@@ -21,3 +21,26 @@ C:\Users\PC\source\repos\MCLauncher\MCLauncher\obj\Debug\MCLauncher.SelectVerInf
 C:\Users\PC\source\repos\MCLauncher\MCLauncher\obj\Debug\MCLauncher.NewUI.resources
 C:\Users\PC\source\repos\MCLauncher\MCLauncher\obj\Debug\MCLauncher.LargeDownloadWarn.resources
 C:\Users\PC\source\repos\MCLauncher\MCLauncher\obj\Debug\MCLauncher.About.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.exe.config
+D:\Source Code\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.exe
+D:\Source Code\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.pdb
+D:\Source Code\MineC-raft-Launcher\MCLauncher\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\MineC-raft-Launcher\MCLauncher\bin\Debug\Newtonsoft.Json.xml
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.AssemblyReference.cache
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.About.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DownloadProgress.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.LargeDownloadWarn.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.LoadCustom.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.MainWindow.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.NewUI.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.OfflineMode.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Properties.Resources.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.SelectVerInfo.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Settings.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Update.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.VerSelect.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.GenerateResource.cache
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CoreCompileInputs.cache
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CopyComplete
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.exe
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.pdb
