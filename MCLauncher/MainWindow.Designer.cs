@@ -179,7 +179,6 @@ namespace MCLauncher
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(100, 20);
             this.usernameTextBox.TabIndex = 5;
-            this.usernameTextBox.Visible = false;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.usernameTextBox_TextChanged);
             // 
             // panel1
@@ -213,7 +212,6 @@ namespace MCLauncher
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Change username:";
-            this.label1.Visible = false;
             // 
             // logInBtn
             // 
@@ -235,7 +233,6 @@ namespace MCLauncher
             this.settingsBtn.TabIndex = 7;
             this.settingsBtn.Text = "Settings";
             this.settingsBtn.UseVisualStyleBackColor = true;
-            this.settingsBtn.Visible = false;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
             // MainWindow
