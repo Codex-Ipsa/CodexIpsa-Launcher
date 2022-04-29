@@ -39,6 +39,7 @@ namespace MCLauncher
             this.ps3EdBtn = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.infoBtn = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -86,7 +87,7 @@ namespace MCLauncher
             // 
             // x360EdBtn
             // 
-            this.x360EdBtn.Location = new System.Drawing.Point(12, 7);
+            this.x360EdBtn.Location = new System.Drawing.Point(93, 7);
             this.x360EdBtn.Name = "x360EdBtn";
             this.x360EdBtn.Size = new System.Drawing.Size(75, 20);
             this.x360EdBtn.TabIndex = 4;
@@ -97,7 +98,7 @@ namespace MCLauncher
             // javaModBtn
             // 
             this.javaModBtn.Enabled = false;
-            this.javaModBtn.Location = new System.Drawing.Point(93, 7);
+            this.javaModBtn.Location = new System.Drawing.Point(12, 7);
             this.javaModBtn.Name = "javaModBtn";
             this.javaModBtn.Size = new System.Drawing.Size(75, 20);
             this.javaModBtn.TabIndex = 5;
@@ -140,12 +141,28 @@ namespace MCLauncher
             this.infoBtn.Visible = false;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Test",
+            "t2",
+            "tes5+",
+            "tes496"});
+            this.comboBox1.Location = new System.Drawing.Point(98, 170);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 12;
+            this.comboBox1.Visible = false;
+            // 
             // VerSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(260, 360);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.infoBtn);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.ps3EdBtn);
@@ -174,5 +191,6 @@ namespace MCLauncher
         private System.Windows.Forms.Button ps3EdBtn;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button infoBtn;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

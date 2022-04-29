@@ -40,7 +40,7 @@ namespace MCLauncher
             {
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile("https://dejvoss.cz/launcher-data/MCLauncherUpdater.exe", currentPath + "\\MCLauncherUpdater.exe");
+                    client.DownloadFile(Globals.updaterRel, currentPath + "\\MCLauncherUpdater.exe");
                 }
 
                 System.Diagnostics.Process.Start("CMD.exe", $"/C MCLauncherUpdater.exe");
