@@ -16,6 +16,11 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
+            Directory.CreateDirectory(Globals.currentPath + "\\bin");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\xenia");
+
             string currentPath = Directory.GetCurrentDirectory();
 
             //Download and extract the emulator if doesn't exist yet

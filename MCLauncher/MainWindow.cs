@@ -36,15 +36,13 @@ namespace MCLauncher
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "versions"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "java"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "x360"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "xenia"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "mods"));
 
-            checkForUpdates();
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
+            
+
+            //checkForUpdates();
         }
 
         void checkForUpdates()

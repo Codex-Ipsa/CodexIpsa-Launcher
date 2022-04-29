@@ -10,8 +10,8 @@ namespace MCLauncher
     class Globals
     {
         //Manual
-        public static string verCurrent = "demo1rc";
-        public static string verDisplay = "0.0.6-rc (Xbox 360 Demo)";
+        public static string verCurrent = "0.0.6";
+        public static string verDisplay = "0.0.6-development";
         public static bool isDev = false;
         public static bool offlineMode = false;
 

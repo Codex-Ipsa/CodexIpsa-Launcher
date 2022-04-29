@@ -131,9 +131,9 @@ namespace MCLauncher
             this.verSelected.ForeColor = System.Drawing.Color.White;
             this.verSelected.Location = new System.Drawing.Point(13, 31);
             this.verSelected.Name = "verSelected";
-            this.verSelected.Size = new System.Drawing.Size(22, 13);
+            this.verSelected.Size = new System.Drawing.Size(37, 13);
             this.verSelected.TabIndex = 1;
-            this.verSelected.Text = "tu0";
+            this.verSelected.Text = "b1.7.3";
             // 
             // label2
             // 

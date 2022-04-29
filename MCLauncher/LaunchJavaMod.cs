@@ -21,6 +21,11 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
+            Directory.CreateDirectory(Globals.currentPath + "\\bin");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\libs");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\mods");
+
             using (var client = new WebClient())
             {
                 string currentPath = Directory.GetCurrentDirectory();

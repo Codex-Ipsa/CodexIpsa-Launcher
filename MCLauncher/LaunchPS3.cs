@@ -17,6 +17,11 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
+            Directory.CreateDirectory(Globals.currentPath + "\\bin");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\ps3");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\rpcs3");
+
             using (var client = new WebClient())
             {
                 string currentPath = Directory.GetCurrentDirectory();
@@ -44,11 +49,11 @@ namespace MCLauncher
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();
 
-                    string zipPath = currentPath + "\\bin\\versions\\1.00_blus";
-                    string extractPath = currentPath + "\\bin\\versions\\1.00_blus\\";
+                    string zipPath = currentPath + $"\\bin\\versions\\1.00_blus";
+                    string extractPath = currentPath + $"\\bin\\versions\\1.00_blus\\";
                     ZipFile.ExtractToDirectory(zipPath, extractPath);
 
-                    File.Delete(currentPath + "\\bin\\versions\\1.00_blus");
+                    File.Delete(currentPath + $"\\bin\\versions\\1.00_blus");
 
                     //client.DownloadFile(linkToVer, currentPath + $"\\bin\\versions\\{selectedVer}");
                 }

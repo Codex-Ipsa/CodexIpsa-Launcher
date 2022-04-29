@@ -75,19 +75,17 @@ namespace MCLauncher
             // 
             // javaEdBtn
             // 
-            this.javaEdBtn.Enabled = false;
-            this.javaEdBtn.Location = new System.Drawing.Point(174, 7);
+            this.javaEdBtn.Location = new System.Drawing.Point(12, 7);
             this.javaEdBtn.Name = "javaEdBtn";
             this.javaEdBtn.Size = new System.Drawing.Size(75, 20);
             this.javaEdBtn.TabIndex = 3;
             this.javaEdBtn.Text = "Java Edition";
             this.javaEdBtn.UseVisualStyleBackColor = true;
-            this.javaEdBtn.Visible = false;
             this.javaEdBtn.Click += new System.EventHandler(this.javaEdBtn_Click);
             // 
             // x360EdBtn
             // 
-            this.x360EdBtn.Location = new System.Drawing.Point(93, 7);
+            this.x360EdBtn.Location = new System.Drawing.Point(174, 7);
             this.x360EdBtn.Name = "x360EdBtn";
             this.x360EdBtn.Size = new System.Drawing.Size(75, 20);
             this.x360EdBtn.TabIndex = 4;
@@ -97,26 +95,22 @@ namespace MCLauncher
             // 
             // javaModBtn
             // 
-            this.javaModBtn.Enabled = false;
-            this.javaModBtn.Location = new System.Drawing.Point(12, 7);
+            this.javaModBtn.Location = new System.Drawing.Point(93, 7);
             this.javaModBtn.Name = "javaModBtn";
             this.javaModBtn.Size = new System.Drawing.Size(75, 20);
             this.javaModBtn.TabIndex = 5;
             this.javaModBtn.Text = "Java Mods";
             this.javaModBtn.UseVisualStyleBackColor = true;
-            this.javaModBtn.Visible = false;
             this.javaModBtn.Click += new System.EventHandler(this.javaModBtn_Click);
             // 
             // ps3EdBtn
             // 
-            this.ps3EdBtn.Enabled = false;
             this.ps3EdBtn.Location = new System.Drawing.Point(173, 33);
             this.ps3EdBtn.Name = "ps3EdBtn";
             this.ps3EdBtn.Size = new System.Drawing.Size(75, 20);
             this.ps3EdBtn.TabIndex = 6;
             this.ps3EdBtn.Text = "PS3 Edition";
             this.ps3EdBtn.UseVisualStyleBackColor = true;
-            this.ps3EdBtn.Visible = false;
             this.ps3EdBtn.Click += new System.EventHandler(this.ps3EdBtn_Click);
             // 
             // btnLoad
@@ -146,13 +140,13 @@ namespace MCLauncher
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Test",
-            "t2",
-            "tes5+",
-            "tes496"});
-            this.comboBox1.Location = new System.Drawing.Point(98, 170);
+            "Java Edition",
+            "Java Edition (Mods)",
+            "Xbox 360 Edition",
+            "PlayStation 3 Edition"});
+            this.comboBox1.Location = new System.Drawing.Point(12, 59);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(236, 21);
             this.comboBox1.TabIndex = 12;
             this.comboBox1.Visible = false;
             // 

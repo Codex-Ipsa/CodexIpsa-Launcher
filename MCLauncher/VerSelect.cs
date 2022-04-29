@@ -9,7 +9,7 @@ namespace MCLauncher
 {
     public partial class VerSelect : Form
     {
-        public static string checkTab = "x360";
+        public static string checkTab = "java";
         List<string> linksJavaList = new List<string>();
         List<string> linksX360List = new List<string>();
         List<string> linksPS3List = new List<string>();
@@ -31,7 +31,7 @@ namespace MCLauncher
 
             if(!Globals.offlineMode)
             {
-                LoadXbox360List();
+                LoadJavaList();
             }
             else
             {
