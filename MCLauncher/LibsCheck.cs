@@ -16,35 +16,36 @@ namespace MCLauncher
         public string link { get; set; }
         public string extract { get; set; }
     }
+
     class LibsCheck
     {
         public static bool isDone = false;
-        public static void CheckPre17()
+        
+        //For versions before release 1.6
+        public static void CheckPre16()
         {
-            var libsLink = "http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
-
             using (WebClient client = new WebClient())
             {
-                string currentPath = Directory.GetCurrentDirectory();
-
-                string json = client.DownloadString(libsLink);
+                string json = client.DownloadString(Globals.libsPre16Json);
                 List<LibsJson> data = JsonConvert.DeserializeObject<List<LibsJson>>(json);
 
                 foreach (var libs in data)
                 {
                     //Download required libraries
-                    if (!File.Exists($"{currentPath}\\bin\\libs\\{libs.name}"))
+                    if (!File.Exists($"{Globals.currentPath}\\bin\\libs\\{libs.name}"))
                     {
                         DownloadProgress.url = libs.link;
-                        DownloadProgress.savePath = $"{currentPath}\\bin\\libs\\{libs.name}";
+                        DownloadProgress.savePath = $"{Globals.currentPath}\\bin\\libs\\{libs.name}";
                         DownloadProgress download = new DownloadProgress();
                         download.ShowDialog();
 
                         if(libs.extract != "null")
                         {
-                            Directory.CreateDirectory($"{currentPath}\\bin\\libs\\{libs.extract}");
-                            string zipPath = $"{currentPath}\\bin\\libs\\{libs.name}";
-                            string extractPath = $"{currentPath}\\bin\\libs\\{libs.extract}";
+                            if(Directory.Exists($"{Globals.currentPath}\\bin\\libs\\{libs.extract}"))
+                                Directory.Delete($"{Globals.currentPath}\\bin\\libs\\{libs.extract}", true);
+                            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\libs\\{libs.extract}");
+                            string zipPath = $"{Globals.currentPath}\\bin\\libs\\{libs.name}";
+                            string extractPath = $"{Globals.currentPath}\\bin\\libs\\{libs.extract}";
                             ZipFile.ExtractToDirectory(zipPath, extractPath);
                         }
                     }

@@ -18,7 +18,6 @@ namespace MCLauncher
         public static string currentPath = Directory.GetCurrentDirectory();
 
         //Links
-
         public static string xenia = $"http://codex-ipsa.dejvoss.cz/MCL-Data/emu/xenia.zip";
         public static string verCheck = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest.txt";
         public static string verCheckDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-dev.txt";
@@ -31,5 +30,7 @@ namespace MCLauncher
         public static string javaModJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{verCurrent}/data/java-mod.json";
         public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{verCurrent}/data/x360.json";
         public static string ps3Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{verCurrent}/data/ps3-blus.json";
+
+        public static string libsPre16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
     }
 }

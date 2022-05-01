@@ -20,41 +20,27 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
-            Directory.CreateDirectory(Globals.currentPath + "\\bin");
-            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
-            Directory.CreateDirectory(Globals.currentPath + "\\bin\\libs");
-            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\java");
+            //Create directories
+            Directory.CreateDirectory($"{Globals.currentPath}\\bin");
+            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions");
+            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions\\java");
+            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\libs");
 
             using (var client = new WebClient())
             {
-                string currentPath = Directory.GetCurrentDirectory();
-
-                //Download required libraries
-                /*if (!File.Exists(Path.Combine(currentPath + "\\bin\\libs\\", "lwjgl.jar")))
-                {
-                    DownloadProgress.url = Globals.javaLibs;
-                    DownloadProgress.savePath = $"{currentPath}\\bin\\libs\\libs.zip";
-                    DownloadProgress download = new DownloadProgress();
-                    download.ShowDialog();
-
-                    string zipPath = currentPath + "\\bin\\libs\\libs.zip";
-                    string extractPath = currentPath + "\\bin\\libs\\";
-                    ZipFile.ExtractToDirectory(zipPath, extractPath);
-
-                    File.Delete(currentPath + "\\bin\\libs\\libs.zip");
-                }*/
-
-                //Download version and libraries
-                if (!File.Exists(Path.Combine(currentPath + "\\bin\\versions\\java\\", $"{selectedVer}.jar")))
+                //Download version
+                if (!File.Exists($"{Globals.currentPath}\\bin\\versions\\java\\{selectedVer}.jar"))
                 {
                     DownloadProgress.url = linkToJar;
-                    DownloadProgress.savePath = $"{currentPath}\\bin\\versions\\java\\{selectedVer}.jar";
+                    DownloadProgress.savePath = $"{Globals.currentPath}\\bin\\versions\\java\\{selectedVer}.jar";
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();
                 }
+
+                //If it's an applet, check for libs, download them, and launch the game
                 if (typeVer == "applet")
                 {
-                    LibsCheck.CheckPre17();
+                    LibsCheck.CheckPre16();
 
                     if (LibsCheck.isDone == true)
                     {
@@ -64,21 +50,22 @@ namespace MCLauncher
                         VerSelect.checkTab = "java";
                         LibsCheck.isDone = false;
                     }
-                }                
+                }
+                //If it's a1.0.6 to 1.5, check for libs, download them, and launch the game.
                 else if (typeVer == "jar106")
                 {
-                    LibsCheck.CheckPre17();
+                    LibsCheck.CheckPre16();
 
                     if(LibsCheck.isDone == true)
                     {
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
-
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
                         LibsCheck.isDone = false;
                     }
                 }
+                //If it's post1.6, check for libs, download them, and launch the game.
                 else if (typeVer == "jar16")
                 {
 
