@@ -11,16 +11,16 @@ namespace MCLauncher
     {
         public static string checkTab = "java";
         List<string> linksJavaList = new List<string>();
-        List<string> linksX360List = new List<string>();
-        List<string> linksPS3List = new List<string>();
-        List<string> versionModList = new List<string>();
+        List<string> typeJavaList = new List<string>();
+
         List<string> linksJavaModsList = new List<string>();
         List<string> linksBaseJavaModsList = new List<string>();
         List<string> linksJavaForgeList = new List<string>();
         List<string> typeJavaModsList = new List<string>();
-        List<string> versionList = new List<string>();
-        //List<string> versionListX360 = new List<string>();
-        List<string> versionListPS3 = new List<string>();
+
+        List<string> linksX360List = new List<string>();
+        
+        List<string> linksPS3List = new List<string>();
 
         public VerSelect()
         {
@@ -48,6 +48,7 @@ namespace MCLauncher
                     LaunchJava.selectedVer = listBox1.Items[listBox1.SelectedIndex].ToString();
                     int index = listBox1.FindString(LaunchJava.selectedVer);
                     LaunchJava.linkToJar = linksJavaList[index];
+                    LaunchJava.typeVer = typeJavaList[index];
                     label1.Text = "Selected: Java " + LaunchJava.selectedVer;
                     //infoBox.Text = $"Java Edition\nVersionGoesHere\nReleaseDate\nSimpleInfoGoesHere";
                 }
@@ -120,6 +121,7 @@ namespace MCLauncher
 
         public void LoadJavaList()
         {
+            List<string> versionListJava = new List<string>();
             checkTab = "java";
 
             using (WebClient client = new WebClient())
@@ -129,17 +131,19 @@ namespace MCLauncher
 
                 foreach (var vers in data)
                 {
-                    versionList.Add(vers.verName);
+                    versionListJava.Add(vers.verName);
                     linksJavaList.Add(vers.verLink);
+                    typeJavaList.Add(vers.verType);
                 }
             }
-            listBox1.DataSource = versionList;
+            listBox1.DataSource = versionListJava;
 
             listBox1.Refresh();
         }
 
         public void LoadJavaModList()
         {
+            List<string> versionJavaModList = new List<string>();
             checkTab = "javaMod";
 
             using (WebClient client = new WebClient())
@@ -149,14 +153,14 @@ namespace MCLauncher
 
                 foreach (var vers in data)
                 {
-                    versionModList.Add(vers.modID);
+                    versionJavaModList.Add(vers.modID);
                     linksJavaModsList.Add(vers.modLink);
                     linksBaseJavaModsList.Add(vers.baseVer);
                     linksJavaForgeList.Add(vers.modForgeVer);
                     typeJavaModsList.Add(vers.modType);
                 }
             }
-            listBox1.DataSource = versionModList;
+            listBox1.DataSource = versionJavaModList;
 
             listBox1.Refresh();
         }
@@ -184,6 +188,7 @@ namespace MCLauncher
 
         public void LoadPS3List()
         {
+            List<string> versionListPS3 = new List<string>();
             checkTab = "ps3";
 
             using (WebClient client = new WebClient())

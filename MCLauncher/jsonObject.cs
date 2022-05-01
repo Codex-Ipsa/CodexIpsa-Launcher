@@ -10,6 +10,7 @@ namespace MCLauncher
     {
         public string verName { get; set; }
         public string verLink { get; set; }
+        public string verType { get; set; }
     }
 
     public class RootObject

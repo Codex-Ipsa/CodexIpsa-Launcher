@@ -12,7 +12,7 @@ namespace MCLauncher
     class LaunchXbox360
     {
         public static string selectedVer = "tu0";
-        public static string linkToVer = "https://vault.minerarity.org/versions/legacy/x360/TU0/49AAD81B9FCDA45E4A03D71BFCB353F8FADB236C58";
+        public static string linkToVer;
 
         public static void LaunchGame()
         {
