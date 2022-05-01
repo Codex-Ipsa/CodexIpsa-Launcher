@@ -64,7 +64,6 @@
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonObject.cs" />
-    <Compile Include="jsonObjectMod.cs" />
     <Compile Include="LargeDownloadWarn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +76,7 @@
     <Compile Include="LaunchWin10.cs" />
     <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="LibsCheck.cs" />
     <Compile Include="LoadCustom.cs">
       <SubType>Form</SubType>
     </Compile>

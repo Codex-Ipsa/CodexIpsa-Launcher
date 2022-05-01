@@ -149,7 +149,7 @@ namespace MCLauncher
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(Globals.javaModJson);
-                List<jsonObjectMod> data = JsonConvert.DeserializeObject<List<jsonObjectMod>>(json);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
                 foreach (var vers in data)
                 {

@@ -31,7 +31,7 @@ namespace MCLauncher
                 string currentPath = Directory.GetCurrentDirectory();
 
                 //Download required libraries
-                if (!File.Exists(Path.Combine(currentPath + "\\bin\\libs\\", "lwjgl.jar")))
+                /*if (!File.Exists(Path.Combine(currentPath + "\\bin\\libs\\", "lwjgl.jar")))
                 {
                     DownloadProgress.url = Globals.javaLibs;
                     DownloadProgress.savePath = $"{currentPath}\\bin\\libs\\libs.zip";
@@ -43,7 +43,8 @@ namespace MCLauncher
                     ZipFile.ExtractToDirectory(zipPath, extractPath);
 
                     File.Delete(currentPath + "\\bin\\libs\\libs.zip");
-                }
+                }*/
+                //LibsCheck.Check();
 
                 //Apply mods
                 if (!File.Exists(Path.Combine(currentPath + "\\bin\\mods\\", $"{selectedVer}.jar")))

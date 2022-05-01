@@ -42,6 +42,7 @@ namespace MCLauncher
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
             
 
+            //TEMPORARILY DISABLED, MAKE SURE IT'S ON!!!
             //checkForUpdates();
         }
 
