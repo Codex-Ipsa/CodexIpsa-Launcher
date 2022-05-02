@@ -89,6 +89,7 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MSAuth.cs" />
     <Compile Include="NewUI.cs">
       <SubType>Form</SubType>
     </Compile>

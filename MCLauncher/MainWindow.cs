@@ -27,9 +27,9 @@ namespace MCLauncher
             {
                 File.Delete(Globals.currentPath + "\\MCLauncherUpdater.exe");
             }
-            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherDevUpdater.exe")))
+            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdaterDev.exe")))
             {
-                File.Delete(Globals.currentPath + "\\MCLauncherDevUpdater.exe");
+                File.Delete(Globals.currentPath + "\\MCLauncherUpdaterDev.exe");
             }
             this.Refresh(); //Does this need to be here? Who knows
 
@@ -43,7 +43,7 @@ namespace MCLauncher
             
 
             //TEMPORARILY DISABLED, MAKE SURE IT'S ON!!!
-            //checkForUpdates();
+            checkForUpdates();
         }
 
         void checkForUpdates()

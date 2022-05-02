@@ -17,6 +17,7 @@ namespace MCLauncher
         List<string> linksBaseJavaModsList = new List<string>();
         List<string> linksJavaForgeList = new List<string>();
         List<string> typeJavaModsList = new List<string>();
+        List<string> typeVerJavaModsList = new List<string>();
 
         List<string> linksX360List = new List<string>();
         
@@ -61,6 +62,7 @@ namespace MCLauncher
                     LaunchJavaMod.linkToBase = linksBaseJavaModsList[index];
                     LaunchJavaMod.linkToForge = linksJavaForgeList[index];
                     LaunchJavaMod.modType = typeJavaModsList[index];
+                    LaunchJavaMod.typeVer = typeVerJavaModsList[index];
                     //infoBox.Text = $"{LaunchMod.selectedVer}\nVersionGoesHere\nReleaseDate\nSimpleInfoGoesHere";
                 }
                 else if (checkTab == "x360")
@@ -158,6 +160,7 @@ namespace MCLauncher
                     linksBaseJavaModsList.Add(vers.baseVer);
                     linksJavaForgeList.Add(vers.modForgeVer);
                     typeJavaModsList.Add(vers.modType);
+                    typeVerJavaModsList.Add(vers.verType);
                 }
             }
             listBox1.DataSource = versionJavaModList;
@@ -217,6 +220,38 @@ namespace MCLauncher
         {
             SelectVerInfo verInfo = new SelectVerInfo();
             verInfo.ShowDialog();
+        }
+
+        private void vanillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globals.offlineMode)
+            {
+                LoadJavaList();
+            }
+        }
+
+        private void modsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globals.offlineMode)
+            {
+                LoadJavaModList();
+            }
+        }
+
+        private void xbox360ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globals.offlineMode)
+            {
+                LoadXbox360List();
+            }
+        }
+
+        private void playstation3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globals.offlineMode)
+            {
+                LoadPS3List();
+            }
         }
     }
 }

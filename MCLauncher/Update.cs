@@ -30,10 +30,10 @@ namespace MCLauncher
             {
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile("https://dejvoss.cz/launcher-data/MCLauncherDevUpdater.exe", currentPath + "\\MCLauncherDevUpdater.exe");
+                    client.DownloadFile(Globals.updaterDev, currentPath + "\\MCLauncherUpdaterDev.exe");
                 }
 
-                System.Diagnostics.Process.Start("CMD.exe", $"/C MCLauncherDevUpdater.exe");
+                System.Diagnostics.Process.Start("CMD.exe", $"/C MCLauncherUpdaterDev.exe");
                 Application.Exit();
             }
             else

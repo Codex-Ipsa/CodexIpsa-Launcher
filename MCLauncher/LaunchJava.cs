@@ -37,8 +37,37 @@ namespace MCLauncher
                     download.ShowDialog();
                 }
 
+                //If it's a pre-classic, check for libs, download them, and launch the game
+                if (typeVer == "rubydung")
+                {
+                    LibsCheck.CheckPre16();
+
+                    if (LibsCheck.isDone == true)
+                    {
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.rubydung.RubyDung {Properties.Settings.Default.playerName} test";
+
+                        System.Diagnostics.Process.Start("java.exe", launchCmd);
+                        VerSelect.checkTab = "java";
+                        LibsCheck.isDone = false;
+                    }
+                }
+                //If it's rd-161348, check for libs, download them, and launch the game
+                else if (typeVer == "rubydung2")
+                {
+                    LibsCheck.CheckPre16();
+
+                    if (LibsCheck.isDone == true)
+                    {
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.minecraft.RubyDung {Properties.Settings.Default.playerName} test";
+
+                        System.Diagnostics.Process.Start("java.exe", launchCmd);
+                        VerSelect.checkTab = "java";
+                        LibsCheck.isDone = false;
+                    }
+                }
+
                 //If it's an applet, check for libs, download them, and launch the game
-                if (typeVer == "applet")
+                else if (typeVer == "applet")
                 {
                     LibsCheck.CheckPre16();
 
@@ -58,7 +87,7 @@ namespace MCLauncher
 
                     if(LibsCheck.isDone == true)
                     {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
