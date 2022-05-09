@@ -12,21 +12,18 @@ namespace MCLauncher
     class LaunchXbox360
     {
         public static string selectedVer = "tu0";
-        public static string linkToVer = "https://vault.minerarity.org/versions/legacy/x360/TU0/49AAD81B9FCDA45E4A03D71BFCB353F8FADB236C58";
+        public static string linkToVer;
 
         public static void LaunchGame()
         {
-<<<<<<< Updated upstream
-=======
+            string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
             Directory.CreateDirectory(Globals.currentPath + "\\bin");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\xenia");
-            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
+            Directory.CreateDirectory($"{docsPath}\\Xenia\\content\\584111F7\\000B0000");
 
-            Directory.CreateDirectory($"{Globals.docsPath}\\\\Xenia\\content\\584111F7\\000B0000\\");
-
->>>>>>> Stashed changes
             string currentPath = Directory.GetCurrentDirectory();
 
             //Download and extract the emulator if doesn't exist yet
@@ -58,7 +55,6 @@ namespace MCLauncher
             {
                 try
                 {
-                    string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string pathToVer = $"{currentPath}\\bin\\versions\\x360\\{selectedVer}";
                     string pathToCopy = $"{docsPath}\\Xenia\\content\\584111F7\\000B0000\\tu00000001_00000000";
                     File.Copy(pathToVer, pathToCopy, true);
@@ -81,7 +77,6 @@ namespace MCLauncher
 
                 try
                 {
-                    string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string pathToVer = $"{currentPath}\\bin\\versions\\x360\\{selectedVer}";
                     string pathToCopy = $"{docsPath}\\Xenia\\content\\584111F7\\000B0000\\tu00000001_00000000";
                     File.Copy(pathToVer, pathToCopy, true);

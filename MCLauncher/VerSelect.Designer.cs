@@ -39,7 +39,15 @@ namespace MCLauncher
             this.ps3EdBtn = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.infoBtn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.javaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vanillaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.legacyConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xbox360ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playstation3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bedrockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -75,8 +83,7 @@ namespace MCLauncher
             // 
             // javaEdBtn
             // 
-            this.javaEdBtn.Enabled = false;
-            this.javaEdBtn.Location = new System.Drawing.Point(174, 7);
+            this.javaEdBtn.Location = new System.Drawing.Point(12, 290);
             this.javaEdBtn.Name = "javaEdBtn";
             this.javaEdBtn.Size = new System.Drawing.Size(75, 20);
             this.javaEdBtn.TabIndex = 3;
@@ -87,18 +94,18 @@ namespace MCLauncher
             // 
             // x360EdBtn
             // 
-            this.x360EdBtn.Location = new System.Drawing.Point(93, 7);
+            this.x360EdBtn.Location = new System.Drawing.Point(153, 290);
             this.x360EdBtn.Name = "x360EdBtn";
             this.x360EdBtn.Size = new System.Drawing.Size(75, 20);
             this.x360EdBtn.TabIndex = 4;
             this.x360EdBtn.Text = "X360 Edition";
             this.x360EdBtn.UseVisualStyleBackColor = true;
+            this.x360EdBtn.Visible = false;
             this.x360EdBtn.Click += new System.EventHandler(this.x360EdBtn_Click);
             // 
             // javaModBtn
             // 
-            this.javaModBtn.Enabled = false;
-            this.javaModBtn.Location = new System.Drawing.Point(12, 7);
+            this.javaModBtn.Location = new System.Drawing.Point(45, 290);
             this.javaModBtn.Name = "javaModBtn";
             this.javaModBtn.Size = new System.Drawing.Size(75, 20);
             this.javaModBtn.TabIndex = 5;
@@ -109,8 +116,7 @@ namespace MCLauncher
             // 
             // ps3EdBtn
             // 
-            this.ps3EdBtn.Enabled = false;
-            this.ps3EdBtn.Location = new System.Drawing.Point(173, 33);
+            this.ps3EdBtn.Location = new System.Drawing.Point(93, 290);
             this.ps3EdBtn.Name = "ps3EdBtn";
             this.ps3EdBtn.Size = new System.Drawing.Size(75, 20);
             this.ps3EdBtn.TabIndex = 6;
@@ -141,22 +147,6 @@ namespace MCLauncher
             this.infoBtn.Visible = false;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 
-<<<<<<< Updated upstream
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Test",
-            "t2",
-            "tes5+",
-            "tes496"});
-            this.comboBox1.Location = new System.Drawing.Point(98, 170);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 12;
-            this.comboBox1.Visible = false;
-=======
             // menuStrip1
             // 
             this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
@@ -179,7 +169,6 @@ namespace MCLauncher
             this.javaToolStripMenuItem.Name = "javaToolStripMenuItem";
             this.javaToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.javaToolStripMenuItem.Text = "Java";
-            this.javaToolStripMenuItem.Visible = false;
             // 
             // vanillaToolStripMenuItem
             // 
@@ -217,7 +206,6 @@ namespace MCLauncher
             this.playstation3ToolStripMenuItem.Name = "playstation3ToolStripMenuItem";
             this.playstation3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.playstation3ToolStripMenuItem.Text = "Playstation 3";
-            this.playstation3ToolStripMenuItem.Visible = false;
             this.playstation3ToolStripMenuItem.Click += new System.EventHandler(this.playstation3ToolStripMenuItem_Click);
             // 
             // bedrockToolStripMenuItem
@@ -226,8 +214,6 @@ namespace MCLauncher
             this.bedrockToolStripMenuItem.Name = "bedrockToolStripMenuItem";
             this.bedrockToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.bedrockToolStripMenuItem.Text = "Bedrock";
-            this.bedrockToolStripMenuItem.Visible = false;
->>>>>>> Stashed changes
             // 
             // VerSelect
             // 
@@ -235,7 +221,6 @@ namespace MCLauncher
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(260, 360);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.infoBtn);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.ps3EdBtn);
@@ -245,9 +230,12 @@ namespace MCLauncher
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VerSelect";
             this.Text = "Select version";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,6 +252,13 @@ namespace MCLauncher
         private System.Windows.Forms.Button ps3EdBtn;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button infoBtn;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem javaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vanillaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem legacyConsoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xbox360ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playstation3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bedrockToolStripMenuItem;
     }
 }

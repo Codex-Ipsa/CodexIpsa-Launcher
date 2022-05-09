@@ -27,32 +27,22 @@ namespace MCLauncher
             {
                 File.Delete(Globals.currentPath + "\\MCLauncherUpdater.exe");
             }
-            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherDevUpdater.exe")))
+            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdaterDev.exe")))
             {
-                File.Delete(Globals.currentPath + "\\MCLauncherDevUpdater.exe");
+                File.Delete(Globals.currentPath + "\\MCLauncherUpdaterDev.exe");
             }
             this.Refresh(); //Does this need to be here? Who knows
 
             //Create directories
-            /*Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "versions"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "java"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "x360"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "xenia"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
-            //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "mods"));
 
-<<<<<<< Updated upstream
-=======
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));*/
-
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
+            
 
             //TEMPORARILY DISABLED, MAKE SURE IT'S ON!!!
->>>>>>> Stashed changes
             checkForUpdates();
         }
 
