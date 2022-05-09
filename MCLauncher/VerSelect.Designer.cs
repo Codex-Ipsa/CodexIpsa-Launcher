@@ -173,14 +173,14 @@ namespace MCLauncher
             // vanillaToolStripMenuItem
             // 
             this.vanillaToolStripMenuItem.Name = "vanillaToolStripMenuItem";
-            this.vanillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vanillaToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.vanillaToolStripMenuItem.Text = "Vanilla";
             this.vanillaToolStripMenuItem.Click += new System.EventHandler(this.vanillaToolStripMenuItem_Click);
             // 
             // modsToolStripMenuItem
             // 
             this.modsToolStripMenuItem.Name = "modsToolStripMenuItem";
-            this.modsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modsToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.modsToolStripMenuItem.Text = "Mods";
             this.modsToolStripMenuItem.Click += new System.EventHandler(this.modsToolStripMenuItem_Click);
             // 
@@ -197,14 +197,14 @@ namespace MCLauncher
             // xbox360ToolStripMenuItem
             // 
             this.xbox360ToolStripMenuItem.Name = "xbox360ToolStripMenuItem";
-            this.xbox360ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xbox360ToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.xbox360ToolStripMenuItem.Text = "Xbox 360";
             this.xbox360ToolStripMenuItem.Click += new System.EventHandler(this.xbox360ToolStripMenuItem_Click);
             // 
             // playstation3ToolStripMenuItem
             // 
             this.playstation3ToolStripMenuItem.Name = "playstation3ToolStripMenuItem";
-            this.playstation3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playstation3ToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.playstation3ToolStripMenuItem.Text = "Playstation 3";
             this.playstation3ToolStripMenuItem.Click += new System.EventHandler(this.playstation3ToolStripMenuItem_Click);
             // 
