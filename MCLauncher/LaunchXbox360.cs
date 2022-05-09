@@ -12,15 +12,21 @@ namespace MCLauncher
     class LaunchXbox360
     {
         public static string selectedVer = "tu0";
-        public static string linkToVer;
+        public static string linkToVer = "https://vault.minerarity.org/versions/legacy/x360/TU0/49AAD81B9FCDA45E4A03D71BFCB353F8FADB236C58";
 
         public static void LaunchGame()
         {
+<<<<<<< Updated upstream
+=======
             Directory.CreateDirectory(Globals.currentPath + "\\bin");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
             Directory.CreateDirectory(Globals.currentPath + "\\bin\\xenia");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
 
+            Directory.CreateDirectory($"{Globals.docsPath}\\\\Xenia\\content\\584111F7\\000B0000\\");
+
+>>>>>>> Stashed changes
             string currentPath = Directory.GetCurrentDirectory();
 
             //Download and extract the emulator if doesn't exist yet
@@ -48,7 +54,7 @@ namespace MCLauncher
             }
 
             //If it's a base game, launch it
-            if (selectedVer == "pre-tu-0033" || selectedVer == "pre-tu-0035" || selectedVer == "pre-tu-0054"/* || selectedVer == "tu0"*/)
+            if (selectedVer == "pre-tu-0033" || selectedVer == "pre-tu-0035" || selectedVer == "pre-tu-0054" || selectedVer == "tu0")
             {
                 try
                 {
