@@ -141,6 +141,7 @@ namespace MCLauncher
             this.infoBtn.Visible = false;
             this.infoBtn.Click += new System.EventHandler(this.infoBtn_Click);
             // 
+<<<<<<< Updated upstream
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -155,6 +156,78 @@ namespace MCLauncher
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 12;
             this.comboBox1.Visible = false;
+=======
+            // menuStrip1
+            // 
+            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.javaToolStripMenuItem,
+            this.legacyConsoleToolStripMenuItem,
+            this.bedrockToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(260, 24);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // javaToolStripMenuItem
+            // 
+            this.javaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vanillaToolStripMenuItem,
+            this.modsToolStripMenuItem});
+            this.javaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.javaToolStripMenuItem.Name = "javaToolStripMenuItem";
+            this.javaToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.javaToolStripMenuItem.Text = "Java";
+            this.javaToolStripMenuItem.Visible = false;
+            // 
+            // vanillaToolStripMenuItem
+            // 
+            this.vanillaToolStripMenuItem.Name = "vanillaToolStripMenuItem";
+            this.vanillaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vanillaToolStripMenuItem.Text = "Vanilla";
+            this.vanillaToolStripMenuItem.Click += new System.EventHandler(this.vanillaToolStripMenuItem_Click);
+            // 
+            // modsToolStripMenuItem
+            // 
+            this.modsToolStripMenuItem.Name = "modsToolStripMenuItem";
+            this.modsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.modsToolStripMenuItem.Text = "Mods";
+            this.modsToolStripMenuItem.Click += new System.EventHandler(this.modsToolStripMenuItem_Click);
+            // 
+            // legacyConsoleToolStripMenuItem
+            // 
+            this.legacyConsoleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xbox360ToolStripMenuItem,
+            this.playstation3ToolStripMenuItem});
+            this.legacyConsoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.legacyConsoleToolStripMenuItem.Name = "legacyConsoleToolStripMenuItem";
+            this.legacyConsoleToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.legacyConsoleToolStripMenuItem.Text = "Legacy Consoles";
+            // 
+            // xbox360ToolStripMenuItem
+            // 
+            this.xbox360ToolStripMenuItem.Name = "xbox360ToolStripMenuItem";
+            this.xbox360ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xbox360ToolStripMenuItem.Text = "Xbox 360";
+            this.xbox360ToolStripMenuItem.Click += new System.EventHandler(this.xbox360ToolStripMenuItem_Click);
+            // 
+            // playstation3ToolStripMenuItem
+            // 
+            this.playstation3ToolStripMenuItem.Name = "playstation3ToolStripMenuItem";
+            this.playstation3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playstation3ToolStripMenuItem.Text = "Playstation 3";
+            this.playstation3ToolStripMenuItem.Visible = false;
+            this.playstation3ToolStripMenuItem.Click += new System.EventHandler(this.playstation3ToolStripMenuItem_Click);
+            // 
+            // bedrockToolStripMenuItem
+            // 
+            this.bedrockToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.bedrockToolStripMenuItem.Name = "bedrockToolStripMenuItem";
+            this.bedrockToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.bedrockToolStripMenuItem.Text = "Bedrock";
+            this.bedrockToolStripMenuItem.Visible = false;
+>>>>>>> Stashed changes
             // 
             // VerSelect
             // 

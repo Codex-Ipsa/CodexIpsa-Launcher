@@ -235,7 +235,11 @@ namespace MCLauncher
             this.settingsBtn.TabIndex = 7;
             this.settingsBtn.Text = "Settings";
             this.settingsBtn.UseVisualStyleBackColor = true;
+<<<<<<< Updated upstream
             this.settingsBtn.Visible = false;
+=======
+            this.settingsBtn.UseWaitCursor = true;
+>>>>>>> Stashed changes
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
             // MainWindow

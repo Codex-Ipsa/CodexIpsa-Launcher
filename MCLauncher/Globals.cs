@@ -10,12 +10,20 @@ namespace MCLauncher
     class Globals
     {
         //Manual
+<<<<<<< Updated upstream
         public static string verCurrent = "demo1rc";
         public static string verDisplay = "0.0.6-rc (Xbox 360 Demo)";
         public static bool isDev = false;
+=======
+        public static string codebase = "demo1";
+        public static string verCurrent = "demo1";
+        public static string verDisplay = "0.0.6 (Demo)";
+        public static bool isDev = false; //MAKE SURE IT'S FALSE ON RELEASE
+>>>>>>> Stashed changes
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
+        public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Links
 

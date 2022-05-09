@@ -16,6 +16,17 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
+<<<<<<< Updated upstream
+=======
+            Directory.CreateDirectory(Globals.currentPath + "\\bin");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\xenia");
+            Directory.CreateDirectory(Globals.currentPath + "\\bin\\versions\\x360");
+
+            Directory.CreateDirectory($"{Globals.docsPath}\\\\Xenia\\content\\584111F7\\000B0000\\");
+
+>>>>>>> Stashed changes
             string currentPath = Directory.GetCurrentDirectory();
 
             //Download and extract the emulator if doesn't exist yet
@@ -43,7 +54,7 @@ namespace MCLauncher
             }
 
             //If it's a base game, launch it
-            if (selectedVer == "pre-tu-0033" || selectedVer == "pre-tu-0035" || selectedVer == "pre-tu-0054"/* || selectedVer == "tu0"*/)
+            if (selectedVer == "pre-tu-0033" || selectedVer == "pre-tu-0035" || selectedVer == "pre-tu-0054" || selectedVer == "tu0")
             {
                 try
                 {

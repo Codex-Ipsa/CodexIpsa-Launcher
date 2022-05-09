@@ -34,7 +34,7 @@ namespace MCLauncher
             this.Refresh(); //Does this need to be here? Who knows
 
             //Create directories
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
+            /*Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "versions"));
             //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
             //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "java"));
@@ -44,6 +44,15 @@ namespace MCLauncher
             //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
             //Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "mods"));
 
+<<<<<<< Updated upstream
+=======
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));*/
+
+
+            //TEMPORARILY DISABLED, MAKE SURE IT'S ON!!!
+>>>>>>> Stashed changes
             checkForUpdates();
         }
 
