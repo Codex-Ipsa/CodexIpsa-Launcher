@@ -206,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="icon64.ico" />
     <Content Include="image\dirt-large.png" />
     <Content Include="image\dirt.png" />
     <Content Include="image\icon.ico" />
