@@ -12,7 +12,7 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.0.6-dev";
         public static string verCurrent = "0.0.6-dev_b4";
-        public static string verDisplay = "0.0.6 (Dev-build 4 REVERT)";
+        public static string verDisplay = "0.0.6 (Dev-build 5 In-progress)";
         public static bool isDev = true; //MAKE SURE IT'S FALSE ON RELEASE
         public static bool offlineMode = false;
 
