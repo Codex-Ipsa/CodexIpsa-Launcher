@@ -44,3 +44,4 @@ D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CoreCo
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CopyComplete
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.exe
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.pdb
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.InstanceManager.resources

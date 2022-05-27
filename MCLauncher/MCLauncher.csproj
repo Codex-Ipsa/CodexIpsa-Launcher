@@ -81,6 +81,12 @@
     <Compile Include="DownloadProgress.Designer.cs">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="InstanceManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstanceManager.Designer.cs">
+      <DependentUpon>InstanceManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="jsonObject.cs" />
     <Compile Include="LargeDownloadWarn.cs">
       <SubType>Form</SubType>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadProgress.resx">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstanceManager.resx">
+      <DependentUpon>InstanceManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LargeDownloadWarn.resx">
       <DependentUpon>LargeDownloadWarn.cs</DependentUpon>
