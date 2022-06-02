@@ -50,6 +50,7 @@ namespace MCLauncher
                     int index = listBox1.FindString(LaunchJava.selectedVer);
                     LaunchJava.linkToJar = linksJavaList[index];
                     LaunchJava.typeVer = typeJavaList[index];
+                    LaunchJava.clientPath = "bin/versions/java/" + LaunchJava.selectedVer + ".jar";
                     label1.Text = "Selected: Java " + LaunchJava.selectedVer;
                     //infoBox.Text = $"Java Edition\nVersionGoesHere\nReleaseDate\nSimpleInfoGoesHere";
                 }

@@ -18,6 +18,9 @@ namespace MCLauncher
         public static bool useProxy = true;
         public static string launchCmd;
 
+        public static string clientPath;
+        public static bool isCustom = false;
+
         public static void LaunchGame()
         {
             //Create directories
@@ -25,6 +28,10 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions");
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions\\java");
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\libs");
+            if(isCustom == false)
+            {
+                clientPath = "bin/versions/java/" + selectedVer + ".jar";
+            }
 
             using (var client = new WebClient())
             {
@@ -44,7 +51,7 @@ namespace MCLauncher
 
                     if (LibsCheck.isDone == true)
                     {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.rubydung.RubyDung {Properties.Settings.Default.playerName} test";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.rubydung.RubyDung {Properties.Settings.Default.playerName} test";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
@@ -58,7 +65,7 @@ namespace MCLauncher
 
                     if (LibsCheck.isDone == true)
                     {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.minecraft.RubyDung {Properties.Settings.Default.playerName} test";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" com.mojang.minecraft.RubyDung {Properties.Settings.Default.playerName} test";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
@@ -73,7 +80,7 @@ namespace MCLauncher
 
                     if (LibsCheck.isDone == true)
                     {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
@@ -90,9 +97,10 @@ namespace MCLauncher
                         string gamedir = $"\"{Globals.currentPath}\\bin\\instance\\game\"";
                         //string gamedir = $"{Globals.currentPath}\\bin\\instance";
                         string assetdir = $"\"{Globals.currentPath}\\bin\\instance\\assets\"";
-                        Console.WriteLine(gamedir);
+                        //Console.WriteLine(gamedir);
+                        Console.WriteLine(clientPath);
                         //launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gamedir} --assetDir {assetdir} --tweakClass net.minecraft.launchwrapper.VanillaTweaker";
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
                         VerSelect.checkTab = "java";
