@@ -37,7 +37,6 @@ namespace MCLauncher
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.btnVerSelect = new System.Windows.Forms.Button();
             this.verSelected = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -47,6 +46,7 @@ namespace MCLauncher
             this.label1 = new System.Windows.Forms.Label();
             this.logInBtn = new System.Windows.Forms.Button();
             this.settingsBtn = new System.Windows.Forms.Button();
+            this.changeVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -70,6 +70,7 @@ namespace MCLauncher
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
             this.profilesToolStripMenuItem,
+            this.changeVersionToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -121,24 +122,13 @@ namespace MCLauncher
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
             // 
-            // btnVerSelect
-            // 
-            this.btnVerSelect.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnVerSelect.Location = new System.Drawing.Point(13, 47);
-            this.btnVerSelect.Name = "btnVerSelect";
-            this.btnVerSelect.Size = new System.Drawing.Size(91, 23);
-            this.btnVerSelect.TabIndex = 0;
-            this.btnVerSelect.Text = "Select version";
-            this.btnVerSelect.UseVisualStyleBackColor = true;
-            this.btnVerSelect.Click += new System.EventHandler(this.btnVerSelect_Click);
-            // 
             // verSelected
             // 
             this.verSelected.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.verSelected.AutoSize = true;
             this.verSelected.BackColor = System.Drawing.Color.Transparent;
             this.verSelected.ForeColor = System.Drawing.Color.White;
-            this.verSelected.Location = new System.Drawing.Point(13, 31);
+            this.verSelected.Location = new System.Drawing.Point(13, 44);
             this.verSelected.Name = "verSelected";
             this.verSelected.Size = new System.Drawing.Size(37, 13);
             this.verSelected.TabIndex = 1;
@@ -150,7 +140,7 @@ namespace MCLauncher
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(13, 15);
+            this.label2.Location = new System.Drawing.Point(13, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 13);
             this.label2.TabIndex = 2;
@@ -204,7 +194,6 @@ namespace MCLauncher
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.verSelected);
-            this.panel1.Controls.Add(this.btnVerSelect);
             this.panel1.Location = new System.Drawing.Point(-1, 340);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(785, 75);
@@ -244,6 +233,14 @@ namespace MCLauncher
             this.settingsBtn.UseVisualStyleBackColor = true;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
+            // changeVersionToolStripMenuItem
+            // 
+            this.changeVersionToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.changeVersionToolStripMenuItem.Name = "changeVersionToolStripMenuItem";
+            this.changeVersionToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.changeVersionToolStripMenuItem.Text = "Change version";
+            this.changeVersionToolStripMenuItem.Click += new System.EventHandler(this.changeVersionToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,7 +269,6 @@ namespace MCLauncher
         #endregion
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnVerSelect;
         private System.Windows.Forms.Label verSelected;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPlay;
@@ -287,6 +283,7 @@ namespace MCLauncher
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeVersionToolStripMenuItem;
     }
 }
 

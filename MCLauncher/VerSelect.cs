@@ -253,5 +253,11 @@ namespace MCLauncher
                 LoadPS3List();
             }
         }
+
+        private void customMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadCustom loadCustom = new LoadCustom();
+            loadCustom.ShowDialog();
+        }
     }
 }

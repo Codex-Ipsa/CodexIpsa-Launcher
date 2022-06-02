@@ -95,25 +95,6 @@ namespace MCLauncher
             }
         }
 
-        private void btnVerSelect_Click(object sender, EventArgs e)
-        {
-            VerSelect verSelect = new VerSelect();
-            verSelect.ShowDialog();
-
-
-            if (VerSelect.checkTab == "java")
-                verSelected.Text = LaunchJava.selectedVer;
-
-            else if (VerSelect.checkTab == "javaMod")
-                verSelected.Text = LaunchJavaMod.selectedVer;
-
-            else if (VerSelect.checkTab == "x360")
-                verSelected.Text = LaunchXbox360.selectedVer;
-
-            else if (VerSelect.checkTab == "ps3")
-                verSelected.Text = LaunchPS3.selectedVer;
-        }
-
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (VerSelect.checkTab == "java")
@@ -150,6 +131,25 @@ namespace MCLauncher
         {
             About credits = new About();
             credits.ShowDialog();
+        }
+
+        private void changeVersionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VerSelect verSelect = new VerSelect();
+            verSelect.ShowDialog();
+
+
+            if (VerSelect.checkTab == "java")
+                verSelected.Text = LaunchJava.selectedVer;
+
+            else if (VerSelect.checkTab == "javaMod")
+                verSelected.Text = LaunchJavaMod.selectedVer;
+
+            else if (VerSelect.checkTab == "x360")
+                verSelected.Text = LaunchXbox360.selectedVer;
+
+            else if (VerSelect.checkTab == "ps3")
+                verSelected.Text = LaunchPS3.selectedVer;
         }
     }
 }

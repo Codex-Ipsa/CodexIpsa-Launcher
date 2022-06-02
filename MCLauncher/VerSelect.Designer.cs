@@ -46,7 +46,7 @@ namespace MCLauncher
             this.legacyConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xbox360ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playstation3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bedrockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -153,7 +153,7 @@ namespace MCLauncher
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.javaToolStripMenuItem,
             this.legacyConsoleToolStripMenuItem,
-            this.bedrockToolStripMenuItem});
+            this.customMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(260, 24);
@@ -208,12 +208,13 @@ namespace MCLauncher
             this.playstation3ToolStripMenuItem.Text = "Playstation 3";
             this.playstation3ToolStripMenuItem.Click += new System.EventHandler(this.playstation3ToolStripMenuItem_Click);
             // 
-            // bedrockToolStripMenuItem
+            // customMenuItem
             // 
-            this.bedrockToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.bedrockToolStripMenuItem.Name = "bedrockToolStripMenuItem";
-            this.bedrockToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.bedrockToolStripMenuItem.Text = "Bedrock";
+            this.customMenuItem.ForeColor = System.Drawing.Color.White;
+            this.customMenuItem.Name = "customMenuItem";
+            this.customMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.customMenuItem.Text = "Custom";
+            this.customMenuItem.Click += new System.EventHandler(this.customMenuItem_Click);
             // 
             // VerSelect
             // 
@@ -259,6 +260,6 @@ namespace MCLauncher
         private System.Windows.Forms.ToolStripMenuItem legacyConsoleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xbox360ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playstation3ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bedrockToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customMenuItem;
     }
 }
