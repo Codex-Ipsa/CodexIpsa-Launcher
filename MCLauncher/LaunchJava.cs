@@ -12,9 +12,9 @@ namespace MCLauncher
 {
     class LaunchJava
     {
-        public static string selectedVer = "b1.7.3";
-        public static string linkToJar = "https://launcher.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar";
-        public static string typeVer = "jar106";
+        public static string selectedVer;
+        public static string linkToJar;
+        public static string typeVer;
         public static bool useProxy = true;
         public static string launchCmd;
 

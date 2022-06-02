@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -32,6 +34,22 @@ namespace MCLauncher
                 File.Delete(Globals.currentPath + "\\MCLauncherUpdaterDev.exe");
             }
             this.Refresh(); //Does this need to be here? Who knows
+
+            //Set default version
+            using (var client = new WebClient())
+            {
+                string json = client.DownloadString(Globals.defaultVer);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                //Set the LaunchJava defaults
+                foreach (var vers in data)
+                {
+                    LaunchJava.selectedVer = vers.verName;
+                    LaunchJava.linkToJar = vers.verLink;
+                    LaunchJava.typeVer = vers.verType;
+                    verSelected.Text = vers.verName;
+                }
+            }
 
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));

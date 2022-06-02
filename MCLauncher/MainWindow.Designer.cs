@@ -33,6 +33,7 @@ namespace MCLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -46,7 +47,6 @@ namespace MCLauncher
             this.label1 = new System.Windows.Forms.Label();
             this.logInBtn = new System.Windows.Forms.Button();
             this.settingsBtn = new System.Windows.Forms.Button();
-            this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -83,6 +83,13 @@ namespace MCLauncher
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
             this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.homeToolStripMenuItem.Text = "Home";
+            // 
+            // profilesToolStripMenuItem
+            // 
+            this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.profilesToolStripMenuItem.Text = "Profiles";
             // 
             // aboutToolStripMenuItem
             // 
@@ -236,13 +243,6 @@ namespace MCLauncher
             this.settingsBtn.Text = "Settings";
             this.settingsBtn.UseVisualStyleBackColor = true;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
-            // 
-            // profilesToolStripMenuItem
-            // 
-            this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
-            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.profilesToolStripMenuItem.Text = "Profiles";
             // 
             // MainWindow
             // 
