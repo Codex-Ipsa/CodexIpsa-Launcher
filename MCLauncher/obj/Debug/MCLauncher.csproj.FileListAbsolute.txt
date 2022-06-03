@@ -47,3 +47,29 @@ D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.pdb
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.InstanceManager.resources
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Warning.resources
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.GameConsole.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.exe.config
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.exe
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\bin\Debug\MCLauncher.pdb
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\bin\Debug\Newtonsoft.Json.dll
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\bin\Debug\Newtonsoft.Json.xml
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csprojAssemblyReference.cache
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.About.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DownloadProgress.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.GameConsole.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.InstanceManager.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.LargeDownloadWarn.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.LoadCustom.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.MainWindow.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.NewUI.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.OfflineMode.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Properties.Resources.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.SelectVerInfo.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Settings.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Update.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.VerSelect.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Warning.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.GenerateResource.cache
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CoreCompileInputs.cache
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CopyComplete
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.exe
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.pdb
