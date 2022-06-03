@@ -110,12 +110,6 @@ namespace MCLauncher
                 LaunchPS3.LaunchGame();
         }
 
-        private void settingsBtn_Click(object sender, EventArgs e)
-        {
-            Settings settings = new Settings();
-            settings.ShowDialog();
-        }
-
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
         {
             string newName = usernameTextBox.Text;
@@ -140,16 +134,39 @@ namespace MCLauncher
 
 
             if (VerSelect.checkTab == "java")
+            {
                 verSelected.Text = LaunchJava.selectedVer;
+                gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
+            }
 
             else if (VerSelect.checkTab == "javaMod")
+            {
                 verSelected.Text = LaunchJavaMod.selectedVer;
+                gameVerLabel.Text = "Ready to play Modded " + LaunchJavaMod.selectedVer;
+            }
 
             else if (VerSelect.checkTab == "x360")
+            {
                 verSelected.Text = LaunchXbox360.selectedVer;
+                gameVerLabel.Text = "Ready to play Minecraft X360 " + LaunchXbox360.selectedVer;
+            }
 
             else if (VerSelect.checkTab == "ps3")
+            {
                 verSelected.Text = LaunchPS3.selectedVer;
+                gameVerLabel.Text = "Ready to play Minecraft PS3 " + LaunchPS3.selectedVer;
+            }
+        }
+
+        private void profilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InstanceManager instMan = new InstanceManager();
+            instMan.ShowDialog();
+        }
+
+        private void settingsBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

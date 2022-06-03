@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MCLauncher
         public static string typeVer;
         public static bool useProxy = true;
         public static string launchCmd;
+        public static string consoleOutput;
 
         public static string clientPath;
         public static bool isCustom = false;
@@ -103,6 +105,36 @@ namespace MCLauncher
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";
 
                         System.Diagnostics.Process.Start("java.exe", launchCmd);
+
+                        /*Process process = new Process();
+                        process.StartInfo.FileName = "java.exe";
+                        process.StartInfo.Arguments = launchCmd;
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.StartInfo.RedirectStandardError = true;
+
+                        process.ErrorDataReceived += new DataReceivedEventHandler(ErrorOutputHandler);
+
+                        process.Start();
+
+                        process.BeginErrorReadLine();
+
+                        string output = process.StandardOutput.ReadToEnd();
+                        GameConsole.textStr += output;
+                        GameConsole con = new GameConsole();
+                        con.ShowDialog();
+                        process.WaitForExit();*/
+                        /*proc.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+                        proc.ErrorDataReceived += new DataReceivedEventHandler(OutputHandlerErr);
+                        GameConsole con = new GameConsole();
+                        con.ShowDialog();
+
+                        while (!proc.StandardOutput.EndOfStream)
+                        {
+                            consoleOutput = proc.StandardOutput.ReadLine();
+                            GameConsole.textStr += consoleOutput;
+                        }*/
+
                         VerSelect.checkTab = "java";
                         LibsCheck.isDone = false;
                     }
@@ -114,5 +146,16 @@ namespace MCLauncher
                 }
             }
         }
+
+        /*private static void OutputHandler(object sender, DataReceivedEventArgs e)
+        {
+            GameConsole.textStr += e.Data;
+            //Console.WriteLine(e.Data);
+        }
+        private static void ErrorOutputHandler(object sender, DataReceivedEventArgs e)
+        {
+            Console.WriteLine(e.Data);
+            //Console.WriteLine(e.Data);
+        }*/
     }
 }

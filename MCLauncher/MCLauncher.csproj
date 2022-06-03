@@ -81,6 +81,12 @@
     <Compile Include="DownloadProgress.Designer.cs">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameConsole.Designer.cs">
+      <DependentUpon>GameConsole.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstanceManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,11 +159,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warning.Designer.cs">
+      <DependentUpon>Warning.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadProgress.resx">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameConsole.resx">
+      <DependentUpon>GameConsole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
@@ -193,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VerSelect.resx">
       <DependentUpon>VerSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warning.resx">
+      <DependentUpon>Warning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

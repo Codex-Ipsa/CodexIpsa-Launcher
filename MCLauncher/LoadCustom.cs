@@ -13,7 +13,7 @@ namespace MCLauncher
 {
     public partial class LoadCustom : Form
     {
-        string result;
+        string verPath = string.Empty;
         string verType;
 
         public LoadCustom()
@@ -30,34 +30,63 @@ namespace MCLauncher
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                result = ofd.FileName;
+                verPath = ofd.FileName;
                 StreamReader sr = new StreamReader(ofd.FileName);
                 sr.Close();
             }
-            pathLabel.Text = result;
+            pathLabel.Text = verPath;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(verType == "java-applet")
+            if(verPath == string.Empty)
             {
-                LaunchJava.isCustom = true;
-                LaunchJava.selectedVer = "custom";
-                LaunchJava.typeVer = "applet";
-                LaunchJava.clientPath = result;
-                this.Close();
-            }
-            else if (verType == "java-a106")
-            {
-                LaunchJava.isCustom = true;
-                LaunchJava.selectedVer = "custom";
-                LaunchJava.typeVer = "jar106";
-                LaunchJava.clientPath = result;
-                this.Close();
+                Warning.warnString = "Please select a valid path.";
+                Warning warn = new Warning();
+                warn.ShowDialog();
+                //do nothing
             }
             else
             {
-                //do nothing
+                if (verType == "java-applet")
+                {
+                    LaunchJava.isCustom = true;
+                    LaunchJava.selectedVer = "custom";
+                    LaunchJava.typeVer = "applet";
+                    LaunchJava.clientPath = verPath;
+                    this.Close();
+                }
+                else if (verType == "java-a106")
+                {
+                    LaunchJava.isCustom = true;
+                    LaunchJava.selectedVer = "custom";
+                    LaunchJava.typeVer = "jar106";
+                    LaunchJava.clientPath = verPath;
+                    this.Close();
+                }
+                else if (verType == "rubydung")
+                {
+                    LaunchJava.isCustom = true;
+                    LaunchJava.selectedVer = "custom";
+                    LaunchJava.typeVer = "rubydung";
+                    LaunchJava.clientPath = verPath;
+                    this.Close();
+                }
+                else if (verType == "rubydung2")
+                {
+                    LaunchJava.isCustom = true;
+                    LaunchJava.selectedVer = "custom";
+                    LaunchJava.typeVer = "rubydung2";
+                    LaunchJava.clientPath = verPath;
+                    this.Close();
+                }
+                else
+                {
+                    Warning.warnString = "Please select a launch type.";
+                    Warning warn = new Warning();
+                    warn.ShowDialog();
+                    //do nothing
+                }
             }
         }
 

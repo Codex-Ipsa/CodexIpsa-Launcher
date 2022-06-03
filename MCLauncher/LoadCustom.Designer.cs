@@ -82,7 +82,9 @@ namespace MCLauncher
             this.methodComboBox.FormattingEnabled = true;
             this.methodComboBox.Items.AddRange(new object[] {
             "java-applet",
-            "java-a106"});
+            "java-a106",
+            "rubydung",
+            "rubydung2"});
             this.methodComboBox.Location = new System.Drawing.Point(10, 89);
             this.methodComboBox.Name = "methodComboBox";
             this.methodComboBox.Size = new System.Drawing.Size(121, 21);
