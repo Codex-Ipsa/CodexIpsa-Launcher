@@ -22,7 +22,7 @@ namespace MCLauncher
             //Set needed things - window name, changelog, username
             this.Text = "MineC#raft Launcher v" + Globals.verDisplay;
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
-            usernameLabel.Text = "Username: " + Properties.Settings.Default.playerName;
+            playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName;
 
             //Delete updaters if they exist for some reason
             if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdater.exe")))
@@ -47,7 +47,8 @@ namespace MCLauncher
                     LaunchJava.selectedVer = vers.verName;
                     LaunchJava.linkToJar = vers.verLink;
                     LaunchJava.typeVer = vers.verType;
-                    verSelected.Text = vers.verName;
+
+                    gameVerLabel.Text = "Ready to play Minecraft " + vers.verName;
                 }
             }
 
@@ -116,8 +117,8 @@ namespace MCLauncher
             Properties.Settings.Default.playerName = newName;
             Properties.Settings.Default.Save();
 
-            usernameLabel.Text = "Username: " + newName;
-            usernameLabel.Refresh();
+            playerNameLabel.Text = "Welcome, " + newName;
+            playerNameLabel.Refresh();
             newName = "";
         }
 
@@ -135,25 +136,21 @@ namespace MCLauncher
 
             if (VerSelect.checkTab == "java")
             {
-                verSelected.Text = LaunchJava.selectedVer;
                 gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
             }
 
             else if (VerSelect.checkTab == "javaMod")
             {
-                verSelected.Text = LaunchJavaMod.selectedVer;
                 gameVerLabel.Text = "Ready to play Modded " + LaunchJavaMod.selectedVer;
             }
 
             else if (VerSelect.checkTab == "x360")
             {
-                verSelected.Text = LaunchXbox360.selectedVer;
                 gameVerLabel.Text = "Ready to play Minecraft X360 " + LaunchXbox360.selectedVer;
             }
 
             else if (VerSelect.checkTab == "ps3")
             {
-                verSelected.Text = LaunchPS3.selectedVer;
                 gameVerLabel.Text = "Ready to play Minecraft PS3 " + LaunchPS3.selectedVer;
             }
         }
@@ -162,11 +159,6 @@ namespace MCLauncher
         {
             InstanceManager instMan = new InstanceManager();
             instMan.ShowDialog();
-        }
-
-        private void settingsBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
