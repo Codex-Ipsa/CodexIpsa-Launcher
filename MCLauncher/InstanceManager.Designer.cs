@@ -29,6 +29,7 @@ namespace MCLauncher
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstanceManager));
             this.label1 = new System.Windows.Forms.Label();
             this.createBtn = new System.Windows.Forms.Button();
             this.nameBox = new System.Windows.Forms.TextBox();
@@ -37,26 +38,26 @@ namespace MCLauncher
             this.resCheck = new System.Windows.Forms.CheckBox();
             this.openCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.resBoxY = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.resBoxX = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.editionBox = new System.Windows.Forms.TextBox();
-            this.verBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.verBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.javaBox = new System.Windows.Forms.TextBox();
-            this.javaCheck = new System.Windows.Forms.CheckBox();
-            this.jvmBox = new System.Windows.Forms.TextBox();
-            this.jvmCheck = new System.Windows.Forms.CheckBox();
-            this.methodCheck = new System.Windows.Forms.CheckBox();
-            this.custjarCheck = new System.Windows.Forms.CheckBox();
-            this.custjarBox = new System.Windows.Forms.TextBox();
             this.methodBox = new System.Windows.Forms.ComboBox();
+            this.custjarBox = new System.Windows.Forms.TextBox();
+            this.custjarCheck = new System.Windows.Forms.CheckBox();
+            this.methodCheck = new System.Windows.Forms.CheckBox();
+            this.jvmCheck = new System.Windows.Forms.CheckBox();
+            this.jvmBox = new System.Windows.Forms.TextBox();
+            this.javaCheck = new System.Windows.Forms.CheckBox();
+            this.javaBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.editionBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -97,9 +98,11 @@ namespace MCLauncher
             this.dirCheck.TabIndex = 11;
             this.dirCheck.Text = "Custom directory:";
             this.dirCheck.UseVisualStyleBackColor = true;
+            this.dirCheck.CheckedChanged += new System.EventHandler(this.dirCheck_CheckedChanged);
             // 
             // dirBox
             // 
+            this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(516, 20);
@@ -114,6 +117,7 @@ namespace MCLauncher
             this.resCheck.TabIndex = 13;
             this.resCheck.Text = "Custom resolution:";
             this.resCheck.UseVisualStyleBackColor = true;
+            this.resCheck.CheckedChanged += new System.EventHandler(this.resCheck_CheckedChanged);
             // 
             // openCheck
             // 
@@ -143,6 +147,14 @@ namespace MCLauncher
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
             // 
+            // resBoxY
+            // 
+            this.resBoxY.Enabled = false;
+            this.resBoxY.Location = new System.Drawing.Point(392, 64);
+            this.resBoxY.Name = "resBoxY";
+            this.resBoxY.Size = new System.Drawing.Size(246, 20);
+            this.resBoxY.TabIndex = 20;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -152,15 +164,9 @@ namespace MCLauncher
             this.label4.TabIndex = 19;
             this.label4.Text = "x";
             // 
-            // resBoxY
-            // 
-            this.resBoxY.Location = new System.Drawing.Point(392, 64);
-            this.resBoxY.Name = "resBoxY";
-            this.resBoxY.Size = new System.Drawing.Size(246, 20);
-            this.resBoxY.TabIndex = 20;
-            // 
             // resBoxX
             // 
+            this.resBoxX.Enabled = false;
             this.resBoxX.Location = new System.Drawing.Point(122, 65);
             this.resBoxX.Name = "resBoxX";
             this.resBoxX.Size = new System.Drawing.Size(246, 20);
@@ -168,40 +174,16 @@ namespace MCLauncher
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.editionBox);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.editionBox);
             this.groupBox2.Location = new System.Drawing.Point(12, 131);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(644, 70);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Version selection";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Edition:";
-            // 
-            // editionBox
-            // 
-            this.editionBox.Location = new System.Drawing.Point(122, 13);
-            this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(516, 20);
-            this.editionBox.TabIndex = 8;
-            // 
-            // verBox
-            // 
-            this.verBox.FormattingEnabled = true;
-            this.verBox.Location = new System.Drawing.Point(122, 39);
-            this.verBox.Name = "verBox";
-            this.verBox.Size = new System.Drawing.Size(516, 21);
-            this.verBox.TabIndex = 22;
             // 
             // label2
             // 
@@ -211,6 +193,25 @@ namespace MCLauncher
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 23;
             this.label2.Text = "Use version:";
+            // 
+            // verBox
+            // 
+            this.verBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.verBox.FormattingEnabled = true;
+            this.verBox.Location = new System.Drawing.Point(122, 39);
+            this.verBox.Name = "verBox";
+            this.verBox.Size = new System.Drawing.Size(516, 21);
+            this.verBox.TabIndex = 22;
+            this.verBox.SelectedIndexChanged += new System.EventHandler(this.verBox_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Edition:";
             // 
             // groupBox3
             // 
@@ -229,49 +230,22 @@ namespace MCLauncher
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
             // 
-            // javaBox
+            // methodBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(122, 13);
-            this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(516, 20);
-            this.javaBox.TabIndex = 8;
+            this.methodBox.Enabled = false;
+            this.methodBox.FormattingEnabled = true;
+            this.methodBox.Location = new System.Drawing.Point(122, 65);
+            this.methodBox.Name = "methodBox";
+            this.methodBox.Size = new System.Drawing.Size(516, 21);
+            this.methodBox.TabIndex = 24;
             // 
-            // javaCheck
+            // custjarBox
             // 
-            this.javaCheck.AutoSize = true;
-            this.javaCheck.Location = new System.Drawing.Point(6, 15);
-            this.javaCheck.Name = "javaCheck";
-            this.javaCheck.Size = new System.Drawing.Size(81, 17);
-            this.javaCheck.TabIndex = 21;
-            this.javaCheck.Text = "Java install:";
-            this.javaCheck.UseVisualStyleBackColor = true;
-            // 
-            // jvmBox
-            // 
-            this.jvmBox.Location = new System.Drawing.Point(122, 39);
-            this.jvmBox.Name = "jvmBox";
-            this.jvmBox.Size = new System.Drawing.Size(516, 20);
-            this.jvmBox.TabIndex = 22;
-            // 
-            // jvmCheck
-            // 
-            this.jvmCheck.AutoSize = true;
-            this.jvmCheck.Location = new System.Drawing.Point(6, 41);
-            this.jvmCheck.Name = "jvmCheck";
-            this.jvmCheck.Size = new System.Drawing.Size(102, 17);
-            this.jvmCheck.TabIndex = 23;
-            this.jvmCheck.Text = "JVM arguments:";
-            this.jvmCheck.UseVisualStyleBackColor = true;
-            // 
-            // methodCheck
-            // 
-            this.methodCheck.AutoSize = true;
-            this.methodCheck.Location = new System.Drawing.Point(6, 67);
-            this.methodCheck.Name = "methodCheck";
-            this.methodCheck.Size = new System.Drawing.Size(103, 17);
-            this.methodCheck.TabIndex = 25;
-            this.methodCheck.Text = "Launch method:";
-            this.methodCheck.UseVisualStyleBackColor = true;
+            this.custjarBox.Enabled = false;
+            this.custjarBox.Location = new System.Drawing.Point(122, 91);
+            this.custjarBox.Name = "custjarBox";
+            this.custjarBox.Size = new System.Drawing.Size(516, 20);
+            this.custjarBox.TabIndex = 27;
             // 
             // custjarCheck
             // 
@@ -282,21 +256,56 @@ namespace MCLauncher
             this.custjarCheck.TabIndex = 26;
             this.custjarCheck.Text = "Minecraft.jar:";
             this.custjarCheck.UseVisualStyleBackColor = true;
+            this.custjarCheck.CheckedChanged += new System.EventHandler(this.custjarCheck_CheckedChanged);
             // 
-            // custjarBox
+            // methodCheck
             // 
-            this.custjarBox.Location = new System.Drawing.Point(122, 91);
-            this.custjarBox.Name = "custjarBox";
-            this.custjarBox.Size = new System.Drawing.Size(516, 20);
-            this.custjarBox.TabIndex = 27;
+            this.methodCheck.AutoSize = true;
+            this.methodCheck.Location = new System.Drawing.Point(6, 67);
+            this.methodCheck.Name = "methodCheck";
+            this.methodCheck.Size = new System.Drawing.Size(103, 17);
+            this.methodCheck.TabIndex = 25;
+            this.methodCheck.Text = "Launch method:";
+            this.methodCheck.UseVisualStyleBackColor = true;
+            this.methodCheck.CheckedChanged += new System.EventHandler(this.methodCheck_CheckedChanged);
             // 
-            // methodBox
+            // jvmCheck
             // 
-            this.methodBox.FormattingEnabled = true;
-            this.methodBox.Location = new System.Drawing.Point(122, 65);
-            this.methodBox.Name = "methodBox";
-            this.methodBox.Size = new System.Drawing.Size(516, 21);
-            this.methodBox.TabIndex = 24;
+            this.jvmCheck.AutoSize = true;
+            this.jvmCheck.Location = new System.Drawing.Point(6, 41);
+            this.jvmCheck.Name = "jvmCheck";
+            this.jvmCheck.Size = new System.Drawing.Size(102, 17);
+            this.jvmCheck.TabIndex = 23;
+            this.jvmCheck.Text = "JVM arguments:";
+            this.jvmCheck.UseVisualStyleBackColor = true;
+            this.jvmCheck.CheckedChanged += new System.EventHandler(this.jvmCheck_CheckedChanged);
+            // 
+            // jvmBox
+            // 
+            this.jvmBox.Enabled = false;
+            this.jvmBox.Location = new System.Drawing.Point(122, 39);
+            this.jvmBox.Name = "jvmBox";
+            this.jvmBox.Size = new System.Drawing.Size(516, 20);
+            this.jvmBox.TabIndex = 22;
+            // 
+            // javaCheck
+            // 
+            this.javaCheck.AutoSize = true;
+            this.javaCheck.Location = new System.Drawing.Point(6, 15);
+            this.javaCheck.Name = "javaCheck";
+            this.javaCheck.Size = new System.Drawing.Size(81, 17);
+            this.javaCheck.TabIndex = 21;
+            this.javaCheck.Text = "Java install:";
+            this.javaCheck.UseVisualStyleBackColor = true;
+            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
+            // 
+            // javaBox
+            // 
+            this.javaBox.Enabled = false;
+            this.javaBox.Location = new System.Drawing.Point(122, 13);
+            this.javaBox.Name = "javaBox";
+            this.javaBox.Size = new System.Drawing.Size(516, 20);
+            this.javaBox.TabIndex = 8;
             // 
             // button1
             // 
@@ -325,6 +334,16 @@ namespace MCLauncher
             this.button3.Text = "Install mod";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // editionBox
+            // 
+            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.editionBox.FormattingEnabled = true;
+            this.editionBox.Location = new System.Drawing.Point(122, 12);
+            this.editionBox.Name = "editionBox";
+            this.editionBox.Size = new System.Drawing.Size(516, 21);
+            this.editionBox.TabIndex = 24;
+            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
+            // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,6 +356,7 @@ namespace MCLauncher
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.createBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstanceManager";
             this.Text = "InstanceManager";
             this.groupBox1.ResumeLayout(false);
@@ -366,7 +386,6 @@ namespace MCLauncher
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox editionBox;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox custjarBox;
         private System.Windows.Forms.CheckBox custjarCheck;
@@ -379,5 +398,6 @@ namespace MCLauncher
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox editionBox;
     }
 }

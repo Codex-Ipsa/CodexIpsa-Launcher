@@ -31,8 +31,6 @@ namespace MCLauncher
             if (dr == DialogResult.OK)
             {
                 verPath = ofd.FileName;
-                StreamReader sr = new StreamReader(ofd.FileName);
-                sr.Close();
             }
             pathLabel.Text = verPath;
         }
