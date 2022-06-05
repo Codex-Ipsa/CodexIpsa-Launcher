@@ -41,10 +41,8 @@ namespace MCLauncher
         {
             if(verPath == string.Empty)
             {
-                Warning.warnString = "Please select a valid path.";
-                Warning warn = new Warning();
+                Warning warn = new Warning("Please choose a valid path.");
                 warn.ShowDialog();
-                //do nothing
             }
             else
             {
@@ -82,10 +80,8 @@ namespace MCLauncher
                 }
                 else
                 {
-                    Warning.warnString = "Please select a launch type.";
-                    Warning warn = new Warning();
+                    Warning warn = new Warning("Please select a launch type.");
                     warn.ShowDialog();
-                    //do nothing
                 }
             }
         }

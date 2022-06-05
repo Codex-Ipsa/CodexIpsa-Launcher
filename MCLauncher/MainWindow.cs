@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -55,14 +56,27 @@ namespace MCLauncher
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "versions"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "instance"));
 
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
             Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
-            
 
-            //TEMPORARILY DISABLED, MAKE SURE IT'S ON!!!
+            if(!File.Exists($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
+            {
+                using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
+                {
+                    byte[] config = new UTF8Encoding(true).GetBytes($"WARNING!\nDo not mess with anything in this folder!\nIt will corrupt the instance(s)!");
+                    fs.Write(config, 0, config.Length);
+                }
+            }
+            if(!Directory.Exists($"{Globals.currentPath}\\bin\\instance\\Default"))
+            {
+                InstanceManager.tempName = "Default";
+                InstanceManager.createInstance();
+            }
             checkForUpdates();
+            loadInstanceList();
         }
 
         void checkForUpdates()
@@ -159,6 +173,41 @@ namespace MCLauncher
         {
             InstanceManager instMan = new InstanceManager();
             instMan.ShowDialog();
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            loadInstanceList();
+        }
+
+        public void loadInstanceList()
+        {
+            List<string> instanceList = new List<string>();
+            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\bin\\instance\\", "*");
+
+            foreach (string dir in dirs)
+            {
+                var dirN = new DirectoryInfo(dir);
+                var dirName = dirN.Name;
+                if(File.Exists($"{Globals.currentPath}\\bin\\instance\\{dirName}\\instance.cfg"))
+                {
+                    instanceList.Add(dirName);
+                }
+                else
+                {
+                    //do nothing
+                }
+
+                //Console.WriteLine(dir);
+            }
+            comboBox1.DataSource = instanceList;
+            comboBox1.Refresh();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            InstanceManager.selectedInstance = comboBox1.Text;
+            Console.WriteLine("selected: " + InstanceManager.selectedInstance);
         }
     }
 }

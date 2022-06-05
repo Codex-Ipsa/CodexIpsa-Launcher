@@ -13,10 +13,10 @@ namespace MCLauncher
     public partial class Warning : Form
     {
         public static string warnString = "";
-        public Warning()
+        public Warning(string str)
         {
             InitializeComponent();
-            warnLabel.Text = warnString;
+            warnLabel.Text = str;
         }
 
         private void okBtn_Click(object sender, EventArgs e)

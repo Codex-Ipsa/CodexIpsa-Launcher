@@ -41,12 +41,15 @@ namespace MCLauncher
             this.btnPlay = new System.Windows.Forms.Button();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.gameVerLabel = new System.Windows.Forms.Label();
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -145,7 +148,7 @@ namespace MCLauncher
             // usernameTextBox
             // 
             this.usernameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.usernameTextBox.Location = new System.Drawing.Point(13, 34);
+            this.usernameTextBox.Location = new System.Drawing.Point(191, 31);
             this.usernameTextBox.MaxLength = 16;
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(100, 20);
@@ -158,6 +161,9 @@ namespace MCLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.gameVerLabel);
@@ -170,6 +176,17 @@ namespace MCLauncher
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(785, 75);
             this.panel1.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(13, 26);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(142, 21);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // button1
             // 
@@ -211,7 +228,7 @@ namespace MCLauncher
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(13, 18);
+            this.label1.Location = new System.Drawing.Point(188, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 10;
@@ -230,28 +247,34 @@ namespace MCLauncher
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
             // 
-            // comboBox1
+            // label2
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "t",
-            "tes",
-            "t",
-            "est",
-            "est",
-            "es",
-            "t",
-            "s",
-            "t",
-            "es",
-            "t",
-            "es",
-            "te",
-            "st"});
-            this.comboBox1.Location = new System.Drawing.Point(119, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(10, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Select profile:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(13, 49);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(68, 21);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "New profile";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(87, 49);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(68, 21);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Edit profile";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -296,6 +319,9 @@ namespace MCLauncher
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
 
