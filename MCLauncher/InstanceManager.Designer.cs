@@ -38,10 +38,16 @@ namespace MCLauncher
             this.resCheck = new System.Windows.Forms.CheckBox();
             this.openCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maxRamBox = new System.Windows.Forms.TextBox();
+            this.ramCheck = new System.Windows.Forms.CheckBox();
+            this.minRamBox = new System.Windows.Forms.TextBox();
             this.resBoxY = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.resBoxX = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.editionBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.verBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,7 +63,7 @@ namespace MCLauncher
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.editionBox = new System.Windows.Forms.ComboBox();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -74,11 +80,11 @@ namespace MCLauncher
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(575, 331);
+            this.createBtn.Location = new System.Drawing.Point(575, 358);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(75, 23);
             this.createBtn.TabIndex = 7;
-            this.createBtn.Text = "Save";
+            this.createBtn.Text = "Create";
             this.createBtn.UseVisualStyleBackColor = true;
             this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
             // 
@@ -122,7 +128,7 @@ namespace MCLauncher
             // openCheck
             // 
             this.openCheck.AutoSize = true;
-            this.openCheck.Location = new System.Drawing.Point(6, 93);
+            this.openCheck.Location = new System.Drawing.Point(6, 119);
             this.openCheck.Name = "openCheck";
             this.openCheck.Size = new System.Drawing.Size(140, 17);
             this.openCheck.TabIndex = 15;
@@ -131,9 +137,14 @@ namespace MCLauncher
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.maxRamBox);
+            this.groupBox1.Controls.Add(this.ramCheck);
+            this.groupBox1.Controls.Add(this.minRamBox);
             this.groupBox1.Controls.Add(this.resBoxY);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.openCheck);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nameBox);
             this.groupBox1.Controls.Add(this.dirBox);
@@ -142,10 +153,55 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.dirCheck);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 113);
+            this.groupBox1.Size = new System.Drawing.Size(644, 140);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(390, 94);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Max:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(123, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Min:";
+            // 
+            // maxRamBox
+            // 
+            this.maxRamBox.Enabled = false;
+            this.maxRamBox.Location = new System.Drawing.Point(426, 91);
+            this.maxRamBox.Name = "maxRamBox";
+            this.maxRamBox.Size = new System.Drawing.Size(212, 20);
+            this.maxRamBox.TabIndex = 23;
+            // 
+            // ramCheck
+            // 
+            this.ramCheck.AutoSize = true;
+            this.ramCheck.Location = new System.Drawing.Point(6, 93);
+            this.ramCheck.Name = "ramCheck";
+            this.ramCheck.Size = new System.Drawing.Size(66, 17);
+            this.ramCheck.TabIndex = 22;
+            this.ramCheck.Text = "Memory:";
+            this.ramCheck.UseVisualStyleBackColor = true;
+            this.ramCheck.CheckedChanged += new System.EventHandler(this.ramCheck_CheckedChanged);
+            // 
+            // minRamBox
+            // 
+            this.minRamBox.Enabled = false;
+            this.minRamBox.Location = new System.Drawing.Point(156, 91);
+            this.minRamBox.Name = "minRamBox";
+            this.minRamBox.Size = new System.Drawing.Size(212, 20);
+            this.minRamBox.TabIndex = 21;
             // 
             // resBoxY
             // 
@@ -178,12 +234,22 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(12, 131);
+            this.groupBox2.Location = new System.Drawing.Point(12, 158);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(644, 70);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Version selection";
+            // 
+            // editionBox
+            // 
+            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.editionBox.FormattingEnabled = true;
+            this.editionBox.Location = new System.Drawing.Point(122, 12);
+            this.editionBox.Name = "editionBox";
+            this.editionBox.Size = new System.Drawing.Size(516, 21);
+            this.editionBox.TabIndex = 24;
+            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -223,7 +289,7 @@ namespace MCLauncher
             this.groupBox3.Controls.Add(this.jvmBox);
             this.groupBox3.Controls.Add(this.javaCheck);
             this.groupBox3.Controls.Add(this.javaBox);
-            this.groupBox3.Location = new System.Drawing.Point(12, 207);
+            this.groupBox3.Location = new System.Drawing.Point(12, 234);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(644, 118);
             this.groupBox3.TabIndex = 24;
@@ -309,7 +375,7 @@ namespace MCLauncher
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(494, 331);
+            this.button1.Location = new System.Drawing.Point(494, 358);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 25;
@@ -318,7 +384,7 @@ namespace MCLauncher
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(18, 331);
+            this.button2.Location = new System.Drawing.Point(18, 358);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 26;
@@ -327,28 +393,29 @@ namespace MCLauncher
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(413, 331);
+            this.button3.Location = new System.Drawing.Point(413, 358);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 27;
             this.button3.Text = "Install mod";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // editionBox
+            // saveBtn
             // 
-            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.editionBox.FormattingEnabled = true;
-            this.editionBox.Location = new System.Drawing.Point(122, 12);
-            this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(516, 21);
-            this.editionBox.TabIndex = 24;
-            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
+            this.saveBtn.Location = new System.Drawing.Point(575, 358);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 28;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 362);
+            this.ClientSize = new System.Drawing.Size(668, 388);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -399,5 +466,11 @@ namespace MCLauncher
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox editionBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox maxRamBox;
+        private System.Windows.Forms.CheckBox ramCheck;
+        private System.Windows.Forms.TextBox minRamBox;
+        private System.Windows.Forms.Button saveBtn;
     }
 }

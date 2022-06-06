@@ -20,6 +20,10 @@ namespace MCLauncher
         public string baseVer { get; set; }
         public string modType { get; set; }
         public string modForgeVer { get; set; }
+
+        //Instance config
+        public string gameVer { get; set; }
+        public string typeVer { get; set; }
     }
 
     public class RootObject

@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace MCLauncher
 {
@@ -202,12 +203,40 @@ namespace MCLauncher
             }
             comboBox1.DataSource = instanceList;
             comboBox1.Refresh();
+            LaunchJava.instanceName = comboBox1.Text;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             InstanceManager.selectedInstance = comboBox1.Text;
             Console.WriteLine("selected: " + InstanceManager.selectedInstance);
+            LaunchJava.instanceName = comboBox1.Text;
+        }
+
+        private void newInstBtn_Click(object sender, EventArgs e)
+        {
+            InstanceManager.cfgInstName = "New profile";
+            InstanceManager.mode = "new";
+            InstanceManager instMan = new InstanceManager();
+            instMan.ShowDialog();
+        }
+
+        private void editInstBtn_Click(object sender, EventArgs e)
+        {
+            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+            //Set the data
+            foreach (var vers in data)
+            {
+                InstanceManager.cfgGameVer = vers.gameVer;
+                InstanceManager.cfgTypeVer = vers.typeVer;
+            }
+
+            InstanceManager.cfgInstName = comboBox1.Text;
+            InstanceManager.mode = "edit";
+            InstanceManager instMan = new InstanceManager();
+            instMan.ShowDialog();
         }
     }
 }

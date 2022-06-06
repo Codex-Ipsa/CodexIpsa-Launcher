@@ -20,13 +20,26 @@ namespace MCLauncher
         public static string tempName;
         public static int instanceInt = 1;
         public static int cfgVer = 1;
+        public static string mode;
 
+        public static string cfgInstName = "";
         public static string cfgGameVer = "b1.7.3";
         public static string cfgTypeVer = "a106";
 
         public InstanceManager()
         {
             InitializeComponent();
+            //Set mode dependant stuff
+            if (mode == "new")
+            {
+                createBtn.Visible = true;
+                saveBtn.Visible = false;
+            }
+            else if (mode == "edit")
+            {
+                createBtn.Visible = false;
+                saveBtn.Visible = true;
+            }
             //Set the editions list
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
@@ -51,9 +64,12 @@ namespace MCLauncher
             }
             verBox.DataSource = versionList;
             verBox.Refresh();
+
             cfgGameVer = verBox.Text;
             int index = verBox.FindString(cfgGameVer);
             cfgTypeVer = typeJavaList[index];
+
+            nameBox.Text = cfgInstName;
         }
 
         public static void createInstance()
@@ -65,10 +81,12 @@ namespace MCLauncher
             {
                 Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}");
                 Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\game");
+                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\assets");
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\"\n}},\n{{\n\"typeVer\":\"{cfgTypeVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\"\n}}\n]");
+
                     fs.Write(config, 0, config.Length);
                 }
 
@@ -82,6 +100,28 @@ namespace MCLauncher
                 tempName = createName + "_" + instanceInt.ToString();
                 instanceInt++;
                 createInstance();
+            }
+        }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists($"{Globals.currentPath}\\bin\\instance\\{tempName}"))
+            {
+                using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
+                {
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\"\n}}\n]");
+
+                    fs.Write(config, 0, config.Length);
+                }
+
+                foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
+                    form.Close();
+            }
+            else
+            {
+                //do nothing
+                foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
+                    form.Close();
             }
         }
 
@@ -171,6 +211,20 @@ namespace MCLauncher
             {
                 resBoxX.Enabled = true;
                 resBoxY.Enabled = true;
+            }
+        }
+
+        private void ramCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (maxRamBox.Enabled == true)
+            {
+                maxRamBox.Enabled = false;
+                minRamBox.Enabled = false;
+            }
+            else
+            {
+                maxRamBox.Enabled = true;
+                minRamBox.Enabled = true;
             }
         }
 
