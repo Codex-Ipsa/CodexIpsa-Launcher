@@ -1,12 +1,12 @@
-i> 0000349C Build: stfs-writer / db25e694dfcca509fd88b45752d070d5ff37f375 on Jun 13 2021
-i> 0000349C Storage root: C:\Users\PC\Documents\Xenia
-i> 0000349C Loaded config: C:\Users\PC\Documents\Xenia\xenia.config.toml
-i> 0000349C Content root: C:\Users\PC\Documents\Xenia\content
-i> 0000349C Cache root: C:\Users\PC\Documents\Xenia\cache
-w> 00001EC8 SDL GameControllerDB: file 'gamecontrollerdb.txt' does not exist.
-w> 0000349C Failed to load dxcompiler.dll, converted DXIL disassembly for debugging will be unavailable - if needed, download the DirectX Shader Compiler from https://github.com/microsoft/DirectXShaderCompiler/releases and place the DLL in the Xenia directory
-i> 0000349C DXGI adapter: NVIDIA GeForce GTX 1660 Ti (vendor 0x10DE, device 0x2182)
-i> 0000349C Direct3D 12 device and OS features:
+i> 00001A6C Build: stfs-writer / db25e694dfcca509fd88b45752d070d5ff37f375 on Jun 13 2021
+i> 00001A6C Storage root: C:\Users\PC\Documents\Xenia
+i> 00001A6C Loaded config: C:\Users\PC\Documents\Xenia\xenia.config.toml
+i> 00001A6C Content root: C:\Users\PC\Documents\Xenia\content
+i> 00001A6C Cache root: C:\Users\PC\Documents\Xenia\cache
+w> 00004BC4 SDL GameControllerDB: file 'gamecontrollerdb.txt' does not exist.
+w> 00001A6C Failed to load dxcompiler.dll, converted DXIL disassembly for debugging will be unavailable - if needed, download the DirectX Shader Compiler from https://github.com/microsoft/DirectXShaderCompiler/releases and place the DLL in the Xenia directory
+i> 00001A6C DXGI adapter: NVIDIA GeForce GTX 1660 Ti (vendor 0x10DE, device 0x2182)
+i> 00001A6C Direct3D 12 device and OS features:
 * Max GPU virtual address bits per resource: 40
 * Non-zeroed heap creation: yes
 * Pixel-shader-specified stencil reference: no
@@ -14,19 +14,19 @@ i> 0000349C Direct3D 12 device and OS features:
 * Rasterizer-ordered views: yes
 * Resource binding: tier 3
 * Tiled resources: tier 3
-i> 0000349C Added handle:F8000004 for class xe::kernel::XObject
-i> 0000349C XThreadF8000004 (1) Stack: 40010000-40030000
-i> 0000349C Added handle:F8000008 for class xe::kernel::XObject
-i> 0000349C XThreadF8000008 (2) Stack: 40050000-40070000
-K> F8000004 XThread::Execute thid 1 (handle=F8000004, 'GPU Commands (F8000004)', native=00003384, <host>)
-K> F8000008 XThread::Execute thid 2 (handle=F8000008, 'GPU VSync (F8000008)', native=000018D8, <host>)
-i> 0000349C Added handle:F800000C for class xe::kernel::XObject
-i> 0000349C XThreadF800000C (3) Stack: 40090000-400B0000
-i> 0000349C Added handle:F8000010 for class xe::kernel::XObject
-i> 0000349C XThreadF8000010 (4) Stack: 400D0000-400F0000
-K> F800000C XThread::Execute thid 3 (handle=F800000C, 'XMA Decoder (F800000C)', native=00000A88, <host>)
-i> 0000349C Added handle:F8000014 for class xe::kernel::XObject
-K> F8000010 XThread::Execute thid 4 (handle=F8000010, 'Audio Worker (F8000010)', native=00004204, <host>)
-i> 0000349C Added handle:F8000018 for class xe::kernel::XObject
-i> 0000349C Added handle:F800001C for class xe::kernel::XObject
-!> 0000349C Could not resolve an STFS container given path D:\Source
+i> 00001A6C Added handle:F8000004 for class xe::kernel::XObject
+i> 00001A6C XThreadF8000004 (1) Stack: 40010000-40030000
+i> 00001A6C Added handle:F8000008 for class xe::kernel::XObject
+i> 00001A6C XThreadF8000008 (2) Stack: 40050000-40070000
+K> F8000004 XThread::Execute thid 1 (handle=F8000004, 'GPU Commands (F8000004)', native=00003934, <host>)
+K> F8000008 XThread::Execute thid 2 (handle=F8000008, 'GPU VSync (F8000008)', native=00003A14, <host>)
+i> 00001A6C Added handle:F800000C for class xe::kernel::XObject
+i> 00001A6C XThreadF800000C (3) Stack: 40090000-400B0000
+i> 00001A6C Added handle:F8000010 for class xe::kernel::XObject
+i> 00001A6C XThreadF8000010 (4) Stack: 400D0000-400F0000
+i> 00001A6C Added handle:F8000014 for class xe::kernel::XObject
+K> F800000C XThread::Execute thid 3 (handle=F800000C, 'XMA Decoder (F800000C)', native=00000DB0, <host>)
+K> F8000010 XThread::Execute thid 4 (handle=F8000010, 'Audio Worker (F8000010)', native=00003B9C, <host>)
+i> 00001A6C Added handle:F8000018 for class xe::kernel::XObject
+i> 00001A6C Added handle:F800001C for class xe::kernel::XObject
+!> 00001A6C Could not resolve an STFS container given path D:\Source

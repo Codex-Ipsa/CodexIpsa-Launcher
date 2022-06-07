@@ -24,6 +24,7 @@ namespace MCLauncher
         //Instance config
         public string gameVer { get; set; }
         public string typeVer { get; set; }
+        public string linkVer { get; set; }
     }
 
     public class RootObject

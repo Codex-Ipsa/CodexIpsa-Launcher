@@ -94,6 +94,7 @@ namespace MCLauncher
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
             this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.profilesToolStripMenuItem.Text = "Profiles";
+            this.profilesToolStripMenuItem.Visible = false;
             this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
             // 
             // changeVersionToolStripMenuItem
@@ -102,6 +103,7 @@ namespace MCLauncher
             this.changeVersionToolStripMenuItem.Name = "changeVersionToolStripMenuItem";
             this.changeVersionToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.changeVersionToolStripMenuItem.Text = "Change version";
+            this.changeVersionToolStripMenuItem.Visible = false;
             this.changeVersionToolStripMenuItem.Click += new System.EventHandler(this.changeVersionToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem

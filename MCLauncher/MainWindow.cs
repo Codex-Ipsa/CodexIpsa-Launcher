@@ -38,7 +38,7 @@ namespace MCLauncher
             this.Refresh(); //Does this need to be here? Who knows
 
             //Set default version
-            using (var client = new WebClient())
+            /*using (var client = new WebClient())
             {
                 string json = client.DownloadString(Globals.defaultVer);
                 List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
@@ -52,7 +52,7 @@ namespace MCLauncher
 
                     gameVerLabel.Text = "Ready to play Minecraft " + vers.verName;
                 }
-            }
+            }*/
 
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
@@ -73,11 +73,25 @@ namespace MCLauncher
             }
             if(!Directory.Exists($"{Globals.currentPath}\\bin\\instance\\Default"))
             {
+                InstanceManager.mode = "initial";
                 InstanceManager.tempName = "Default";
                 InstanceManager.createInstance();
             }
             checkForUpdates();
             loadInstanceList();
+
+            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+            //Set the LaunchJava stuff
+            foreach (var vers in data)
+            {
+                LaunchJava.selectedVer = vers.gameVer;
+                LaunchJava.linkToJar = vers.linkVer;
+                LaunchJava.typeVer = vers.typeVer;
+            }
+
+            gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
         }
 
         void checkForUpdates()
@@ -208,9 +222,7 @@ namespace MCLauncher
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            InstanceManager.selectedInstance = comboBox1.Text;
-            Console.WriteLine("selected: " + InstanceManager.selectedInstance);
-            LaunchJava.instanceName = comboBox1.Text;
+            reloadInstance();
         }
 
         private void newInstBtn_Click(object sender, EventArgs e)
@@ -227,16 +239,34 @@ namespace MCLauncher
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the data
-            foreach (var vers in data)
+            /*foreach (var vers in data)
             {
                 InstanceManager.cfgGameVer = vers.gameVer;
                 InstanceManager.cfgTypeVer = vers.typeVer;
-            }
+            }*/
 
             InstanceManager.cfgInstName = comboBox1.Text;
             InstanceManager.mode = "edit";
             InstanceManager instMan = new InstanceManager();
             instMan.ShowDialog();
+        }
+
+        public static void reloadInstance(ComboBox comboBox1, Label gameVerLabel)
+        {
+            Console.WriteLine("selected: " + InstanceManager.selectedInstance);
+
+            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+            //Set the LaunchJava stuff
+            foreach (var vers in data)
+            {
+                LaunchJava.selectedVer = vers.gameVer;
+                LaunchJava.linkToJar = vers.linkVer;
+                LaunchJava.typeVer = vers.typeVer;
+            }
+            LaunchJava.instanceName = comboBox1.Text;
+            gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
         }
     }
 }

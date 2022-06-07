@@ -22,9 +22,10 @@ namespace MCLauncher
         public static int cfgVer = 1;
         public static string mode;
 
-        public static string cfgInstName = "";
-        public static string cfgGameVer = "b1.7.3";
-        public static string cfgTypeVer = "a106";
+        public static string cfgInstName;
+        public static string cfgGameVer;
+        public static string cfgTypeVer;
+        public static string cfgLinkVer;
 
         public InstanceManager()
         {
@@ -44,13 +45,14 @@ namespace MCLauncher
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
             editionsList.Add("Xbox 360 Edition");
-            editionsList.Add("Playstation 3 Edition");
+            //editionsList.Add("Playstation 3 Edition");
             editionBox.DataSource = editionsList;
             editionBox.Refresh();
 
             //Set the versions list for java
             List<string> versionList = new List<string>();
             List<string> typeJavaList = new List<string>();
+            List<string> linkJavaList = new List<string>();
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(Globals.javaJson);
@@ -60,6 +62,7 @@ namespace MCLauncher
                 {
                     versionList.Add(vers.verName);
                     typeJavaList.Add(vers.verType);
+                    linkJavaList.Add(vers.verLink);
                 }
             }
             verBox.DataSource = versionList;
@@ -68,12 +71,30 @@ namespace MCLauncher
             cfgGameVer = verBox.Text;
             int index = verBox.FindString(cfgGameVer);
             cfgTypeVer = typeJavaList[index];
+            cfgLinkVer = linkJavaList[index];
 
             nameBox.Text = cfgInstName;
         }
 
         public static void createInstance()
         {
+            if (mode == "initial")
+            {
+                //Set default version
+                using (var client = new WebClient())
+                {
+                    string json = client.DownloadString(Globals.defaultVer);
+                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                    //Set the LaunchJava defaults
+                    foreach (var vers in data)
+                    {
+                        cfgGameVer = vers.verName;
+                        cfgLinkVer = vers.verLink;
+                        cfgTypeVer = vers.verType;
+                    }
+                }
+            }
             Console.WriteLine("TEMPNAME " + tempName);
 
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance");
@@ -85,12 +106,14 @@ namespace MCLauncher
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
 
                     fs.Write(config, 0, config.Length);
                 }
 
                 instanceInt = 1;
+                //What the fuck is this shit
+                //MainWindow.reloadInstance(LaunchJava.instanceName, LaunchJava.selectedVer);
 
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
@@ -105,21 +128,26 @@ namespace MCLauncher
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("TEMPNAME " + tempName);
+            createName = nameBox.Text;
+            tempName = createName;
+
             if (Directory.Exists($"{Globals.currentPath}\\bin\\instance\\{tempName}"))
             {
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
 
                     fs.Write(config, 0, config.Length);
                 }
-
+                //MainWindow.callReload();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }
             else
             {
                 //do nothing
+                //MainWindow.callReload();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }
@@ -243,6 +271,7 @@ namespace MCLauncher
                         versionList.Add(vers.verName);
                     }
                 }
+                VerSelect.checkTab = "java";
                 verBox.DataSource = versionList;
                 verBox.Refresh();
                 cfgGameVer = verBox.Text;
@@ -260,6 +289,7 @@ namespace MCLauncher
                         versionList.Add(vers.verName);
                     }
                 }
+                VerSelect.checkTab = "x360";
                 verBox.DataSource = versionList;
                 verBox.Refresh();
                 cfgTypeVer = "x360";
@@ -277,6 +307,7 @@ namespace MCLauncher
                         versionList.Add(vers.verName);
                     }
                 }
+                VerSelect.checkTab = "ps3";
                 verBox.DataSource = versionList;
                 verBox.Refresh();
                 cfgTypeVer = "ps3";
@@ -289,7 +320,9 @@ namespace MCLauncher
 
             if (editionBox.Text == "Java Edition")
             {
+                List<string> versionList = new List<string>();
                 List<string> typeJavaList = new List<string>();
+                List<string> linkJavaList = new List<string>();
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(Globals.javaJson);
@@ -297,13 +330,22 @@ namespace MCLauncher
 
                     foreach (var vers in data)
                     {
+                        versionList.Add(vers.verName);
                         typeJavaList.Add(vers.verType);
+                        linkJavaList.Add(vers.verLink);
                     }
                 }
+
+                cfgGameVer = verBox.Text;
                 int index = verBox.FindString(cfgGameVer);
                 cfgTypeVer = typeJavaList[index];
-                Console.WriteLine("cfgTypeVer: " + cfgTypeVer);
+                cfgLinkVer = linkJavaList[index];
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
