@@ -15,7 +15,7 @@ namespace MCLauncher
 {
     public partial class InstanceManager : Form
     {
-        public static string selectedInstance;
+        public static string selectedInstance = "Default";
         public static string createName;
         public static string tempName;
         public static int instanceInt = 1;
@@ -113,7 +113,7 @@ namespace MCLauncher
 
                 instanceInt = 1;
                 //What the fuck is this shit
-                //MainWindow.reloadInstance(LaunchJava.instanceName, LaunchJava.selectedVer);
+                MainWindow.reloadInstance();
 
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
@@ -140,14 +140,14 @@ namespace MCLauncher
 
                     fs.Write(config, 0, config.Length);
                 }
-                //MainWindow.callReload();
+                MainWindow.reloadInstance();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }
             else
             {
                 //do nothing
-                //MainWindow.callReload();
+                MainWindow.reloadInstance();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }

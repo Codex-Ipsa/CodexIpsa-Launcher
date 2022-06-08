@@ -12,9 +12,11 @@ namespace MCLauncher
 {
     public partial class MainWindow : Form
     {
+        public static MainWindow Instance;
 
         public MainWindow()
         {
+            Instance = this;
             Properties.Settings.Default.Reload();
             InitializeComponent();
         }
@@ -251,7 +253,7 @@ namespace MCLauncher
             instMan.ShowDialog();
         }
 
-        public static void reloadInstance(ComboBox comboBox1, Label gameVerLabel)
+        public static void reloadInstance(/*ComboBox comboBox1, Label gameVerLabel*/)
         {
             Console.WriteLine("selected: " + InstanceManager.selectedInstance);
 
@@ -265,8 +267,8 @@ namespace MCLauncher
                 LaunchJava.linkToJar = vers.linkVer;
                 LaunchJava.typeVer = vers.typeVer;
             }
-            LaunchJava.instanceName = comboBox1.Text;
-            gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
+            LaunchJava.instanceName = Instance.comboBox1.Text;
+            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
         }
     }
 }
