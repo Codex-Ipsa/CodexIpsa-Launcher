@@ -26,6 +26,7 @@ namespace MCLauncher
             Logger.Log("Launcher started");
             this.Text = "MineC#raft Launcher v" + Globals.verDisplay; //window name
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
+            webBrowser1.Refresh();
             playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
 
             //Delete updaters if they exist for some reason
@@ -255,7 +256,11 @@ namespace MCLauncher
 
         public static void reloadInstance()
         {
-            InstanceManager.selectedInstance = Instance.comboBox1.Text;
+            if(InstanceManager.mode != "initial")
+            {
+                InstanceManager.selectedInstance = Instance.comboBox1.Text;
+            }
+
             Console.WriteLine("selected: " + InstanceManager.selectedInstance);
 
             string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
