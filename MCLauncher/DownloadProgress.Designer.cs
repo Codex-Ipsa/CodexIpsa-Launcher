@@ -61,9 +61,9 @@ namespace MCLauncher
             this.ProgressLabel.ForeColor = System.Drawing.Color.White;
             this.ProgressLabel.Location = new System.Drawing.Point(12, 51);
             this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(35, 13);
+            this.ProgressLabel.Size = new System.Drawing.Size(54, 13);
             this.ProgressLabel.TabIndex = 3;
-            this.ProgressLabel.Text = "label3";
+            this.ProgressLabel.Text = "Loading...";
             // 
             // cancelBtn
             // 

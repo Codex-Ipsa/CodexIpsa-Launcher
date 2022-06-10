@@ -173,10 +173,12 @@ namespace MCLauncher
             if(dirBox.Enabled == true)
             {
                 dirBox.Enabled = false;
+                dirBtn.Enabled = false;
             }
             else
             {
                 dirBox.Enabled = true;
+                dirBtn.Enabled = true;
             }
         }
 
@@ -185,9 +187,11 @@ namespace MCLauncher
             if (javaBox.Enabled == true)
             {
                 javaBox.Enabled = false;
+                javaBtn.Enabled = false;
             }
             else
             {
+                javaBox.Enabled = true;
                 javaBox.Enabled = true;
             }
         }
@@ -221,10 +225,12 @@ namespace MCLauncher
             if (custjarBox.Enabled == true)
             {
                 custjarBox.Enabled = false;
+                custjarBtn.Enabled = false;
             }
             else
             {
                 custjarBox.Enabled = true;
+                custjarBtn.Enabled = true;
             }
         }
 

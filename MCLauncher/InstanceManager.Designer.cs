@@ -64,6 +64,9 @@ namespace MCLauncher
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
+            this.custjarBtn = new System.Windows.Forms.Button();
+            this.javaBtn = new System.Windows.Forms.Button();
+            this.dirBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,7 +114,7 @@ namespace MCLauncher
             this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(516, 20);
+            this.dirBox.Size = new System.Drawing.Size(476, 20);
             this.dirBox.TabIndex = 12;
             // 
             // resCheck
@@ -137,6 +140,7 @@ namespace MCLauncher
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dirBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.maxRamBox);
@@ -281,6 +285,8 @@ namespace MCLauncher
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.javaBtn);
+            this.groupBox3.Controls.Add(this.custjarBtn);
             this.groupBox3.Controls.Add(this.methodBox);
             this.groupBox3.Controls.Add(this.custjarBox);
             this.groupBox3.Controls.Add(this.custjarCheck);
@@ -308,9 +314,9 @@ namespace MCLauncher
             // custjarBox
             // 
             this.custjarBox.Enabled = false;
-            this.custjarBox.Location = new System.Drawing.Point(122, 91);
+            this.custjarBox.Location = new System.Drawing.Point(122, 92);
             this.custjarBox.Name = "custjarBox";
-            this.custjarBox.Size = new System.Drawing.Size(516, 20);
+            this.custjarBox.Size = new System.Drawing.Size(476, 20);
             this.custjarBox.TabIndex = 27;
             // 
             // custjarCheck
@@ -370,7 +376,7 @@ namespace MCLauncher
             this.javaBox.Enabled = false;
             this.javaBox.Location = new System.Drawing.Point(122, 13);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(516, 20);
+            this.javaBox.Size = new System.Drawing.Size(476, 20);
             this.javaBox.TabIndex = 8;
             // 
             // button1
@@ -410,6 +416,36 @@ namespace MCLauncher
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            // 
+            // custjarBtn
+            // 
+            this.custjarBtn.Enabled = false;
+            this.custjarBtn.Location = new System.Drawing.Point(604, 92);
+            this.custjarBtn.Name = "custjarBtn";
+            this.custjarBtn.Size = new System.Drawing.Size(34, 20);
+            this.custjarBtn.TabIndex = 28;
+            this.custjarBtn.Text = "...";
+            this.custjarBtn.UseVisualStyleBackColor = true;
+            // 
+            // javaBtn
+            // 
+            this.javaBtn.Enabled = false;
+            this.javaBtn.Location = new System.Drawing.Point(604, 12);
+            this.javaBtn.Name = "javaBtn";
+            this.javaBtn.Size = new System.Drawing.Size(34, 20);
+            this.javaBtn.TabIndex = 29;
+            this.javaBtn.Text = "...";
+            this.javaBtn.UseVisualStyleBackColor = true;
+            // 
+            // dirBtn
+            // 
+            this.dirBtn.Enabled = false;
+            this.dirBtn.Location = new System.Drawing.Point(604, 38);
+            this.dirBtn.Name = "dirBtn";
+            this.dirBtn.Size = new System.Drawing.Size(34, 20);
+            this.dirBtn.TabIndex = 30;
+            this.dirBtn.Text = "...";
+            this.dirBtn.UseVisualStyleBackColor = true;
             // 
             // InstanceManager
             // 
@@ -473,5 +509,8 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox ramCheck;
         private System.Windows.Forms.TextBox minRamBox;
         private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Button dirBtn;
+        private System.Windows.Forms.Button javaBtn;
+        private System.Windows.Forms.Button custjarBtn;
     }
 }

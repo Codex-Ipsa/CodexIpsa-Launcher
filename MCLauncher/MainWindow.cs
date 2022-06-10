@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace MCLauncher
 {
@@ -23,10 +22,11 @@ namespace MCLauncher
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            //Set needed things - window name, changelog, username
-            this.Text = "MineC#raft Launcher v" + Globals.verDisplay;
-            webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
-            playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName;
+            //Set required things
+            Logger.Log("Launcher started");
+            this.Text = "MineC#raft Launcher v" + Globals.verDisplay; //window name
+            webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
+            playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
 
             //Delete updaters if they exist for some reason
             if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdater.exe")))
@@ -253,8 +253,9 @@ namespace MCLauncher
             instMan.ShowDialog();
         }
 
-        public static void reloadInstance(/*ComboBox comboBox1, Label gameVerLabel*/)
+        public static void reloadInstance()
         {
+            InstanceManager.selectedInstance = Instance.comboBox1.Text;
             Console.WriteLine("selected: " + InstanceManager.selectedInstance);
 
             string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");

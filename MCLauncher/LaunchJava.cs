@@ -120,7 +120,7 @@ namespace MCLauncher
 
                     if(LibsCheck.isDone == true)
                     {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/java/{selectedVer}.jar;bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.VanillaTweaker";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --version \"GAY\"--tweakClass net.minecraft.launchwrapper.VanillaTweaker";
                         
                         Process process = new Process();
                         process.StartInfo.FileName = "java.exe";
@@ -133,9 +133,9 @@ namespace MCLauncher
                     }
                 }
                 //If it's post1.6, check for libs, download them, and launch the game.
-                else if (typeVer == "jar16")
+                else if (typeVer == "jar1.6")
                 {
-
+                    //java.exe -Xms1024m -Xmx1024m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp "bin/versions/java/1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar;bin/libs/codecjorbis-20101023.jar;bin/libs/codecwav-20101023.jar;bin/libs/libraryjavasound-20101123.jar;bin/libs/librarylwjglopenal-20100824.jar;bin/libs/soundsystem-20120107.jar;bin/libs/argo-2.25_fixed.jar;bin/libs/bcprov-jdk15on-1.47.jar;bin/libs/guava-14.0.jar;bin/libs/commons-lang3-3.1.jar;bin/libs/commons-io-2.4.jar;bin/libs/gson-2.2.2.jar" net.minecraft.client.main.Main PlayerName test --username DEJVOSS --version 1.6 --gameDir bin/instance/Default/game --assetsDir bin/instance/Default/assets
                 }
             }
         }
