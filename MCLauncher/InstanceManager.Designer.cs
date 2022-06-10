@@ -38,6 +38,7 @@ namespace MCLauncher
             this.resCheck = new System.Windows.Forms.CheckBox();
             this.openCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dirBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.maxRamBox = new System.Windows.Forms.TextBox();
@@ -52,6 +53,8 @@ namespace MCLauncher
             this.verBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.javaBtn = new System.Windows.Forms.Button();
+            this.custjarBtn = new System.Windows.Forms.Button();
             this.methodBox = new System.Windows.Forms.ComboBox();
             this.custjarBox = new System.Windows.Forms.TextBox();
             this.custjarCheck = new System.Windows.Forms.CheckBox();
@@ -60,13 +63,10 @@ namespace MCLauncher
             this.jvmBox = new System.Windows.Forms.TextBox();
             this.javaCheck = new System.Windows.Forms.CheckBox();
             this.javaBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.opendirBtn = new System.Windows.Forms.Button();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.instmodBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
-            this.custjarBtn = new System.Windows.Forms.Button();
-            this.javaBtn = new System.Windows.Forms.Button();
-            this.dirBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -161,6 +161,16 @@ namespace MCLauncher
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
+            // 
+            // dirBtn
+            // 
+            this.dirBtn.Enabled = false;
+            this.dirBtn.Location = new System.Drawing.Point(604, 38);
+            this.dirBtn.Name = "dirBtn";
+            this.dirBtn.Size = new System.Drawing.Size(34, 20);
+            this.dirBtn.TabIndex = 30;
+            this.dirBtn.Text = "...";
+            this.dirBtn.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -302,6 +312,26 @@ namespace MCLauncher
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
             // 
+            // javaBtn
+            // 
+            this.javaBtn.Enabled = false;
+            this.javaBtn.Location = new System.Drawing.Point(604, 12);
+            this.javaBtn.Name = "javaBtn";
+            this.javaBtn.Size = new System.Drawing.Size(34, 20);
+            this.javaBtn.TabIndex = 29;
+            this.javaBtn.Text = "...";
+            this.javaBtn.UseVisualStyleBackColor = true;
+            // 
+            // custjarBtn
+            // 
+            this.custjarBtn.Enabled = false;
+            this.custjarBtn.Location = new System.Drawing.Point(604, 92);
+            this.custjarBtn.Name = "custjarBtn";
+            this.custjarBtn.Size = new System.Drawing.Size(34, 20);
+            this.custjarBtn.TabIndex = 28;
+            this.custjarBtn.Text = "...";
+            this.custjarBtn.UseVisualStyleBackColor = true;
+            // 
             // methodBox
             // 
             this.methodBox.Enabled = false;
@@ -379,33 +409,33 @@ namespace MCLauncher
             this.javaBox.Size = new System.Drawing.Size(476, 20);
             this.javaBox.TabIndex = 8;
             // 
-            // button1
+            // opendirBtn
             // 
-            this.button1.Location = new System.Drawing.Point(494, 358);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Open dir";
-            this.button1.UseVisualStyleBackColor = true;
+            this.opendirBtn.Location = new System.Drawing.Point(494, 358);
+            this.opendirBtn.Name = "opendirBtn";
+            this.opendirBtn.Size = new System.Drawing.Size(75, 23);
+            this.opendirBtn.TabIndex = 25;
+            this.opendirBtn.Text = "Open dir";
+            this.opendirBtn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // closeBtn
             // 
-            this.button2.Location = new System.Drawing.Point(18, 358);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.closeBtn.Location = new System.Drawing.Point(18, 358);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(75, 23);
+            this.closeBtn.TabIndex = 26;
+            this.closeBtn.Text = "Cancel";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
-            // button3
+            // instmodBtn
             // 
-            this.button3.Location = new System.Drawing.Point(413, 358);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Install mod";
-            this.button3.UseVisualStyleBackColor = true;
+            this.instmodBtn.Location = new System.Drawing.Point(413, 358);
+            this.instmodBtn.Name = "instmodBtn";
+            this.instmodBtn.Size = new System.Drawing.Size(75, 23);
+            this.instmodBtn.TabIndex = 27;
+            this.instmodBtn.Text = "Install mod";
+            this.instmodBtn.UseVisualStyleBackColor = true;
             // 
             // saveBtn
             // 
@@ -417,52 +447,22 @@ namespace MCLauncher
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // custjarBtn
-            // 
-            this.custjarBtn.Enabled = false;
-            this.custjarBtn.Location = new System.Drawing.Point(604, 92);
-            this.custjarBtn.Name = "custjarBtn";
-            this.custjarBtn.Size = new System.Drawing.Size(34, 20);
-            this.custjarBtn.TabIndex = 28;
-            this.custjarBtn.Text = "...";
-            this.custjarBtn.UseVisualStyleBackColor = true;
-            // 
-            // javaBtn
-            // 
-            this.javaBtn.Enabled = false;
-            this.javaBtn.Location = new System.Drawing.Point(604, 12);
-            this.javaBtn.Name = "javaBtn";
-            this.javaBtn.Size = new System.Drawing.Size(34, 20);
-            this.javaBtn.TabIndex = 29;
-            this.javaBtn.Text = "...";
-            this.javaBtn.UseVisualStyleBackColor = true;
-            // 
-            // dirBtn
-            // 
-            this.dirBtn.Enabled = false;
-            this.dirBtn.Location = new System.Drawing.Point(604, 38);
-            this.dirBtn.Name = "dirBtn";
-            this.dirBtn.Size = new System.Drawing.Size(34, 20);
-            this.dirBtn.TabIndex = 30;
-            this.dirBtn.Text = "...";
-            this.dirBtn.UseVisualStyleBackColor = true;
-            // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 388);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.instmodBtn);
+            this.Controls.Add(this.closeBtn);
+            this.Controls.Add(this.opendirBtn);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.createBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstanceManager";
-            this.Text = "InstanceManager";
+            this.Text = "Profile editor";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -499,9 +499,9 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.ComboBox methodBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button opendirBtn;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Button instmodBtn;
         private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;

@@ -149,7 +149,7 @@ namespace MCLauncher
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.usernameTextBox.Location = new System.Drawing.Point(191, 31);
             this.usernameTextBox.MaxLength = 16;
             this.usernameTextBox.Name = "usernameTextBox";
@@ -257,7 +257,7 @@ namespace MCLauncher
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.White;

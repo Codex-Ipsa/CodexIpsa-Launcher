@@ -30,17 +30,9 @@ namespace MCLauncher
         public InstanceManager()
         {
             InitializeComponent();
-            //Set mode dependant stuff
-            if (mode == "new")
-            {
-                createBtn.Visible = true;
-                saveBtn.Visible = false;
-            }
-            else if (mode == "edit")
-            {
-                createBtn.Visible = false;
-                saveBtn.Visible = true;
-            }
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             //Set the editions list
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
@@ -73,6 +65,22 @@ namespace MCLauncher
             cfgTypeVer = typeJavaList[index];
             cfgLinkVer = linkJavaList[index];
 
+            //Set mode dependant stuff
+            if (mode == "new")
+            {
+                createBtn.Visible = true;
+                saveBtn.Visible = false;
+                instmodBtn.Visible = false;
+                opendirBtn.Visible = false;
+            }
+            else if (mode == "edit")
+            {
+                createBtn.Visible = false;
+                saveBtn.Visible = true;
+                instmodBtn.Visible = true;
+                opendirBtn.Visible = true;
+            }
+
             nameBox.Text = cfgInstName;
         }
 
@@ -95,6 +103,7 @@ namespace MCLauncher
                     }
                 }
             }
+
             Console.WriteLine("TEMPNAME " + tempName);
 
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance");
@@ -112,7 +121,7 @@ namespace MCLauncher
                 }
 
                 instanceInt = 1;
-                //What the fuck is this shit
+
                 MainWindow.reloadInstance();
 
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
@@ -349,7 +358,7 @@ namespace MCLauncher
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
