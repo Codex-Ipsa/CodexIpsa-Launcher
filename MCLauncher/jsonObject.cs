@@ -12,6 +12,7 @@ namespace MCLauncher
         public string verName { get; set; }
         public string verLink { get; set; }
         public string verType { get; set; }
+        public string proxyPort { get; set; }
 
         //Mods
         public string modID { get; set; }
@@ -25,6 +26,7 @@ namespace MCLauncher
         public string gameVer { get; set; }
         public string typeVer { get; set; }
         public string linkVer { get; set; }
+        public string proxyVer { get; set; }
     }
 
     public class RootObject

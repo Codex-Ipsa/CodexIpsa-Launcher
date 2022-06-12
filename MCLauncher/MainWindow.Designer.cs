@@ -103,7 +103,6 @@ namespace MCLauncher
             this.changeVersionToolStripMenuItem.Name = "changeVersionToolStripMenuItem";
             this.changeVersionToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.changeVersionToolStripMenuItem.Text = "Change version";
-            this.changeVersionToolStripMenuItem.Visible = false;
             this.changeVersionToolStripMenuItem.Click += new System.EventHandler(this.changeVersionToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem

@@ -91,6 +91,7 @@ namespace MCLauncher
             {
                 LaunchJava.selectedVer = vers.gameVer;
                 LaunchJava.linkToJar = vers.linkVer;
+                LaunchJava.proxyPort = vers.proxyVer;
                 LaunchJava.typeVer = vers.typeVer;
             }
 
@@ -272,6 +273,7 @@ namespace MCLauncher
                 LaunchJava.selectedVer = vers.gameVer;
                 LaunchJava.linkToJar = vers.linkVer;
                 LaunchJava.typeVer = vers.typeVer;
+                LaunchJava.proxyPort = vers.proxyVer;
             }
             LaunchJava.instanceName = Instance.comboBox1.Text;
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
