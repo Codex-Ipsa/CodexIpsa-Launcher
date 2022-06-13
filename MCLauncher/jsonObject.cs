@@ -27,6 +27,11 @@ namespace MCLauncher
         public string typeVer { get; set; }
         public string linkVer { get; set; }
         public string proxyVer { get; set; }
+
+
+        //JRE downloads
+        public string jreLink { get; set; }
+        public string jreVer { get; set; }
     }
 
     public class RootObject

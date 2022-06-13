@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace MCLauncher
 {
-    public partial class Warning : Form
+    public partial class JavaCheck : Form
     {
         public static string warnString = "";
-        public Warning(string str)
+        public JavaCheck(string str)
         {
             InitializeComponent();
             warnLabel.Text = str;

@@ -278,5 +278,11 @@ namespace MCLauncher
             LaunchJava.instanceName = Instance.comboBox1.Text;
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
         }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DebugTools dt = new DebugTools();
+            dt.ShowDialog();
+        }
     }
 }

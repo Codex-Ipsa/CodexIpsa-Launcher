@@ -1,7 +1,7 @@
 ﻿
 namespace MCLauncher
 {
-    partial class Warning
+    partial class JavaCheck
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace MCLauncher
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Warning));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JavaCheck));
             this.warnLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.okBtn = new System.Windows.Forms.Button();
@@ -50,6 +50,7 @@ namespace MCLauncher
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 11);
             this.label1.Name = "label1";
@@ -67,7 +68,7 @@ namespace MCLauncher
             this.okBtn.UseVisualStyleBackColor = true;
             this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
             // 
-            // Warning
+            // JavaCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +78,7 @@ namespace MCLauncher
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Warning";
+            this.Name = "JavaCheck";
             this.Text = "Warning";
             this.ResumeLayout(false);
             this.PerformLayout();

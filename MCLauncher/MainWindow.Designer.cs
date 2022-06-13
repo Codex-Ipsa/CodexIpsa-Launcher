@@ -50,6 +50,7 @@ namespace MCLauncher
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,7 +75,8 @@ namespace MCLauncher
             this.homeToolStripMenuItem,
             this.profilesToolStripMenuItem,
             this.changeVersionToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(785, 24);
@@ -279,6 +281,15 @@ namespace MCLauncher
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
             // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,6 +336,7 @@ namespace MCLauncher
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button editInstBtn;
         private System.Windows.Forms.Button newInstBtn;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
     }
 }
 

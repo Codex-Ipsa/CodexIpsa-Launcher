@@ -70,5 +70,17 @@ namespace MCLauncher.Properties {
                 this["ramXMS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ownJava {
+            get {
+                return ((bool)(this["ownJava"]));
+            }
+            set {
+                this["ownJava"] = value;
+            }
+        }
     }
 }

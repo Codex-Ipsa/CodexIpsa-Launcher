@@ -14,5 +14,8 @@
     <Setting Name="ramXMS" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">512</Value>
     </Setting>
+    <Setting Name="ownJava" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

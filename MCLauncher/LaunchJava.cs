@@ -30,6 +30,8 @@ namespace MCLauncher
         public static string gameDir;
         public static string assetDir;
 
+        public static string javaLocation = "java.exe";
+
         public static void LaunchGame()
         {
             //Create directories
@@ -66,7 +68,7 @@ namespace MCLauncher
 
                         //Process.Start("java.exe", launchCmd);
                         Process process = new Process();
-                        process.StartInfo.FileName = "java.exe";
+                        process.StartInfo.FileName = javaLocation;
                         process.StartInfo.Arguments = launchCmd;
                         process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                         process.Start();
@@ -85,7 +87,7 @@ namespace MCLauncher
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" com.mojang.minecraft.RubyDung {Properties.Settings.Default.playerName} test"; /*--gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.VanillaTweaker*/
 
                         Process process = new Process();
-                        process.StartInfo.FileName = "java.exe";
+                        process.StartInfo.FileName = javaLocation;
                         process.StartInfo.Arguments = launchCmd;
                         process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                         process.Start();
@@ -105,7 +107,7 @@ namespace MCLauncher
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
 
                         Process process = new Process();
-                        process.StartInfo.FileName = "java.exe";
+                        process.StartInfo.FileName = javaLocation;
                         process.StartInfo.Arguments = launchCmd;
                         process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                         process.Start();
@@ -121,13 +123,13 @@ namespace MCLauncher
 
                     if(LibsCheck.isDone == true)
                     {
-                        //launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
+                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
 
                         //edutest
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/argo-small-3.2.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/bcprov-jdk15on-148.jar;bin/libs/worldedit-5.5.6.jar;bin/libs/scala-library.jar;bin/libs/guava-14.0-rc3.jar;bin/libs/commons-io-2.2.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
-
+                        //launchCmd = "java.exe -Xms1024m -Xmx1024m -Djava.library.path=minecraft/bin/natives/ -cp \"minecraft/bin/minecraft.jar;minecraft/bin/lwjgl.jar;minecraft/bin/lwjgl_util.jar;minecraft/bin/argo-small-3.2.jar;minecraft/bin/bcprov-jdk15on-148.jar;minecraft/bin/worldedit-5.5.6.jar;minecraft/bin/scala-library.jar;minecraft/bin/guava-14.0-rc3.jar;minecraft/bin/commons-io-2.2.jar;minecraft/bin/jinput.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.client.Minecraft Player test";
+                        
                         Process process = new Process();
-                        process.StartInfo.FileName = "java.exe";
+                        process.StartInfo.FileName = javaLocation;
                         process.StartInfo.Arguments = launchCmd;
                         process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                         process.Start();
