@@ -141,7 +141,6 @@ namespace MCLauncher
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
             this.groupBox1.Controls.Add(this.dirBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
@@ -157,7 +156,7 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.resCheck);
             this.groupBox1.Controls.Add(this.resBoxX);
             this.groupBox1.Controls.Add(this.dirCheck);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(644, 140);
@@ -248,12 +247,11 @@ namespace MCLauncher
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox2.BackgroundImage")));
             this.groupBox2.Controls.Add(this.editionBox);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(12, 158);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(644, 70);
@@ -302,7 +300,6 @@ namespace MCLauncher
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox3.BackgroundImage")));
             this.groupBox3.Controls.Add(this.javaBtn);
             this.groupBox3.Controls.Add(this.custjarBtn);
             this.groupBox3.Controls.Add(this.methodBox);
@@ -313,7 +310,7 @@ namespace MCLauncher
             this.groupBox3.Controls.Add(this.jvmBox);
             this.groupBox3.Controls.Add(this.javaCheck);
             this.groupBox3.Controls.Add(this.javaBox);
-            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(12, 234);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(644, 118);
@@ -460,7 +457,6 @@ namespace MCLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(668, 388);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.instmodBtn);

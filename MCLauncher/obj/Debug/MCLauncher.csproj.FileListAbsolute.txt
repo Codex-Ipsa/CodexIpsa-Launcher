@@ -74,3 +74,4 @@ C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLaunc
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.pdb
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.JavaCheck.resources
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DebugTools.resources
+D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.SuggestedBindingRedirects.cache
