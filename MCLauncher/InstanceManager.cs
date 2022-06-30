@@ -83,6 +83,7 @@ namespace MCLauncher
                 saveBtn.Visible = true;
                 instmodBtn.Visible = true;
                 opendirBtn.Visible = true;
+                nameBox.Enabled = false;
             }
 
             nameBox.Text = cfgInstName;
@@ -111,17 +112,17 @@ namespace MCLauncher
 
             Console.WriteLine("TEMPNAME " + tempName);
 
-            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance");
-            if (!Directory.Exists($"{Globals.currentPath}\\bin\\instance\\{tempName}"))
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance");
+            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
             {
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\game");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\assets");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\jarmods");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
 
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
+                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\",\n\"proxyVer\":\"{cfgProxyVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
 
                     fs.Write(config, 0, config.Length);
                 }
@@ -147,16 +148,16 @@ namespace MCLauncher
             createName = nameBox.Text;
             tempName = createName;
 
-            if (Directory.Exists($"{Globals.currentPath}\\bin\\instance\\{tempName}"))
+            if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
             {
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\game");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\assets");
-                Directory.CreateDirectory($"{Globals.currentPath}\\bin\\instance\\{tempName}\\jarmods");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
 
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\{tempName}\\instance.cfg"))
+                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\",\n\"proxyVer\":\"{cfgProxyVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
 
                     fs.Write(config, 0, config.Length);
                 }
@@ -212,7 +213,7 @@ namespace MCLauncher
             else
             {
                 javaBox.Enabled = true;
-                javaBox.Enabled = true;
+                javaBtn.Enabled = true;
             }
         }
 

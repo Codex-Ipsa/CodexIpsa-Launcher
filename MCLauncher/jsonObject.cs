@@ -32,6 +32,15 @@ namespace MCLauncher
         //JRE downloads
         public string jreLink { get; set; }
         public string jreVer { get; set; }
+
+        //VersionType Json
+        public string note { get; set; }
+        public string minJava { get; set; }
+        public string launchMethod { get; set; }
+        public string libsType { get; set; }
+        public string libs { get; set; }
+        public string proxy { get; set; }
+        public string addCmd { get; set; }
     }
 
     public class RootObject

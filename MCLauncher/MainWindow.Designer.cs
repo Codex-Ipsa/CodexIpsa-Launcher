@@ -36,6 +36,7 @@ namespace MCLauncher
             this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@ namespace MCLauncher
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -114,6 +114,15 @@ namespace MCLauncher
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // panel2
             // 
@@ -280,15 +289,6 @@ namespace MCLauncher
             this.usernameLabel.TabIndex = 4;
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
-            // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
-            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

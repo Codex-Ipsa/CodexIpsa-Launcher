@@ -10,9 +10,9 @@ namespace MCLauncher
     class Globals
     {
         //Manual
-        public static string codebase = "0.0.6-dev";
+        public static string codebase = "0.0.7-dev";
         public static string verCurrent = "0.0.6-dev_8-pre";
-        public static string verDisplay = "0.0.6 (Dev 8 Pre)"; //0.0.6 (Dev 7 WIP)
+        public static string verDisplay = "0.0.7-rewrite"; //0.0.6 (Dev 7 WIP)
         public static bool isDev = true; //MAKE SURE IT'S FALSE ON RELEASE
         public static bool offlineMode = false;
 
@@ -28,12 +28,12 @@ namespace MCLauncher
         public static string updaterRel = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdater.exe";
         public static string updaterDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdaterDev.exe";
 
-        public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog/";
-        public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/base-ver.json";
-        public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/java.json";
+        public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
+        public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
+        public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/java_version.json";
         public static string javaModJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/java-mod.json";
-        public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/x360.json";
-        public static string ps3Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/ps3-blus.json";
+        public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/x360_version.json";
+        public static string ps3Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/ps3_version.json";
 
         public static string libsPre16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
 

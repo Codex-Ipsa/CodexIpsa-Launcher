@@ -32,20 +32,20 @@ namespace MCLauncher
                 foreach (var libs in data)
                 {
                     //Download required libraries
-                    if (!File.Exists($"{Globals.currentPath}\\bin\\libs\\{libs.name}"))
+                    if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                     {
                         DownloadProgress.url = libs.link;
-                        DownloadProgress.savePath = $"{Globals.currentPath}\\bin\\libs\\{libs.name}";
+                        DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
                         DownloadProgress download = new DownloadProgress();
                         download.ShowDialog();
 
                         if(libs.extract != "null")
                         {
-                            if(Directory.Exists($"{Globals.currentPath}\\bin\\libs\\{libs.extract}"))
-                                Directory.Delete($"{Globals.currentPath}\\bin\\libs\\{libs.extract}", true);
-                            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\libs\\{libs.extract}");
-                            string zipPath = $"{Globals.currentPath}\\bin\\libs\\{libs.name}";
-                            string extractPath = $"{Globals.currentPath}\\bin\\libs\\{libs.extract}";
+                            if(Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
+                                Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
+                            string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
+                            string extractPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}";
                             ZipFile.ExtractToDirectory(zipPath, extractPath);
                         }
                     }

@@ -23,8 +23,7 @@ namespace MCLauncher
         private void MainWindow_Load(object sender, EventArgs e)
         {
             //Set required things
-            Logger.Log("Launcher started");
-            this.Text = "MineC#raft Launcher v" + Globals.verDisplay; //window name
+            this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
             webBrowser1.Refresh();
             playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
@@ -38,64 +37,42 @@ namespace MCLauncher
             {
                 File.Delete(Globals.currentPath + "\\MCLauncherUpdaterDev.exe");
             }
-            this.Refresh(); //Does this need to be here? Who knows
-
-            //Set default version
-            /*using (var client = new WebClient())
-            {
-                string json = client.DownloadString(Globals.defaultVer);
-                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                //Set the LaunchJava defaults
-                foreach (var vers in data)
-                {
-                    LaunchJava.selectedVer = vers.verName;
-                    LaunchJava.linkToJar = vers.verLink;
-                    LaunchJava.typeVer = vers.verType;
-
-                    gameVerLabel.Text = "Ready to play Minecraft " + vers.verName;
-                }
-            }*/
+            checkForUpdates();
 
             //Create directories
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath, "bin"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "versions"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "instance"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath, ".codexipsa"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "versions"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "instance"));
 
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "libs"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin\\versions", "ps3"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\bin", "rpcs3"));
+            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "libs"));
 
-            if(!File.Exists($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
+            /*if(!File.Exists($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
             {
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
                 {
                     byte[] config = new UTF8Encoding(true).GetBytes($"WARNING!\nDo not mess with anything in this folder!\nIt will corrupt the instance(s)!");
                     fs.Write(config, 0, config.Length);
                 }
-            }
-            if(!Directory.Exists($"{Globals.currentPath}\\bin\\instance\\Default"))
+            }*/
+            if(!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
                 InstanceManager.mode = "initial";
                 InstanceManager.tempName = "Default";
                 InstanceManager.createInstance();
             }
-            checkForUpdates();
             loadInstanceList();
 
-            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.selectedVer = vers.gameVer;
-                LaunchJava.linkToJar = vers.linkVer;
-                LaunchJava.proxyPort = vers.proxyVer;
-                LaunchJava.typeVer = vers.typeVer;
+                LaunchJava.launchVerName = vers.gameVer;
+                LaunchJava.launchVerUrl = vers.linkVer;
+                LaunchJava.launchVerType = vers.typeVer;
             }
-
-            gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
+            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
 
         void checkForUpdates()
@@ -202,13 +179,13 @@ namespace MCLauncher
         public void loadInstanceList()
         {
             List<string> instanceList = new List<string>();
-            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\bin\\instance\\", "*");
+            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
 
             foreach (string dir in dirs)
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
-                if(File.Exists($"{Globals.currentPath}\\bin\\instance\\{dirName}\\instance.cfg"))
+                if(File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
                 {
                     instanceList.Add(dirName);
                 }
@@ -239,7 +216,7 @@ namespace MCLauncher
 
         private void editInstBtn_Click(object sender, EventArgs e)
         {
-            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the data
@@ -264,11 +241,11 @@ namespace MCLauncher
 
             Console.WriteLine("selected: " + InstanceManager.selectedInstance);
 
-            string json = File.ReadAllText($"{Globals.currentPath}\\bin\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the LaunchJava stuff
-            foreach (var vers in data)
+            /*foreach (var vers in data)
             {
                 LaunchJava.selectedVer = vers.gameVer;
                 LaunchJava.linkToJar = vers.linkVer;
@@ -276,7 +253,16 @@ namespace MCLauncher
                 LaunchJava.proxyPort = vers.proxyVer;
             }
             LaunchJava.instanceName = Instance.comboBox1.Text;
-            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;
+            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;*/
+
+            foreach (var vers in data)
+            {
+                LaunchJava.launchVerName = vers.gameVer;
+                LaunchJava.launchVerUrl = vers.linkVer;
+                LaunchJava.launchVerType = vers.typeVer;
+            }
+            LaunchJava.currentInstance = Instance.comboBox1.Text;
+            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
