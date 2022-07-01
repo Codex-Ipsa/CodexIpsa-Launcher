@@ -36,7 +36,6 @@ namespace MCLauncher
             this.dirCheck = new System.Windows.Forms.CheckBox();
             this.dirBox = new System.Windows.Forms.TextBox();
             this.resCheck = new System.Windows.Forms.CheckBox();
-            this.openCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dirBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,7 +82,7 @@ namespace MCLauncher
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(575, 358);
+            this.createBtn.Location = new System.Drawing.Point(575, 337);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(75, 23);
             this.createBtn.TabIndex = 7;
@@ -128,16 +127,6 @@ namespace MCLauncher
             this.resCheck.UseVisualStyleBackColor = true;
             this.resCheck.CheckedChanged += new System.EventHandler(this.resCheck_CheckedChanged);
             // 
-            // openCheck
-            // 
-            this.openCheck.AutoSize = true;
-            this.openCheck.Location = new System.Drawing.Point(6, 119);
-            this.openCheck.Name = "openCheck";
-            this.openCheck.Size = new System.Drawing.Size(140, 17);
-            this.openCheck.TabIndex = 15;
-            this.openCheck.Text = "Keep the launcher open";
-            this.openCheck.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
@@ -148,7 +137,6 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.ramCheck);
             this.groupBox1.Controls.Add(this.minRamBox);
             this.groupBox1.Controls.Add(this.resBoxY);
-            this.groupBox1.Controls.Add(this.openCheck);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nameBox);
@@ -159,7 +147,7 @@ namespace MCLauncher
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 140);
+            this.groupBox1.Size = new System.Drawing.Size(644, 119);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
@@ -252,7 +240,7 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(12, 158);
+            this.groupBox2.Location = new System.Drawing.Point(12, 137);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(644, 70);
             this.groupBox2.TabIndex = 21;
@@ -311,7 +299,7 @@ namespace MCLauncher
             this.groupBox3.Controls.Add(this.javaCheck);
             this.groupBox3.Controls.Add(this.javaBox);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(12, 234);
+            this.groupBox3.Location = new System.Drawing.Point(12, 213);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(644, 118);
             this.groupBox3.TabIndex = 24;
@@ -417,7 +405,7 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(494, 358);
+            this.opendirBtn.Location = new System.Drawing.Point(494, 337);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(75, 23);
             this.opendirBtn.TabIndex = 25;
@@ -426,7 +414,7 @@ namespace MCLauncher
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(18, 358);
+            this.closeBtn.Location = new System.Drawing.Point(18, 337);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
@@ -436,7 +424,7 @@ namespace MCLauncher
             // 
             // instmodBtn
             // 
-            this.instmodBtn.Location = new System.Drawing.Point(413, 358);
+            this.instmodBtn.Location = new System.Drawing.Point(413, 337);
             this.instmodBtn.Name = "instmodBtn";
             this.instmodBtn.Size = new System.Drawing.Size(75, 23);
             this.instmodBtn.TabIndex = 27;
@@ -445,7 +433,7 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(575, 358);
+            this.saveBtn.Location = new System.Drawing.Point(575, 337);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
@@ -457,7 +445,7 @@ namespace MCLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 388);
+            this.ClientSize = new System.Drawing.Size(668, 372);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.instmodBtn);
             this.Controls.Add(this.closeBtn);
@@ -487,7 +475,6 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox dirCheck;
         private System.Windows.Forms.TextBox dirBox;
         private System.Windows.Forms.CheckBox resCheck;
-        private System.Windows.Forms.CheckBox openCheck;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox resBoxY;
         private System.Windows.Forms.Label label4;

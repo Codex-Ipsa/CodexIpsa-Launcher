@@ -28,6 +28,7 @@ namespace MCLauncher
         public static string javaLibs = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libs.zip";
         public static string updaterRel = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdater.exe";
         public static string updaterDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdaterDev.exe";
+        public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-version.json";
 
         public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
         public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";

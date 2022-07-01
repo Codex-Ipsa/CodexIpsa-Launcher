@@ -78,9 +78,12 @@ namespace MCLauncher
 
         void checkForUpdates()
         {
+
+            //Check for launcher update
             using (WebClient client = new WebClient())
             {
                 string updateLauncherVer = "";
+
 
                 try
                 {
@@ -270,6 +273,12 @@ namespace MCLauncher
         {
             DebugTools dt = new DebugTools();
             dt.ShowDialog();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings stg = new Settings();
+            stg.ShowDialog();
         }
     }
 }

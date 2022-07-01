@@ -41,6 +41,12 @@ namespace MCLauncher
         public string libs { get; set; }
         public string proxy { get; set; }
         public string addCmd { get; set; }
+
+        //Updates
+        public string brId { get; set; }
+        public string brName { get; set; }
+        public string brVer { get; set; }
+        public string brUrl { get; set; }
     }
 
     public class RootObject

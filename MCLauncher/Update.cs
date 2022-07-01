@@ -52,5 +52,16 @@ namespace MCLauncher
         {
             this.Close();
         }
+
+        public static void DownloadUpdate()
+        {
+            using (var client = new WebClient())
+            {
+                client.DownloadFile(Globals.updaterRel, Globals.currentPath + "\\MCLauncherUpdater.exe");
+            }
+
+            System.Diagnostics.Process.Start("CMD.exe", $"/C MCLauncherUpdater.exe");
+            Application.Exit();
+        }
     }
 }

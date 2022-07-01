@@ -26,7 +26,6 @@ namespace MCLauncher
         public static string cfgGameVer;
         public static string cfgTypeVer;
         public static string cfgLinkVer;
-        public static string cfgProxyVer;
 
         public InstanceManager()
         {
@@ -46,7 +45,6 @@ namespace MCLauncher
             List<string> versionList = new List<string>();
             List<string> typeJavaList = new List<string>();
             List<string> linkJavaList = new List<string>();
-            List<string> proxyJavaList = new List<string>();
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(Globals.javaJson);
@@ -57,7 +55,6 @@ namespace MCLauncher
                     versionList.Add(vers.verName);
                     typeJavaList.Add(vers.verType);
                     linkJavaList.Add(vers.verLink);
-                    proxyJavaList.Add(vers.proxyPort);
                 }
             }
             verBox.DataSource = versionList;
@@ -67,7 +64,6 @@ namespace MCLauncher
             int index = verBox.FindString(cfgGameVer);
             cfgTypeVer = typeJavaList[index];
             cfgLinkVer = linkJavaList[index];
-            cfgProxyVer = proxyJavaList[index];
 
             //Set mode dependant stuff
             if (mode == "new")
@@ -105,7 +101,6 @@ namespace MCLauncher
                         cfgGameVer = vers.verName;
                         cfgLinkVer = vers.verLink;
                         cfgTypeVer = vers.verType;
-                        cfgProxyVer = vers.proxyPort;
                     }
                 }
             }
@@ -350,7 +345,6 @@ namespace MCLauncher
                 List<string> versionList = new List<string>();
                 List<string> typeJavaList = new List<string>();
                 List<string> linkJavaList = new List<string>();
-                List<string> proxyJavaList = new List<string>();
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(Globals.javaJson);
@@ -361,7 +355,6 @@ namespace MCLauncher
                         versionList.Add(vers.verName);
                         typeJavaList.Add(vers.verType);
                         linkJavaList.Add(vers.verLink);
-                        proxyJavaList.Add(vers.proxyPort);
                     }
                 }
 
@@ -369,7 +362,6 @@ namespace MCLauncher
                 int index = verBox.FindString(cfgGameVer);
                 cfgTypeVer = typeJavaList[index];
                 cfgLinkVer = linkJavaList[index];
-                cfgProxyVer = proxyJavaList[index];
             }
         }
 

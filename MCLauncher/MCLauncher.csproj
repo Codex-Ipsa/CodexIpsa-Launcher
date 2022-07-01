@@ -154,7 +154,6 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings1.cs" />
     <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>
