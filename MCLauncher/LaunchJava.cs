@@ -82,13 +82,16 @@ namespace MCLauncher
             }*/
 
             //Create required dirs
+            Console.WriteLine($"[LaunchJava] Starting process...");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions\\java");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
+            Console.WriteLine($"[LaunchJava] Directories created!");
 
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
+            Console.WriteLine($"[LaunchJava] Loading version data from {launchJsonUrl}...");
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(launchJsonUrl);
@@ -97,24 +100,39 @@ namespace MCLauncher
                 foreach (var vers in data)
                 {
                     launchJavaReq = vers.minJava;
+                    Console.WriteLine($"[LaunchJava] Minimum Java: {launchJavaReq}");
                     launchClasspath = vers.launchMethod;
+                    Console.WriteLine($"[LaunchJava] Classpath: {launchClasspath}");
                     launchLibsType = vers.libsType;
+                    Console.WriteLine($"[LaunchJava] Libs type: {launchLibsType}");
                     launchLibsPath = vers.libs;
+                    Console.WriteLine($"[LaunchJava] Libs path: {launchLibsPath}");
                     launchProxyPort = vers.proxy;
+                    Console.WriteLine($"[LaunchJava] Proxy port: {launchProxyPort}");
                     launchCmdAddon = vers.addCmd;
+                    Console.WriteLine($"[LaunchJava] Addon: {launchCmdAddon}");
                 }
             }
-            
+            Console.WriteLine($"[LaunchJava] Loaded version data!");
+
             //Set required stuff
             launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
+            Console.WriteLine($"[LaunchJava] Client path: {launchClientPath}");
             launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true";
+            Console.WriteLine($"[LaunchJava] Proxy: {launchProxy}");
             launchNativePath = $".codexipsa/libs/natives/";
+            Console.WriteLine($"[LaunchJava] Natives path:{launchNativePath}");
             workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
+            Console.WriteLine($"[LaunchJava] WorkDir: {workDir}");
             gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
+            Console.WriteLine($"[LaunchJava] GameDir: {gameDir}");
             assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO, customise
+            Console.WriteLine($"[LaunchJava] AssetsDir: {assetDir}");
             launchPlayerName = Properties.Settings.Default.playerName;
+            Console.WriteLine($"[LaunchJava] Player name: {launchPlayerName}");
 
             //Download client
+            Console.WriteLine($"[LaunchJava] Donloading client...");
             var dlClient = new WebClient();
             if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\versions\\java\\{launchVerName}.jar"))
             {
@@ -123,11 +141,13 @@ namespace MCLauncher
                 DownloadProgress dl = new DownloadProgress();
                 dl.ShowDialog();
             }
+            Console.WriteLine($"[LaunchJava] Done!");
 
             //Check for libs - TODO
-            Console.WriteLine("lib type " + launchLibsType);
+            Console.WriteLine($"[LaunchJava] Starting libs check...");
             LibsCheck.type = launchLibsType;
             LibsCheck.Check();
+            Console.WriteLine($"[LaunchJava] Done!");
 
             //Build the launchcmd
             launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
@@ -148,21 +168,20 @@ namespace MCLauncher
 
                 launchCommand += $" {launchCmdAddon6}";
             }
+            Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
 
-            Console.WriteLine($"LaunchCommand done: {launchCommand}");
-            Console.WriteLine($"More debug shit:\nname: {launchVerName}\ntype: {launchVerType}\nurl: {launchVerUrl}\ninstance: {currentInstance}\ngameDir: {gameDir}\nassetDir: {assetDir}");
-            Console.WriteLine($"VerData url: http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json");
 
             //Check if Java exists
             try
             {
+                Console.WriteLine($"[LaunchJava] Launching the game...");
                 //get current appdata for later
                 var tempAppdata = Environment.GetEnvironmentVariable("Appdata");
-                Console.WriteLine($"TempAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+                Console.WriteLine($"[LaunchJava] TempAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
                 
                 //Set appdata to instance dir
                 Environment.SetEnvironmentVariable("Appdata", workDir);
-                Console.WriteLine($"InstAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+                Console.WriteLine($"[LaunchJava] InstAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
 
                 //Start the game
                 Process process = new Process();
@@ -178,15 +197,16 @@ namespace MCLauncher
 
                 //Reset appdata back to original
                 Environment.SetEnvironmentVariable("Appdata", tempAppdata);
-                Console.WriteLine($"OldAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+                Console.WriteLine($"[LaunchJava] OldAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
 
+                Console.WriteLine($"[LaunchJava] Closing the game...");
                 //Process.Start("java.exe");
                 //Console.WriteLine("Just pretend the game started");
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
                 //TODO: start some java install wizard thing LMFAO
-                Console.WriteLine("Could not find Java!");
+                Console.WriteLine("[LaunchJava] Could not find Java!");
                 Console.WriteLine(ex.Message);
             }
         }
