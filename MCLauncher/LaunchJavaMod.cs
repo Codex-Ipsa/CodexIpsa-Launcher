@@ -141,7 +141,8 @@ namespace MCLauncher
                 //TODO: CHECK VERSION TYPE, LAUNCH ACCORDINGLY
                 if (typeVer == "applet")
                 {
-                    LibsCheck.CheckPre16();
+                    LibsCheck.type = "pre1.6";
+                    LibsCheck.Check();
                     if (LibsCheck.isDone == true)
                     {
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/mods/{selectedVer}.jar;bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
@@ -153,7 +154,8 @@ namespace MCLauncher
                 }
                 else if (typeVer == "jar106")
                 {
-                    LibsCheck.CheckPre16();
+                    LibsCheck.type = "pre1.6";
+                    LibsCheck.Check();
                     if (LibsCheck.isDone == true)
                     {
                         launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"bin/versions/mods/{selectedVer}.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jinput-2.0.5.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test";

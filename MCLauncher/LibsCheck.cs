@@ -19,14 +19,17 @@ namespace MCLauncher
 
     class LibsCheck
     {
+        public static string type;
         public static bool isDone = false;
-        
-        //For versions before release 1.6
-        public static void CheckPre16()
+
+        public static void Check()
         {
+            string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
+            Console.WriteLine($"[LibsCheck] Type is {type}");
+            Console.WriteLine($"[LibsCheck] Url is {url}");
             using (WebClient client = new WebClient())
             {
-                string json = client.DownloadString(Globals.libsPre16Json);
+                string json = client.DownloadString(url);
                 List<LibsJson> data = JsonConvert.DeserializeObject<List<LibsJson>>(json);
 
                 foreach (var libs in data)
@@ -39,9 +42,9 @@ namespace MCLauncher
                         DownloadProgress download = new DownloadProgress();
                         download.ShowDialog();
 
-                        if(libs.extract != "null")
+                        if (libs.extract != "null")
                         {
-                            if(Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
+                            if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
                                 Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
                             string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";

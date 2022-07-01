@@ -116,7 +116,7 @@ namespace MCLauncher
             if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
             {
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
+                //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
 

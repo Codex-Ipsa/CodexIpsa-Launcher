@@ -11,8 +11,9 @@ namespace MCLauncher
     {
         //Manual
         public static string codebase = "0.0.7-dev";
+        public static string branch = "0.0.7-rewrite";
         public static string verCurrent = "0.0.6-dev_8-pre";
-        public static string verDisplay = "0.0.7-rewrite"; //0.0.6 (Dev 7 WIP)
+        public static string verDisplay = "0.0.7-rewrite (b2)"; //0.0.6 (Dev 7 WIP)
         public static bool isDev = true; //MAKE SURE IT'S FALSE ON RELEASE
         public static bool offlineMode = false;
 
@@ -36,6 +37,7 @@ namespace MCLauncher
         public static string ps3Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/ps3_version.json";
 
         public static string libsPre16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
+        public static string libs16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-1.6.json";
 
         public static string jre8Link = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/jre8-latest.json";
     }

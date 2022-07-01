@@ -30,8 +30,6 @@ namespace MCLauncher
         public static string launchCmd;
         public static string clientPath;
         public static string launchMethod;
-        public static string gameDir;
-        public static string assetDir;
 
         //Debug
         public static bool isCustom = false;
@@ -50,20 +48,24 @@ namespace MCLauncher
 
         public static string currentInstance;
 
-        public static string launchJavaLocation = "java.exe"; //TODO
+        public static string launchJavaLocation = "java.exe"; //TODO, custom Java
         public static string launchCommand;
         public static string launchJavaReq;
 
-        public static string launchXmx = "1024"; //TODO
-        public static string launchXms = "1024"; //TODO
+        public static string launchXmx = "1024"; //TODO, custom vars
+        public static string launchXms = "1024"; //TODO, custom vars
         public static string launchProxyPort;
         public static string launchProxy;
         public static string launchNativePath;
         public static string launchClientPath;
         public static string launchLibsPath;
         public static string launchClasspath;
-        public static string launchPlayerName = "DEJVOSS"; //TODO
+        public static string launchPlayerName;
         public static string launchCmdAddon;
+
+        public static string gameDir;
+        public static string assetDir;
+        public static string workDir;
 
         public static void LaunchGame()
         {
@@ -105,10 +107,12 @@ namespace MCLauncher
             
             //Set required stuff
             launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
-            launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true";
+            launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true";
             launchNativePath = $".codexipsa/libs/natives/";
-            gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\game\""; //TODO
-            assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO
+            workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
+            gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
+            assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO, customise
+            launchPlayerName = Properties.Settings.Default.playerName;
 
             //Download client
             var dlClient = new WebClient();
@@ -120,8 +124,10 @@ namespace MCLauncher
                 dl.ShowDialog();
             }
 
-            //Check for libs
-            LibsCheck.CheckPre16();
+            //Check for libs - TODO
+            Console.WriteLine("lib type " + launchLibsType);
+            LibsCheck.type = launchLibsType;
+            LibsCheck.Check();
 
             //Build the launchcmd
             launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
@@ -129,13 +135,18 @@ namespace MCLauncher
             {
                 launchCommand += $"{launchProxy} ";
             }
-            launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath} {launchPlayerName} test";
+            launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
             if (launchCmdAddon != string.Empty)
             {
                 //This needs a better system
                 var launchCmdAddon1 = launchCmdAddon.Replace("{gameDir}", $"{gameDir}");
                 var launchCmdAddon2 = launchCmdAddon1.Replace("{assetDir}", $"{assetDir}");
-                launchCommand += $" {launchCmdAddon2}";
+                var launchCmdAddon3 = launchCmdAddon2.Replace("{playerName}", $"{launchPlayerName}");
+                var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"test");
+                var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
+                var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
+
+                launchCommand += $" {launchCmdAddon6}";
             }
 
             Console.WriteLine($"LaunchCommand done: {launchCommand}");
@@ -145,14 +156,30 @@ namespace MCLauncher
             //Check if Java exists
             try
             {
+                //get current appdata for later
+                var tempAppdata = Environment.GetEnvironmentVariable("Appdata");
+                Console.WriteLine($"TempAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+                
+                //Set appdata to instance dir
+                Environment.SetEnvironmentVariable("Appdata", workDir);
+                Console.WriteLine($"InstAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+
+                //Start the game
                 Process process = new Process();
                 process.StartInfo.FileName = launchJavaLocation;
                 process.StartInfo.Arguments = launchCommand;
                 process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                 process.Start();
 
+
                 VerSelect.checkTab = "java";
                 LibsCheck.isDone = false;
+                process.WaitForExit();
+
+                //Reset appdata back to original
+                Environment.SetEnvironmentVariable("Appdata", tempAppdata);
+                Console.WriteLine($"OldAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+
                 //Process.Start("java.exe");
                 //Console.WriteLine("Just pretend the game started");
             }
@@ -162,117 +189,6 @@ namespace MCLauncher
                 Console.WriteLine("Could not find Java!");
                 Console.WriteLine(ex.Message);
             }
-
-            using (var download = new WebClient())
-            {
-                //Download version
-                /*if (!File.Exists($"{Globals.currentPath}\\bin\\versions\\java\\{selectedVer}.jar"))
-                {
-                    DownloadProgress.url = linkToJar;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\bin\\versions\\java\\{selectedVer}.jar";
-                    DownloadProgress download = new DownloadProgress();
-                    download.ShowDialog();
-                }
-
-                //If it's a pre-classic, check for libs, download them, and launch the game
-                if (typeVer == "rubydung")
-                {
-                    LibsCheck.CheckPre16();
-
-                    if (LibsCheck.isDone == true)
-                    {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" com.mojang.rubydung.RubyDung {Properties.Settings.Default.playerName} test"; //gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.VanillaTweaker
-
-                        //Process.Start("java.exe", launchCmd);
-                        Process process = new Process();
-                        process.StartInfo.FileName = javaLocation;
-                        process.StartInfo.Arguments = launchCmd;
-                        process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
-                        process.Start();
-                        
-                        VerSelect.checkTab = "java";
-                        LibsCheck.isDone = false;
-                    }
-                }
-                //If it's rd-161348, check for libs, download them, and launch the game
-                else if (typeVer == "rubydung2")
-                {
-                    LibsCheck.CheckPre16();
-
-                    if (LibsCheck.isDone == true)
-                    {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" com.mojang.minecraft.RubyDung {Properties.Settings.Default.playerName} test"; //gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.VanillaTweaker
-
-                        Process process = new Process();
-                        process.StartInfo.FileName = javaLocation;
-                        process.StartInfo.Arguments = launchCmd;
-                        process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
-                        process.Start();
-
-                        VerSelect.checkTab = "java";
-                        LibsCheck.isDone = false;
-                    }
-                }
-
-                //If it's an applet, check for libs, download them, and launch the game
-                else if (typeVer == "applet")
-                {
-                    LibsCheck.CheckPre16();
-
-                    if (LibsCheck.isDone == true)
-                    {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
-
-                        Process process = new Process();
-                        process.StartInfo.FileName = javaLocation;
-                        process.StartInfo.Arguments = launchCmd;
-                        process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
-                        process.Start();
-
-                        VerSelect.checkTab = "java";
-                        LibsCheck.isDone = false;
-                    }
-                }
-                //If it's a1.0.6 to 1.5, check for libs, download them, and launch the game.
-                else if (typeVer == "jar106")
-                {
-                    LibsCheck.CheckPre16();
-
-                    if(LibsCheck.isDone == true)
-                    {
-                        launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/launchwrapper-1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.launchwrapper.Launch {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir} --tweakClass net.minecraft.launchwrapper.AlphaVanillaTweaker";
-                        //launchCmd = $" -Xms{Properties.Settings.Default.ramXMS}m -Xmx{Properties.Settings.Default.ramXMS}m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={proxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp \"{clientPath};bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.client.Minecraft {Properties.Settings.Default.playerName} test --gameDir {gameDir} --assetDir {assetDir}";
-
-                        //edutest
-                        //launchCmd = "java.exe -Xms1024m -Xmx1024m -Djava.library.path=minecraft/bin/natives/ -cp \"minecraft/bin/minecraft.jar;minecraft/bin/lwjgl.jar;minecraft/bin/lwjgl_util.jar;minecraft/bin/argo-small-3.2.jar;minecraft/bin/bcprov-jdk15on-148.jar;minecraft/bin/worldedit-5.5.6.jar;minecraft/bin/scala-library.jar;minecraft/bin/guava-14.0-rc3.jar;minecraft/bin/commons-io-2.2.jar;minecraft/bin/jinput.jar;bin/libs/asm-all-4.1.jar\" net.minecraft.client.Minecraft Player test";
-
-                        Process process = new Process();
-                        process.StartInfo.FileName = javaLocation;
-                        process.StartInfo.Arguments = launchCmd;
-                        process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
-                        process.Start();
-
-                        VerSelect.checkTab = "java";
-                        LibsCheck.isDone = false;
-                    }
-                }
-                //If it's post1.6, check for libs, download them, and launch the game.
-                else if (typeVer == "jar1.6")
-                {
-                    //java.exe -Xms1024m -Xmx1024m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Djava.util.Arrays.useLegacyMergeSort=true -Djava.library.path=bin/libs/natives/ -cp "bin/versions/java/1.6.jar;bin/libs/lwjgl-2.9.0.jar;bin/libs/lwjgl_util-2.9.0.jar;bin/libs/jutils-1.0.0.jar;bin/libs/jopt-simple-4.5.jar;bin/libs/jinput-2.0.5.jar;bin/libs/asm-all-4.1.jar;bin/libs/codecjorbis-20101023.jar;bin/libs/codecwav-20101023.jar;bin/libs/libraryjavasound-20101123.jar;bin/libs/librarylwjglopenal-20100824.jar;bin/libs/soundsystem-20120107.jar;bin/libs/argo-2.25_fixed.jar;bin/libs/bcprov-jdk15on-1.47.jar;bin/libs/guava-14.0.jar;bin/libs/commons-lang3-3.1.jar;bin/libs/commons-io-2.4.jar;bin/libs/gson-2.2.2.jar" net.minecraft.client.main.Main PlayerName test --username DEJVOSS --version 1.6 --gameDir bin/instance/Default/game --assetsDir bin/instance/Default/assets
-                }*/
-            }
         }
-
-        /*private static void OutputHandler(object sender, DataReceivedEventArgs e)
-        {
-            GameConsole.textStr += e.Data;
-            //Console.WriteLine(e.Data);
-        }
-        private static void ErrorOutputHandler(object sender, DataReceivedEventArgs e)
-        {
-            Console.WriteLine(e.Data);
-            //Console.WriteLine(e.Data);
-        }*/
     }
 }
