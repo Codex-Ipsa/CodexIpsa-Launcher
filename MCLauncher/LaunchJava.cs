@@ -89,6 +89,10 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
             Console.WriteLine($"[LaunchJava] Directories created!");
 
+            Console.WriteLine($"[LaunchJava] Version: {launchVerName}");
+            Console.WriteLine($"[LaunchJava] Type: {launchVerType}");
+            Console.WriteLine($"[LaunchJava] Url: {launchVerUrl}");
+
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
             Console.WriteLine($"[LaunchJava] Loading version data from {launchJsonUrl}...");
