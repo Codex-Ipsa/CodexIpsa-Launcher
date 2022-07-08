@@ -51,6 +51,10 @@ namespace MCLauncher
 
         public static void checkForBranches()
         {
+            branchList.Clear();
+            branchIdList.Clear();
+            branchVerList.Clear();
+            branchUrlList.Clear();
             Console.WriteLine($"[BranchCheck] Loading updates list...");
 
             using (WebClient client = new WebClient())

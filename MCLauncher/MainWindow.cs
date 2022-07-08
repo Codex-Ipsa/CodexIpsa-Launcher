@@ -105,40 +105,6 @@ namespace MCLauncher
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
 
-        void checkForUpdates()
-        {
-
-            //Check for launcher update
-            using (WebClient client = new WebClient())
-            {
-                string updateLauncherVer = "";
-
-
-                try
-                {
-                    if (Globals.isDev == false)
-                        updateLauncherVer = client.DownloadString(Globals.verCheck);
-                    else
-                        updateLauncherVer = client.DownloadString(Globals.verCheckDev);
-
-                    if (updateLauncherVer != Globals.verCurrent)
-                    {
-                        Update updateForm = new Update();
-                        updateForm.ShowDialog();
-                    }
-                }
-                catch (WebException)
-                {
-                    Globals.offlineMode = true;
-                    OfflineMode offlineMode = new OfflineMode();
-                    offlineMode.ShowDialog();
-                    //this.Text += " (Offline mode)";
-                    this.Close();
-                }
-
-            }
-        }
-
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (VerSelect.checkTab == "java")

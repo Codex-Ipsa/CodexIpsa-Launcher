@@ -36,7 +36,6 @@ namespace MCLauncher
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnUpdates = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboUpdateSelect = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
@@ -45,10 +44,10 @@ namespace MCLauncher
             // 
             // applyBtn
             // 
-            this.applyBtn.Location = new System.Drawing.Point(16, 284);
-            this.applyBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.applyBtn.Location = new System.Drawing.Point(252, 213);
+            this.applyBtn.Margin = new System.Windows.Forms.Padding(4);
             this.applyBtn.Name = "applyBtn";
-            this.applyBtn.Size = new System.Drawing.Size(100, 28);
+            this.applyBtn.Size = new System.Drawing.Size(109, 28);
             this.applyBtn.TabIndex = 14;
             this.applyBtn.Text = "Apply";
             this.applyBtn.UseVisualStyleBackColor = true;
@@ -56,12 +55,14 @@ namespace MCLauncher
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(595, 71);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
@@ -84,47 +85,38 @@ namespace MCLauncher
             this.comboBox1.Items.AddRange(new object[] {
             "English"});
             this.comboBox1.Location = new System.Drawing.Point(147, 23);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(439, 24);
             this.comboBox1.TabIndex = 0;
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.btnUpdates);
-            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.comboUpdateSelect);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(16, 94);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(595, 126);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(595, 111);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Updates";
             // 
             // btnUpdates
             // 
-            this.btnUpdates.Location = new System.Drawing.Point(8, 87);
-            this.btnUpdates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdates.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdates.Location = new System.Drawing.Point(7, 64);
+            this.btnUpdates.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdates.Name = "btnUpdates";
             this.btnUpdates.Size = new System.Drawing.Size(579, 28);
             this.btnUpdates.TabIndex = 3;
             this.btnUpdates.Text = "Check for updates";
             this.btnUpdates.UseVisualStyleBackColor = true;
             this.btnUpdates.Click += new System.EventHandler(this.btnUpdates_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(8, 59);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(213, 21);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Check for updates on startup";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -139,11 +131,12 @@ namespace MCLauncher
             // comboUpdateSelect
             // 
             this.comboUpdateSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboUpdateSelect.ForeColor = System.Drawing.Color.Black;
             this.comboUpdateSelect.FormattingEnabled = true;
             this.comboUpdateSelect.Items.AddRange(new object[] {
             "English"});
             this.comboUpdateSelect.Location = new System.Drawing.Point(147, 23);
-            this.comboUpdateSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboUpdateSelect.Margin = new System.Windows.Forms.Padding(4);
             this.comboUpdateSelect.Name = "comboUpdateSelect";
             this.comboUpdateSelect.Size = new System.Drawing.Size(439, 24);
             this.comboUpdateSelect.TabIndex = 0;
@@ -153,12 +146,13 @@ namespace MCLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 327);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(627, 254);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.applyBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Settings";
             this.Text = "Settings";
             this.groupBox1.ResumeLayout(false);
@@ -176,7 +170,6 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnUpdates;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboUpdateSelect;
     }
