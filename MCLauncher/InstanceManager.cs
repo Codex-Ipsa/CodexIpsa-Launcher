@@ -26,6 +26,10 @@ namespace MCLauncher
         public static string cfgGameVer;
         public static string cfgTypeVer;
         public static string cfgLinkVer;
+        public static string cfgMinRam;
+        public static string cfgMaxRam;
+
+        public static bool cfgUseRam;
 
         public InstanceManager()
         {
@@ -95,12 +99,14 @@ namespace MCLauncher
                     string json = client.DownloadString(Globals.defaultVer);
                     List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
-                    //Set the LaunchJava defaults
                     foreach (var vers in data)
                     {
                         cfgGameVer = vers.verName;
                         cfgLinkVer = vers.verLink;
                         cfgTypeVer = vers.verType;
+                        cfgUseRam = false;
+                        cfgMaxRam = "1024";
+                        cfgMinRam = "1024";
                     }
                 }
             }

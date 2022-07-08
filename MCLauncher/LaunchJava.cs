@@ -159,6 +159,9 @@ namespace MCLauncher
             {
                 launchCommand += $"{launchProxy} ";
             }
+            //-Dserver=164.68.108.64 -Dport=5565
+            //join://46.69.208.198:25565/use/classic_6/c0.0.22a_05
+            //-Dserver=46.69.208.198 -Dport=25565
             launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
             if (launchCmdAddon != string.Empty)
             {
@@ -173,6 +176,7 @@ namespace MCLauncher
                 launchCommand += $" {launchCmdAddon6}";
             }
             Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
+            Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");
 
 
             //Check if Java exists
@@ -187,13 +191,26 @@ namespace MCLauncher
                 Environment.SetEnvironmentVariable("Appdata", workDir);
                 Console.WriteLine($"[LaunchJava] InstAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
 
+                Console.WriteLine($"[LaunchJava] Game output:");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 //Start the game
                 Process process = new Process();
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+
+                process.OutputDataReceived += OnOutputDataReceived;
+                process.ErrorDataReceived += OnErrorDataReceived;
+
+
                 process.StartInfo.FileName = launchJavaLocation;
                 process.StartInfo.Arguments = launchCommand;
                 process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
                 process.Start();
 
+                process.BeginErrorReadLine();
+                process.BeginOutputReadLine();
 
                 VerSelect.checkTab = "java";
                 LibsCheck.isDone = false;
@@ -213,6 +230,20 @@ namespace MCLauncher
                 Console.WriteLine("[LaunchJava] Could not find Java!");
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(e.Data);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(e.Data);
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }

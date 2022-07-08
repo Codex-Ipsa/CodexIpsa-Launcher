@@ -40,9 +40,7 @@ namespace MCLauncher
             this.dirBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.maxRamBox = new System.Windows.Forms.TextBox();
             this.ramCheck = new System.Windows.Forms.CheckBox();
-            this.minRamBox = new System.Windows.Forms.TextBox();
             this.resBoxY = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.resBoxX = new System.Windows.Forms.TextBox();
@@ -66,25 +64,31 @@ namespace MCLauncher
             this.closeBtn = new System.Windows.Forms.Button();
             this.instmodBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
+            this.maxRamBox = new System.Windows.Forms.NumericUpDown();
+            this.minRamBox = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(8, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(91, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Profile name:";
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(575, 337);
+            this.createBtn.Location = new System.Drawing.Point(767, 415);
+            this.createBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.createBtn.Name = "createBtn";
-            this.createBtn.Size = new System.Drawing.Size(75, 23);
+            this.createBtn.Size = new System.Drawing.Size(100, 28);
             this.createBtn.TabIndex = 7;
             this.createBtn.Text = "Create";
             this.createBtn.UseVisualStyleBackColor = true;
@@ -92,17 +96,19 @@ namespace MCLauncher
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(122, 13);
+            this.nameBox.Location = new System.Drawing.Point(163, 16);
+            this.nameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(516, 20);
+            this.nameBox.Size = new System.Drawing.Size(687, 22);
             this.nameBox.TabIndex = 8;
             // 
             // dirCheck
             // 
             this.dirCheck.AutoSize = true;
-            this.dirCheck.Location = new System.Drawing.Point(6, 41);
+            this.dirCheck.Location = new System.Drawing.Point(8, 50);
+            this.dirCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dirCheck.Name = "dirCheck";
-            this.dirCheck.Size = new System.Drawing.Size(107, 17);
+            this.dirCheck.Size = new System.Drawing.Size(140, 21);
             this.dirCheck.TabIndex = 11;
             this.dirCheck.Text = "Custom directory:";
             this.dirCheck.UseVisualStyleBackColor = true;
@@ -111,17 +117,19 @@ namespace MCLauncher
             // dirBox
             // 
             this.dirBox.Enabled = false;
-            this.dirBox.Location = new System.Drawing.Point(122, 39);
+            this.dirBox.Location = new System.Drawing.Point(163, 48);
+            this.dirBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(476, 20);
+            this.dirBox.Size = new System.Drawing.Size(633, 22);
             this.dirBox.TabIndex = 12;
             // 
             // resCheck
             // 
             this.resCheck.AutoSize = true;
-            this.resCheck.Location = new System.Drawing.Point(6, 67);
+            this.resCheck.Location = new System.Drawing.Point(8, 82);
+            this.resCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resCheck.Name = "resCheck";
-            this.resCheck.Size = new System.Drawing.Size(112, 17);
+            this.resCheck.Size = new System.Drawing.Size(147, 21);
             this.resCheck.TabIndex = 13;
             this.resCheck.Text = "Custom resolution:";
             this.resCheck.UseVisualStyleBackColor = true;
@@ -130,12 +138,12 @@ namespace MCLauncher
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.minRamBox);
+            this.groupBox1.Controls.Add(this.maxRamBox);
             this.groupBox1.Controls.Add(this.dirBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.maxRamBox);
             this.groupBox1.Controls.Add(this.ramCheck);
-            this.groupBox1.Controls.Add(this.minRamBox);
             this.groupBox1.Controls.Add(this.resBoxY);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
@@ -145,9 +153,11 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.resBoxX);
             this.groupBox1.Controls.Add(this.dirCheck);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(16, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 119);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(859, 146);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
@@ -155,9 +165,10 @@ namespace MCLauncher
             // dirBtn
             // 
             this.dirBtn.Enabled = false;
-            this.dirBtn.Location = new System.Drawing.Point(604, 38);
+            this.dirBtn.Location = new System.Drawing.Point(805, 47);
+            this.dirBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dirBtn.Name = "dirBtn";
-            this.dirBtn.Size = new System.Drawing.Size(34, 20);
+            this.dirBtn.Size = new System.Drawing.Size(45, 25);
             this.dirBtn.TabIndex = 30;
             this.dirBtn.Text = "...";
             this.dirBtn.UseVisualStyleBackColor = true;
@@ -165,71 +176,61 @@ namespace MCLauncher
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(390, 94);
+            this.label5.Location = new System.Drawing.Point(520, 116);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.Size = new System.Drawing.Size(37, 17);
             this.label5.TabIndex = 25;
             this.label5.Text = "Max:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(123, 94);
+            this.label3.Location = new System.Drawing.Point(164, 116);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.Size = new System.Drawing.Size(34, 17);
             this.label3.TabIndex = 24;
             this.label3.Text = "Min:";
-            // 
-            // maxRamBox
-            // 
-            this.maxRamBox.Enabled = false;
-            this.maxRamBox.Location = new System.Drawing.Point(426, 91);
-            this.maxRamBox.Name = "maxRamBox";
-            this.maxRamBox.Size = new System.Drawing.Size(212, 20);
-            this.maxRamBox.TabIndex = 23;
             // 
             // ramCheck
             // 
             this.ramCheck.AutoSize = true;
-            this.ramCheck.Location = new System.Drawing.Point(6, 93);
+            this.ramCheck.Location = new System.Drawing.Point(8, 114);
+            this.ramCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ramCheck.Name = "ramCheck";
-            this.ramCheck.Size = new System.Drawing.Size(66, 17);
+            this.ramCheck.Size = new System.Drawing.Size(84, 21);
             this.ramCheck.TabIndex = 22;
             this.ramCheck.Text = "Memory:";
             this.ramCheck.UseVisualStyleBackColor = true;
             this.ramCheck.CheckedChanged += new System.EventHandler(this.ramCheck_CheckedChanged);
             // 
-            // minRamBox
-            // 
-            this.minRamBox.Enabled = false;
-            this.minRamBox.Location = new System.Drawing.Point(156, 91);
-            this.minRamBox.Name = "minRamBox";
-            this.minRamBox.Size = new System.Drawing.Size(212, 20);
-            this.minRamBox.TabIndex = 21;
-            // 
             // resBoxY
             // 
             this.resBoxY.Enabled = false;
-            this.resBoxY.Location = new System.Drawing.Point(392, 64);
+            this.resBoxY.Location = new System.Drawing.Point(523, 79);
+            this.resBoxY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resBoxY.Name = "resBoxY";
-            this.resBoxY.Size = new System.Drawing.Size(246, 20);
+            this.resBoxY.Size = new System.Drawing.Size(327, 22);
             this.resBoxY.TabIndex = 20;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(374, 67);
+            this.label4.Location = new System.Drawing.Point(499, 82);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(12, 13);
+            this.label4.Size = new System.Drawing.Size(14, 17);
             this.label4.TabIndex = 19;
             this.label4.Text = "x";
             // 
             // resBoxX
             // 
             this.resBoxX.Enabled = false;
-            this.resBoxX.Location = new System.Drawing.Point(122, 65);
+            this.resBoxX.Location = new System.Drawing.Point(163, 80);
+            this.resBoxX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resBoxX.Name = "resBoxX";
-            this.resBoxX.Size = new System.Drawing.Size(246, 20);
+            this.resBoxX.Size = new System.Drawing.Size(327, 22);
             this.resBoxX.TabIndex = 14;
             // 
             // groupBox2
@@ -240,9 +241,11 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(12, 137);
+            this.groupBox2.Location = new System.Drawing.Point(16, 169);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(644, 70);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(859, 86);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Version selection";
@@ -251,18 +254,20 @@ namespace MCLauncher
             // 
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.editionBox.FormattingEnabled = true;
-            this.editionBox.Location = new System.Drawing.Point(122, 12);
+            this.editionBox.Location = new System.Drawing.Point(163, 15);
+            this.editionBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(516, 21);
+            this.editionBox.Size = new System.Drawing.Size(687, 24);
             this.editionBox.TabIndex = 24;
             this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 42);
+            this.label2.Location = new System.Drawing.Point(8, 52);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(87, 17);
             this.label2.TabIndex = 23;
             this.label2.Text = "Use version:";
             // 
@@ -270,18 +275,20 @@ namespace MCLauncher
             // 
             this.verBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.verBox.FormattingEnabled = true;
-            this.verBox.Location = new System.Drawing.Point(122, 39);
+            this.verBox.Location = new System.Drawing.Point(163, 48);
+            this.verBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.verBox.Name = "verBox";
-            this.verBox.Size = new System.Drawing.Size(516, 21);
+            this.verBox.Size = new System.Drawing.Size(687, 24);
             this.verBox.TabIndex = 22;
             this.verBox.SelectedIndexChanged += new System.EventHandler(this.verBox_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 16);
+            this.label6.Location = new System.Drawing.Point(8, 20);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.Size = new System.Drawing.Size(55, 17);
             this.label6.TabIndex = 0;
             this.label6.Text = "Edition:";
             // 
@@ -299,9 +306,11 @@ namespace MCLauncher
             this.groupBox3.Controls.Add(this.javaCheck);
             this.groupBox3.Controls.Add(this.javaBox);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(12, 213);
+            this.groupBox3.Location = new System.Drawing.Point(16, 262);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(644, 118);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(859, 145);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
@@ -309,9 +318,10 @@ namespace MCLauncher
             // javaBtn
             // 
             this.javaBtn.Enabled = false;
-            this.javaBtn.Location = new System.Drawing.Point(604, 12);
+            this.javaBtn.Location = new System.Drawing.Point(805, 15);
+            this.javaBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.javaBtn.Name = "javaBtn";
-            this.javaBtn.Size = new System.Drawing.Size(34, 20);
+            this.javaBtn.Size = new System.Drawing.Size(45, 25);
             this.javaBtn.TabIndex = 29;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
@@ -319,9 +329,10 @@ namespace MCLauncher
             // custjarBtn
             // 
             this.custjarBtn.Enabled = false;
-            this.custjarBtn.Location = new System.Drawing.Point(604, 92);
+            this.custjarBtn.Location = new System.Drawing.Point(805, 113);
+            this.custjarBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.custjarBtn.Name = "custjarBtn";
-            this.custjarBtn.Size = new System.Drawing.Size(34, 20);
+            this.custjarBtn.Size = new System.Drawing.Size(45, 25);
             this.custjarBtn.TabIndex = 28;
             this.custjarBtn.Text = "...";
             this.custjarBtn.UseVisualStyleBackColor = true;
@@ -330,25 +341,28 @@ namespace MCLauncher
             // 
             this.methodBox.Enabled = false;
             this.methodBox.FormattingEnabled = true;
-            this.methodBox.Location = new System.Drawing.Point(122, 65);
+            this.methodBox.Location = new System.Drawing.Point(163, 80);
+            this.methodBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.methodBox.Name = "methodBox";
-            this.methodBox.Size = new System.Drawing.Size(516, 21);
+            this.methodBox.Size = new System.Drawing.Size(687, 24);
             this.methodBox.TabIndex = 24;
             // 
             // custjarBox
             // 
             this.custjarBox.Enabled = false;
-            this.custjarBox.Location = new System.Drawing.Point(122, 92);
+            this.custjarBox.Location = new System.Drawing.Point(163, 113);
+            this.custjarBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.custjarBox.Name = "custjarBox";
-            this.custjarBox.Size = new System.Drawing.Size(476, 20);
+            this.custjarBox.Size = new System.Drawing.Size(633, 22);
             this.custjarBox.TabIndex = 27;
             // 
             // custjarCheck
             // 
             this.custjarCheck.AutoSize = true;
-            this.custjarCheck.Location = new System.Drawing.Point(6, 93);
+            this.custjarCheck.Location = new System.Drawing.Point(8, 114);
+            this.custjarCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.custjarCheck.Name = "custjarCheck";
-            this.custjarCheck.Size = new System.Drawing.Size(87, 17);
+            this.custjarCheck.Size = new System.Drawing.Size(112, 21);
             this.custjarCheck.TabIndex = 26;
             this.custjarCheck.Text = "Minecraft.jar:";
             this.custjarCheck.UseVisualStyleBackColor = true;
@@ -357,9 +371,10 @@ namespace MCLauncher
             // methodCheck
             // 
             this.methodCheck.AutoSize = true;
-            this.methodCheck.Location = new System.Drawing.Point(6, 67);
+            this.methodCheck.Location = new System.Drawing.Point(8, 82);
+            this.methodCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.methodCheck.Name = "methodCheck";
-            this.methodCheck.Size = new System.Drawing.Size(103, 17);
+            this.methodCheck.Size = new System.Drawing.Size(132, 21);
             this.methodCheck.TabIndex = 25;
             this.methodCheck.Text = "Launch method:";
             this.methodCheck.UseVisualStyleBackColor = true;
@@ -368,9 +383,10 @@ namespace MCLauncher
             // jvmCheck
             // 
             this.jvmCheck.AutoSize = true;
-            this.jvmCheck.Location = new System.Drawing.Point(6, 41);
+            this.jvmCheck.Location = new System.Drawing.Point(8, 50);
+            this.jvmCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.jvmCheck.Name = "jvmCheck";
-            this.jvmCheck.Size = new System.Drawing.Size(102, 17);
+            this.jvmCheck.Size = new System.Drawing.Size(132, 21);
             this.jvmCheck.TabIndex = 23;
             this.jvmCheck.Text = "JVM arguments:";
             this.jvmCheck.UseVisualStyleBackColor = true;
@@ -379,17 +395,19 @@ namespace MCLauncher
             // jvmBox
             // 
             this.jvmBox.Enabled = false;
-            this.jvmBox.Location = new System.Drawing.Point(122, 39);
+            this.jvmBox.Location = new System.Drawing.Point(163, 48);
+            this.jvmBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.jvmBox.Name = "jvmBox";
-            this.jvmBox.Size = new System.Drawing.Size(516, 20);
+            this.jvmBox.Size = new System.Drawing.Size(687, 22);
             this.jvmBox.TabIndex = 22;
             // 
             // javaCheck
             // 
             this.javaCheck.AutoSize = true;
-            this.javaCheck.Location = new System.Drawing.Point(6, 15);
+            this.javaCheck.Location = new System.Drawing.Point(8, 18);
+            this.javaCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.javaCheck.Name = "javaCheck";
-            this.javaCheck.Size = new System.Drawing.Size(81, 17);
+            this.javaCheck.Size = new System.Drawing.Size(104, 21);
             this.javaCheck.TabIndex = 21;
             this.javaCheck.Text = "Java install:";
             this.javaCheck.UseVisualStyleBackColor = true;
@@ -398,25 +416,28 @@ namespace MCLauncher
             // javaBox
             // 
             this.javaBox.Enabled = false;
-            this.javaBox.Location = new System.Drawing.Point(122, 13);
+            this.javaBox.Location = new System.Drawing.Point(163, 16);
+            this.javaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(476, 20);
+            this.javaBox.Size = new System.Drawing.Size(633, 22);
             this.javaBox.TabIndex = 8;
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(494, 337);
+            this.opendirBtn.Location = new System.Drawing.Point(659, 415);
+            this.opendirBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.opendirBtn.Name = "opendirBtn";
-            this.opendirBtn.Size = new System.Drawing.Size(75, 23);
+            this.opendirBtn.Size = new System.Drawing.Size(100, 28);
             this.opendirBtn.TabIndex = 25;
             this.opendirBtn.Text = "Open dir";
             this.opendirBtn.UseVisualStyleBackColor = true;
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(18, 337);
+            this.closeBtn.Location = new System.Drawing.Point(24, 415);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(75, 23);
+            this.closeBtn.Size = new System.Drawing.Size(100, 28);
             this.closeBtn.TabIndex = 26;
             this.closeBtn.Text = "Cancel";
             this.closeBtn.UseVisualStyleBackColor = true;
@@ -424,28 +445,86 @@ namespace MCLauncher
             // 
             // instmodBtn
             // 
-            this.instmodBtn.Location = new System.Drawing.Point(413, 337);
+            this.instmodBtn.Location = new System.Drawing.Point(551, 415);
+            this.instmodBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.instmodBtn.Name = "instmodBtn";
-            this.instmodBtn.Size = new System.Drawing.Size(75, 23);
+            this.instmodBtn.Size = new System.Drawing.Size(100, 28);
             this.instmodBtn.TabIndex = 27;
             this.instmodBtn.Text = "Install mod";
             this.instmodBtn.UseVisualStyleBackColor = true;
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(575, 337);
+            this.saveBtn.Location = new System.Drawing.Point(767, 415);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.Size = new System.Drawing.Size(100, 28);
             this.saveBtn.TabIndex = 28;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
+            // maxRamBox
+            // 
+            this.maxRamBox.Enabled = false;
+            this.maxRamBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.maxRamBox.Location = new System.Drawing.Point(568, 112);
+            this.maxRamBox.Maximum = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            this.maxRamBox.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.maxRamBox.Name = "maxRamBox";
+            this.maxRamBox.Size = new System.Drawing.Size(282, 22);
+            this.maxRamBox.TabIndex = 31;
+            this.maxRamBox.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            // 
+            // minRamBox
+            // 
+            this.minRamBox.Enabled = false;
+            this.minRamBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.minRamBox.Location = new System.Drawing.Point(208, 112);
+            this.minRamBox.Maximum = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            this.minRamBox.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.minRamBox.Name = "minRamBox";
+            this.minRamBox.Size = new System.Drawing.Size(282, 22);
+            this.minRamBox.TabIndex = 32;
+            this.minRamBox.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            // 
             // InstanceManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 372);
+            this.ClientSize = new System.Drawing.Size(891, 458);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.instmodBtn);
             this.Controls.Add(this.closeBtn);
@@ -455,6 +534,7 @@ namespace MCLauncher
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.createBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InstanceManager";
             this.Text = "Profile Manager";
             this.groupBox1.ResumeLayout(false);
@@ -463,6 +543,8 @@ namespace MCLauncher
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -498,12 +580,12 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox maxRamBox;
         private System.Windows.Forms.CheckBox ramCheck;
-        private System.Windows.Forms.TextBox minRamBox;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button dirBtn;
         private System.Windows.Forms.Button javaBtn;
         private System.Windows.Forms.Button custjarBtn;
+        private System.Windows.Forms.NumericUpDown minRamBox;
+        private System.Windows.Forms.NumericUpDown maxRamBox;
     }
 }

@@ -24,21 +24,50 @@ namespace MCLauncher
         private void MainWindow_Load(object sender, EventArgs e)
         {
             //Set required things
+            Console.WriteLine($"[MainWindow] MineC#raft Launcher has started!");
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
+            Console.WriteLine($"[MainWindow] Version {Globals.verDisplay}, Branch {Globals.codebase}");
+
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
             webBrowser1.Refresh();
+            Console.WriteLine($"[MainWindow] Browser URL set");
             playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
 
-            //Delete updaters if they exist for some reason
-            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdater.exe")))
+            //Delete updater if it exists for some reason
+            if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
+                File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
+
+
+            //Check for updates
+            Console.WriteLine($"[MainWindow] Checking for updates..");
+            List<string> branchIds = new List<string>();
+
+            using (WebClient client = new WebClient())
             {
-                File.Delete(Globals.currentPath + "\\MCLauncherUpdater.exe");
+                string jsonUpd = client.DownloadString(Globals.updateInfo);
+                List<jsonObject> dataUpd = JsonConvert.DeserializeObject<List<jsonObject>>(jsonUpd);
+
+                foreach (var vers in dataUpd)
+                {
+                    branchIds.Add(vers.brId);
+                }
+
+                int index = branchIds.FindIndex(x => x.StartsWith(Globals.branch));
+                Console.WriteLine($"[MainWindow] Found branch {Globals.branch} on index {index}");
+
+                if(index == -1)
+                {
+                    Console.WriteLine($"[MainWindow] Current branch is no longer supported!");
+                }
+                else
+                {
+                    Console.WriteLine($"[MainWindow] Success! Moving over to VerCheck.");
+                    Settings.checkForUpdates(Globals.branch);
+                }
+
+                //TODO: set selectedIndex
             }
-            if (File.Exists(Path.Combine(Globals.currentPath + "\\MCLauncherUpdaterDev.exe")))
-            {
-                File.Delete(Globals.currentPath + "\\MCLauncherUpdaterDev.exe");
-            }
-            checkForUpdates();
+            //Settings.checkForUpdates();
 
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, ".codexipsa"));
@@ -249,16 +278,6 @@ namespace MCLauncher
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the LaunchJava stuff
-            /*foreach (var vers in data)
-            {
-                LaunchJava.selectedVer = vers.gameVer;
-                LaunchJava.linkToJar = vers.linkVer;
-                LaunchJava.typeVer = vers.typeVer;
-                LaunchJava.proxyPort = vers.proxyVer;
-            }
-            LaunchJava.instanceName = Instance.comboBox1.Text;
-            Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.selectedVer;*/
-
             foreach (var vers in data)
             {
                 LaunchJava.launchVerName = vers.gameVer;

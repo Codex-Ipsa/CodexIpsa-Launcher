@@ -15,8 +15,18 @@ namespace MCLauncher
 {
     public partial class Settings : Form
     {
+        public static List<string> branchList = new List<string>();
+        public static List<string> branchIdList = new List<string>();
+        public static List<string> branchVerList = new List<string>();
+        public static List<string> branchUrlList = new List<string>();
+
+
         public static string updateCheckMode;
         public static Settings InstanceSetting;
+
+        public static int cfgBranchIndex;
+        public static string cfgLatestVer;
+        public static string cfgLatestUrl;
 
         public Settings()
         {
@@ -28,19 +38,20 @@ namespace MCLauncher
             checkForBranches();
         }
 
-        private void checkForBranches()
+        private void comboUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine($"[VerCheck] Loading updates list...");
+            cfgBranchIndex = comboUpdateSelect.FindStringExact(comboUpdateSelect.Text);
+            Console.WriteLine($"[BranchCheck] Index is {cfgBranchIndex}");
+            Console.WriteLine($"[BranchCheck] Selected branchId: {branchIdList[cfgBranchIndex]}");
+            Console.WriteLine($"[BranchCheck] Branch ver: {branchVerList[cfgBranchIndex]}");
+            Console.WriteLine($"[BranchCheck] Branch url: {branchUrlList[cfgBranchIndex]}");
+            cfgLatestVer = branchVerList[cfgBranchIndex];
+            cfgLatestUrl = branchUrlList[cfgBranchIndex];
+        }
 
-            int index;
-            string tempName;
-
-            List<string> brIdList = new List<string>();
-            List<string> brNameList = new List<string>();
-            List<string> brVersionList = new List<string>();
-            List<string> brUrlList = new List<string>();
-
-            List<string> brFinalList = new List<string>();
+        public static void checkForBranches()
+        {
+            Console.WriteLine($"[BranchCheck] Loading updates list...");
 
             using (WebClient client = new WebClient())
             {
@@ -49,88 +60,89 @@ namespace MCLauncher
 
                 foreach (var vers in data)
                 {
-                    brFinalList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
+                    branchList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
+                    branchIdList.Add(vers.brId);
+                    branchVerList.Add(vers.brVer);
+                    branchUrlList.Add(vers.brUrl);
                 }
-                index = comboUpdateSelect.FindStringExact(comboUpdateSelect.Text);
-                comboUpdateSelect.DataSource = brFinalList;
-                Console.WriteLine("index is " + index);
-                //comboUpdateSelect.SelectionStart = index;
+
+                InstanceSetting.comboUpdateSelect.DataSource = branchList;
+                cfgBranchIndex = InstanceSetting.comboUpdateSelect.FindStringExact(InstanceSetting.comboUpdateSelect.Text);
+                Console.WriteLine($"[BranchCheck] Index is {cfgBranchIndex}");
+                Console.WriteLine($"[BranchCheck] Selected branchId: {branchIdList[cfgBranchIndex]}");
+                Console.WriteLine($"[BranchCheck] Branch ver: {branchVerList[cfgBranchIndex]}");
+                Console.WriteLine($"[BranchCheck] Branch url: {branchUrlList[cfgBranchIndex]}");
+                cfgLatestVer = branchVerList[cfgBranchIndex];
+                cfgLatestUrl = branchUrlList[cfgBranchIndex];
+                //TODO: set selectedIndex
             }
         }
 
         private void applyBtn_Click(object sender, EventArgs e)
         {
-            //TODO: save
-            this.Close();
+            saveSettings();
         }
 
         private void btnUpdates_Click(object sender, EventArgs e)
         {
             updateCheckMode = "button";
-            checkForUpdates();
+            checkForUpdates(branchIdList[cfgBranchIndex]);
         }
 
-        public static void checkForUpdates()
+        public static void checkForUpdates(string targetBranch)
         {
-            if(updateCheckMode == "button")
+            Console.WriteLine($"[VerCheck] Checking for updates on branchId {targetBranch}.");
+
+            using (WebClient client = new WebClient())
             {
-                Console.WriteLine($"[VerCheck] Checking for updates (called by user).");
+                string json = client.DownloadString(Globals.updateInfo);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
-                int index;
-                string tempVer;
-
-                List<string> brIdList = new List<string>();
-                List<string> brNameList = new List<string>();
-                List<string> brVersionList = new List<string>();
-                List<string> brUrlList = new List<string>();
-
-                using (WebClient client = new WebClient())
+                foreach (var vers in data)
                 {
-                    string json = client.DownloadString(Globals.updateInfo);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        brIdList.Add(vers.brId);
-                        Console.WriteLine($"[VerCheck] Branch found: {vers.brId}");
-                        brNameList.Add(vers.brName);
-                        brVersionList.Add(vers.brVer);
-                        brUrlList.Add(vers.brUrl);
-                    }
-                    index = InstanceSetting.comboUpdateSelect.FindStringExact(InstanceSetting.comboUpdateSelect.Text);
-
-                    Console.WriteLine($"[VerCheck] Selected index: {index}");
-                    Console.WriteLine($"[VerCheck] Corresponding branch: {brIdList[index]}");
-                    Console.WriteLine($"[VerCheck] Corresponding name: {brNameList[index]}");
-                    Console.WriteLine($"[VerCheck] Corresponding version: {brVersionList[index]}");
-                    Console.WriteLine($"[VerCheck] Corresponding url: {brUrlList[index]}");
-
-                    if (Globals.verCurrent != brVersionList[2])
-                    {
-                        Console.WriteLine($"[VerCheck] NEW VERSION DETECTED!");
-                        Console.WriteLine($"[VerCheck] Corresponding url: {brUrlList[index]}");
-
-                        using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\updateTemp.cfg"))
-                        {
-                            byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"brId\":\"{brIdList[index]}\",\n\"brUrl\":\"{brUrlList[index]}\"\n}}\n]");
-
-                            fs.Write(config, 0, config.Length);
-                        }
-
-                        updateCheckMode = "null";
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[VerCheck] No new version detected.");
-                        updateCheckMode = "null";
-                    }
+                    branchList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
+                    branchIdList.Add(vers.brId);
+                    branchVerList.Add(vers.brVer);
+                    branchUrlList.Add(vers.brUrl);
                 }
-            }
-            else if (updateCheckMode == "startup")
-            {
-                Console.WriteLine($"[VerCheck] Checking for updates (called by startup).");
 
+                cfgBranchIndex = branchIdList.FindIndex(x => x.StartsWith(targetBranch));
+                Console.WriteLine($"[VerCheck] Index is {cfgBranchIndex}");
+                Console.WriteLine($"[VerCheck] Selected branchId: {branchIdList[cfgBranchIndex]}");
+                Console.WriteLine($"[VerCheck] Branch ver: {branchVerList[cfgBranchIndex]}");
+                Console.WriteLine($"[VerCheck] Branch url: {branchUrlList[cfgBranchIndex]}");
+                cfgLatestVer = branchVerList[cfgBranchIndex];
+                cfgLatestUrl = branchUrlList[cfgBranchIndex];
+                //TODO: set selectedIndex
             }
+
+            if (Globals.verCurrent != cfgLatestVer)
+            {
+                Console.WriteLine($"[VerCheck] New version found!");
+
+                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\update.cfg"))
+                {
+                    byte[] config = new UTF8Encoding(true).GetBytes($"{cfgLatestUrl}");
+
+                    fs.Write(config, 0, config.Length);
+                }
+
+                string temp = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\update.cfg");
+                Console.WriteLine($"[VerCheck] url from text is: {temp}");
+
+                Update upd = new Update();
+                upd.ShowDialog();
+            }
+            else
+            {
+                Console.WriteLine($"[VerCheck] Nope, no new version.");
+            }
+        }
+
+        public static void saveSettings()
+        {
+            //TODO: save
+            //foreach (var form in Application.OpenForms.OfType<Settings>().ToList())form.Close();
         }
     }
 }

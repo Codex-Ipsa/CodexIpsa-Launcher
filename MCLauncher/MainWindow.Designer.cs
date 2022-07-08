@@ -35,6 +35,7 @@ namespace MCLauncher
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,7 +52,6 @@ namespace MCLauncher
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,13 +65,15 @@ namespace MCLauncher
             this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
             this.panel3.Controls.Add(this.menuStrip1);
             this.panel3.Location = new System.Drawing.Point(-1, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(785, 26);
+            this.panel3.Size = new System.Drawing.Size(1047, 32);
             this.panel3.TabIndex = 0;
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
             this.profilesToolStripMenuItem,
@@ -81,7 +83,8 @@ namespace MCLauncher
             this.debugToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(785, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,14 +92,14 @@ namespace MCLauncher
             // 
             this.homeToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.homeToolStripMenuItem.Text = "Home";
             // 
             // profilesToolStripMenuItem
             // 
             this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
-            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
             this.profilesToolStripMenuItem.Text = "Profiles";
             this.profilesToolStripMenuItem.Visible = false;
             this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
@@ -105,16 +108,24 @@ namespace MCLauncher
             // 
             this.changeVersionToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.changeVersionToolStripMenuItem.Name = "changeVersionToolStripMenuItem";
-            this.changeVersionToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.changeVersionToolStripMenuItem.Size = new System.Drawing.Size(124, 24);
             this.changeVersionToolStripMenuItem.Text = "Change version";
             this.changeVersionToolStripMenuItem.Visible = false;
             this.changeVersionToolStripMenuItem.Click += new System.EventHandler(this.changeVersionToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -123,7 +134,7 @@ namespace MCLauncher
             this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.debugToolStripMenuItem.Text = "Debug";
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
@@ -134,27 +145,30 @@ namespace MCLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.Controls.Add(this.webBrowser1);
-            this.panel2.Location = new System.Drawing.Point(-1, 24);
+            this.panel2.Location = new System.Drawing.Point(-1, 30);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(785, 325);
+            this.panel2.Size = new System.Drawing.Size(1047, 400);
             this.panel2.TabIndex = 1;
             // 
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(27, 25);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(785, 325);
+            this.webBrowser1.Size = new System.Drawing.Size(1047, 400);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
             // 
             // btnPlay
             // 
             this.btnPlay.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnPlay.Location = new System.Drawing.Point(348, 26);
+            this.btnPlay.Location = new System.Drawing.Point(464, 32);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(75, 23);
+            this.btnPlay.Size = new System.Drawing.Size(100, 28);
             this.btnPlay.TabIndex = 3;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -163,10 +177,11 @@ namespace MCLauncher
             // usernameTextBox
             // 
             this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.usernameTextBox.Location = new System.Drawing.Point(191, 31);
+            this.usernameTextBox.Location = new System.Drawing.Point(255, 38);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.usernameTextBox.MaxLength = 16;
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.usernameTextBox.Size = new System.Drawing.Size(132, 22);
             this.usernameTextBox.TabIndex = 5;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.usernameTextBox_TextChanged);
             // 
@@ -187,16 +202,18 @@ namespace MCLauncher
             this.panel1.Controls.Add(this.usernameTextBox);
             this.panel1.Controls.Add(this.usernameLabel);
             this.panel1.Controls.Add(this.btnPlay);
-            this.panel1.Location = new System.Drawing.Point(-1, 340);
+            this.panel1.Location = new System.Drawing.Point(-1, 418);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(785, 75);
+            this.panel1.Size = new System.Drawing.Size(1047, 92);
             this.panel1.TabIndex = 0;
             // 
             // editInstBtn
             // 
-            this.editInstBtn.Location = new System.Drawing.Point(87, 49);
+            this.editInstBtn.Location = new System.Drawing.Point(116, 60);
+            this.editInstBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editInstBtn.Name = "editInstBtn";
-            this.editInstBtn.Size = new System.Drawing.Size(68, 21);
+            this.editInstBtn.Size = new System.Drawing.Size(91, 26);
             this.editInstBtn.TabIndex = 16;
             this.editInstBtn.Text = "Edit profile";
             this.editInstBtn.UseVisualStyleBackColor = true;
@@ -204,9 +221,10 @@ namespace MCLauncher
             // 
             // newInstBtn
             // 
-            this.newInstBtn.Location = new System.Drawing.Point(13, 49);
+            this.newInstBtn.Location = new System.Drawing.Point(17, 60);
+            this.newInstBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.newInstBtn.Name = "newInstBtn";
-            this.newInstBtn.Size = new System.Drawing.Size(68, 21);
+            this.newInstBtn.Size = new System.Drawing.Size(91, 26);
             this.newInstBtn.TabIndex = 15;
             this.newInstBtn.Text = "New profile";
             this.newInstBtn.UseVisualStyleBackColor = true;
@@ -217,9 +235,10 @@ namespace MCLauncher
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(10, 12);
+            this.label2.Location = new System.Drawing.Point(13, 15);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.Size = new System.Drawing.Size(94, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "Select profile:";
             // 
@@ -227,9 +246,10 @@ namespace MCLauncher
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 26);
+            this.comboBox1.Location = new System.Drawing.Point(17, 32);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(142, 21);
+            this.comboBox1.Size = new System.Drawing.Size(188, 24);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
@@ -237,9 +257,10 @@ namespace MCLauncher
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Location = new System.Drawing.Point(620, 47);
+            this.button1.Location = new System.Drawing.Point(827, 58);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 13;
             this.button1.Text = "Accounts";
             this.button1.UseVisualStyleBackColor = true;
@@ -249,9 +270,10 @@ namespace MCLauncher
             this.gameVerLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.gameVerLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameVerLabel.ForeColor = System.Drawing.Color.White;
-            this.gameVerLabel.Location = new System.Drawing.Point(541, 31);
+            this.gameVerLabel.Location = new System.Drawing.Point(721, 38);
+            this.gameVerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameVerLabel.Name = "gameVerLabel";
-            this.gameVerLabel.Size = new System.Drawing.Size(238, 13);
+            this.gameVerLabel.Size = new System.Drawing.Size(317, 16);
             this.gameVerLabel.TabIndex = 12;
             this.gameVerLabel.Text = "Ready to play Minecraft GameVer";
             this.gameVerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -261,9 +283,10 @@ namespace MCLauncher
             this.playerNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.playerNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.playerNameLabel.ForeColor = System.Drawing.Color.White;
-            this.playerNameLabel.Location = new System.Drawing.Point(538, 15);
+            this.playerNameLabel.Location = new System.Drawing.Point(717, 18);
+            this.playerNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.playerNameLabel.Name = "playerNameLabel";
-            this.playerNameLabel.Size = new System.Drawing.Size(241, 13);
+            this.playerNameLabel.Size = new System.Drawing.Size(321, 16);
             this.playerNameLabel.TabIndex = 11;
             this.playerNameLabel.Text = "Welcome, PlayerName";
             this.playerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -274,9 +297,10 @@ namespace MCLauncher
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(188, 15);
+            this.label1.Location = new System.Drawing.Point(251, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.Size = new System.Drawing.Size(128, 17);
             this.label1.TabIndex = 10;
             this.label1.Text = "Change username:";
             // 
@@ -286,32 +310,26 @@ namespace MCLauncher
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
             this.usernameLabel.ForeColor = System.Drawing.Color.White;
-            this.usernameLabel.Location = new System.Drawing.Point(345, 51);
+            this.usernameLabel.Location = new System.Drawing.Point(460, 63);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(61, 13);
+            this.usernameLabel.Size = new System.Drawing.Size(81, 17);
             this.usernameLabel.TabIndex = 4;
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
             // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 413);
+            this.ClientSize = new System.Drawing.Size(1045, 508);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 452);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(1061, 545);
             this.Name = "MainWindow";
             this.Text = "Launcher";
             this.Load += new System.EventHandler(this.MainWindow_Load);

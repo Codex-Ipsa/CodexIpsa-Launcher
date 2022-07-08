@@ -38,9 +38,10 @@ namespace MCLauncher
             // 
             // cancelBtn
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(111, 51);
+            this.cancelBtn.Location = new System.Drawing.Point(148, 63);
+            this.cancelBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.cancelBtn.Size = new System.Drawing.Size(100, 28);
             this.cancelBtn.TabIndex = 0;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
@@ -48,9 +49,10 @@ namespace MCLauncher
             // 
             // updateBtn
             // 
-            this.updateBtn.Location = new System.Drawing.Point(12, 51);
+            this.updateBtn.Location = new System.Drawing.Point(16, 63);
+            this.updateBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(75, 23);
+            this.updateBtn.Size = new System.Drawing.Size(100, 28);
             this.updateBtn.TabIndex = 1;
             this.updateBtn.Text = "Ok";
             this.updateBtn.UseVisualStyleBackColor = true;
@@ -61,9 +63,10 @@ namespace MCLauncher
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.Size = new System.Drawing.Size(191, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "There is an update available!";
             // 
@@ -72,23 +75,25 @@ namespace MCLauncher
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 22);
+            this.label2.Location = new System.Drawing.Point(16, 27);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 13);
+            this.label2.Size = new System.Drawing.Size(138, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Wish to download it?";
             // 
             // Update
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(198, 86);
+            this.ClientSize = new System.Drawing.Size(264, 106);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.cancelBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Update";
             this.Text = "Update";
             this.ResumeLayout(false);

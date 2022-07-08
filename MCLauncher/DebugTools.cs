@@ -17,7 +17,7 @@ namespace MCLauncher
     public partial class DebugTools : Form
     {
         public static bool cstJava = false;
-        public static string newPath = $"{Globals.currentPath}\\bin\\java\\bin\\java.exe";
+        public static string newPath = $"{Globals.currentPath}\\.codexipsa\\java\\bin\\java.exe";
         public static string dlLink;
         public static string dlVer;
 
@@ -27,18 +27,18 @@ namespace MCLauncher
             if(cstJava == false)
             {
                 checkBox1.Checked = false;
-                LaunchJava.javaLocation = "java.exe";
+                LaunchJava.launchJavaLocation = "java.exe";
             }
             else
             {
                 checkBox1.Checked = true;
-                LaunchJava.javaLocation = newPath;
+                LaunchJava.launchJavaLocation = newPath;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\java");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\java");
 
             using (var client = new WebClient())
             {
@@ -52,9 +52,9 @@ namespace MCLauncher
                 }
             }
 
-            if (!File.Exists($"{Globals.currentPath}\\bin\\java\\ver.txt"))
+            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\java\\ver.txt"))
             {
-                using (StreamWriter writer = new StreamWriter($"{Globals.currentPath}\\bin\\java\\ver.txt"))
+                using (StreamWriter writer = new StreamWriter($"{Globals.currentPath}\\.codexipsa\\java\\ver.txt"))
                 {
                     writer.Write(dlVer);
                 }
@@ -62,13 +62,13 @@ namespace MCLauncher
                 using (var client = new WebClient())
                 {
                     DownloadProgress.url = dlLink;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\bin\\java\\java.zip";
+                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\java\\java.zip";
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();
                 }
 
-                ZipFile.ExtractToDirectory($"{Globals.currentPath}\\bin\\java\\java.zip", $"{Globals.currentPath}\\bin\\java");
-                File.Delete($"{Globals.currentPath}\\bin\\java\\java.zip");
+                ZipFile.ExtractToDirectory($"{Globals.currentPath}\\.codexipsa\\java\\java.zip", $"{Globals.currentPath}\\.codexipsa\\java");
+                File.Delete($"{Globals.currentPath}\\.codexipsa\\java\\java.zip");
             }
             else
             {
@@ -82,12 +82,12 @@ namespace MCLauncher
             if (checkBox1.Checked == false)
             {
                 cstJava = false;
-                LaunchJava.javaLocation = "java.exe";
+                LaunchJava.launchJavaLocation = "java.exe";
             }
             else
             {
                 cstJava = true;
-                LaunchJava.javaLocation = newPath;
+                LaunchJava.launchJavaLocation = newPath;
             }
         }
     }

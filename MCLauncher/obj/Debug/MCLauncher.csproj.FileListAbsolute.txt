@@ -66,7 +66,6 @@ C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLaunc
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Settings.resources
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Update.resources
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.VerSelect.resources
-C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.Warning.resources
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.GenerateResource.cache
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CoreCompileInputs.cache
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.CopyComplete
@@ -75,3 +74,5 @@ C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLaunc
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.JavaCheck.resources
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DebugTools.resources
 D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.SuggestedBindingRedirects.cache
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DebugTools.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.JavaCheck.resources

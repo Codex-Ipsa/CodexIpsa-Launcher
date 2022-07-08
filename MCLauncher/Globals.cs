@@ -12,8 +12,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.0.7-dev";
         public static string branch = "0.0.7-rewrite";
-        public static string verCurrent = "0.0.6-dev_8-pre";
-        public static string verDisplay = "0.0.7-rewrite (b2)"; //0.0.6 (Dev 7 WIP)
+        public static string verCurrent = "0.0.7.3_1";
+        public static string verDisplay = "0.0.7-rewrite (b3_1)"; //0.0.6 (Dev 7 WIP)
         public static bool isDev = true; //MAKE SURE IT'S FALSE ON RELEASE
         public static bool offlineMode = false;
 
@@ -26,9 +26,8 @@ namespace MCLauncher
         public static string verCheck = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest.txt";
         public static string verCheckDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-dev.txt";
         public static string javaLibs = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libs.zip";
-        public static string updaterRel = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdater.exe";
-        public static string updaterDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/MCLauncherUpdaterDev.exe";
-        public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-version.json";
+        public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater.exe";
+        public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/version/list.json";
 
         public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
         public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
