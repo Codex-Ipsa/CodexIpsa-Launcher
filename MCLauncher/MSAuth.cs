@@ -158,18 +158,18 @@ namespace MCLauncher
                 {
                     xstsToken = vers.Token;
                     Console.WriteLine($"[MSAuth] xstsToken: {xstsToken}");
-                    XError = vers.XErr;
-                    Console.WriteLine($"[MSAuth] xError: {XError}");
+                    /*XError = vers.XErr;
+                    Console.WriteLine($"[MSAuth] xError: {XError}");*/
                 }
 
-                if (XError != String.Empty)
+                /*if (XError != String.Empty)
                 {
                     Console.WriteLine($"[MSAuth] xError occured! Error code: {XError}.");
                 }
                 else
                 {
                     Console.WriteLine($"[MSAuth] No xError found.");
-                }
+                }*/
             }
             catch (WebException e)
             {
