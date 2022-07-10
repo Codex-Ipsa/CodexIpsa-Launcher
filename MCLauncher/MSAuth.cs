@@ -25,6 +25,11 @@ namespace MCLauncher
         public string userHash;
         public string XError;
         public string xstsToken;
+        public string mcAccessToken;
+        public string playerUUID;
+        public string playerName;
+        public string refreshToken;
+
 
         public MSAuth()
         {
@@ -84,7 +89,11 @@ namespace MCLauncher
             {
                 accessToken = vers.access_token;
                 Console.WriteLine($"[MSAuth] accessToken: {accessToken}");
+                refreshToken = vers.refresh_token;
+                Console.WriteLine($"[MSAuth] refreshToken: {refreshToken}");
             }
+
+            voidRefreshToken();
 
             //Auth with XBL
             var xblRequest = (HttpWebRequest)WebRequest.Create("https://user.auth.xboxlive.com/user/authenticate");
@@ -153,13 +162,13 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] XSTS Response: {xstsResponseString}");
                 }
 
-                List<xstsObject> xstsTokenData = JsonConvert.DeserializeObject<List<xstsObject>>($"[{xstsResponseString}]");
+                List<jsonObject> xstsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{xstsResponseString}]");
                 foreach (var vers in xstsTokenData)
                 {
                     xstsToken = vers.Token;
                     Console.WriteLine($"[MSAuth] xstsToken: {xstsToken}");
-                    /*XError = vers.XErr;
-                    Console.WriteLine($"[MSAuth] xError: {XError}");*/
+                    XError = vers.XErr;
+                    Console.WriteLine($"[MSAuth] xError: {XError}");
                 }
 
                 /*if (XError != String.Empty)
@@ -170,6 +179,87 @@ namespace MCLauncher
                 {
                     Console.WriteLine($"[MSAuth] No xError found.");
                 }*/
+
+                //Minecraft authentication
+                var mcRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/authentication/login_with_xbox");
+                mcRequest.ContentType = "application/json";
+                mcRequest.Accept = "application/json";
+                mcRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(mcRequest.GetRequestStream()))
+                {
+                    string json = $"{{\"identityToken\": \"XBL3.0 x={userHash};{xstsToken}\"}}";
+
+                    streamWriter.Write(json);
+                    Console.WriteLine($"[MSAuth] MC Request: {json}");
+                }
+                var mcResponse = (HttpWebResponse)mcRequest.GetResponse();
+                var mcResponseString = "";
+                using (var streamReader = new StreamReader(mcResponse.GetResponseStream()))
+                {
+                    mcResponseString = streamReader.ReadToEnd();
+                    Console.WriteLine($"[MSAuth] MC Response: {mcResponseString}");
+                }
+
+                List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
+                foreach (var vers in mcTokenData)
+                {
+                    mcAccessToken = vers.access_token;
+                    Console.WriteLine($"[MSAuth] mcAccessToken: {mcAccessToken}");
+                }
+
+                //Verify game ownership
+                var ownRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/entitlements/mcstore");
+                ownRequest.ContentType = "application/json";
+                ownRequest.Accept = "application/json";
+                ownRequest.Method = "GET";
+                ownRequest.PreAuthenticate = true;
+                ownRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
+
+                var ownResponse = (HttpWebResponse)ownRequest.GetResponse();
+                var ownResponseString = "";
+                using (var streamReader = new StreamReader(ownResponse.GetResponseStream()))
+                {
+                    ownResponseString = streamReader.ReadToEnd();
+                    Console.WriteLine($"[MSAuth] Own Response: {ownResponseString}");
+                }
+
+                //TODO: VERIFY THE USER ACTALLY OWNS THE ACCOUNT
+
+
+
+
+
+                //Get profile info
+                var profileRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/minecraft/profile");
+                profileRequest.ContentType = "application/json";
+                profileRequest.Accept = "application/json";
+                profileRequest.Method = "GET";
+                profileRequest.PreAuthenticate = true;
+                profileRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
+
+                var profileResponse = (HttpWebResponse)profileRequest.GetResponse();
+                var profileResponseString = "";
+                using (var streamReader = new StreamReader(profileResponse.GetResponseStream()))
+                {
+                    profileResponseString = streamReader.ReadToEnd();
+                    Console.WriteLine($"[MSAuth] Profile Response: {profileResponseString}");
+                }
+
+                List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
+                foreach (var vers in mcProfileData)
+                {
+                    playerName = vers.name;
+                    Console.WriteLine($"[MSAuth] Player name: {playerName}");
+                    playerUUID = vers.id;
+                    Console.WriteLine($"[MSAuth] Player UUID: {playerUUID}");
+                }
+
+                //TODO: Only do the following if the player succesfully verifies
+                LaunchJava.launchPlayerName = playerName;
+                LaunchJava.launchPlayerUUID = playerUUID;
+                LaunchJava.launchPlayerAccessToken = accessToken;
+                
             }
             catch (WebException e)
             {
@@ -179,6 +269,11 @@ namespace MCLauncher
 
             /*Console.WriteLine($"[MSAuth] Seems like there was an error in getting your Xbox account data.");
             Console.WriteLine($"[MSAuth] XError code: {XError}.");*/
+
+        }
+
+        public static void voidRefreshToken()
+        {
 
         }
     }

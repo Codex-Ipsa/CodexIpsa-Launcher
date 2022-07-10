@@ -61,6 +61,8 @@ namespace MCLauncher
         public static string launchLibsPath;
         public static string launchClasspath;
         public static string launchPlayerName;
+        public static string launchPlayerUUID;
+        public static string launchPlayerAccessToken;
         public static string launchCmdAddon;
 
         public static string gameDir;
@@ -162,22 +164,21 @@ namespace MCLauncher
             //-Dserver=164.68.108.64 -Dport=5565
             //join://46.69.208.198:25565/use/classic_6/c0.0.22a_05
             //-Dserver=46.69.208.198 -Dport=25565
-            launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
+            launchCommand += $" -Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
             if (launchCmdAddon != string.Empty)
             {
                 //This needs a better system
                 var launchCmdAddon1 = launchCmdAddon.Replace("{gameDir}", $"{gameDir}");
                 var launchCmdAddon2 = launchCmdAddon1.Replace("{assetDir}", $"{assetDir}");
                 var launchCmdAddon3 = launchCmdAddon2.Replace("{playerName}", $"{launchPlayerName}");
-                var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"test");
+                var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}");
                 var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
                 var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
 
-                launchCommand += $" {launchCmdAddon6}";
+                launchCommand += $" {launchCmdAddon6}"; //sessionid=token:{launchPlayerAccessToken}:{launchPlayerUUID}
             }
             Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
             Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");
-
 
             //Check if Java exists
             try

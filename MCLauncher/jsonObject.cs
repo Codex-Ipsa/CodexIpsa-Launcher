@@ -49,20 +49,17 @@ namespace MCLauncher
         public string brUrl { get; set; }
 
         //MSAuth
+        public string refresh_token { get; set; }
         public string access_token { get; set; }
         public string Token { get; set; }
         public string uhs { get; set; }
-    }
-
-    public class xstsObject
-    {
-        public string Token { get; set; }
         public string XErr { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
     }
 
     public class RootObject
     {
         public List<jsonObject> jsonObjects { get; set; }
-        public List<xstsObject> xstsObjects { get; set; }
     }
 }
