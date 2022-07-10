@@ -67,7 +67,6 @@ namespace MCLauncher
 
                 //TODO: set selectedIndex
             }
-            //Settings.checkForUpdates();
 
             //Create directories
             Directory.CreateDirectory(Path.Combine(Globals.currentPath, ".codexipsa"));
@@ -84,6 +83,12 @@ namespace MCLauncher
                     fs.Write(config, 0, config.Length);
                 }
             }*/
+
+            //Temporary calling MSAuth
+            Console.WriteLine($"[MainWindow Debug] Calling MSAuth");
+            MSAuth auth = new MSAuth();
+            auth.ShowDialog();
+
             if(!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
                 InstanceManager.mode = "initial";

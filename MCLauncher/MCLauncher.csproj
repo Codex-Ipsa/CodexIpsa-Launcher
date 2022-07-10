@@ -129,7 +129,12 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MSAuth.cs" />
+    <Compile Include="MSAuth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSAuth.Designer.cs">
+      <DependentUpon>MSAuth.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSAuth.resx">
+      <DependentUpon>MSAuth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewUI.resx">
       <DependentUpon>NewUI.cs</DependentUpon>
