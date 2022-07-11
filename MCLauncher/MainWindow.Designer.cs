@@ -52,6 +52,7 @@ namespace MCLauncher
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
+            this.logoutBtn = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -190,6 +191,7 @@ namespace MCLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.logoutBtn);
             this.panel1.Controls.Add(this.editInstBtn);
             this.panel1.Controls.Add(this.newInstBtn);
             this.panel1.Controls.Add(this.label2);
@@ -318,6 +320,17 @@ namespace MCLauncher
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
             // 
+            // logoutBtn
+            // 
+            this.logoutBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.logoutBtn.Location = new System.Drawing.Point(933, 59);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(100, 28);
+            this.logoutBtn.TabIndex = 17;
+            this.logoutBtn.Text = "Log out";
+            this.logoutBtn.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -367,6 +380,7 @@ namespace MCLauncher
         private System.Windows.Forms.Button newInstBtn;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.Button logoutBtn;
     }
 }
 

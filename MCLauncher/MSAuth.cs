@@ -67,7 +67,7 @@ namespace MCLauncher
 
             getToken();
 
-            voidRefreshToken();
+            //voidRefreshToken();
 
             xblAuth();
 
@@ -263,12 +263,12 @@ namespace MCLauncher
                 Console.WriteLine($"[MSAuth] Own Response: {ownResponseString}");
             }
 
-            //TODO: VERIFY THE USER ACTALLY OWNS THE ACCOUNT
+            //TODO: VERIFY THE USER ACTALLY OWNS THE GAME
         }
 
-        public static void voidRefreshToken()
+        public static void voidRefreshToken(string mcAccessToken, string mcRefreshToken)
         {
-
+            //TODO
         }
 
         public static void getProfileInfo()
@@ -301,9 +301,7 @@ namespace MCLauncher
 
         public static void getMpPass()
         {
-            //TODO: get mppass https://github.com/Moresteck/BetaCraft-Launcher-Java/blob/master/src/main/java/org/betacraft/Wrapper.java
-
-
+            //Notify the mojang session servers
             var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
             mojpassRequest.ContentType = "application/json";
             mojpassRequest.Accept = "application/json";
@@ -324,22 +322,30 @@ namespace MCLauncher
                 mojpassResponseString = streamReader.ReadToEnd();
                 Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
             }
+            Console.WriteLine($"[MSAuth] Mojpass code: {mojpassResponse.StatusCode}");
 
+            if(mojpassResponse.StatusCode == HttpStatusCode.NoContent)
+            {
+                Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
 
-            //TODO: CHECK IF 204
+                //Get the actual Mppass
+                var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server=142.44.247.4:25565");
 
+                mppassRequest.Method = "POST";
+                mppassRequest.ContentType = "application/x-www-form-urlencoded";
 
+                Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
+                var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
+                var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
+                Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
+                mpPass = mppassResponseString;
 
-            var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server=142.44.247.4:25565");
-
-            mppassRequest.Method = "POST";
-            mppassRequest.ContentType = "application/x-www-form-urlencoded";
-
-            Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
-            var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
-            var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-            Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
-            mpPass = mppassResponseString;
+            }
+            else
+            {
+                Console.WriteLine($"[MSAuth] Auth failed! Mojpass status: {mojpassResponse.StatusCode}");
+                mpPass = "-";
+            }
         }
     }
 }

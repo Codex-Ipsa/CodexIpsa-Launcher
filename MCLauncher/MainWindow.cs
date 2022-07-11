@@ -31,6 +31,10 @@ namespace MCLauncher
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
             webBrowser1.Refresh();
             Console.WriteLine($"[MainWindow] Browser URL set");
+
+            //Authentication
+            checkAuth();
+
             playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
 
             //Delete updater if it exists for some reason
@@ -272,6 +276,22 @@ namespace MCLauncher
             Console.WriteLine($"[MainWindow] Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
+        }
+
+        public static void checkAuth()
+        {
+            if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
+            {
+                Console.WriteLine($"[MainWindow] User is not logged in");
+                Instance.logoutBtn.Visible = false;
+                Instance.loginBtn.Visible = true;
+            }
+            else
+            {
+                Console.WriteLine($"[MainWindow] User is logged in, re-checking everything");
+                Instance.logoutBtn.Visible = true;
+                Instance.loginBtn.Visible = false;
+            }
         }
     }
 }
