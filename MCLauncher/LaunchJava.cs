@@ -134,7 +134,7 @@ namespace MCLauncher
             Console.WriteLine($"[LaunchJava] GameDir: {gameDir}");
             assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO, customise
             Console.WriteLine($"[LaunchJava] AssetsDir: {assetDir}");
-            launchPlayerName = Properties.Settings.Default.playerName;
+            /*launchPlayerName = Properties.Settings.Default.playerName;*/
             Console.WriteLine($"[LaunchJava] Player name: {launchPlayerName}");
 
             //Download client

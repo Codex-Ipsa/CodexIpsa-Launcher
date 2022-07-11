@@ -255,6 +255,24 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] Player UUID: {playerUUID}");
                 }
 
+                //TODO: get mppass https://github.com/Moresteck/BetaCraft-Launcher-Java/blob/master/src/main/java/org/betacraft/Wrapper.java
+                var mppassRequest = (HttpWebRequest)WebRequest.Create("http://api.betacraft.uk/getmppass.jsp?");
+                var mppassPostData = "user=" + Uri.EscapeDataString(playerName);
+                mppassPostData += "&server=" + Uri.EscapeDataString("46.69.208.198:25565");
+                
+                var mppassData = Encoding.ASCII.GetBytes(mppassPostData);
+                mppassRequest.Method = "POST";
+                mppassRequest.ContentType = "application/x-www-form-urlencoded";
+                mppassRequest.ContentLength = mppassData.Length;
+                using (var stream = mppassRequest.GetRequestStream())
+                {
+                    stream.Write(mppassData, 0, mppassData.Length);
+                }
+                var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
+                var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
+                Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
+
+
                 //TODO: Only do the following if the player succesfully verifies
                 LaunchJava.launchPlayerName = playerName;
                 LaunchJava.launchPlayerUUID = playerUUID;

@@ -84,11 +84,6 @@ namespace MCLauncher
                 }
             }*/
 
-            //Temporary calling MSAuth
-            Console.WriteLine($"[MainWindow Debug] Calling MSAuth");
-            MSAuth auth = new MSAuth();
-            auth.ShowDialog();
-
             if(!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
                 InstanceManager.mode = "initial";
@@ -269,6 +264,14 @@ namespace MCLauncher
         {
             Settings stg = new Settings();
             stg.ShowDialog();
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            //Calling MSAuth
+            Console.WriteLine($"[MainWindow] Calling MSAuth");
+            MSAuth auth = new MSAuth();
+            auth.ShowDialog();
         }
     }
 }
