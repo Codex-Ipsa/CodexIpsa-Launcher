@@ -13,6 +13,7 @@ namespace MCLauncher
     public partial class MainWindow : Form
     {
         public static MainWindow Instance;
+        public static string msPlayerName;
 
         public MainWindow()
         {
@@ -23,19 +24,18 @@ namespace MCLauncher
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            //Set required things
-            Console.WriteLine($"[MainWindow] MineC#raft Launcher has started!");
+            //Set the window name
+            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"MineC#raft Launcher has started!");
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
-            Console.WriteLine($"[MainWindow] Version {Globals.verDisplay}, Branch {Globals.codebase}");
+            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
-            webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute); //changelog URL
+            //Changelog url
+            webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
-            Console.WriteLine($"[MainWindow] Browser URL set");
+            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"Changelog URL loaded");
 
-            //Authentication
+            //Check if user is logged in
             checkAuth();
-
-            playerNameLabel.Text = "Welcome, " + Properties.Settings.Default.playerName; //username
 
             //Delete updater if it exists for some reason
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
@@ -276,6 +276,30 @@ namespace MCLauncher
             Console.WriteLine($"[MainWindow] Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
+
+            if(MSAuth.hasErrored == true)
+            {
+                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MainWindow]", $"MSAuth returned hasErrored. Please try again.");
+                MSAuth.hasErrored = false;
+            }
+            else
+            {
+                Instance.logoutBtn.Visible = true;
+                Instance.loginBtn.Visible = false;
+                Instance.playerNameLabel.Text = $"Welcome, {msPlayerName}";
+            }
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine($"[MainWindow] Logging out");
+            LaunchJava.launchPlayerName = "Guest";
+            LaunchJava.launchPlayerUUID = "null";
+            LaunchJava.launchPlayerAccessToken = "null";
+            LaunchJava.launchMpPass = "null";
+            Properties.Settings.Default.msRefreshToken = String.Empty;
+            Properties.Settings.Default.Save();
+            checkAuth();
         }
 
         public static void checkAuth()
@@ -285,12 +309,30 @@ namespace MCLauncher
                 Console.WriteLine($"[MainWindow] User is not logged in");
                 Instance.logoutBtn.Visible = false;
                 Instance.loginBtn.Visible = true;
+                Instance.playerNameLabel.Text = "Welcome, Guest. [O]";
+                LaunchJava.launchPlayerName = "Guest";
+                LaunchJava.launchPlayerUUID = "null";
+                LaunchJava.launchPlayerAccessToken = "null";
+                LaunchJava.launchMpPass = "null";
             }
             else
             {
                 Console.WriteLine($"[MainWindow] User is logged in, re-checking everything");
-                Instance.logoutBtn.Visible = true;
-                Instance.loginBtn.Visible = false;
+                MSAuth.usernameFromRefreshToken();
+                if(MSAuth.hasErrored == true)
+                {
+                    Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MainWindow]", $"MSAuth returned hasErrored. Please re-log in.");
+                    MSAuth.hasErrored = false;
+                    Properties.Settings.Default.msRefreshToken = String.Empty;
+                    Properties.Settings.Default.Save();
+                    checkAuth();
+                }
+                else
+                {
+                    Instance.logoutBtn.Visible = true;
+                    Instance.loginBtn.Visible = false;
+                    Instance.playerNameLabel.Text = $"Welcome, {msPlayerName}";
+                }
             }
         }
     }

@@ -330,6 +330,7 @@ namespace MCLauncher
             this.logoutBtn.TabIndex = 17;
             this.logoutBtn.Text = "Log out";
             this.logoutBtn.UseVisualStyleBackColor = true;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // MainWindow
             // 
