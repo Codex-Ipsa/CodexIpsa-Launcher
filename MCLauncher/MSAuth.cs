@@ -18,17 +18,18 @@ namespace MCLauncher
 {
     public partial class MSAuth : Form
     {
-        public string browserAddress;
-        public string authCode;
-        public string accessToken;
-        public string xblToken;
-        public string userHash;
-        public string XError;
-        public string xstsToken;
-        public string mcAccessToken;
-        public string playerUUID;
-        public string playerName;
-        public string refreshToken;
+        public static string browserAddress;
+        public static string authCode;
+        public static string accessToken;
+        public static string xblToken;
+        public static string userHash;
+        public static string XError;
+        public static string xstsToken;
+        public static string mcAccessToken;
+        public static string playerUUID;
+        public static string playerName;
+        public static string refreshToken;
+        public static string mpPass;
 
 
         public MSAuth()
@@ -64,6 +65,38 @@ namespace MCLauncher
 
             Console.WriteLine($"[MSAuth] AuthCode: {authCode}");
 
+            getToken();
+
+            voidRefreshToken();
+
+            xblAuth();
+
+            xstsAuth();
+
+            minecraftAuth();
+
+            verifyOwnership();
+
+            //todo: only do if player owns the game
+            getProfileInfo();
+
+            //todo: move to javalaunch?
+            getMpPass();
+
+            //TODO: Only do the following if the player succesfully verifies
+            LaunchJava.launchPlayerName = playerName;
+            LaunchJava.launchPlayerUUID = playerUUID;
+            LaunchJava.launchPlayerAccessToken = mcAccessToken;
+            LaunchJava.launchMpPass = mpPass;
+
+
+            /*Console.WriteLine($"[MSAuth] Seems like there was an error in getting your Xbox account data.");
+            Console.WriteLine($"[MSAuth] XError code: {XError}.");*/
+
+        }
+
+        public static void getToken()
+        {
             //Get authToken using authCode
             var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.live.com/oauth20_token.srf");
             var tokenPostData = "client_id=" + Uri.EscapeDataString("2313c7c4-a66c-44c4-9683-0bde2bb69c79");
@@ -92,9 +125,10 @@ namespace MCLauncher
                 refreshToken = vers.refresh_token;
                 Console.WriteLine($"[MSAuth] refreshToken: {refreshToken}");
             }
+        }
 
-            voidRefreshToken();
-
+        public static void xblAuth()
+        {
             //Auth with XBL
             var xblRequest = (HttpWebRequest)WebRequest.Create("https://user.auth.xboxlive.com/user/authenticate");
             xblRequest.ContentType = "application/json";
@@ -136,8 +170,10 @@ namespace MCLauncher
                 userHash = vers.uhs;
                 Console.WriteLine($"[MSAuth] userHash: {userHash}");
             }
+        }
 
-
+        public static void xstsAuth()
+        {
             //Authenticate with XSTS
             var xstsRequest = (HttpWebRequest)WebRequest.Create("https://xsts.auth.xboxlive.com/xsts/authorize");
             xstsRequest.ContentType = "application/json";
@@ -171,128 +207,139 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] xError: {XError}");
                 }
 
-                /*if (XError != String.Empty)
-                {
-                    Console.WriteLine($"[MSAuth] xError occured! Error code: {XError}.");
-                }
-                else
-                {
-                    Console.WriteLine($"[MSAuth] No xError found.");
-                }*/
-
-                //Minecraft authentication
-                var mcRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/authentication/login_with_xbox");
-                mcRequest.ContentType = "application/json";
-                mcRequest.Accept = "application/json";
-                mcRequest.Method = "POST";
-
-                using (var streamWriter = new StreamWriter(mcRequest.GetRequestStream()))
-                {
-                    string json = $"{{\"identityToken\": \"XBL3.0 x={userHash};{xstsToken}\"}}";
-
-                    streamWriter.Write(json);
-                    Console.WriteLine($"[MSAuth] MC Request: {json}");
-                }
-                var mcResponse = (HttpWebResponse)mcRequest.GetResponse();
-                var mcResponseString = "";
-                using (var streamReader = new StreamReader(mcResponse.GetResponseStream()))
-                {
-                    mcResponseString = streamReader.ReadToEnd();
-                    Console.WriteLine($"[MSAuth] MC Response: {mcResponseString}");
-                }
-
-                List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
-                foreach (var vers in mcTokenData)
-                {
-                    mcAccessToken = vers.access_token;
-                    Console.WriteLine($"[MSAuth] mcAccessToken: {mcAccessToken}");
-                }
-
-                //Verify game ownership
-                var ownRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/entitlements/mcstore");
-                ownRequest.ContentType = "application/json";
-                ownRequest.Accept = "application/json";
-                ownRequest.Method = "GET";
-                ownRequest.PreAuthenticate = true;
-                ownRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
-
-                var ownResponse = (HttpWebResponse)ownRequest.GetResponse();
-                var ownResponseString = "";
-                using (var streamReader = new StreamReader(ownResponse.GetResponseStream()))
-                {
-                    ownResponseString = streamReader.ReadToEnd();
-                    Console.WriteLine($"[MSAuth] Own Response: {ownResponseString}");
-                }
-
-                //TODO: VERIFY THE USER ACTALLY OWNS THE ACCOUNT
-
-
-
-
-
-                //Get profile info
-                var profileRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/minecraft/profile");
-                profileRequest.ContentType = "application/json";
-                profileRequest.Accept = "application/json";
-                profileRequest.Method = "GET";
-                profileRequest.PreAuthenticate = true;
-                profileRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
-
-                var profileResponse = (HttpWebResponse)profileRequest.GetResponse();
-                var profileResponseString = "";
-                using (var streamReader = new StreamReader(profileResponse.GetResponseStream()))
-                {
-                    profileResponseString = streamReader.ReadToEnd();
-                    Console.WriteLine($"[MSAuth] Profile Response: {profileResponseString}");
-                }
-
-                List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
-                foreach (var vers in mcProfileData)
-                {
-                    playerName = vers.name;
-                    Console.WriteLine($"[MSAuth] Player name: {playerName}");
-                    playerUUID = vers.id;
-                    Console.WriteLine($"[MSAuth] Player UUID: {playerUUID}");
-                }
-
-                //TODO: get mppass https://github.com/Moresteck/BetaCraft-Launcher-Java/blob/master/src/main/java/org/betacraft/Wrapper.java
-                var mppassRequest = (HttpWebRequest)WebRequest.Create("http://api.betacraft.uk/getmppass.jsp?");
-                var mppassPostData = "user=" + Uri.EscapeDataString(playerName);
-                mppassPostData += "&server=" + Uri.EscapeDataString("46.69.208.198:25565");
-                
-                var mppassData = Encoding.ASCII.GetBytes(mppassPostData);
-                mppassRequest.Method = "POST";
-                mppassRequest.ContentType = "application/x-www-form-urlencoded";
-                mppassRequest.ContentLength = mppassData.Length;
-                using (var stream = mppassRequest.GetRequestStream())
-                {
-                    stream.Write(mppassData, 0, mppassData.Length);
-                }
-                var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
-                var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-                Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
-
-
-                //TODO: Only do the following if the player succesfully verifies
-                LaunchJava.launchPlayerName = playerName;
-                LaunchJava.launchPlayerUUID = playerUUID;
-                LaunchJava.launchPlayerAccessToken = accessToken;
-                
             }
             catch (WebException e)
             {
                 Console.WriteLine($"[MSAuth] XSTS request returned an error: {e.Message}");
             }
+        }
 
+        public static void minecraftAuth()
+        {
+            //Minecraft authentication
+            var mcRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/authentication/login_with_xbox");
+            mcRequest.ContentType = "application/json";
+            mcRequest.Accept = "application/json";
+            mcRequest.Method = "POST";
 
-            /*Console.WriteLine($"[MSAuth] Seems like there was an error in getting your Xbox account data.");
-            Console.WriteLine($"[MSAuth] XError code: {XError}.");*/
+            using (var streamWriter = new StreamWriter(mcRequest.GetRequestStream()))
+            {
+                string json = $"{{\"identityToken\": \"XBL3.0 x={userHash};{xstsToken}\"}}";
 
+                streamWriter.Write(json);
+                Console.WriteLine($"[MSAuth] MC Request: {json}");
+            }
+            var mcResponse = (HttpWebResponse)mcRequest.GetResponse();
+            var mcResponseString = "";
+            using (var streamReader = new StreamReader(mcResponse.GetResponseStream()))
+            {
+                mcResponseString = streamReader.ReadToEnd();
+                Console.WriteLine($"[MSAuth] MC Response: {mcResponseString}");
+            }
+
+            List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
+            foreach (var vers in mcTokenData)
+            {
+                mcAccessToken = vers.access_token;
+                Console.WriteLine($"[MSAuth] mcAccessToken: {mcAccessToken}");
+            }
+        }
+
+        public static void verifyOwnership()
+        {
+            //Verify game ownership
+            var ownRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/entitlements/mcstore");
+            ownRequest.ContentType = "application/json";
+            ownRequest.Accept = "application/json";
+            ownRequest.Method = "GET";
+            ownRequest.PreAuthenticate = true;
+            ownRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
+
+            var ownResponse = (HttpWebResponse)ownRequest.GetResponse();
+            var ownResponseString = "";
+            using (var streamReader = new StreamReader(ownResponse.GetResponseStream()))
+            {
+                ownResponseString = streamReader.ReadToEnd();
+                Console.WriteLine($"[MSAuth] Own Response: {ownResponseString}");
+            }
+
+            //TODO: VERIFY THE USER ACTALLY OWNS THE ACCOUNT
         }
 
         public static void voidRefreshToken()
         {
 
+        }
+
+        public static void getProfileInfo()
+        {
+            //Get profile info
+            var profileRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/minecraft/profile");
+            profileRequest.ContentType = "application/json";
+            profileRequest.Accept = "application/json";
+            profileRequest.Method = "GET";
+            profileRequest.PreAuthenticate = true;
+            profileRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
+
+            var profileResponse = (HttpWebResponse)profileRequest.GetResponse();
+            var profileResponseString = "";
+            using (var streamReader = new StreamReader(profileResponse.GetResponseStream()))
+            {
+                profileResponseString = streamReader.ReadToEnd();
+                Console.WriteLine($"[MSAuth] Profile Response: {profileResponseString}");
+            }
+
+            List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
+            foreach (var vers in mcProfileData)
+            {
+                playerName = vers.name;
+                Console.WriteLine($"[MSAuth] Player name: {playerName}");
+                playerUUID = vers.id;
+                Console.WriteLine($"[MSAuth] Player UUID: {playerUUID}");
+            }
+        }
+
+        public static void getMpPass()
+        {
+            //TODO: get mppass https://github.com/Moresteck/BetaCraft-Launcher-Java/blob/master/src/main/java/org/betacraft/Wrapper.java
+
+
+            var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
+            mojpassRequest.ContentType = "application/json";
+            mojpassRequest.Accept = "application/json";
+            mojpassRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
+            {
+                //TODO: GENERATE SERVERID IP:PORT > SHA1
+                string json = $"{{\"serverId\": \"e4ac4d84356dc6617c55f4b5d1d7ba5fba2d4f88\",\"accessToken\": \"{mcAccessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
+
+                streamWriter.Write(json);
+                Console.WriteLine($"[MSAuth] Mojpass Request: {json}");
+            }
+            var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
+            var mojpassResponseString = "";
+            using (var streamReader = new StreamReader(mojpassResponse.GetResponseStream()))
+            {
+                mojpassResponseString = streamReader.ReadToEnd();
+                Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
+            }
+
+
+            //TODO: CHECK IF 204
+
+
+
+            var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server=142.44.247.4:25565");
+
+            mppassRequest.Method = "POST";
+            mppassRequest.ContentType = "application/x-www-form-urlencoded";
+
+            Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
+            var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
+            var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
+            Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
+            mpPass = mppassResponseString;
         }
     }
 }

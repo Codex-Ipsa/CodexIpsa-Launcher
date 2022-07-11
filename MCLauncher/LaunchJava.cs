@@ -62,6 +62,7 @@ namespace MCLauncher
         public static string launchClasspath;
         public static string launchPlayerName;
         public static string launchPlayerUUID;
+        public static string launchMpPass;
         public static string launchPlayerAccessToken;
         public static string launchCmdAddon;
 
@@ -155,6 +156,17 @@ namespace MCLauncher
             LibsCheck.Check();
             Console.WriteLine($"[LaunchJava] Done!");
 
+            //TODO: CHECK IF AUTHENTICATED
+            if(launchPlayerAccessToken == String.Empty || launchPlayerAccessToken == null)
+            {
+                Console.WriteLine($"[LaunchJava] Failed to authenticate!");
+                Console.WriteLine($"[LaunchJava] Failed to The game will start in offline mode.");
+                launchPlayerAccessToken = "null";
+                launchPlayerUUID = "null";
+                launchPlayerName = "MHF_Cow";
+            }
+
+
             //Build the launchcmd
             launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
             if(launchProxyPort != "null")
@@ -164,6 +176,7 @@ namespace MCLauncher
             //-Dserver=164.68.108.64 -Dport=5565
             //join://46.69.208.198:25565/use/classic_6/c0.0.22a_05
             //-Dserver=46.69.208.198 -Dport=25565
+            //omniclassic -Dserver=142.44.247.4 -Dport=25565 -Dmppass={launchMpPass}
             launchCommand += $" -Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
             if (launchCmdAddon != string.Empty)
             {
