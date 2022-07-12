@@ -65,7 +65,9 @@ namespace MCLauncher
         public static string launchMpPass;
         public static string launchPlayerAccessToken;
         public static string launchCmdAddon;
-        public static bool launchDidAuth = false;
+        public static bool launchJoinMP = false;
+        public static string launchServerIP;
+        public static string launchServerPort;
 
         public static string gameDir;
         public static string assetDir;
@@ -85,19 +87,66 @@ namespace MCLauncher
                 clientPath = "bin/versions/java/" + selectedVer + ".jar";
             }*/
 
-            //Auth before launch
+            //Deserialize the versiontype json
+            launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
+            Console.WriteLine($"[LaunchJava] Loading version data from {launchJsonUrl}...");
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(launchJsonUrl);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                foreach (var vers in data)
+                {
+                    launchJavaReq = vers.minJava;
+                    Console.WriteLine($"[LaunchJava] Minimum Java: {launchJavaReq}");
+                    launchClasspath = vers.launchMethod;
+                    Console.WriteLine($"[LaunchJava] Classpath: {launchClasspath}");
+                    launchLibsType = vers.libsType;
+                    Console.WriteLine($"[LaunchJava] Libs type: {launchLibsType}");
+                    launchLibsPath = vers.libs;
+                    Console.WriteLine($"[LaunchJava] Libs path: {launchLibsPath}");
+                    launchProxyPort = vers.proxy;
+                    Console.WriteLine($"[LaunchJava] Proxy port: {launchProxyPort}");
+                    launchCmdAddon = vers.addCmd;
+                    Console.WriteLine($"[LaunchJava] Addon: {launchCmdAddon}");
+                    if (vers.getServer == "true")
+                    {
+                        Console.WriteLine($"[LaunchJava] GetServer is true");
+                        EnterIp ei = new EnterIp();
+                        ei.ShowDialog();
+
+                        if (EnterIp.inputedText == String.Empty || EnterIp.inputedText == null)
+                        {
+                            launchJoinMP = false;
+                            Console.WriteLine($"[LaunchJava] Server IP returned empty.");
+                        }
+                        else
+                        {
+                            launchServerIP = EnterIp.serverIP;
+                            launchServerPort = EnterIp.serverPort;
+                            launchJoinMP = true;
+                            Console.WriteLine($"[LaunchJava] Server IP: {launchServerIP}");
+                            Console.WriteLine($"[LaunchJava] Server port: {launchServerPort}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[LaunchJava] GetServer is false");
+                    }
+                }
+            }
+            Console.WriteLine($"[LaunchJava] Loaded version data!");
+
             MSAuth.onGameStart();
-            if(MSAuth.hasErrored == true)
+            if (MSAuth.hasErrored == true)
             {
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MSAuth]", $"Could not authenticate you.");
                 MSAuth.hasErrored = false;
             }
             else
             {
+                Console.WriteLine($"[LaunchJava] MP pass: {launchMpPass}");
                 //Create required dirs
-                Console.WriteLine($"[LaunchJava] Starting process...");
-
-
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions\\java");
@@ -107,32 +156,6 @@ namespace MCLauncher
                 Console.WriteLine($"[LaunchJava] Version: {launchVerName}");
                 Console.WriteLine($"[LaunchJava] Type: {launchVerType}");
                 Console.WriteLine($"[LaunchJava] Url: {launchVerUrl}");
-
-                //Deserialize the versiontype json
-                launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
-                Console.WriteLine($"[LaunchJava] Loading version data from {launchJsonUrl}...");
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(launchJsonUrl);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        launchJavaReq = vers.minJava;
-                        Console.WriteLine($"[LaunchJava] Minimum Java: {launchJavaReq}");
-                        launchClasspath = vers.launchMethod;
-                        Console.WriteLine($"[LaunchJava] Classpath: {launchClasspath}");
-                        launchLibsType = vers.libsType;
-                        Console.WriteLine($"[LaunchJava] Libs type: {launchLibsType}");
-                        launchLibsPath = vers.libs;
-                        Console.WriteLine($"[LaunchJava] Libs path: {launchLibsPath}");
-                        launchProxyPort = vers.proxy;
-                        Console.WriteLine($"[LaunchJava] Proxy port: {launchProxyPort}");
-                        launchCmdAddon = vers.addCmd;
-                        Console.WriteLine($"[LaunchJava] Addon: {launchCmdAddon}");
-                    }
-                }
-                Console.WriteLine($"[LaunchJava] Loaded version data!");
 
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
@@ -185,6 +208,16 @@ namespace MCLauncher
                 if (launchProxyPort != "null")
                 {
                     launchCommand += $"{launchProxy} ";
+                }
+                if (launchJoinMP == true)
+                {
+                    /*launchMpPass = "-";
+                    launchPlayerAccessToken = "-";
+                    launchPlayerUUID = "-";*/
+                    //join://80.241.210.126:25564/use/classic_7/c0.30-c
+
+                    launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass}";
+                    //launchCommand += $"-Dserver=80.241.210.126 -Dport=25564 -Dmppass=-";
                 }
                 //-Dserver=164.68.108.64 -Dport=5565
                 //join://46.69.208.198:25565/use/classic_6/c0.0.22a_05

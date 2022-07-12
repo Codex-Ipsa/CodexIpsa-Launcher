@@ -77,3 +77,4 @@ D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.csproj.Sugges
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.DebugTools.resources
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.JavaCheck.resources
 C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.MSAuth.resources
+C:\Users\David\Documents\GitHub\MineC-raft-Launcher\MCLauncher\obj\Debug\MCLauncher.EnterIp.resources
