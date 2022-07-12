@@ -43,6 +43,7 @@ namespace MCLauncher
             this.btnPlay = new System.Windows.Forms.Button();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.logoutBtn = new System.Windows.Forms.Button();
             this.editInstBtn = new System.Windows.Forms.Button();
             this.newInstBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@ namespace MCLauncher
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
-            this.logoutBtn = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -84,7 +84,7 @@ namespace MCLauncher
             this.debugToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1047, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1047, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -92,7 +92,7 @@ namespace MCLauncher
             // 
             this.homeToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.homeToolStripMenuItem.Text = "Home";
             // 
             // profilesToolStripMenuItem
@@ -117,7 +117,7 @@ namespace MCLauncher
             // 
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -125,7 +125,7 @@ namespace MCLauncher
             // 
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -134,7 +134,7 @@ namespace MCLauncher
             this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(68, 26);
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.debugToolStripMenuItem.Text = "Debug";
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
@@ -183,6 +183,7 @@ namespace MCLauncher
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(132, 22);
             this.usernameTextBox.TabIndex = 5;
+            this.usernameTextBox.Visible = false;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.usernameTextBox_TextChanged);
             // 
             // panel1
@@ -208,6 +209,18 @@ namespace MCLauncher
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1047, 92);
             this.panel1.TabIndex = 0;
+            // 
+            // logoutBtn
+            // 
+            this.logoutBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.logoutBtn.Location = new System.Drawing.Point(827, 57);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(100, 28);
+            this.logoutBtn.TabIndex = 17;
+            this.logoutBtn.Text = "Log out";
+            this.logoutBtn.UseVisualStyleBackColor = true;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // editInstBtn
             // 
@@ -305,6 +318,7 @@ namespace MCLauncher
             this.label1.Size = new System.Drawing.Size(128, 17);
             this.label1.TabIndex = 10;
             this.label1.Text = "Change username:";
+            this.label1.Visible = false;
             // 
             // usernameLabel
             // 
@@ -319,18 +333,6 @@ namespace MCLauncher
             this.usernameLabel.TabIndex = 4;
             this.usernameLabel.Text = "Username: ";
             this.usernameLabel.Visible = false;
-            // 
-            // logoutBtn
-            // 
-            this.logoutBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.logoutBtn.Location = new System.Drawing.Point(933, 59);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(100, 28);
-            this.logoutBtn.TabIndex = 17;
-            this.logoutBtn.Text = "Log out";
-            this.logoutBtn.UseVisualStyleBackColor = true;
-            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // MainWindow
             // 

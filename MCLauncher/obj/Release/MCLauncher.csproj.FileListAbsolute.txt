@@ -1,1 +1,0 @@
-D:\Source Code\MineC-raft-Launcher\MCLauncher\obj\release\MCLauncher.csproj.AssemblyReference.cache
