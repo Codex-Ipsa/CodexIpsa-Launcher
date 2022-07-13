@@ -221,7 +221,7 @@ namespace MCLauncher
                     //Console.WriteLine($"[MSAuth] mcAccessToken: {mcAccessToken}");
                 }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 hasErrored = true;
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
@@ -249,7 +249,7 @@ namespace MCLauncher
                     //Console.WriteLine($"[MSAuth] Own Response: {ownResponseString}");
                 }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 hasErrored = true;
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
@@ -287,7 +287,7 @@ namespace MCLauncher
                     //Console.WriteLine($"[MSAuth] accessToken: {accessToken}");
                 }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
                 hasErrored = true;
@@ -323,7 +323,7 @@ namespace MCLauncher
                     //Console.WriteLine($"[MSAuth] Player UUID: {playerUUID}");
                 }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
                 hasErrored = true;
@@ -332,64 +332,62 @@ namespace MCLauncher
 
         public static void getMpPass()
         {
-            try
+            /*try
+            {*/
+            //Notify the mojang session servers
+            var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
+            mojpassRequest.ContentType = "application/json";
+            mojpassRequest.Accept = "application/json";
+            mojpassRequest.Method = "POST";
+
+            var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}"));
+            string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
+            Console.WriteLine($"[MSAuth] sha1 (serverId): {sha1}");
+
+            using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
             {
-                //Notify the mojang session servers
-                var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
-                mojpassRequest.ContentType = "application/json";
-                mojpassRequest.Accept = "application/json";
-                mojpassRequest.Method = "POST";
+                string json = $"{{\"serverId\": \"{sha1}\",\"accessToken\": \"{mcAccessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
 
-                using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
-                {
-                    //TODO: SERVER IP WINDOW FOR CLASSIC
-                    var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}"));
-                    string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
-
-                    Console.WriteLine($"[MSAuth] sha1 (serverId): {sha1}");
-
-                    string json = $"{{\"serverId\": \"{sha1}\",\"accessToken\": \"{mcAccessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
-
-                    streamWriter.Write(json);
-                    Console.WriteLine($"[MSAuth] Mojpass Request: {json}");
-                }
-                var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
-                var mojpassResponseString = "";
-                using (var streamReader = new StreamReader(mojpassResponse.GetResponseStream()))
-                {
-                    mojpassResponseString = streamReader.ReadToEnd();
-                    Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
-                }
-                Console.WriteLine($"[MSAuth] Mojpass code: {mojpassResponse.StatusCode}");
-
-                if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
-                {
-                    Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
-
-                    //Get the actual Mppass
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server=142.44.247.4:25565");
-
-                    mppassRequest.Method = "POST";
-                    mppassRequest.ContentType = "application/x-www-form-urlencoded";
-
-                    Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
-                    var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
-                    var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-                    Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
-                    mpPass = mppassResponseString;
-
-                }
-                else
-                {
-                    Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
-                    mpPass = "-";
-                }
+                streamWriter.Write(json);
+                Console.WriteLine($"[MSAuth] Mojpass Request: {json}");
             }
+            var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
+            var mojpassResponseString = "";
+            using (var streamReader = new StreamReader(mojpassResponse.GetResponseStream()))
+            {
+                mojpassResponseString = streamReader.ReadToEnd();
+                Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
+            }
+            Console.WriteLine($"[MSAuth] Mojpass code: {mojpassResponse.StatusCode}");
+
+            if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
+            {
+                Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
+
+                //Get the actual Mppass
+                var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}");
+
+                mppassRequest.Method = "POST";
+                mppassRequest.ContentType = "application/x-www-form-urlencoded";
+
+                Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
+                var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
+                var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
+                Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
+                mpPass = mppassResponseString;
+
+            }
+            else
+            {
+                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
+                mpPass = "-";
+            }
+            /*}
             catch(WebException e)
             {
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
-            }
+            }*/
         }
 
         public void LogIn()
