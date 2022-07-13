@@ -342,23 +342,23 @@ namespace MCLauncher
 
             var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}"));
             string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
-            Console.WriteLine($"[MSAuth] sha1 (serverId): {sha1}");
+            //Console.WriteLine($"[MSAuth] sha1 (serverId): {sha1}");
 
             using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
             {
                 string json = $"{{\"serverId\": \"{sha1}\",\"accessToken\": \"{mcAccessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
 
                 streamWriter.Write(json);
-                Console.WriteLine($"[MSAuth] Mojpass Request: {json}");
+                //Console.WriteLine($"[MSAuth] Mojpass Request: {json}");
             }
             var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
             var mojpassResponseString = "";
             using (var streamReader = new StreamReader(mojpassResponse.GetResponseStream()))
             {
                 mojpassResponseString = streamReader.ReadToEnd();
-                Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
+                //Console.WriteLine($"[MSAuth] Mojpass Response: {mojpassResponseString}");
             }
-            Console.WriteLine($"[MSAuth] Mojpass code: {mojpassResponse.StatusCode}");
+            //Console.WriteLine($"[MSAuth] Mojpass code: {mojpassResponse.StatusCode}");
 
             if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
             {
@@ -370,10 +370,9 @@ namespace MCLauncher
                 mppassRequest.Method = "POST";
                 mppassRequest.ContentType = "application/x-www-form-urlencoded";
 
-                Console.WriteLine($"[MSAuth] mppassData: {mppassRequest}");
                 var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
                 var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-                Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
+                //Console.WriteLine($"[MSAuth] MPpass Response: {mppassResponseString}");
                 mpPass = mppassResponseString;
 
             }
@@ -466,6 +465,5 @@ namespace MCLauncher
                 LaunchJava.launchMpPass = mpPass;
             }
         }
-
     }
 }

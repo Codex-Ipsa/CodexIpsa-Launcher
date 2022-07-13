@@ -236,7 +236,7 @@ namespace MCLauncher
 
                     launchCommand += $" {launchCmdAddon6}";
                 }
-                Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
+                //Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
                 Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");
 
                 //Check if Java exists
