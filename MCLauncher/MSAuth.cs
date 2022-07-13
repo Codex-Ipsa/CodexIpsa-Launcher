@@ -332,8 +332,8 @@ namespace MCLauncher
 
         public static void getMpPass()
         {
-            /*try
-            {*/
+            try
+            {
             //Notify the mojang session servers
             var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
             mojpassRequest.ContentType = "application/json";
@@ -382,12 +382,12 @@ namespace MCLauncher
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
                 mpPass = "-";
             }
-            /*}
+            }
             catch(WebException e)
             {
                 Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
-            }*/
+            }
         }
 
         public void LogIn()
