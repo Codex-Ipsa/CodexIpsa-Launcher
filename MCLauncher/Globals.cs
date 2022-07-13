@@ -13,7 +13,7 @@ namespace MCLauncher
         public static string codebase = "0.0.7-dev";
         public static string branch = "0.0.7-rewrite";
         public static string verCurrent = "0.0.7.5_1";
-        public static string verDisplay = "0.0.7.5_1 (rewrite)"; //0.0.6 (Dev 7 WIP)
+        public static string verDisplay = "0.0.7.6 (rewrite)"; //0.0.6 (Dev 7 WIP)
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();

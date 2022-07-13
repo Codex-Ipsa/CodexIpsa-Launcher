@@ -211,18 +211,9 @@ namespace MCLauncher
                 }
                 if (launchJoinMP == true)
                 {
-                    /*launchMpPass = "-";
-                    launchPlayerAccessToken = "-";
-                    launchPlayerUUID = "-";*/
-                    //join://80.241.210.126:25564/use/classic_7/c0.30-c
-
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass}";
-                    //launchCommand += $"-Dserver=80.241.210.126 -Dport=25564 -Dmppass=-";
                 }
-                //-Dserver=164.68.108.64 -Dport=5565
-                //join://46.69.208.198:25565/use/classic_6/c0.0.22a_05
-                //-Dserver=46.69.208.198 -Dport=25565
-                //omniclassic -Dserver=142.44.247.4 -Dport=25565 -Dmppass={launchMpPass}
+
                 launchCommand += $" -Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
                 if (launchCmdAddon != string.Empty)
                 {

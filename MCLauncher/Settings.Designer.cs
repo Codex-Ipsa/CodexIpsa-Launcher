@@ -58,7 +58,7 @@ namespace MCLauncher
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
@@ -96,7 +96,7 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.btnUpdates);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.comboUpdateSelect);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(16, 94);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
@@ -146,7 +146,6 @@ namespace MCLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(627, 254);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

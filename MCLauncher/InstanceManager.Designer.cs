@@ -37,6 +37,8 @@ namespace MCLauncher
             this.dirBox = new System.Windows.Forms.TextBox();
             this.resCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.minRamBox = new System.Windows.Forms.NumericUpDown();
+            this.maxRamBox = new System.Windows.Forms.NumericUpDown();
             this.dirBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,13 +66,16 @@ namespace MCLauncher
             this.closeBtn = new System.Windows.Forms.Button();
             this.instmodBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
-            this.maxRamBox = new System.Windows.Forms.NumericUpDown();
-            this.minRamBox = new System.Windows.Forms.NumericUpDown();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.javaPage = new System.Windows.Forms.TabPage();
+            this.x360Page = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.javaPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -85,8 +90,8 @@ namespace MCLauncher
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(767, 415);
-            this.createBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.createBtn.Location = new System.Drawing.Point(778, 451);
+            this.createBtn.Margin = new System.Windows.Forms.Padding(4);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(100, 28);
             this.createBtn.TabIndex = 7;
@@ -97,7 +102,7 @@ namespace MCLauncher
             // nameBox
             // 
             this.nameBox.Location = new System.Drawing.Point(163, 16);
-            this.nameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nameBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(687, 22);
             this.nameBox.TabIndex = 8;
@@ -106,7 +111,7 @@ namespace MCLauncher
             // 
             this.dirCheck.AutoSize = true;
             this.dirCheck.Location = new System.Drawing.Point(8, 50);
-            this.dirCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dirCheck.Margin = new System.Windows.Forms.Padding(4);
             this.dirCheck.Name = "dirCheck";
             this.dirCheck.Size = new System.Drawing.Size(140, 21);
             this.dirCheck.TabIndex = 11;
@@ -118,7 +123,7 @@ namespace MCLauncher
             // 
             this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(163, 48);
-            this.dirBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dirBox.Margin = new System.Windows.Forms.Padding(4);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(633, 22);
             this.dirBox.TabIndex = 12;
@@ -127,7 +132,7 @@ namespace MCLauncher
             // 
             this.resCheck.AutoSize = true;
             this.resCheck.Location = new System.Drawing.Point(8, 82);
-            this.resCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resCheck.Margin = new System.Windows.Forms.Padding(4);
             this.resCheck.Name = "resCheck";
             this.resCheck.Size = new System.Drawing.Size(147, 21);
             this.resCheck.TabIndex = 13;
@@ -153,20 +158,76 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.resBoxX);
             this.groupBox1.Controls.Add(this.dirCheck);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(859, 146);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(867, 146);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
+            // 
+            // minRamBox
+            // 
+            this.minRamBox.Enabled = false;
+            this.minRamBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.minRamBox.Location = new System.Drawing.Point(208, 112);
+            this.minRamBox.Maximum = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            this.minRamBox.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.minRamBox.Name = "minRamBox";
+            this.minRamBox.Size = new System.Drawing.Size(282, 22);
+            this.minRamBox.TabIndex = 32;
+            this.minRamBox.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            // 
+            // maxRamBox
+            // 
+            this.maxRamBox.Enabled = false;
+            this.maxRamBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.maxRamBox.Location = new System.Drawing.Point(568, 112);
+            this.maxRamBox.Maximum = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            this.maxRamBox.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.maxRamBox.Name = "maxRamBox";
+            this.maxRamBox.Size = new System.Drawing.Size(282, 22);
+            this.maxRamBox.TabIndex = 31;
+            this.maxRamBox.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
             // 
             // dirBtn
             // 
             this.dirBtn.Enabled = false;
             this.dirBtn.Location = new System.Drawing.Point(805, 47);
-            this.dirBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dirBtn.Margin = new System.Windows.Forms.Padding(4);
             this.dirBtn.Name = "dirBtn";
             this.dirBtn.Size = new System.Drawing.Size(45, 25);
             this.dirBtn.TabIndex = 30;
@@ -197,7 +258,7 @@ namespace MCLauncher
             // 
             this.ramCheck.AutoSize = true;
             this.ramCheck.Location = new System.Drawing.Point(8, 114);
-            this.ramCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ramCheck.Margin = new System.Windows.Forms.Padding(4);
             this.ramCheck.Name = "ramCheck";
             this.ramCheck.Size = new System.Drawing.Size(84, 21);
             this.ramCheck.TabIndex = 22;
@@ -209,7 +270,7 @@ namespace MCLauncher
             // 
             this.resBoxY.Enabled = false;
             this.resBoxY.Location = new System.Drawing.Point(523, 79);
-            this.resBoxY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resBoxY.Margin = new System.Windows.Forms.Padding(4);
             this.resBoxY.Name = "resBoxY";
             this.resBoxY.Size = new System.Drawing.Size(327, 22);
             this.resBoxY.TabIndex = 20;
@@ -228,7 +289,7 @@ namespace MCLauncher
             // 
             this.resBoxX.Enabled = false;
             this.resBoxX.Location = new System.Drawing.Point(163, 80);
-            this.resBoxX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.resBoxX.Margin = new System.Windows.Forms.Padding(4);
             this.resBoxX.Name = "resBoxX";
             this.resBoxX.Size = new System.Drawing.Size(327, 22);
             this.resBoxX.TabIndex = 14;
@@ -241,11 +302,11 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.verBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(16, 169);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(7, 161);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(859, 86);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(867, 86);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Version selection";
@@ -255,7 +316,7 @@ namespace MCLauncher
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.editionBox.FormattingEnabled = true;
             this.editionBox.Location = new System.Drawing.Point(163, 15);
-            this.editionBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.editionBox.Margin = new System.Windows.Forms.Padding(4);
             this.editionBox.Name = "editionBox";
             this.editionBox.Size = new System.Drawing.Size(687, 24);
             this.editionBox.TabIndex = 24;
@@ -276,7 +337,7 @@ namespace MCLauncher
             this.verBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.verBox.FormattingEnabled = true;
             this.verBox.Location = new System.Drawing.Point(163, 48);
-            this.verBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.verBox.Margin = new System.Windows.Forms.Padding(4);
             this.verBox.Name = "verBox";
             this.verBox.Size = new System.Drawing.Size(687, 24);
             this.verBox.TabIndex = 22;
@@ -306,11 +367,11 @@ namespace MCLauncher
             this.groupBox3.Controls.Add(this.javaCheck);
             this.groupBox3.Controls.Add(this.javaBox);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(16, 262);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Location = new System.Drawing.Point(7, 255);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(859, 145);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(867, 145);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
@@ -318,8 +379,8 @@ namespace MCLauncher
             // javaBtn
             // 
             this.javaBtn.Enabled = false;
-            this.javaBtn.Location = new System.Drawing.Point(805, 15);
-            this.javaBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.javaBtn.Location = new System.Drawing.Point(814, 14);
+            this.javaBtn.Margin = new System.Windows.Forms.Padding(4);
             this.javaBtn.Name = "javaBtn";
             this.javaBtn.Size = new System.Drawing.Size(45, 25);
             this.javaBtn.TabIndex = 29;
@@ -329,8 +390,8 @@ namespace MCLauncher
             // custjarBtn
             // 
             this.custjarBtn.Enabled = false;
-            this.custjarBtn.Location = new System.Drawing.Point(805, 113);
-            this.custjarBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.custjarBtn.Location = new System.Drawing.Point(814, 113);
+            this.custjarBtn.Margin = new System.Windows.Forms.Padding(4);
             this.custjarBtn.Name = "custjarBtn";
             this.custjarBtn.Size = new System.Drawing.Size(45, 25);
             this.custjarBtn.TabIndex = 28;
@@ -342,25 +403,25 @@ namespace MCLauncher
             this.methodBox.Enabled = false;
             this.methodBox.FormattingEnabled = true;
             this.methodBox.Location = new System.Drawing.Point(163, 80);
-            this.methodBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.methodBox.Margin = new System.Windows.Forms.Padding(4);
             this.methodBox.Name = "methodBox";
-            this.methodBox.Size = new System.Drawing.Size(687, 24);
+            this.methodBox.Size = new System.Drawing.Size(693, 24);
             this.methodBox.TabIndex = 24;
             // 
             // custjarBox
             // 
             this.custjarBox.Enabled = false;
             this.custjarBox.Location = new System.Drawing.Point(163, 113);
-            this.custjarBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.custjarBox.Margin = new System.Windows.Forms.Padding(4);
             this.custjarBox.Name = "custjarBox";
-            this.custjarBox.Size = new System.Drawing.Size(633, 22);
+            this.custjarBox.Size = new System.Drawing.Size(643, 22);
             this.custjarBox.TabIndex = 27;
             // 
             // custjarCheck
             // 
             this.custjarCheck.AutoSize = true;
             this.custjarCheck.Location = new System.Drawing.Point(8, 114);
-            this.custjarCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.custjarCheck.Margin = new System.Windows.Forms.Padding(4);
             this.custjarCheck.Name = "custjarCheck";
             this.custjarCheck.Size = new System.Drawing.Size(112, 21);
             this.custjarCheck.TabIndex = 26;
@@ -372,7 +433,7 @@ namespace MCLauncher
             // 
             this.methodCheck.AutoSize = true;
             this.methodCheck.Location = new System.Drawing.Point(8, 82);
-            this.methodCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.methodCheck.Margin = new System.Windows.Forms.Padding(4);
             this.methodCheck.Name = "methodCheck";
             this.methodCheck.Size = new System.Drawing.Size(132, 21);
             this.methodCheck.TabIndex = 25;
@@ -384,7 +445,7 @@ namespace MCLauncher
             // 
             this.jvmCheck.AutoSize = true;
             this.jvmCheck.Location = new System.Drawing.Point(8, 50);
-            this.jvmCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jvmCheck.Margin = new System.Windows.Forms.Padding(4);
             this.jvmCheck.Name = "jvmCheck";
             this.jvmCheck.Size = new System.Drawing.Size(132, 21);
             this.jvmCheck.TabIndex = 23;
@@ -396,16 +457,16 @@ namespace MCLauncher
             // 
             this.jvmBox.Enabled = false;
             this.jvmBox.Location = new System.Drawing.Point(163, 48);
-            this.jvmBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jvmBox.Margin = new System.Windows.Forms.Padding(4);
             this.jvmBox.Name = "jvmBox";
-            this.jvmBox.Size = new System.Drawing.Size(687, 22);
+            this.jvmBox.Size = new System.Drawing.Size(696, 22);
             this.jvmBox.TabIndex = 22;
             // 
             // javaCheck
             // 
             this.javaCheck.AutoSize = true;
             this.javaCheck.Location = new System.Drawing.Point(8, 18);
-            this.javaCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.javaCheck.Margin = new System.Windows.Forms.Padding(4);
             this.javaCheck.Name = "javaCheck";
             this.javaCheck.Size = new System.Drawing.Size(104, 21);
             this.javaCheck.TabIndex = 21;
@@ -417,15 +478,15 @@ namespace MCLauncher
             // 
             this.javaBox.Enabled = false;
             this.javaBox.Location = new System.Drawing.Point(163, 16);
-            this.javaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.javaBox.Margin = new System.Windows.Forms.Padding(4);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(633, 22);
+            this.javaBox.Size = new System.Drawing.Size(643, 22);
             this.javaBox.TabIndex = 8;
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(659, 415);
-            this.opendirBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.opendirBtn.Location = new System.Drawing.Point(670, 451);
+            this.opendirBtn.Margin = new System.Windows.Forms.Padding(4);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(100, 28);
             this.opendirBtn.TabIndex = 25;
@@ -434,8 +495,8 @@ namespace MCLauncher
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(24, 415);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.closeBtn.Location = new System.Drawing.Point(13, 451);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(100, 28);
             this.closeBtn.TabIndex = 26;
@@ -445,8 +506,8 @@ namespace MCLauncher
             // 
             // instmodBtn
             // 
-            this.instmodBtn.Location = new System.Drawing.Point(551, 415);
-            this.instmodBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.instmodBtn.Location = new System.Drawing.Point(562, 451);
+            this.instmodBtn.Margin = new System.Windows.Forms.Padding(4);
             this.instmodBtn.Name = "instmodBtn";
             this.instmodBtn.Size = new System.Drawing.Size(100, 28);
             this.instmodBtn.TabIndex = 27;
@@ -455,8 +516,8 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(767, 415);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveBtn.Location = new System.Drawing.Point(778, 451);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(4);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(100, 28);
             this.saveBtn.TabIndex = 28;
@@ -464,87 +525,65 @@ namespace MCLauncher
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // maxRamBox
+            // tabControl1
             // 
-            this.maxRamBox.Enabled = false;
-            this.maxRamBox.Increment = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.maxRamBox.Location = new System.Drawing.Point(568, 112);
-            this.maxRamBox.Maximum = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            this.maxRamBox.Minimum = new decimal(new int[] {
-            512,
-            0,
-            0,
-            0});
-            this.maxRamBox.Name = "maxRamBox";
-            this.maxRamBox.Size = new System.Drawing.Size(282, 22);
-            this.maxRamBox.TabIndex = 31;
-            this.maxRamBox.Value = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
+            this.tabControl1.Controls.Add(this.javaPage);
+            this.tabControl1.Controls.Add(this.x360Page);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(890, 444);
+            this.tabControl1.TabIndex = 33;
             // 
-            // minRamBox
+            // javaPage
             // 
-            this.minRamBox.Enabled = false;
-            this.minRamBox.Increment = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-            this.minRamBox.Location = new System.Drawing.Point(208, 112);
-            this.minRamBox.Maximum = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            this.minRamBox.Minimum = new decimal(new int[] {
-            512,
-            0,
-            0,
-            0});
-            this.minRamBox.Name = "minRamBox";
-            this.minRamBox.Size = new System.Drawing.Size(282, 22);
-            this.minRamBox.TabIndex = 32;
-            this.minRamBox.Value = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
+            this.javaPage.Controls.Add(this.groupBox1);
+            this.javaPage.Controls.Add(this.groupBox2);
+            this.javaPage.Controls.Add(this.groupBox3);
+            this.javaPage.Location = new System.Drawing.Point(4, 25);
+            this.javaPage.Name = "javaPage";
+            this.javaPage.Padding = new System.Windows.Forms.Padding(3);
+            this.javaPage.Size = new System.Drawing.Size(882, 415);
+            this.javaPage.TabIndex = 0;
+            this.javaPage.Text = "Java Edition";
+            this.javaPage.UseVisualStyleBackColor = true;
+            // 
+            // x360Page
+            // 
+            this.x360Page.Location = new System.Drawing.Point(4, 25);
+            this.x360Page.Name = "x360Page";
+            this.x360Page.Padding = new System.Windows.Forms.Padding(3);
+            this.x360Page.Size = new System.Drawing.Size(882, 415);
+            this.x360Page.TabIndex = 1;
+            this.x360Page.Text = "Xbox 360 Edition";
+            this.x360Page.UseVisualStyleBackColor = true;
             // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 458);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(891, 490);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.instmodBtn);
             this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.opendirBtn);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.createBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InstanceManager";
             this.Text = "Profile Manager";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.javaPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -587,5 +626,8 @@ namespace MCLauncher
         private System.Windows.Forms.Button custjarBtn;
         private System.Windows.Forms.NumericUpDown minRamBox;
         private System.Windows.Forms.NumericUpDown maxRamBox;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage javaPage;
+        private System.Windows.Forms.TabPage x360Page;
     }
 }
