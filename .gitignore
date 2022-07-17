@@ -1,1 +1,3 @@
-/MCLauncher/bin/Debug
+/MCLauncher/bin
+/MCLauncher/obj
+/.vs

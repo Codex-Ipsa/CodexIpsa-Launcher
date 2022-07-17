@@ -68,6 +68,8 @@ namespace MCLauncher
         public static bool launchJoinMP = false;
         public static string launchServerIP;
         public static string launchServerPort;
+        public static string launchWidth = "854";
+        public static string launchHeight = "480";
 
         public static string gameDir;
         public static string assetDir;
@@ -225,7 +227,7 @@ namespace MCLauncher
                     var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
 
-                    launchCommand += $" {launchCmdAddon6}";
+                    launchCommand += $" {launchCmdAddon6} with={launchWidth} height={launchHeight}";
                 }
                 //Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
                 Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");

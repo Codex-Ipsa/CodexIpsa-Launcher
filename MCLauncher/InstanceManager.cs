@@ -26,10 +26,33 @@ namespace MCLauncher
         public static string cfgGameVer;
         public static string cfgTypeVer;
         public static string cfgLinkVer;
-        public static string cfgMinRam;
-        public static string cfgMaxRam;
 
-        public static bool cfgUseRam;
+
+
+        public static string instCustDirectory = "";
+        public static bool useCustDirectory = false;
+
+        public static string instCustResWidth = "";
+        public static string instCustResHeight = "";
+        public static bool useCustResolution = false;
+
+        public static string instCustRamMin = "1024";
+        public static string instCustRamMax = "1024";
+        public static bool useCustRam = false;
+
+        public static string instCustJava = "";
+        public static bool useCustJava = false;
+
+        public static string instCustJvm = "";
+        public static bool useCustJvm = false;
+
+        public static string instCustMethod = "";
+        public static bool useCustMethod = false;
+
+        public static string instCustJar = "";
+        public static bool useCustJar = false;
+
+        public static bool useOfflineMode = false;
 
         public InstanceManager()
         {
@@ -37,6 +60,7 @@ namespace MCLauncher
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+
             //Set the editions list
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
@@ -76,6 +100,7 @@ namespace MCLauncher
                 saveBtn.Visible = false;
                 instmodBtn.Visible = false;
                 opendirBtn.Visible = false;
+
             }
             else if (mode == "edit")
             {
@@ -104,9 +129,6 @@ namespace MCLauncher
                         cfgGameVer = vers.verName;
                         cfgLinkVer = vers.verLink;
                         cfgTypeVer = vers.verType;
-                        cfgUseRam = false;
-                        cfgMaxRam = "1024";
-                        cfgMinRam = "1024";
                     }
                 }
             }
@@ -118,12 +140,33 @@ namespace MCLauncher
             {
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
                 //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
+                //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n" +
+                        $"\"gameVer\":\"{cfgGameVer}\"," +
+                        $"\n\"typeVer\":\"{cfgTypeVer}\"," +
+                        $"\n\"linkVer\":\"{cfgLinkVer}\"," +
+                        $"\n\"useCustDir\":\"{useCustDirectory}\"," +
+                        $"\n\"custDir\":\"{instCustDirectory}\"," +
+                        $"\n\"useCustRes\":\"{useCustResolution}\"," +
+                        $"\n\"custResWidth\":\"{instCustResWidth}\"," +
+                        $"\n\"custResHeight\":\"{instCustResHeight}\"," +
+                        $"\n\"useCustRam\":\"{useCustRam}\"," +
+                        $"\n\"custRamMin\":\"{instCustRamMin}\"," +
+                        $"\n\"custRamMax\":\"{instCustRamMax}\"," +
+                        $"\n\"useCustJava\":\"{useCustJava}\"," +
+                        $"\n\"custJava\":\"{instCustJava}\"," +
+                        $"\n\"useCustJvm\":\"{useCustJvm}\"," +
+                        $"\n\"custJvm\":\"{instCustJvm}\"," +
+                        $"\n\"useCustMethod\":\"{useCustMethod}\"," +
+                        $"\n\"custMethod\":\"{instCustMethod}\"," +
+                        $"\n\"useCustJar\":\"{useCustJar}\"," +
+                        $"\n\"custJar\":\"{instCustJar}\"," +
+                        $"\n\"useOfflineMode\":\"{useOfflineMode}\"" +
+                        $"\n}}\n]");
 
                     fs.Write(config, 0, config.Length);
                 }
@@ -152,8 +195,8 @@ namespace MCLauncher
             if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
             {
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
+                //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\game");
+                //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\assets");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
@@ -194,11 +237,13 @@ namespace MCLauncher
         {
             if(dirBox.Enabled == true)
             {
+                useCustDirectory = false;
                 dirBox.Enabled = false;
                 dirBtn.Enabled = false;
             }
             else
             {
+                useCustDirectory = true;
                 dirBox.Enabled = true;
                 dirBtn.Enabled = true;
             }
@@ -208,11 +253,13 @@ namespace MCLauncher
         {
             if (javaBox.Enabled == true)
             {
+                useCustJava = false;
                 javaBox.Enabled = false;
                 javaBtn.Enabled = false;
             }
             else
             {
+                useCustJava = true;
                 javaBox.Enabled = true;
                 javaBtn.Enabled = true;
             }
@@ -222,10 +269,12 @@ namespace MCLauncher
         {
             if (jvmBox.Enabled == true)
             {
+                useCustJvm = false;
                 jvmBox.Enabled = false;
             }
             else
             {
+                useCustJvm = true;
                 jvmBox.Enabled = true;
             }
         }
@@ -234,10 +283,12 @@ namespace MCLauncher
         {
             if (methodBox.Enabled == true)
             {
+                useCustMethod = false;
                 methodBox.Enabled = false;
             }
             else
             {
+                useCustMethod = true;
                 methodBox.Enabled = true;
             }
         }
@@ -246,11 +297,13 @@ namespace MCLauncher
         {
             if (custjarBox.Enabled == true)
             {
+                useCustJar = false;
                 custjarBox.Enabled = false;
                 custjarBtn.Enabled = false;
             }
             else
             {
+                useCustJar = true;
                 custjarBox.Enabled = true;
                 custjarBtn.Enabled = true;
             }
@@ -258,15 +311,17 @@ namespace MCLauncher
 
         private void resCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (resBoxX.Enabled == true)
+            if (resBoxWidth.Enabled == true)
             {
-                resBoxX.Enabled = false;
-                resBoxY.Enabled = false;
+                useCustResolution = false;
+                resBoxWidth.Enabled = false;
+                resBoxHeight.Enabled = false;
             }
             else
             {
-                resBoxX.Enabled = true;
-                resBoxY.Enabled = true;
+                useCustResolution = true;
+                resBoxWidth.Enabled = true;
+                resBoxHeight.Enabled = true;
             }
         }
 
@@ -274,14 +329,78 @@ namespace MCLauncher
         {
             if (maxRamBox.Enabled == true)
             {
+                useCustRam = false;
                 maxRamBox.Enabled = false;
                 minRamBox.Enabled = false;
             }
             else
             {
+                useCustRam = true;
                 maxRamBox.Enabled = true;
                 minRamBox.Enabled = true;
             }
+        }
+
+        private void custjarBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Open a game file";
+            ofd.Filter = "JAR File (*.jar*) | *.jar*";
+            DialogResult dr = ofd.ShowDialog();
+            /*if (dr == DialogResult.OK)
+            {
+                verPath = ofd.FileName;
+            }
+            pathLabel.Text = verPath;*/
+        }
+
+        private void offlineModeCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!offlineModeCheck.Checked)
+            {
+                useOfflineMode = false;
+                Console.WriteLine("It is now unchecked.");
+            }
+            else
+            {
+                useOfflineMode = true;
+                Console.WriteLine("It is now checked.");
+            }
+        }
+
+        private void dirBox_TextChanged(object sender, EventArgs e)
+        {
+            instCustDirectory = dirBox.Text;
+        }
+
+        private void resBoxWidth_TextChanged(object sender, EventArgs e)
+        {
+            instCustResWidth = resBoxWidth.Text;
+        }
+
+        private void resBoxHeight_TextChanged(object sender, EventArgs e)
+        {
+            instCustResHeight = resBoxHeight.Text;
+        }
+
+        private void javaBox_TextChanged(object sender, EventArgs e)
+        {
+            instCustJava = javaBox.Text;
+        }
+
+        private void jvmBox_TextChanged(object sender, EventArgs e)
+        {
+            instCustJvm = jvmBox.Text;
+        }
+
+        private void methodBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            instCustMethod = methodBox.Text;
+        }
+
+        private void custjarBox_TextChanged(object sender, EventArgs e)
+        {
+            instCustJar = custjarBox.Text;
         }
 
         private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
