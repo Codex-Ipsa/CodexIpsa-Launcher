@@ -23,10 +23,22 @@ namespace MCLauncher
         public string modForgeVer { get; set; }
 
         //Instance config
-        public string gameVer { get; set; }
-        public string typeVer { get; set; }
-        public string linkVer { get; set; }
-        public string proxyVer { get; set; }
+        public string instVer { get; set; }
+        public string instType { get; set; }
+        public string instUrl { get; set; }
+        public string instResWidth { get; set; }
+        public string instResHeight { get; set; }
+        public string instRamMin { get; set; }
+        public string instRamMax { get; set; }
+        public string useCustJava { get; set; }
+        public string instCustJava { get; set; }
+        public string useCustJvm { get; set; }
+        public string instCustJvm { get; set; }
+        public string useCustMethod { get; set; }
+        public string instCustMethod { get; set; }
+        public string useCustJar { get; set; }
+        public string instCustJar { get; set; }
+        public string useOfflineMode { get; set; }
 
 
         //JRE downloads

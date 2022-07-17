@@ -102,9 +102,9 @@ namespace MCLauncher
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.launchVerName = vers.gameVer;
-                LaunchJava.launchVerUrl = vers.linkVer;
-                LaunchJava.launchVerType = vers.typeVer;
+                LaunchJava.launchVerName = vers.instVer;
+                LaunchJava.launchVerUrl = vers.instUrl;
+                LaunchJava.launchVerType = vers.instType;
             }
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
@@ -250,9 +250,9 @@ namespace MCLauncher
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.launchVerName = vers.gameVer;
-                LaunchJava.launchVerUrl = vers.linkVer;
-                LaunchJava.launchVerType = vers.typeVer;
+                LaunchJava.launchVerName = vers.instVer;
+                LaunchJava.launchVerUrl = vers.instUrl;
+                LaunchJava.launchVerType = vers.instType;
             }
             LaunchJava.currentInstance = Instance.comboBox1.Text;
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;

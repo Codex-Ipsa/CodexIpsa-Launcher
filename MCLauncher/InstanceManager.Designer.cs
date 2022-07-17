@@ -33,16 +33,18 @@ namespace MCLauncher
             this.label1 = new System.Windows.Forms.Label();
             this.createBtn = new System.Windows.Forms.Button();
             this.nameBox = new System.Windows.Forms.TextBox();
-            this.dirCheck = new System.Windows.Forms.CheckBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.resCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.resBoxHeight = new System.Windows.Forms.TextBox();
+            this.resBoxWidth = new System.Windows.Forms.TextBox();
             this.minRamBox = new System.Windows.Forms.NumericUpDown();
             this.maxRamBox = new System.Windows.Forms.NumericUpDown();
             this.dirBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ramCheck = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.editionBox = new System.Windows.Forms.ComboBox();
@@ -68,8 +70,6 @@ namespace MCLauncher
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.javaPage = new System.Windows.Forms.TabPage();
             this.x360Page = new System.Windows.Forms.TabPage();
-            this.resBoxWidth = new System.Windows.Forms.TextBox();
-            this.resBoxHeight = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
@@ -105,40 +105,20 @@ namespace MCLauncher
             this.nameBox.Size = new System.Drawing.Size(516, 20);
             this.nameBox.TabIndex = 8;
             // 
-            // dirCheck
-            // 
-            this.dirCheck.AutoSize = true;
-            this.dirCheck.Location = new System.Drawing.Point(6, 41);
-            this.dirCheck.Name = "dirCheck";
-            this.dirCheck.Size = new System.Drawing.Size(107, 17);
-            this.dirCheck.TabIndex = 11;
-            this.dirCheck.Text = "Custom directory:";
-            this.dirCheck.UseVisualStyleBackColor = true;
-            this.dirCheck.CheckedChanged += new System.EventHandler(this.dirCheck_CheckedChanged);
-            // 
             // dirBox
             // 
-            this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(476, 20);
             this.dirBox.TabIndex = 12;
             this.dirBox.TextChanged += new System.EventHandler(this.dirBox_TextChanged);
             // 
-            // resCheck
-            // 
-            this.resCheck.AutoSize = true;
-            this.resCheck.Location = new System.Drawing.Point(6, 67);
-            this.resCheck.Name = "resCheck";
-            this.resCheck.Size = new System.Drawing.Size(112, 17);
-            this.resCheck.TabIndex = 13;
-            this.resCheck.Text = "Custom resolution:";
-            this.resCheck.UseVisualStyleBackColor = true;
-            this.resCheck.CheckedChanged += new System.EventHandler(this.resCheck_CheckedChanged);
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.resBoxHeight);
             this.groupBox1.Controls.Add(this.resBoxWidth);
             this.groupBox1.Controls.Add(this.minRamBox);
@@ -146,13 +126,10 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.dirBtn);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.ramCheck);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nameBox);
             this.groupBox1.Controls.Add(this.dirBox);
-            this.groupBox1.Controls.Add(this.resCheck);
-            this.groupBox1.Controls.Add(this.dirCheck);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(5, 6);
             this.groupBox1.Name = "groupBox1";
@@ -161,9 +138,51 @@ namespace MCLauncher
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profile info";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Directory:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 67);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Resolution:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 94);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Memory:";
+            // 
+            // resBoxHeight
+            // 
+            this.resBoxHeight.Location = new System.Drawing.Point(392, 64);
+            this.resBoxHeight.Name = "resBoxHeight";
+            this.resBoxHeight.Size = new System.Drawing.Size(246, 20);
+            this.resBoxHeight.TabIndex = 34;
+            this.resBoxHeight.TextChanged += new System.EventHandler(this.resBoxHeight_TextChanged);
+            // 
+            // resBoxWidth
+            // 
+            this.resBoxWidth.Location = new System.Drawing.Point(122, 64);
+            this.resBoxWidth.Name = "resBoxWidth";
+            this.resBoxWidth.Size = new System.Drawing.Size(246, 20);
+            this.resBoxWidth.TabIndex = 33;
+            this.resBoxWidth.TextChanged += new System.EventHandler(this.resBoxWidth_TextChanged);
+            // 
             // minRamBox
             // 
-            this.minRamBox.Enabled = false;
             this.minRamBox.Increment = new decimal(new int[] {
             128,
             0,
@@ -192,7 +211,6 @@ namespace MCLauncher
             // 
             // maxRamBox
             // 
-            this.maxRamBox.Enabled = false;
             this.maxRamBox.Increment = new decimal(new int[] {
             128,
             0,
@@ -221,7 +239,6 @@ namespace MCLauncher
             // 
             // dirBtn
             // 
-            this.dirBtn.Enabled = false;
             this.dirBtn.Location = new System.Drawing.Point(604, 38);
             this.dirBtn.Name = "dirBtn";
             this.dirBtn.Size = new System.Drawing.Size(34, 20);
@@ -246,17 +263,6 @@ namespace MCLauncher
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Min:";
-            // 
-            // ramCheck
-            // 
-            this.ramCheck.AutoSize = true;
-            this.ramCheck.Location = new System.Drawing.Point(6, 93);
-            this.ramCheck.Name = "ramCheck";
-            this.ramCheck.Size = new System.Drawing.Size(66, 17);
-            this.ramCheck.TabIndex = 22;
-            this.ramCheck.Text = "Memory:";
-            this.ramCheck.UseVisualStyleBackColor = true;
-            this.ramCheck.CheckedChanged += new System.EventHandler(this.ramCheck_CheckedChanged);
             // 
             // label4
             // 
@@ -297,9 +303,9 @@ namespace MCLauncher
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 23;
-            this.label2.Text = "Use version:";
+            this.label2.Text = "Version:";
             // 
             // verBox
             // 
@@ -463,6 +469,7 @@ namespace MCLauncher
             this.opendirBtn.TabIndex = 25;
             this.opendirBtn.Text = "Open dir";
             this.opendirBtn.UseVisualStyleBackColor = true;
+            this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
             // 
             // closeBtn
             // 
@@ -529,24 +536,6 @@ namespace MCLauncher
             this.x360Page.Text = "Xbox 360 Edition";
             this.x360Page.UseVisualStyleBackColor = true;
             // 
-            // resBoxWidth
-            // 
-            this.resBoxWidth.Enabled = false;
-            this.resBoxWidth.Location = new System.Drawing.Point(122, 64);
-            this.resBoxWidth.Name = "resBoxWidth";
-            this.resBoxWidth.Size = new System.Drawing.Size(246, 20);
-            this.resBoxWidth.TabIndex = 33;
-            this.resBoxWidth.TextChanged += new System.EventHandler(this.resBoxWidth_TextChanged);
-            // 
-            // resBoxHeight
-            // 
-            this.resBoxHeight.Enabled = false;
-            this.resBoxHeight.Location = new System.Drawing.Point(392, 64);
-            this.resBoxHeight.Name = "resBoxHeight";
-            this.resBoxHeight.Size = new System.Drawing.Size(246, 20);
-            this.resBoxHeight.TabIndex = 34;
-            this.resBoxHeight.TextChanged += new System.EventHandler(this.resBoxHeight_TextChanged);
-            // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,9 +570,7 @@ namespace MCLauncher
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button createBtn;
         private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.CheckBox dirCheck;
         private System.Windows.Forms.TextBox dirBox;
-        private System.Windows.Forms.CheckBox resCheck;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -605,7 +592,6 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox ramCheck;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button dirBtn;
         private System.Windows.Forms.Button javaBtn;
@@ -618,5 +604,8 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox offlineModeCheck;
         private System.Windows.Forms.TextBox resBoxHeight;
         private System.Windows.Forms.TextBox resBoxWidth;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

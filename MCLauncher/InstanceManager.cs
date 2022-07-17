@@ -29,16 +29,13 @@ namespace MCLauncher
 
 
 
-        public static string instCustDirectory = "";
-        public static bool useCustDirectory = false;
+        public static string instGameDir = "";
 
-        public static string instCustResWidth = "";
-        public static string instCustResHeight = "";
-        public static bool useCustResolution = false;
+        public static string instResWidth = "854";
+        public static string instResHeight = "480";
 
-        public static string instCustRamMin = "1024";
-        public static string instCustRamMax = "1024";
-        public static bool useCustRam = false;
+        public static string instRamMin = "1024";
+        public static string instRamMax = "1024";
 
         public static string instCustJava = "";
         public static bool useCustJava = false;
@@ -101,6 +98,12 @@ namespace MCLauncher
                 instmodBtn.Visible = false;
                 opendirBtn.Visible = false;
 
+                instGameDir = "";
+                instResWidth = "854";
+                instResHeight = "480";
+                instRamMax = "1024";
+                instRamMin = "1024";
+
             }
             else if (mode == "edit")
             {
@@ -109,8 +112,21 @@ namespace MCLauncher
                 instmodBtn.Visible = true;
                 opendirBtn.Visible = true;
                 nameBox.Enabled = false;
+
+                string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                //Set the LaunchJava stuff
+                foreach (var vers in data)
+                {
+                    resBoxWidth.Text = vers.instResWidth;
+                    resBoxHeight.Text = vers.instResHeight;
+
+                }
             }
 
+            resBoxWidth.Text = instResWidth;
+            resBoxHeight.Text = instResHeight;
             nameBox.Text = cfgInstName;
         }
 
@@ -146,25 +162,22 @@ namespace MCLauncher
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
                 {
                     byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n" +
-                        $"\"gameVer\":\"{cfgGameVer}\"," +
-                        $"\n\"typeVer\":\"{cfgTypeVer}\"," +
-                        $"\n\"linkVer\":\"{cfgLinkVer}\"," +
-                        $"\n\"useCustDir\":\"{useCustDirectory}\"," +
-                        $"\n\"custDir\":\"{instCustDirectory}\"," +
-                        $"\n\"useCustRes\":\"{useCustResolution}\"," +
-                        $"\n\"custResWidth\":\"{instCustResWidth}\"," +
-                        $"\n\"custResHeight\":\"{instCustResHeight}\"," +
-                        $"\n\"useCustRam\":\"{useCustRam}\"," +
-                        $"\n\"custRamMin\":\"{instCustRamMin}\"," +
-                        $"\n\"custRamMax\":\"{instCustRamMax}\"," +
+                        $"\"instVer\":\"{cfgGameVer}\"," +
+                        $"\n\"instType\":\"{cfgTypeVer}\"," +
+                        $"\n\"instUrl\":\"{cfgLinkVer}\"," +
+                        $"\n\"instDir\":\"{instGameDir}\"," +
+                        $"\n\"instResWidth\":\"{instResWidth}\"," +
+                        $"\n\"instResHeight\":\"{instResHeight}\"," +
+                        $"\n\"instRamMin\":\"{instRamMin}\"," +
+                        $"\n\"instRamMax\":\"{instRamMax}\"," +
                         $"\n\"useCustJava\":\"{useCustJava}\"," +
-                        $"\n\"custJava\":\"{instCustJava}\"," +
+                        $"\n\"instCustJava\":\"{instCustJava}\"," +
                         $"\n\"useCustJvm\":\"{useCustJvm}\"," +
-                        $"\n\"custJvm\":\"{instCustJvm}\"," +
+                        $"\n\"instCustJvm\":\"{instCustJvm}\"," +
                         $"\n\"useCustMethod\":\"{useCustMethod}\"," +
-                        $"\n\"custMethod\":\"{instCustMethod}\"," +
+                        $"\n\"instCustMethod\":\"{instCustMethod}\"," +
                         $"\n\"useCustJar\":\"{useCustJar}\"," +
-                        $"\n\"custJar\":\"{instCustJar}\"," +
+                        $"\n\"instCustJar\":\"{instCustJar}\"," +
                         $"\n\"useOfflineMode\":\"{useOfflineMode}\"" +
                         $"\n}}\n]");
 
@@ -201,8 +214,25 @@ namespace MCLauncher
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n\"gameVer\":\"{cfgGameVer}\",\n\"typeVer\":\"{cfgTypeVer}\",\n\"linkVer\":\"{cfgLinkVer}\"\n}}\n]");
-
+                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n" +
+                        $"\"instVer\":\"{cfgGameVer}\"," +
+                        $"\n\"instType\":\"{cfgTypeVer}\"," +
+                        $"\n\"instUrl\":\"{cfgLinkVer}\"," +
+                        $"\n\"instDir\":\"{instGameDir}\"," +
+                        $"\n\"instResWidth\":\"{instResWidth}\"," +
+                        $"\n\"instResHeight\":\"{instResHeight}\"," +
+                        $"\n\"instRamMin\":\"{instRamMin}\"," +
+                        $"\n\"instRamMax\":\"{instRamMax}\"," +
+                        $"\n\"useCustJava\":\"{useCustJava}\"," +
+                        $"\n\"instCustJava\":\"{instCustJava}\"," +
+                        $"\n\"useCustJvm\":\"{useCustJvm}\"," +
+                        $"\n\"instCustJvm\":\"{instCustJvm}\"," +
+                        $"\n\"useCustMethod\":\"{useCustMethod}\"," +
+                        $"\n\"instCustMethod\":\"{instCustMethod}\"," +
+                        $"\n\"useCustJar\":\"{useCustJar}\"," +
+                        $"\n\"instCustJar\":\"{instCustJar}\"," +
+                        $"\n\"useOfflineMode\":\"{useOfflineMode}\"" +
+                        $"\n}}\n]");
                     fs.Write(config, 0, config.Length);
                 }
                 MainWindow.reloadInstance();
@@ -230,22 +260,6 @@ namespace MCLauncher
                 createName = nameBox.Text;
                 tempName = createName;
                 createInstance();
-            }
-        }
-
-        private void dirCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if(dirBox.Enabled == true)
-            {
-                useCustDirectory = false;
-                dirBox.Enabled = false;
-                dirBtn.Enabled = false;
-            }
-            else
-            {
-                useCustDirectory = true;
-                dirBox.Enabled = true;
-                dirBtn.Enabled = true;
             }
         }
 
@@ -309,38 +323,6 @@ namespace MCLauncher
             }
         }
 
-        private void resCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (resBoxWidth.Enabled == true)
-            {
-                useCustResolution = false;
-                resBoxWidth.Enabled = false;
-                resBoxHeight.Enabled = false;
-            }
-            else
-            {
-                useCustResolution = true;
-                resBoxWidth.Enabled = true;
-                resBoxHeight.Enabled = true;
-            }
-        }
-
-        private void ramCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (maxRamBox.Enabled == true)
-            {
-                useCustRam = false;
-                maxRamBox.Enabled = false;
-                minRamBox.Enabled = false;
-            }
-            else
-            {
-                useCustRam = true;
-                maxRamBox.Enabled = true;
-                minRamBox.Enabled = true;
-            }
-        }
-
         private void custjarBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -370,17 +352,17 @@ namespace MCLauncher
 
         private void dirBox_TextChanged(object sender, EventArgs e)
         {
-            instCustDirectory = dirBox.Text;
+            instGameDir = dirBox.Text;
         }
 
         private void resBoxWidth_TextChanged(object sender, EventArgs e)
         {
-            instCustResWidth = resBoxWidth.Text;
+            instResWidth = resBoxWidth.Text;
         }
 
         private void resBoxHeight_TextChanged(object sender, EventArgs e)
         {
-            instCustResHeight = resBoxHeight.Text;
+            instResHeight = resBoxHeight.Text;
         }
 
         private void javaBox_TextChanged(object sender, EventArgs e)
@@ -493,6 +475,11 @@ namespace MCLauncher
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void opendirBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
