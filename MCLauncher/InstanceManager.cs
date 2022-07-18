@@ -34,8 +34,8 @@ namespace MCLauncher
         public static string instResWidth = "854";
         public static string instResHeight = "480";
 
-        public static string instRamMin = "1024";
-        public static string instRamMax = "1024";
+        public static int instRamMin = 1024;
+        public static int instRamMax = 1024;
 
         public static string instCustJava = "";
         public static bool useCustJava = false;
@@ -98,11 +98,13 @@ namespace MCLauncher
                 instmodBtn.Visible = false;
                 opendirBtn.Visible = false;
 
-                instGameDir = "";
+                instGameDir = $"";
                 instResWidth = "854";
                 instResHeight = "480";
-                instRamMax = "1024";
-                instRamMin = "1024";
+                instRamMax = 1024;
+                instRamMin = 1024;
+                useCustJava = true;
+                instCustJava = "java.exe";
 
             }
             else if (mode == "edit")
@@ -121,6 +123,20 @@ namespace MCLauncher
                 {
                     resBoxWidth.Text = vers.instResWidth;
                     resBoxHeight.Text = vers.instResHeight;
+
+                    minRamBox.Text = vers.instRamMin;
+                    maxRamBox.Text = vers.instRamMax;
+
+                    if(vers.useCustJava == "True")
+                    {
+                        javaCheck.Checked = true;
+                        javaBox.Text = vers.instCustJava;
+                    }
+                    else
+                    {
+                        javaCheck.Checked = false;
+                        javaBox.Text = vers.instCustJava;
+                    }
 
                 }
             }
@@ -145,6 +161,7 @@ namespace MCLauncher
                         cfgGameVer = vers.verName;
                         cfgLinkVer = vers.verLink;
                         cfgTypeVer = vers.verType;
+                        //TODO 
                     }
                 }
             }
@@ -383,6 +400,16 @@ namespace MCLauncher
         private void custjarBox_TextChanged(object sender, EventArgs e)
         {
             instCustJar = custjarBox.Text;
+        }
+
+        private void minRamBox_ValueChanged(object sender, EventArgs e)
+        {
+            instRamMin = Convert.ToInt32(minRamBox.Value);
+        }
+
+        private void maxRamBox_ValueChanged(object sender, EventArgs e)
+        {
+            instRamMax = Convert.ToInt32(maxRamBox.Value);
         }
 
         private void editionBox_SelectedIndexChanged(object sender, EventArgs e)

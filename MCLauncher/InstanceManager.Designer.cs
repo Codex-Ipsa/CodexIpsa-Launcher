@@ -208,6 +208,7 @@ namespace MCLauncher
             0,
             0,
             0});
+            this.minRamBox.ValueChanged += new System.EventHandler(this.minRamBox_ValueChanged);
             // 
             // maxRamBox
             // 
@@ -236,6 +237,7 @@ namespace MCLauncher
             0,
             0,
             0});
+            this.maxRamBox.ValueChanged += new System.EventHandler(this.maxRamBox_ValueChanged);
             // 
             // dirBtn
             // 

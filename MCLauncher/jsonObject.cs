@@ -69,6 +69,9 @@ namespace MCLauncher
         public string XErr { get; set; }
         public string id { get; set; }
         public string name { get; set; }
+
+        //assetIndex
+        public string objects { get; set; }
     }
 
     public class RootObject

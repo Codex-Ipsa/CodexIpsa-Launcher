@@ -34,6 +34,9 @@ namespace MCLauncher
             webBrowser1.Refresh();
             Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"Changelog URL loaded");
 
+            //Temporary test thing doesn't work yet
+            //AssetIndex.downloadIndex();
+
             //Check if user is logged in
             checkAuth();
 
@@ -253,6 +256,11 @@ namespace MCLauncher
                 LaunchJava.launchVerName = vers.instVer;
                 LaunchJava.launchVerUrl = vers.instUrl;
                 LaunchJava.launchVerType = vers.instType;
+                LaunchJava.launchWidth = vers.instResWidth;
+                LaunchJava.launchHeight = vers.instResHeight;
+                LaunchJava.launchXms = vers.instRamMin;
+                LaunchJava.launchXmx = vers.instRamMax;
+                //LaunchJava.use //TODO!!!
             }
             LaunchJava.currentInstance = Instance.comboBox1.Text;
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;

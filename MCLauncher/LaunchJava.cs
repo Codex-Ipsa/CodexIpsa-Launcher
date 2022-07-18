@@ -48,7 +48,6 @@ namespace MCLauncher
 
         public static string currentInstance;
 
-        public static string launchJavaLocation = "java.exe"; //TODO, custom Java
         public static string launchCommand;
         public static string launchJavaReq;
 
@@ -59,7 +58,6 @@ namespace MCLauncher
         public static string launchNativePath;
         public static string launchClientPath;
         public static string launchLibsPath;
-        public static string launchClasspath;
         public static string launchPlayerName;
         public static string launchPlayerUUID;
         public static string launchMpPass;
@@ -70,6 +68,16 @@ namespace MCLauncher
         public static string launchServerPort;
         public static string launchWidth = "854";
         public static string launchHeight = "480";
+        public static string launchJavaLocation;
+        public static bool useCustJava;
+
+        public static bool useCustJvm;
+        public static string launchClasspath;
+        public static bool useCustMethod;
+
+        public static bool useCustJar;
+
+        public static bool useOfflineMode;
 
         public static string gameDir;
         public static string assetDir;
