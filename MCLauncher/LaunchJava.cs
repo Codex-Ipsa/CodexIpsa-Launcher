@@ -68,7 +68,7 @@ namespace MCLauncher
         public static string launchServerPort;
         public static string launchWidth = "854";
         public static string launchHeight = "480";
-        public static string launchJavaLocation;
+        public static string launchJavaLocation = "java.exe";
         public static bool useCustJava;
 
         public static bool useCustJvm;

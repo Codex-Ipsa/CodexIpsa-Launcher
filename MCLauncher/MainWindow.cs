@@ -260,6 +260,7 @@ namespace MCLauncher
                 LaunchJava.launchHeight = vers.instResHeight;
                 LaunchJava.launchXms = vers.instRamMin;
                 LaunchJava.launchXmx = vers.instRamMax;
+                //LaunchJava.javaLocation = vers.instCustJava;
                 //LaunchJava.use //TODO!!!
             }
             LaunchJava.currentInstance = Instance.comboBox1.Text;

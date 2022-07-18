@@ -105,7 +105,6 @@ namespace MCLauncher
                 instRamMin = 1024;
                 useCustJava = true;
                 instCustJava = "java.exe";
-
             }
             else if (mode == "edit")
             {
