@@ -40,7 +40,7 @@ namespace MCLauncher
             InitializeComponent();
             webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
 
-            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"Started the auth process, this will take a while.");
+            Logger.logError("[MSAuth]", $"Started the auth process, this will take a while.");
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
@@ -141,7 +141,7 @@ namespace MCLauncher
             }
             catch (WebException e)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"XBL request returned an error: {e.Message}");
+                Logger.logError("[MSAuth]", $"XBL request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -184,7 +184,7 @@ namespace MCLauncher
             }
             catch (WebException e)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"XSTS request returned an error: {e.Message}");
+                Logger.logError("[MSAuth]", $"XSTS request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -224,7 +224,7 @@ namespace MCLauncher
             catch (WebException e)
             {
                 hasErrored = true;
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
+                Logger.logError("[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
             }
 
         }
@@ -252,7 +252,7 @@ namespace MCLauncher
             catch (WebException e)
             {
                 hasErrored = true;
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
+                Logger.logError("[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
             }
             //TODO: VERIFY THE USER ACTALLY OWNS THE GAME (lol) [maybe is done already?]
         }
@@ -289,7 +289,7 @@ namespace MCLauncher
             }
             catch (WebException e)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
+                Logger.logError("[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -325,7 +325,7 @@ namespace MCLauncher
             }
             catch (WebException e)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
+                Logger.logError("[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -378,13 +378,13 @@ namespace MCLauncher
             }
             else
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
+                Logger.logError("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
                 mpPass = "-";
             }
             }
             catch(WebException e)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
+                Logger.logError("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -404,7 +404,7 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MSAuth]", $"Could not authenticate you.");
+                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
             }
             else
             {
@@ -431,7 +431,7 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MSAuth]", $"Could not authenticate you.");
+                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
                 hasErrored = false;
             }
             else
@@ -454,7 +454,7 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MSAuth]", $"Could not authenticate you.");
+                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
                 hasErrored = false;
             }
             else

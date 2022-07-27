@@ -21,9 +21,14 @@ namespace MCLauncher
     {
         public static string type;
         public static bool isDone = false;
+        public static List<string> libsList = new List<string>();
 
         public static void Check()
         {
+            Logger.logMessage("[LibsCheck]", $"Lenght 1: {libsList.Count}");
+            libsList.Clear();
+            Logger.logMessage("[LibsCheck]", $"Lenght 2: {libsList.Count}");
+
             string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
             Console.WriteLine($"[LibsCheck] Type is {type}");
             Console.WriteLine($"[LibsCheck] Url is {url}");
@@ -34,6 +39,9 @@ namespace MCLauncher
 
                 foreach (var libs in data)
                 {
+                    //Add names to a list for LaunchJava
+                    libsList.Add(libs.name);
+
                     //Download required libraries
                     if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                     {
@@ -53,6 +61,7 @@ namespace MCLauncher
                         }
                     }
                 }
+                Logger.logMessage("[LibsCheck]", $"Lenght 3: {libsList.Count}");
                 isDone = true;
             }
         }

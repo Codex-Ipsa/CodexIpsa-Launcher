@@ -8,17 +8,28 @@ namespace MCLauncher
 {
     class Logger
     {
-        public static void log(ConsoleColor headerColor, ConsoleColor textColor, string header, string text)
+        public static void logMessage(string header, string text)
         {
-            Console.ForegroundColor = headerColor;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(header);
-            Console.ForegroundColor = textColor;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
         }
 
-        public static void gameLog(string source, string text)
+        public static void logError(string header, string text)
         {
-            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(header);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine(" " + text);
+        }
+
+        public static void logGame(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("[Game]");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine(" " + text);
         }
     }
 }

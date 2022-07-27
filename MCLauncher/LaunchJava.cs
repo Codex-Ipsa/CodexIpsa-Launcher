@@ -113,8 +113,6 @@ namespace MCLauncher
                     Console.WriteLine($"[LaunchJava] Classpath: {launchClasspath}");
                     launchLibsType = vers.libsType;
                     Console.WriteLine($"[LaunchJava] Libs type: {launchLibsType}");
-                    launchLibsPath = vers.libs;
-                    Console.WriteLine($"[LaunchJava] Libs path: {launchLibsPath}");
                     launchProxyPort = vers.proxy;
                     Console.WriteLine($"[LaunchJava] Proxy port: {launchProxyPort}");
                     launchCmdAddon = vers.addCmd;
@@ -147,10 +145,12 @@ namespace MCLauncher
             }
             Console.WriteLine($"[LaunchJava] Loaded version data!");
 
+            
+
             MSAuth.onGameStart();
             if (MSAuth.hasErrored == true)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MSAuth]", $"Could not authenticate you.");
+                Logger.logMessage( $"[MSAuth]", $"Could not authenticate you.");
                 MSAuth.hasErrored = false;
             }
             else
@@ -170,7 +170,7 @@ namespace MCLauncher
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
                 Console.WriteLine($"[LaunchJava] Client path: {launchClientPath}");
-                launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true";
+                launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //-Dstand-alone=true
                 Console.WriteLine($"[LaunchJava] Proxy: {launchProxy}");
                 launchNativePath = $".codexipsa/libs/natives/";
                 Console.WriteLine($"[LaunchJava] Natives path:{launchNativePath}");
@@ -199,13 +199,20 @@ namespace MCLauncher
                 Console.WriteLine($"[LaunchJava] Starting libs check...");
                 LibsCheck.type = launchLibsType;
                 LibsCheck.Check();
+
+                foreach(var lib in LibsCheck.libsList)
+                {
+                    Logger.logMessage("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
+                    launchLibsPath += $".codexipsa\\libs\\{lib};";
+                }
+
                 Console.WriteLine($"[LaunchJava] Done!");
 
                 //TODO: CHECK IF AUTHENTICATED
                 if (launchPlayerAccessToken == String.Empty || launchPlayerAccessToken == null)
                 {
-                    Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[LaunchJava]", "Failed to authenticate!");
-                    Logger.log(ConsoleColor.Red, ConsoleColor.Gray, "[LaunchJava]", "The game will start in offline mode.");
+                    Logger.logMessage("[LaunchJava]", "Failed to authenticate!");
+                    Logger.logMessage("[LaunchJava]", "The game will start in offline mode.");
                     launchPlayerAccessToken = "null";
                     launchPlayerUUID = "null";
                     launchMpPass = "null";
@@ -238,6 +245,7 @@ namespace MCLauncher
                     launchCommand += $" {launchCmdAddon6} with={launchWidth} height={launchHeight}";
                 }
                 //Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
+                //launchCommand = $"-Xmx1024m -Xms1024m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort=11705 -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true -Djava.library.path=.codexipsa/libs/natives/ -cp \".codexipsa/versions/java/b1.7.3.jar;.codexipsa/libs/betacraft-wrapper-01072022.jar;.codexipsa/libs/lwjgl-2.9.0.jar;.codexipsa/libs/lwjgl_util-2.9.0.jar;.codexipsa/libs/jinput-2.0.5.jar\" uk.betacraft.mcwrapper.BCWrapper username=Guest sessionid=token:null:null width=854 height=480 frameName=\"Minecraft b1.7.3\" --workDir \"D:\\Source Code\\MineC-raft-Launcher\\MCLauncher\bin\\Debug\\.codexipsa\\instance\\Default\" with=854 height=480";
                 Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");
 
                 //Check if Java exists
@@ -275,6 +283,7 @@ namespace MCLauncher
 
                     VerSelect.checkTab = "java";
                     LibsCheck.isDone = false;
+                    launchLibsPath = string.Empty;
                     process.WaitForExit();
 
                     //Reset appdata back to original
@@ -282,8 +291,6 @@ namespace MCLauncher
                     Console.WriteLine($"[LaunchJava] OldAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
 
                     Console.WriteLine($"[LaunchJava] Closing the game...");
-                    //Process.Start("java.exe");
-                    //Console.WriteLine("Just pretend the game started");
                 }
                 catch (System.ComponentModel.Win32Exception ex)
                 {

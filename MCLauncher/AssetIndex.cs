@@ -23,7 +23,7 @@ namespace MCLauncher
                 string s = json.Replace("{\"objects\": ", "\"objects\": ");
                 string s2 = s.Replace("}, \"virtual\": true}", "}, \"virtual\": true");
 
-                Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[AssetIndex]", $"Fixed index content: [{s2}]");
+                Logger.logMessage("[AssetIndex]", $"Fixed index content: [{s2}]");
 
                 List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>($"[{s2}]");
 
@@ -32,7 +32,7 @@ namespace MCLauncher
                 foreach (var vers in data)
                 {
                     
-                    Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[AssetIndex]", $"Ver: {vers.objects}");
+                    Logger.logMessage("[AssetIndex]", $"Ver: {vers.objects}");
                 }
             }
         }

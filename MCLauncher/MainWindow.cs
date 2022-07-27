@@ -25,14 +25,14 @@ namespace MCLauncher
         private void MainWindow_Load(object sender, EventArgs e)
         {
             //Set the window name
-            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"MineC#raft Launcher has started!");
+            Logger.logMessage($"[MainWindow]", $"MineC#raft Launcher has started!");
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
-            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
+            Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
-            Logger.log(ConsoleColor.Green, ConsoleColor.Gray, $"[MainWindow]", $"Changelog URL loaded");
+            Logger.logMessage($"[MainWindow]", $"Changelog URL loaded");
 
             //Temporary test thing doesn't work yet
             //AssetIndex.downloadIndex();
@@ -288,7 +288,7 @@ namespace MCLauncher
 
             if(MSAuth.hasErrored == true)
             {
-                Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MainWindow]", $"MSAuth returned hasErrored. Please try again.");
+                Logger.logMessage($"[MainWindow]", $"MSAuth returned hasErrored. Please try again.");
                 MSAuth.hasErrored = false;
             }
             else
@@ -330,7 +330,7 @@ namespace MCLauncher
                 MSAuth.usernameFromRefreshToken();
                 if(MSAuth.hasErrored == true)
                 {
-                    Logger.log(ConsoleColor.Red, ConsoleColor.Gray, $"[MainWindow]", $"MSAuth returned hasErrored. Please re-log in.");
+                    Logger.logMessage($"[MainWindow]", $"MSAuth returned hasErrored. Please re-log in.");
                     MSAuth.hasErrored = false;
                     Properties.Settings.Default.msRefreshToken = String.Empty;
                     Properties.Settings.Default.Save();
