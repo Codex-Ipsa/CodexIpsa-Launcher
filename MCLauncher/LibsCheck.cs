@@ -25,13 +25,12 @@ namespace MCLauncher
 
         public static void Check()
         {
-            Logger.logMessage("[LibsCheck]", $"Lenght 1: {libsList.Count}");
+            Logger.logMessage("[LibsCheck]", $"Starting LibsCheck");
             libsList.Clear();
-            Logger.logMessage("[LibsCheck]", $"Lenght 2: {libsList.Count}");
-
             string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
-            Console.WriteLine($"[LibsCheck] Type is {type}");
-            Console.WriteLine($"[LibsCheck] Url is {url}");
+            Logger.logMessage("[LibsCheck]", $"Type: {type}");
+            Logger.logMessage("[LibsCheck]", $"Url: {url}");
+
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(url);
@@ -61,7 +60,7 @@ namespace MCLauncher
                         }
                     }
                 }
-                Logger.logMessage("[LibsCheck]", $"Lenght 3: {libsList.Count}");
+                Logger.logMessage("[LibsCheck]", $"Done");
                 isDone = true;
             }
         }

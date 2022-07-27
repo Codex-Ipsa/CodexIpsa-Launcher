@@ -99,7 +99,8 @@ namespace MCLauncher
 
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
-            Console.WriteLine($"[LaunchJava] Loading version data from {launchJsonUrl}...");
+            Logger.logMessage("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
+            
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(launchJsonUrl);
@@ -108,83 +109,79 @@ namespace MCLauncher
                 foreach (var vers in data)
                 {
                     launchJavaReq = vers.minJava;
-                    Console.WriteLine($"[LaunchJava] Minimum Java: {launchJavaReq}");
+                    Logger.logMessage("[LaunchJava]", $"Minimum java: {launchJavaReq}");
                     launchClasspath = vers.launchMethod;
-                    Console.WriteLine($"[LaunchJava] Classpath: {launchClasspath}");
+                    Logger.logMessage("[LaunchJava]", $"Main class: {launchClasspath}");
                     launchLibsType = vers.libsType;
-                    Console.WriteLine($"[LaunchJava] Libs type: {launchLibsType}");
+                    Logger.logMessage("[LaunchJava]", $"Libs type: {launchLibsType}");
                     launchProxyPort = vers.proxy;
-                    Console.WriteLine($"[LaunchJava] Proxy port: {launchProxyPort}");
+                    Logger.logMessage("[LaunchJava]", $"Proxy port: {launchProxyPort}");
                     launchCmdAddon = vers.addCmd;
-                    Console.WriteLine($"[LaunchJava] Addon: {launchCmdAddon}");
+                    Logger.logMessage("[LaunchJava]", $"Addon: {launchCmdAddon}");
                     if (vers.getServer == "true")
                     {
-                        Console.WriteLine($"[LaunchJava] GetServer is true");
+                        Logger.logMessage("[LaunchJava]", $"getServer returned true");
                         EnterIp ei = new EnterIp();
                         ei.ShowDialog();
 
                         if (EnterIp.inputedText == String.Empty || EnterIp.inputedText == null)
                         {
                             launchJoinMP = false;
-                            Console.WriteLine($"[LaunchJava] Server IP returned empty.");
+                            Logger.logMessage("[LaunchJava]", $"serverIP returned empty");
                         }
                         else
                         {
                             launchServerIP = EnterIp.serverIP;
                             launchServerPort = EnterIp.serverPort;
                             launchJoinMP = true;
-                            Console.WriteLine($"[LaunchJava] Server IP: {launchServerIP}");
-                            Console.WriteLine($"[LaunchJava] Server port: {launchServerPort}");
+                            Logger.logMessage("[LaunchJava]", $"Server IP: {launchServerIP}");
+                            Logger.logMessage("[LaunchJava]", $"Server port: {launchServerPort}");
                         }
                     }
                     else
                     {
-                        Console.WriteLine($"[LaunchJava] GetServer is false");
+                        Logger.logMessage("[LaunchJava]", $"getServer returned false");
                     }
                 }
             }
-            Console.WriteLine($"[LaunchJava] Loaded version data!");
-
-            
+            Logger.logMessage("[LaunchJava]", $"Version data succesfully loaded");            
 
             MSAuth.onGameStart();
             if (MSAuth.hasErrored == true)
             {
-                Logger.logMessage( $"[MSAuth]", $"Could not authenticate you.");
+                Logger.logError("[MSAuth/LaunchJava]", $"Could not authenticate you!");
                 MSAuth.hasErrored = false;
             }
             else
             {
-                Console.WriteLine($"[LaunchJava] MP pass: {launchMpPass}");
+                Logger.logMessage("[LaunchJava]", $"Mppass: {launchMpPass}");
                 //Create required dirs
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions\\java");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
-                Console.WriteLine($"[LaunchJava] Directories created!");
+                Logger.logMessage("[LaunchJava]", $"Directories created");
 
-                Console.WriteLine($"[LaunchJava] Version: {launchVerName}");
-                Console.WriteLine($"[LaunchJava] Type: {launchVerType}");
-                Console.WriteLine($"[LaunchJava] Url: {launchVerUrl}");
+                Logger.logMessage("[LaunchJava]", $"Version name: {launchVerName}");
+                Logger.logMessage("[LaunchJava]", $"Version type: {launchVerType}");
+                Logger.logMessage("[LaunchJava]", $"Version URL: {launchVerUrl}");
 
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
-                Console.WriteLine($"[LaunchJava] Client path: {launchClientPath}");
+                Logger.logMessage("[LaunchJava]", $"Client path: {launchClientPath}");
                 launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //-Dstand-alone=true
-                Console.WriteLine($"[LaunchJava] Proxy: {launchProxy}");
+                Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxy}");
                 launchNativePath = $".codexipsa/libs/natives/";
-                Console.WriteLine($"[LaunchJava] Natives path:{launchNativePath}");
+                Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
                 workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
-                Console.WriteLine($"[LaunchJava] WorkDir: {workDir}");
+                Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
-                Console.WriteLine($"[LaunchJava] GameDir: {gameDir}");
+                Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
                 assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO, customise
-                Console.WriteLine($"[LaunchJava] AssetsDir: {assetDir}");
-                /*launchPlayerName = Properties.Settings.Default.playerName;*/
-                Console.WriteLine($"[LaunchJava] Player name: {launchPlayerName}");
+                Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
+                Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
                 //Download client
-                Console.WriteLine($"[LaunchJava] Donloading client...");
                 var dlClient = new WebClient();
                 if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\versions\\java\\{launchVerName}.jar"))
                 {
@@ -193,10 +190,8 @@ namespace MCLauncher
                     DownloadProgress dl = new DownloadProgress();
                     dl.ShowDialog();
                 }
-                Console.WriteLine($"[LaunchJava] Done!");
+                Logger.logMessage("[LaunchJava]", $"Downloaded client.jar");
 
-                //Check for libs - TODO
-                Console.WriteLine($"[LaunchJava] Starting libs check...");
                 LibsCheck.type = launchLibsType;
                 LibsCheck.Check();
 
@@ -206,13 +201,11 @@ namespace MCLauncher
                     launchLibsPath += $".codexipsa\\libs\\{lib};";
                 }
 
-                Console.WriteLine($"[LaunchJava] Done!");
-
                 //TODO: CHECK IF AUTHENTICATED
                 if (launchPlayerAccessToken == String.Empty || launchPlayerAccessToken == null)
                 {
-                    Logger.logMessage("[LaunchJava]", "Failed to authenticate!");
-                    Logger.logMessage("[LaunchJava]", "The game will start in offline mode.");
+                    Logger.logError("[LaunchJava]", $"Failed to authenticate");
+                    Logger.logError("[LaunchJava]", $"The game will start in offline mode");
                     launchPlayerAccessToken = "null";
                     launchPlayerUUID = "null";
                     launchMpPass = "null";
@@ -231,7 +224,7 @@ namespace MCLauncher
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass}";
                 }
 
-                launchCommand += $" -Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
+                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system
@@ -244,23 +237,25 @@ namespace MCLauncher
 
                     launchCommand += $" {launchCmdAddon6} with={launchWidth} height={launchHeight}";
                 }
-                //Console.WriteLine($"[LaunchJava] Launch command done: **{launchCommand}**");
-                //launchCommand = $"-Xmx1024m -Xms1024m -DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort=11705 -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true -Djava.library.path=.codexipsa/libs/natives/ -cp \".codexipsa/versions/java/b1.7.3.jar;.codexipsa/libs/betacraft-wrapper-01072022.jar;.codexipsa/libs/lwjgl-2.9.0.jar;.codexipsa/libs/lwjgl_util-2.9.0.jar;.codexipsa/libs/jinput-2.0.5.jar\" uk.betacraft.mcwrapper.BCWrapper username=Guest sessionid=token:null:null width=854 height=480 frameName=\"Minecraft b1.7.3\" --workDir \"D:\\Source Code\\MineC-raft-Launcher\\MCLauncher\bin\\Debug\\.codexipsa\\instance\\Default\" with=854 height=480";
-                Console.WriteLine($"[LaunchJava] Java location: {launchJavaLocation}");
+                if(Globals.isDebug)
+                {
+                    Logger.logMessage("[LaunchJava]", $"Launch cmd done: {launchCommand}");
+                }
+                Logger.logMessage("[LaunchJava]", $"Java location: {launchJavaLocation}");
 
                 //Check if Java exists
                 try
                 {
-                    Console.WriteLine($"[LaunchJava] Launching the game...");
-                    //get current appdata for later
+                    Logger.logMessage("[LaunchJava]", $"Launching the game");
+
+                    //Get current appdata for later
                     var tempAppdata = Environment.GetEnvironmentVariable("Appdata");
-                    Console.WriteLine($"[LaunchJava] TempAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
+                    Logger.logMessage("[LaunchJava]", $"Current Appdata is {Environment.GetEnvironmentVariable("Appdata")}");
 
                     //Set appdata to instance dir
                     Environment.SetEnvironmentVariable("Appdata", workDir);
-                    Console.WriteLine($"[LaunchJava] InstAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
-
-                    Console.WriteLine($"[LaunchJava] Game output:");
+                    Logger.logMessage("[LaunchJava]", $"Changed Appdata to {Environment.GetEnvironmentVariable("Appdata")}");
+                    Logger.logMessage("[LaunchJava]", $"Game output:");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     //Start the game
                     Process process = new Process();
@@ -288,15 +283,13 @@ namespace MCLauncher
 
                     //Reset appdata back to original
                     Environment.SetEnvironmentVariable("Appdata", tempAppdata);
-                    Console.WriteLine($"[LaunchJava] OldAppdata: {Environment.GetEnvironmentVariable("Appdata")}");
-
-                    Console.WriteLine($"[LaunchJava] Closing the game...");
+                    Logger.logMessage("[LaunchJava]", $"Changed Appdata back to {Environment.GetEnvironmentVariable("Appdata")}");
+                    Logger.logMessage("[LaunchJava]", $"Game closed");
                 }
                 catch (System.ComponentModel.Win32Exception ex)
                 {
                     //TODO: start some java install wizard thing LMFAO
-                    Console.WriteLine("[LaunchJava] Could not find Java!");
-                    Console.WriteLine(ex.Message);
+                    Logger.logError("[LaunchJava]", $"Could not find Java: {ex.Message}");
                 }
             }
         }
