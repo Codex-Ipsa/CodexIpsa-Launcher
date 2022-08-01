@@ -69,6 +69,9 @@ namespace MCLauncher
         public string XErr { get; set; }
         public string id { get; set; }
         public string name { get; set; }
+        public string user_code { get; set; }
+        public string device_code { get; set; }
+        public string verification_uri { get; set; }
 
         //assetIndex
         public string objects { get; set; }

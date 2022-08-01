@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -11,6 +12,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -32,15 +34,23 @@ namespace MCLauncher
         public static string refreshToken;
         public static string mpPass;
 
+        public static string userCode;
+        public static string deviceCode;
+        public static string deviceUrl;
+
         public static bool hasErrored = false;
+
+        public static int deviceLimit = 900;
+        public static int deviceCurrent = 0;
 
 
         public MSAuth()
         {
             InitializeComponent();
-            webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
+            //webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
 
-            Logger.logError("[MSAuth]", $"Started the auth process, this will take a while.");
+            Logger.logMessage("[MSAuth]", $"Started the auth process, this will take a while.");
+            DeviceFlowTest();
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
@@ -91,6 +101,104 @@ namespace MCLauncher
                 refreshToken = vers.refresh_token;
                 //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"RefreshToken: {refreshToken}");
             }
+        }
+
+        public static void deviceFlow()
+        {
+            //This uses the test azure app, change that!!!
+            var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
+            deviceRequest.Method = "GET";
+            deviceRequest.ContentType = "application/x-www-form-urlencoded";
+            var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
+            var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
+            Logger.logMessage("[MSAuth]", $"Deviceflow test response: {deviceResponseString}");
+
+
+            string deviceJson = $"[{deviceResponseString}]";
+
+            List<jsonObject> deviceData = JsonConvert.DeserializeObject<List<jsonObject>>(deviceJson);
+            foreach (var vers in deviceData)
+            {
+                userCode = vers.user_code;
+                deviceCode = vers.device_code;
+                deviceUrl = vers.verification_uri;
+
+                Logger.logMessage("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
+                Logger.logMessage("[MSAuth]", $"Device code: {deviceCode}");
+
+                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"AccessToken: {accessToken}");
+                refreshToken = vers.refresh_token;
+                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"RefreshToken: {refreshToken}");
+            }
+
+            System.Timers.Timer myTimer = new System.Timers.Timer();
+            myTimer.Elapsed += new ElapsedEventHandler(deviceFlowPing);
+            myTimer.Interval = 5000; // 1000 ms is one second
+            myTimer.Start();
+            while (deviceCurrent <= 180)
+            {
+                if (deviceCurrent > 180)
+                {
+                    myTimer.Stop();
+                    myTimer.Dispose();
+                }
+            }
+        }
+
+        public static void deviceFlowPing(object source, ElapsedEventArgs e)
+        {
+            Logger.logMessage("[MSAuth]", $"Test! 1s! {deviceCurrent}");
+
+            //var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/token?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code={deviceCode}");
+
+            /*Uri test = new Uri($"https://login.microsoftonline.com/consumers/oauth2/v2.0/token?grant_type=urn:ietf:params:oauth:grant-type:device_code&client_id=6731de76-14a6-49ae-97bc-6eba6914391e&device_code={deviceCode}");
+            var deviceRequest = (HttpWebRequest)WebRequest.Create(test.AbsoluteUri);
+            deviceRequest.Method = "POST";
+            deviceRequest.ContentType = "application/x-www-form-urlencoded";
+            var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
+            var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
+            Logger.logMessage("[MSAuth]", $"Deviceflow test response: {deviceResponseString}");*/
+
+            var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.microsoftonline.com/consumers/oauth2/v2.0/token");
+            var tokenPostData = "grant_type=" + Uri.EscapeDataString("urn:ietf:params:oauth:grant-type:device_code");
+            tokenPostData += "&client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
+            tokenPostData += "&device_code=" + Uri.EscapeDataString($"{deviceCode}");
+            var tokenData = Encoding.ASCII.GetBytes(tokenPostData);
+            tokenRequest.Method = "POST";
+            tokenRequest.ContentType = "application/x-www-form-urlencoded";
+            tokenRequest.ContentLength = tokenData.Length;
+            //Logger.logMessage("[MSAuth]", $"Post data: {tokenPostData}");
+
+            //This has to be done because of MS's shitty service - thanks!
+            try
+            {
+                using (var stream = tokenRequest.GetRequestStream())
+                {
+                    stream.Write(tokenData, 0, tokenData.Length);
+                }
+                var tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
+                var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
+
+            }
+            catch (WebException ex)
+            {
+                using (WebResponse response = ex.Response)
+                {
+                    HttpWebResponse httpResponse = (HttpWebResponse)response;
+                    Console.WriteLine("Error code: {0}", httpResponse.StatusCode);
+                    using (Stream data = response.GetResponseStream())
+                    using (var reader = new StreamReader(data))
+                    {
+                        string text = reader.ReadToEnd();
+                        Console.WriteLine(text);
+                    }
+                }
+            }
+
+            deviceCurrent++;
+
+
+
         }
 
         public static void xblAuth()
@@ -417,6 +525,11 @@ namespace MCLauncher
             /*Console.WriteLine($"[MSAuth] Seems like there was an error in getting your Xbox account data.");
             Console.WriteLine($"[MSAuth] XError code: {XError}.");*/
 
+        }
+
+        public void DeviceFlowTest()
+        {
+            deviceFlow();
         }
 
         public static void usernameFromRefreshToken()

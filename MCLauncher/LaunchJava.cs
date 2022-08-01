@@ -85,18 +85,6 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
-            //Create directories
-            /*Directory.CreateDirectory($"{Globals.currentPath}\\bin");
-            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions");
-            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions\\java");
-            Directory.CreateDirectory($"{Globals.currentPath}\\bin\\libs");
-            gameDir = $"\"{Globals.currentPath}\\bin\\instance\\{instanceName}\\game\"";
-            assetDir = $"\"{Globals.currentPath}\\bin\\instance\\{instanceName}\\assets\"";
-            if (isCustom == false)
-            {
-                clientPath = "bin/versions/java/" + selectedVer + ".jar";
-            }*/
-
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
             Logger.logMessage("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
