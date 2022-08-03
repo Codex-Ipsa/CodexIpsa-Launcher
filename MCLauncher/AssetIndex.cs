@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MCLauncher
 {
@@ -17,24 +15,32 @@ namespace MCLauncher
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(testurl);
-                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[AssetIndex]", $"Donloaded index content: {json}");
-               // Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[AssetIndex]", $"End of index content");
-                
-                string s = json.Replace("{\"objects\": ", "\"objects\": ");
-                string s2 = s.Replace("}, \"virtual\": true}", "}, \"virtual\": true");
+                string json2 = $"[{json}]";
 
-                Logger.logMessage("[AssetIndex]", $"Fixed index content: [{s2}]");
-
-                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>($"[{s2}]");
-
-
-
-                foreach (var vers in data)
+                using (var sr = new StringReader(json2))
+                using (var jr = new JsonTextReader(sr))
                 {
-                    
-                    Logger.logMessage("[AssetIndex]", $"Ver: {vers.objects}");
+                    var serial = new JsonSerializer();
+                    serial.Formatting = Formatting.Indented;
+                    var obj = serial.Deserialize<assetIndexJson>(jr);
+
+                    var reserializedJSON = JsonConvert.SerializeObject(obj, Formatting.Indented);
+
+                    Console.WriteLine("Re-serialized JSON: ");
+                    Console.WriteLine(reserializedJSON);
                 }
             }
         }
+    }
+
+    class assetIndexJson
+    {
+        public Dictionary<string, List<assetIndexObj>> objects { get; set; }
+    }
+
+    class assetIndexObj
+    {
+        public string hash { get; set; }
+        public int size { get; set; }
     }
 }

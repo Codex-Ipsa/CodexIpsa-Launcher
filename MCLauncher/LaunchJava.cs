@@ -26,7 +26,6 @@ namespace MCLauncher
         //Launch
         public static string instanceName;
         public static string javaLocation = "java.exe";
-        public static string proxyPort;
         public static string launchCmd;
         public static string clientPath;
         public static string launchMethod;
