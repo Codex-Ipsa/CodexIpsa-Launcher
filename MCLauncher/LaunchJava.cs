@@ -164,7 +164,7 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\""; //TODO, customise
+                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\\virtual\\legacy"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 

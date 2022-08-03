@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace MCLauncher
@@ -12,24 +14,73 @@ namespace MCLauncher
 
         public static void downloadIndex()
         {
-            using (WebClient client = new WebClient())
+            List<string> list1 = new List<string>();
+            WebClient wc = new WebClient();
+            //string json = "{ProdId:\"1\",Title:\"C#\",Author:\"Jeffy\",Publisher:\"XYZ\",Category:\"Microsoft\"}";
+            string json = wc.DownloadString(testurl);
+            JObject obj = JsonConvert.DeserializeObject<JObject>(json);
+            var properties = obj.Properties();
+
+            string finalJson = "[\n";
+            foreach (var prop in properties)
             {
-                string json = client.DownloadString(testurl);
-                string json2 = $"[{json}]";
+                string key = prop.Name;
+                object value = prop.Value;
+                //Console.WriteLine("THIS IS A START+" + value.ToString());
 
-                using (var sr = new StringReader(json2))
-                using (var jr = new JsonTextReader(sr))
+                string assets = value.ToString();
+                if (assets.Contains("icon_16x16.png"))
                 {
-                    var serial = new JsonSerializer();
-                    serial.Formatting = Formatting.Indented;
-                    var obj = serial.Deserialize<assetIndexJson>(jr);
+                    JObject obj2 = JsonConvert.DeserializeObject<JObject>(assets);
+                    var properties2 = obj2.Properties();
+                    foreach (var prop2 in properties2)
+                    {
+                        string key2 = prop2.Name;
+                        object value2 = prop2.Value;
+                        list1.Add(value2.ToString());
+                        //Console.WriteLine("THIS IS A START+" + value.ToString());
 
-                    var reserializedJSON = JsonConvert.SerializeObject(obj, Formatting.Indented);
-
-                    Console.WriteLine("Re-serialized JSON: ");
-                    Console.WriteLine(reserializedJSON);
+                        //Console.WriteLine(key + "=" + value);
+                    }
+                    foreach (var val in list1)
+                    {
+                        //Console.WriteLine(val + ",");
+                        finalJson += val.ToString() + ",";
+                    }
+                    finalJson += "\n]";
+                    //Console.WriteLine(finalJson);
                 }
+                //Console.WriteLine(key + "=" + value);
             }
+
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(finalJson);
+
+            foreach (var vers in data)
+            {
+                string firstTwo = vers.hash.Substring(0, 2);
+                string fullHash = vers.hash;
+                //Console.WriteLine("First two: " + firstTwo);
+                //Console.WriteLine("Full hash: " + fullHash);
+
+                if (!File.Exists($"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}\\{fullHash}"))
+                {
+
+                    using (WebClient client = new WebClient())
+                    {
+                        Directory.CreateDirectory($"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}");
+                        client.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}\\{fullHash}");
+                        Console.WriteLine("Downloaded: " + fullHash + "\n");
+                    }
+                }
+                else
+                {
+                    //Do nothing
+                    //Console.WriteLine("Already exists!\n");
+                }
+
+
+            }
+
         }
     }
 

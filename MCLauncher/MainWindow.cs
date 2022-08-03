@@ -36,7 +36,7 @@ namespace MCLauncher
             Logger.logMessage($"[MainWindow]", $"Changelog URL loaded");
 
             //Temporary test thing doesn't work yet
-            //AssetIndex.downloadIndex();
+            AssetIndex.downloadIndex();
 
             //Check if user is logged in
             checkAuth();

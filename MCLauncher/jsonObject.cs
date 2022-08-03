@@ -73,7 +73,7 @@ namespace MCLauncher
         public string verification_uri { get; set; }
 
         //assetIndex
-        public string objects { get; set; }
+        public string hash { get; set; }
     }
 
     public class RootObject
