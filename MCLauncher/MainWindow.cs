@@ -27,6 +27,7 @@ namespace MCLauncher
             //Set the window name
             Logger.logMessage($"[MainWindow]", $"MineC#raft Launcher has started!");
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
+            Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
             //Changelog url
