@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -48,23 +49,44 @@ namespace MCLauncher
         public MSAuth()
         {
             InitializeComponent();
-            //webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
-
             Logger.logMessage("[MSAuth]", $"Started the auth process, this will take a while.");
-            //DeviceFlowTest();
+            webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
+            //This uses the test azure app, change that!!!
 
+            /*var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin%20offline_access");
+            deviceRequest.Method = "GET";
+            deviceRequest.ContentType = "application/x-www-form-urlencoded";
+            var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
+            var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
+            Logger.logMessage("[MSAuth]", $"Deviceflow test response: {deviceResponseString}");
+
+
+            string deviceJson = $"[{deviceResponseString}]";
+
+            List<jsonObject> deviceData = JsonConvert.DeserializeObject<List<jsonObject>>(deviceJson);
+            foreach (var vers in deviceData)
+            {
+                userCode = vers.user_code;
+                deviceCode = vers.device_code;
+                deviceUrl = vers.verification_uri;
+
+                Logger.logMessage("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
+                Logger.logMessage("[MSAuth]", $"Device code: {deviceCode}");
+                codeLabel.Text = $"And enter the code {userCode}";
+            }
+            this.Refresh();*/
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             browserAddress = webBrowser1.Url.ToString();
-            //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"Browser navigated to {browserAddress}");
+            //Logger.logMessage("[MSAuth]", $"Browser navigated to {browserAddress}");
 
             if (browserAddress.StartsWith("https://codex-ipsa.dejvoss.cz/auth?code="))
             {
                 //Get the authcode from URL
                 string temp = webBrowser1.Url.ToString();
-                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"Authorization Code url: {temp}");
+                Logger.logMessage("[MSAuth]", $"Authorization Code url: {temp}");
                 authCode = temp.Replace("https://codex-ipsa.dejvoss.cz/auth?code=", "");
                 LogIn();
                 this.Close();
@@ -105,46 +127,7 @@ namespace MCLauncher
             }
         }
 
-        public static void deviceFlow()
-        {
-            //This uses the test azure app, change that!!!
-            var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin%20offline_access");
-            deviceRequest.Method = "GET";
-            deviceRequest.ContentType = "application/x-www-form-urlencoded";
-            var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
-            var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
-            Logger.logMessage("[MSAuth]", $"Deviceflow test response: {deviceResponseString}");
-
-
-            string deviceJson = $"[{deviceResponseString}]";
-
-            List<jsonObject> deviceData = JsonConvert.DeserializeObject<List<jsonObject>>(deviceJson);
-            foreach (var vers in deviceData)
-            {
-                userCode = vers.user_code;
-                deviceCode = vers.device_code;
-                deviceUrl = vers.verification_uri;
-
-                Logger.logMessage("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
-                Logger.logMessage("[MSAuth]", $"Device code: {deviceCode}");
-
-                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"AccessToken: {accessToken}");
-                //Logger.log(ConsoleColor.Green, ConsoleColor.Gray, "[MSAuth]", $"RefreshToken: {refreshToken}");
-            }
-
-            System.Timers.Timer myTimer = new System.Timers.Timer();
-            myTimer.Elapsed += new ElapsedEventHandler(deviceFlowPing);
-            myTimer.Interval = 5000; // 1000 ms is one second
-            myTimer.Start();
-            while (deviceCurrent <= 180)
-            {
-
-            }
-            myTimer.Stop();
-            myTimer.Dispose();
-        }
-
-        public static async void deviceFlowPing(object source, ElapsedEventArgs e)
+        public static void deviceFlowPing(object source, ElapsedEventArgs e)
         {
             Logger.logMessage("[MSAuth]", $"Test! 1s! {deviceCurrent}");
 
@@ -170,13 +153,24 @@ namespace MCLauncher
                 var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
                 deviceCurrent = 181;
                 Logger.logMessage("[MSAuth]", $"Response string: {tokenResponseString}");
+
+                string tokenJson = $"[{tokenResponseString}]";
+                List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
+                foreach (var vers in authTokenData)
+                {
+                    accessToken = vers.access_token;
+                    Logger.logMessage("[MSAuth]", $"AccessTokenHHH: {accessToken}");
+                    LogIn();
+                }
+
             }
             catch (WebException ex)
             {
                 using (WebResponse response = ex.Response)
                 {
                     HttpWebResponse httpResponse = (HttpWebResponse)response;
-                    Console.WriteLine("Error code: {0}", httpResponse.StatusCode);
+                    Logger.logError("[MSAuth]", $"Error code: {httpResponse.StatusCode}");
+
                     using (Stream data = response.GetResponseStream())
                     using (var reader = new StreamReader(data))
                     {
@@ -488,7 +482,7 @@ namespace MCLauncher
             }
         }
 
-        public void LogIn()
+        public static void LogIn()
         {
             //Console.WriteLine($"[MSAuth] AuthCode: {authCode}");
             getToken();
@@ -518,9 +512,9 @@ namespace MCLauncher
 
         }
 
-        public void DeviceFlowTest()
+        public void deviceFlow()
         {
-            deviceFlow();
+            
         }
 
         public static void usernameFromRefreshToken()
@@ -573,6 +567,24 @@ namespace MCLauncher
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://microsoft.com/link");
+
         }
+
+        /*private void MSAuth_Shown(object sender, EventArgs e)
+        {
+            this.Refresh();
+            this.Activate();
+            TopMost = true;
+            System.Timers.Timer myTimer = new System.Timers.Timer();
+            myTimer.Elapsed += new ElapsedEventHandler(deviceFlowPing);
+            myTimer.Interval = 5000; // 1000 ms is one second
+            myTimer.Start();
+            while (deviceCurrent <= 180)
+            {
+
+            }
+            myTimer.Stop();
+            myTimer.Dispose();
+        }*/
     }
 }

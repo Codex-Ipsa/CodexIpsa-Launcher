@@ -29,22 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MSAuth));
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.codeLabel = new System.Windows.Forms.Label();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(2);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(15, 16);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(281, 134);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
             // label1
             // 
@@ -54,6 +44,7 @@
             this.label1.Size = new System.Drawing.Size(145, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "This is early work in progress!";
+            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -63,6 +54,7 @@
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Go to";
+            this.label2.Visible = false;
             // 
             // linkLabel1
             // 
@@ -73,17 +65,39 @@
             this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "microsoft.com/link";
+            this.linkLabel1.Visible = false;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // codeLabel
+            // 
+            this.codeLabel.AutoSize = true;
+            this.codeLabel.Location = new System.Drawing.Point(12, 54);
+            this.codeLabel.Name = "codeLabel";
+            this.codeLabel.Size = new System.Drawing.Size(129, 13);
+            this.codeLabel.TabIndex = 4;
+            this.codeLabel.Text = "And enter the code XXXX";
+            this.codeLabel.Visible = false;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(342, 369);
+            this.webBrowser1.TabIndex = 5;
+            this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
             // MSAuth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 134);
+            this.ClientSize = new System.Drawing.Size(342, 369);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.codeLabel);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.webBrowser1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MSAuth";
@@ -94,10 +108,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label codeLabel;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
