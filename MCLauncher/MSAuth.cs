@@ -53,7 +53,7 @@ namespace MCLauncher
             webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");
             //This uses the test azure app, change that!!!
 
-            /*var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin%20offline_access");
+            /*var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin%20offline_access"); //THIS NEEDS TO HAVE OFFLINE ACCESS TO RETURN REFRESH CODE!!!!!
             deviceRequest.Method = "GET";
             deviceRequest.ContentType = "application/x-www-form-urlencoded";
             var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
