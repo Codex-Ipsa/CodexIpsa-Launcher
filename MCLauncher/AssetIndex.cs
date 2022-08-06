@@ -10,84 +10,117 @@ namespace MCLauncher
 {
     public class AssetIndex
     {
-        public static string testurl = "https://launchermeta.mojang.com/v1/packages/770572e819335b6c0a053f8378ad88eda189fc14/legacy.json";
+        public static bool isLegacy;
 
-        public static void downloadIndex()
+        public static List<string> nameList = new List<string>();
+        public static List<string> hashList = new List<string>();
+
+        public static void start(string indexUrl, string indexName)
         {
-            List<string> list1 = new List<string>();
-            WebClient wc = new WebClient();
-            //string json = "{ProdId:\"1\",Title:\"C#\",Author:\"Jeffy\",Publisher:\"XYZ\",Category:\"Microsoft\"}";
-            string json = wc.DownloadString(testurl);
-            JObject obj = JsonConvert.DeserializeObject<JObject>(json);
-            var properties = obj.Properties();
+            isLegacy = false;
+            WebClient client = new WebClient();
+            string origJson = client.DownloadString(indexUrl);
+            Logger.logMessage("[AssetIndex]", origJson);
 
-            string finalJson = "[\n";
-            foreach (var prop in properties)
+            JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
+            var origProps = origObj.Properties();
+
+            foreach (var oProp in origProps)
             {
-                string key = prop.Name;
-                object value = prop.Value;
-                //Console.WriteLine("THIS IS A START+" + value.ToString());
+                string oKey = oProp.Name;
+                string oVal = oProp.Value.ToString();
 
-                string assets = value.ToString();
-                if (assets.Contains("icon_16x16.png"))
+                if (oKey == "virtual" && oVal == "True")
                 {
-                    JObject obj2 = JsonConvert.DeserializeObject<JObject>(assets);
-                    var properties2 = obj2.Properties();
-                    foreach (var prop2 in properties2)
-                    {
-                        string key2 = prop2.Name;
-                        object value2 = prop2.Value;
-                        list1.Add(value2.ToString());
-                        //Console.WriteLine("THIS IS A START+" + value.ToString());
-
-                        //Console.WriteLine(key + "=" + value);
-                    }
-                    foreach (var val in list1)
-                    {
-                        //Console.WriteLine(val + ",");
-                        finalJson += val.ToString() + ",";
-                    }
-                    finalJson += "\n]";
-                    //Console.WriteLine(finalJson);
+                    isLegacy = true;
+                    Logger.logMessage("[AssetIndex]", "isLegacy returned true!");
                 }
-                //Console.WriteLine(key + "=" + value);
-            }
-
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(finalJson);
-
-            foreach (var vers in data)
-            {
-                string firstTwo = vers.hash.Substring(0, 2);
-                string fullHash = vers.hash;
-                //Console.WriteLine("First two: " + firstTwo);
-                //Console.WriteLine("Full hash: " + fullHash);
-
-                if (!File.Exists($"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}\\{fullHash}"))
+                else if (oKey == "objects")
                 {
+                    string indexJson = oVal;
 
-                    using (WebClient client = new WebClient())
+                    JObject assetObj = JsonConvert.DeserializeObject<JObject>(indexJson);
+                    var assetProps = assetObj.Properties();
+                    foreach (var aProp in assetProps)
                     {
-                        Directory.CreateDirectory($"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}");
-                        client.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\assetstest\\objects\\{firstTwo}\\{fullHash}");
-                        Console.WriteLine("Downloaded: " + fullHash + "\n");
+                        string aKey = aProp.Name;
+                        object aVal = aProp.Value;
+
+                        //Logger.logError("[AssetIndex]", $"Loaded asset object: {aKey}; {aVal}");
+
+                        JObject itemObj = JsonConvert.DeserializeObject<JObject>(aVal.ToString());
+                        var itemProps = itemObj.Properties();
+                        foreach (var iProp in itemProps)
+                        {
+                            if(iProp.Name == "hash")
+                            {
+                                //string iKey = iProp.Name;
+                                object iVal = iProp.Value;
+
+                                //Logger.logError("[AssetIndex]", $"Loaded key object: {iKey}; {iVal}");
+
+                                Logger.logMessage("[AssetIndex]", $"Name: {aKey}; hash: {iVal}");
+                                nameList.Add(aKey);
+                                hashList.Add(iVal.ToString());
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    //Do nothing
-                    //Console.WriteLine("Already exists!\n");
+                    Logger.logError("[AssetIndex]", $"Unknown key: {oKey}, with value: {oVal}");
                 }
 
 
-            }
+                if (isLegacy == true)
+                {
+                    int indexInt = 0;
+                    WebClient wc = new WebClient();
+                    foreach (var name in nameList)
+                    {
+                        string fullHash = hashList[indexInt];
+                        string firstTwo = fullHash.Substring(0, 2);
 
+                        string fileDirectory = "/" + name;
+                        int index = fileDirectory.LastIndexOf("/");
+                        if (index >= 0)
+                            fileDirectory = fileDirectory.Substring(0, index);
+
+                        string fileName = name;
+                        int index2 = fileName.IndexOf("/");
+                        if (index2 >= 0)
+                            fileName = fileName.Substring(fileName.LastIndexOf("/"));
+
+                        Logger.logMessage("[AssetIndex]", $"Dir: {fileDirectory}");
+
+                        Logger.logMessage("[AssetIndex]", $"FileName: {fileName}");
+
+                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}");
+
+                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}"))
+                        {
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}");
+                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}");
+
+                        }
+                        isLegacy = false;
+
+                        //isLegacy = false;
+                        //Logger.logError("[AssetIndex]", $"Name: {name}; hash: {fullHash}");
+                        indexInt++;
+                    }
+                    indexInt = 0;
+                }
+                else
+                {
+                    //TODO
+                }
+                hashList.Clear();
+                nameList.Clear();
+            }
         }
     }
 
-    class assetIndexJson
-    {
-        public Dictionary<string, List<assetIndexObj>> objects { get; set; }
-    }
 
     class assetIndexObj
     {

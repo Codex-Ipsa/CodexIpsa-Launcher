@@ -71,9 +71,6 @@ namespace MCLauncher
         public string user_code { get; set; }
         public string device_code { get; set; }
         public string verification_uri { get; set; }
-
-        //assetIndex
-        public string hash { get; set; }
     }
 
     public class RootObject

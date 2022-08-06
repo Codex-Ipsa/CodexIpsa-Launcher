@@ -82,6 +82,9 @@ namespace MCLauncher
         public static string assetDir;
         public static string workDir;
 
+        public static string assetIndexType;
+        public static string assetIndexUrl;
+
         public static void LaunchGame()
         {
             //Deserialize the versiontype json
@@ -156,7 +159,7 @@ namespace MCLauncher
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
                 Logger.logMessage("[LaunchJava]", $"Client path: {launchClientPath}");
-                launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //-Dstand-alone=true
+                launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
                 Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxy}");
                 launchNativePath = $".codexipsa/libs/natives/";
                 Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
@@ -164,7 +167,7 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\assets\\virtual\\legacy"; //TODO, customise
+                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\assets\\{assetDir}"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
@@ -182,7 +185,12 @@ namespace MCLauncher
                 LibsCheck.type = launchLibsType;
                 LibsCheck.Check();
 
-                foreach(var lib in LibsCheck.libsList)
+                //Check for assets
+
+                AssetIndex.start("https://launchermeta.mojang.com/v1/packages/770572e819335b6c0a053f8378ad88eda189fc14/legacy.json", "legacy");
+
+
+                foreach (var lib in LibsCheck.libsList)
                 {
                     Logger.logMessage("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
                     launchLibsPath += $".codexipsa\\libs\\{lib};";

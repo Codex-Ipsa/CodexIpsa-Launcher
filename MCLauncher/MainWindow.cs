@@ -30,13 +30,18 @@ namespace MCLauncher
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
+
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
             Logger.logMessage($"[MainWindow]", $"Changelog URL loaded");
 
-            //Temporary test thing doesn't work yet
-            AssetIndex.downloadIndex();
+            //Create directories
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets");
 
             //Check if user is logged in
             checkAuth();
@@ -76,13 +81,6 @@ namespace MCLauncher
                 //TODO: set selectedIndex
             }
 
-            //Create directories
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath, ".codexipsa"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "versions"));
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "instance"));
-
-            Directory.CreateDirectory(Path.Combine(Globals.currentPath + "\\.codexipsa", "libs"));
-
             /*if(!File.Exists($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
             {
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
@@ -92,7 +90,7 @@ namespace MCLauncher
                 }
             }*/
 
-            if(!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
+            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
                 InstanceManager.mode = "initial";
                 InstanceManager.tempName = "Default";
