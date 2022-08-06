@@ -144,6 +144,19 @@ namespace MCLauncher
             }
             else
             {
+
+                //Check for assets + get type from json name
+                if (assetIndexUrl != String.Empty)
+                {
+                    string input1 = assetIndexUrl;
+                    input1 = input1.Substring(input1.LastIndexOf("/"));
+                    input1 = input1.Replace(".json", "");
+                    input1 = input1.Replace("/", "");
+                    assetIndexType = input1;
+                    Logger.logError("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
+                    AssetIndex.start(assetIndexUrl, assetIndexType);
+                }
+
                 Logger.logMessage("[LaunchJava]", $"Mppass: {launchMpPass}");
                 //Create required dirs
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
@@ -155,6 +168,7 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"Version name: {launchVerName}");
                 Logger.logMessage("[LaunchJava]", $"Version type: {launchVerType}");
                 Logger.logMessage("[LaunchJava]", $"Version URL: {launchVerUrl}");
+                Logger.logMessage("[LaunchJava]", $"Version AssetIndex: {assetIndexUrl}");
 
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
@@ -167,7 +181,7 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\assets\\{assetDir}"; //TODO, customise
+                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\assets\\{assetIndexType}\""; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
@@ -184,11 +198,6 @@ namespace MCLauncher
 
                 LibsCheck.type = launchLibsType;
                 LibsCheck.Check();
-
-                //Check for assets
-
-                AssetIndex.start("https://launchermeta.mojang.com/v1/packages/770572e819335b6c0a053f8378ad88eda189fc14/legacy.json", "legacy");
-
 
                 foreach (var lib in LibsCheck.libsList)
                 {
@@ -230,7 +239,7 @@ namespace MCLauncher
                     var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
 
-                    launchCommand += $" {launchCmdAddon6} with={launchWidth} height={launchHeight}";
+                    launchCommand += $" {launchCmdAddon6}";
                 }
                 if(Globals.isDebug)
                 {

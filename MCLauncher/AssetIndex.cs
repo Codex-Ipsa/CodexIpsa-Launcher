@@ -91,17 +91,13 @@ namespace MCLauncher
                         if (index2 >= 0)
                             fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                        Logger.logMessage("[AssetIndex]", $"Dir: {fileDirectory}");
-
-                        Logger.logMessage("[AssetIndex]", $"FileName: {fileName}");
-
-                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}");
+                        //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}");
 
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}"))
                         {
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}");
                             wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}");
-
+                            Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
                         }
                         isLegacy = false;
 
@@ -110,21 +106,15 @@ namespace MCLauncher
                         indexInt++;
                     }
                     indexInt = 0;
+                    hashList.Clear();
+                    nameList.Clear();
+                    //TODO: copy to .minecraft/assets for versions that don't support --assetsDir
                 }
                 else
                 {
-                    //TODO
+                    //TODO: for versions past 1.7 (?) do the new system
                 }
-                hashList.Clear();
-                nameList.Clear();
             }
         }
-    }
-
-
-    class assetIndexObj
-    {
-        public string hash { get; set; }
-        public int size { get; set; }
     }
 }

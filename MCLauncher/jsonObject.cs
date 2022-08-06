@@ -12,6 +12,7 @@ namespace MCLauncher
         public string verName { get; set; }
         public string verLink { get; set; }
         public string verType { get; set; }
+        public string verAssets { get; set; }
 
         //Mods
         public string modID { get; set; }
@@ -38,6 +39,7 @@ namespace MCLauncher
         public string useCustJar { get; set; }
         public string instCustJar { get; set; }
         public string useOfflineMode { get; set; }
+        public string instAssets { get; set; }
 
 
         //JRE downloads

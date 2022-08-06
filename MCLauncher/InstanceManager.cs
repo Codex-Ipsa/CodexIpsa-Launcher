@@ -26,6 +26,7 @@ namespace MCLauncher
         public static string cfgGameVer;
         public static string cfgTypeVer;
         public static string cfgLinkVer;
+        public static string cfgAssetsJson;
 
 
 
@@ -70,6 +71,7 @@ namespace MCLauncher
             List<string> versionList = new List<string>();
             List<string> typeJavaList = new List<string>();
             List<string> linkJavaList = new List<string>();
+            List<string> assetsJavaList = new List<string>();
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(Globals.javaJson);
@@ -80,6 +82,7 @@ namespace MCLauncher
                     versionList.Add(vers.verName);
                     typeJavaList.Add(vers.verType);
                     linkJavaList.Add(vers.verLink);
+                    assetsJavaList.Add(vers.verAssets);
                 }
             }
             verBox.DataSource = versionList;
@@ -89,6 +92,7 @@ namespace MCLauncher
             int index = verBox.FindString(cfgGameVer);
             cfgTypeVer = typeJavaList[index];
             cfgLinkVer = linkJavaList[index];
+            cfgAssetsJson = assetsJavaList[index];
 
             //Set mode dependant stuff
             if (mode == "new")
@@ -160,6 +164,7 @@ namespace MCLauncher
                         cfgGameVer = vers.verName;
                         cfgLinkVer = vers.verLink;
                         cfgTypeVer = vers.verType;
+                        cfgAssetsJson = vers.verAssets;
                         //TODO 
                     }
                 }
@@ -181,6 +186,7 @@ namespace MCLauncher
                         $"\"instVer\":\"{cfgGameVer}\"," +
                         $"\n\"instType\":\"{cfgTypeVer}\"," +
                         $"\n\"instUrl\":\"{cfgLinkVer}\"," +
+                        $"\n\"instAssets\":\"{cfgAssetsJson}\"," +
                         $"\n\"instDir\":\"{instGameDir}\"," +
                         $"\n\"instResWidth\":\"{instResWidth}\"," +
                         $"\n\"instResHeight\":\"{instResHeight}\"," +
@@ -234,6 +240,7 @@ namespace MCLauncher
                         $"\"instVer\":\"{cfgGameVer}\"," +
                         $"\n\"instType\":\"{cfgTypeVer}\"," +
                         $"\n\"instUrl\":\"{cfgLinkVer}\"," +
+                        $"\n\"instAssets\":\"{cfgAssetsJson}\"," +
                         $"\n\"instDir\":\"{instGameDir}\"," +
                         $"\n\"instResWidth\":\"{instResWidth}\"," +
                         $"\n\"instResHeight\":\"{instResHeight}\"," +
@@ -478,6 +485,7 @@ namespace MCLauncher
                 List<string> versionList = new List<string>();
                 List<string> typeJavaList = new List<string>();
                 List<string> linkJavaList = new List<string>();
+                List<string> assetsJavaList = new List<string>();
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(Globals.javaJson);
@@ -488,6 +496,7 @@ namespace MCLauncher
                         versionList.Add(vers.verName);
                         typeJavaList.Add(vers.verType);
                         linkJavaList.Add(vers.verLink);
+                        assetsJavaList.Add(vers.verAssets);
                     }
                 }
 
@@ -495,6 +504,7 @@ namespace MCLauncher
                 int index = verBox.FindString(cfgGameVer);
                 cfgTypeVer = typeJavaList[index];
                 cfgLinkVer = linkJavaList[index];
+                cfgAssetsJson = assetsJavaList[index];
             }
         }
 
