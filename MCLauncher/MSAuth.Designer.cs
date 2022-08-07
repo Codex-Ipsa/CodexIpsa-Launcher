@@ -84,7 +84,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(342, 369);
+            this.webBrowser1.Size = new System.Drawing.Size(301, 128);
             this.webBrowser1.TabIndex = 5;
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 369);
+            this.ClientSize = new System.Drawing.Size(301, 128);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.codeLabel);
             this.Controls.Add(this.linkLabel1);
@@ -102,6 +102,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MSAuth";
             this.Text = "Log-in";
+            this.Shown += new System.EventHandler(this.MSAuth_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -136,7 +136,15 @@ namespace MCLauncher
             }
             Logger.logMessage("[LaunchJava]", $"Version data succesfully loaded");            
 
-            MSAuth.onGameStart();
+            if(launchJoinMP == true)
+            {
+                MSAuth.onGameStart(true);
+            }
+            else
+            {
+                MSAuth.onGameStart(false);
+            }
+
             if (MSAuth.hasErrored == true)
             {
                 Logger.logError("[MSAuth/LaunchJava]", $"Could not authenticate you!");
@@ -225,7 +233,7 @@ namespace MCLauncher
                 }
                 if (launchJoinMP == true)
                 {
-                    launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass}";
+                    launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
                 }
 
                 launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
