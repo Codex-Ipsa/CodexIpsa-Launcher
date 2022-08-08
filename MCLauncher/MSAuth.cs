@@ -45,14 +45,12 @@ namespace MCLauncher
         public static int deviceLimit = 900;
         public static int deviceCurrent = 0;
 
-
         public MSAuth()
         {
             InitializeComponent();
-            /*Logger.logMessage("[MSAuth]", $"Started the auth process, this will take a while.");
-            webBrowser1.Url = new Uri("https://login.live.com/oauth20_authorize.srf?client_id=2313c7c4-a66c-44c4-9683-0bde2bb69c79&response_type=code&redirect_uri=https://codex-ipsa.dejvoss.cz/auth&scope=XboxLive.signin%20offline_access");*/
-            //This uses the test azure app, change that!!!
 
+            //This uses the test azure app, change that!!!
+            deviceCurrent = 0;
             var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"); //THIS NEEDS TO HAVE OFFLINE ACCESS TO RETURN REFRESH CODE!!!!!
             deviceRequest.Method = "GET";
             deviceRequest.ContentType = "application/x-www-form-urlencoded";
@@ -72,25 +70,12 @@ namespace MCLauncher
 
                 Logger.logMessage("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
                 Logger.logMessage("[MSAuth]", $"Device code: {deviceCode}");
-                codeLabel.Text = $"And enter the code {userCode}";
+                textBox1.Text = $"{userCode}";
+                textBox1.ReadOnly = true;
             }
             this.Refresh();
-        }
-
-        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
-        {
-            /*browserAddress = webBrowser1.Url.ToString();
-            //Logger.logMessage("[MSAuth]", $"Browser navigated to {browserAddress}");
-
-            if (browserAddress.StartsWith("https://codex-ipsa.dejvoss.cz/auth?code="))
-            {
-                //Get the authcode from URL
-                string temp = webBrowser1.Url.ToString();
-                Logger.logMessage("[MSAuth]", $"Authorization Code url: {temp}");
-                authCode = temp.Replace("https://codex-ipsa.dejvoss.cz/auth?code=", "");
-                LogIn();
-                this.Close();
-            }*/
+            backgroundWorker1.RunWorkerAsync();
+            //this.Close();
         }
 
         public static void deviceFlowPing(object source, ElapsedEventArgs e)
@@ -525,14 +510,16 @@ namespace MCLauncher
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://microsoft.com/link");
-
         }
 
         private void MSAuth_Shown(object sender, EventArgs e)
         {
-            this.Refresh();
-            this.Activate();
-            //TopMost = true;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
             System.Timers.Timer myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(deviceFlowPing);
             myTimer.Interval = 5000; // 1000 ms is one second
@@ -543,6 +530,24 @@ namespace MCLauncher
             }
             myTimer.Stop();
             myTimer.Dispose();
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            Logger.logError("[MSAuth]", "User cancelled the operation!");
+            hasErrored = true;
+            this.Close();
+        }
+
+        private void MSAuth_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            deviceCurrent = 181;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Logger.logMessage("[MSAuth]", "Worker completed!");
+            this.Close();
         }
     }
 }

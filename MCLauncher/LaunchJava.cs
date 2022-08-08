@@ -246,8 +246,8 @@ namespace MCLauncher
                     var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}");
                     var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
-                    var launchCmdAddon7 = launchCmdAddon6.Replace("{workDir}", $"{workDir}"); //uuid
-                    var launchCmdAddon8 = launchCmdAddon7.Replace("{workDir}", $"{workDir}"); //something different from first 1.7 snapshot json
+                    var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");
+                    var launchCmdAddon8 = launchCmdAddon7.Replace("{accessToken}", $"{launchPlayerAccessToken}");
 
                     launchCommand += $" {launchCmdAddon8}";
                 }
