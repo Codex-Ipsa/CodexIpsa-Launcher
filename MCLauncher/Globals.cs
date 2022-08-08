@@ -12,20 +12,20 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.0.7-dev";
         public static string branch = "0.0.7-rewrite";
-        public static string verCurrent = "0.0.7.8_02"; //Change this on release
-        public static string verDisplay = "0.0.7.8_02"; //Change this on release
+        public static string verCurrent = "0.0.7.8_03"; //Change this on release
+        public static string verDisplay = "0.0.7.8_03"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
-        public static bool isDebug = true; //Change this on releases
+        public static bool isDebug = false; //Change this on releases
 
         //Links
         public static string xenia = $"http://codex-ipsa.dejvoss.cz/MCL-Data/emu/xenia.zip";
-        public static string verCheck = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest.txt";
-        public static string verCheckDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-dev.txt";
+        //public static string verCheck = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest.txt";
+        //public static string verCheckDev = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/latest-dev.txt";
         public static string javaLibs = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libs.zip";
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater.exe";
         public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/version/list.json";
@@ -37,8 +37,8 @@ namespace MCLauncher
         public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/x360_version.json";
         public static string ps3Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/ps3_version.json";
 
-        public static string libsPre16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
-        public static string libs16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-1.6.json";
+        //public static string libsPre16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-pre1.6.json";
+        //public static string libs16Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-1.6.json";
 
         public static string jre8Link = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/jre8-latest.json";
     }

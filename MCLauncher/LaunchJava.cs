@@ -108,6 +108,8 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Proxy port: {launchProxyPort}");
                     launchCmdAddon = vers.addCmd;
                     Logger.logMessage("[LaunchJava]", $"Addon: {launchCmdAddon}");
+                    assetIndexUrl = vers.assetIndex;
+                    Logger.logMessage("[LaunchJava]", $"Asset index: {assetIndexUrl}");
                     if (vers.getServer == "true")
                     {
                         Logger.logMessage("[LaunchJava]", $"getServer returned true");
@@ -152,7 +154,6 @@ namespace MCLauncher
             }
             else
             {
-
                 //Check for assets + get type from json name
                 if (assetIndexUrl != String.Empty)
                 {
@@ -243,7 +244,7 @@ namespace MCLauncher
                     var launchCmdAddon1 = launchCmdAddon.Replace("{gameDir}", $"{gameDir}");
                     var launchCmdAddon2 = launchCmdAddon1.Replace("{assetDir}", $"{assetDir}");
                     var launchCmdAddon3 = launchCmdAddon2.Replace("{playerName}", $"{launchPlayerName}");
-                    var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}");
+                    var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
                     var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
                     var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");

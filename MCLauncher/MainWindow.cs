@@ -107,7 +107,6 @@ namespace MCLauncher
                 LaunchJava.launchVerName = vers.instVer;
                 LaunchJava.launchVerUrl = vers.instUrl;
                 LaunchJava.launchVerType = vers.instType;
-                LaunchJava.assetIndexUrl = vers.instAssets;
             }
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
@@ -256,7 +255,6 @@ namespace MCLauncher
                 LaunchJava.launchVerName = vers.instVer;
                 LaunchJava.launchVerUrl = vers.instUrl;
                 LaunchJava.launchVerType = vers.instType;
-                LaunchJava.assetIndexUrl = vers.instAssets;
                 LaunchJava.launchWidth = vers.instResWidth;
                 LaunchJava.launchHeight = vers.instResHeight;
                 LaunchJava.launchXms = vers.instRamMin;

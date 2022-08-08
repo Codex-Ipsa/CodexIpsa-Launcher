@@ -52,7 +52,6 @@ namespace MCLauncher
             this.gameVerLabel = new System.Windows.Forms.Label();
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.usernameLabel = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -198,7 +197,6 @@ namespace MCLauncher
             this.panel1.Controls.Add(this.playerNameLabel);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.usernameTextBox);
-            this.panel1.Controls.Add(this.usernameLabel);
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Location = new System.Drawing.Point(-1, 340);
             this.panel1.Name = "panel1";
@@ -306,19 +304,6 @@ namespace MCLauncher
             this.label1.Text = "Change username:";
             this.label1.Visible = false;
             // 
-            // usernameLabel
-            // 
-            this.usernameLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.usernameLabel.ForeColor = System.Drawing.Color.White;
-            this.usernameLabel.Location = new System.Drawing.Point(345, 51);
-            this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(61, 13);
-            this.usernameLabel.TabIndex = 4;
-            this.usernameLabel.Text = "Username: ";
-            this.usernameLabel.Visible = false;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,7 +345,6 @@ namespace MCLauncher
         private System.Windows.Forms.Label gameVerLabel;
         private System.Windows.Forms.Label playerNameLabel;
         private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button editInstBtn;

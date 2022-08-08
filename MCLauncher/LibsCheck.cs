@@ -27,8 +27,8 @@ namespace MCLauncher
         {
             Logger.logMessage("[LibsCheck]", $"Starting LibsCheck");
             libsList.Clear();
-            string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
-            //string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-libs/{type}.json"; THIS IS FOR THE MAJOR LIBRARIES + VER JSON MERGE
+            //string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
+            string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-libs/{type}.json"; //THIS IS FOR THE MAJOR LIBRARIES + VER JSON MERGE
             Logger.logMessage("[LibsCheck]", $"Type: {type}");
             Logger.logMessage("[LibsCheck]", $"Url: {url}");
 
