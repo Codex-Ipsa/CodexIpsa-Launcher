@@ -49,6 +49,9 @@ namespace MCLauncher
         {
             this.ControlBox = false;
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
 
             //This uses the test azure app, change that!!!
             deviceCurrent = 0;

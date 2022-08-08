@@ -18,6 +18,9 @@ namespace MCLauncher
         public EnterIp()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
