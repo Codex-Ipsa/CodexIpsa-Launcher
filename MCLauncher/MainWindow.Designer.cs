@@ -274,9 +274,9 @@ namespace MCLauncher
             this.gameVerLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.gameVerLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameVerLabel.ForeColor = System.Drawing.Color.White;
-            this.gameVerLabel.Location = new System.Drawing.Point(541, 31);
+            this.gameVerLabel.Location = new System.Drawing.Point(481, 31);
             this.gameVerLabel.Name = "gameVerLabel";
-            this.gameVerLabel.Size = new System.Drawing.Size(238, 13);
+            this.gameVerLabel.Size = new System.Drawing.Size(353, 13);
             this.gameVerLabel.TabIndex = 12;
             this.gameVerLabel.Text = "Ready to play Minecraft GameVer";
             this.gameVerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
