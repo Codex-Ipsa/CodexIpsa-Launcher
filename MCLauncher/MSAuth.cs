@@ -47,6 +47,7 @@ namespace MCLauncher
 
         public MSAuth()
         {
+            this.ControlBox = false;
             InitializeComponent();
 
             //This uses the test azure app, change that!!!

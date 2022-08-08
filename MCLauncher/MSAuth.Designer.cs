@@ -74,9 +74,9 @@
             // 
             // cancelBtn
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(108, 93);
+            this.cancelBtn.Location = new System.Drawing.Point(12, 65);
             this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.cancelBtn.Size = new System.Drawing.Size(277, 23);
             this.cancelBtn.TabIndex = 3;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 128);
+            this.ClientSize = new System.Drawing.Size(301, 100);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.linkLabel1);
