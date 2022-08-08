@@ -114,7 +114,7 @@ namespace MCLauncher
                     refreshToken = vers.refresh_token;
                     Logger.logMessage("[MSAuth]", $"AccessToken: {accessToken}");
                     Logger.logMessage("[MSAuth]", $"RefreshToken: {refreshToken}");
-                    deviceFlow();
+                    //deviceFlow();
                 }
             }
             catch (WebException ex)
@@ -455,6 +455,7 @@ namespace MCLauncher
                 Properties.Settings.Default.Save();
                 Logger.logMessage("[MSAuth]", $"Saved refresh token: {Properties.Settings.Default.msRefreshToken}");
                 MainWindow.msPlayerName = playerName;
+                MainWindow.checkAuth();
             }
         }
 
@@ -513,10 +514,6 @@ namespace MCLauncher
             System.Diagnostics.Process.Start("https://microsoft.com/link");
         }
 
-        private void MSAuth_Shown(object sender, EventArgs e)
-        {
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -548,6 +545,7 @@ namespace MCLauncher
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Logger.logMessage("[MSAuth]", "Worker completed!");
+            deviceFlow();
             this.Close();
         }
     }

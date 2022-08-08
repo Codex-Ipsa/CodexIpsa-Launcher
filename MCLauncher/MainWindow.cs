@@ -297,6 +297,7 @@ namespace MCLauncher
                 Instance.logoutBtn.Visible = true;
                 Instance.loginBtn.Visible = false;
                 Instance.playerNameLabel.Text = $"Welcome, {msPlayerName}";
+                this.Refresh();
             }
         }
 

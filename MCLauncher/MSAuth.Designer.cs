@@ -104,7 +104,6 @@
             this.Name = "MSAuth";
             this.Text = "Log-in";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MSAuth_FormClosing);
-            this.Shown += new System.EventHandler(this.MSAuth_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
