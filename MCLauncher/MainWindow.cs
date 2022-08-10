@@ -130,17 +130,6 @@ namespace MCLauncher
                 LaunchPS3.LaunchGame();
         }
 
-        private void usernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            string newName = usernameTextBox.Text;
-            Properties.Settings.Default.playerName = newName;
-            Properties.Settings.Default.Save();
-
-            playerNameLabel.Text = "Welcome, " + newName;
-            playerNameLabel.Refresh();
-            newName = "";
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About credits = new About();

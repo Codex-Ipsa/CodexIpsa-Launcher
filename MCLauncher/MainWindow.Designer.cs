@@ -41,7 +41,6 @@ namespace MCLauncher
             this.panel2 = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.editInstBtn = new System.Windows.Forms.Button();
@@ -51,7 +50,6 @@ namespace MCLauncher
             this.loginBtn = new System.Windows.Forms.Button();
             this.gameVerLabel = new System.Windows.Forms.Label();
             this.playerNameLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -170,17 +168,6 @@ namespace MCLauncher
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // usernameTextBox
-            // 
-            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.usernameTextBox.Location = new System.Drawing.Point(191, 31);
-            this.usernameTextBox.MaxLength = 16;
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.usernameTextBox.TabIndex = 5;
-            this.usernameTextBox.Visible = false;
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.usernameTextBox_TextChanged);
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -195,8 +182,6 @@ namespace MCLauncher
             this.panel1.Controls.Add(this.loginBtn);
             this.panel1.Controls.Add(this.gameVerLabel);
             this.panel1.Controls.Add(this.playerNameLabel);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.usernameTextBox);
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Location = new System.Drawing.Point(-1, 340);
             this.panel1.Name = "panel1";
@@ -291,19 +276,6 @@ namespace MCLauncher
             this.playerNameLabel.Text = "Welcome, PlayerName";
             this.playerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(188, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Change username:";
-            this.label1.Visible = false;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,10 +305,8 @@ namespace MCLauncher
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnPlay;
-        private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
