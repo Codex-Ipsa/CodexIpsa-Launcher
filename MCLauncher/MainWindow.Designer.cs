@@ -314,7 +314,7 @@ namespace MCLauncher
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 450);
+            this.MinimumSize = new System.Drawing.Size(800, 452);
             this.Name = "MainWindow";
             this.Text = "Launcher";
             this.Load += new System.EventHandler(this.MainWindow_Load);
