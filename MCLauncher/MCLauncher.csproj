@@ -106,6 +106,12 @@
     <Compile Include="GameConsole.Designer.cs">
       <DependentUpon>GameConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="HomeWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomeWindow.Designer.cs">
+      <DependentUpon>HomeWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstanceManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameConsole.resx">
       <DependentUpon>GameConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomeWindow.resx">
+      <DependentUpon>HomeWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>

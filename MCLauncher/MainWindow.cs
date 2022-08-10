@@ -36,6 +36,10 @@ namespace MCLauncher
             webBrowser1.Refresh();
             Logger.logMessage($"[MainWindow]", $"Changelog URL loaded");
 
+            HomeWindow hw = new HomeWindow();
+            Controls.Add(hw);
+            hw.Dock = DockStyle.Fill;
+
             //Create directories
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
