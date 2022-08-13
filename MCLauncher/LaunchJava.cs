@@ -88,7 +88,7 @@ namespace MCLauncher
         public static void LaunchGame()
         {
             //Deserialize the versiontype json
-            launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
+            launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/method-data/ver-launch/{launchVerType}.json";
             Logger.logMessage("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
             
             using (WebClient client = new WebClient())

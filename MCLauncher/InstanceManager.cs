@@ -72,7 +72,7 @@ namespace MCLauncher
             List<string> linkJavaList = new List<string>();
             using (WebClient client = new WebClient())
             {
-                string json = client.DownloadString(Globals.javaJson);
+                string json = client.DownloadString(Globals.classicPJson);
                 List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
                 foreach (var vers in data)
@@ -418,7 +418,7 @@ namespace MCLauncher
                 List<string> versionList = new List<string>();
                 using (WebClient client = new WebClient())
                 {
-                    string json = client.DownloadString(Globals.javaJson);
+                    string json = client.DownloadString(Globals.classicPJson);
                     List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
                     foreach (var vers in data)
@@ -480,7 +480,7 @@ namespace MCLauncher
                 List<string> linkJavaList = new List<string>();
                 using (WebClient client = new WebClient())
                 {
-                    string json = client.DownloadString(Globals.javaJson);
+                    string json = client.DownloadString(Globals.classicPJson);
                     List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
                     foreach (var vers in data)
