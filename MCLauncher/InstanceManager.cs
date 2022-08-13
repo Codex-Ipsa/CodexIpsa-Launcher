@@ -61,7 +61,7 @@ namespace MCLauncher
             //Set the editions list
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
-            editionsList.Add("Xbox 360 Edition");
+            //editionsList.Add("Xbox 360 Edition");
             //editionsList.Add("Playstation 3 Edition");
             editionBox.DataSource = editionsList;
             editionBox.Refresh();
