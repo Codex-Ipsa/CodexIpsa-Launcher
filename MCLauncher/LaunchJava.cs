@@ -84,6 +84,9 @@ namespace MCLauncher
 
         public static string assetIndexType;
         public static string assetIndexUrl;
+        public static string assetIndexDir;
+
+        public static string loggingXml;
 
         public static void LaunchGame()
         {
@@ -110,6 +113,10 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Addon: {launchCmdAddon}");
                     assetIndexUrl = vers.assetIndex;
                     Logger.logMessage("[LaunchJava]", $"Asset index: {assetIndexUrl}");
+                    assetIndexDir = vers.assetDir;
+                    Logger.logMessage("[LaunchJava]", $"Asset dir: {assetIndexDir}");
+                    loggingXml = vers.logging;
+                    Logger.logMessage("[LaunchJava]", $"Logging path: {loggingXml}");
                     if (vers.getServer == "true")
                     {
                         Logger.logMessage("[LaunchJava]", $"getServer returned true");
@@ -232,6 +239,17 @@ namespace MCLauncher
                 {
                     launchCommand += $"{launchProxy} ";
                 }
+                if (loggingXml != "false")
+                {
+                    Logger.logMessage("[LaunchJava]", "Log4j active!");
+                    //TODO: download XML
+                    /*Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
+                    DownloadProgress.url = "";
+                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\\\libs\\log4j\\{}";
+                    DownloadProgress dp4j = new DownloadProgress();
+                    dp4j.ShowDialog();*/
+                    launchCommand += $"-Dlog4j.configurationFile={loggingXml} ";
+                }
                 if (launchJoinMP == true)
                 {
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
@@ -245,7 +263,7 @@ namespace MCLauncher
                     var launchCmdAddon2 = launchCmdAddon1.Replace("{assetDir}", $"{assetDir}");
                     var launchCmdAddon3 = launchCmdAddon2.Replace("{playerName}", $"{launchPlayerName}");
                     var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
-                    var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"{launchVerName}");
+                    var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"\"{launchVerName}\"");
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
                     var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");
                     var launchCmdAddon8 = launchCmdAddon7.Replace("{accessToken}", $"{launchPlayerAccessToken}");

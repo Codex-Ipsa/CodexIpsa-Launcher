@@ -54,6 +54,8 @@ namespace MCLauncher
         public string addCmd { get; set; }
         public string getServer { get; set; }
         public string assetIndex { get; set; }
+        public string assetDir { get; set; }
+        public string logging { get; set; }
 
         //Updates
         public string brId { get; set; }
