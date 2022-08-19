@@ -52,8 +52,18 @@ namespace MCLauncher
 
                         if (libs.extract != "null")
                         {
+                            //TODO: get rid of this
                             if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
                                 Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);
+
+                            using (ZipArchive archive = ZipFile.OpenRead($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
+                            {
+                                //TODO: if they don't exist, extract/replace them
+                                foreach (ZipArchiveEntry entry in archive.Entries)
+                                {
+                                    Logger.logError("[LibsCheck]", "Exctract part: " + entry.FullName);
+                                }
+                            }
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
                             string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
                             string extractPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}";

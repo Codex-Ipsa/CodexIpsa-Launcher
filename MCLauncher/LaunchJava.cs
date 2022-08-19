@@ -169,7 +169,7 @@ namespace MCLauncher
                     input1 = input1.Replace(".json", "");
                     input1 = input1.Replace("/", "");
                     assetIndexType = input1;
-                    Logger.logError("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
+                    Logger.logMessage("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
                     AssetIndex.start(assetIndexUrl, assetIndexType);
                 }
 
