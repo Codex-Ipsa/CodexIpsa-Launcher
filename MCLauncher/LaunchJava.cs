@@ -243,11 +243,16 @@ namespace MCLauncher
                 {
                     Logger.logMessage("[LaunchJava]", "Log4j active!");
                     //TODO: download XML
-                    /*Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
-                    DownloadProgress.url = "";
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\\\libs\\log4j\\{}";
+                    string fileName = loggingXml;
+                    int index2 = fileName.IndexOf("/");
+                    if (index2 >= 0)
+                        fileName = fileName.Substring(fileName.LastIndexOf("/"));
+
+                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
+                    DownloadProgress.url = loggingXml;
+                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\\\libs\\log4j\\{fileName}";
                     DownloadProgress dp4j = new DownloadProgress();
-                    dp4j.ShowDialog();*/
+                    dp4j.ShowDialog();
                     launchCommand += $"-Dlog4j.configurationFile={loggingXml} ";
                 }
                 if (launchJoinMP == true)
