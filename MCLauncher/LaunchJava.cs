@@ -268,11 +268,14 @@ namespace MCLauncher
                     if (index2 >= 0)
                         fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
-                    DownloadProgress.url = loggingXml;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}";
-                    DownloadProgress dp4j = new DownloadProgress();
-                    dp4j.ShowDialog();
+                    if(!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}"))
+                    {
+                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
+                        DownloadProgress.url = loggingXml;
+                        DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}";
+                        DownloadProgress dp4j = new DownloadProgress();
+                        dp4j.ShowDialog();
+                    }
                     launchCommand += $"-Dlog4j.configurationFile=\"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}\" ";
                 }
                 if (launchJoinMP == true)
