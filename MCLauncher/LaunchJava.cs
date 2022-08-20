@@ -87,6 +87,7 @@ namespace MCLauncher
         public static string assetIndexDir;
 
         public static string loggingXml;
+        public static string javaagentJar;
 
         public static void LaunchGame()
         {
@@ -116,7 +117,9 @@ namespace MCLauncher
                     assetIndexDir = vers.assetDir;
                     Logger.logMessage("[LaunchJava]", $"Asset dir: {assetIndexDir}");
                     loggingXml = vers.logging;
-                    Logger.logMessage("[LaunchJava]", $"Logging path: {loggingXml}");
+                    Logger.logMessage("[LaunchJava]", $"Logging url: {loggingXml}");
+                    javaagentJar = vers.javaagent;
+                    Logger.logMessage("[LaunchJava]", $"Javaagent url: {javaagentJar}");
                     if (vers.getServer == "true")
                     {
                         Logger.logMessage("[LaunchJava]", $"getServer returned true");
@@ -235,6 +238,23 @@ namespace MCLauncher
 
                 //Build the launchcmd
                 launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
+                if(javaagentJar != "false")
+                {
+                    Logger.logMessage("[LaunchJava]", "Javaagent active!");
+                    string fileName = javaagentJar;
+                    int index2 = fileName.IndexOf("/");
+                    if (index2 >= 0)
+                        fileName = fileName.Substring(fileName.LastIndexOf("/"));
+
+                    if(!File.Exists($"{workDir}\\.minecraft\\{fileName}"))
+                    {
+                        DownloadProgress.url = javaagentJar;
+                        DownloadProgress.savePath = $"{workDir}\\.minecraft\\{fileName}";
+                        DownloadProgress dp4j = new DownloadProgress();
+                        dp4j.ShowDialog();
+                    }
+                    launchCommand += $"-javaagent:\"{workDir}\\.minecraft\\{fileName}\" ";
+                }
                 if (launchProxyPort != "null")
                 {
                     launchCommand += $"{launchProxy} ";
@@ -250,17 +270,17 @@ namespace MCLauncher
 
                     Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
                     DownloadProgress.url = loggingXml;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\\\libs\\log4j\\{fileName}";
+                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}";
                     DownloadProgress dp4j = new DownloadProgress();
                     dp4j.ShowDialog();
-                    launchCommand += $"-Dlog4j.configurationFile={loggingXml} ";
+                    launchCommand += $"-Dlog4j.configurationFile=\"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}\" ";
                 }
                 if (launchJoinMP == true)
                 {
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
                 }
 
-                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath}";
+                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath} ";
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system
@@ -273,7 +293,7 @@ namespace MCLauncher
                     var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");
                     var launchCmdAddon8 = launchCmdAddon7.Replace("{accessToken}", $"{launchPlayerAccessToken}");
 
-                    launchCommand += $" {launchCmdAddon8}";
+                    launchCommand += $"{launchCmdAddon8}";
                 }
                 if(Globals.isDebug)
                 {
