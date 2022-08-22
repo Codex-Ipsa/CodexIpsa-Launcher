@@ -53,21 +53,42 @@ namespace MCLauncher
                         if (libs.extract != "null")
                         {
                             //TODO: get rid of this
-                            if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
-                                Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);
+                            /*if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
+                                Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);*/
 
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
                             using (ZipArchive archive = ZipFile.OpenRead($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                             {
                                 //TODO: if they don't exist, extract/replace them
                                 foreach (ZipArchiveEntry entry in archive.Entries)
                                 {
-                                    Logger.logError("[LibsCheck]", "Exctract part: " + entry.FullName);
+                                    string dir = "/"+ entry.ToString();
+                                    int index = dir.LastIndexOf("/");
+                                    if (index >= 0)
+                                        dir = dir.Substring(0, index); // or index + 1 to keep slash
+
+
+                                    string file = "/" + entry.FullName;
+                                    Logger.logError("[LibsCheck]", $"Exctract part: {entry.FullName}");
+                                    Logger.logError("[LibsCheck]", $"Exctract dir: {dir}");
+
+                                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}"))
+                                    {
+                                        File.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    }
+                                    if (entry.FullName.EndsWith("/"))
+                                    {
+                                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    }
+                                    else
+                                    {
+                                        entry.ExtractToFile($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    }
                                 }
                             }
-                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
-                            string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
+                            /*string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
                             string extractPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}";
-                            ZipFile.ExtractToDirectory(zipPath, extractPath);
+                            ZipFile.ExtractToDirectory(zipPath, extractPath);*/
                         }
                     }
                 }

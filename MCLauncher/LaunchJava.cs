@@ -262,13 +262,12 @@ namespace MCLauncher
                 if (loggingXml != "false")
                 {
                     Logger.logMessage("[LaunchJava]", "Log4j active!");
-                    //TODO: download XML
                     string fileName = loggingXml;
                     int index2 = fileName.IndexOf("/");
                     if (index2 >= 0)
                         fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                    if(!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}"))
+                    if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}"))
                     {
                         Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
                         DownloadProgress.url = loggingXml;
