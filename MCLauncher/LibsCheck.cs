@@ -39,9 +39,11 @@ namespace MCLauncher
 
                 foreach (var libs in data)
                 {
-                    //Add names to a list for LaunchJava
-                    libsList.Add(libs.name);
-
+                    if(libs.extract == "null")
+                    {
+                        //Add names to a list for LaunchJava - this is here so natives don't get added to the list
+                        libsList.Add(libs.name);
+                    }
                     //Download required libraries
                     if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                     {
@@ -62,7 +64,7 @@ namespace MCLauncher
                                 //TODO: if they don't exist, extract/replace them
                                 foreach (ZipArchiveEntry entry in archive.Entries)
                                 {
-                                    string dir = "/"+ entry.ToString();
+                                    string dir = "/" + entry.ToString();
                                     int index = dir.LastIndexOf("/");
                                     if (index >= 0)
                                         dir = dir.Substring(0, index); // or index + 1 to keep slash

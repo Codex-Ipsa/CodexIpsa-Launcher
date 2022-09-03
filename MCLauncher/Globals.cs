@@ -20,7 +20,7 @@ namespace MCLauncher
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
-        public static bool isDebug = false; //Change this on releases
+        public static bool isDebug = true; //Change this on releases
 
         //Links
         public static string xenia = $"http://codex-ipsa.dejvoss.cz/MCL-Data/emu/xenia.zip";
