@@ -294,6 +294,7 @@ namespace MCLauncher
                     var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
                     var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");
                     var launchCmdAddon8 = launchCmdAddon7.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    var launchCmdAddon9 = launchCmdAddon8.Replace("{assetName}", $"{assetIndexType}");
 
                     launchCommand += $"{launchCmdAddon8}";
                 }
