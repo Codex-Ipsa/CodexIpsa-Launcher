@@ -71,7 +71,7 @@ namespace MCLauncher
                     Logger.logError("[AssetIndex]", $"Unknown key: {oKey}, with value: {oVal}");
                 }
 
-
+                Logger.logError("[AssetIndex]", $"isLegacy: {isLegacy}");
                 if (isLegacy == true)
                 {
                     int indexInt = 0;
@@ -99,21 +99,42 @@ namespace MCLauncher
                             wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}");
                             Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
                         }
-                        isLegacy = false;
 
                         //isLegacy = false;
                         //Logger.logError("[AssetIndex]", $"Name: {name}; hash: {fullHash}");
                         indexInt++;
                     }
+                    isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
                     nameList.Clear();
                     //TODO: copy to .minecraft/assets for versions that don't support --assetsDir
                 }
-                else
+                /*else if (isLegacy==false)
                 {
                     //TODO: for versions past 1.7 (?) do the new system
-                }
+
+                    int indexInt = 0;
+                    WebClient wc = new WebClient();
+                    foreach (var name in nameList)
+                    {
+                        string fullHash = hashList[indexInt];
+                        string firstTwo = fullHash.Substring(0, 2);
+
+                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}"))
+                        {
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}");
+                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}");
+                            Logger.logMessage("[AssetIndex]", $"Downloaded {fullHash} to {firstTwo}");
+                        }
+                        isLegacy = false;
+
+                        indexInt++;
+                    }
+                    indexInt = 0;
+                    hashList.Clear();
+                    nameList.Clear();
+                }*/
             }
         }
     }

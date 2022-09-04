@@ -198,9 +198,9 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
                 workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
-                gameDir = $"\"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft\""; //TODO, customise
+                gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                assetDir = $"\"{Globals.currentPath}\\.codexipsa\\assets\\{assetIndexType}\""; //TODO, customise
+                assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\{assetIndexType}"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
@@ -286,17 +286,18 @@ namespace MCLauncher
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system
-                    var launchCmdAddon1 = launchCmdAddon.Replace("{gameDir}", $"{gameDir}");
-                    var launchCmdAddon2 = launchCmdAddon1.Replace("{assetDir}", $"{assetDir}");
-                    var launchCmdAddon3 = launchCmdAddon2.Replace("{playerName}", $"{launchPlayerName}");
-                    var launchCmdAddon4 = launchCmdAddon3.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
-                    var launchCmdAddon5 = launchCmdAddon4.Replace("{version}", $"\"{launchVerName}\"");
-                    var launchCmdAddon6 = launchCmdAddon5.Replace("{workDir}", $"{workDir}");
-                    var launchCmdAddon7 = launchCmdAddon6.Replace("{uuid}", $"{launchPlayerUUID}");
-                    var launchCmdAddon8 = launchCmdAddon7.Replace("{accessToken}", $"{launchPlayerAccessToken}");
-                    var launchCmdAddon9 = launchCmdAddon8.Replace("{assetName}", $"{assetIndexType}");
+                    launchCmdAddon = launchCmdAddon.Replace("{gameDir}", $"\"{gameDir}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{assetDir}", $"\"{assetDir}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{playerName}", $"{launchPlayerName}");
+                    //launchCmdAddon = launchCmdAddon.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
+                    launchCmdAddon = launchCmdAddon.Replace("{version}", $"\"{launchVerName}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{workDir}", $"\"{workDir}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
+                    launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    launchCmdAddon = launchCmdAddon.Replace("{assetName}", $"\"{assetIndexType}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{userType}", $"msa");
 
-                    launchCommand += $"{launchCmdAddon8}";
+                    launchCommand += $"{launchCmdAddon}";
                 }
                 if(Globals.isDebug)
                 {

@@ -107,6 +107,7 @@ namespace MCLauncher
             // 
             // dirBox
             // 
+            this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(476, 20);
@@ -167,6 +168,7 @@ namespace MCLauncher
             // 
             // resBoxHeight
             // 
+            this.resBoxHeight.Enabled = false;
             this.resBoxHeight.Location = new System.Drawing.Point(392, 64);
             this.resBoxHeight.Name = "resBoxHeight";
             this.resBoxHeight.Size = new System.Drawing.Size(246, 20);
@@ -175,6 +177,7 @@ namespace MCLauncher
             // 
             // resBoxWidth
             // 
+            this.resBoxWidth.Enabled = false;
             this.resBoxWidth.Location = new System.Drawing.Point(122, 64);
             this.resBoxWidth.Name = "resBoxWidth";
             this.resBoxWidth.Size = new System.Drawing.Size(246, 20);
@@ -241,6 +244,7 @@ namespace MCLauncher
             // 
             // dirBtn
             // 
+            this.dirBtn.Enabled = false;
             this.dirBtn.Location = new System.Drawing.Point(604, 38);
             this.dirBtn.Name = "dirBtn";
             this.dirBtn.Size = new System.Drawing.Size(34, 20);
@@ -353,6 +357,7 @@ namespace MCLauncher
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
+            this.offlineModeCheck.Enabled = false;
             this.offlineModeCheck.Location = new System.Drawing.Point(6, 116);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
@@ -404,6 +409,7 @@ namespace MCLauncher
             // custjarCheck
             // 
             this.custjarCheck.AutoSize = true;
+            this.custjarCheck.Enabled = false;
             this.custjarCheck.Location = new System.Drawing.Point(6, 93);
             this.custjarCheck.Name = "custjarCheck";
             this.custjarCheck.Size = new System.Drawing.Size(87, 17);
@@ -415,6 +421,7 @@ namespace MCLauncher
             // methodCheck
             // 
             this.methodCheck.AutoSize = true;
+            this.methodCheck.Enabled = false;
             this.methodCheck.Location = new System.Drawing.Point(6, 67);
             this.methodCheck.Name = "methodCheck";
             this.methodCheck.Size = new System.Drawing.Size(103, 17);
@@ -426,6 +433,7 @@ namespace MCLauncher
             // jvmCheck
             // 
             this.jvmCheck.AutoSize = true;
+            this.jvmCheck.Enabled = false;
             this.jvmCheck.Location = new System.Drawing.Point(6, 41);
             this.jvmCheck.Name = "jvmCheck";
             this.jvmCheck.Size = new System.Drawing.Size(102, 17);
@@ -446,6 +454,7 @@ namespace MCLauncher
             // javaCheck
             // 
             this.javaCheck.AutoSize = true;
+            this.javaCheck.Enabled = false;
             this.javaCheck.Location = new System.Drawing.Point(6, 15);
             this.javaCheck.Name = "javaCheck";
             this.javaCheck.Size = new System.Drawing.Size(81, 17);
