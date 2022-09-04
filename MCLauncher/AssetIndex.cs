@@ -17,8 +17,22 @@ namespace MCLauncher
 
         public static void start(string indexUrl, string indexName)
         {
-            isLegacy = false;
+            if (indexName.Contains("legacy"))
+            {
+                isLegacy = true;
+                Logger.logMessage("[AssetIndex]", "isLegacy returned true!");
+            }
+            else
+            {
+                isLegacy = false;
+            }
+
             WebClient client = new WebClient();
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\");
+            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\{indexName}.json"))
+            {
+                client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\{indexName}.json");
+            }
             string origJson = client.DownloadString(indexUrl);
             Logger.logMessage("[AssetIndex]", origJson);
 
@@ -30,12 +44,7 @@ namespace MCLauncher
                 string oKey = oProp.Name;
                 string oVal = oProp.Value.ToString();
 
-                if (oKey == "virtual" && oVal == "True")
-                {
-                    isLegacy = true;
-                    Logger.logMessage("[AssetIndex]", "isLegacy returned true!");
-                }
-                else if (oKey == "objects")
+                if (oKey == "objects")
                 {
                     string indexJson = oVal;
 
@@ -110,7 +119,7 @@ namespace MCLauncher
                     nameList.Clear();
                     //TODO: copy to .minecraft/assets for versions that don't support --assetsDir
                 }
-                /*else if (isLegacy==false)
+                else if (isLegacy == false)
                 {
                     //TODO: for versions past 1.7 (?) do the new system
 
@@ -127,14 +136,14 @@ namespace MCLauncher
                             wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}");
                             Logger.logMessage("[AssetIndex]", $"Downloaded {fullHash} to {firstTwo}");
                         }
-                        isLegacy = false;
 
                         indexInt++;
                     }
+                    isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
                     nameList.Clear();
-                }*/
+                }
             }
         }
     }

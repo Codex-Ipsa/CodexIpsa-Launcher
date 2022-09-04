@@ -12,8 +12,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.0.7-dev";
         public static string branch = "dev";
-        public static string verCurrent = "0.0.7.12"; //Change this on release
-        public static string verDisplay = "0.0.7 Beta 12"; //Change this on release
+        public static string verCurrent = "0.0.7.13"; //Change this on release
+        public static string verDisplay = "0.0.7.13"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
