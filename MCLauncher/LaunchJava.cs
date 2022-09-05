@@ -52,8 +52,8 @@ namespace MCLauncher
 
         public static string launchXmx = "1024"; //TODO, custom vars
         public static string launchXms = "1024"; //TODO, custom vars
-        public static string launchProxyPort;
         public static string launchProxy;
+        //public static string launchProxyOld;
         public static string launchNativePath;
         public static string launchClientPath;
         public static string launchLibsPath;
@@ -108,8 +108,8 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Main class: {launchClasspath}");
                     launchLibsType = vers.libsType;
                     Logger.logMessage("[LaunchJava]", $"Libs type: {launchLibsType}");
-                    launchProxyPort = vers.proxy;
-                    Logger.logMessage("[LaunchJava]", $"Proxy port: {launchProxyPort}");
+                    launchProxy = vers.proxy;
+                    Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxy}");
                     launchCmdAddon = vers.addCmd;
                     Logger.logMessage("[LaunchJava]", $"Addon: {launchCmdAddon}");
                     assetIndexUrl = vers.assetIndex;
@@ -192,8 +192,8 @@ namespace MCLauncher
                 //Set required stuff
                 launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
                 Logger.logMessage("[LaunchJava]", $"Client path: {launchClientPath}");
-                launchProxy = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxyPort} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
-                Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxy}");
+                //launchProxyOld = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxy} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
+                //Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxyOld}");
                 launchNativePath = $".codexipsa/libs/natives/";
                 Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
                 workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
@@ -255,7 +255,7 @@ namespace MCLauncher
                     }
                     launchCommand += $"-javaagent:\"{workDir}\\.minecraft\\{fileName}\" ";
                 }
-                if (launchProxyPort != "null")
+                if (launchProxy != "null")
                 {
                     launchCommand += $"{launchProxy} ";
                 }
@@ -290,7 +290,7 @@ namespace MCLauncher
                     launchCmdAddon = launchCmdAddon.Replace("{assetDir}", $"\"{assetDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{playerName}", $"{launchPlayerName}");
                     //launchCmdAddon = launchCmdAddon.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
-                    launchCmdAddon = launchCmdAddon.Replace("{version}", $"\"{launchVerName}\"");
+                    launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName}");
                     launchCmdAddon = launchCmdAddon.Replace("{workDir}", $"\"{workDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
                     launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
