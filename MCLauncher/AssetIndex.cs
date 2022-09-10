@@ -134,7 +134,7 @@ namespace MCLauncher
                         {
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}");
                             wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}");
-                            Logger.logMessage("[AssetIndex]", $"Downloaded {fullHash} to {firstTwo}");
+                            Logger.logMessage("[AssetIndex]", $"Downloaded {name} to {firstTwo}/{fullHash}");
                         }
 
                         indexInt++;

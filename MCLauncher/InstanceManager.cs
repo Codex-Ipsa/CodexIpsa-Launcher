@@ -86,7 +86,7 @@ namespace MCLauncher
             verBox.Refresh();
 
             cfgGameVer = verBox.Text;
-            int index = verBox.FindString(cfgGameVer);
+            int index = verBox.FindStringExact(cfgGameVer);
             cfgTypeVer = typeJavaList[index];
             cfgLinkVer = linkJavaList[index];
 
@@ -490,7 +490,7 @@ namespace MCLauncher
                 }
 
                 cfgGameVer = verBox.Text;
-                int index = verBox.FindString(cfgGameVer);
+                int index = verBox.FindStringExact(cfgGameVer);
                 cfgTypeVer = typeJavaList[index];
                 cfgLinkVer = linkJavaList[index];
             }

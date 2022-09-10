@@ -14,6 +14,7 @@ namespace MCLauncher
             Console.Write(header);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
+            //TODO: Format log4j shits
         }
 
         public static void logError(string header, string text)

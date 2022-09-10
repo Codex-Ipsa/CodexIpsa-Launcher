@@ -17,6 +17,7 @@ namespace MCLauncher
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
+        public static string dataPath = Directory.GetCurrentDirectory() + "\\.codexipsa";
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
