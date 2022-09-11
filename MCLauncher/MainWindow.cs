@@ -30,15 +30,14 @@ namespace MCLauncher
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
-
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
-            Logger.logMessage($"[MainWindow]", $"Changelog URL loaded");
+            Logger.logMessage($"[MainWindow]", $"Changelog loaded");
 
-            HomeWindow hw = new HomeWindow();
+            /*HomeWindow hw = new HomeWindow();
             Controls.Add(hw);
-            hw.Dock = DockStyle.Fill;
+            hw.Dock = DockStyle.Fill;*/
 
             //Create directories
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
@@ -123,10 +122,10 @@ namespace MCLauncher
             else if (VerSelect.checkTab == "javaMod")
                 LaunchJavaMod.LaunchGame();
 
-            else if (VerSelect.checkTab == "x360")
+            else if (InstanceManager.cfgTypeVer == "x360")
                 LaunchXbox360.LaunchGame();
 
-            else if (VerSelect.checkTab == "ps3")
+            else if (InstanceManager.cfgTypeVer == "ps3")
                 LaunchPS3.LaunchGame();
         }
 

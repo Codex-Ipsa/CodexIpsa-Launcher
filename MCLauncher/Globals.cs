@@ -12,8 +12,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.0.7-dev";
         public static string branch = "dev";
-        public static string verCurrent = "0.0.7.14"; //Change this on release
-        public static string verDisplay = "0.0.7.14"; //Change this on release
+        public static string verCurrent = "0.0.7.15"; //Change this on release
+        public static string verDisplay = "0.0.7.15"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -24,10 +24,9 @@ namespace MCLauncher
         public static bool isDebug = true; //Change this on releases
 
         //Links
-        public static string xenia = $"http://codex-ipsa.dejvoss.cz/MCL-Data/emu/xenia.zip";
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater.exe";
         public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/version/list.json";
-
+        public static string xeniaInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/emulator/xenia.json";
         public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
         public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
         public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/java_version.json";

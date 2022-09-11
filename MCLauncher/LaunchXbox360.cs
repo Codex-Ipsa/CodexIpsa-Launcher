@@ -21,7 +21,13 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.dataPath}\\versions");
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360");
             Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia");
+            Directory.CreateDirectory($"{Globals.docsPath}\\Xenia\\content\\584111F7\\000B0000");
             Logger.logMessage("[LaunchX360]", $"Directories created");
+
+            //Get latest xenia version
+            WebClient wc = new WebClient();
+            string xeniaJson = wc.DownloadString(Globals.xeniaInfo);
+            Logger.logError("[LaunchX360]" , xeniaJson);
 
             /*Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions");
             Directory.CreateDirectory($"{Globals.currentPath}\\bin\\versions\\x360");

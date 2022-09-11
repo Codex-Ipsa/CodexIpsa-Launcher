@@ -15,6 +15,15 @@ namespace MCLauncher
 {
     public partial class InstanceManager : Form
     {
+        /*public static void CreateInstance()
+        {
+
+        }
+
+        public static void ReloadInstance()
+        {
+
+        }*/
         public static string selectedInstance = "Default";
         public static string createName;
         public static string tempName;
@@ -61,7 +70,7 @@ namespace MCLauncher
             //Set the editions list
             List<string> editionsList = new List<string>();
             editionsList.Add("Java Edition");
-            editionsList.Add("Xbox 360 Edition");
+            //editionsList.Add("Xbox 360 Edition");
             //editionsList.Add("Playstation 3 Edition");
             editionBox.DataSource = editionsList;
             editionBox.Refresh();
@@ -343,11 +352,11 @@ namespace MCLauncher
             ofd.Title = "Open a game file";
             ofd.Filter = "JAR File (*.jar*) | *.jar*";
             DialogResult dr = ofd.ShowDialog();
-            /*if (dr == DialogResult.OK)
-            {
-                verPath = ofd.FileName;
-            }
-            pathLabel.Text = verPath;*/
+            //if (dr == DialogResult.OK)
+            //{
+            //    verPath = ofd.FileName;
+            //}
+            //pathLabel.Text = verPath;
         }
 
         private void offlineModeCheck_CheckedChanged(object sender, EventArgs e)
