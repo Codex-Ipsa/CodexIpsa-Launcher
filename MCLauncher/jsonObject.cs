@@ -10,6 +10,7 @@ namespace MCLauncher
     {
         //Universal
         public string verName { get; set; }
+        public string verNote { get; set; }
         public string verLink { get; set; }
         public string verType { get; set; }
 

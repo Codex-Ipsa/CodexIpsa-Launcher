@@ -14,6 +14,7 @@ namespace MCLauncher
     {
         public static MainWindow Instance;
         public static string msPlayerName;
+        public static string selectedEdition = "java"; //TODO: LOAD THIS FROM INSTANCE
 
         public MainWindow()
         {
@@ -30,6 +31,9 @@ namespace MCLauncher
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
+            WebClient cl = new WebClient();
+            string test = cl.DownloadString(Globals.javaeduJson);
+            Logger.logError("[TEST]", test);
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
@@ -116,17 +120,16 @@ namespace MCLauncher
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (VerSelect.checkTab == "java")
+            if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 
-            else if (VerSelect.checkTab == "javaMod")
-                LaunchJavaMod.LaunchGame();
-
-            else if (InstanceManager.cfgTypeVer == "x360")
+            else if (selectedEdition == "x360")
                 LaunchXbox360.LaunchGame();
 
-            else if (InstanceManager.cfgTypeVer == "ps3")
+            else if (selectedEdition == "ps3")
                 LaunchPS3.LaunchGame();
+            else if (selectedEdition == "edu")
+                LaunchJava.LaunchGame();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,35 +206,9 @@ namespace MCLauncher
             reloadInstance();
         }
 
-        private void newInstBtn_Click(object sender, EventArgs e)
-        {
-            InstanceManager.cfgInstName = "New profile";
-            InstanceManager.mode = "new";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
-        }
-
-        private void editInstBtn_Click(object sender, EventArgs e)
-        {
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //Set the data
-            /*foreach (var vers in data)
-            {
-                InstanceManager.cfgGameVer = vers.gameVer;
-                InstanceManager.cfgTypeVer = vers.typeVer;
-            }*/
-
-            InstanceManager.cfgInstName = comboBox1.Text;
-            InstanceManager.mode = "edit";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
-        }
-
         public static void reloadInstance()
         {
-            if(InstanceManager.mode != "initial")
+            if (InstanceManager.mode != "initial")
             {
                 InstanceManager.selectedInstance = Instance.comboBox1.Text;
             }
@@ -256,6 +233,32 @@ namespace MCLauncher
             }
             LaunchJava.currentInstance = Instance.comboBox1.Text;
             Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
+        }
+
+        private void newInstBtn_Click(object sender, EventArgs e)
+        {
+            InstanceManager.cfgInstName = "New profile";
+            InstanceManager.mode = "new";
+            InstanceManager instMan = new InstanceManager();
+            instMan.ShowDialog();
+        }
+
+        private void editInstBtn_Click(object sender, EventArgs e)
+        {
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+            //Set the data
+            /*foreach (var vers in data)
+            {
+                InstanceManager.cfgGameVer = vers.gameVer;
+                InstanceManager.cfgTypeVer = vers.typeVer;
+            }*/
+
+            InstanceManager.cfgInstName = comboBox1.Text;
+            InstanceManager.mode = "edit";
+            InstanceManager instMan = new InstanceManager();
+            instMan.ShowDialog();
         }
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
@@ -310,11 +313,21 @@ namespace MCLauncher
                 Console.WriteLine($"[MainWindow] User is not logged in");
                 Instance.logoutBtn.Visible = false;
                 Instance.loginBtn.Visible = true;
-                Instance.playerNameLabel.Text = "Welcome, Guest. [O]";
+                Instance.playerNameLabel.Text = "Not logged in.";
                 LaunchJava.launchPlayerName = "Guest";
                 LaunchJava.launchPlayerUUID = "null";
                 LaunchJava.launchPlayerAccessToken = "null";
                 LaunchJava.launchMpPass = "null";
+                if(Globals.requireAuth == true)
+                {
+                    Instance.btnPlay.Enabled = false;
+                    Instance.loginLabel.Text = "You need to log in to use the launcher!";
+                }
+                else
+                {
+                    Instance.btnPlay.Enabled = true;
+                    Instance.loginLabel.Text = "MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
+                }
             }
             else
             {
@@ -333,6 +346,8 @@ namespace MCLauncher
                     Instance.logoutBtn.Visible = true;
                     Instance.loginBtn.Visible = false;
                     Instance.playerNameLabel.Text = $"Welcome, {msPlayerName}";
+                    Instance.btnPlay.Enabled = true;
+                    Instance.loginLabel.Text = "";
                 }
             }
         }

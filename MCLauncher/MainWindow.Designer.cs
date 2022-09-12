@@ -50,6 +50,7 @@ namespace MCLauncher
             this.loginBtn = new System.Windows.Forms.Button();
             this.gameVerLabel = new System.Windows.Forms.Label();
             this.playerNameLabel = new System.Windows.Forms.Label();
+            this.loginLabel = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -174,6 +175,7 @@ namespace MCLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.loginLabel);
             this.panel1.Controls.Add(this.logoutBtn);
             this.panel1.Controls.Add(this.editInstBtn);
             this.panel1.Controls.Add(this.newInstBtn);
@@ -276,6 +278,18 @@ namespace MCLauncher
             this.playerNameLabel.Text = "Welcome, PlayerName";
             this.playerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // loginLabel
+            // 
+            this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.loginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.loginLabel.ForeColor = System.Drawing.Color.White;
+            this.loginLabel.Location = new System.Drawing.Point(212, 52);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(353, 13);
+            this.loginLabel.TabIndex = 18;
+            this.loginLabel.Text = "You need to log in to use the launcher!";
+            this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,6 +336,7 @@ namespace MCLauncher
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.Button logoutBtn;
+        private System.Windows.Forms.Label loginLabel;
     }
 }
 

@@ -15,15 +15,41 @@ namespace MCLauncher
 {
     public partial class InstanceManager : Form
     {
-        /*public static void CreateInstance()
-        {
+        public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
 
-        }
+        /*public static List<string> varNames;
+        public static List<string> varValues;
+        public static List<string> editionNames = new List<string>() { "Java Edition" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
 
-        public static void ReloadInstance()
-        {
+        public static string name = "Default";
+        public static string edition;
+        public static string version;
+        public static string type;
+        public static string url;
 
-        }*/
+        public static string directory;
+        public static string resolutionX;
+        public static string resolutionY;
+        public static string ramMin;
+        public static string ramMax;
+
+        public static string customJava;
+        public static bool useCustomJava = false;
+        public static string jvmArgs;
+        public static bool useJvmArgs = false;
+        public static string launchMethod;
+        public static bool useLaunchMethod = false;
+        public static string customJar;
+        public static bool useCustomJar = false;
+        public static bool offlineMode;*/
+
+
+
+
+        /// <summary>
+        /// OLD SHIT BELOW!!!
+        /// </summary>
+
         public static string selectedInstance = "Default";
         public static string createName;
         public static string tempName;
@@ -35,30 +61,67 @@ namespace MCLauncher
         public static string cfgGameVer;
         public static string cfgTypeVer;
         public static string cfgLinkVer;
-
-
-
         public static string instGameDir = "";
-
         public static string instResWidth = "854";
         public static string instResHeight = "480";
-
         public static int instRamMin = 1024;
         public static int instRamMax = 1024;
-
         public static string instCustJava = "";
         public static bool useCustJava = false;
-
         public static string instCustJvm = "";
         public static bool useCustJvm = false;
-
         public static string instCustMethod = "";
         public static bool useCustMethod = false;
-
         public static string instCustJar = "";
         public static bool useCustJar = false;
-
         public static bool useOfflineMode = false;
+
+        /*public static void setData()
+        {
+            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "launchMethod", "useLaunchMethod", "customJar", "useCustomJar", "offlineMode" };
+            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}" };
+
+        }
+
+        public static void setDefaults()
+        {
+            name = "New Instance";//Todo: number
+
+        }
+
+        public static void instanceWorker(string name, string mode)
+        {
+
+        }
+
+        public static void reloadInstance()
+        {
+            if (InstanceManager.mode != "initial")
+            {
+                InstanceManager.name = Instance.comboBox1.Text;
+            }
+
+            Console.WriteLine("selected: " + InstanceManager.name);
+
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.name}\\instance.cfg");
+            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+            //Set the LaunchJava stuff
+            foreach (var vers in data)
+            {
+                LaunchJava.launchVerName = vers.instVer;
+                LaunchJava.launchVerUrl = vers.instUrl;
+                LaunchJava.launchVerType = vers.instType;
+                LaunchJava.launchWidth = vers.instResWidth;
+                LaunchJava.launchHeight = vers.instResHeight;
+                LaunchJava.launchXms = vers.instRamMin;
+                LaunchJava.launchXmx = vers.instRamMax;
+                //LaunchJava.javaLocation = vers.instCustJava;
+                //LaunchJava.use //TODO!!!
+            }
+            LaunchJava.currentInstance = MainWindow.Instance.comboBox1.Text;
+            MainWindow.Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
+        }*/
 
         public InstanceManager()
         {
@@ -68,11 +131,7 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Set the editions list
-            List<string> editionsList = new List<string>();
-            editionsList.Add("Java Edition");
-            //editionsList.Add("Xbox 360 Edition");
-            //editionsList.Add("Playstation 3 Edition");
-            editionBox.DataSource = editionsList;
+            editionBox.DataSource = editionNames;
             editionBox.Refresh();
 
             //Set the versions list for java
@@ -86,7 +145,7 @@ namespace MCLauncher
 
                 foreach (var vers in data)
                 {
-                    versionList.Add(vers.verName);
+                    versionList.Add($"{vers.verName}"); //({vers.verNote})
                     typeJavaList.Add(vers.verType);
                     linkJavaList.Add(vers.verLink);
                 }
@@ -94,8 +153,10 @@ namespace MCLauncher
             verBox.DataSource = versionList;
             verBox.Refresh();
 
-            cfgGameVer = verBox.Text;
-            int index = verBox.FindStringExact(cfgGameVer);
+            ////Why is this here
+            int index = verBox.FindStringExact(verBox.Text);
+            Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
+            cfgGameVer = versionList[index];
             cfgTypeVer = typeJavaList[index];
             cfgLinkVer = linkJavaList[index];
 
@@ -420,59 +481,52 @@ namespace MCLauncher
 
         private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<string> versionList = new List<string>();
+            List<string> typesList = new List<string>();
+            using (WebClient client = new WebClient())
+            {
+                string json = "";
+                if (editionBox.Text == "Java Edition")
+                    json = client.DownloadString(Globals.javaJson);
+                else if (editionBox.Text == "Xbox 360 Edition")
+                    json = client.DownloadString(Globals.x360Json);
+                else if (editionBox.Text == "Playstation 3 Edition")
+                    json = client.DownloadString(Globals.ps3Json);
+                else if (editionBox.Text == "MinecraftEdu")
+                    json = client.DownloadString(Globals.javaeduJson);
+
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                foreach (var vers in data)
+                {
+                    versionList.Add(vers.verName);
+                    typesList.Add(vers.verType);
+                }
+            }
+
+            verBox.DataSource = versionList;
+            verBox.Refresh();
+            cfgGameVer = verBox.Text;
+            int i = verBox.FindStringExact(cfgGameVer);
             if (editionBox.Text == "Java Edition")
             {
-                List<string> versionList = new List<string>();
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.javaJson);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        versionList.Add(vers.verName);
-                    }
-                }
-                VerSelect.checkTab = "java";
-                verBox.DataSource = versionList;
-                verBox.Refresh();
-                cfgGameVer = verBox.Text;
+                MainWindow.selectedEdition = "java";
+                cfgTypeVer = typesList[i];
             }
             else if (editionBox.Text == "Xbox 360 Edition")
             {
-                List<string> versionList = new List<string>();
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.x360Json);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        versionList.Add(vers.verName);
-                    }
-                }
-                VerSelect.checkTab = "x360";
-                verBox.DataSource = versionList;
-                verBox.Refresh();
+                MainWindow.selectedEdition = "x360";
                 cfgTypeVer = "x360";
             }
             else if (editionBox.Text == "Playstation 3 Edition")
             {
-                List<string> versionList = new List<string>();
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.ps3Json);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        versionList.Add(vers.verName);
-                    }
-                }
-                VerSelect.checkTab = "ps3";
-                verBox.DataSource = versionList;
-                verBox.Refresh();
+                MainWindow.selectedEdition = "ps3";
                 cfgTypeVer = "ps3";
+            }
+            else if(editionBox.Text == "MinecraftEdu")
+            {
+                MainWindow.selectedEdition = "edu";
+                cfgTypeVer = typesList[i];
             }
         }
 
@@ -498,8 +552,33 @@ namespace MCLauncher
                     }
                 }
 
-                cfgGameVer = verBox.Text;
-                int index = verBox.FindStringExact(cfgGameVer);
+                int index = verBox.FindStringExact(verBox.Text);
+                Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
+                cfgGameVer = versionList[index];
+                cfgTypeVer = typeJavaList[index];
+                cfgLinkVer = linkJavaList[index];
+            }
+            else if (editionBox.Text == "MinecraftEdu")
+            {
+                List<string> versionList = new List<string>();
+                List<string> typeJavaList = new List<string>();
+                List<string> linkJavaList = new List<string>();
+                using (WebClient client = new WebClient())
+                {
+                    string json = client.DownloadString(Globals.javaeduJson);
+                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                    foreach (var vers in data)
+                    {
+                        versionList.Add(vers.verName);
+                        typeJavaList.Add(vers.verType);
+                        linkJavaList.Add(vers.verLink);
+                    }
+                }
+
+                int index = verBox.FindStringExact(verBox.Text);
+                Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
+                cfgGameVer = versionList[index];
                 cfgTypeVer = typeJavaList[index];
                 cfgLinkVer = linkJavaList[index];
             }
