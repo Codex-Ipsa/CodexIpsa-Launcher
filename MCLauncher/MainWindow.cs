@@ -31,9 +31,6 @@ namespace MCLauncher
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
-            WebClient cl = new WebClient();
-            string test = cl.DownloadString(Globals.javaeduJson);
-            Logger.logError("[TEST]", test);
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();

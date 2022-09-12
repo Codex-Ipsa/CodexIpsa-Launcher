@@ -190,11 +190,11 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"Version AssetIndex: {assetIndexUrl}");
 
                 //Set required stuff
-                launchClientPath = $".codexipsa/versions/java/{launchVerName}.jar";
+                launchClientPath = $"{Globals.currentPath}/.codexipsa/versions/java/{launchVerName}.jar";
                 Logger.logMessage("[LaunchJava]", $"Client path: {launchClientPath}");
                 //launchProxyOld = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxy} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
                 //Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxyOld}");
-                launchNativePath = $".codexipsa/libs/natives/";
+                launchNativePath = $"\"{Globals.currentPath}/.codexipsa/libs/natives/\"";
                 Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
                 workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
@@ -221,7 +221,7 @@ namespace MCLauncher
                 foreach (var lib in LibsCheck.libsList)
                 {
                     Logger.logMessage("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
-                    launchLibsPath += $".codexipsa\\libs\\{lib};";
+                    launchLibsPath += $"{Globals.currentPath}\\.codexipsa\\libs\\{lib};";
                 }
 
                 //TODO: CHECK IF AUTHENTICATED
@@ -332,7 +332,7 @@ namespace MCLauncher
 
                     process.StartInfo.FileName = launchJavaLocation;
                     process.StartInfo.Arguments = launchCommand;
-                    process.StartInfo.WorkingDirectory = $"{Globals.currentPath}";
+                    process.StartInfo.WorkingDirectory = $"{gameDir}";
                     process.Start();
 
                     process.BeginErrorReadLine();
