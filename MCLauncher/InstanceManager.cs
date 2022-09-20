@@ -336,7 +336,7 @@ namespace MCLauncher
         {
             if(nameBox.Text == string.Empty)
             {
-                JavaCheck warn = new JavaCheck("Name can't be empty!");
+                Warning warn = new Warning("Name can't be empty!");
                 warn.ShowDialog();
             }
             else

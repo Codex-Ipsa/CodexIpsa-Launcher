@@ -50,10 +50,11 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            //Delete updater if it exists for some reason
+            //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
-
+            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\update.cfg"))
+                File.Delete($"{Globals.currentPath}\\.codexipsa\\update.cfg");
 
             //Check for updates
             Console.WriteLine($"[MainWindow] Checking for updates..");
@@ -74,7 +75,9 @@ namespace MCLauncher
 
                 if(index == -1)
                 {
-                    Console.WriteLine($"[MainWindow] Current branch is no longer supported!");
+                    Logger.logError("[MainWindow]", $"Current branch is no longer supported!");
+                    Warning wrn = new Warning("Your branch is no longer supported!");
+                    wrn.ShowDialog();
                 }
                 else
                 {
@@ -310,7 +313,7 @@ namespace MCLauncher
                 Console.WriteLine($"[MainWindow] User is not logged in");
                 Instance.logoutBtn.Visible = false;
                 Instance.loginBtn.Visible = true;
-                Instance.playerNameLabel.Text = "Not logged in.";
+                Instance.playerNameLabel.Text = "Welcome, Guest";
                 LaunchJava.launchPlayerName = "Guest";
                 LaunchJava.launchPlayerUUID = "null";
                 LaunchJava.launchPlayerAccessToken = "null";

@@ -14,12 +14,13 @@ namespace MCLauncher
 {
     public partial class Update : Form
     {
-        public Update()
+        public Update(string ver, string info)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            infoLabel.Text = $"{ver}\n{info}";
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
@@ -36,10 +37,10 @@ namespace MCLauncher
         {
             using (var client = new WebClient())
             {
-                client.DownloadFile(Globals.updaterUrl, Globals.currentPath + "\\LauncherUpdater.exe");
+                client.DownloadFile(Globals.updaterUrl, $"{Globals.currentPath}\\LauncherUpdater.exe");
             }
 
-            System.Diagnostics.Process.Start("CMD.exe", $"/C LauncherUpdater.exe");
+            System.Diagnostics.Process.Start($"{Globals.currentPath}\\LauncherUpdater.exe");
             Application.Exit();
         }
     }

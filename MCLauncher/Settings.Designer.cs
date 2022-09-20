@@ -44,10 +44,9 @@ namespace MCLauncher
             // 
             // applyBtn
             // 
-            this.applyBtn.Location = new System.Drawing.Point(252, 213);
-            this.applyBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.applyBtn.Location = new System.Drawing.Point(189, 173);
             this.applyBtn.Name = "applyBtn";
-            this.applyBtn.Size = new System.Drawing.Size(109, 28);
+            this.applyBtn.Size = new System.Drawing.Size(82, 23);
             this.applyBtn.TabIndex = 14;
             this.applyBtn.Text = "Apply";
             this.applyBtn.UseVisualStyleBackColor = true;
@@ -59,22 +58,19 @@ namespace MCLauncher
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(595, 71);
+            this.groupBox1.Size = new System.Drawing.Size(446, 58);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Presentation";
+            this.groupBox1.Text = "Launcher";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 27);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Language";
             // 
@@ -84,10 +80,9 @@ namespace MCLauncher
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "English"});
-            this.comboBox1.Location = new System.Drawing.Point(147, 23);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Location = new System.Drawing.Point(110, 19);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(439, 24);
+            this.comboBox1.Size = new System.Drawing.Size(330, 21);
             this.comboBox1.TabIndex = 0;
             // 
             // groupBox2
@@ -97,11 +92,9 @@ namespace MCLauncher
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.comboUpdateSelect);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(16, 94);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 76);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(595, 111);
+            this.groupBox2.Size = new System.Drawing.Size(446, 90);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Updates";
@@ -109,10 +102,9 @@ namespace MCLauncher
             // btnUpdates
             // 
             this.btnUpdates.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdates.Location = new System.Drawing.Point(7, 64);
-            this.btnUpdates.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdates.Location = new System.Drawing.Point(5, 52);
             this.btnUpdates.Name = "btnUpdates";
-            this.btnUpdates.Size = new System.Drawing.Size(579, 28);
+            this.btnUpdates.Size = new System.Drawing.Size(434, 23);
             this.btnUpdates.TabIndex = 3;
             this.btnUpdates.Text = "Check for updates";
             this.btnUpdates.UseVisualStyleBackColor = true;
@@ -121,10 +113,9 @@ namespace MCLauncher
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 27);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 17);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Branch";
             // 
@@ -135,23 +126,21 @@ namespace MCLauncher
             this.comboUpdateSelect.FormattingEnabled = true;
             this.comboUpdateSelect.Items.AddRange(new object[] {
             "English"});
-            this.comboUpdateSelect.Location = new System.Drawing.Point(147, 23);
-            this.comboUpdateSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.comboUpdateSelect.Location = new System.Drawing.Point(110, 19);
             this.comboUpdateSelect.Name = "comboUpdateSelect";
-            this.comboUpdateSelect.Size = new System.Drawing.Size(439, 24);
+            this.comboUpdateSelect.Size = new System.Drawing.Size(330, 21);
             this.comboUpdateSelect.TabIndex = 0;
             this.comboUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.comboUpdateSelect_SelectedIndexChanged);
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 254);
+            this.ClientSize = new System.Drawing.Size(470, 206);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.applyBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Settings";
             this.Text = "Settings";
             this.groupBox1.ResumeLayout(false);

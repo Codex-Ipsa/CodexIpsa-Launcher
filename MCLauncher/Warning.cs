@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace MCLauncher
 {
-    public partial class JavaCheck : Form
+    public partial class Warning : Form
     {
-        public static string warnString = "";
-        public JavaCheck(string str)
+        //Max 17 chars per line 
+        public Warning(string str)
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
             warnLabel.Text = str;
         }
 

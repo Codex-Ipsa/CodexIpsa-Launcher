@@ -1,7 +1,7 @@
 ﻿
 namespace MCLauncher
 {
-    partial class JavaCheck
+    partial class Warning
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace MCLauncher
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JavaCheck));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Warning));
             this.warnLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.okBtn = new System.Windows.Forms.Button();

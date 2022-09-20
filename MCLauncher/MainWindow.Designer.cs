@@ -42,6 +42,7 @@ namespace MCLauncher
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnPlay = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.loginLabel = new System.Windows.Forms.Label();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.editInstBtn = new System.Windows.Forms.Button();
             this.newInstBtn = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@ namespace MCLauncher
             this.loginBtn = new System.Windows.Forms.Button();
             this.gameVerLabel = new System.Windows.Forms.Label();
             this.playerNameLabel = new System.Windows.Forms.Label();
-            this.loginLabel = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -190,6 +190,18 @@ namespace MCLauncher
             this.panel1.Size = new System.Drawing.Size(785, 75);
             this.panel1.TabIndex = 0;
             // 
+            // loginLabel
+            // 
+            this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.loginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.loginLabel.ForeColor = System.Drawing.Color.White;
+            this.loginLabel.Location = new System.Drawing.Point(212, 52);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(353, 13);
+            this.loginLabel.TabIndex = 18;
+            this.loginLabel.Text = "You need to log in to use the launcher!";
+            this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // logoutBtn
             // 
             this.logoutBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -277,18 +289,6 @@ namespace MCLauncher
             this.playerNameLabel.TabIndex = 11;
             this.playerNameLabel.Text = "Welcome, PlayerName";
             this.playerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // loginLabel
-            // 
-            this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.loginLabel.BackColor = System.Drawing.Color.Transparent;
-            this.loginLabel.ForeColor = System.Drawing.Color.White;
-            this.loginLabel.Location = new System.Drawing.Point(212, 52);
-            this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(353, 13);
-            this.loginLabel.TabIndex = 18;
-            this.loginLabel.Text = "You need to log in to use the launcher!";
-            this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainWindow
             // 

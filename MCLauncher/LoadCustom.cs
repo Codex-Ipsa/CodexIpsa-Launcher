@@ -39,7 +39,7 @@ namespace MCLauncher
         {
             if(verPath == string.Empty)
             {
-                JavaCheck warn = new JavaCheck("Please choose a valid path.");
+                Warning warn = new Warning("Please choose a valid path.");
                 warn.ShowDialog();
             }
             else
@@ -78,7 +78,7 @@ namespace MCLauncher
                 }
                 else
                 {
-                    JavaCheck warn = new JavaCheck("Please select a launch type.");
+                    Warning warn = new Warning("Please select a launch type.");
                     warn.ShowDialog();
                 }
             }
