@@ -73,11 +73,11 @@ namespace MCLauncher
             loadData();
             branchIndex = idList.FindIndex(collection => collection.SequenceEqual(branchToCheck));
 
-            Logger.logError("[Settings]", idList[branchIndex]);
+            Logger.logMessage("[Settings]", $"Branch to check: {idList[branchIndex]}");
 
             if (Globals.verCurrent != versionList[branchIndex])
             {
-                Logger.logError("[Settings]", $"New update is available!");
+                Logger.logMessage("[Settings]", $"New update is available!");
 
                 using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\update.cfg"))
                 {
@@ -90,14 +90,14 @@ namespace MCLauncher
             }
             else
             {
-                Logger.logError("[Settings]", $"No new update is available.");
+                Logger.logMessage("[Settings]", $"No new update is available.");
             }
         }
 
         private void comboUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             branchIndex = comboUpdateSelect.SelectedIndex;
-            Logger.logError("[Settings]", $"i:{branchIndex}, v:{versionList[branchIndex]}, b:{idList[branchIndex]}");
+            Logger.logMessage("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
         }
 
         private void btnUpdates_Click(object sender, EventArgs e)

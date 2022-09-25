@@ -57,7 +57,7 @@ namespace MCLauncher
                 File.Delete($"{Globals.currentPath}\\.codexipsa\\update.cfg");
 
             //Check for updates
-            Console.WriteLine($"[MainWindow] Checking for updates..");
+            Logger.logMessage($"[MainWindow]", "Checking for updates..");
             List<string> branchIds = new List<string>();
 
             using (WebClient client = new WebClient())
@@ -71,7 +71,7 @@ namespace MCLauncher
                 }
 
                 int index = branchIds.FindIndex(x => x.StartsWith(Globals.branch));
-                Console.WriteLine($"[MainWindow] Found branch {Globals.branch} on index {index}");
+                Logger.logMessage($"[MainWindow]", $"Branch {Globals.branch} is on {index}");
 
                 if(index == -1)
                 {
@@ -81,7 +81,6 @@ namespace MCLauncher
                 }
                 else
                 {
-                    Console.WriteLine($"[MainWindow] Success! Moving over to VerCheck.");
                     Settings.checkForUpdates(Globals.branch);
                 }
 
@@ -204,7 +203,7 @@ namespace MCLauncher
                 InstanceManager.selectedInstance = Instance.comboBox1.Text;
             }
 
-            Console.WriteLine("selected: " + InstanceManager.selectedInstance);
+            Logger.logMessage("[MainWindow]", $"Selected instance: {InstanceManager.selectedInstance}");
 
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
@@ -267,7 +266,7 @@ namespace MCLauncher
         private void loginBtn_Click(object sender, EventArgs e)
         {
             //Calling MSAuth
-            Console.WriteLine($"[MainWindow] Calling MSAuth");
+            Logger.logMessage($"[MainWindow]", "Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
 
@@ -287,7 +286,7 @@ namespace MCLauncher
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine($"[MainWindow] Logging out");
+            Logger.logMessage($"[MainWindow]", "Logging out");
             LaunchJava.launchPlayerName = "Guest";
             LaunchJava.launchPlayerUUID = "null";
             LaunchJava.launchPlayerAccessToken = "null";
@@ -301,7 +300,7 @@ namespace MCLauncher
         {
             if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
             {
-                Console.WriteLine($"[MainWindow] User is not logged in");
+                Logger.logError($"[MainWindow]", "User is not logged in");
                 Instance.logoutBtn.Visible = false;
                 Instance.loginBtn.Visible = true;
                 Instance.playerNameLabel.Text = "Welcome, Guest";
@@ -322,7 +321,7 @@ namespace MCLauncher
             }
             else
             {
-                Console.WriteLine($"[MainWindow] User is logged in, re-checking everything");
+                Logger.logMessage($"[MainWindow]", "User is logged in, re-checking everything");
                 MSAuth.usernameFromRefreshToken();
                 if(MSAuth.hasErrored == true)
                 {
