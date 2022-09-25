@@ -29,18 +29,32 @@ namespace MCLauncher
 
         public Settings()
         {
+            //Initialize
             InstanceSetting = this;
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            loadData();
+            comboUpdateSelect.DataSource = nameList;
+            int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));
+            comboUpdateSelect.SelectedIndex = index1;
+            branchIndex = comboUpdateSelect.SelectedIndex;
+
+
+        }
+
+        public static void loadData()
+        {   
+            //Clear lists just in case
             nameList.Clear();
             idList.Clear();
             versionList.Clear();
             urlList.Clear();
             noteList.Clear();
 
+            //Get update info
             WebClient client = new WebClient();
             string jsonData = client.DownloadString(Globals.updateInfo);
             List<settingsJson> data = JsonConvert.DeserializeObject<List<settingsJson>>(jsonData);
@@ -52,29 +66,16 @@ namespace MCLauncher
                 versionList.Add(vers.brVer);
                 noteList.Add(vers.brNote);
             }
-            comboUpdateSelect.DataSource = nameList;
-            int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));
-            comboUpdateSelect.SelectedIndex = index1;
-            branchIndex = comboUpdateSelect.SelectedIndex;
         }
 
-        private void comboUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
+        public static void checkForUpdates(string branchToCheck)
         {
-            branchIndex = comboUpdateSelect.SelectedIndex;
-            Logger.logMessage("[Settings]", $"Index: {branchIndex}");
-        }
+            loadData();
+            branchIndex = idList.FindIndex(collection => collection.SequenceEqual(branchToCheck));
 
-        private void btnUpdates_Click(object sender, EventArgs e)
-        {
-            checkForUpdates(idList[branchIndex]);
-            Logger.logError("[Settings]", versionList[branchIndex]);
-        }
+            Logger.logError("[Settings]", idList[branchIndex]);
 
-        public static void checkForUpdates(string branchName)
-        {
-            Logger.logError("[Settings]", versionList[branchIndex]); //this too errors TODO
-
-            if (Globals.verCurrent != versionList[branchIndex]) //this errors
+            if (Globals.verCurrent != versionList[branchIndex])
             {
                 Logger.logError("[Settings]", $"New update is available!");
 
@@ -91,6 +92,17 @@ namespace MCLauncher
             {
                 Logger.logError("[Settings]", $"No new update is available.");
             }
+        }
+
+        private void comboUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            branchIndex = comboUpdateSelect.SelectedIndex;
+            Logger.logError("[Settings]", $"i:{branchIndex}, v:{versionList[branchIndex]}, b:{idList[branchIndex]}");
+        }
+
+        private void btnUpdates_Click(object sender, EventArgs e)
+        {
+            checkForUpdates(idList[branchIndex]);
         }
 
         private void applyBtn_Click(object sender, EventArgs e)

@@ -20,7 +20,7 @@ namespace MCLauncher
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            infoLabel.Text = $"{ver}\n{info}";
+            infoLabel.Text = $"{ver}\n\n{info}";
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
