@@ -88,15 +88,6 @@ namespace MCLauncher
                 //TODO: set selectedIndex
             }
 
-            /*if(!File.Exists($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
-            {
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\bin\\instance\\readme.txt"))
-                {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"WARNING!\nDo not mess with anything in this folder!\nIt will corrupt the instance(s)!");
-                    fs.Write(config, 0, config.Length);
-                }
-            }*/
-
             if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
                 InstanceManager.mode = "initial";
