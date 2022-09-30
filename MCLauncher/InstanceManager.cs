@@ -271,7 +271,7 @@ namespace MCLauncher
 
                 instanceInt = 1;
 
-                MainWindow.reloadInstance();
+                HomeScreen.reloadInstance();
 
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
@@ -319,14 +319,14 @@ namespace MCLauncher
                         $"\n}}\n]");
                     fs.Write(config, 0, config.Length);
                 }
-                MainWindow.reloadInstance();
+                HomeScreen.reloadInstance();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }
             else
             {
                 //do nothing
-                MainWindow.reloadInstance();
+                HomeScreen.reloadInstance();
                 foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
                     form.Close();
             }
@@ -510,22 +510,22 @@ namespace MCLauncher
             int i = verBox.FindStringExact(cfgGameVer);
             if (editionBox.Text == "Java Edition")
             {
-                MainWindow.selectedEdition = "java";
+                HomeScreen.selectedEdition = "java";
                 cfgTypeVer = typesList[i];
             }
             else if (editionBox.Text == "Xbox 360 Edition")
             {
-                MainWindow.selectedEdition = "x360";
+                HomeScreen.selectedEdition = "x360";
                 cfgTypeVer = "x360";
             }
             else if (editionBox.Text == "Playstation 3 Edition")
             {
-                MainWindow.selectedEdition = "ps3";
+                HomeScreen.selectedEdition = "ps3";
                 cfgTypeVer = "ps3";
             }
             else if(editionBox.Text == "MinecraftEdu")
             {
-                MainWindow.selectedEdition = "edu";
+                HomeScreen.selectedEdition = "edu";
                 cfgTypeVer = typesList[i];
             }
         }

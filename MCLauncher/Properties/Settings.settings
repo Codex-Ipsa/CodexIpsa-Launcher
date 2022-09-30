@@ -20,5 +20,11 @@
     <Setting Name="msRefreshToken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="prefLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
+    <Setting Name="WARNING" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

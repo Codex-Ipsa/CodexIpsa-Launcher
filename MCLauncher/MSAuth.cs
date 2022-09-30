@@ -502,8 +502,8 @@ namespace MCLauncher
                 Properties.Settings.Default.Save();
                 if (Globals.isDebug)
                     Logger.logMessage("[MSAuth]", $"Saved refresh token: {Properties.Settings.Default.msRefreshToken}");
-                MainWindow.msPlayerName = playerName;
-                MainWindow.checkAuth();
+                HomeScreen.msPlayerName = playerName;
+                HomeScreen.checkAuth();
             }
         }
 
@@ -525,7 +525,7 @@ namespace MCLauncher
             else
             {
                 //Logger.log(ConsoleColor.Blue, ConsoleColor.Gray, $"[MSAuth]", $"Got username: {playerName}");
-                MainWindow.msPlayerName = playerName;
+                HomeScreen.msPlayerName = playerName;
             }
         }
 

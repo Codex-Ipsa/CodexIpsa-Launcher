@@ -76,13 +76,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
     <Compile Include="AssetIndex.cs" />
+    <Compile Include="controls\CreditsScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\CreditsScreen.Designer.cs">
+      <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,11 +108,11 @@
       <DependentUpon>GameConsole.cs</DependentUpon>
     </Compile>
     <Compile Include="Strings.cs" />
-    <Compile Include="WindowHome.cs">
+    <Compile Include="controls\HomeScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WindowHome.Designer.cs">
-      <DependentUpon>WindowHome.cs</DependentUpon>
+    <Compile Include="controls\HomeScreen.Designer.cs">
+      <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceManager.cs">
       <SubType>Form</SubType>
@@ -185,8 +185,8 @@
     <Compile Include="Warning.Designer.cs">
       <DependentUpon>Warning.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="About.resx">
-      <DependentUpon>About.cs</DependentUpon>
+    <EmbeddedResource Include="controls\CreditsScreen.resx">
+      <DependentUpon>CreditsScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugTools.resx">
       <DependentUpon>DebugTools.cs</DependentUpon>
@@ -200,8 +200,8 @@
     <EmbeddedResource Include="GameConsole.resx">
       <DependentUpon>GameConsole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WindowHome.resx">
-      <DependentUpon>WindowHome.cs</DependentUpon>
+    <EmbeddedResource Include="controls\HomeScreen.resx">
+      <DependentUpon>HomeScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
