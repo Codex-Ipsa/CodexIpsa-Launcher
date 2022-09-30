@@ -42,7 +42,7 @@ namespace MCLauncher
             }
             else
             {
-                webBrowser.DocumentText = "<center><p>Failed to load changelog</p></center>";
+                webBrowser.DocumentText = $"<center><p>{Strings.htmlChangelogFailed}</p></center>";
                 webBrowser.Refresh();
                 Logger.logError($"[MainWindow]", $"Failed to load changelog");
             }
@@ -62,7 +62,7 @@ namespace MCLauncher
                 LaunchJava.launchVerUrl = vers.instUrl;
                 LaunchJava.launchVerType = vers.instType;
             }
-            Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
+            Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
 
         }
 
@@ -73,7 +73,7 @@ namespace MCLauncher
                 Logger.logError($"[MainWindow]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
-                Instance.lblWelcome.Text = "Welcome, Guest";
+                Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
                 LaunchJava.launchPlayerName = "Guest";
                 LaunchJava.launchPlayerUUID = "null";
                 LaunchJava.launchPlayerAccessToken = "null";
@@ -81,12 +81,18 @@ namespace MCLauncher
                 if (Globals.requireAuth == true)
                 {
                     Instance.btnPlay.Enabled = false;
-                    Instance.lblLogInWarn.Text = "You need to log in to use the launcher!";
+                    Instance.cmbInstaces.Enabled = false;
+                    Instance.btnEditInst.Enabled = false;
+                    Instance.btnNewInst.Enabled = false;
+                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn;
                 }
                 else
                 {
                     Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Text = "MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
+                    Instance.cmbInstaces.Enabled = true;
+                    Instance.btnEditInst.Enabled = true;
+                    Instance.btnNewInst.Enabled = true;
+                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn_Debug;
                 }
             }
             else
@@ -105,7 +111,7 @@ namespace MCLauncher
                 {
                     Instance.btnLogOut.Visible = true;
                     Instance.btnLogIn.Visible = false;
-                    Instance.lblWelcome.Text = $"Welcome, {msPlayerName}";
+                    Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
                     Instance.btnPlay.Enabled = true;
                     Instance.lblLogInWarn.Text = "";
                 }

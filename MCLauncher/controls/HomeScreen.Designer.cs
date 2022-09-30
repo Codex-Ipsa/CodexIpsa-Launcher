@@ -78,7 +78,7 @@
             // 
             // btnEditInst
             // 
-            this.btnEditInst.Location = new System.Drawing.Point(107, 49);
+            this.btnEditInst.Location = new System.Drawing.Point(105, 50);
             this.btnEditInst.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditInst.Name = "btnEditInst";
             this.btnEditInst.Size = new System.Drawing.Size(91, 26);
@@ -89,7 +89,7 @@
             // 
             // btnNewInst
             // 
-            this.btnNewInst.Location = new System.Drawing.Point(8, 49);
+            this.btnNewInst.Location = new System.Drawing.Point(7, 50);
             this.btnNewInst.Margin = new System.Windows.Forms.Padding(4);
             this.btnNewInst.Name = "btnNewInst";
             this.btnNewInst.Size = new System.Drawing.Size(91, 26);
@@ -201,6 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.webBrowser);
             this.Margin = new System.Windows.Forms.Padding(4);

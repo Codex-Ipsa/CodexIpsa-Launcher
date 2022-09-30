@@ -260,10 +260,12 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <Content Include="icon64.ico" />
+    <Content Include="image\dirt-large-dark.png" />
     <Content Include="image\dirt-large.png" />
     <Content Include="image\dirt.png" />
     <Content Include="image\icon.ico" />
     <Content Include="image\icon.png" />
+    <Content Include="image\stone-large-dark.png" />
     <Content Include="image\stone-large.png" />
     <Content Include="image\stone.png" />
   </ItemGroup>

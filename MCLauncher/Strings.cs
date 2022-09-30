@@ -14,11 +14,12 @@ namespace MCLauncher
         public static string btnLogOut = $"Log-out";
         public static string btnEditInst = $"Edit profile";
         public static string btnNewInst = $"New profile";
-        public static string lblWelcome = $"Welcome, {{playerName}}";
-        public static string lblReady = $"Ready to play Minecraft {{gameVer}}";
+        public static string lblWelcome = $"Welcome,";
+        public static string lblReady = $"Ready to play Minecraft";
         public static string lblSelInst = $"Select profile:";
-        public static string lblLogInWarn = $"";
-        public static string lblLogInWarn_Debug = $"";
+        public static string lblLogInWarn = $"You need to log in to use the launcher!";
+        public static string lblLogInWarn_Debug = $"MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
+        public static string htmlChangelogFailed = $"Failed to load changelog";
 
         //CreditsScreen
         public static string lblLauncherBy = $"MineC#raft Launcher {Globals.verDisplay} by";
