@@ -182,7 +182,7 @@
             this.lblLogInWarn.Name = "lblLogInWarn";
             this.lblLogInWarn.Size = new System.Drawing.Size(471, 16);
             this.lblLogInWarn.TabIndex = 20;
-            this.lblLogInWarn.Text = "You need to log in to use the launcher!";
+            this.lblLogInWarn.Text = "lbl.logInWarn";
             this.lblLogInWarn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnLogOut

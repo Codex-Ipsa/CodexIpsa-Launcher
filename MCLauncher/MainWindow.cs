@@ -15,13 +15,16 @@ namespace MCLauncher
 {
     public partial class MainWindow : Form
     {
-        HomeScreen home = new HomeScreen();
-        CreditsScreen creditsScr = new CreditsScreen();
+        HomeScreen home;
+        CreditsScreen creditsScr;
 
         public MainWindow()
         {
             Properties.Settings.Default.Reload();
             InitializeComponent();
+            loadMainWindow();
+            home = new HomeScreen();
+            creditsScr = new CreditsScreen();
             addHome();
         }
         public void addHome()
@@ -40,10 +43,8 @@ namespace MCLauncher
             this.Controls.Remove(home);
         }
 
-
-        private void MainWindow_Load(object sender, EventArgs e)
+        public void loadMainWindow()
         {
-
             //Set the window name
             Logger.logMessage($"[MainWindow]", $"MineC#raft Launcher has started!");
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}]"; //window name
@@ -109,7 +110,7 @@ namespace MCLauncher
                 int index = branchIds.FindIndex(x => x.StartsWith(Globals.branch));
                 Logger.logMessage($"[MainWindow]", $"Branch {Globals.branch} is on {index}");
 
-                if(index == -1)
+                if (index == -1)
                 {
                     Logger.logError("[MainWindow]", $"Current branch is no longer supported!");
                     Warning wrn = new Warning("Your branch is no longer supported!");
@@ -129,28 +130,8 @@ namespace MCLauncher
                 InstanceManager.tempName = "Default";
                 InstanceManager.createInstance();
             }
-        }
 
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void newInstBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void editInstBtn_Click(object sender, EventArgs e)
-        {
-            
+            //addHome();
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,17 +156,14 @@ namespace MCLauncher
             stg.ShowDialog();
         }
 
-
-        private void loginBtn_Click(object sender, EventArgs e)
+        private void MainWindow_ResizeBegin(object sender, EventArgs e)
         {
-
+            SuspendLayout();
         }
 
-        private void logoutBtn_Click(object sender, EventArgs e)
+        private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
-            
+            ResumeLayout();
         }
-
-        
     }
 }

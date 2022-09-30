@@ -38,13 +38,13 @@ namespace MCLauncher
             {
                 webBrowser.Url = new Uri(Globals.changelog, UriKind.Absolute);
                 webBrowser.Refresh();
-                Logger.logMessage($"[MainWindow]", $"Changelog loaded");
+                Logger.logMessage($"[HomeScreen]", $"Changelog loaded");
             }
             else
             {
                 webBrowser.DocumentText = $"<center><p>{Strings.htmlChangelogFailed}</p></center>";
                 webBrowser.Refresh();
-                Logger.logError($"[MainWindow]", $"Failed to load changelog");
+                Logger.logError($"[HomeScreen]", $"Failed to load changelog");
             }
 
             //Check if user is logged in
@@ -70,7 +70,7 @@ namespace MCLauncher
         {
             if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
             {
-                Logger.logError($"[MainWindow]", "User is not logged in");
+                Logger.logError($"[HomeScreen]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
                 Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
@@ -97,11 +97,11 @@ namespace MCLauncher
             }
             else
             {
-                Logger.logMessage($"[MainWindow]", "User is logged in, re-checking everything");
+                Logger.logMessage($"[HomeScreen]", "User is logged in, re-checking everything");
                 MSAuth.usernameFromRefreshToken();
                 if (MSAuth.hasErrored == true)
                 {
-                    Logger.logMessage($"[MainWindow]", $"MSAuth returned hasErrored. Please re-log in.");
+                    Logger.logMessage($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
                     MSAuth.hasErrored = false;
                     Properties.Settings.Default.msRefreshToken = String.Empty;
                     Properties.Settings.Default.Save();
@@ -150,7 +150,7 @@ namespace MCLauncher
                 InstanceManager.selectedInstance = Instance.cmbInstaces.Text;
             }
 
-            Logger.logMessage("[MainWindow]", $"Selected instance: {InstanceManager.selectedInstance}");
+            Logger.logMessage("[HomeScreen]", $"Selected instance: {InstanceManager.selectedInstance}");
 
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
@@ -217,13 +217,13 @@ namespace MCLauncher
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             //Calling MSAuth
-            Logger.logMessage($"[MainWindow]", "Calling MSAuth");
+            Logger.logMessage($"[HomeScreen]", "Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
 
             if (MSAuth.hasErrored == true)
             {
-                Logger.logMessage($"[MainWindow]", $"MSAuth returned hasErrored. Please try again.");
+                Logger.logMessage($"[HomeScreen]", $"MSAuth returned hasErrored. Please try again.");
                 MSAuth.hasErrored = false;
             }
             else
@@ -237,7 +237,7 @@ namespace MCLauncher
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Logger.logMessage($"[MainWindow]", "Logging out");
+            Logger.logMessage($"[HomeScreen]", "Logging out");
             LaunchJava.launchPlayerName = "Guest";
             LaunchJava.launchPlayerUUID = "null";
             LaunchJava.launchPlayerAccessToken = "null";
