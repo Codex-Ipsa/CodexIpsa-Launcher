@@ -6,9 +6,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MCLauncher
 {
@@ -39,6 +42,12 @@ namespace MCLauncher
                 webBrowser.Url = new Uri(Globals.changelog, UriKind.Absolute);
                 webBrowser.Refresh();
                 Logger.logMessage($"[HomeScreen]", $"Changelog loaded");
+
+                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png"))
+                {
+                    panel1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                }
+
             }
             else
             {

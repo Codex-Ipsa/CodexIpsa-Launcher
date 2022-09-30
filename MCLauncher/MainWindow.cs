@@ -121,6 +121,23 @@ namespace MCLauncher
                     Settings.checkForUpdates(Globals.branch);
                 }
 
+                //Seasonal background
+                try
+                {
+                    using (WebClient cl = new WebClient())
+                    {
+                        cl.DownloadFile("http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/seasonal/dirt.png", $"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                    }
+                    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                }
+                catch(System.Net.WebException e)
+                {
+                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png"))
+                    {
+                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                    }
+                }                
+
                 //TODO: set selectedIndex
             }
 
