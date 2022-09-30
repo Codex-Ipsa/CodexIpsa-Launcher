@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeScreen));
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogOut = new System.Windows.Forms.Button();
+            this.lblLogInWarn = new System.Windows.Forms.Label();
             this.btnEditInst = new System.Windows.Forms.Button();
             this.btnNewInst = new System.Windows.Forms.Button();
             this.cmbInstaces = new System.Windows.Forms.ComboBox();
@@ -39,22 +40,9 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.lblLogInWarn = new System.Windows.Forms.Label();
-            this.btnLogOut = new System.Windows.Forms.Button();
+            this.pnlChangelog = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(27, 25);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(1045, 400);
-            this.webBrowser.TabIndex = 2;
             // 
             // panel1
             // 
@@ -75,6 +63,31 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1045, 79);
             this.panel1.TabIndex = 3;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnLogOut.Location = new System.Drawing.Point(828, 48);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(100, 28);
+            this.btnLogOut.TabIndex = 21;
+            this.btnLogOut.Text = "btn.logOut";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
+            // lblLogInWarn
+            // 
+            this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
+            this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
+            this.lblLogInWarn.Location = new System.Drawing.Point(285, 54);
+            this.lblLogInWarn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLogInWarn.Name = "lblLogInWarn";
+            this.lblLogInWarn.Size = new System.Drawing.Size(471, 16);
+            this.lblLogInWarn.TabIndex = 20;
+            this.lblLogInWarn.Text = "lbl.logInWarn";
+            this.lblLogInWarn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnEditInst
             // 
@@ -172,38 +185,24 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // lblLogInWarn
+            // pnlChangelog
             // 
-            this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
-            this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
-            this.lblLogInWarn.Location = new System.Drawing.Point(285, 54);
-            this.lblLogInWarn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLogInWarn.Name = "lblLogInWarn";
-            this.lblLogInWarn.Size = new System.Drawing.Size(471, 16);
-            this.lblLogInWarn.TabIndex = 20;
-            this.lblLogInWarn.Text = "lbl.logInWarn";
-            this.lblLogInWarn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLogOut.Location = new System.Drawing.Point(828, 48);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(100, 28);
-            this.btnLogOut.TabIndex = 21;
-            this.btnLogOut.Text = "btn.logOut";
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            this.pnlChangelog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChangelog.BackColor = System.Drawing.Color.Transparent;
+            this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
+            this.pnlChangelog.Name = "pnlChangelog";
+            this.pnlChangelog.Size = new System.Drawing.Size(1045, 400);
+            this.pnlChangelog.TabIndex = 4;
             // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.pnlChangelog);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.webBrowser);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HomeScreen";
             this.Size = new System.Drawing.Size(1045, 476);
@@ -214,8 +213,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Label lblWelcome;
@@ -227,5 +224,6 @@
         private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Label lblLogInWarn;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Panel pnlChangelog;
     }
 }

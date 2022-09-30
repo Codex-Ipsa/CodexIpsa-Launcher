@@ -84,6 +84,12 @@
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="controls\SettingsScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\SettingsScreen.Designer.cs">
+      <DependentUpon>SettingsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,12 +166,6 @@
     <Compile Include="SelectVerInfo.Designer.cs">
       <DependentUpon>SelectVerInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +188,9 @@
     </Compile>
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\SettingsScreen.resx">
+      <DependentUpon>SettingsScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugTools.resx">
       <DependentUpon>DebugTools.cs</DependentUpon>
@@ -226,9 +229,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectVerInfo.resx">
       <DependentUpon>SelectVerInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>

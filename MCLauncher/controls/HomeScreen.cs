@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml;
+using Color = System.Drawing.Color;
 
 namespace MCLauncher
 {
@@ -36,8 +38,10 @@ namespace MCLauncher
             lblWelcome.Text = Strings.lblWelcome;
             lblReady.Text = Strings.lblReady;
 
+            pnlChangelog.AutoScroll = true;
+
             //Load browser URL
-            if(Globals.offlineMode == false)
+            /*if(Globals.offlineMode == false)
             {
                 webBrowser.Url = new Uri(Globals.changelog, UriKind.Absolute);
                 webBrowser.Refresh();
@@ -54,7 +58,9 @@ namespace MCLauncher
                 webBrowser.DocumentText = $"<center><p>{Strings.htmlChangelogFailed}</p></center>";
                 webBrowser.Refresh();
                 Logger.logError($"[HomeScreen]", $"Failed to load changelog");
-            }
+            }*/
+            //JSON changelog system
+            loadChangelog();
 
             //Check if user is logged in
             checkAuth();
@@ -181,6 +187,33 @@ namespace MCLauncher
             Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
 
+        public static void loadChangelog()
+        {
+            using (WebClient client = new WebClient())
+            {
+                int i = 0;
+                string json = client.DownloadString(Globals.changelogJson);
+                List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
+
+                Console.WriteLine(json);
+                foreach (var vers in data)
+                {
+                    Label label = new Label();
+                    label.Text = i.ToString() + vers.title;
+                    label.Location = new Point(2, i);
+                    label.Font = new Font("Arial", 18, FontStyle.Regular);
+                    label.AutoSize = true;
+                    label.ForeColor = Color.White;
+                    Instance.pnlChangelog.Controls.Add(label);
+                    /*Console.WriteLine(vers.title);
+                    Console.WriteLine(vers.date);
+                    Console.WriteLine(vers.content);
+                    Console.WriteLine(vers.type);*/
+                    i += 48;
+                }
+            }
+        }
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (selectedEdition == "java")
@@ -266,5 +299,14 @@ namespace MCLauncher
         {
             loadInstanceList();
         }
+    }
+
+    public class changelogJson
+    {
+        public string type { get; set; }
+        public string title { get; set; }
+        public string date { get; set; }
+        public string content { get; set; }
+        public string brNote { get; set; }
     }
 }

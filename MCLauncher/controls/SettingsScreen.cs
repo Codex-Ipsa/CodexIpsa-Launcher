@@ -11,9 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MCLauncher
+namespace MCLauncher.controls
 {
-    public partial class Settings : Form
+    public partial class SettingsScreen : UserControl
     {
         public static List<string> nameList = new List<string>();
         public static List<string> idList = new List<string>();
@@ -21,32 +21,32 @@ namespace MCLauncher
         public static List<string> urlList = new List<string>();
         public static List<string> noteList = new List<string>();
 
-
         public static string updateCheckMode;
-        public static Settings InstanceSetting;
+        public static SettingsScreen InstanceSetting;
 
         public static int branchIndex;
 
-        public Settings()
+        public SettingsScreen()
         {
-            //Initialize
             InstanceSetting = this;
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+
+            //Load lang
+            grbLauncher.Text = Strings.grbLauncher;
+            grbUpdates.Text = Strings.grbUpdates;
+            lblBranch.Text = Strings.lblBranch;
+            lblLang.Text = Strings.lblLang;
+            btnCheckUpdates.Text = Strings.btnCheckUpdates;
 
             loadData();
-            comboUpdateSelect.DataSource = nameList;
+            cmbUpdateSelect.DataSource = nameList;
             int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));
-            comboUpdateSelect.SelectedIndex = index1;
-            branchIndex = comboUpdateSelect.SelectedIndex;
-
-
+            cmbUpdateSelect.SelectedIndex = index1;
+            branchIndex = cmbUpdateSelect.SelectedIndex;
         }
 
         public static void loadData()
-        {   
+        {
             //Clear lists just in case
             nameList.Clear();
             idList.Clear();
@@ -94,26 +94,15 @@ namespace MCLauncher
             }
         }
 
-        private void comboUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            branchIndex = comboUpdateSelect.SelectedIndex;
+            branchIndex = cmbUpdateSelect.SelectedIndex;
             Logger.logMessage("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
         }
 
-        private void btnUpdates_Click(object sender, EventArgs e)
+        private void btnCheckUpdates_Click(object sender, EventArgs e)
         {
             checkForUpdates(idList[branchIndex]);
-        }
-
-        private void applyBtn_Click(object sender, EventArgs e)
-        {
-            saveSettings();
-            this.Close();
-        }
-
-        public static void saveSettings()
-        {
-            //TODO for stuff like languages   
         }
     }
 

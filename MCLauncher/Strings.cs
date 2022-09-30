@@ -27,7 +27,14 @@ namespace MCLauncher
         public static string lblCopyright = $"(c) 2022";
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";
         public static string lblSpecialThanks = $"Special thanks:\nBetaCraft; proxy, inspiration.\nOmniarchive; inspiration.\nMisterSheeple; file hosting.";
-    
+
+        //SettingsScreen
+        public static string grbLauncher = "Launcher";
+        public static string grbUpdates = "Updates";
+        public static string lblLang = "Language";
+        public static string lblBranch = "Branch";
+        public static string btnCheckUpdates = "Check for updates";
+
         public static void reloadLangs()
         {
             /*if(Properties.Settings.Default.prefLanguage == "cs")

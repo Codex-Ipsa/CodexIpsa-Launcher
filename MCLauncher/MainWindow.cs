@@ -15,24 +15,29 @@ namespace MCLauncher
 {
     public partial class MainWindow : Form
     {
-        HomeScreen home;
+        HomeScreen homeScr;
         CreditsScreen creditsScr;
+        SettingsScreen settingsScr;
 
         public MainWindow()
         {
             Properties.Settings.Default.Reload();
             InitializeComponent();
             loadMainWindow();
-            home = new HomeScreen();
+
+            //this is done here so it initializes first
+            homeScr = new HomeScreen();
             creditsScr = new CreditsScreen();
+            settingsScr = new SettingsScreen();
             addHome();
         }
         public void addHome()
         {
-            home.Location = new Point(0, 24);
-            home.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
-            this.Controls.Add(home);
+            homeScr.Location = new Point(0, 24);
+            homeScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
+            this.Controls.Remove(settingsScr);
         }
 
         public void addCredits()
@@ -40,7 +45,17 @@ namespace MCLauncher
             creditsScr.Location = new Point(0, 24);
             creditsScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
             this.Controls.Add(creditsScr);
-            this.Controls.Remove(home);
+            this.Controls.Remove(homeScr);
+            this.Controls.Remove(settingsScr);
+        }
+
+        public void addSettings()
+        {
+            settingsScr.Location = new Point(0, 24);
+            settingsScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            this.Controls.Add(settingsScr);
+            this.Controls.Remove(homeScr);
+            this.Controls.Remove(creditsScr);
         }
 
         public void loadMainWindow()
@@ -118,7 +133,7 @@ namespace MCLauncher
                 }
                 else
                 {
-                    Settings.checkForUpdates(Globals.branch);
+                    SettingsScreen.checkForUpdates(Globals.branch);
                 }
 
                 //Seasonal background
@@ -169,8 +184,7 @@ namespace MCLauncher
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings stg = new Settings();
-            stg.ShowDialog();
+            addSettings();
         }
 
         private void MainWindow_ResizeBegin(object sender, EventArgs e)
