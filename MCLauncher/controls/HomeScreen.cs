@@ -182,6 +182,7 @@ namespace MCLauncher
 
             else if (selectedEdition == "ps3")
                 LaunchPS3.LaunchGame();
+
             else if (selectedEdition == "edu")
                 LaunchJava.LaunchGame();
         }
@@ -230,7 +231,7 @@ namespace MCLauncher
             {
                 Instance.btnLogOut.Visible = true;
                 Instance.btnLogIn.Visible = false;
-                Instance.lblWelcome.Text = $"Welcome, {msPlayerName}";
+                Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
                 this.Refresh();
             }
         }
