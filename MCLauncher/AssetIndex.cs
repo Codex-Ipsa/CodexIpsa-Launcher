@@ -34,7 +34,7 @@ namespace MCLauncher
                 client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\{indexName}.json");
             }
             string origJson = client.DownloadString(indexUrl);
-            Logger.logMessage("[AssetIndex]", origJson);
+            //Logger.logMessage("[AssetIndex]", origJson);
 
             JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
             var origProps = origObj.Properties();
@@ -121,8 +121,6 @@ namespace MCLauncher
                 }
                 else if (isLegacy == false)
                 {
-                    //TODO: for versions past 1.7 (?) do the new system
-
                     int indexInt = 0;
                     WebClient wc = new WebClient();
                     foreach (var name in nameList)

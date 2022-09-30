@@ -10,10 +10,10 @@ namespace MCLauncher
     class Globals
     {
         //Manual
-        public static string codebase = "0.0.7-dev";
-        public static string branch = "dev";
+        public static string codebase = "0.0.7-dev"; //0.0.7-dev
+        public static string branch = "dev"; //dev
         public static string verCurrent = "0.0.7.17"; //Change this on release
-        public static string verDisplay = "0.0.7.17"; //Change this on release
+        public static string verDisplay = "0.0.7.18-dev"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -21,8 +21,8 @@ namespace MCLauncher
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
-        public static bool isDebug = false; //Change this on releases
-        public static bool requireAuth = true; //Change this on releases
+        public static bool isDebug = true; //Change this on releases
+        public static bool requireAuth = false; //Change this on releases
 
         //Links
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater.exe";

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
 
@@ -31,10 +32,39 @@ namespace MCLauncher
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.codebase}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.codebase}");
 
+            //Offline check
+            /*try
+            {
+                HttpWebRequest request = WebRequest.Create("https://codex-ipsa.dejvoss.cz/") as HttpWebRequest;
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                response.Close();
+                Logger.logMessage($"[MainWindow]", $"Connected to internet, launcher will start in online mode");
+
+            }
+            catch (Exception ex)
+            {
+                Logger.logError($"[MainWindow]", $"No connection, launcher will start in offline mode");
+                Globals.offlineMode = true;
+            }*/
+
             //Changelog url
             webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
             webBrowser1.Refresh();
             Logger.logMessage($"[MainWindow]", $"Changelog loaded");
+            /*if(Globals.offlineMode)
+            {
+                webBrowser1.Document.Write("<center><p>Unable to load changelog</p></center>");
+                Logger.logError($"[MainWindow]", $"Unable to set changelog");
+                webBrowser1.Refresh();
+            }
+            else
+            {
+                webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
+                webBrowser1.Refresh();
+                Logger.logMessage($"[MainWindow]", $"Changelog loaded");
+            }*/
+
+            
 
             /*HomeWindow hw = new HomeWindow();
             Controls.Add(hw);
@@ -46,6 +76,7 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets");
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\data");
 
             //Check if user is logged in
             checkAuth();

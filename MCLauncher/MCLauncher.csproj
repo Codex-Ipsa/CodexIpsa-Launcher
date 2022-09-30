@@ -107,11 +107,12 @@
     <Compile Include="GameConsole.Designer.cs">
       <DependentUpon>GameConsole.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomeWindow.cs">
+    <Compile Include="Strings.cs" />
+    <Compile Include="WindowHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HomeWindow.Designer.cs">
-      <DependentUpon>HomeWindow.cs</DependentUpon>
+    <Compile Include="WindowHome.Designer.cs">
+      <DependentUpon>WindowHome.cs</DependentUpon>
     </Compile>
     <Compile Include="InstanceManager.cs">
       <SubType>Form</SubType>
@@ -120,12 +121,6 @@
       <DependentUpon>InstanceManager.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonObject.cs" />
-    <Compile Include="LargeDownloadWarn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LargeDownloadWarn.Designer.cs">
-      <DependentUpon>LargeDownloadWarn.cs</DependentUpon>
-    </Compile>
     <Compile Include="LaunchJava.cs" />
     <Compile Include="LaunchJavaMod.cs" />
     <Compile Include="LaunchPS3.cs" />
@@ -151,12 +146,6 @@
     </Compile>
     <Compile Include="MSAuth.Designer.cs">
       <DependentUpon>MSAuth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NewUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewUI.Designer.cs">
-      <DependentUpon>NewUI.cs</DependentUpon>
     </Compile>
     <Compile Include="OfflineMode.cs">
       <SubType>Form</SubType>
@@ -211,14 +200,11 @@
     <EmbeddedResource Include="GameConsole.resx">
       <DependentUpon>GameConsole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomeWindow.resx">
-      <DependentUpon>HomeWindow.cs</DependentUpon>
+    <EmbeddedResource Include="WindowHome.resx">
+      <DependentUpon>WindowHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LargeDownloadWarn.resx">
-      <DependentUpon>LargeDownloadWarn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadCustom.resx">
       <DependentUpon>LoadCustom.cs</DependentUpon>
@@ -228,9 +214,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MSAuth.resx">
       <DependentUpon>MSAuth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewUI.resx">
-      <DependentUpon>NewUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OfflineMode.resx">
       <DependentUpon>OfflineMode.cs</DependentUpon>
