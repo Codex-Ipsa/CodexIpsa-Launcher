@@ -141,17 +141,34 @@ namespace MCLauncher
                 {
                     using (WebClient cl = new WebClient())
                     {
-                        cl.DownloadFile("http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/seasonal/dirt.png", $"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                        cl.DownloadFile(Globals.seasonalDirt, $"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
                     }
-                    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
                 }
-                catch(System.Net.WebException e)
+                catch(WebException e)
                 {
-                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png"))
+                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))
                     {
-                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
+                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
                     }
-                }                
+                }
+
+                try
+                {
+                    using (WebClient cl = new WebClient())
+                    {
+                        cl.DownloadFile(Globals.seasonalStone, $"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                    }
+                    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                }
+                catch (WebException e)
+                {
+                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+                    {
+                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                    }
+                }
+
 
                 //TODO: set selectedIndex
             }

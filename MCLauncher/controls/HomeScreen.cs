@@ -40,6 +40,15 @@ namespace MCLauncher
 
             pnlChangelog.AutoScroll = true;
 
+            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))
+            {
+                panel1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
+            }
+            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+            {
+                this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+            }
+
             //Load browser URL
             /*if(Globals.offlineMode == false)
             {
@@ -47,10 +56,6 @@ namespace MCLauncher
                 webBrowser.Refresh();
                 Logger.logMessage($"[HomeScreen]", $"Changelog loaded");
 
-                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png"))
-                {
-                    panel1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonal.png");
-                }
 
             }
             else
@@ -191,26 +196,112 @@ namespace MCLauncher
         {
             using (WebClient client = new WebClient())
             {
-                int i = 0;
+                int y = 5;
+                int x = 2;
                 string json = client.DownloadString(Globals.changelogJson);
                 List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
 
-                Console.WriteLine(json);
                 foreach (var vers in data)
                 {
-                    Label label = new Label();
-                    label.Text = i.ToString() + vers.title;
-                    label.Location = new Point(2, i);
-                    label.Font = new Font("Arial", 18, FontStyle.Regular);
-                    label.AutoSize = true;
-                    label.ForeColor = Color.White;
-                    Instance.pnlChangelog.Controls.Add(label);
-                    /*Console.WriteLine(vers.title);
-                    Console.WriteLine(vers.date);
-                    Console.WriteLine(vers.content);
-                    Console.WriteLine(vers.type);*/
-                    i += 48;
+                    if (vers.type == "header")
+                    {
+                        Label labelHead = new Label();
+                        labelHead.Text = $"{vers.title}";
+                        labelHead.Location = new Point(x, y);
+                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                        labelHead.AutoSize = true;
+                        labelHead.ForeColor = Color.White;
+                        Instance.pnlChangelog.Controls.Add(labelHead);
+                        y += 14 * 3;
+                    }
+                    else if (vers.type == "post")
+                    {
+                        Label labelHead = new Label();
+                        labelHead.Text = $"{vers.title}";
+                        labelHead.Location = new Point(x, y);
+                        labelHead.Font = new Font("Arial", 14, FontStyle.Regular);
+                        labelHead.AutoSize = true;
+                        labelHead.ForeColor = Color.White;
+                        Instance.pnlChangelog.Controls.Add(labelHead);
+                        y += 13 * 2;
+
+                        Label labelDate = new Label();
+                        labelDate.Text = $"{vers.date}";
+                        labelDate.Location = new Point(x, y);
+                        labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
+                        labelDate.AutoSize = true;
+                        labelDate.ForeColor = Color.White;
+                        Instance.pnlChangelog.Controls.Add(labelDate);
+                        y += 12 * 2;
+
+                        int strLog = 1;
+                        string[] result = vers.content.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
+                        foreach(string s in result)
+                        {
+                            Label labelText = new Label();
+                            labelText.Text = $"{s}";
+                            labelText.Location = new Point(x, y);
+                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
+                            labelText.AutoSize = true;
+                            labelText.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelText);
+                            if(strLog < result.Length)
+                            {
+                                y += 12 * 2;
+                            }
+                            else if(strLog >= result.Length)
+                            {
+                                y += 12 * 3;
+                            }
+                            strLog++;
+                        }
+                        strLog = 1;
+                    }
+                    else if (vers.type == "announcement")
+                    {
+                        Label labelHead = new Label();
+                        labelHead.Text = $"{vers.title}";
+                        labelHead.Location = new Point(x, y);
+                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                        labelHead.AutoSize = true;
+                        labelHead.ForeColor = Color.Red;
+                        Instance.pnlChangelog.Controls.Add(labelHead);
+                        y += 12 * 3;
+
+                        /*if(vers.date != String.Empty)
+                        {
+                            Label labelDate = new Label();
+                            labelDate.Text = $"{vers.date}";
+                            labelDate.Location = new Point(x, y);
+                            labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
+                            labelDate.AutoSize = true;
+                            labelDate.ForeColor = Color.Red;
+                            Instance.pnlChangelog.Controls.Add(labelDate);
+                            y += 12 * 2;
+                        }
+
+                        if(vers.content !=  String.Empty)
+                        {
+                            Label labelText = new Label();
+                            labelText.Text = $"{vers.content}";
+                            labelText.Location = new Point(x, y);
+                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
+                            labelText.AutoSize = true;
+                            labelText.ForeColor = Color.Red;
+                            Instance.pnlChangelog.Controls.Add(labelText);
+                            y += 12 * 3;
+                        }*/
+                    }
                 }
+
+                y = y -= 12 * 2;
+                Label labelEmpty = new Label();
+                labelEmpty.Text = $"";
+                labelEmpty.Location = new Point(x, y);
+                labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
+                labelEmpty.AutoSize = true;
+                labelEmpty.ForeColor = Color.Red;
+                Instance.pnlChangelog.Controls.Add(labelEmpty);
             }
         }
 
@@ -298,6 +389,11 @@ namespace MCLauncher
         private void cmbInstaces_Click(object sender, EventArgs e)
         {
             loadInstanceList();
+        }
+
+        private void pnlChangelog_Scroll(object sender, ScrollEventArgs e)
+        {
+            pnlChangelog.Invalidate();
         }
     }
 
