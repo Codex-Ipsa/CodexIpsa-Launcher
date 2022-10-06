@@ -179,8 +179,6 @@ namespace MCLauncher
                 InstanceManager.tempName = "Default";
                 InstanceManager.createInstance();
             }
-
-            //addHome();
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)

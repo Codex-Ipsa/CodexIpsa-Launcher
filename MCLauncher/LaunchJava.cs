@@ -358,15 +358,33 @@ namespace MCLauncher
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
+            string message;
+            if (e.Data != null && e.Data.Contains(launchPlayerAccessToken))
+            {
+                message = e.Data.Replace(launchPlayerAccessToken, "ACCESS_TOKEN");
+            }
+            else
+            {
+                message = e.Data;
+            }
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(e.Data);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
+            string message;
+            if (e.Data != null && e.Data.Contains(launchPlayerAccessToken))
+            {
+                message = e.Data.Replace(launchPlayerAccessToken, "ACCESS_TOKEN");
+            }
+            else
+            {
+                message = e.Data;
+            }
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.Data);
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
