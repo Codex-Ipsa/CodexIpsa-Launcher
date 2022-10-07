@@ -15,12 +15,16 @@ namespace MCLauncher
 {
     public partial class MainWindow : Form
     {
+        public static MainWindow Instance;
         HomeScreen homeScr;
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
+        InstanceScreen instanceScr;
+        ConsoleScreen consoleScr;
 
         public MainWindow()
         {
+            Instance = this;
             Properties.Settings.Default.Reload();
             InitializeComponent();
             loadMainWindow();
@@ -29,6 +33,8 @@ namespace MCLauncher
             homeScr = new HomeScreen();
             creditsScr = new CreditsScreen();
             settingsScr = new SettingsScreen();
+            instanceScr = new InstanceScreen();
+            consoleScr = new ConsoleScreen();
             addHome();
         }
         public void addHome()
@@ -38,6 +44,8 @@ namespace MCLauncher
             this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
+            this.Controls.Remove(instanceScr);
+            this.Controls.Remove(consoleScr);
         }
 
         public void addCredits()
@@ -47,6 +55,8 @@ namespace MCLauncher
             this.Controls.Add(creditsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
+            this.Controls.Remove(instanceScr);
+            this.Controls.Remove(consoleScr);
         }
 
         public void addSettings()
@@ -56,6 +66,28 @@ namespace MCLauncher
             this.Controls.Add(settingsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
+            this.Controls.Remove(instanceScr);
+            this.Controls.Remove(consoleScr);
+        }
+        public void addInstance()
+        {
+            instanceScr.Location = new Point(0, 24);
+            instanceScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            this.Controls.Add(instanceScr);
+            this.Controls.Remove(homeScr);
+            this.Controls.Remove(creditsScr);
+            this.Controls.Remove(settingsScr);
+            this.Controls.Remove(consoleScr);
+        }
+        public void addConsole()
+        {
+            consoleScr.Location = new Point(0, 24);
+            consoleScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            this.Controls.Add(consoleScr);
+            this.Controls.Remove(homeScr);
+            this.Controls.Remove(creditsScr);
+            this.Controls.Remove(settingsScr);
+            this.Controls.Remove(instanceScr);
         }
 
         public void loadMainWindow()
@@ -210,6 +242,21 @@ namespace MCLauncher
         private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
             ResumeLayout();
+        }
+
+        private void instanceToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            addInstance();
+        }
+
+        private void consoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addConsole();
+        }
+
+        public static void loadLog()
+        {
+            Instance.addConsole();
         }
     }
 }

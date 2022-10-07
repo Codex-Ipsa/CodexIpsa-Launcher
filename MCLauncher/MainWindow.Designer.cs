@@ -33,11 +33,12 @@ namespace MCLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.instanceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
+            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +60,8 @@ namespace MCLauncher
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
-            this.instanceToolStripMenuItem1,
+            this.instanceToolStripMenuItem,
+            this.consoleToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.debugToolStripMenuItem});
@@ -78,12 +80,14 @@ namespace MCLauncher
             this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
-            // instanceToolStripMenuItem1
+            // instanceToolStripMenuItem
             // 
-            this.instanceToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.instanceToolStripMenuItem1.Name = "instanceToolStripMenuItem1";
-            this.instanceToolStripMenuItem1.Size = new System.Drawing.Size(58, 20);
-            this.instanceToolStripMenuItem1.Text = "Profiles";
+            this.instanceToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
+            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.instanceToolStripMenuItem.Text = "Profiles";
+            this.instanceToolStripMenuItem.Visible = false;
+            this.instanceToolStripMenuItem.Click += new System.EventHandler(this.instanceToolStripMenuItem1_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -122,6 +126,15 @@ namespace MCLauncher
             this.pnlBackground.TabIndex = 1;
             this.pnlBackground.Visible = false;
             // 
+            // consoleToolStripMenuItem
+            // 
+            this.consoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.consoleToolStripMenuItem.Text = "Console";
+            this.consoleToolStripMenuItem.Visible = false;
+            this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,7 +165,8 @@ namespace MCLauncher
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
     }
 }
 

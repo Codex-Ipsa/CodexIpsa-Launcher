@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MCLauncher.controls;
 
 namespace MCLauncher
 {
@@ -88,6 +89,8 @@ namespace MCLauncher
 
         public static string loggingXml;
         public static string javaagentJar;
+
+        public static string tempAppdata;
 
         public static void LaunchGame()
         {
@@ -204,6 +207,25 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
+                //copy assets to required dir (if needed)
+                if (assetIndexDir != String.Empty)
+                {
+                    string realPath = assetIndexDir.Replace("{workDir}", $"{workDir}");
+                    Logger.logMessage("[LaunchJava]", $"Assets are being copied to {realPath}");
+                    Directory.CreateDirectory(realPath);
+
+                    foreach (string dirPath in Directory.GetDirectories(assetDir, "*", SearchOption.AllDirectories))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(assetDir, realPath));
+                    }
+
+                    foreach (string newPath in Directory.GetFiles(assetDir, "*.*", SearchOption.AllDirectories))
+                    {
+                        File.Copy(newPath, newPath.Replace(assetDir, realPath), true);
+                    }
+
+                }
+
                 //Download client
                 var dlClient = new WebClient();
                 if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\versions\\java\\{launchVerName}.jar"))
@@ -311,7 +333,7 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Launching the game");
 
                     //Get current appdata for later
-                    var tempAppdata = Environment.GetEnvironmentVariable("Appdata");
+                    tempAppdata = Environment.GetEnvironmentVariable("Appdata");
                     Logger.logMessage("[LaunchJava]", $"Current Appdata is {Environment.GetEnvironmentVariable("Appdata")}");
 
                     //Set appdata to instance dir
@@ -333,25 +355,41 @@ namespace MCLauncher
                     process.StartInfo.FileName = launchJavaLocation;
                     process.StartInfo.Arguments = launchCommand;
                     process.StartInfo.WorkingDirectory = $"{gameDir}";
+                    process.EnableRaisingEvents = true;
+                    process.Exited += new EventHandler(ClosedGame);
                     process.Start();
 
                     process.BeginErrorReadLine();
                     process.BeginOutputReadLine();
 
+                    //MainWindow.loadLog();
+
                     VerSelect.checkTab = "java";
                     LibsCheck.isDone = false;
                     launchLibsPath = string.Empty;
-                    process.WaitForExit();
-
-                    //Reset appdata back to original
-                    Environment.SetEnvironmentVariable("Appdata", tempAppdata);
-                    Logger.logMessage("[LaunchJava]", $"Changed Appdata back to {Environment.GetEnvironmentVariable("Appdata")}");
-                    Logger.logMessage("[LaunchJava]", $"Game closed");
                 }
                 catch (System.ComponentModel.Win32Exception ex)
                 {
                     //TODO: start some java install wizard thing LMFAO
                     Logger.logError("[LaunchJava]", $"Could not find Java: {ex.Message}");
+                }
+            }
+        }
+            
+        static void ClosedGame(object sender, System.EventArgs e)
+        {
+            //Reset appdata back to original
+            Environment.SetEnvironmentVariable("Appdata", tempAppdata);
+            Logger.logMessage("[LaunchJava]", $"Changed Appdata back to {Environment.GetEnvironmentVariable("Appdata")}");
+            Logger.logMessage("[LaunchJava]", $"Game closed");
+
+            //Delete temp assets folder
+            if(assetIndexDir != string.Empty)
+            {
+                string realPath = assetIndexDir.Replace("{workDir}", $"{workDir}");
+                if(Directory.Exists(realPath))
+                {
+                    Directory.Delete(realPath, true);
                 }
             }
         }
@@ -367,9 +405,79 @@ namespace MCLauncher
             {
                 message = e.Data;
             }
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //format log4j xml
+            string timestamp = "";
+            long timestampD = 0;
+            string thread = "";
+            string level = "";
+            string strmessage = "";
+
+            if (message != null && message.Contains("<log4j:Event"))
+            {
+                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
+
+                //get timestamp
+                int index = message.IndexOf("\" level");
+                if (index >= 0)
+                    timestamp = message.Substring(0, index);
+                int index2 = timestamp.IndexOf("timestamp=\"");
+                if (index2 >= 0)
+                    timestamp = timestamp.Substring(index2 + 11);
+                timestampD = (long)Convert.ToDouble(timestamp);
+
+                //get thread
+                int index5 = message.IndexOf("\">");
+                if (index5 >= 0)
+                    thread = message.Substring(0, index5);
+                int index6 = thread.IndexOf("thread=\"");
+                if (index6 >= 0)
+                    thread = thread.Substring(index6 + 8);
+
+                //get level
+                int index3 = message.IndexOf("\" thread");
+                if (index3 >= 0)
+                    level = message.Substring(0, index3);
+                int index4 = level.IndexOf("level=\"");
+                if (index4 >= 0)
+                    level = level.Substring(index4 + 7);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                DateTime t = UnixTimeToDateTime(timestampD);
+                string time = t.ToString("HH:mm:ss");
+                Console.Write($"[{time}] [{thread}/{level}]: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+            }
+            else if (message != null && message.Contains("<log4j:Message"))
+            {
+                //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
+
+                //get message
+                int index = message.IndexOf("]]></");
+                if (index >= 0)
+                    strmessage = message.Substring(0, index);
+                int index2 = strmessage.IndexOf("[CDATA[");
+                if (index2 >= 0)
+                    strmessage = strmessage.Substring(index2 + 7);
+
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"{strmessage}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+            }
+            else if (message != null && message.Contains("</log4j:Event"))
+            {
+                //</log4j:Event>
+                //do nothing
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"{message}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
         }
 
         static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
@@ -383,9 +491,87 @@ namespace MCLauncher
             {
                 message = e.Data;
             }
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(message);
-            Console.ForegroundColor = ConsoleColor.Gray;
+
+            //format log4j xml
+            string timestamp = "";
+            long timestampD = 0;
+            string thread = "";
+            string level = "";
+            string strmessage = "";
+
+            if (message != null && message.Contains("<log4j:Event"))
+            {
+                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
+
+                //get timestamp
+                int index = message.IndexOf("\" level");
+                if (index >= 0)
+                    timestamp = message.Substring(0, index);
+                int index2 = timestamp.IndexOf("timestamp=\"");
+                if (index2 >= 0)
+                    timestamp = timestamp.Substring(index2 + 11);
+                timestampD = (long)Convert.ToDouble(timestamp);
+
+                //get thread
+                int index5 = message.IndexOf("\">");
+                if (index5 >= 0)
+                    thread = message.Substring(0, index5);
+                int index6 = thread.IndexOf("thread=\"");
+                if (index6 >= 0)
+                    thread = thread.Substring(index6 + 8);
+
+                //get level
+                int index3 = message.IndexOf("\" thread");
+                if (index3 >= 0)
+                    level = message.Substring(0, index3);
+                int index4 = level.IndexOf("level=\"");
+                if (index4 >= 0)
+                    level = level.Substring(index4 + 7);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                DateTime t = UnixTimeToDateTime(timestampD);
+                string time = t.ToString("HH:mm:ss");
+                Console.Write($"[{time}] [{thread}/{level}]: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+            }
+            else if (message != null && message.Contains("<log4j:Message"))
+            {
+                //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
+
+                //get message
+                int index = message.IndexOf("]]></");
+                if (index >= 0)
+                    strmessage = message.Substring(0, index);
+                int index2 = strmessage.IndexOf("[CDATA[");
+                if (index2 >= 0)
+                    strmessage = strmessage.Substring(index2 + 7);
+
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{strmessage}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+            }
+            else if (message != null && message.Contains("</log4j:Event"))
+            {
+                //</log4j:Event>
+                //do nothing
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{message}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            //ConsoleScreen.writeError(message);
+        }
+
+        public static DateTime UnixTimeToDateTime(long unixtime)
+        {
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(unixtime).ToLocalTime();
+            return dtDateTime;
         }
     }
 }

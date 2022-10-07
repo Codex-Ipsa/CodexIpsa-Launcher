@@ -78,11 +78,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetIndex.cs" />
+    <Compile Include="controls\ConsoleScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ConsoleScreen.Designer.cs">
+      <DependentUpon>ConsoleScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\InstanceScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\InstanceScreen.Designer.cs">
+      <DependentUpon>InstanceScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="controls\SettingsScreen.cs">
       <SubType>UserControl</SubType>
@@ -186,8 +198,14 @@
     <Compile Include="Warning.Designer.cs">
       <DependentUpon>Warning.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="controls\ConsoleScreen.resx">
+      <DependentUpon>ConsoleScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\InstanceScreen.resx">
+      <DependentUpon>InstanceScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
