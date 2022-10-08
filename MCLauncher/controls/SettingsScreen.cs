@@ -26,6 +26,8 @@ namespace MCLauncher.controls
 
         public static int branchIndex;
 
+        public static bool isUpdating;
+
         public SettingsScreen()
         {
             InstanceSetting = this;

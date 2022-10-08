@@ -28,14 +28,6 @@ namespace MCLauncher
             Properties.Settings.Default.Reload();
             InitializeComponent();
             loadMainWindow();
-
-            //this is done here so it initializes first
-            homeScr = new HomeScreen();
-            creditsScr = new CreditsScreen();
-            settingsScr = new SettingsScreen();
-            instanceScr = new InstanceScreen();
-            consoleScr = new ConsoleScreen();
-            addHome();
         }
         public void addHome()
         {
@@ -208,6 +200,17 @@ namespace MCLauncher
                 InstanceManager.mode = "initial";
                 InstanceManager.tempName = "Default";
                 InstanceManager.createInstance();
+            }
+
+            if(SettingsScreen.isUpdating == false)
+            {
+                //this is done here so it initializes first
+                homeScr = new HomeScreen();
+                creditsScr = new CreditsScreen();
+                settingsScr = new SettingsScreen();
+                instanceScr = new InstanceScreen();
+                consoleScr = new ConsoleScreen();
+                addHome();
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MCLauncher.controls;
 
 namespace MCLauncher
 {
@@ -27,11 +29,13 @@ namespace MCLauncher
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
+            SettingsScreen.isUpdating = true;
             DownloadUpdate(UrlString);
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
+            SettingsScreen.isUpdating = false;
             this.Close();
         }
 
@@ -42,7 +46,15 @@ namespace MCLauncher
                 client.DownloadFile(Globals.updaterUrl, $"{Globals.currentPath}\\LauncherUpdater.exe");
             }
 
-            System.Diagnostics.Process.Start($"{Globals.currentPath}\\LauncherUpdater.exe -url \"{url}\"");
+            var processU = new Process
+            {
+                StartInfo =
+                {
+                  FileName = $"{Globals.currentPath}\\LauncherUpdater.exe",
+                  Arguments = $"-url \"{url}\""
+                }
+            };
+            processU.Start();
             Application.Exit();
         }
     }
