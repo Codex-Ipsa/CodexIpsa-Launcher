@@ -18,7 +18,7 @@ namespace MCLauncher.controls
             ImageList iconList = new ImageList();
             iconList.ImageSize = new Size(32, 32);
 
-            iconList.Images.Add(Image.FromFile(@"D:\Source Code\MineC-raft-Launcher\MCLauncher\image\icon64.png"));
+            //iconList.Images.Add(Image.FromFile(@"D:\Source Code\MineC-raft-Launcher\MCLauncher\image\icon64.png"));
 
 
             ListViewGroup group = new ListViewGroup("List item text", HorizontalAlignment.Left);
