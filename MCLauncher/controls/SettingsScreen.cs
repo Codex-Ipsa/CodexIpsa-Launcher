@@ -85,7 +85,7 @@ namespace MCLauncher.controls
 
                     fs.Write(config, 0, config.Length);
                 }
-                Update upd = new Update(versionList[branchIndex], noteList[branchIndex]);
+                Update upd = new Update(versionList[branchIndex], noteList[branchIndex], urlList[branchIndex]);
                 upd.ShowDialog();
             }
             else

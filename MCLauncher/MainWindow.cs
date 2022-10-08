@@ -137,8 +137,6 @@ namespace MCLauncher
             //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
-            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\update.cfg"))
-                File.Delete($"{Globals.currentPath}\\.codexipsa\\update.cfg");
 
             //Check for updates
             Logger.logMessage($"[MainWindow]", "Checking for updates..");

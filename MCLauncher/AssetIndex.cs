@@ -28,13 +28,12 @@ namespace MCLauncher
             }
 
             WebClient client = new WebClient();
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\");
-            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\{indexName}.json"))
+            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\");
+            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json"))
             {
-                client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\indexes\\{indexName}.json");
+                client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
             }
             string origJson = client.DownloadString(indexUrl);
-            //Logger.logMessage("[AssetIndex]", origJson);
 
             JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
             var origProps = origObj.Properties();
@@ -47,27 +46,19 @@ namespace MCLauncher
                 if (oKey == "objects")
                 {
                     string indexJson = oVal;
-
                     JObject assetObj = JsonConvert.DeserializeObject<JObject>(indexJson);
                     var assetProps = assetObj.Properties();
                     foreach (var aProp in assetProps)
                     {
                         string aKey = aProp.Name;
                         object aVal = aProp.Value;
-
-                        //Logger.logError("[AssetIndex]", $"Loaded asset object: {aKey}; {aVal}");
-
                         JObject itemObj = JsonConvert.DeserializeObject<JObject>(aVal.ToString());
                         var itemProps = itemObj.Properties();
                         foreach (var iProp in itemProps)
                         {
                             if(iProp.Name == "hash")
                             {
-                                //string iKey = iProp.Name;
                                 object iVal = iProp.Value;
-
-                                //Logger.logError("[AssetIndex]", $"Loaded key object: {iKey}; {iVal}");
-
                                 Logger.logMessage("[AssetIndex]", $"Name: {aKey}; hash: {iVal}");
                                 nameList.Add(aKey);
                                 hashList.Add(iVal.ToString());
@@ -83,6 +74,7 @@ namespace MCLauncher
                 Logger.logError("[AssetIndex]", $"isLegacy: {isLegacy}");
                 if (isLegacy == true)
                 {
+                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\");
                     int indexInt = 0;
                     WebClient wc = new WebClient();
                     foreach (var name in nameList)
@@ -100,27 +92,25 @@ namespace MCLauncher
                         if (index2 >= 0)
                             fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                        //Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}");
 
-                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}"))
+                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}"))
                         {
-                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}");
-                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\{fileDirectory}\\{fileName}");
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
+                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
                         }
 
-                        //isLegacy = false;
-                        //Logger.logError("[AssetIndex]", $"Name: {name}; hash: {fullHash}");
                         indexInt++;
                     }
                     isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
                     nameList.Clear();
-                    //TODO: copy to .minecraft/assets for versions that don't support --assetsDir
                 }
                 else if (isLegacy == false)
                 {
+                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\");
+
                     int indexInt = 0;
                     WebClient wc = new WebClient();
                     foreach (var name in nameList)
@@ -128,10 +118,10 @@ namespace MCLauncher
                         string fullHash = hashList[indexInt];
                         string firstTwo = fullHash.Substring(0, 2);
 
-                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}"))
+                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}"))
                         {
-                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}");
-                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\{indexName}\\objects\\{firstTwo}\\{fullHash}");
+                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
+                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             Logger.logMessage("[AssetIndex]", $"Downloaded {name} to {firstTwo}/{fullHash}");
                         }
 

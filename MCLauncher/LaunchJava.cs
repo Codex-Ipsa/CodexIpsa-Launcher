@@ -203,7 +203,14 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\{assetIndexType}"; //TODO, customise
+                if(assetIndexType.Contains("legacy"))
+                {
+                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{assetIndexType}"; //TODO, customise
+                }
+                else
+                {
+                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets"; //TODO, customise
+                }
                 Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
 
@@ -221,7 +228,11 @@ namespace MCLauncher
 
                     foreach (string newPath in Directory.GetFiles(assetDir, "*.*", SearchOption.AllDirectories))
                     {
-                        File.Copy(newPath, newPath.Replace(assetDir, realPath), true);
+                        //lazy fix
+                        if(Path.GetDirectoryName(newPath) != assetDir)
+                        {
+                            File.Copy(newPath, newPath.Replace(assetDir, realPath), true);
+                        }
                     }
 
                 }

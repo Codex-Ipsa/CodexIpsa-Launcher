@@ -14,18 +14,20 @@ namespace MCLauncher
 {
     public partial class Update : Form
     {
-        public Update(string ver, string info)
+        public string UrlString;
+        public Update(string ver, string info, string url)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             infoLabel.Text = $"{ver}\n\n{info}";
+            UrlString = url;
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            DownloadUpdate();
+            DownloadUpdate(UrlString);
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
@@ -33,14 +35,14 @@ namespace MCLauncher
             this.Close();
         }
 
-        public static void DownloadUpdate()
+        public static void DownloadUpdate(string url)
         {
             using (var client = new WebClient())
             {
                 client.DownloadFile(Globals.updaterUrl, $"{Globals.currentPath}\\LauncherUpdater.exe");
             }
 
-            System.Diagnostics.Process.Start($"{Globals.currentPath}\\LauncherUpdater.exe");
+            System.Diagnostics.Process.Start($"{Globals.currentPath}\\LauncherUpdater.exe -url \"{url}\"");
             Application.Exit();
         }
     }
