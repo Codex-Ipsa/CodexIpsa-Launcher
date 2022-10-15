@@ -19,7 +19,6 @@ namespace MCLauncher
 
         /*public static List<string> varNames;
         public static List<string> varValues;
-        public static List<string> editionNames = new List<string>() { "Java Edition" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
 
         public static string name = "Default";
         public static string edition;
@@ -76,11 +75,15 @@ namespace MCLauncher
         public static bool useCustJar = false;
         public static bool useOfflineMode = false;
 
-        /*public static void setData()
+        /*public InstanceManager()
+        {
+            InitializeComponent();
+        }
+
+        public static void setData()
         {
             varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "launchMethod", "useLaunchMethod", "customJar", "useCustomJar", "offlineMode" };
             varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}" };
-
         }
 
         public static void setDefaults()

@@ -29,6 +29,7 @@ namespace MCLauncher
             InitializeComponent();
             loadMainWindow();
         }
+
         public void addHome()
         {
             homeScr.Location = new Point(0, 24);
@@ -89,6 +90,8 @@ namespace MCLauncher
             this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
             Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
+
+
 
             //Offline check
             /*try
@@ -167,7 +170,7 @@ namespace MCLauncher
                     }
                     menuStrip1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
                 }
-                catch(WebException e)
+                catch (WebException e)
                 {
                     if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))
                     {
@@ -193,13 +196,6 @@ namespace MCLauncher
 
 
                 //TODO: set selectedIndex
-            }
-
-            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
-            {
-                InstanceManager.mode = "initial";
-                InstanceManager.tempName = "Default";
-                InstanceManager.createInstance();
             }
 
             if(SettingsScreen.isUpdating == false)
@@ -242,6 +238,7 @@ namespace MCLauncher
 
         private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
+            //Invalidate();
             ResumeLayout();
         }
 

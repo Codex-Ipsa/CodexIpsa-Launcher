@@ -70,6 +70,13 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
+            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
+            {
+                InstanceManager.mode = "initial";
+                InstanceManager.tempName = "Default";
+                InstanceManager.createInstance();
+            }       
+
             //Load instance list
             loadInstanceList();
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");

@@ -194,6 +194,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.pnlChangelog);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "HomeScreen";
             this.Size = new System.Drawing.Size(784, 387);
             this.panel1.ResumeLayout(false);

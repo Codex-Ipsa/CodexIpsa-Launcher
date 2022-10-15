@@ -97,7 +97,7 @@ namespace MCLauncher
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
             Logger.logMessage("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
-            
+
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(launchJsonUrl);
@@ -203,7 +203,7 @@ namespace MCLauncher
                 Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
                 gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft"; //TODO, customise
                 Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                if(assetIndexType.Contains("legacy"))
+                if(assetIndexType != null && assetIndexType.Contains("legacy"))
                 {
                     assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{assetIndexType}"; //TODO, customise
                 }
@@ -424,6 +424,8 @@ namespace MCLauncher
             string level = "";
             string strmessage = "";
 
+            bool printError = false;
+
             if (message != null && message.Contains("<log4j:Event"))
             {
                 //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
@@ -458,8 +460,25 @@ namespace MCLauncher
                 string time = t.ToString("HH:mm:ss");
                 Console.Write($"[{time}] [{thread}/{level}]: ");
                 Console.ForegroundColor = ConsoleColor.Gray;
-
             }
+            //TODO: this
+            /*else if (message != null && message.Contains("<log4j:Throwable"))
+            {
+                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
+
+                //get message
+                int index2 = message.IndexOf("[CDATA[");
+                if (index2 >= 0)
+                    strmessage = message.Substring(index2 + 7);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{strmessage}");
+                printError = true;
+            }
+            else if (message != null && message.Contains("</log4j:Throwable"))
+            {
+                printError = false;
+            }*/
             else if (message != null && message.Contains("<log4j:Message"))
             {
                 //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
@@ -476,7 +495,6 @@ namespace MCLauncher
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"{strmessage}");
                 Console.ForegroundColor = ConsoleColor.Gray;
-
             }
             else if (message != null && message.Contains("</log4j:Event"))
             {
@@ -485,9 +503,18 @@ namespace MCLauncher
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"{message}");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                if(printError == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{message}");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{message}");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
             }
         }
 
@@ -503,79 +530,10 @@ namespace MCLauncher
                 message = e.Data;
             }
 
-            //format log4j xml
-            string timestamp = "";
-            long timestampD = 0;
-            string thread = "";
-            string level = "";
-            string strmessage = "";
 
-            if (message != null && message.Contains("<log4j:Event"))
-            {
-                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
-
-                //get timestamp
-                int index = message.IndexOf("\" level");
-                if (index >= 0)
-                    timestamp = message.Substring(0, index);
-                int index2 = timestamp.IndexOf("timestamp=\"");
-                if (index2 >= 0)
-                    timestamp = timestamp.Substring(index2 + 11);
-                timestampD = (long)Convert.ToDouble(timestamp);
-
-                //get thread
-                int index5 = message.IndexOf("\">");
-                if (index5 >= 0)
-                    thread = message.Substring(0, index5);
-                int index6 = thread.IndexOf("thread=\"");
-                if (index6 >= 0)
-                    thread = thread.Substring(index6 + 8);
-
-                //get level
-                int index3 = message.IndexOf("\" thread");
-                if (index3 >= 0)
-                    level = message.Substring(0, index3);
-                int index4 = level.IndexOf("level=\"");
-                if (index4 >= 0)
-                    level = level.Substring(index4 + 7);
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                DateTime t = UnixTimeToDateTime(timestampD);
-                string time = t.ToString("HH:mm:ss");
-                Console.Write($"[{time}] [{thread}/{level}]: ");
-                Console.ForegroundColor = ConsoleColor.Gray;
-
-            }
-            else if (message != null && message.Contains("<log4j:Message"))
-            {
-                //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
-
-                //get message
-                int index = message.IndexOf("]]></");
-                if (index >= 0)
-                    strmessage = message.Substring(0, index);
-                int index2 = strmessage.IndexOf("[CDATA[");
-                if (index2 >= 0)
-                    strmessage = strmessage.Substring(index2 + 7);
-
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{strmessage}");
-                Console.ForegroundColor = ConsoleColor.Gray;
-
-            }
-            else if (message != null && message.Contains("</log4j:Event"))
-            {
-                //</log4j:Event>
-                //do nothing
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{message}");
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
-            //ConsoleScreen.writeError(message);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{message}");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public static DateTime UnixTimeToDateTime(long unixtime)
