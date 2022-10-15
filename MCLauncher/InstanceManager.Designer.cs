@@ -96,7 +96,6 @@ namespace MCLauncher
             this.createBtn.TabIndex = 7;
             this.createBtn.Text = "Create";
             this.createBtn.UseVisualStyleBackColor = true;
-            this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
             // 
             // nameBox
             // 
@@ -107,12 +106,10 @@ namespace MCLauncher
             // 
             // dirBox
             // 
-            this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(476, 20);
             this.dirBox.TabIndex = 12;
-            this.dirBox.TextChanged += new System.EventHandler(this.dirBox_TextChanged);
             // 
             // groupBox1
             // 
@@ -168,21 +165,17 @@ namespace MCLauncher
             // 
             // resBoxHeight
             // 
-            this.resBoxHeight.Enabled = false;
             this.resBoxHeight.Location = new System.Drawing.Point(392, 64);
             this.resBoxHeight.Name = "resBoxHeight";
             this.resBoxHeight.Size = new System.Drawing.Size(246, 20);
             this.resBoxHeight.TabIndex = 34;
-            this.resBoxHeight.TextChanged += new System.EventHandler(this.resBoxHeight_TextChanged);
             // 
             // resBoxWidth
             // 
-            this.resBoxWidth.Enabled = false;
             this.resBoxWidth.Location = new System.Drawing.Point(122, 64);
             this.resBoxWidth.Name = "resBoxWidth";
             this.resBoxWidth.Size = new System.Drawing.Size(246, 20);
             this.resBoxWidth.TabIndex = 33;
-            this.resBoxWidth.TextChanged += new System.EventHandler(this.resBoxWidth_TextChanged);
             // 
             // minRamBox
             // 
@@ -207,11 +200,10 @@ namespace MCLauncher
             this.minRamBox.Size = new System.Drawing.Size(212, 20);
             this.minRamBox.TabIndex = 32;
             this.minRamBox.Value = new decimal(new int[] {
-            1024,
+            512,
             0,
             0,
             0});
-            this.minRamBox.ValueChanged += new System.EventHandler(this.minRamBox_ValueChanged);
             // 
             // maxRamBox
             // 
@@ -236,11 +228,10 @@ namespace MCLauncher
             this.maxRamBox.Size = new System.Drawing.Size(212, 20);
             this.maxRamBox.TabIndex = 31;
             this.maxRamBox.Value = new decimal(new int[] {
-            1024,
+            512,
             0,
             0,
             0});
-            this.maxRamBox.ValueChanged += new System.EventHandler(this.maxRamBox_ValueChanged);
             // 
             // dirBtn
             // 
@@ -302,7 +293,6 @@ namespace MCLauncher
             this.editionBox.Name = "editionBox";
             this.editionBox.Size = new System.Drawing.Size(516, 21);
             this.editionBox.TabIndex = 24;
-            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -321,7 +311,6 @@ namespace MCLauncher
             this.verBox.Name = "verBox";
             this.verBox.Size = new System.Drawing.Size(516, 21);
             this.verBox.TabIndex = 22;
-            this.verBox.SelectedIndexChanged += new System.EventHandler(this.verBox_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -364,7 +353,6 @@ namespace MCLauncher
             this.offlineModeCheck.TabIndex = 30;
             this.offlineModeCheck.Text = "Launch in offline mode";
             this.offlineModeCheck.UseVisualStyleBackColor = true;
-            this.offlineModeCheck.CheckedChanged += new System.EventHandler(this.offlineModeCheck_CheckedChanged);
             // 
             // javaBtn
             // 
@@ -385,7 +373,6 @@ namespace MCLauncher
             this.custjarBtn.TabIndex = 28;
             this.custjarBtn.Text = "...";
             this.custjarBtn.UseVisualStyleBackColor = true;
-            this.custjarBtn.Click += new System.EventHandler(this.custjarBtn_Click);
             // 
             // methodBox
             // 
@@ -395,7 +382,6 @@ namespace MCLauncher
             this.methodBox.Name = "methodBox";
             this.methodBox.Size = new System.Drawing.Size(521, 21);
             this.methodBox.TabIndex = 24;
-            this.methodBox.SelectedIndexChanged += new System.EventHandler(this.methodBox_SelectedIndexChanged);
             // 
             // custjarBox
             // 
@@ -404,7 +390,6 @@ namespace MCLauncher
             this.custjarBox.Name = "custjarBox";
             this.custjarBox.Size = new System.Drawing.Size(483, 20);
             this.custjarBox.TabIndex = 27;
-            this.custjarBox.TextChanged += new System.EventHandler(this.custjarBox_TextChanged);
             // 
             // custjarCheck
             // 
@@ -416,7 +401,6 @@ namespace MCLauncher
             this.custjarCheck.TabIndex = 26;
             this.custjarCheck.Text = "Minecraft.jar:";
             this.custjarCheck.UseVisualStyleBackColor = true;
-            this.custjarCheck.CheckedChanged += new System.EventHandler(this.custjarCheck_CheckedChanged);
             // 
             // methodCheck
             // 
@@ -428,7 +412,6 @@ namespace MCLauncher
             this.methodCheck.TabIndex = 25;
             this.methodCheck.Text = "Launch method:";
             this.methodCheck.UseVisualStyleBackColor = true;
-            this.methodCheck.CheckedChanged += new System.EventHandler(this.methodCheck_CheckedChanged);
             // 
             // jvmCheck
             // 
@@ -440,7 +423,6 @@ namespace MCLauncher
             this.jvmCheck.TabIndex = 23;
             this.jvmCheck.Text = "JVM arguments:";
             this.jvmCheck.UseVisualStyleBackColor = true;
-            this.jvmCheck.CheckedChanged += new System.EventHandler(this.jvmCheck_CheckedChanged);
             // 
             // jvmBox
             // 
@@ -449,7 +431,6 @@ namespace MCLauncher
             this.jvmBox.Name = "jvmBox";
             this.jvmBox.Size = new System.Drawing.Size(523, 20);
             this.jvmBox.TabIndex = 22;
-            this.jvmBox.TextChanged += new System.EventHandler(this.jvmBox_TextChanged);
             // 
             // javaCheck
             // 
@@ -461,7 +442,6 @@ namespace MCLauncher
             this.javaCheck.TabIndex = 21;
             this.javaCheck.Text = "Java install:";
             this.javaCheck.UseVisualStyleBackColor = true;
-            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
             // 
             // javaBox
             // 
@@ -470,7 +450,6 @@ namespace MCLauncher
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(483, 20);
             this.javaBox.TabIndex = 8;
-            this.javaBox.TextChanged += new System.EventHandler(this.javaBox_TextChanged);
             // 
             // opendirBtn
             // 
@@ -480,7 +459,6 @@ namespace MCLauncher
             this.opendirBtn.TabIndex = 25;
             this.opendirBtn.Text = "Open dir";
             this.opendirBtn.UseVisualStyleBackColor = true;
-            this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
             // 
             // closeBtn
             // 
@@ -490,7 +468,6 @@ namespace MCLauncher
             this.closeBtn.TabIndex = 26;
             this.closeBtn.Text = "Cancel";
             this.closeBtn.UseVisualStyleBackColor = true;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // instmodBtn
             // 

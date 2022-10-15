@@ -22,6 +22,7 @@ namespace MCLauncher
         public static HomeScreen Instance;
         public static string selectedEdition = "java"; //TODO: LOAD THIS FROM INSTANCE
         public static string msPlayerName;
+        public static string selectedInstance = "Default"; //TODO: SAVE LAST OPENED INSTANCE AND LOAD It here
 
         public HomeScreen()
         {
@@ -72,14 +73,13 @@ namespace MCLauncher
 
             if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
-                InstanceManager.mode = "initial";
-                InstanceManager.tempName = "Default";
-                InstanceManager.createInstance();
+                InstanceManager man = new InstanceManager("Default", "initial");
+                man.ShowDialog();
             }       
 
             //Load instance list
             loadInstanceList();
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
             List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
             //Set the LaunchJava stuff
@@ -172,7 +172,7 @@ namespace MCLauncher
 
         public static void reloadInstance()
         {
-            if (InstanceManager.mode != "initial")
+            /*if (InstanceManager.mode != "initial")
             {
                 InstanceManager.selectedInstance = Instance.cmbInstaces.Text;
             }
@@ -196,7 +196,7 @@ namespace MCLauncher
                 //LaunchJava.use //TODO!!!
             }
             LaunchJava.currentInstance = Instance.cmbInstaces.Text;
-            Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
+            Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;*/
         }
 
         public static void loadChangelog()
@@ -329,30 +329,14 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            //TODO: switch to a tab instead
-            InstanceManager.cfgInstName = "New profile";
-            InstanceManager.mode = "new";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
+            InstanceManager man = new InstanceManager("New profile", "new");
+            man.ShowDialog();
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            //TODO: switch to a tab instead
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //TODO: Set the data
-            /*foreach (var vers in data)
-            {
-                InstanceManager.cfgGameVer = vers.gameVer;
-                InstanceManager.cfgTypeVer = vers.typeVer;
-            }*/
-
-            InstanceManager.cfgInstName = cmbInstaces.Text;
-            InstanceManager.mode = "edit";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
+            InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
+            man.ShowDialog();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
