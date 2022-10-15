@@ -41,8 +41,8 @@ namespace MCLauncher
         public static bool useLaunchMethod = false;
         public static bool offlineMode;
 
-
-
+        public static string tempName;
+        public static int tempInt = 1;
 
         /// <summary>
         /// OLD SHIT BELOW!!!
@@ -74,21 +74,40 @@ namespace MCLauncher
         public static bool useCustJar = false;
         public static bool useOfflineMode = false;*/
 
-        public InstanceManager(string name, string mode)
+        public InstanceManager(string instanceName, string mode)
         {
+            This = this;
             InitializeComponent();
 
+            tempName = instanceName;
+            Start(instanceName, mode);
+        }
+
+        public static void Start(string instanceName, string mode)
+        {
             if (mode == "initial")
             {
-                loadDefault("Default", "new"); //Todo: number
+                loadDefault("Default", "new");
             }
             else if (mode == "new")
             {
-                loadDefault(name, "new"); //Todo: number
+                Logger.logError("[InstanceManager]", $"{tempName}_{tempInt}");
+                //this throws a stackoverflow for some reason
+                if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+                {
+                    Start($"{tempName}_{tempInt}", "new");
+                    tempInt++;
+                }
+                else
+                {
+                    loadDefault(instanceName, "new");
+                    tempInt = 1;
+                    tempName = "";
+                }
             }
             else if (mode == "edit")
             {
-                loadDefault(name, "edit");
+                loadDefault(instanceName, "edit");
             }
 
             setData();
@@ -101,7 +120,10 @@ namespace MCLauncher
             //this sets default stuff
             if (mode == "new")
             {
+                Logger.logError("[InstanceManager]", instanceName);
                 name = instanceName;
+                This.nameBox.Text = instanceName;
+
                 edition = editionNames[0];
                 version = "";
                 type = "";
@@ -121,8 +143,9 @@ namespace MCLauncher
             }
             else if(mode == "edit")
             {
-                //TODO: GET THIS FROM JSON
-                name = "EDIT";
+                name = instanceName;
+                This.nameBox.Text = instanceName;
+
                 edition = "";
                 version = "";
                 type = "";
@@ -148,14 +171,35 @@ namespace MCLauncher
             varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{offlineMode}" };
         }
 
-        public static void saveInstance(string name)
+        public static void saveInstance(string instanceName)
         {
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{name}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft");
+
+            if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
+            
+            using (FileStream fs = File.Create($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+            {
+                string final = $"[\n{{\n";
+                int i = 0;
+                foreach(var varname in varNames)
+                {
+                    final += $"\"{varname}\":\"{varValues[i]}\",\n";
+                    i++;
+                }
+                i = 0;
+                final += $"\n}}\n]";
+                byte[] config = new UTF8Encoding(true).GetBytes(final);
+                fs.Write(config, 0, config.Length);
+            }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            saveInstance(nameBox);
+            saveInstance(nameBox.Text);
+            this.Close();
         }
     }
 }
