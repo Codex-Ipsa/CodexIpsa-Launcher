@@ -293,6 +293,7 @@ namespace MCLauncher
             this.editionBox.Name = "editionBox";
             this.editionBox.Size = new System.Drawing.Size(516, 21);
             this.editionBox.TabIndex = 24;
+            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -311,6 +312,7 @@ namespace MCLauncher
             this.verBox.Name = "verBox";
             this.verBox.Size = new System.Drawing.Size(516, 21);
             this.verBox.TabIndex = 22;
+            this.verBox.SelectedIndexChanged += new System.EventHandler(this.verBox_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -346,7 +348,6 @@ namespace MCLauncher
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
-            this.offlineModeCheck.Enabled = false;
             this.offlineModeCheck.Location = new System.Drawing.Point(6, 116);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
@@ -394,7 +395,6 @@ namespace MCLauncher
             // custjarCheck
             // 
             this.custjarCheck.AutoSize = true;
-            this.custjarCheck.Enabled = false;
             this.custjarCheck.Location = new System.Drawing.Point(6, 93);
             this.custjarCheck.Name = "custjarCheck";
             this.custjarCheck.Size = new System.Drawing.Size(87, 17);
@@ -405,7 +405,6 @@ namespace MCLauncher
             // methodCheck
             // 
             this.methodCheck.AutoSize = true;
-            this.methodCheck.Enabled = false;
             this.methodCheck.Location = new System.Drawing.Point(6, 67);
             this.methodCheck.Name = "methodCheck";
             this.methodCheck.Size = new System.Drawing.Size(103, 17);
@@ -416,7 +415,6 @@ namespace MCLauncher
             // jvmCheck
             // 
             this.jvmCheck.AutoSize = true;
-            this.jvmCheck.Enabled = false;
             this.jvmCheck.Location = new System.Drawing.Point(6, 41);
             this.jvmCheck.Name = "jvmCheck";
             this.jvmCheck.Size = new System.Drawing.Size(102, 17);
@@ -435,7 +433,6 @@ namespace MCLauncher
             // javaCheck
             // 
             this.javaCheck.AutoSize = true;
-            this.javaCheck.Enabled = false;
             this.javaCheck.Location = new System.Drawing.Point(6, 15);
             this.javaCheck.Name = "javaCheck";
             this.javaCheck.Size = new System.Drawing.Size(81, 17);

@@ -73,21 +73,21 @@ namespace MCLauncher
 
             if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
-                InstanceManager man = new InstanceManager("Default", "initial");
-                man.ShowDialog();
+                InstanceManager.Start("Default", "initial");
             }       
 
             //Load instance list
             loadInstanceList();
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+            Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.launchVerName = vers.instVer;
-                LaunchJava.launchVerUrl = vers.instUrl;
-                LaunchJava.launchVerType = vers.instType;
+                LaunchJava.launchVerName = vers.version;
+                LaunchJava.launchVerUrl = vers.url;
+                LaunchJava.launchVerType = vers.type;
             }
             Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
 

@@ -17,9 +17,14 @@ namespace MCLauncher
     {
         public static InstanceManager This;
         public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
+        public static List<string> editionUrls = new List<string>() { Globals.javaJson, Globals.javaeduJson };
 
         public static List<string> varNames;
         public static List<string> varValues;
+
+        public static List<string> verList = new List<string>();
+        public static List<string> typeList = new List<string>();
+        public static List<string> urlList = new List<string>();
 
         public static string name;
         public static string edition;
@@ -28,10 +33,10 @@ namespace MCLauncher
         public static string url;
 
         public static string directory;
-        public static string resolutionX;
-        public static string resolutionY;
-        public static string ramMin;
-        public static string ramMax;
+        public static int resolutionX;
+        public static int resolutionY;
+        public static int ramMin;
+        public static int ramMax;
 
         public static string customJava;
         public static bool useCustomJava = false;
@@ -42,37 +47,7 @@ namespace MCLauncher
         public static bool offlineMode;
 
         public static string tempName;
-        public static int tempInt = 1;
-
-        /// <summary>
-        /// OLD SHIT BELOW!!!
-        /// </summary>
-
-        /*public static string selectedInstance = "Default";
-        public static string createName;
-        public static string tempName;
-        public static int instanceInt = 1;
-        public static int cfgVer = 1;
-        public static string mode;
-
-        public static string cfgInstName;
-        public static string cfgGameVer;
-        public static string cfgTypeVer;
-        public static string cfgLinkVer;
-        public static string instGameDir = "";
-        public static string instResWidth = "854";
-        public static string instResHeight = "480";
-        public static int instRamMin = 1024;
-        public static int instRamMax = 1024;
-        public static string instCustJava = "";
-        public static bool useCustJava = false;
-        public static string instCustJvm = "";
-        public static bool useCustJvm = false;
-        public static string instCustMethod = "";
-        public static bool useCustMethod = false;
-        public static string instCustJar = "";
-        public static bool useCustJar = false;
-        public static bool useOfflineMode = false;*/
+        public static int tempInt = 0;
 
         public InstanceManager(string instanceName, string mode)
         {
@@ -85,9 +60,13 @@ namespace MCLauncher
 
         public static void Start(string instanceName, string mode)
         {
+            verList.Clear();
+            typeList.Clear();
+            urlList.Clear();
             if (mode == "initial")
             {
-                loadDefault("Default", "new");
+                loadDefault(instanceName, "initial");
+                saveInstance("Default");
             }
             else if (mode == "new")
             {
@@ -95,13 +74,13 @@ namespace MCLauncher
                 //this throws a stackoverflow for some reason
                 if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
                 {
-                    Start($"{tempName}_{tempInt}", "new");
                     tempInt++;
+                    Start($"{tempName}_{tempInt}", "new");
                 }
                 else
                 {
                     loadDefault(instanceName, "new");
-                    tempInt = 1;
+                    tempInt = 0;
                     tempName = "";
                 }
             }
@@ -109,8 +88,6 @@ namespace MCLauncher
             {
                 loadDefault(instanceName, "edit");
             }
-
-            setData();
         }
 
 
@@ -118,21 +95,49 @@ namespace MCLauncher
         public static void loadDefault(string instanceName, string mode)
         {
             //this sets default stuff
-            if (mode == "new")
+
+            if (mode == "initial")
             {
-                Logger.logError("[InstanceManager]", instanceName);
+                name = instanceName;
+                edition = editionNames[0];
+                using (var client = new WebClient())
+                {
+                    string json = client.DownloadString(Globals.defaultVer);
+                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                    foreach (var vers in data)
+                    {
+                        version = vers.verName;
+                        type = vers.verType;
+                        url = vers.verLink;
+                    }
+                }
+                directory = $"";
+                resolutionX = 854;
+                resolutionY = 480;
+                ramMin = 512;
+                ramMax = 512;
+                customJava = "";
+                useCustomJava = false;
+                jvmArgs = "";
+                useJvmArgs = false;
+                launchMethod = "";
+                useLaunchMethod = false;
+                offlineMode = false;
+            }
+            else if (mode == "new")
+            {
                 name = instanceName;
                 This.nameBox.Text = instanceName;
-
                 edition = editionNames[0];
                 version = "";
                 type = "";
                 url = "";
                 directory = "";
-                resolutionX = "";
-                resolutionY = "";
-                ramMin = "";
-                ramMax = "";
+                resolutionX = 854;
+                resolutionY = 480;
+                ramMin = 512;
+                ramMax = 512;
                 customJava = "";
                 useCustomJava = false;
                 jvmArgs = "";
@@ -143,25 +148,66 @@ namespace MCLauncher
             }
             else if(mode == "edit")
             {
-                name = instanceName;
-                This.nameBox.Text = instanceName;
+                //TODO: FINISH THIS SHIT
+                This.editionBox.DataSource = editionNames;
+                This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
 
-                edition = "";
-                version = "";
-                type = "";
-                url = "";
-                directory = "";
-                resolutionX = "";
-                resolutionY = "";
-                ramMin = "";
-                ramMax = "";
-                customJava = "";
-                useCustomJava = false;
-                jvmArgs = "";
-                useJvmArgs = false;
-                launchMethod = "";
-                useLaunchMethod = false;
-                offlineMode = false;
+                int i = This.editionBox.FindStringExact(edition);
+
+                using (WebClient client = new WebClient())
+                {
+                    string json2 = client.DownloadString(editionUrls[i]);
+                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
+
+                    foreach (var vers in data2)
+                    {
+                        verList.Add(vers.verName);
+                        typeList.Add(vers.verType);
+                        urlList.Add(vers.verLink);
+                    }
+                }
+
+                string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
+                List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+                foreach (var vers in data)
+                {
+                    name = vers.name;
+                    edition = vers.edition;
+                    version = vers.version;
+                    type = vers.type;
+                    url = vers.url;
+                    directory = vers.directory;
+                    resolutionX = Int32.Parse(vers.resolutionX);
+                    resolutionY = Int32.Parse(vers.resolutionY);
+                    ramMin = Int32.Parse(vers.ramMin);
+                    ramMax = Int32.Parse(vers.ramMax);
+                    customJava = vers.customJava;
+                    useCustomJava = bool.Parse(vers.useCustomJava);
+                    jvmArgs = vers.jvmArgs;
+                    useJvmArgs = bool.Parse(vers.useJvmArgs);
+                    launchMethod = vers.launchMethod;
+                    useLaunchMethod = bool.Parse(vers.useLaunchMethod);
+                    offlineMode = bool.Parse(vers.offlineMode);
+                }
+
+                This.nameBox.Text = name;
+                //This.verBox.DataSource = verList;
+                //This.verBox.Text = version;
+                This.dirBox.Text = directory;
+                This.resBoxHeight.Text = resolutionX.ToString();
+                This.resBoxWidth.Text = resolutionY.ToString();
+                This.minRamBox.Value = ramMin;
+                This.maxRamBox.Value = ramMax;
+                This.javaCheck.Checked = useCustomJava;
+                This.javaBox.Enabled = useCustomJava;
+                This.javaBox.Text = customJava;
+                This.jvmCheck.Checked = useJvmArgs;
+                This.jvmBox.Enabled = useJvmArgs;
+                This.jvmBox.Text = jvmArgs;
+                This.methodCheck.Checked = useLaunchMethod;
+                This.methodBox.Enabled = useLaunchMethod;
+                This.methodBox.Text = launchMethod;
+                This.offlineModeCheck.Checked = offlineMode;
             }
         }
 
@@ -173,6 +219,8 @@ namespace MCLauncher
 
         public static void saveInstance(string instanceName)
         {
+            setData();
+
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft");
@@ -182,15 +230,15 @@ namespace MCLauncher
             
             using (FileStream fs = File.Create($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
             {
-                string final = $"[\n{{\n";
+                string final = $"[\n  {{\n";
                 int i = 0;
                 foreach(var varname in varNames)
                 {
-                    final += $"\"{varname}\":\"{varValues[i]}\",\n";
+                    final += $"    \"{varname}\":\"{varValues[i]}\",\n";
                     i++;
                 }
                 i = 0;
-                final += $"\n}}\n]";
+                final += $"  }}\n]";
                 byte[] config = new UTF8Encoding(true).GetBytes(final);
                 fs.Write(config, 0, config.Length);
             }
@@ -201,5 +249,67 @@ namespace MCLauncher
             saveInstance(nameBox.Text);
             this.Close();
         }
+
+        private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            edition = editionBox.Text;
+            int i = editionBox.SelectedIndex;
+            Logger.logMessage("[InstanceManager]", i.ToString() + editionUrls[i]);
+
+            verList = new List<string>();
+            typeList = new List<string>();
+            urlList = new List<string>();
+
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(editionUrls[i]);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                foreach (var vers in data)
+                {
+                    verList.Add(vers.verName);
+                    typeList.Add(vers.verType);
+                    urlList.Add(vers.verLink);
+                }
+                verBox.DataSource = verList;
+            }
+            Logger.logError("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
+        }
+
+        private void verBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int i = verBox.SelectedIndex;
+                version = verList[i];
+                url = urlList[i];
+                type = typeList[i];
+            }
+            catch(ArgumentOutOfRangeException aore)
+            {
+                Logger.logError("[InstanceManager]", "Ignore this error");
+            }
+        }
+    }
+
+    public class instanceObjects
+    {
+        public string name { get; set; }
+        public string edition { get; set; }
+        public string version { get; set; }
+        public string type { get; set; }
+        public string url { get; set; }
+        public string directory { get; set; }
+        public string resolutionX { get; set; }
+        public string resolutionY { get; set; }
+        public string ramMin { get; set; }
+        public string ramMax { get; set; }
+        public string customJava { get; set; }
+        public string useCustomJava { get; set; }
+        public string jvmArgs { get; set; }
+        public string useJvmArgs { get; set; }
+        public string launchMethod { get; set; }
+        public string useLaunchMethod { get; set; }
+        public string offlineMode { get; set; }
     }
 }
