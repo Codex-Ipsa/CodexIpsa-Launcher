@@ -141,18 +141,11 @@
     </Compile>
     <Compile Include="jsonObject.cs" />
     <Compile Include="LaunchJava.cs" />
-    <Compile Include="LaunchJavaMod.cs" />
     <Compile Include="LaunchPS3.cs" />
     <Compile Include="LaunchWin10.cs" />
     <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="LibsCheck.cs" />
-    <Compile Include="LoadCustom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoadCustom.Designer.cs">
-      <DependentUpon>LoadCustom.cs</DependentUpon>
-    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -183,12 +176,6 @@
     </Compile>
     <Compile Include="Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VerSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VerSelect.Designer.cs">
-      <DependentUpon>VerSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,9 +215,6 @@
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoadCustom.resx">
-      <DependentUpon>LoadCustom.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -250,9 +234,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VerSelect.resx">
-      <DependentUpon>VerSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warning.resx">
       <DependentUpon>Warning.cs</DependentUpon>

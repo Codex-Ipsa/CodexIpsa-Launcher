@@ -54,10 +54,7 @@ namespace MCLauncher
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.offlineModeCheck = new System.Windows.Forms.CheckBox();
             this.javaBtn = new System.Windows.Forms.Button();
-            this.custjarBtn = new System.Windows.Forms.Button();
             this.methodBox = new System.Windows.Forms.ComboBox();
-            this.custjarBox = new System.Windows.Forms.TextBox();
-            this.custjarCheck = new System.Windows.Forms.CheckBox();
             this.methodCheck = new System.Windows.Forms.CheckBox();
             this.jvmCheck = new System.Windows.Forms.CheckBox();
             this.jvmBox = new System.Windows.Forms.TextBox();
@@ -328,10 +325,7 @@ namespace MCLauncher
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.offlineModeCheck);
             this.groupBox3.Controls.Add(this.javaBtn);
-            this.groupBox3.Controls.Add(this.custjarBtn);
             this.groupBox3.Controls.Add(this.methodBox);
-            this.groupBox3.Controls.Add(this.custjarBox);
-            this.groupBox3.Controls.Add(this.custjarCheck);
             this.groupBox3.Controls.Add(this.methodCheck);
             this.groupBox3.Controls.Add(this.jvmCheck);
             this.groupBox3.Controls.Add(this.jvmBox);
@@ -340,7 +334,7 @@ namespace MCLauncher
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(5, 207);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(650, 139);
+            this.groupBox3.Size = new System.Drawing.Size(650, 119);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
@@ -348,7 +342,7 @@ namespace MCLauncher
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
-            this.offlineModeCheck.Location = new System.Drawing.Point(6, 116);
+            this.offlineModeCheck.Location = new System.Drawing.Point(3, 94);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineModeCheck.TabIndex = 30;
@@ -365,16 +359,6 @@ namespace MCLauncher
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
             // 
-            // custjarBtn
-            // 
-            this.custjarBtn.Enabled = false;
-            this.custjarBtn.Location = new System.Drawing.Point(610, 92);
-            this.custjarBtn.Name = "custjarBtn";
-            this.custjarBtn.Size = new System.Drawing.Size(34, 20);
-            this.custjarBtn.TabIndex = 28;
-            this.custjarBtn.Text = "...";
-            this.custjarBtn.UseVisualStyleBackColor = true;
-            // 
             // methodBox
             // 
             this.methodBox.Enabled = false;
@@ -383,24 +367,6 @@ namespace MCLauncher
             this.methodBox.Name = "methodBox";
             this.methodBox.Size = new System.Drawing.Size(521, 21);
             this.methodBox.TabIndex = 24;
-            // 
-            // custjarBox
-            // 
-            this.custjarBox.Enabled = false;
-            this.custjarBox.Location = new System.Drawing.Point(122, 92);
-            this.custjarBox.Name = "custjarBox";
-            this.custjarBox.Size = new System.Drawing.Size(483, 20);
-            this.custjarBox.TabIndex = 27;
-            // 
-            // custjarCheck
-            // 
-            this.custjarCheck.AutoSize = true;
-            this.custjarCheck.Location = new System.Drawing.Point(6, 93);
-            this.custjarCheck.Name = "custjarCheck";
-            this.custjarCheck.Size = new System.Drawing.Size(87, 17);
-            this.custjarCheck.TabIndex = 26;
-            this.custjarCheck.Text = "Minecraft.jar:";
-            this.custjarCheck.UseVisualStyleBackColor = true;
             // 
             // methodCheck
             // 
@@ -411,6 +377,7 @@ namespace MCLauncher
             this.methodCheck.TabIndex = 25;
             this.methodCheck.Text = "Launch method:";
             this.methodCheck.UseVisualStyleBackColor = true;
+            this.methodCheck.CheckedChanged += new System.EventHandler(this.methodCheck_CheckedChanged);
             // 
             // jvmCheck
             // 
@@ -421,6 +388,7 @@ namespace MCLauncher
             this.jvmCheck.TabIndex = 23;
             this.jvmCheck.Text = "JVM arguments:";
             this.jvmCheck.UseVisualStyleBackColor = true;
+            this.jvmCheck.CheckedChanged += new System.EventHandler(this.jvmCheck_CheckedChanged);
             // 
             // jvmBox
             // 
@@ -439,6 +407,7 @@ namespace MCLauncher
             this.javaCheck.TabIndex = 21;
             this.javaCheck.Text = "Java install:";
             this.javaCheck.UseVisualStyleBackColor = true;
+            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
             // 
             // javaBox
             // 
@@ -563,8 +532,6 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox custjarBox;
-        private System.Windows.Forms.CheckBox custjarCheck;
         private System.Windows.Forms.CheckBox methodCheck;
         private System.Windows.Forms.CheckBox jvmCheck;
         private System.Windows.Forms.TextBox jvmBox;
@@ -580,7 +547,6 @@ namespace MCLauncher
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button dirBtn;
         private System.Windows.Forms.Button javaBtn;
-        private System.Windows.Forms.Button custjarBtn;
         private System.Windows.Forms.NumericUpDown minRamBox;
         private System.Windows.Forms.NumericUpDown maxRamBox;
         private System.Windows.Forms.TabControl tabControl1;

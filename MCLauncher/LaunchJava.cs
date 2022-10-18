@@ -16,30 +16,6 @@ namespace MCLauncher
 {
     class LaunchJava
     {
-        /// <summary>
-        /// Old stuff
-        /// </summary>
-        //Main
-        public static string selectedVer;
-        public static string linkToJar;
-        public static string typeVer;
-
-        //Launch
-        public static string instanceName;
-        public static string javaLocation = "java.exe";
-        public static string launchCmd;
-        public static string clientPath;
-        public static string launchMethod;
-
-        //Debug
-        public static bool isCustom = false;
-        public static bool useProxy = true;
-        public static string consoleOutput;
-        /// <summary>
-        /// Old stuff ends
-        /// </summary>
-
-
         public static string launchVerName;
         public static string launchVerType;
         public static string launchVerUrl;
@@ -54,7 +30,6 @@ namespace MCLauncher
         public static string launchXmx = "1024"; //TODO, custom vars
         public static string launchXms = "1024"; //TODO, custom vars
         public static string launchProxy;
-        //public static string launchProxyOld;
         public static string launchNativePath;
         public static string launchClientPath;
         public static string launchLibsPath;
@@ -66,17 +41,15 @@ namespace MCLauncher
         public static bool launchJoinMP = false;
         public static string launchServerIP;
         public static string launchServerPort;
-        public static string launchWidth = "854";
-        public static string launchHeight = "480";
+        public static string launchResX = "854";
+        public static string launchResY = "480";
         public static string launchJavaLocation = "java.exe";
-        public static bool useCustJava;
 
+        public static bool useCustJava;
         public static bool useCustJvm;
         public static string launchClasspath;
         public static bool useCustMethod;
-
         public static bool useCustJar;
-
         public static bool useOfflineMode;
 
         public static string gameDir;
@@ -334,9 +307,8 @@ namespace MCLauncher
                 }
                 if(Globals.isDebug)
                 {
-                    Logger.logMessage("[LaunchJava]", $"Launch cmd done: {launchCommand}");
+                    Logger.logMessage("[LaunchJava]", $"Launch cmd done: {launchJavaLocation} {launchCommand}");
                 }
-                Logger.logMessage("[LaunchJava]", $"Java location: {launchJavaLocation}");
 
                 //Check if Java exists
                 try
@@ -363,7 +335,7 @@ namespace MCLauncher
                     process.ErrorDataReceived += OnErrorDataReceived;
 
 
-                    process.StartInfo.FileName = launchJavaLocation;
+                    process.StartInfo.FileName = "java.exe";
                     process.StartInfo.Arguments = launchCommand;
                     process.StartInfo.WorkingDirectory = $"{gameDir}";
                     process.EnableRaisingEvents = true;
@@ -375,7 +347,7 @@ namespace MCLauncher
 
                     //MainWindow.loadLog();
 
-                    VerSelect.checkTab = "java";
+                    //VerSelect.checkTab = "java";
                     LibsCheck.isDone = false;
                     launchLibsPath = string.Empty;
                 }

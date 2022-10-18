@@ -141,6 +141,10 @@ namespace MCLauncher
                     Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
                     Instance.btnPlay.Enabled = true;
                     Instance.lblLogInWarn.Text = "";
+                    Instance.cmbInstaces.Enabled = true;
+                    Instance.btnEditInst.Enabled = true;
+                    Instance.btnNewInst.Enabled = true;
+
                 }
             }
         }
@@ -167,11 +171,38 @@ namespace MCLauncher
             }
             cmbInstaces.DataSource = instanceList;
             cmbInstaces.Refresh();
-            LaunchJava.instanceName = cmbInstaces.Text;
+            LaunchJava.currentInstance = cmbInstaces.Text;
         }
 
-        public static void reloadInstance()
+        public static void reloadInstance(string instName)
         {
+            Logger.logMessage("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{instName}\\instance.cfg");
+            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+            foreach (var item in data)
+            {
+                if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load Java base");
+                    LaunchJava.currentInstance = instName;
+                    //LaunchJava.gameDir TODO
+                    LaunchJava.launchResX = item.resolutionX;
+                    LaunchJava.launchResY = item.resolutionY;
+                }
+                else if (item.edition == "Xbox 360 Edition")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load X360 base");
+                }
+                else if (item.edition == "PlayStation3 Edition")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load PS3 base");
+                }
+                else
+                {
+                    Logger.logError("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
+                }
+            }
+
             /*if (InstanceManager.mode != "initial")
             {
                 InstanceManager.selectedInstance = Instance.cmbInstaces.Text;
@@ -374,7 +405,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            reloadInstance();
+            reloadInstance(cmbInstaces.Text);
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)

@@ -219,6 +219,23 @@ namespace MCLauncher
 
         public static void saveInstance(string instanceName)
         {
+            name = instanceName;
+            edition = This.editionBox.Text;
+            version = This.verBox.Text;
+            directory = This.dirBox.Text;
+            resolutionX = Int32.Parse(This.resBoxWidth.Text);
+            resolutionY = Int32.Parse(This.resBoxHeight.Text);
+            ramMax = Int32.Parse(This.maxRamBox.Text);
+            ramMin = Int32.Parse(This.minRamBox.Text);
+            useCustomJava = This.javaCheck.Checked;
+            customJava = This.javaBox.Text;
+            useJvmArgs = This.jvmCheck.Checked;
+            jvmArgs = This.jvmBox.Text;
+            useLaunchMethod = This.methodCheck.Checked;
+            launchMethod = This.methodBox.Text;
+            offlineMode = This.offlineModeCheck.Checked;
+
+
             setData();
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
@@ -247,6 +264,7 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             saveInstance(nameBox.Text);
+            HomeScreen.reloadInstance(name);
             this.Close();
         }
 
@@ -288,6 +306,44 @@ namespace MCLauncher
             catch(ArgumentOutOfRangeException aore)
             {
                 Logger.logError("[InstanceManager]", "Ignore this error");
+            }
+        }
+
+        private void javaCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if(javaCheck.Checked)
+            {
+                javaBox.Enabled = true;
+                javaBtn.Enabled = true;
+            }
+            else
+            {
+                javaBox.Enabled = false;
+                javaBtn.Enabled = false;
+            }
+        }
+
+        private void jvmCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (jvmCheck.Checked)
+            {
+                jvmBox.Enabled = true;
+            }
+            else
+            {
+                jvmBox.Enabled = false;
+            }
+        }
+
+        private void methodCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (methodCheck.Checked)
+            {
+                methodBox.Enabled = true;
+            }
+            else
+            {
+                methodBox.Enabled = false;
             }
         }
     }
