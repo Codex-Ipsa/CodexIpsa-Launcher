@@ -27,8 +27,8 @@ namespace MCLauncher
         public static string launchCommand;
         public static string launchJavaReq;
 
-        public static string launchXmx = "1024"; //TODO, custom vars
-        public static string launchXms = "1024"; //TODO, custom vars
+        public static string launchRamMax;
+        public static string launchRamMin;
         public static string launchProxy;
         public static string launchNativePath;
         public static string launchClientPath;
@@ -41,8 +41,8 @@ namespace MCLauncher
         public static bool launchJoinMP = false;
         public static string launchServerIP;
         public static string launchServerPort;
-        public static string launchResX = "854";
-        public static string launchResY = "480";
+        public static string launchResX;
+        public static string launchResY;
         public static string launchJavaLocation = "java.exe";
 
         public static bool useCustJava;
@@ -243,7 +243,7 @@ namespace MCLauncher
 
 
                 //Build the launchcmd
-                launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
+                launchCommand = $"-Xmx{launchRamMax}m -Xms{launchRamMin}m ";
                 if(javaagentJar != "false")
                 {
                     Logger.logMessage("[LaunchJava]", "Javaagent active!");

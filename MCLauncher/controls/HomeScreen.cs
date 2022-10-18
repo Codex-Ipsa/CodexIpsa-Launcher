@@ -188,6 +188,13 @@ namespace MCLauncher
                     //LaunchJava.gameDir TODO
                     LaunchJava.launchResX = item.resolutionX;
                     LaunchJava.launchResY = item.resolutionY;
+                    LaunchJava.launchRamMax = item.ramMax;
+                    LaunchJava.launchRamMin = item.ramMin;
+                    LaunchJava.launchVerName = item.version;
+                    LaunchJava.launchVerType = item.type;
+                    LaunchJava.launchVerUrl = item.url;
+                    Instance.lblReady.Text = $"Ready to play Minecraft {item.version}";
+
                 }
                 else if (item.edition == "Xbox 360 Edition")
                 {
