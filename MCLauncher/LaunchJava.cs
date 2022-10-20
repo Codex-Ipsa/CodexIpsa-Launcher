@@ -43,13 +43,13 @@ namespace MCLauncher
         public static string launchServerPort;
         public static string launchResX;
         public static string launchResY;
-        public static string launchJavaLocation = "java.exe";
 
         public static bool useCustJava;
+        public static string launchJavaLocation;
         public static bool useCustJvm;
-        public static string launchClasspath;
+        public static string launchJvmArgs;
+        public static string launchMethod;
         public static bool useCustMethod;
-        public static bool useCustJar;
         public static bool useOfflineMode;
 
         public static string gameDir;
@@ -80,8 +80,8 @@ namespace MCLauncher
                 {
                     launchJavaReq = vers.minJava;
                     Logger.logMessage("[LaunchJava]", $"Minimum java: {launchJavaReq}");
-                    launchClasspath = vers.launchMethod;
-                    Logger.logMessage("[LaunchJava]", $"Main class: {launchClasspath}");
+                    launchMethod = vers.launchMethod;
+                    Logger.logMessage("[LaunchJava]", $"Main class: {launchMethod}");
                     launchLibsType = vers.libsType;
                     Logger.logMessage("[LaunchJava]", $"Libs type: {launchLibsType}");
                     launchProxy = vers.proxy;
@@ -288,26 +288,29 @@ namespace MCLauncher
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
                 }
 
-                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath} ";
+                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} ";
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system
                     launchCmdAddon = launchCmdAddon.Replace("{gameDir}", $"\"{gameDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{assetDir}", $"\"{assetDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{playerName}", $"{launchPlayerName}");
-                    //launchCmdAddon = launchCmdAddon.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
                     launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName}");
                     launchCmdAddon = launchCmdAddon.Replace("{workDir}", $"\"{workDir}\"");
-                    launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
-                    launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    if(useOfflineMode == true)
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"uuid");
+                        launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"access_token");
+                    }
+                    else
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
+                        launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    }
                     launchCmdAddon = launchCmdAddon.Replace("{assetName}", $"\"{assetIndexType}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{userType}", $"msa");
 
                     launchCommand += $"{launchCmdAddon}";
-                }
-                if(Globals.isDebug)
-                {
-                    Logger.logMessage("[LaunchJava]", $"Launch cmd done: {launchJavaLocation} {launchCommand}");
                 }
 
                 //Check if Java exists
@@ -334,9 +337,19 @@ namespace MCLauncher
                     process.OutputDataReceived += OnOutputDataReceived;
                     process.ErrorDataReceived += OnErrorDataReceived;
 
-
-                    process.StartInfo.FileName = "java.exe";
+                    if(useCustJava == true)
+                    {
+                        process.StartInfo.FileName = $"\"{launchJavaLocation}\"";
+                    }
+                    else
+                    {
+                        process.StartInfo.FileName = "java.exe";
+                    }
                     process.StartInfo.Arguments = launchCommand;
+                    if (Globals.isDebug)
+                    {
+                        Logger.logMessage("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
+                    }
                     process.StartInfo.WorkingDirectory = $"{gameDir}";
                     process.EnableRaisingEvents = true;
                     process.Exited += new EventHandler(ClosedGame);

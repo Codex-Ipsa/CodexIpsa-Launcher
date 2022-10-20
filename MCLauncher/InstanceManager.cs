@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace MCLauncher
             if (mode == "initial")
             {
                 loadDefault(instanceName, "initial");
-                saveInstance("Default");
+                saveInstance("Default", "initial");
             }
             else if (mode == "new")
             {
@@ -217,23 +218,26 @@ namespace MCLauncher
             varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{offlineMode}" };
         }
 
-        public static void saveInstance(string instanceName)
+        public static void saveInstance(string instanceName, string mode)
         {
-            name = instanceName;
-            edition = This.editionBox.Text;
-            version = This.verBox.Text;
-            directory = This.dirBox.Text;
-            resolutionX = Int32.Parse(This.resBoxWidth.Text);
-            resolutionY = Int32.Parse(This.resBoxHeight.Text);
-            ramMax = Int32.Parse(This.maxRamBox.Text);
-            ramMin = Int32.Parse(This.minRamBox.Text);
-            useCustomJava = This.javaCheck.Checked;
-            customJava = This.javaBox.Text;
-            useJvmArgs = This.jvmCheck.Checked;
-            jvmArgs = This.jvmBox.Text;
-            useLaunchMethod = This.methodCheck.Checked;
-            launchMethod = This.methodBox.Text;
-            offlineMode = This.offlineModeCheck.Checked;
+            if(mode != "initial")
+            {
+                name = instanceName;
+                edition = This.editionBox.Text;
+                version = This.verBox.Text;
+                directory = This.dirBox.Text;
+                resolutionX = Int32.Parse(This.resBoxWidth.Text);
+                resolutionY = Int32.Parse(This.resBoxHeight.Text);
+                ramMax = Int32.Parse(This.maxRamBox.Text);
+                ramMin = Int32.Parse(This.minRamBox.Text);
+                useCustomJava = This.javaCheck.Checked;
+                customJava = This.javaBox.Text;
+                useJvmArgs = This.jvmCheck.Checked;
+                jvmArgs = This.jvmBox.Text;
+                useLaunchMethod = This.methodCheck.Checked;
+                launchMethod = This.methodBox.Text;
+                offlineMode = This.offlineModeCheck.Checked;
+            }
 
 
             setData();
@@ -263,7 +267,7 @@ namespace MCLauncher
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            saveInstance(nameBox.Text);
+            saveInstance(nameBox.Text, "other");
             HomeScreen.reloadInstance(name);
             this.Close();
         }
@@ -345,6 +349,21 @@ namespace MCLauncher
             {
                 methodBox.Enabled = false;
             }
+        }
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void opendirBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
+        }
+
+        private void javaBox_TextChanged(object sender, EventArgs e)
+        {
+            javaBox.Text = javaBox.Text.Replace('\\', '/');
         }
     }
 

@@ -62,7 +62,6 @@ namespace MCLauncher
             this.javaBox = new System.Windows.Forms.TextBox();
             this.opendirBtn = new System.Windows.Forms.Button();
             this.closeBtn = new System.Windows.Forms.Button();
-            this.instmodBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.javaPage = new System.Windows.Forms.TabPage();
@@ -87,7 +86,7 @@ namespace MCLauncher
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(584, 379);
+            this.createBtn.Location = new System.Drawing.Point(584, 363);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(75, 23);
             this.createBtn.TabIndex = 7;
@@ -103,6 +102,7 @@ namespace MCLauncher
             // 
             // dirBox
             // 
+            this.dirBox.Enabled = false;
             this.dirBox.Location = new System.Drawing.Point(122, 39);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(476, 20);
@@ -162,6 +162,7 @@ namespace MCLauncher
             // 
             // resBoxHeight
             // 
+            this.resBoxHeight.Enabled = false;
             this.resBoxHeight.Location = new System.Drawing.Point(392, 64);
             this.resBoxHeight.Name = "resBoxHeight";
             this.resBoxHeight.Size = new System.Drawing.Size(246, 20);
@@ -169,6 +170,7 @@ namespace MCLauncher
             // 
             // resBoxWidth
             // 
+            this.resBoxWidth.Enabled = false;
             this.resBoxWidth.Location = new System.Drawing.Point(122, 64);
             this.resBoxWidth.Name = "resBoxWidth";
             this.resBoxWidth.Size = new System.Drawing.Size(246, 20);
@@ -342,7 +344,7 @@ namespace MCLauncher
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
-            this.offlineModeCheck.Location = new System.Drawing.Point(3, 94);
+            this.offlineModeCheck.Location = new System.Drawing.Point(6, 92);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineModeCheck.TabIndex = 30;
@@ -354,7 +356,7 @@ namespace MCLauncher
             this.javaBtn.Enabled = false;
             this.javaBtn.Location = new System.Drawing.Point(610, 11);
             this.javaBtn.Name = "javaBtn";
-            this.javaBtn.Size = new System.Drawing.Size(34, 20);
+            this.javaBtn.Size = new System.Drawing.Size(34, 22);
             this.javaBtn.TabIndex = 29;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
@@ -416,37 +418,31 @@ namespace MCLauncher
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(483, 20);
             this.javaBox.TabIndex = 8;
+            this.javaBox.TextChanged += new System.EventHandler(this.javaBox_TextChanged);
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(503, 379);
+            this.opendirBtn.Location = new System.Drawing.Point(503, 363);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(75, 23);
             this.opendirBtn.TabIndex = 25;
             this.opendirBtn.Text = "Open dir";
             this.opendirBtn.UseVisualStyleBackColor = true;
+            this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(9, 379);
+            this.closeBtn.Location = new System.Drawing.Point(9, 363);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
             this.closeBtn.Text = "Cancel";
             this.closeBtn.UseVisualStyleBackColor = true;
-            // 
-            // instmodBtn
-            // 
-            this.instmodBtn.Location = new System.Drawing.Point(422, 379);
-            this.instmodBtn.Name = "instmodBtn";
-            this.instmodBtn.Size = new System.Drawing.Size(75, 23);
-            this.instmodBtn.TabIndex = 27;
-            this.instmodBtn.Text = "Install mod";
-            this.instmodBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(584, 379);
+            this.saveBtn.Location = new System.Drawing.Point(584, 363);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
@@ -456,13 +452,16 @@ namespace MCLauncher
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.javaPage);
             this.tabControl1.Controls.Add(this.x360Page);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(668, 378);
+            this.tabControl1.Size = new System.Drawing.Size(668, 358);
             this.tabControl1.TabIndex = 33;
             // 
             // javaPage
@@ -474,7 +473,7 @@ namespace MCLauncher
             this.javaPage.Margin = new System.Windows.Forms.Padding(2);
             this.javaPage.Name = "javaPage";
             this.javaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.javaPage.Size = new System.Drawing.Size(660, 352);
+            this.javaPage.Size = new System.Drawing.Size(660, 332);
             this.javaPage.TabIndex = 0;
             this.javaPage.Text = "Java Edition";
             this.javaPage.UseVisualStyleBackColor = true;
@@ -495,10 +494,9 @@ namespace MCLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(668, 409);
+            this.ClientSize = new System.Drawing.Size(668, 391);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.instmodBtn);
             this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.opendirBtn);
             this.Controls.Add(this.createBtn);
@@ -540,7 +538,6 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox methodBox;
         private System.Windows.Forms.Button opendirBtn;
         private System.Windows.Forms.Button closeBtn;
-        private System.Windows.Forms.Button instmodBtn;
         private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;

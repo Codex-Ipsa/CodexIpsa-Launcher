@@ -193,6 +193,13 @@ namespace MCLauncher
                     LaunchJava.launchVerName = item.version;
                     LaunchJava.launchVerType = item.type;
                     LaunchJava.launchVerUrl = item.url;
+                    LaunchJava.launchJavaLocation = item.customJava;
+                    LaunchJava.useCustJava = bool.Parse(item.useCustomJava);
+                    LaunchJava.launchJvmArgs = item.jvmArgs;
+                    LaunchJava.useCustMethod = bool.Parse(item.useLaunchMethod);
+                    //LaunchJava.launchMethod = item.launchMethod;
+                    LaunchJava.useCustMethod = bool.Parse(item.useLaunchMethod);
+                    LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
                     Instance.lblReady.Text = $"Ready to play Minecraft {item.version}";
 
                 }
