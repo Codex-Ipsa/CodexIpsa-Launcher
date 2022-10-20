@@ -123,7 +123,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.grbLauncher);
             this.Controls.Add(this.grbUpdates);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SettingsScreen";
             this.Size = new System.Drawing.Size(784, 387);
             this.grbLauncher.ResumeLayout(false);

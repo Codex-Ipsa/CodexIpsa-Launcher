@@ -51,7 +51,7 @@ namespace MCLauncher
                 StartInfo =
                 {
                   FileName = $"{Globals.currentPath}\\LauncherUpdater.exe",
-                  Arguments = $"-url \"{url}\""
+                  Arguments = $"-url \"{url}\" -updInst"
                 }
             };
             processU.Start();
