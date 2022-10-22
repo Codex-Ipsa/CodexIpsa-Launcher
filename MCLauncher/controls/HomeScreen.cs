@@ -51,21 +51,6 @@ namespace MCLauncher
                 this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
             }
 
-            //Load browser URL
-            /*if(Globals.offlineMode == false)
-            {
-                webBrowser.Url = new Uri(Globals.changelog, UriKind.Absolute);
-                webBrowser.Refresh();
-                Logger.logMessage($"[HomeScreen]", $"Changelog loaded");
-
-
-            }
-            else
-            {
-                webBrowser.DocumentText = $"<center><p>{Strings.htmlChangelogFailed}</p></center>";
-                webBrowser.Refresh();
-                Logger.logError($"[HomeScreen]", $"Failed to load changelog");
-            }*/
             //JSON changelog system
             loadChangelog();
 
@@ -226,32 +211,6 @@ namespace MCLauncher
                     Logger.logError("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
                 }
             }
-
-            /*if (InstanceManager.mode != "initial")
-            {
-                InstanceManager.selectedInstance = Instance.cmbInstaces.Text;
-            }
-
-            Logger.logMessage("[HomeScreen]", $"Selected instance: {InstanceManager.selectedInstance}");
-
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //Set the LaunchJava stuff
-            foreach (var vers in data)
-            {
-                LaunchJava.launchVerName = vers.instVer;
-                LaunchJava.launchVerUrl = vers.instUrl;
-                LaunchJava.launchVerType = vers.instType;
-                LaunchJava.launchWidth = vers.instResWidth;
-                LaunchJava.launchHeight = vers.instResHeight;
-                LaunchJava.launchXms = vers.instRamMin;
-                LaunchJava.launchXmx = vers.instRamMax;
-                //LaunchJava.javaLocation = vers.instCustJava;
-                //LaunchJava.use //TODO!!!
-            }
-            LaunchJava.currentInstance = Instance.cmbInstaces.Text;
-            Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;*/
         }
 
         public static void loadChangelog()
@@ -329,30 +288,6 @@ namespace MCLauncher
                         labelHead.ForeColor = Color.Red;
                         Instance.pnlChangelog.Controls.Add(labelHead);
                         y += 12 * 3;
-
-                        /*if(vers.date != String.Empty)
-                        {
-                            Label labelDate = new Label();
-                            labelDate.Text = $"{vers.date}";
-                            labelDate.Location = new Point(x, y);
-                            labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
-                            labelDate.AutoSize = true;
-                            labelDate.ForeColor = Color.Red;
-                            Instance.pnlChangelog.Controls.Add(labelDate);
-                            y += 12 * 2;
-                        }
-
-                        if(vers.content !=  String.Empty)
-                        {
-                            Label labelText = new Label();
-                            labelText.Text = $"{vers.content}";
-                            labelText.Location = new Point(x, y);
-                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
-                            labelText.AutoSize = true;
-                            labelText.ForeColor = Color.Red;
-                            Instance.pnlChangelog.Controls.Add(labelText);
-                            y += 12 * 3;
-                        }*/
                     }
                 }
 

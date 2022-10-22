@@ -149,7 +149,6 @@ namespace MCLauncher
             }
             else if(mode == "edit")
             {
-                //TODO: FINISH THIS SHIT
                 This.editionBox.DataSource = editionNames;
                 This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
 
@@ -297,8 +296,11 @@ namespace MCLauncher
                     typeList.Add(vers.verType);
                     urlList.Add(vers.verLink);
                 }
-                verBox.DataSource = verList;
             }
+            verBox.DataSource = verList;
+            /*verBox.SelectedIndex = verBox.FindStringExact(version);
+            Logger.logMessage("[InstanceManager]", "Sample test " + verBox.FindStringExact(version));*/
+
             Logger.logError("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
         }
 
