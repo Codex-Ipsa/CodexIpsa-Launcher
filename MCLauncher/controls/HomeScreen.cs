@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
+using System.Xml.Linq;
 using Color = System.Drawing.Color;
 
 namespace MCLauncher
@@ -160,7 +161,16 @@ namespace MCLauncher
                 var dirName = dirN.Name;
                 if (File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
                 {
-                    instanceList.Add(dirName);
+                    string text = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg");
+                    if(text.Contains("instVer") && text.Contains("instType"))
+                    {
+                        updateFromLegacyInst($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}");
+                        instanceList.Add(dirName);
+                    }
+                    else
+                    {
+                        instanceList.Add(dirName);
+                    }
                 }
                 else
                 {
@@ -355,6 +365,42 @@ namespace MCLauncher
                 labelEmpty.ForeColor = Color.Red;
                 Instance.pnlChangelog.Controls.Add(labelEmpty);
             }
+        }
+
+        public static void updateFromLegacyInst(string path)
+        {
+            int index = path.LastIndexOf("\\") + 1;
+            string name = path.Substring(index, path.Length - index);
+
+            string text = File.ReadAllText($"{path}\\instance.cfg");
+            if (text.Contains("classroom"))
+            {
+                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");
+            }
+            else
+            {
+                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"Java Edition\",");
+            }
+            text = text.Replace("instVer", "version");
+            text = text.Replace("instType", "type");
+            text = text.Replace("instUrl", "url");
+            text = text.Replace("instDir", "directory");
+            text = text.Replace("instResWidth", "resolutionX");
+            text = text.Replace("instResHeight", "resolutionY");
+            text = text.Replace("instRamMin", "ramMin");
+            text = text.Replace("instRamMax", "ramMax");
+            text = text.Replace("useCustJava", "useCustomJava");
+            text = text.Replace("instCustJava", "customJava");
+            text = text.Replace("useCustJvm", "useJvmArgs");
+            text = text.Replace("instCustJvm", "jvmArgs");
+            text = text.Replace("useCustMethod", "useLaunchMethod");
+            text = text.Replace("instCustMethod", "launchMethod");
+            text = text.Replace("\"useCustJar\":\"False\",", String.Empty);
+            text = text.Replace("\"instCustJar\":\"\",", String.Empty);
+            text = text.Replace("useOfflineMode", "offlineMode");
+            Logger.logMessage("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
+            Console.WriteLine(text);
+            File.WriteAllText($"{path}\\instance.cfg", text);
         }
 
         private void btnPlay_Click(object sender, EventArgs e)

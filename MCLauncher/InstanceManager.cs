@@ -240,6 +240,7 @@ namespace MCLauncher
             }
 
 
+
             setData();
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
@@ -267,6 +268,9 @@ namespace MCLauncher
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            /*editionBox_SelectedIndexChanged(this, EventArgs.Empty);
+            verBox_SelectedIndexChanged(this, EventArgs.Empty);*/
+
             saveInstance(nameBox.Text, "other");
             HomeScreen.reloadInstance(name);
             this.Close();
