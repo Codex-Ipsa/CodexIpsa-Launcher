@@ -131,22 +131,56 @@ namespace MCLauncher
                 //TODO
                 name = instanceName;
                 This.nameBox.Text = instanceName;
+                This.editionBox.DataSource = editionNames;
                 edition = editionNames[0];
-                version = "";
-                type = "";
-                url = "";
+                int i = This.editionBox.FindStringExact(edition);
+                using (WebClient client = new WebClient())
+                {
+                    string json = client.DownloadString(editionUrls[i]);
+                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                    foreach (var vers in data)
+                    {
+                        verList.Add(vers.verName);
+                        typeList.Add(vers.verType);
+                        urlList.Add(vers.verLink);
+                    }
+                }
+                This.verBox.DataSource = verList;
+
+                using (WebClient client = new WebClient())
+                {
+                    string json2 = client.DownloadString(Globals.defaultVer);
+                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
+
+                    foreach (var vers in data2)
+                    {
+                        version = vers.verName;
+                        type = vers.verType;
+                        url = vers.verLink;
+                    }
+                }
+
                 directory = "";
                 resolutionX = 854;
+                This.resBoxHeight.Text = resolutionX.ToString();
                 resolutionY = 480;
+                This.resBoxWidth.Text = resolutionY.ToString();
                 ramMin = 512;
+                This.minRamBox.Value = ramMin;
                 ramMax = 512;
+                This.maxRamBox.Value = ramMax;
                 customJava = "";
                 useCustomJava = false;
+                This.javaCheck.Checked = false;
                 jvmArgs = "";
                 useJvmArgs = false;
+                This.jvmCheck.Checked = false;
                 launchMethod = "";
                 useLaunchMethod = false;
+                This.methodCheck.Checked = false;
                 offlineMode = false;
+                This.offlineModeCheck.Checked = false;
             }
             else if(mode == "edit")
             {
@@ -154,7 +188,6 @@ namespace MCLauncher
                 This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
 
                 int i = This.editionBox.FindStringExact(edition);
-
                 using (WebClient client = new WebClient())
                 {
                     string json2 = client.DownloadString(editionUrls[i]);
@@ -193,11 +226,7 @@ namespace MCLauncher
                 }
                 This.verBox.DataSource = verList;
                 This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
-
-
                 This.nameBox.Text = name;
-                //This.verBox.DataSource = verList;
-                //This.verBox.Text = version;
                 This.dirBox.Text = directory;
                 This.resBoxHeight.Text = resolutionX.ToString();
                 This.resBoxWidth.Text = resolutionY.ToString();
