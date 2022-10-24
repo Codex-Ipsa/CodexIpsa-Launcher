@@ -44,6 +44,7 @@ namespace MCLauncher
                         //Add names to a list for LaunchJava - this is here so natives don't get added to the list
                         libsList.Add(libs.name);
                     }
+
                     //Download required libraries
                     if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                     {

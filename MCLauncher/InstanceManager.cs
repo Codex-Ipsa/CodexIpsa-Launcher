@@ -72,7 +72,7 @@ namespace MCLauncher
             else if (mode == "new")
             {
                 Logger.logError("[InstanceManager]", $"{tempName}_{tempInt}");
-                //this throws a stackoverflow for some reason
+                //TODO this throws a stackoverflow for some reason
                 if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
                 {
                     tempInt++;
@@ -128,6 +128,7 @@ namespace MCLauncher
             }
             else if (mode == "new")
             {
+                //TODO
                 name = instanceName;
                 This.nameBox.Text = instanceName;
                 edition = editionNames[0];
@@ -167,6 +168,7 @@ namespace MCLauncher
                     }
                 }
 
+
                 string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
                 List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
                 foreach (var vers in data)
@@ -189,6 +191,9 @@ namespace MCLauncher
                     useLaunchMethod = bool.Parse(vers.useLaunchMethod);
                     offlineMode = bool.Parse(vers.offlineMode);
                 }
+                This.verBox.DataSource = verList;
+                This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
+
 
                 This.nameBox.Text = name;
                 //This.verBox.DataSource = verList;
@@ -267,9 +272,6 @@ namespace MCLauncher
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            /*editionBox_SelectedIndexChanged(this, EventArgs.Empty);
-            verBox_SelectedIndexChanged(this, EventArgs.Empty);*/
-
             saveInstance(nameBox.Text, "other");
             HomeScreen.reloadInstance(name);
             this.Close();
