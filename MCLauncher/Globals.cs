@@ -10,7 +10,7 @@ namespace MCLauncher
     class Globals
     {
         //Manual
-        public static string codebase = "0.0.7-dev"; //0.0.7-dev //mojang-data
+        public static string codebase = "mojang-data"; //0.0.7-dev //mojang-data
         public static string branch = "dev-instances"; //dev //dev-instances
         public static string verCurrent = "0.0.7.21"; //Change this on release
         public static string verDisplay = "0.0.7.21"; //Change this on release
