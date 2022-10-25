@@ -40,6 +40,7 @@ namespace MCLauncher
 
                 //delete natives
                 System.IO.DirectoryInfo di = new DirectoryInfo($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
+                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
                 foreach (FileInfo file in di.GetFiles())
                 {
                     file.Delete();

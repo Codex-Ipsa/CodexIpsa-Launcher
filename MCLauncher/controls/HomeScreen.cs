@@ -191,7 +191,7 @@ namespace MCLauncher
                     LaunchJava.launchJavaLocation = item.customJava;
                     LaunchJava.useCustJava = bool.Parse(item.useCustomJava);
                     LaunchJava.launchJvmArgs = item.jvmArgs;
-                    LaunchJava.useCustMethod = bool.Parse(item.useLaunchMethod);
+                    LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
                     //LaunchJava.launchMethod = item.launchMethod;
                     LaunchJava.useCustMethod = bool.Parse(item.useLaunchMethod);
                     LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);

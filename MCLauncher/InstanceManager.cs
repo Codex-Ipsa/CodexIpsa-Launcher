@@ -184,6 +184,7 @@ namespace MCLauncher
             }
             else if(mode == "edit")
             {
+                This.nameBox.Enabled = false;
                 This.editionBox.DataSource = editionNames;
                 This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
 

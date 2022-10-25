@@ -313,6 +313,11 @@ namespace MCLauncher
                     launchCommand += $"{launchCmdAddon}";
                 }
 
+                if(useCustJvm == true)
+                {
+                    launchCommand += " " + launchJvmArgs;
+                }
+
                 //Check if Java exists
                 try
                 {
