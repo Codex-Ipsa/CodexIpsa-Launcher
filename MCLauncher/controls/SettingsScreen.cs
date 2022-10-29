@@ -42,6 +42,13 @@ namespace MCLauncher.controls
             lblLang.Text = Strings.lblLang;
             btnCheckUpdates.Text = Strings.btnCheckUpdates;
 
+            //center panel
+            pnlCenter.Location = new Point(
+                this.ClientSize.Width / 2 - pnlCenter.Size.Width / 2,
+                this.ClientSize.Height / 2 - pnlCenter.Size.Height / 2);
+            pnlCenter.Anchor = AnchorStyles.None;
+
+
             loadData();
             cmbUpdateSelect.DataSource = nameList;
             int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));

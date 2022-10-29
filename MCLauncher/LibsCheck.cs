@@ -70,9 +70,6 @@ namespace MCLauncher
                     if (libs.extract != "null")
                     {
                         //TODO: get rid of this
-                        /*if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}"))
-                            Directory.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}", true);*/
-
                         Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
                         using (ZipArchive archive = ZipFile.OpenRead($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
                         {

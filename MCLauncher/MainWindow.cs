@@ -33,7 +33,9 @@ namespace MCLauncher
         public void addHome()
         {
             homeScr.Location = new Point(0, 24);
-            homeScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            homeScr.Dock = DockStyle.Fill;
+            homeScr.Padding = new Padding(0, 24, 0, 0);
+
             this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
@@ -44,7 +46,9 @@ namespace MCLauncher
         public void addCredits()
         {
             creditsScr.Location = new Point(0, 24);
-            creditsScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            creditsScr.Dock = DockStyle.Fill;
+            creditsScr.Padding = new Padding(0, 24, 0, 0);
+
             this.Controls.Add(creditsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
@@ -55,7 +59,9 @@ namespace MCLauncher
         public void addSettings()
         {
             settingsScr.Location = new Point(0, 24);
-            settingsScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            settingsScr.Dock = DockStyle.Fill;
+            settingsScr.Padding = new Padding(0, 24, 0, 0);
+
             this.Controls.Add(settingsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
@@ -65,7 +71,9 @@ namespace MCLauncher
         public void addInstance()
         {
             instanceScr.Location = new Point(0, 24);
-            instanceScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            instanceScr.Dock = DockStyle.Fill;
+            instanceScr.Padding = new Padding(0, 24, 0, 0);
+
             this.Controls.Add(instanceScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
@@ -75,7 +83,9 @@ namespace MCLauncher
         public void addConsole()
         {
             consoleScr.Location = new Point(0, 24);
-            consoleScr.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left);
+            consoleScr.Dock = DockStyle.Fill;
+            consoleScr.Padding = new Padding(0, 24, 0, 0);
+
             this.Controls.Add(consoleScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
@@ -238,7 +248,6 @@ namespace MCLauncher
 
         private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
-            //Invalidate();
             ResumeLayout();
         }
 

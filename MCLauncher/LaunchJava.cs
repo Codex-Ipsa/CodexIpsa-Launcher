@@ -65,6 +65,8 @@ namespace MCLauncher
 
         public static string tempAppdata;
 
+        public static bool printError;
+
         public static void LaunchGame()
         {
             //Deserialize the versiontype json
@@ -414,10 +416,9 @@ namespace MCLauncher
             string level = "";
             string strmessage = "";
 
-            bool printError = false;
-
             if (message != null && message.Contains("<log4j:Event"))
             {
+                printError = false;
                 //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
 
                 //get timestamp
@@ -451,26 +452,9 @@ namespace MCLauncher
                 Console.Write($"[{time}] [{thread}/{level}]: ");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            //TODO: this
-            /*else if (message != null && message.Contains("<log4j:Throwable"))
-            {
-                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
-
-                //get message
-                int index2 = message.IndexOf("[CDATA[");
-                if (index2 >= 0)
-                    strmessage = message.Substring(index2 + 7);
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{strmessage}");
-                printError = true;
-            }
-            else if (message != null && message.Contains("</log4j:Throwable"))
-            {
-                printError = false;
-            }*/
             else if (message != null && message.Contains("<log4j:Message"))
             {
+                printError = false;
                 //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
 
                 //get message
@@ -486,8 +470,29 @@ namespace MCLauncher
                 Console.WriteLine($"{strmessage}");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+            else if (message != null && message.Contains("<log4j:Throwable"))
+            {
+                printError = true;
+                //get message
+                int index = message.IndexOf("[CDATA[");
+                if (index >= 0)
+                    strmessage = message.Substring(index + 7);
+                /*int index2 = message.IndexOf("[CDATA[");
+                if (index2 >= 0)
+                    strmessage = strmessage.Substring(index2 + 7);*/
+
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{strmessage}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else if(message != null && message.Contains("</log4j:Throwable"))
+            {
+                printError = false;
+            }
             else if (message != null && message.Contains("</log4j:Event"))
             {
+                printError = false;
                 //</log4j:Event>
                 //do nothing
             }
