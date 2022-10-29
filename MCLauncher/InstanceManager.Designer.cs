@@ -53,8 +53,6 @@ namespace MCLauncher
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.offlineModeCheck = new System.Windows.Forms.CheckBox();
             this.javaBtn = new System.Windows.Forms.Button();
-            this.methodBox = new System.Windows.Forms.ComboBox();
-            this.methodCheck = new System.Windows.Forms.CheckBox();
             this.jvmCheck = new System.Windows.Forms.CheckBox();
             this.jvmBox = new System.Windows.Forms.TextBox();
             this.javaCheck = new System.Windows.Forms.CheckBox();
@@ -174,7 +172,7 @@ namespace MCLauncher
             0,
             0});
             this.minRamBox.Location = new System.Drawing.Point(156, 91);
-            this.minRamBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minRamBox.Margin = new System.Windows.Forms.Padding(2);
             this.minRamBox.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -202,7 +200,7 @@ namespace MCLauncher
             0,
             0});
             this.maxRamBox.Location = new System.Drawing.Point(426, 91);
-            this.maxRamBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.maxRamBox.Margin = new System.Windows.Forms.Padding(2);
             this.maxRamBox.Maximum = new decimal(new int[] {
             8192,
             0,
@@ -317,8 +315,6 @@ namespace MCLauncher
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.offlineModeCheck);
             this.groupBox3.Controls.Add(this.javaBtn);
-            this.groupBox3.Controls.Add(this.methodBox);
-            this.groupBox3.Controls.Add(this.methodCheck);
             this.groupBox3.Controls.Add(this.jvmCheck);
             this.groupBox3.Controls.Add(this.jvmBox);
             this.groupBox3.Controls.Add(this.javaCheck);
@@ -326,7 +322,7 @@ namespace MCLauncher
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(5, 207);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(650, 119);
+            this.groupBox3.Size = new System.Drawing.Size(650, 90);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "For experts";
@@ -334,7 +330,7 @@ namespace MCLauncher
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
-            this.offlineModeCheck.Location = new System.Drawing.Point(6, 92);
+            this.offlineModeCheck.Location = new System.Drawing.Point(6, 67);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineModeCheck.TabIndex = 30;
@@ -350,27 +346,6 @@ namespace MCLauncher
             this.javaBtn.TabIndex = 29;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
-            // 
-            // methodBox
-            // 
-            this.methodBox.Enabled = false;
-            this.methodBox.FormattingEnabled = true;
-            this.methodBox.Location = new System.Drawing.Point(122, 65);
-            this.methodBox.Name = "methodBox";
-            this.methodBox.Size = new System.Drawing.Size(521, 21);
-            this.methodBox.TabIndex = 24;
-            // 
-            // methodCheck
-            // 
-            this.methodCheck.AutoSize = true;
-            this.methodCheck.Enabled = false;
-            this.methodCheck.Location = new System.Drawing.Point(6, 67);
-            this.methodCheck.Name = "methodCheck";
-            this.methodCheck.Size = new System.Drawing.Size(103, 17);
-            this.methodCheck.TabIndex = 25;
-            this.methodCheck.Text = "Launch method:";
-            this.methodCheck.UseVisualStyleBackColor = true;
-            this.methodCheck.CheckedChanged += new System.EventHandler(this.methodCheck_CheckedChanged);
             // 
             // jvmCheck
             // 
@@ -413,7 +388,7 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(503, 363);
+            this.opendirBtn.Location = new System.Drawing.Point(503, 334);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(75, 23);
             this.opendirBtn.TabIndex = 25;
@@ -423,7 +398,7 @@ namespace MCLauncher
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(9, 363);
+            this.closeBtn.Location = new System.Drawing.Point(9, 334);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
@@ -433,7 +408,7 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(584, 363);
+            this.saveBtn.Location = new System.Drawing.Point(584, 334);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
@@ -449,10 +424,10 @@ namespace MCLauncher
             this.tabControl1.Controls.Add(this.javaPage);
             this.tabControl1.Controls.Add(this.x360Page);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(668, 358);
+            this.tabControl1.Size = new System.Drawing.Size(668, 329);
             this.tabControl1.TabIndex = 33;
             // 
             // javaPage
@@ -461,10 +436,10 @@ namespace MCLauncher
             this.javaPage.Controls.Add(this.groupBox2);
             this.javaPage.Controls.Add(this.groupBox3);
             this.javaPage.Location = new System.Drawing.Point(4, 22);
-            this.javaPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.javaPage.Margin = new System.Windows.Forms.Padding(2);
             this.javaPage.Name = "javaPage";
-            this.javaPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.javaPage.Size = new System.Drawing.Size(660, 332);
+            this.javaPage.Padding = new System.Windows.Forms.Padding(2);
+            this.javaPage.Size = new System.Drawing.Size(660, 303);
             this.javaPage.TabIndex = 0;
             this.javaPage.Text = "Java Edition";
             this.javaPage.UseVisualStyleBackColor = true;
@@ -472,9 +447,9 @@ namespace MCLauncher
             // x360Page
             // 
             this.x360Page.Location = new System.Drawing.Point(4, 22);
-            this.x360Page.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.x360Page.Margin = new System.Windows.Forms.Padding(2);
             this.x360Page.Name = "x360Page";
-            this.x360Page.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.x360Page.Padding = new System.Windows.Forms.Padding(2);
             this.x360Page.Size = new System.Drawing.Size(660, 332);
             this.x360Page.TabIndex = 1;
             this.x360Page.Text = "Xbox 360 Edition";
@@ -485,7 +460,7 @@ namespace MCLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(668, 391);
+            this.ClientSize = new System.Drawing.Size(668, 362);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.closeBtn);
@@ -519,12 +494,10 @@ namespace MCLauncher
         private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox methodCheck;
         private System.Windows.Forms.CheckBox jvmCheck;
         private System.Windows.Forms.TextBox jvmBox;
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.TextBox javaBox;
-        private System.Windows.Forms.ComboBox methodBox;
         private System.Windows.Forms.Button opendirBtn;
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.ComboBox editionBox;

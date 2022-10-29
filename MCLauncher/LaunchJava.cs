@@ -16,6 +16,9 @@ namespace MCLauncher
 {
     class LaunchJava
     {
+        public static List<string> proxyArgs = new List<string>();
+        public static List<string> otherArgs = new List<string>();
+
         public static string launchVerName;
         public static string launchVerType;
         public static string launchVerUrl;
@@ -49,7 +52,6 @@ namespace MCLauncher
         public static bool useCustJvm;
         public static string launchJvmArgs;
         public static string launchMethod;
-        public static bool useCustMethod;
         public static bool useOfflineMode;
 
         public static string gameDir;
@@ -142,6 +144,25 @@ namespace MCLauncher
             }
             else
             {
+                //do stuff with custom JVM
+                string[] jvmArgs = launchJvmArgs.Split(' ');
+                if (useCustJvm == true)
+                {
+                    foreach(string jvmArg in jvmArgs)
+                    {
+                        if(jvmArg.StartsWith("-D"))
+                        {
+                            proxyArgs.Add(jvmArg);
+                            Logger.logMessage("[LaunchJava]", $"Arg type is 1: \"{jvmArg}\"");
+                        }
+                        else
+                        {
+                            otherArgs.Add(jvmArg);
+                            Logger.logMessage("[LaunchJava]", $"Arg type is 2: \"{jvmArg}\"");
+                        }
+                    }
+                }
+
                 //Check for assets + get type from json name
                 if (assetIndexUrl != String.Empty)
                 {
@@ -265,7 +286,15 @@ namespace MCLauncher
                 }
                 if (launchProxy != "null")
                 {
-                    launchCommand += $"{launchProxy} ";
+                    //TEMP
+                    //launchCommand += $"{launchProxy} ";
+                }
+                if (useCustJvm == true)
+                {
+                    foreach (string arg in proxyArgs)
+                    {
+                        launchCommand += $"{arg} ";
+                    }
                 }
                 if (loggingXml != "false")
                 {
@@ -312,12 +341,15 @@ namespace MCLauncher
                     launchCmdAddon = launchCmdAddon.Replace("{assetName}", $"\"{assetIndexType}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{userType}", $"msa");
 
-                    launchCommand += $"{launchCmdAddon}";
+                    launchCommand += $"{launchCmdAddon} ";
                 }
 
-                if(useCustJvm == true)
+                if (useCustJvm == true)
                 {
-                    launchCommand += " " + launchJvmArgs;
+                    foreach (string arg in otherArgs)
+                    {
+                        launchCommand += $"{arg} ";
+                    }
                 }
 
                 //Check if Java exists

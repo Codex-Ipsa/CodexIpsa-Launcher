@@ -43,8 +43,6 @@ namespace MCLauncher
         public static bool useCustomJava = false;
         public static string jvmArgs;
         public static bool useJvmArgs = false;
-        public static string launchMethod;
-        public static bool useLaunchMethod = false;
         public static bool offlineMode;
 
         public static string tempName;
@@ -122,8 +120,6 @@ namespace MCLauncher
                 useCustomJava = false;
                 jvmArgs = "";
                 useJvmArgs = false;
-                launchMethod = "";
-                useLaunchMethod = false;
                 offlineMode = false;
             }
             else if (mode == "new")
@@ -176,9 +172,6 @@ namespace MCLauncher
                 jvmArgs = "";
                 useJvmArgs = false;
                 This.jvmCheck.Checked = false;
-                launchMethod = "";
-                useLaunchMethod = false;
-                This.methodCheck.Checked = false;
                 offlineMode = false;
                 This.offlineModeCheck.Checked = false;
             }
@@ -221,8 +214,6 @@ namespace MCLauncher
                     useCustomJava = bool.Parse(vers.useCustomJava);
                     jvmArgs = vers.jvmArgs;
                     useJvmArgs = bool.Parse(vers.useJvmArgs);
-                    launchMethod = vers.launchMethod;
-                    useLaunchMethod = bool.Parse(vers.useLaunchMethod);
                     offlineMode = bool.Parse(vers.offlineMode);
                 }
                 This.verBox.DataSource = verList;
@@ -239,17 +230,14 @@ namespace MCLauncher
                 This.jvmCheck.Checked = useJvmArgs;
                 This.jvmBox.Enabled = useJvmArgs;
                 This.jvmBox.Text = jvmArgs;
-                This.methodCheck.Checked = useLaunchMethod;
-                This.methodBox.Enabled = useLaunchMethod;
-                This.methodBox.Text = launchMethod;
                 This.offlineModeCheck.Checked = offlineMode;
             }
         }
 
         public static void setData()
         {
-            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "launchMethod", "useLaunchMethod", "offlineMode" };
-            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{offlineMode}" };
+            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "offlineMode" };
+            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{offlineMode}" };
         }
 
         public static void saveInstance(string instanceName, string mode)
@@ -268,8 +256,6 @@ namespace MCLauncher
                 customJava = This.javaBox.Text;
                 useJvmArgs = This.jvmCheck.Checked;
                 jvmArgs = This.jvmBox.Text;
-                useLaunchMethod = This.methodCheck.Checked;
-                launchMethod = This.methodBox.Text;
                 offlineMode = This.offlineModeCheck.Checked;
             }
 
@@ -374,18 +360,6 @@ namespace MCLauncher
             else
             {
                 jvmBox.Enabled = false;
-            }
-        }
-
-        private void methodCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (methodCheck.Checked)
-            {
-                methodBox.Enabled = true;
-            }
-            else
-            {
-                methodBox.Enabled = false;
             }
         }
 
