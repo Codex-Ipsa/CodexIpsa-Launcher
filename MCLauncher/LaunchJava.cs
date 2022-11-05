@@ -24,6 +24,7 @@ namespace MCLauncher
         public static string launchVerUrl;
         public static string launchJsonUrl;
         public static string launchLibsType;
+        public static string serverUrl;
 
         public static string currentInstance;
 
@@ -100,6 +101,8 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Logging url: {loggingXml}");
                     javaagentJar = vers.javaagent;
                     Logger.logMessage("[LaunchJava]", $"Javaagent url: {javaagentJar}");
+                    serverUrl = vers.server;
+                    Logger.logMessage("[LaunchJava]", $"Server url: {serverUrl}");
                     if (vers.getServer == "true")
                     {
                         Logger.logMessage("[LaunchJava]", $"getServer returned true");
@@ -349,6 +352,23 @@ namespace MCLauncher
                     {
                         launchCommand += $"{arg} ";
                     }
+                }
+
+                if(serverUrl.Contains("http"))
+                {
+                    Console.WriteLine($"\"{serverUrl}\"");
+                    Directory.CreateDirectory($"{gameDir}\\server\\");
+                    if(File.Exists($"{gameDir}\\server\\minecraft_server.jar"))
+                    {
+                        File.Delete($"{gameDir}\\server\\minecraft_server.jar");
+                    }
+
+                    DownloadProgress.url = serverUrl;
+                    DownloadProgress.savePath = $"{gameDir}\\server\\minecraft_server.jar";
+                    DownloadProgress dl = new DownloadProgress();
+                    dl.ShowDialog();
+
+                    Logger.logMessage("[LaunchJava]", "Applied early 1.3 snapshot fix");
                 }
 
                 //Check if Java exists
