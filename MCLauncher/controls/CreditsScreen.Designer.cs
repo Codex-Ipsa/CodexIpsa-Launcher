@@ -48,9 +48,10 @@
             this.pnlCenter.Controls.Add(this.lblTeam);
             this.pnlCenter.Controls.Add(this.lblCopyright);
             this.pnlCenter.Controls.Add(this.lblLauncherBy);
-            this.pnlCenter.Location = new System.Drawing.Point(304, 113);
+            this.pnlCenter.Location = new System.Drawing.Point(228, 92);
+            this.pnlCenter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(455, 238);
+            this.pnlCenter.Size = new System.Drawing.Size(341, 193);
             this.pnlCenter.TabIndex = 21;
             // 
             // panel1
@@ -58,10 +59,9 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel1.Location = new System.Drawing.Point(27, 59);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(20, 48);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(43, 39);
+            this.panel1.Size = new System.Drawing.Size(32, 32);
             this.panel1.TabIndex = 19;
             // 
             // lblDejvossIpsa
@@ -70,10 +70,9 @@
             this.lblDejvossIpsa.AutoSize = true;
             this.lblDejvossIpsa.BackColor = System.Drawing.Color.Transparent;
             this.lblDejvossIpsa.LinkColor = System.Drawing.Color.White;
-            this.lblDejvossIpsa.Location = new System.Drawing.Point(90, 75);
-            this.lblDejvossIpsa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDejvossIpsa.Location = new System.Drawing.Point(68, 61);
             this.lblDejvossIpsa.Name = "lblDejvossIpsa";
-            this.lblDejvossIpsa.Size = new System.Drawing.Size(98, 16);
+            this.lblDejvossIpsa.Size = new System.Drawing.Size(76, 13);
             this.lblDejvossIpsa.TabIndex = 18;
             this.lblDejvossIpsa.TabStop = true;
             this.lblDejvossIpsa.Text = "lbl.dejvossIpsa";
@@ -85,10 +84,9 @@
             this.lblSpecialThanks.AutoSize = true;
             this.lblSpecialThanks.BackColor = System.Drawing.Color.Transparent;
             this.lblSpecialThanks.ForeColor = System.Drawing.Color.White;
-            this.lblSpecialThanks.Location = new System.Drawing.Point(231, 115);
-            this.lblSpecialThanks.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSpecialThanks.Location = new System.Drawing.Point(173, 93);
             this.lblSpecialThanks.Name = "lblSpecialThanks";
-            this.lblSpecialThanks.Size = new System.Drawing.Size(113, 16);
+            this.lblSpecialThanks.Size = new System.Drawing.Size(89, 13);
             this.lblSpecialThanks.TabIndex = 17;
             this.lblSpecialThanks.Text = "lbl.specialThanks";
             // 
@@ -97,10 +95,9 @@
             this.lblTeam.AutoSize = true;
             this.lblTeam.BackColor = System.Drawing.Color.Transparent;
             this.lblTeam.ForeColor = System.Drawing.Color.White;
-            this.lblTeam.Location = new System.Drawing.Point(27, 115);
-            this.lblTeam.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTeam.Location = new System.Drawing.Point(20, 93);
             this.lblTeam.Name = "lblTeam";
-            this.lblTeam.Size = new System.Drawing.Size(54, 16);
+            this.lblTeam.Size = new System.Drawing.Size(43, 13);
             this.lblTeam.TabIndex = 13;
             this.lblTeam.Text = "lbl.team";
             // 
@@ -109,10 +106,9 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.ForeColor = System.Drawing.Color.White;
-            this.lblCopyright.Location = new System.Drawing.Point(330, 75);
-            this.lblCopyright.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCopyright.Location = new System.Drawing.Point(248, 61);
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(79, 16);
+            this.lblCopyright.Size = new System.Drawing.Size(63, 13);
             this.lblCopyright.TabIndex = 12;
             this.lblCopyright.Text = "lbl.copyright";
             // 
@@ -121,21 +117,22 @@
             this.lblLauncherBy.AutoSize = true;
             this.lblLauncherBy.BackColor = System.Drawing.Color.Transparent;
             this.lblLauncherBy.ForeColor = System.Drawing.Color.White;
-            this.lblLauncherBy.Location = new System.Drawing.Point(90, 59);
-            this.lblLauncherBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLauncherBy.Location = new System.Drawing.Point(68, 48);
             this.lblLauncherBy.Name = "lblLauncherBy";
-            this.lblLauncherBy.Size = new System.Drawing.Size(91, 16);
+            this.lblLauncherBy.Size = new System.Drawing.Size(73, 13);
             this.lblLauncherBy.TabIndex = 11;
             this.lblLauncherBy.Text = "lbl.launcherBy";
             // 
             // CreditsScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.pnlCenter);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "CreditsScreen";
-            this.Size = new System.Drawing.Size(1045, 476);
+            this.Size = new System.Drawing.Size(784, 387);
             this.pnlCenter.ResumeLayout(false);
             this.pnlCenter.PerformLayout();
             this.ResumeLayout(false);

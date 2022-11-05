@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,214 +16,91 @@ namespace MCLauncher
 {
     public partial class InstanceManager : Form
     {
+        public static InstanceManager This;
         public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
+        public static List<string> editionUrls = new List<string>() { Globals.javaJson, Globals.javaeduJson };
 
-        /*public static List<string> varNames;
+        public static List<string> varNames;
         public static List<string> varValues;
 
-        public static string name = "Default";
+        public static List<string> verList = new List<string>();
+        public static List<string> typeList = new List<string>();
+        public static List<string> urlList = new List<string>();
+
+        public static string name;
         public static string edition;
         public static string version;
         public static string type;
         public static string url;
 
         public static string directory;
-        public static string resolutionX;
-        public static string resolutionY;
-        public static string ramMin;
-        public static string ramMax;
+        public static int resolutionX;
+        public static int resolutionY;
+        public static int ramMin;
+        public static int ramMax;
 
         public static string customJava;
         public static bool useCustomJava = false;
         public static string jvmArgs;
         public static bool useJvmArgs = false;
-        public static string launchMethod;
-        public static bool useLaunchMethod = false;
-        public static string customJar;
-        public static bool useCustomJar = false;
-        public static bool offlineMode;*/
+        public static bool offlineMode;
 
-
-
-
-        /// <summary>
-        /// OLD SHIT BELOW!!!
-        /// </summary>
-
-        public static string selectedInstance = "Default";
-        public static string createName;
         public static string tempName;
-        public static int instanceInt = 1;
-        public static int cfgVer = 1;
-        public static string mode;
+        public static int tempInt = 0;
 
-        public static string cfgInstName;
-        public static string cfgGameVer;
-        public static string cfgTypeVer;
-        public static string cfgLinkVer;
-        public static string instGameDir = "";
-        public static string instResWidth = "854";
-        public static string instResHeight = "480";
-        public static int instRamMin = 1024;
-        public static int instRamMax = 1024;
-        public static string instCustJava = "";
-        public static bool useCustJava = false;
-        public static string instCustJvm = "";
-        public static bool useCustJvm = false;
-        public static string instCustMethod = "";
-        public static bool useCustMethod = false;
-        public static string instCustJar = "";
-        public static bool useCustJar = false;
-        public static bool useOfflineMode = false;
-
-        /*public InstanceManager()
+        public InstanceManager(string instanceName, string mode)
         {
-            InitializeComponent();
-        }
-
-        public static void setData()
-        {
-            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "launchMethod", "useLaunchMethod", "customJar", "useCustomJar", "offlineMode" };
-            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{launchMethod}", $"{useLaunchMethod}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}" };
-        }
-
-        public static void setDefaults()
-        {
-            name = "New Instance";//Todo: number
-
-        }
-
-        public static void instanceWorker(string name, string mode)
-        {
-
-        }
-
-        public static void reloadInstance()
-        {
-            if (InstanceManager.mode != "initial")
-            {
-                InstanceManager.name = Instance.comboBox1.Text;
-            }
-
-            Console.WriteLine("selected: " + InstanceManager.name);
-
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.name}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //Set the LaunchJava stuff
-            foreach (var vers in data)
-            {
-                LaunchJava.launchVerName = vers.instVer;
-                LaunchJava.launchVerUrl = vers.instUrl;
-                LaunchJava.launchVerType = vers.instType;
-                LaunchJava.launchWidth = vers.instResWidth;
-                LaunchJava.launchHeight = vers.instResHeight;
-                LaunchJava.launchXms = vers.instRamMin;
-                LaunchJava.launchXmx = vers.instRamMax;
-                //LaunchJava.javaLocation = vers.instCustJava;
-                //LaunchJava.use //TODO!!!
-            }
-            LaunchJava.currentInstance = MainWindow.Instance.comboBox1.Text;
-            MainWindow.Instance.gameVerLabel.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
-        }*/
-
-        public InstanceManager()
-        {
+            This = this;
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            //Set the editions list
-            editionBox.DataSource = editionNames;
-            editionBox.Refresh();
+            tempName = instanceName;
+            Start(instanceName, mode);
+        }
 
-            //Set the versions list for java
-            List<string> versionList = new List<string>();
-            List<string> typeJavaList = new List<string>();
-            List<string> linkJavaList = new List<string>();
-            using (WebClient client = new WebClient())
+        public static void Start(string instanceName, string mode)
+        {
+            verList.Clear();
+            typeList.Clear();
+            urlList.Clear();
+            if (mode == "initial")
             {
-                string json = client.DownloadString(Globals.javaJson);
-                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                foreach (var vers in data)
-                {
-                    versionList.Add($"{vers.verName}"); //({vers.verNote})
-                    typeJavaList.Add(vers.verType);
-                    linkJavaList.Add(vers.verLink);
-                }
+                loadDefault(instanceName, "initial");
+                saveInstance("Default", "initial");
             }
-            verBox.DataSource = versionList;
-            verBox.Refresh();
-
-            ////Why is this here
-            int index = verBox.FindStringExact(verBox.Text);
-            Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
-            cfgGameVer = versionList[index];
-            cfgTypeVer = typeJavaList[index];
-            cfgLinkVer = linkJavaList[index];
-
-            //Set mode dependant stuff
-            if (mode == "new")
+            else if (mode == "new")
             {
-                createBtn.Visible = true;
-                saveBtn.Visible = false;
-                instmodBtn.Visible = false;
-                opendirBtn.Visible = false;
-
-                instGameDir = $"";
-                instResWidth = "854";
-                instResHeight = "480";
-                instRamMax = 1024;
-                instRamMin = 1024;
-                useCustJava = true;
-                instCustJava = "java.exe";
+                //Logger.logMessage("[InstanceManager]", $"{tempName}_{tempInt}");
+                if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+                {
+                    tempInt++;
+                    Start($"{tempName}_{tempInt}", "new");
+                }
+                else
+                {
+                    loadDefault(instanceName, "new");
+                    tempInt = 0;
+                    tempName = "";
+                }
             }
             else if (mode == "edit")
             {
-                createBtn.Visible = false;
-                saveBtn.Visible = true;
-                instmodBtn.Visible = true;
-                opendirBtn.Visible = true;
-                nameBox.Enabled = false;
-
-                string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
-                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                //Set the LaunchJava stuff
-                foreach (var vers in data)
-                {
-                    resBoxWidth.Text = vers.instResWidth;
-                    resBoxHeight.Text = vers.instResHeight;
-
-                    minRamBox.Text = vers.instRamMin;
-                    maxRamBox.Text = vers.instRamMax;
-
-                    if(vers.useCustJava == "True")
-                    {
-                        javaCheck.Checked = true;
-                        javaBox.Text = vers.instCustJava;
-                    }
-                    else
-                    {
-                        javaCheck.Checked = false;
-                        javaBox.Text = vers.instCustJava;
-                    }
-
-                }
+                loadDefault(instanceName, "edit");
             }
-
-            resBoxWidth.Text = instResWidth;
-            resBoxHeight.Text = instResHeight;
-            nameBox.Text = cfgInstName;
         }
 
-        public static void createInstance()
+
+
+        public static void loadDefault(string instanceName, string mode)
         {
+            //this sets default stuff
+
             if (mode == "initial")
             {
-                //Set default version
+                name = instanceName;
+                edition = editionNames[0];
                 using (var client = new WebClient())
                 {
                     string json = client.DownloadString(Globals.defaultVer);
@@ -230,360 +108,286 @@ namespace MCLauncher
 
                     foreach (var vers in data)
                     {
-                        cfgGameVer = vers.verName;
-                        cfgLinkVer = vers.verLink;
-                        cfgTypeVer = vers.verType;
-                        //TODO 
+                        version = vers.verName;
+                        type = vers.verType;
+                        url = vers.verLink;
                     }
                 }
+                directory = $"";
+                resolutionX = 854;
+                resolutionY = 480;
+                ramMin = 512;
+                ramMax = 512;
+                customJava = "";
+                useCustomJava = false;
+                jvmArgs = "";
+                useJvmArgs = false;
+                offlineMode = false;
             }
-
-            Console.WriteLine("TEMPNAME " + tempName);
-
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance");
-            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
+            else if (mode == "new")
             {
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\.minecraft");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
-
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
+                //TODO
+                name = instanceName;
+                This.nameBox.Text = instanceName;
+                This.editionBox.DataSource = editionNames;
+                edition = editionNames[0];
+                int i = This.editionBox.FindStringExact(edition);
+                using (WebClient client = new WebClient())
                 {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n" +
-                        $"\"instVer\":\"{cfgGameVer}\"," +
-                        $"\n\"instType\":\"{cfgTypeVer}\"," +
-                        $"\n\"instUrl\":\"{cfgLinkVer}\"," +
-                        $"\n\"instDir\":\"{instGameDir}\"," +
-                        $"\n\"instResWidth\":\"{instResWidth}\"," +
-                        $"\n\"instResHeight\":\"{instResHeight}\"," +
-                        $"\n\"instRamMin\":\"{instRamMin}\"," +
-                        $"\n\"instRamMax\":\"{instRamMax}\"," +
-                        $"\n\"useCustJava\":\"{useCustJava}\"," +
-                        $"\n\"instCustJava\":\"{instCustJava}\"," +
-                        $"\n\"useCustJvm\":\"{useCustJvm}\"," +
-                        $"\n\"instCustJvm\":\"{instCustJvm}\"," +
-                        $"\n\"useCustMethod\":\"{useCustMethod}\"," +
-                        $"\n\"instCustMethod\":\"{instCustMethod}\"," +
-                        $"\n\"useCustJar\":\"{useCustJar}\"," +
-                        $"\n\"instCustJar\":\"{instCustJar}\"," +
-                        $"\n\"useOfflineMode\":\"{useOfflineMode}\"" +
-                        $"\n}}\n]");
+                    string json = client.DownloadString(editionUrls[i]);
+                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
-                    fs.Write(config, 0, config.Length);
+                    foreach (var vers in data)
+                    {
+                        verList.Add(vers.verName + vers.verNote);
+                        typeList.Add(vers.verType);
+                        urlList.Add(vers.verLink);
+                    }
+                }
+                This.verBox.DataSource = verList;
+
+                using (WebClient client = new WebClient())
+                {
+                    string json2 = client.DownloadString(Globals.defaultVer);
+                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
+
+                    foreach (var vers in data2)
+                    {
+                        version = vers.verName;
+                        type = vers.verType;
+                        url = vers.verLink;
+                    }
                 }
 
-                instanceInt = 1;
-
-                HomeScreen.reloadInstance();
-
-                foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
-                    form.Close();
+                directory = "";
+                resolutionX = 854;
+                This.resBoxHeight.Text = resolutionY.ToString();
+                resolutionY = 480;
+                This.resBoxWidth.Text = resolutionX.ToString();
+                ramMin = 512;
+                This.minRamBox.Value = ramMin;
+                ramMax = 512;
+                This.maxRamBox.Value = ramMax;
+                customJava = "";
+                useCustomJava = false;
+                This.javaCheck.Checked = false;
+                jvmArgs = "";
+                useJvmArgs = false;
+                This.jvmCheck.Checked = false;
+                offlineMode = false;
+                This.offlineModeCheck.Checked = false;
             }
-            else
+            else if(mode == "edit")
             {
-                tempName = createName + "_" + instanceInt.ToString();
-                instanceInt++;
-                createInstance();
+                This.nameBox.Enabled = false;
+                This.editionBox.DataSource = editionNames;
+                This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
+
+                int i = This.editionBox.FindStringExact(edition);
+                using (WebClient client = new WebClient())
+                {
+                    string json2 = client.DownloadString(editionUrls[i]);
+                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
+
+                    foreach (var vers in data2)
+                    {
+                        verList.Add(vers.verName + vers.verNote);
+                        typeList.Add(vers.verType);
+                        urlList.Add(vers.verLink);
+                    }
+                }
+
+
+                string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
+                List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+                foreach (var vers in data)
+                {
+                    name = vers.name;
+                    edition = vers.edition;
+                    version = vers.version;
+                    type = vers.type;
+                    url = vers.url;
+                    directory = vers.directory;
+                    resolutionX = Int32.Parse(vers.resolutionX);
+                    resolutionY = Int32.Parse(vers.resolutionY);
+                    ramMin = Int32.Parse(vers.ramMin);
+                    ramMax = Int32.Parse(vers.ramMax);
+                    customJava = vers.customJava;
+                    useCustomJava = bool.Parse(vers.useCustomJava);
+                    jvmArgs = vers.jvmArgs;
+                    useJvmArgs = bool.Parse(vers.useJvmArgs);
+                    offlineMode = bool.Parse(vers.offlineMode);
+                }
+                This.verBox.DataSource = verList;
+                This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
+                if(This.verBox.SelectedIndex == -1)
+                {
+                    This.verBox.SelectedIndex = This.verBox.FindString(version + " (");
+                }
+                This.nameBox.Text = name;
+                This.dirBox.Text = directory;
+                This.resBoxHeight.Text = resolutionY.ToString();
+                This.resBoxWidth.Text = resolutionX.ToString();
+                This.minRamBox.Value = ramMin;
+                This.maxRamBox.Value = ramMax;
+                This.javaCheck.Checked = useCustomJava;
+                This.javaBox.Enabled = useCustomJava;
+                This.javaBox.Text = customJava;
+                This.jvmCheck.Checked = useJvmArgs;
+                This.jvmBox.Enabled = useJvmArgs;
+                This.jvmBox.Text = jvmArgs;
+                This.offlineModeCheck.Checked = offlineMode;
+            }
+        }
+
+        public static void setData()
+        {
+            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "offlineMode" };
+            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{offlineMode}" };
+        }
+
+        public static void saveInstance(string instanceName, string mode)
+        {
+            if(mode != "initial")
+            {
+                name = instanceName;
+                edition = This.editionBox.Text;
+                //version = This.verBox.Text;
+                if(This.verBox.Text.Contains("("))
+                {
+                    int index = This.verBox.Text.IndexOf(" (");
+                    if (index >= 0)
+                        version = This.verBox.Text.Substring(0, index);
+                }
+                else
+                {
+                    version = This.verBox.Text;
+                }
+                directory = This.dirBox.Text;
+                resolutionX = Int32.Parse(This.resBoxWidth.Text);
+                resolutionY = Int32.Parse(This.resBoxHeight.Text);
+                ramMax = Int32.Parse(This.maxRamBox.Text);
+                ramMin = Int32.Parse(This.minRamBox.Text);
+                useCustomJava = This.javaCheck.Checked;
+                customJava = This.javaBox.Text;
+                useJvmArgs = This.jvmCheck.Checked;
+                jvmArgs = This.jvmBox.Text;
+                offlineMode = This.offlineModeCheck.Checked;
+            }
+
+
+
+            setData();
+
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft");
+
+            if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
+            
+            using (FileStream fs = File.Create($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
+            {
+                string final = $"[\n  {{\n";
+                int i = 0;
+                foreach(var varname in varNames)
+                {
+                    final += $"    \"{varname}\":\"{varValues[i]}\",\n";
+                    i++;
+                }
+                i = 0;
+                final += $"  }}\n]";
+                byte[] config = new UTF8Encoding(true).GetBytes(final);
+                fs.Write(config, 0, config.Length);
             }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("TEMPNAME " + tempName);
-            createName = nameBox.Text;
-            tempName = createName;
-
-            if (Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}"))
-            {
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\.minecraft");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\jarmods");
-
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\instance\\{tempName}\\instance.cfg"))
-                {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"[\n{{\n" +
-                        $"\"instVer\":\"{cfgGameVer}\"," +
-                        $"\n\"instType\":\"{cfgTypeVer}\"," +
-                        $"\n\"instUrl\":\"{cfgLinkVer}\"," +
-                        $"\n\"instDir\":\"{instGameDir}\"," +
-                        $"\n\"instResWidth\":\"{instResWidth}\"," +
-                        $"\n\"instResHeight\":\"{instResHeight}\"," +
-                        $"\n\"instRamMin\":\"{instRamMin}\"," +
-                        $"\n\"instRamMax\":\"{instRamMax}\"," +
-                        $"\n\"useCustJava\":\"{useCustJava}\"," +
-                        $"\n\"instCustJava\":\"{instCustJava}\"," +
-                        $"\n\"useCustJvm\":\"{useCustJvm}\"," +
-                        $"\n\"instCustJvm\":\"{instCustJvm}\"," +
-                        $"\n\"useCustMethod\":\"{useCustMethod}\"," +
-                        $"\n\"instCustMethod\":\"{instCustMethod}\"," +
-                        $"\n\"useCustJar\":\"{useCustJar}\"," +
-                        $"\n\"instCustJar\":\"{instCustJar}\"," +
-                        $"\n\"useOfflineMode\":\"{useOfflineMode}\"" +
-                        $"\n}}\n]");
-                    fs.Write(config, 0, config.Length);
-                }
-                HomeScreen.reloadInstance();
-                foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
-                    form.Close();
-            }
-            else
-            {
-                //do nothing
-                HomeScreen.reloadInstance();
-                foreach (var form in Application.OpenForms.OfType<InstanceManager>().ToList())
-                    form.Close();
-            }
+            saveInstance(nameBox.Text, "other");
+            HomeScreen.reloadInstance(name);
+            this.Close();
         }
 
-        private void createBtn_Click(object sender, EventArgs e)
+        private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(nameBox.Text == string.Empty)
+            edition = editionBox.Text;
+            int i = editionBox.SelectedIndex;
+            Logger.logMessage("[InstanceManager]", i.ToString() + editionUrls[i]);
+
+            verList = new List<string>();
+            typeList = new List<string>();
+            urlList = new List<string>();
+
+            using (WebClient client = new WebClient())
             {
-                Warning warn = new Warning("Name can't be empty!");
-                warn.ShowDialog();
+                string json = client.DownloadString(editionUrls[i]);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                foreach (var vers in data)
+                {
+                    verList.Add(vers.verName + vers.verNote);
+                    typeList.Add(vers.verType);
+                    urlList.Add(vers.verLink);
+                }
             }
-            else
+            verBox.DataSource = verList;
+
+            Logger.logMessage("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
+        }
+
+        private void verBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
             {
-                createName = nameBox.Text;
-                tempName = createName;
-                createInstance();
+                int i = verBox.SelectedIndex;
+                //version = verList[i];
+                if (verList[i].Contains("("))
+                {
+                    int index = verList[i].IndexOf(" (");
+                    if (index >= 0)
+                        version = verList[i].Substring(0, index);
+                }
+                else
+                {
+                    version = verList[i];
+                }
+
+                /*int index = verList[i].IndexOf(" (");
+                if (index >= 0)
+                    version = verList[i].Substring(0, index);*/
+                url = urlList[i];
+                type = typeList[i];
+            }
+            catch(ArgumentOutOfRangeException aore)
+            {
+                Logger.logError("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (javaBox.Enabled == true)
+            if(javaCheck.Checked)
             {
-                useCustJava = false;
-                javaBox.Enabled = false;
-                javaBtn.Enabled = false;
+                javaBox.Enabled = true;
+                javaBtn.Enabled = true;
             }
             else
             {
-                useCustJava = true;
-                javaBox.Enabled = true;
-                javaBtn.Enabled = true;
+                javaBox.Enabled = false;
+                javaBtn.Enabled = false;
             }
         }
 
         private void jvmCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (jvmBox.Enabled == true)
+            if (jvmCheck.Checked)
             {
-                useCustJvm = false;
-                jvmBox.Enabled = false;
-            }
-            else
-            {
-                useCustJvm = true;
                 jvmBox.Enabled = true;
             }
-        }
-
-        private void methodCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (methodBox.Enabled == true)
-            {
-                useCustMethod = false;
-                methodBox.Enabled = false;
-            }
             else
             {
-                useCustMethod = true;
-                methodBox.Enabled = true;
-            }
-        }
-
-        private void custjarCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (custjarBox.Enabled == true)
-            {
-                useCustJar = false;
-                custjarBox.Enabled = false;
-                custjarBtn.Enabled = false;
-            }
-            else
-            {
-                useCustJar = true;
-                custjarBox.Enabled = true;
-                custjarBtn.Enabled = true;
-            }
-        }
-
-        private void custjarBtn_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Open a game file";
-            ofd.Filter = "JAR File (*.jar*) | *.jar*";
-            DialogResult dr = ofd.ShowDialog();
-            //if (dr == DialogResult.OK)
-            //{
-            //    verPath = ofd.FileName;
-            //}
-            //pathLabel.Text = verPath;
-        }
-
-        private void offlineModeCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!offlineModeCheck.Checked)
-            {
-                useOfflineMode = false;
-                Console.WriteLine("It is now unchecked.");
-            }
-            else
-            {
-                useOfflineMode = true;
-                Console.WriteLine("It is now checked.");
-            }
-        }
-
-        private void dirBox_TextChanged(object sender, EventArgs e)
-        {
-            instGameDir = dirBox.Text;
-        }
-
-        private void resBoxWidth_TextChanged(object sender, EventArgs e)
-        {
-            instResWidth = resBoxWidth.Text;
-        }
-
-        private void resBoxHeight_TextChanged(object sender, EventArgs e)
-        {
-            instResHeight = resBoxHeight.Text;
-        }
-
-        private void javaBox_TextChanged(object sender, EventArgs e)
-        {
-            instCustJava = javaBox.Text;
-        }
-
-        private void jvmBox_TextChanged(object sender, EventArgs e)
-        {
-            instCustJvm = jvmBox.Text;
-        }
-
-        private void methodBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            instCustMethod = methodBox.Text;
-        }
-
-        private void custjarBox_TextChanged(object sender, EventArgs e)
-        {
-            instCustJar = custjarBox.Text;
-        }
-
-        private void minRamBox_ValueChanged(object sender, EventArgs e)
-        {
-            instRamMin = Convert.ToInt32(minRamBox.Value);
-        }
-
-        private void maxRamBox_ValueChanged(object sender, EventArgs e)
-        {
-            instRamMax = Convert.ToInt32(maxRamBox.Value);
-        }
-
-        private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<string> versionList = new List<string>();
-            List<string> typesList = new List<string>();
-            using (WebClient client = new WebClient())
-            {
-                string json = "";
-                if (editionBox.Text == "Java Edition")
-                    json = client.DownloadString(Globals.javaJson);
-                else if (editionBox.Text == "Xbox 360 Edition")
-                    json = client.DownloadString(Globals.x360Json);
-                else if (editionBox.Text == "Playstation 3 Edition")
-                    json = client.DownloadString(Globals.ps3Json);
-                else if (editionBox.Text == "MinecraftEdu")
-                    json = client.DownloadString(Globals.javaeduJson);
-
-                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                foreach (var vers in data)
-                {
-                    versionList.Add(vers.verName);
-                    typesList.Add(vers.verType);
-                }
-            }
-
-            verBox.DataSource = versionList;
-            verBox.Refresh();
-            cfgGameVer = verBox.Text;
-            int i = verBox.FindStringExact(cfgGameVer);
-            if (editionBox.Text == "Java Edition")
-            {
-                HomeScreen.selectedEdition = "java";
-                cfgTypeVer = typesList[i];
-            }
-            else if (editionBox.Text == "Xbox 360 Edition")
-            {
-                HomeScreen.selectedEdition = "x360";
-                cfgTypeVer = "x360";
-            }
-            else if (editionBox.Text == "Playstation 3 Edition")
-            {
-                HomeScreen.selectedEdition = "ps3";
-                cfgTypeVer = "ps3";
-            }
-            else if(editionBox.Text == "MinecraftEdu")
-            {
-                HomeScreen.selectedEdition = "edu";
-                cfgTypeVer = typesList[i];
-            }
-        }
-
-        private void verBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cfgGameVer = verBox.Text;
-
-            if (editionBox.Text == "Java Edition")
-            {
-                List<string> versionList = new List<string>();
-                List<string> typeJavaList = new List<string>();
-                List<string> linkJavaList = new List<string>();
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.javaJson);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        versionList.Add(vers.verName);
-                        typeJavaList.Add(vers.verType);
-                        linkJavaList.Add(vers.verLink);
-                    }
-                }
-
-                int index = verBox.FindStringExact(verBox.Text);
-                Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
-                cfgGameVer = versionList[index];
-                cfgTypeVer = typeJavaList[index];
-                cfgLinkVer = linkJavaList[index];
-            }
-            else if (editionBox.Text == "MinecraftEdu")
-            {
-                List<string> versionList = new List<string>();
-                List<string> typeJavaList = new List<string>();
-                List<string> linkJavaList = new List<string>();
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.javaeduJson);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-                    foreach (var vers in data)
-                    {
-                        versionList.Add(vers.verName);
-                        typeJavaList.Add(vers.verType);
-                        linkJavaList.Add(vers.verLink);
-                    }
-                }
-
-                int index = verBox.FindStringExact(verBox.Text);
-                Logger.logError("[InstanceManager]", $"Index: {index} ({versionList[index]}, {typeJavaList[index]})");
-                cfgGameVer = versionList[index];
-                cfgTypeVer = typeJavaList[index];
-                cfgLinkVer = linkJavaList[index];
+                jvmBox.Enabled = false;
             }
         }
 
@@ -594,7 +398,38 @@ namespace MCLauncher
 
         private void opendirBtn_Click(object sender, EventArgs e)
         {
+            Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
+        }
+
+        private void javaBox_TextChanged(object sender, EventArgs e)
+        {
+            javaBox.Text = javaBox.Text.Replace('\\', '/');
+        }
+
+        private void javaBtn_Click(object sender, EventArgs e)
+        {
 
         }
+    }
+
+    public class instanceObjects
+    {
+        public string name { get; set; }
+        public string edition { get; set; }
+        public string version { get; set; }
+        public string type { get; set; }
+        public string url { get; set; }
+        public string directory { get; set; }
+        public string resolutionX { get; set; }
+        public string resolutionY { get; set; }
+        public string ramMin { get; set; }
+        public string ramMax { get; set; }
+        public string customJava { get; set; }
+        public string useCustomJava { get; set; }
+        public string jvmArgs { get; set; }
+        public string useJvmArgs { get; set; }
+        public string launchMethod { get; set; }
+        public string useLaunchMethod { get; set; }
+        public string offlineMode { get; set; }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
+            this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbLauncher = new System.Windows.Forms.GroupBox();
             this.lblLang = new System.Windows.Forms.Label();
             this.cmbLangSelect = new System.Windows.Forms.ComboBox();
@@ -36,9 +37,20 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
+            this.pnlCenter.SuspendLayout();
             this.grbLauncher.SuspendLayout();
             this.grbUpdates.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // pnlCenter
+            // 
+            this.pnlCenter.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCenter.Controls.Add(this.grbLauncher);
+            this.pnlCenter.Controls.Add(this.grbUpdates);
+            this.pnlCenter.Location = new System.Drawing.Point(169, 116);
+            this.pnlCenter.Name = "pnlCenter";
+            this.pnlCenter.Size = new System.Drawing.Size(446, 154);
+            this.pnlCenter.TabIndex = 22;
             // 
             // grbLauncher
             // 
@@ -46,10 +58,10 @@
             this.grbLauncher.Controls.Add(this.lblLang);
             this.grbLauncher.Controls.Add(this.cmbLangSelect);
             this.grbLauncher.ForeColor = System.Drawing.Color.White;
-            this.grbLauncher.Location = new System.Drawing.Point(169, 116);
+            this.grbLauncher.Location = new System.Drawing.Point(0, 0);
             this.grbLauncher.Name = "grbLauncher";
             this.grbLauncher.Size = new System.Drawing.Size(446, 58);
-            this.grbLauncher.TabIndex = 18;
+            this.grbLauncher.TabIndex = 20;
             this.grbLauncher.TabStop = false;
             this.grbLauncher.Text = "grb.launcher";
             // 
@@ -78,10 +90,10 @@
             this.grbUpdates.Controls.Add(this.lblBranch);
             this.grbUpdates.Controls.Add(this.cmbUpdateSelect);
             this.grbUpdates.ForeColor = System.Drawing.Color.White;
-            this.grbUpdates.Location = new System.Drawing.Point(169, 180);
+            this.grbUpdates.Location = new System.Drawing.Point(0, 64);
             this.grbUpdates.Name = "grbUpdates";
             this.grbUpdates.Size = new System.Drawing.Size(446, 90);
-            this.grbUpdates.TabIndex = 19;
+            this.grbUpdates.TabIndex = 21;
             this.grbUpdates.TabStop = false;
             this.grbUpdates.Text = "grb.updates";
             // 
@@ -121,11 +133,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.Controls.Add(this.grbLauncher);
-            this.Controls.Add(this.grbUpdates);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.pnlCenter);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "SettingsScreen";
             this.Size = new System.Drawing.Size(784, 387);
+            this.pnlCenter.ResumeLayout(false);
             this.grbLauncher.ResumeLayout(false);
             this.grbLauncher.PerformLayout();
             this.grbUpdates.ResumeLayout(false);
@@ -136,6 +149,7 @@
 
         #endregion
 
+        private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.GroupBox grbLauncher;
         private System.Windows.Forms.Label lblLang;
         private System.Windows.Forms.ComboBox cmbLangSelect;

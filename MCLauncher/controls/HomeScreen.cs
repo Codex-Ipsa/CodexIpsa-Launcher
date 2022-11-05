@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
+using System.Xml.Linq;
 using Color = System.Drawing.Color;
 
 namespace MCLauncher
@@ -22,6 +23,7 @@ namespace MCLauncher
         public static HomeScreen Instance;
         public static string selectedEdition = "java"; //TODO: LOAD THIS FROM INSTANCE
         public static string msPlayerName;
+        public static string selectedInstance = "Default"; //TODO: SAVE LAST OPENED INSTANCE AND LOAD It here
 
         public HomeScreen()
         {
@@ -49,21 +51,6 @@ namespace MCLauncher
                 this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
             }
 
-            //Load browser URL
-            /*if(Globals.offlineMode == false)
-            {
-                webBrowser.Url = new Uri(Globals.changelog, UriKind.Absolute);
-                webBrowser.Refresh();
-                Logger.logMessage($"[HomeScreen]", $"Changelog loaded");
-
-
-            }
-            else
-            {
-                webBrowser.DocumentText = $"<center><p>{Strings.htmlChangelogFailed}</p></center>";
-                webBrowser.Refresh();
-                Logger.logError($"[HomeScreen]", $"Failed to load changelog");
-            }*/
             //JSON changelog system
             loadChangelog();
 
@@ -72,22 +59,21 @@ namespace MCLauncher
 
             if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
             {
-                InstanceManager.mode = "initial";
-                InstanceManager.tempName = "Default";
-                InstanceManager.createInstance();
+                InstanceManager.Start("Default", "initial");
             }       
 
             //Load instance list
             loadInstanceList();
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
+            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+            //Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.launchVerName = vers.instVer;
-                LaunchJava.launchVerUrl = vers.instUrl;
-                LaunchJava.launchVerType = vers.instType;
+                LaunchJava.launchVerName = vers.version;
+                LaunchJava.launchVerUrl = vers.url;
+                LaunchJava.launchVerType = vers.type;
             }
             Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
 
@@ -141,6 +127,10 @@ namespace MCLauncher
                     Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
                     Instance.btnPlay.Enabled = true;
                     Instance.lblLogInWarn.Text = "";
+                    Instance.cmbInstaces.Enabled = true;
+                    Instance.btnEditInst.Enabled = true;
+                    Instance.btnNewInst.Enabled = true;
+
                 }
             }
         }
@@ -156,7 +146,16 @@ namespace MCLauncher
                 var dirName = dirN.Name;
                 if (File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
                 {
-                    instanceList.Add(dirName);
+                    string text = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg");
+                    if(text.Contains("instVer") && text.Contains("instType"))
+                    {
+                        updateFromLegacyInst($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}");
+                        instanceList.Add(dirName);
+                    }
+                    else
+                    {
+                        instanceList.Add(dirName);
+                    }
                 }
                 else
                 {
@@ -167,36 +166,50 @@ namespace MCLauncher
             }
             cmbInstaces.DataSource = instanceList;
             cmbInstaces.Refresh();
-            LaunchJava.instanceName = cmbInstaces.Text;
+            LaunchJava.currentInstance = cmbInstaces.Text;
         }
 
-        public static void reloadInstance()
+        public static void reloadInstance(string instName)
         {
-            if (InstanceManager.mode != "initial")
+            Logger.logMessage("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
+            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{instName}\\instance.cfg");
+            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+            foreach (var item in data)
             {
-                InstanceManager.selectedInstance = Instance.cmbInstaces.Text;
+                if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load Java base");
+                    LaunchJava.currentInstance = instName;
+                    //LaunchJava.gameDir TODO
+                    LaunchJava.launchResX = item.resolutionX;
+                    LaunchJava.launchResY = item.resolutionY;
+                    LaunchJava.launchRamMax = item.ramMax;
+                    LaunchJava.launchRamMin = item.ramMin;
+                    LaunchJava.launchVerName = item.version;
+                    LaunchJava.launchVerType = item.type;
+                    LaunchJava.launchVerUrl = item.url;
+                    LaunchJava.launchJavaLocation = item.customJava;
+                    LaunchJava.useCustJava = bool.Parse(item.useCustomJava);
+                    LaunchJava.launchJvmArgs = item.jvmArgs;
+                    LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
+                    //LaunchJava.launchMethod = item.launchMethod;
+                    LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
+                    Instance.lblReady.Text = $"Ready to play Minecraft {item.version}";
+
+                }
+                else if (item.edition == "Xbox 360 Edition")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load X360 base");
+                }
+                else if (item.edition == "PlayStation3 Edition")
+                {
+                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load PS3 base");
+                }
+                else
+                {
+                    Logger.logError("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
+                }
             }
-
-            Logger.logMessage("[HomeScreen]", $"Selected instance: {InstanceManager.selectedInstance}");
-
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //Set the LaunchJava stuff
-            foreach (var vers in data)
-            {
-                LaunchJava.launchVerName = vers.instVer;
-                LaunchJava.launchVerUrl = vers.instUrl;
-                LaunchJava.launchVerType = vers.instType;
-                LaunchJava.launchWidth = vers.instResWidth;
-                LaunchJava.launchHeight = vers.instResHeight;
-                LaunchJava.launchXms = vers.instRamMin;
-                LaunchJava.launchXmx = vers.instRamMax;
-                //LaunchJava.javaLocation = vers.instCustJava;
-                //LaunchJava.use //TODO!!!
-            }
-            LaunchJava.currentInstance = Instance.cmbInstaces.Text;
-            Instance.lblReady.Text = "Ready to play Minecraft " + LaunchJava.launchVerName;
         }
 
         public static void loadChangelog()
@@ -274,30 +287,6 @@ namespace MCLauncher
                         labelHead.ForeColor = Color.Red;
                         Instance.pnlChangelog.Controls.Add(labelHead);
                         y += 12 * 3;
-
-                        /*if(vers.date != String.Empty)
-                        {
-                            Label labelDate = new Label();
-                            labelDate.Text = $"{vers.date}";
-                            labelDate.Location = new Point(x, y);
-                            labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
-                            labelDate.AutoSize = true;
-                            labelDate.ForeColor = Color.Red;
-                            Instance.pnlChangelog.Controls.Add(labelDate);
-                            y += 12 * 2;
-                        }
-
-                        if(vers.content !=  String.Empty)
-                        {
-                            Label labelText = new Label();
-                            labelText.Text = $"{vers.content}";
-                            labelText.Location = new Point(x, y);
-                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
-                            labelText.AutoSize = true;
-                            labelText.ForeColor = Color.Red;
-                            Instance.pnlChangelog.Controls.Add(labelText);
-                            y += 12 * 3;
-                        }*/
                     }
                 }
 
@@ -310,6 +299,42 @@ namespace MCLauncher
                 labelEmpty.ForeColor = Color.Red;
                 Instance.pnlChangelog.Controls.Add(labelEmpty);
             }
+        }
+
+        public static void updateFromLegacyInst(string path)
+        {
+            int index = path.LastIndexOf("\\") + 1;
+            string name = path.Substring(index, path.Length - index);
+
+            string text = File.ReadAllText($"{path}\\instance.cfg");
+            if (text.Contains("classroom"))
+            {
+                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");
+            }
+            else
+            {
+                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"Java Edition\",");
+            }
+            text = text.Replace("instVer", "version");
+            text = text.Replace("instType", "type");
+            text = text.Replace("instUrl", "url");
+            text = text.Replace("instDir", "directory");
+            text = text.Replace("instResWidth", "resolutionX");
+            text = text.Replace("instResHeight", "resolutionY");
+            text = text.Replace("instRamMin", "ramMin");
+            text = text.Replace("instRamMax", "ramMax");
+            text = text.Replace("useCustJava", "useCustomJava");
+            text = text.Replace("instCustJava", "customJava");
+            text = text.Replace("useCustJvm", "useJvmArgs");
+            text = text.Replace("instCustJvm", "jvmArgs");
+            text = text.Replace("useCustMethod", "useLaunchMethod");
+            text = text.Replace("instCustMethod", "launchMethod");
+            text = text.Replace("\"useCustJar\":\"False\",", String.Empty);
+            text = text.Replace("\"instCustJar\":\"\",", String.Empty);
+            text = text.Replace("useOfflineMode", "offlineMode");
+            Logger.logMessage("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
+            Console.WriteLine(text);
+            File.WriteAllText($"{path}\\instance.cfg", text);
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -329,30 +354,14 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            //TODO: switch to a tab instead
-            InstanceManager.cfgInstName = "New profile";
-            InstanceManager.mode = "new";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
+            InstanceManager man = new InstanceManager("New profile", "new");
+            man.ShowDialog();
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            //TODO: switch to a tab instead
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{InstanceManager.selectedInstance}\\instance.cfg");
-            List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
-
-            //TODO: Set the data
-            /*foreach (var vers in data)
-            {
-                InstanceManager.cfgGameVer = vers.gameVer;
-                InstanceManager.cfgTypeVer = vers.typeVer;
-            }*/
-
-            InstanceManager.cfgInstName = cmbInstaces.Text;
-            InstanceManager.mode = "edit";
-            InstanceManager instMan = new InstanceManager();
-            instMan.ShowDialog();
+            InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
+            man.ShowDialog();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
@@ -390,7 +399,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            reloadInstance();
+            reloadInstance(cmbInstaces.Text);
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)

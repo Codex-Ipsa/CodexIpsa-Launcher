@@ -16,45 +16,24 @@ namespace MCLauncher
 {
     class LaunchJava
     {
-        /// <summary>
-        /// Old stuff
-        /// </summary>
-        //Main
-        public static string selectedVer;
-        public static string linkToJar;
-        public static string typeVer;
-
-        //Launch
-        public static string instanceName;
-        public static string javaLocation = "java.exe";
-        public static string launchCmd;
-        public static string clientPath;
-        public static string launchMethod;
-
-        //Debug
-        public static bool isCustom = false;
-        public static bool useProxy = true;
-        public static string consoleOutput;
-        /// <summary>
-        /// Old stuff ends
-        /// </summary>
-
+        public static List<string> proxyArgs = new List<string>();
+        public static List<string> otherArgs = new List<string>();
 
         public static string launchVerName;
         public static string launchVerType;
         public static string launchVerUrl;
         public static string launchJsonUrl;
         public static string launchLibsType;
+        public static string serverUrl;
 
         public static string currentInstance;
 
         public static string launchCommand;
         public static string launchJavaReq;
 
-        public static string launchXmx = "1024"; //TODO, custom vars
-        public static string launchXms = "1024"; //TODO, custom vars
+        public static string launchRamMax;
+        public static string launchRamMin;
         public static string launchProxy;
-        //public static string launchProxyOld;
         public static string launchNativePath;
         public static string launchClientPath;
         public static string launchLibsPath;
@@ -66,17 +45,14 @@ namespace MCLauncher
         public static bool launchJoinMP = false;
         public static string launchServerIP;
         public static string launchServerPort;
-        public static string launchWidth = "854";
-        public static string launchHeight = "480";
-        public static string launchJavaLocation = "java.exe";
+        public static string launchResX;
+        public static string launchResY;
+
         public static bool useCustJava;
-
+        public static string launchJavaLocation;
         public static bool useCustJvm;
-        public static string launchClasspath;
-        public static bool useCustMethod;
-
-        public static bool useCustJar;
-
+        public static string launchJvmArgs;
+        public static string launchMethod;
         public static bool useOfflineMode;
 
         public static string gameDir;
@@ -91,6 +67,8 @@ namespace MCLauncher
         public static string javaagentJar;
 
         public static string tempAppdata;
+
+        public static bool printError;
 
         public static void LaunchGame()
         {
@@ -107,8 +85,8 @@ namespace MCLauncher
                 {
                     launchJavaReq = vers.minJava;
                     Logger.logMessage("[LaunchJava]", $"Minimum java: {launchJavaReq}");
-                    launchClasspath = vers.launchMethod;
-                    Logger.logMessage("[LaunchJava]", $"Main class: {launchClasspath}");
+                    launchMethod = vers.launchMethod;
+                    Logger.logMessage("[LaunchJava]", $"Main class: {launchMethod}");
                     launchLibsType = vers.libsType;
                     Logger.logMessage("[LaunchJava]", $"Libs type: {launchLibsType}");
                     launchProxy = vers.proxy;
@@ -123,6 +101,8 @@ namespace MCLauncher
                     Logger.logMessage("[LaunchJava]", $"Logging url: {loggingXml}");
                     javaagentJar = vers.javaagent;
                     Logger.logMessage("[LaunchJava]", $"Javaagent url: {javaagentJar}");
+                    serverUrl = vers.server;
+                    Logger.logMessage("[LaunchJava]", $"Server url: {serverUrl}");
                     if (vers.getServer == "true")
                     {
                         Logger.logMessage("[LaunchJava]", $"getServer returned true");
@@ -167,6 +147,25 @@ namespace MCLauncher
             }
             else
             {
+                //do stuff with custom JVM
+                string[] jvmArgs = launchJvmArgs.Split(' ');
+                if (useCustJvm == true)
+                {
+                    foreach(string jvmArg in jvmArgs)
+                    {
+                        if(jvmArg.StartsWith("-D"))
+                        {
+                            proxyArgs.Add(jvmArg);
+                            Logger.logMessage("[LaunchJava]", $"Arg type is 1: \"{jvmArg}\"");
+                        }
+                        else
+                        {
+                            otherArgs.Add(jvmArg);
+                            Logger.logMessage("[LaunchJava]", $"Arg type is 2: \"{jvmArg}\"");
+                        }
+                    }
+                }
+
                 //Check for assets + get type from json name
                 if (assetIndexUrl != String.Empty)
                 {
@@ -270,7 +269,7 @@ namespace MCLauncher
 
 
                 //Build the launchcmd
-                launchCommand = $"-Xmx{launchXmx}m -Xms{launchXms}m ";
+                launchCommand = $"-Xmx{launchRamMax}m -Xms{launchRamMin}m ";
                 if(javaagentJar != "false")
                 {
                     Logger.logMessage("[LaunchJava]", "Javaagent active!");
@@ -291,6 +290,13 @@ namespace MCLauncher
                 if (launchProxy != "null")
                 {
                     launchCommand += $"{launchProxy} ";
+                }
+                if (useCustJvm == true)
+                {
+                    foreach (string arg in proxyArgs)
+                    {
+                        launchCommand += $"{arg} ";
+                    }
                 }
                 if (loggingXml != "false")
                 {
@@ -315,28 +321,55 @@ namespace MCLauncher
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
                 }
 
-                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchClasspath} ";
+                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} ";
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system
                     launchCmdAddon = launchCmdAddon.Replace("{gameDir}", $"\"{gameDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{assetDir}", $"\"{assetDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{playerName}", $"{launchPlayerName}");
-                    //launchCmdAddon = launchCmdAddon.Replace("{session}", $"token:{launchPlayerAccessToken}:{launchPlayerUUID}"); //LEGACY, DO NOT USE
                     launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName}");
                     launchCmdAddon = launchCmdAddon.Replace("{workDir}", $"\"{workDir}\"");
-                    launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
-                    launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    if(useOfflineMode == true)
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"uuid");
+                        launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"access_token");
+                    }
+                    else
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{uuid}", $"{launchPlayerUUID}");
+                        launchCmdAddon = launchCmdAddon.Replace("{accessToken}", $"{launchPlayerAccessToken}");
+                    }
                     launchCmdAddon = launchCmdAddon.Replace("{assetName}", $"\"{assetIndexType}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{userType}", $"msa");
 
-                    launchCommand += $"{launchCmdAddon}";
+                    launchCommand += $"{launchCmdAddon} ";
                 }
-                if(Globals.isDebug)
+
+                if (useCustJvm == true)
                 {
-                    Logger.logMessage("[LaunchJava]", $"Launch cmd done: {launchCommand}");
+                    foreach (string arg in otherArgs)
+                    {
+                        launchCommand += $"{arg} ";
+                    }
                 }
-                Logger.logMessage("[LaunchJava]", $"Java location: {launchJavaLocation}");
+
+                if(serverUrl.Contains("http"))
+                {
+                    Console.WriteLine($"\"{serverUrl}\"");
+                    Directory.CreateDirectory($"{gameDir}\\server\\");
+                    if(File.Exists($"{gameDir}\\server\\minecraft_server.jar"))
+                    {
+                        File.Delete($"{gameDir}\\server\\minecraft_server.jar");
+                    }
+
+                    DownloadProgress.url = serverUrl;
+                    DownloadProgress.savePath = $"{gameDir}\\server\\minecraft_server.jar";
+                    DownloadProgress dl = new DownloadProgress();
+                    dl.ShowDialog();
+
+                    Logger.logMessage("[LaunchJava]", "Applied early 1.3 snapshot fix");
+                }
 
                 //Check if Java exists
                 try
@@ -362,9 +395,19 @@ namespace MCLauncher
                     process.OutputDataReceived += OnOutputDataReceived;
                     process.ErrorDataReceived += OnErrorDataReceived;
 
-
-                    process.StartInfo.FileName = launchJavaLocation;
+                    if(useCustJava == true)
+                    {
+                        process.StartInfo.FileName = $"\"{launchJavaLocation}\"";
+                    }
+                    else
+                    {
+                        process.StartInfo.FileName = "java.exe";
+                    }
                     process.StartInfo.Arguments = launchCommand;
+                    if (Globals.isDebug)
+                    {
+                        Logger.logMessage("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
+                    }
                     process.StartInfo.WorkingDirectory = $"{gameDir}";
                     process.EnableRaisingEvents = true;
                     process.Exited += new EventHandler(ClosedGame);
@@ -375,7 +418,7 @@ namespace MCLauncher
 
                     //MainWindow.loadLog();
 
-                    VerSelect.checkTab = "java";
+                    //VerSelect.checkTab = "java";
                     LibsCheck.isDone = false;
                     launchLibsPath = string.Empty;
                 }
@@ -424,10 +467,9 @@ namespace MCLauncher
             string level = "";
             string strmessage = "";
 
-            bool printError = false;
-
             if (message != null && message.Contains("<log4j:Event"))
             {
+                printError = false;
                 //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
 
                 //get timestamp
@@ -461,26 +503,9 @@ namespace MCLauncher
                 Console.Write($"[{time}] [{thread}/{level}]: ");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            //TODO: this
-            /*else if (message != null && message.Contains("<log4j:Throwable"))
-            {
-                //<log4j:Event logger="net.minecraft.server.MinecraftServer" timestamp="1665167311296" level="INFO" thread="Server thread">
-
-                //get message
-                int index2 = message.IndexOf("[CDATA[");
-                if (index2 >= 0)
-                    strmessage = message.Substring(index2 + 7);
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"{strmessage}");
-                printError = true;
-            }
-            else if (message != null && message.Contains("</log4j:Throwable"))
-            {
-                printError = false;
-            }*/
             else if (message != null && message.Contains("<log4j:Message"))
             {
+                printError = false;
                 //<log4j:Message><![CDATA[Saving chunks for level 'CLaumncher'/Overworld]]></log4j:Message>
 
                 //get message
@@ -496,8 +521,29 @@ namespace MCLauncher
                 Console.WriteLine($"{strmessage}");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+            else if (message != null && message.Contains("<log4j:Throwable"))
+            {
+                printError = true;
+                //get message
+                int index = message.IndexOf("[CDATA[");
+                if (index >= 0)
+                    strmessage = message.Substring(index + 7);
+                /*int index2 = message.IndexOf("[CDATA[");
+                if (index2 >= 0)
+                    strmessage = strmessage.Substring(index2 + 7);*/
+
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{strmessage}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else if(message != null && message.Contains("</log4j:Throwable"))
+            {
+                printError = false;
+            }
             else if (message != null && message.Contains("</log4j:Event"))
             {
+                printError = false;
                 //</log4j:Event>
                 //do nothing
             }

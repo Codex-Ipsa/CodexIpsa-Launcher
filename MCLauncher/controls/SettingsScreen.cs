@@ -21,6 +21,8 @@ namespace MCLauncher.controls
         public static List<string> urlList = new List<string>();
         public static List<string> noteList = new List<string>();
 
+        public static List<string> languageList = new List<string>();
+
         public static string updateCheckMode;
         public static SettingsScreen InstanceSetting;
 
@@ -40,11 +42,21 @@ namespace MCLauncher.controls
             lblLang.Text = Strings.lblLang;
             btnCheckUpdates.Text = Strings.btnCheckUpdates;
 
+            //center panel
+            pnlCenter.Location = new Point(
+                this.ClientSize.Width / 2 - pnlCenter.Size.Width / 2,
+                this.ClientSize.Height / 2 - pnlCenter.Size.Height / 2);
+            pnlCenter.Anchor = AnchorStyles.None;
+
+
             loadData();
             cmbUpdateSelect.DataSource = nameList;
             int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));
             cmbUpdateSelect.SelectedIndex = index1;
             branchIndex = cmbUpdateSelect.SelectedIndex;
+            cmbLangSelect.DataSource = languageList;
+
+            cmbLangSelect.SelectedIndex = 0;
         }
 
         public static void loadData()
@@ -55,6 +67,7 @@ namespace MCLauncher.controls
             versionList.Clear();
             urlList.Clear();
             noteList.Clear();
+            languageList.Clear();
 
             //Get update info
             WebClient client = new WebClient();
@@ -68,6 +81,7 @@ namespace MCLauncher.controls
                 versionList.Add(vers.brVer);
                 noteList.Add(vers.brNote);
             }
+            languageList.Add("English");
         }
 
         public static void checkForUpdates(string branchToCheck)
@@ -80,13 +94,6 @@ namespace MCLauncher.controls
             if (Globals.verCurrent != versionList[branchIndex])
             {
                 Logger.logMessage("[Settings]", $"New update is available!");
-
-                using (FileStream fs = File.Create($"{Globals.currentPath}\\.codexipsa\\update.cfg"))
-                {
-                    byte[] config = new UTF8Encoding(true).GetBytes($"{urlList[branchIndex]}");
-
-                    fs.Write(config, 0, config.Length);
-                }
                 Update upd = new Update(versionList[branchIndex], noteList[branchIndex], urlList[branchIndex]);
                 upd.ShowDialog();
             }
@@ -99,7 +106,14 @@ namespace MCLauncher.controls
         private void cmbUpdateSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             branchIndex = cmbUpdateSelect.SelectedIndex;
-            Logger.logMessage("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
+            try
+            {
+                Logger.logMessage("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
+            }
+            catch(ArgumentOutOfRangeException exc)
+            {
+                Logger.logMessage("[Settings]", $"Got an exception, index: {branchIndex}");
+            }
         }
 
         private void btnCheckUpdates_Click(object sender, EventArgs e)

@@ -34,11 +34,11 @@ namespace MCLauncher
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
-            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +89,15 @@ namespace MCLauncher
             this.instanceToolStripMenuItem.Visible = false;
             this.instanceToolStripMenuItem.Click += new System.EventHandler(this.instanceToolStripMenuItem1_Click);
             // 
+            // consoleToolStripMenuItem
+            // 
+            this.consoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.consoleToolStripMenuItem.Text = "Console";
+            this.consoleToolStripMenuItem.Visible = false;
+            this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
@@ -112,6 +121,7 @@ namespace MCLauncher
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Visible = false;
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // pnlBackground
@@ -125,15 +135,6 @@ namespace MCLauncher
             this.pnlBackground.Size = new System.Drawing.Size(785, 383);
             this.pnlBackground.TabIndex = 1;
             this.pnlBackground.Visible = false;
-            // 
-            // consoleToolStripMenuItem
-            // 
-            this.consoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.consoleToolStripMenuItem.Text = "Console";
-            this.consoleToolStripMenuItem.Visible = false;
-            this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

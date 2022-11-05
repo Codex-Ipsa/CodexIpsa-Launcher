@@ -62,7 +62,7 @@ namespace MCLauncher
                 if (selectedVer == "1.00_blus"/*|| selectedVer == "pre-tu-0035" || selectedVer == "pre-tu-0054"*/)
                 {
                     System.Diagnostics.Process.Start($"{currentPath}\\bin\\rpcs3\\rpcs3.exe", $"{currentPath}\\bin\\versions\\{selectedVer}");
-                    VerSelect.checkTab = "ps3";
+                    //VerSelect.checkTab = "ps3";
                 }
             }
         }
