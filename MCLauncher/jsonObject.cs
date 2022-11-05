@@ -58,6 +58,7 @@ namespace MCLauncher
         public string assetDir { get; set; }
         public string logging { get; set; }
         public string javaagent { get; set; }
+        public string server { get; set; }
 
         //Updates
         public string brId { get; set; }

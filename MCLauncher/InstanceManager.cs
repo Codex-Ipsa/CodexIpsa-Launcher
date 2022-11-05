@@ -52,6 +52,9 @@ namespace MCLauncher
         {
             This = this;
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
 
             tempName = instanceName;
             Start(instanceName, mode);
@@ -69,8 +72,7 @@ namespace MCLauncher
             }
             else if (mode == "new")
             {
-                Logger.logError("[InstanceManager]", $"{tempName}_{tempInt}");
-                //TODO this throws a stackoverflow for some reason
+                //Logger.logMessage("[InstanceManager]", $"{tempName}_{tempInt}");
                 if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
                 {
                     tempInt++;
@@ -137,7 +139,7 @@ namespace MCLauncher
 
                     foreach (var vers in data)
                     {
-                        verList.Add(vers.verName);
+                        verList.Add(vers.verName + vers.verNote);
                         typeList.Add(vers.verType);
                         urlList.Add(vers.verLink);
                     }
@@ -159,9 +161,9 @@ namespace MCLauncher
 
                 directory = "";
                 resolutionX = 854;
-                This.resBoxHeight.Text = resolutionX.ToString();
+                This.resBoxHeight.Text = resolutionY.ToString();
                 resolutionY = 480;
-                This.resBoxWidth.Text = resolutionY.ToString();
+                This.resBoxWidth.Text = resolutionX.ToString();
                 ramMin = 512;
                 This.minRamBox.Value = ramMin;
                 ramMax = 512;
@@ -189,7 +191,7 @@ namespace MCLauncher
 
                     foreach (var vers in data2)
                     {
-                        verList.Add(vers.verName);
+                        verList.Add(vers.verName + vers.verNote);
                         typeList.Add(vers.verType);
                         urlList.Add(vers.verLink);
                     }
@@ -218,10 +220,14 @@ namespace MCLauncher
                 }
                 This.verBox.DataSource = verList;
                 This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
+                if(This.verBox.SelectedIndex == -1)
+                {
+                    This.verBox.SelectedIndex = This.verBox.FindString(version + " (");
+                }
                 This.nameBox.Text = name;
                 This.dirBox.Text = directory;
-                This.resBoxHeight.Text = resolutionX.ToString();
-                This.resBoxWidth.Text = resolutionY.ToString();
+                This.resBoxHeight.Text = resolutionY.ToString();
+                This.resBoxWidth.Text = resolutionX.ToString();
                 This.minRamBox.Value = ramMin;
                 This.maxRamBox.Value = ramMax;
                 This.javaCheck.Checked = useCustomJava;
@@ -246,7 +252,17 @@ namespace MCLauncher
             {
                 name = instanceName;
                 edition = This.editionBox.Text;
-                version = This.verBox.Text;
+                //version = This.verBox.Text;
+                if(This.verBox.Text.Contains("("))
+                {
+                    int index = This.verBox.Text.IndexOf(" (");
+                    if (index >= 0)
+                        version = This.verBox.Text.Substring(0, index);
+                }
+                else
+                {
+                    version = This.verBox.Text;
+                }
                 directory = This.dirBox.Text;
                 resolutionX = Int32.Parse(This.resBoxWidth.Text);
                 resolutionY = Int32.Parse(This.resBoxHeight.Text);
@@ -310,16 +326,14 @@ namespace MCLauncher
 
                 foreach (var vers in data)
                 {
-                    verList.Add(vers.verName);
+                    verList.Add(vers.verName + vers.verNote);
                     typeList.Add(vers.verType);
                     urlList.Add(vers.verLink);
                 }
             }
             verBox.DataSource = verList;
-            /*verBox.SelectedIndex = verBox.FindStringExact(version);
-            Logger.logMessage("[InstanceManager]", "Sample test " + verBox.FindStringExact(version));*/
 
-            Logger.logError("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
+            Logger.logMessage("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
         }
 
         private void verBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -327,13 +341,27 @@ namespace MCLauncher
             try
             {
                 int i = verBox.SelectedIndex;
-                version = verList[i];
+                //version = verList[i];
+                if (verList[i].Contains("("))
+                {
+                    int index = verList[i].IndexOf(" (");
+                    if (index >= 0)
+                        version = verList[i].Substring(0, index);
+                }
+                else
+                {
+                    version = verList[i];
+                }
+
+                /*int index = verList[i].IndexOf(" (");
+                if (index >= 0)
+                    version = verList[i].Substring(0, index);*/
                 url = urlList[i];
                 type = typeList[i];
             }
             catch(ArgumentOutOfRangeException aore)
             {
-                Logger.logError("[InstanceManager]", "Ignore this error");
+                Logger.logError("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
         }
 
@@ -376,6 +404,11 @@ namespace MCLauncher
         private void javaBox_TextChanged(object sender, EventArgs e)
         {
             javaBox.Text = javaBox.Text.Replace('\\', '/');
+        }
+
+        private void javaBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -346,6 +346,7 @@ namespace MCLauncher
             this.javaBtn.TabIndex = 29;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
+            this.javaBtn.Click += new System.EventHandler(this.javaBtn_Click);
             // 
             // jvmCheck
             // 
@@ -450,7 +451,7 @@ namespace MCLauncher
             this.x360Page.Margin = new System.Windows.Forms.Padding(2);
             this.x360Page.Name = "x360Page";
             this.x360Page.Padding = new System.Windows.Forms.Padding(2);
-            this.x360Page.Size = new System.Drawing.Size(660, 332);
+            this.x360Page.Size = new System.Drawing.Size(660, 303);
             this.x360Page.TabIndex = 1;
             this.x360Page.Text = "Xbox 360 Edition";
             this.x360Page.UseVisualStyleBackColor = true;

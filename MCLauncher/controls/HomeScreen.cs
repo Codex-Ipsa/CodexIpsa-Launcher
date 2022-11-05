@@ -66,7 +66,7 @@ namespace MCLauncher
             loadInstanceList();
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
+            //Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
             foreach (var vers in data)

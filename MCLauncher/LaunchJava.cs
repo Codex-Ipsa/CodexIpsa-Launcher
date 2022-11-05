@@ -286,8 +286,7 @@ namespace MCLauncher
                 }
                 if (launchProxy != "null")
                 {
-                    //TEMP
-                    //launchCommand += $"{launchProxy} ";
+                    launchCommand += $"{launchProxy} ";
                 }
                 if (useCustJvm == true)
                 {
