@@ -408,7 +408,15 @@ namespace MCLauncher
 
         private void javaBtn_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "exe files (*.exe)|*.exe";
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    javaBox.Text = openFileDialog.FileName;
+                }
+            }
         }
     }
 
