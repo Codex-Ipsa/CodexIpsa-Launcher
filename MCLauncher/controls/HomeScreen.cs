@@ -21,7 +21,7 @@ namespace MCLauncher
     public partial class HomeScreen : UserControl
     {
         public static HomeScreen Instance;
-        public static string selectedEdition = "java"; //TODO: LOAD THIS FROM INSTANCE
+        public static string selectedEdition = "x360"; //TODO: LOAD THIS FROM INSTANCE "java"
         public static string msPlayerName;
         public static string selectedInstance = "Default"; //TODO: SAVE LAST OPENED INSTANCE AND LOAD It here
 

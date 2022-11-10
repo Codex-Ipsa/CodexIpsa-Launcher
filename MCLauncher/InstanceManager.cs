@@ -17,8 +17,8 @@ namespace MCLauncher
     public partial class InstanceManager : Form
     {
         public static InstanceManager This;
-        public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
-        public static List<string> editionUrls = new List<string>() { Globals.javaJson, Globals.javaeduJson };
+        public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu", "Xbox 360 Edition" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
+        public static List<string> editionUrls = new List<string>() { Globals.javaJson, Globals.javaeduJson, Globals.x360Json };
 
         public static List<string> varNames;
         public static List<string> varValues;
