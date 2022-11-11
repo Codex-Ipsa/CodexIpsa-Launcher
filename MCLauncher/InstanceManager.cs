@@ -179,24 +179,7 @@ namespace MCLauncher
             }
             else if(mode == "edit")
             {
-                This.nameBox.Enabled = false;
                 This.editionBox.DataSource = editionNames;
-                This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
-
-                int i = This.editionBox.FindStringExact(edition);
-                using (WebClient client = new WebClient())
-                {
-                    string json2 = client.DownloadString(editionUrls[i]);
-                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
-
-                    foreach (var vers in data2)
-                    {
-                        verList.Add(vers.verName + vers.verNote);
-                        typeList.Add(vers.verType);
-                        urlList.Add(vers.verLink);
-                    }
-                }
-
 
                 string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
                 List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
@@ -218,6 +201,24 @@ namespace MCLauncher
                     useJvmArgs = bool.Parse(vers.useJvmArgs);
                     offlineMode = bool.Parse(vers.offlineMode);
                 }
+
+                This.nameBox.Enabled = false;
+                This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
+
+                int i = This.editionBox.FindStringExact(edition);
+                using (WebClient client = new WebClient())
+                {
+                    string json2 = client.DownloadString(editionUrls[i]);
+                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
+
+                    foreach (var vers in data2)
+                    {
+                        verList.Add(vers.verName + vers.verNote);
+                        typeList.Add(vers.verType);
+                        urlList.Add(vers.verLink);
+                    }
+                }
+
                 This.verBox.DataSource = verList;
                 This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
                 if(This.verBox.SelectedIndex == -1)
@@ -332,6 +333,7 @@ namespace MCLauncher
                 }
             }
             verBox.DataSource = verList;
+            verBox.SelectedIndex = 0;
 
             Logger.logMessage("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
         }
