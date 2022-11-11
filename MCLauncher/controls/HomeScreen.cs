@@ -21,7 +21,7 @@ namespace MCLauncher
     public partial class HomeScreen : UserControl
     {
         public static HomeScreen Instance;
-        public static string selectedEdition = "x360"; //TODO: LOAD THIS FROM INSTANCE "java"
+        public static string selectedEdition; //TODO: LOAD THIS FROM INSTANCE
         public static string msPlayerName;
         public static string selectedInstance = "Default"; //TODO: SAVE LAST OPENED INSTANCE AND LOAD It here
 
@@ -71,12 +71,23 @@ namespace MCLauncher
             //Set the LaunchJava stuff
             foreach (var vers in data)
             {
-                LaunchJava.launchVerName = vers.version;
-                LaunchJava.launchVerUrl = vers.url;
-                LaunchJava.launchVerType = vers.type;
+                if(vers.edition == "Xbox 360 Edition")
+                {
+                    LaunchXbox360.ver = vers.version;
+                    LaunchXbox360.url = vers.url;
+                    LaunchXbox360.type = vers.type;
+                    selectedEdition = "x360";
+                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchXbox360.ver}";
+                }
+                else 
+                {
+                    LaunchJava.launchVerName = vers.version;
+                    LaunchJava.launchVerUrl = vers.url;
+                    LaunchJava.launchVerType = vers.type;
+                    selectedEdition = "java";
+                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
+                }
             }
-            Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
-
         }
 
         public static void checkAuth()
@@ -179,6 +190,7 @@ namespace MCLauncher
                 if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
                 {
                     Logger.logMessage("[HomeScreen/ReloadInstance]", "Load Java base");
+                    selectedEdition = "java";
                     LaunchJava.currentInstance = instName;
                     //LaunchJava.gameDir TODO
                     LaunchJava.launchResX = item.resolutionX;
@@ -194,12 +206,16 @@ namespace MCLauncher
                     LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
                     //LaunchJava.launchMethod = item.launchMethod;
                     LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
-                    Instance.lblReady.Text = $"Ready to play Minecraft {item.version}";
-
+                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
                 }
                 else if (item.edition == "Xbox 360 Edition")
                 {
                     Logger.logMessage("[HomeScreen/ReloadInstance]", "Load X360 base");
+                    selectedEdition = "x360";
+                    LaunchXbox360.ver = item.version;
+                    LaunchXbox360.url = item.url;
+                    LaunchXbox360.type = item.type;
+                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
                 }
                 else if (item.edition == "PlayStation3 Edition")
                 {

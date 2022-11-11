@@ -13,8 +13,9 @@ namespace MCLauncher
 {
     class LaunchXbox360
     {
-        public static string ver = "tu0";
+        public static string ver;
         public static string url;
+        public static string type;
 
         public static void LaunchGame()
         {
@@ -53,8 +54,97 @@ namespace MCLauncher
             }
 
             //TODO: DOWNLOAD GAME + UPDATES
+            if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{ver}"))
+            {
+                DownloadProgress.url = url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\{ver}.zip";
+                DownloadProgress dp = new DownloadProgress();
+                dp.ShowDialog();
 
-            Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe");
+                if(File.Exists($"{Globals.dataPath}\\versions\\x360\\{ver}.zip"))
+                {
+                    Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360\\{ver}");
+                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\x360\\{ver}.zip", $"{Globals.dataPath}\\versions\\x360\\{ver}");
+                    File.Delete($"{Globals.dataPath}\\versions\\x360\\{ver}.zip");
+                }
+            }
+            Logger.logMessage("[LaunchXbox360]", $"Ver: {ver}, Url: {url}, Type: {type}");
+            
+            if(type  == "base")
+            {
+                if(Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000"))
+                    Directory.Delete($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000", true);
+
+                Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe", $"\"{Globals.dataPath}\\versions\\x360\\{ver}\\default.xex\"");
+            }
+            else if(type == "update")
+            {
+                //get base
+                if(!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\tu0"))
+                {
+                    WebClient cl = new WebClient();
+                    string urlForBase = cl.DownloadString(Globals.x360Base);
+
+                    DownloadProgress.url = urlForBase;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\tu0.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
+
+                    if (File.Exists($"{Globals.dataPath}\\versions\\x360\\tu0.zip"))
+                    {
+                        Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360\\tu0");
+                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\x360\\tu0.zip", $"{Globals.dataPath}\\versions\\x360\\tu0");
+                        File.Delete($"{Globals.dataPath}\\versions\\x360\\tu0.zip");
+                    }
+                }
+
+                //get update
+                if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{ver}"))
+                {
+                    DownloadProgress.url = url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\{ver}.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
+
+                    if (File.Exists($"{Globals.dataPath}\\versions\\x360\\{ver}.zip"))
+                    {
+                        Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360\\{ver}");
+                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\x360\\{ver}.zip", $"{Globals.dataPath}\\versions\\x360\\{ver}");
+                        File.Delete($"{Globals.dataPath}\\versions\\x360\\{ver}.zip");
+                    }
+                }
+
+                //move base to xenia dir
+                if(!Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"))
+                {
+                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000");
+
+                    DirectoryInfo di = new DirectoryInfo($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000");
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    foreach (DirectoryInfo dir in di.GetDirectories())
+                    {
+                        dir.Delete(true);
+                    }
+
+                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}");
+
+                    foreach (string dirPath in Directory.GetDirectories($"{Globals.dataPath}\\versions\\x360\\{ver}", "*", SearchOption.AllDirectories))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"));
+                    }
+
+                    //Copy all the files & Replaces any files with the same name
+                    foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\versions\\x360\\{ver}", "*.*", SearchOption.AllDirectories))
+                    {
+                        File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"), true);
+                    }
+                }
+
+                Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe", $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"");
+            }
         }
 
         public static void updateXenia(string url, string ver)
