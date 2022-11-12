@@ -19,6 +19,8 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
+            //TODO: ATTEMPT FIXING BLACK SCREEN BY COPYING BASE GAME INTO XENIA?
+
             //Create required dirs
             Directory.CreateDirectory($"{Globals.dataPath}");
             Directory.CreateDirectory($"{Globals.dataPath}\\versions");
@@ -53,7 +55,7 @@ namespace MCLauncher
                 }
             }
 
-            //TODO: DOWNLOAD GAME + UPDATES
+            //download game and updates
             if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{ver}"))
             {
                 DownloadProgress.url = url;

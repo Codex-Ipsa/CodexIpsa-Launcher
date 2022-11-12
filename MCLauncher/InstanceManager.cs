@@ -276,8 +276,6 @@ namespace MCLauncher
                 offlineMode = This.offlineModeCheck.Checked;
             }
 
-
-
             setData();
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}");
