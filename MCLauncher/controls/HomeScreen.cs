@@ -205,6 +205,11 @@ namespace MCLauncher
                     LaunchJava.launchJvmArgs = item.jvmArgs;
                     LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
                     //LaunchJava.launchMethod = item.launchMethod;
+                    if (json.Contains("customJar"))
+                    {
+                        LaunchJava.useCustJar = bool.Parse(item.useCustomJar);
+                        LaunchJava.custJarLocation = item.customJar;
+                    }
                     LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
                     Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
                 }

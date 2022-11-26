@@ -120,6 +120,12 @@
     <Compile Include="EnterIp.Designer.cs">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\NewProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\NewProfile.Designer.cs">
+      <DependentUpon>NewProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\NewProfile.resx">
+      <DependentUpon>NewProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameConsole.resx">
       <DependentUpon>GameConsole.cs</DependentUpon>

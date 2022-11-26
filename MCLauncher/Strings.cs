@@ -35,6 +35,25 @@ namespace MCLauncher
         public static string lblBranch = "Branch";
         public static string btnCheckUpdates = "Check for updates";
 
+        //InstanceManager
+        public static string grbInfo = "Profile info";
+        public static string lblName = "Profile name:";
+        public static string lblDir = "Directory:";
+        public static string lblRes = "Resolution:";
+        public static string lblResMin = "Min:";
+        public static string lblResMax = "Max:";
+
+        public static string grbVersion = "Version selection";
+        public static string lblEdition = "Edition:";
+        public static string lblVersion = "Version:";
+
+        public static string grbExperts = "For experts";
+        public static string lblJavaInstall = "Java install:";
+        public static string lblJvmArgs = "JVM arguments:";
+        public static string lblCustJar = "Custom JAR:";
+        public static string lblOfflineLaunch = "Launch in offline mode";
+
+
         public static void reloadLangs()
         {
             /*if(Properties.Settings.Default.prefLanguage == "cs")

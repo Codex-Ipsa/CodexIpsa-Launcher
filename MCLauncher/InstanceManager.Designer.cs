@@ -30,10 +30,10 @@ namespace MCLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstanceManager));
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbInfo = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -45,12 +45,15 @@ namespace MCLauncher
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grbVersion = new System.Windows.Forms.GroupBox();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.verBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.grbExperts = new System.Windows.Forms.GroupBox();
+            this.jarBtn = new System.Windows.Forms.Button();
+            this.jarCheck = new System.Windows.Forms.CheckBox();
+            this.jarBox = new System.Windows.Forms.TextBox();
             this.offlineModeCheck = new System.Windows.Forms.CheckBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.jvmCheck = new System.Windows.Forms.CheckBox();
@@ -63,23 +66,23 @@ namespace MCLauncher
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.javaPage = new System.Windows.Forms.TabPage();
             this.x360Page = new System.Windows.Forms.TabPage();
-            this.groupBox1.SuspendLayout();
+            this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.grbVersion.SuspendLayout();
+            this.grbExperts.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.javaPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Profile name:";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(6, 16);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(48, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "lbl.Name";
             // 
             // nameBox
             // 
@@ -96,30 +99,30 @@ namespace MCLauncher
             this.dirBox.Size = new System.Drawing.Size(476, 20);
             this.dirBox.TabIndex = 12;
             // 
-            // groupBox1
+            // grbInfo
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.resBoxHeight);
-            this.groupBox1.Controls.Add(this.resBoxWidth);
-            this.groupBox1.Controls.Add(this.minRamBox);
-            this.groupBox1.Controls.Add(this.maxRamBox);
-            this.groupBox1.Controls.Add(this.dirBtn);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.nameBox);
-            this.groupBox1.Controls.Add(this.dirBox);
-            this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(5, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(650, 119);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Profile info";
+            this.grbInfo.BackColor = System.Drawing.Color.Transparent;
+            this.grbInfo.Controls.Add(this.label9);
+            this.grbInfo.Controls.Add(this.label8);
+            this.grbInfo.Controls.Add(this.label7);
+            this.grbInfo.Controls.Add(this.resBoxHeight);
+            this.grbInfo.Controls.Add(this.resBoxWidth);
+            this.grbInfo.Controls.Add(this.minRamBox);
+            this.grbInfo.Controls.Add(this.maxRamBox);
+            this.grbInfo.Controls.Add(this.dirBtn);
+            this.grbInfo.Controls.Add(this.label5);
+            this.grbInfo.Controls.Add(this.label3);
+            this.grbInfo.Controls.Add(this.label4);
+            this.grbInfo.Controls.Add(this.lblName);
+            this.grbInfo.Controls.Add(this.nameBox);
+            this.grbInfo.Controls.Add(this.dirBox);
+            this.grbInfo.ForeColor = System.Drawing.Color.Black;
+            this.grbInfo.Location = new System.Drawing.Point(5, 6);
+            this.grbInfo.Name = "grbInfo";
+            this.grbInfo.Size = new System.Drawing.Size(650, 119);
+            this.grbInfo.TabIndex = 18;
+            this.grbInfo.TabStop = false;
+            this.grbInfo.Text = "grb.Info";
             // 
             // label9
             // 
@@ -257,20 +260,20 @@ namespace MCLauncher
             this.label4.TabIndex = 19;
             this.label4.Text = "x";
             // 
-            // groupBox2
+            // grbVersion
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.editionBox);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.verBox);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(5, 131);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(650, 70);
-            this.groupBox2.TabIndex = 21;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Version selection";
+            this.grbVersion.BackColor = System.Drawing.Color.Transparent;
+            this.grbVersion.Controls.Add(this.editionBox);
+            this.grbVersion.Controls.Add(this.label2);
+            this.grbVersion.Controls.Add(this.verBox);
+            this.grbVersion.Controls.Add(this.label6);
+            this.grbVersion.ForeColor = System.Drawing.Color.Black;
+            this.grbVersion.Location = new System.Drawing.Point(5, 131);
+            this.grbVersion.Name = "grbVersion";
+            this.grbVersion.Size = new System.Drawing.Size(650, 70);
+            this.grbVersion.TabIndex = 21;
+            this.grbVersion.TabStop = false;
+            this.grbVersion.Text = "grb.Version";
             // 
             // editionBox
             // 
@@ -310,27 +313,61 @@ namespace MCLauncher
             this.label6.TabIndex = 0;
             this.label6.Text = "Edition:";
             // 
-            // groupBox3
+            // grbExperts
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.offlineModeCheck);
-            this.groupBox3.Controls.Add(this.javaBtn);
-            this.groupBox3.Controls.Add(this.jvmCheck);
-            this.groupBox3.Controls.Add(this.jvmBox);
-            this.groupBox3.Controls.Add(this.javaCheck);
-            this.groupBox3.Controls.Add(this.javaBox);
-            this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(5, 207);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(650, 90);
-            this.groupBox3.TabIndex = 24;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "For experts";
+            this.grbExperts.BackColor = System.Drawing.Color.Transparent;
+            this.grbExperts.Controls.Add(this.jarBtn);
+            this.grbExperts.Controls.Add(this.jarCheck);
+            this.grbExperts.Controls.Add(this.jarBox);
+            this.grbExperts.Controls.Add(this.offlineModeCheck);
+            this.grbExperts.Controls.Add(this.javaBtn);
+            this.grbExperts.Controls.Add(this.jvmCheck);
+            this.grbExperts.Controls.Add(this.jvmBox);
+            this.grbExperts.Controls.Add(this.javaCheck);
+            this.grbExperts.Controls.Add(this.javaBox);
+            this.grbExperts.ForeColor = System.Drawing.Color.Black;
+            this.grbExperts.Location = new System.Drawing.Point(5, 207);
+            this.grbExperts.Name = "grbExperts";
+            this.grbExperts.Size = new System.Drawing.Size(650, 114);
+            this.grbExperts.TabIndex = 24;
+            this.grbExperts.TabStop = false;
+            this.grbExperts.Text = "grb.Experts";
+            // 
+            // jarBtn
+            // 
+            this.jarBtn.Enabled = false;
+            this.jarBtn.Location = new System.Drawing.Point(610, 63);
+            this.jarBtn.Name = "jarBtn";
+            this.jarBtn.Size = new System.Drawing.Size(34, 22);
+            this.jarBtn.TabIndex = 34;
+            this.jarBtn.Text = "...";
+            this.jarBtn.UseVisualStyleBackColor = true;
+            this.jarBtn.Click += new System.EventHandler(this.jarBtn_Click);
+            // 
+            // jarCheck
+            // 
+            this.jarCheck.AutoSize = true;
+            this.jarCheck.Location = new System.Drawing.Point(6, 67);
+            this.jarCheck.Name = "jarCheck";
+            this.jarCheck.Size = new System.Drawing.Size(87, 17);
+            this.jarCheck.TabIndex = 33;
+            this.jarCheck.Text = "Custom JAR:";
+            this.jarCheck.UseVisualStyleBackColor = true;
+            this.jarCheck.CheckedChanged += new System.EventHandler(this.jarCheck_CheckedChanged);
+            // 
+            // jarBox
+            // 
+            this.jarBox.Enabled = false;
+            this.jarBox.Location = new System.Drawing.Point(122, 65);
+            this.jarBox.Name = "jarBox";
+            this.jarBox.Size = new System.Drawing.Size(483, 20);
+            this.jarBox.TabIndex = 31;
+            this.jarBox.TextChanged += new System.EventHandler(this.jarBox_TextChanged);
             // 
             // offlineModeCheck
             // 
             this.offlineModeCheck.AutoSize = true;
-            this.offlineModeCheck.Location = new System.Drawing.Point(6, 67);
+            this.offlineModeCheck.Location = new System.Drawing.Point(6, 93);
             this.offlineModeCheck.Name = "offlineModeCheck";
             this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineModeCheck.TabIndex = 30;
@@ -389,7 +426,7 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(503, 334);
+            this.opendirBtn.Location = new System.Drawing.Point(503, 358);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(75, 23);
             this.opendirBtn.TabIndex = 25;
@@ -399,7 +436,7 @@ namespace MCLauncher
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(9, 334);
+            this.closeBtn.Location = new System.Drawing.Point(8, 358);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
@@ -409,7 +446,7 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(584, 334);
+            this.saveBtn.Location = new System.Drawing.Point(584, 358);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
@@ -428,19 +465,19 @@ namespace MCLauncher
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(668, 329);
+            this.tabControl1.Size = new System.Drawing.Size(668, 353);
             this.tabControl1.TabIndex = 33;
             // 
             // javaPage
             // 
-            this.javaPage.Controls.Add(this.groupBox1);
-            this.javaPage.Controls.Add(this.groupBox2);
-            this.javaPage.Controls.Add(this.groupBox3);
+            this.javaPage.Controls.Add(this.grbInfo);
+            this.javaPage.Controls.Add(this.grbVersion);
+            this.javaPage.Controls.Add(this.grbExperts);
             this.javaPage.Location = new System.Drawing.Point(4, 22);
             this.javaPage.Margin = new System.Windows.Forms.Padding(2);
             this.javaPage.Name = "javaPage";
             this.javaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.javaPage.Size = new System.Drawing.Size(660, 303);
+            this.javaPage.Size = new System.Drawing.Size(660, 327);
             this.javaPage.TabIndex = 0;
             this.javaPage.Text = "Java Edition";
             this.javaPage.UseVisualStyleBackColor = true;
@@ -451,7 +488,7 @@ namespace MCLauncher
             this.x360Page.Margin = new System.Windows.Forms.Padding(2);
             this.x360Page.Name = "x360Page";
             this.x360Page.Padding = new System.Windows.Forms.Padding(2);
-            this.x360Page.Size = new System.Drawing.Size(660, 303);
+            this.x360Page.Size = new System.Drawing.Size(660, 327);
             this.x360Page.TabIndex = 1;
             this.x360Page.Text = "Xbox 360 Edition";
             this.x360Page.UseVisualStyleBackColor = true;
@@ -461,7 +498,7 @@ namespace MCLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(668, 362);
+            this.ClientSize = new System.Drawing.Size(668, 386);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.closeBtn);
@@ -469,14 +506,14 @@ namespace MCLauncher
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstanceManager";
             this.Text = "Profile Manager";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbInfo.ResumeLayout(false);
+            this.grbInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.grbVersion.ResumeLayout(false);
+            this.grbVersion.PerformLayout();
+            this.grbExperts.ResumeLayout(false);
+            this.grbExperts.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.javaPage.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -485,16 +522,16 @@ namespace MCLauncher
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.TextBox dirBox;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbInfo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grbVersion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox grbExperts;
         private System.Windows.Forms.CheckBox jvmCheck;
         private System.Windows.Forms.TextBox jvmBox;
         private System.Windows.Forms.CheckBox javaCheck;
@@ -518,5 +555,8 @@ namespace MCLauncher
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button jarBtn;
+        private System.Windows.Forms.CheckBox jarCheck;
+        private System.Windows.Forms.TextBox jarBox;
     }
 }

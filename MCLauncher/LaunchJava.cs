@@ -50,6 +50,8 @@ namespace MCLauncher
 
         public static bool useCustJava;
         public static string launchJavaLocation;
+        public static bool useCustJar;
+        public static string custJarLocation;
         public static bool useCustJvm;
         public static string launchJvmArgs;
         public static string launchMethod;
@@ -319,6 +321,10 @@ namespace MCLauncher
                 if (launchJoinMP == true)
                 {
                     launchCommand += $"-Dserver={launchServerIP} -Dport={launchServerPort} -Dmppass={launchMpPass} ";
+                }
+                if(useCustJar == true)
+                {
+                    launchClientPath = custJarLocation;
                 }
 
                 launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} ";

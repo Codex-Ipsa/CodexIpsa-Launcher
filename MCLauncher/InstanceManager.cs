@@ -43,6 +43,9 @@ namespace MCLauncher
         public static bool useCustomJava = false;
         public static string jvmArgs;
         public static bool useJvmArgs = false;
+        public static string customJar;
+        public static bool useCustomJar = false;
+
         public static bool offlineMode;
 
         public static string tempName;
@@ -52,9 +55,28 @@ namespace MCLauncher
         {
             This = this;
             InitializeComponent();
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+
+            //Load lang
+            grbInfo.Text = Strings.grbInfo;
+            lblName.Text = Strings.lblName;
+            label9.Text = Strings.lblDir;
+            label8.Text = Strings.lblRes;
+            label3.Text = Strings.lblResMin;
+            label5.Text = Strings.lblResMax;
+
+            grbVersion.Text = Strings.grbVersion;
+            label6.Text = Strings.lblEdition;
+            label2.Text = Strings.lblVersion;
+
+            grbExperts.Text = Strings.grbExperts;
+            javaCheck.Text = Strings.lblJavaInstall;
+            jvmCheck.Text = Strings.lblJvmArgs;
+            jarCheck.Text = Strings.lblCustJar;
+            offlineModeCheck.Text = Strings.lblOfflineLaunch;
 
             tempName = instanceName;
             Start(instanceName, mode);
@@ -91,8 +113,6 @@ namespace MCLauncher
             }
         }
 
-
-
         public static void loadDefault(string instanceName, string mode)
         {
             //this sets default stuff
@@ -122,11 +142,12 @@ namespace MCLauncher
                 useCustomJava = false;
                 jvmArgs = "";
                 useJvmArgs = false;
+                customJar = "";
+                useCustomJar = false;
                 offlineMode = false;
             }
             else if (mode == "new")
             {
-                //TODO
                 name = instanceName;
                 This.nameBox.Text = instanceName;
                 This.editionBox.DataSource = editionNames;
@@ -174,6 +195,9 @@ namespace MCLauncher
                 jvmArgs = "";
                 useJvmArgs = false;
                 This.jvmCheck.Checked = false;
+                customJar = "";
+                useCustomJar = false;
+                This.jarCheck.Checked = false;
                 offlineMode = false;
                 This.offlineModeCheck.Checked = false;
             }
@@ -199,6 +223,11 @@ namespace MCLauncher
                     useCustomJava = bool.Parse(vers.useCustomJava);
                     jvmArgs = vers.jvmArgs;
                     useJvmArgs = bool.Parse(vers.useJvmArgs);
+                    if(json.Contains("customJar"))
+                    {
+                        customJar = vers.customJar;
+                        useCustomJar = bool.Parse(vers.useCustomJar);
+                    }
                     offlineMode = bool.Parse(vers.offlineMode);
                 }
 
@@ -237,14 +266,17 @@ namespace MCLauncher
                 This.jvmCheck.Checked = useJvmArgs;
                 This.jvmBox.Enabled = useJvmArgs;
                 This.jvmBox.Text = jvmArgs;
+                This.jarCheck.Checked = useCustomJar;
+                This.jarBox.Enabled = useCustomJar;
+                This.jarBox.Text = customJar;
                 This.offlineModeCheck.Checked = offlineMode;
             }
         }
 
         public static void setData()
         {
-            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "offlineMode" };
-            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{offlineMode}" };
+            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "customJar", "useCustomJar", "offlineMode" };
+            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}" };
         }
 
         public static void saveInstance(string instanceName, string mode)
@@ -273,6 +305,8 @@ namespace MCLauncher
                 customJava = This.javaBox.Text;
                 useJvmArgs = This.jvmCheck.Checked;
                 jvmArgs = This.jvmBox.Text;
+                useCustomJar = This.jarCheck.Checked;
+                customJar = This.jarBox.Text;
                 offlineMode = This.offlineModeCheck.Checked;
             }
 
@@ -341,7 +375,6 @@ namespace MCLauncher
             try
             {
                 int i = verBox.SelectedIndex;
-                //version = verList[i];
                 if (verList[i].Contains("("))
                 {
                     int index = verList[i].IndexOf(" (");
@@ -353,9 +386,6 @@ namespace MCLauncher
                     version = verList[i];
                 }
 
-                /*int index = verList[i].IndexOf(" (");
-                if (index >= 0)
-                    version = verList[i].Substring(0, index);*/
                 url = urlList[i];
                 type = typeList[i];
             }
@@ -418,6 +448,38 @@ namespace MCLauncher
                 }
             }
         }
+
+        private void jarCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (jarCheck.Checked)
+            {
+                jarBox.Enabled = true;
+                jarBtn.Enabled = true;
+            }
+            else
+            {
+                jarBox.Enabled = false;
+                jarBtn.Enabled = false;
+            }
+        }
+
+        private void jarBtn_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "jar files (*.jar)|*.jar";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    jarBox.Text = openFileDialog.FileName;
+                }
+            }
+        }
+
+        private void jarBox_TextChanged(object sender, EventArgs e)
+        {
+            jarBox.Text = jarBox.Text.Replace('\\', '/');
+        }
     }
 
     public class instanceObjects
@@ -438,6 +500,8 @@ namespace MCLauncher
         public string useJvmArgs { get; set; }
         public string launchMethod { get; set; }
         public string useLaunchMethod { get; set; }
+        public string customJar { get; set; }
+        public string useCustomJar { get; set; }
         public string offlineMode { get; set; }
     }
 }
