@@ -47,7 +47,7 @@ namespace MCLauncher
 
 
                 //debug
-                updateXenia(vers.url, vers.ver);
+                //updateXenia(vers.url, vers.ver);
 
                 if (!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version.cfg"))
                 {

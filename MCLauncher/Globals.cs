@@ -12,8 +12,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "mojang-data"; //0.0.7-dev //mojang-data
         public static string branch = "dev"; //dev //dev-instances
-        public static string verCurrent = "0.0.7.27"; //Change this on release
-        public static string verDisplay = "0.0.7.27"; //Change this on release
+        public static string verCurrent = "0.0.7.27_01"; //Change this on release
+        public static string verDisplay = "0.0.7.27_01"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
