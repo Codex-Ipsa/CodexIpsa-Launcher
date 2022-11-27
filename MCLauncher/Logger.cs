@@ -11,7 +11,7 @@ namespace MCLauncher
         public static void logMessage(string header, string text)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(header);
+            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
             //TODO: Format log4j shits
@@ -20,7 +20,7 @@ namespace MCLauncher
         public static void logError(string header, string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(header);
+            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ERROR:");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
         }
