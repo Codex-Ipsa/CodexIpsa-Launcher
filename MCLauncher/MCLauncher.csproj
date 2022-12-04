@@ -281,6 +281,7 @@
     <Content Include="image\dirt-large-dark.png" />
     <Content Include="image\dirt-large.png" />
     <Content Include="image\dirt.png" />
+    <Content Include="image\grass.png" />
     <Content Include="image\icon.ico" />
     <Content Include="image\icon.png" />
     <Content Include="image\stone-large-dark.png" />
