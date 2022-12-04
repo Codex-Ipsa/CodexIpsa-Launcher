@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MCLauncher.controls
 {
@@ -22,6 +23,12 @@ namespace MCLauncher.controls
             lblCopyright.Text = Strings.lblCopyright;
             lblTeam.Text = Strings.lblTeam;
             lblSpecialThanks.Text = Strings.lblSpecialThanks;
+
+            //Seasonal background
+            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+            {
+                this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+            }
 
             //Center the panel
             pnlCenter.Location = new Point(

@@ -26,5 +26,8 @@
     <Setting Name="WARNING" Type="System.String" Scope="Application">
       <Value Profile="(Default)">STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!</Value>
     </Setting>
+    <Setting Name="lastInstance" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

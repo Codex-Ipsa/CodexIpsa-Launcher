@@ -200,6 +200,8 @@ namespace MCLauncher
                 This.jarCheck.Checked = false;
                 offlineMode = false;
                 This.offlineModeCheck.Checked = false;
+
+                This.opendirBtn.Visible = false;
             }
             else if(mode == "edit")
             {

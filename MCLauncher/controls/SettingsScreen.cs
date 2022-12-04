@@ -42,6 +42,12 @@ namespace MCLauncher.controls
             lblLang.Text = Strings.lblLang;
             btnCheckUpdates.Text = Strings.btnCheckUpdates;
 
+            //Seasonal background
+            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+            {
+                this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+            }
+
             //center panel
             pnlCenter.Location = new Point(
                 this.ClientSize.Width / 2 - pnlCenter.Size.Width / 2,

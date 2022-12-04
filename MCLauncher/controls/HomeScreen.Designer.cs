@@ -58,15 +58,15 @@
             this.panel1.Controls.Add(this.btnLogIn);
             this.panel1.Controls.Add(this.btnPlay);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 323);
+            this.panel1.Location = new System.Drawing.Point(0, 325);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 64);
+            this.panel1.Size = new System.Drawing.Size(784, 62);
             this.panel1.TabIndex = 3;
             // 
             // btnLogOut
             // 
             this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLogOut.Location = new System.Drawing.Point(621, 39);
+            this.btnLogOut.Location = new System.Drawing.Point(621, 38);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(75, 23);
             this.btnLogOut.TabIndex = 21;
@@ -79,7 +79,7 @@
             this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
             this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
-            this.lblLogInWarn.Location = new System.Drawing.Point(214, 44);
+            this.lblLogInWarn.Location = new System.Drawing.Point(214, 42);
             this.lblLogInWarn.Name = "lblLogInWarn";
             this.lblLogInWarn.Size = new System.Drawing.Size(353, 13);
             this.lblLogInWarn.TabIndex = 20;
@@ -133,7 +133,7 @@
             this.lblReady.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblReady.BackColor = System.Drawing.Color.Transparent;
             this.lblReady.ForeColor = System.Drawing.Color.White;
-            this.lblReady.Location = new System.Drawing.Point(484, 22);
+            this.lblReady.Location = new System.Drawing.Point(484, 21);
             this.lblReady.Name = "lblReady";
             this.lblReady.Size = new System.Drawing.Size(353, 13);
             this.lblReady.TabIndex = 14;
@@ -145,7 +145,7 @@
             this.lblWelcome.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblWelcome.BackColor = System.Drawing.Color.Transparent;
             this.lblWelcome.ForeColor = System.Drawing.Color.White;
-            this.lblWelcome.Location = new System.Drawing.Point(540, 5);
+            this.lblWelcome.Location = new System.Drawing.Point(540, 4);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(241, 13);
             this.lblWelcome.TabIndex = 12;
@@ -155,7 +155,7 @@
             // btnLogIn
             // 
             this.btnLogIn.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLogIn.Location = new System.Drawing.Point(621, 38);
+            this.btnLogIn.Location = new System.Drawing.Point(621, 37);
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.Size = new System.Drawing.Size(75, 23);
             this.btnLogIn.TabIndex = 1;
@@ -166,7 +166,7 @@
             // btnPlay
             // 
             this.btnPlay.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnPlay.Location = new System.Drawing.Point(355, 20);
+            this.btnPlay.Location = new System.Drawing.Point(355, 19);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 23);
             this.btnPlay.TabIndex = 0;
