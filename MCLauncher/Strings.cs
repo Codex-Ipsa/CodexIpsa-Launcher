@@ -38,7 +38,7 @@ namespace MCLauncher
         //InstanceManager
         public static string grbInfo = "Profile info";
         public static string lblName = "Profile name:";
-        public static string lblDir = "Directory:";
+        public static string lblDir = "Directory (blank = default):";
         public static string lblRes = "Resolution:";
         public static string lblResMin = "Min:";
         public static string lblResMax = "Max:";

@@ -180,7 +180,8 @@ namespace MCLauncher
                     }
                 }
 
-                directory = "";
+                directory = $"";
+                This.dirBox.Text = directory;
                 resolutionX = 854;
                 This.resBoxHeight.Text = resolutionY.ToString();
                 resolutionY = 480;
@@ -481,6 +482,22 @@ namespace MCLauncher
         private void jarBox_TextChanged(object sender, EventArgs e)
         {
             jarBox.Text = jarBox.Text.Replace('\\', '/');
+        }
+
+        private void dirBtn_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog openFileDialog = new FolderBrowserDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    dirBox.Text = openFileDialog.SelectedPath;
+                }
+            }
+        }
+
+        private void dirBox_TextChanged(object sender, EventArgs e)
+        {
+            dirBox.Text = dirBox.Text.Replace('\\', '/');
         }
     }
 

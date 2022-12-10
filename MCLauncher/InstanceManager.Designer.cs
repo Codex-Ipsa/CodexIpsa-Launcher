@@ -30,9 +30,10 @@ namespace MCLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstanceManager));
-            this.lblName = new System.Windows.Forms.Label();
-            this.nameBox = new System.Windows.Forms.TextBox();
-            this.dirBox = new System.Windows.Forms.TextBox();
+            this.opendirBtn = new System.Windows.Forms.Button();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.javaPage = new System.Windows.Forms.TabPage();
             this.grbInfo = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,6 +46,9 @@ namespace MCLauncher
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.dirBox = new System.Windows.Forms.TextBox();
             this.grbVersion = new System.Windows.Forms.GroupBox();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,44 +64,59 @@ namespace MCLauncher
             this.jvmBox = new System.Windows.Forms.TextBox();
             this.javaCheck = new System.Windows.Forms.CheckBox();
             this.javaBox = new System.Windows.Forms.TextBox();
-            this.opendirBtn = new System.Windows.Forms.Button();
-            this.closeBtn = new System.Windows.Forms.Button();
-            this.saveBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.javaPage = new System.Windows.Forms.TabPage();
-            this.x360Page = new System.Windows.Forms.TabPage();
+            this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRamBox)).BeginInit();
             this.grbVersion.SuspendLayout();
             this.grbExperts.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.javaPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblName
+            // opendirBtn
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(6, 16);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(48, 13);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "lbl.Name";
+            this.opendirBtn.Location = new System.Drawing.Point(503, 358);
+            this.opendirBtn.Name = "opendirBtn";
+            this.opendirBtn.Size = new System.Drawing.Size(75, 23);
+            this.opendirBtn.TabIndex = 25;
+            this.opendirBtn.Text = "Open dir";
+            this.opendirBtn.UseVisualStyleBackColor = true;
+            this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
             // 
-            // nameBox
+            // closeBtn
             // 
-            this.nameBox.Location = new System.Drawing.Point(122, 13);
-            this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(516, 20);
-            this.nameBox.TabIndex = 8;
+            this.closeBtn.Location = new System.Drawing.Point(8, 358);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(75, 23);
+            this.closeBtn.TabIndex = 26;
+            this.closeBtn.Text = "Cancel";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
-            // dirBox
+            // saveBtn
             // 
-            this.dirBox.Enabled = false;
-            this.dirBox.Location = new System.Drawing.Point(122, 39);
-            this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(476, 20);
-            this.dirBox.TabIndex = 12;
+            this.saveBtn.Location = new System.Drawing.Point(584, 358);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 28;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            // 
+            // javaPage
+            // 
+            this.javaPage.Controls.Add(this.grbInfo);
+            this.javaPage.Controls.Add(this.grbVersion);
+            this.javaPage.Controls.Add(this.grbExperts);
+            this.javaPage.Location = new System.Drawing.Point(4, 22);
+            this.javaPage.Margin = new System.Windows.Forms.Padding(2);
+            this.javaPage.Name = "javaPage";
+            this.javaPage.Padding = new System.Windows.Forms.Padding(2);
+            this.javaPage.Size = new System.Drawing.Size(660, 327);
+            this.javaPage.TabIndex = 0;
+            this.javaPage.Text = "Profile editor";
+            this.javaPage.UseVisualStyleBackColor = true;
             // 
             // grbInfo
             // 
@@ -129,9 +148,9 @@ namespace MCLauncher
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(6, 42);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.Size = new System.Drawing.Size(131, 13);
             this.label9.TabIndex = 37;
-            this.label9.Text = "Directory:";
+            this.label9.Text = "Directory (blank = default):";
             // 
             // label8
             // 
@@ -225,13 +244,13 @@ namespace MCLauncher
             // 
             // dirBtn
             // 
-            this.dirBtn.Enabled = false;
             this.dirBtn.Location = new System.Drawing.Point(604, 38);
             this.dirBtn.Name = "dirBtn";
             this.dirBtn.Size = new System.Drawing.Size(34, 20);
             this.dirBtn.TabIndex = 30;
             this.dirBtn.Text = "...";
             this.dirBtn.UseVisualStyleBackColor = true;
+            this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
             // 
             // label5
             // 
@@ -259,6 +278,30 @@ namespace MCLauncher
             this.label4.Size = new System.Drawing.Size(12, 13);
             this.label4.TabIndex = 19;
             this.label4.Text = "x";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(6, 16);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(48, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "lbl.Name";
+            // 
+            // nameBox
+            // 
+            this.nameBox.Location = new System.Drawing.Point(122, 13);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(516, 20);
+            this.nameBox.TabIndex = 8;
+            // 
+            // dirBox
+            // 
+            this.dirBox.Location = new System.Drawing.Point(143, 39);
+            this.dirBox.Name = "dirBox";
+            this.dirBox.Size = new System.Drawing.Size(455, 20);
+            this.dirBox.TabIndex = 12;
+            this.dirBox.TextChanged += new System.EventHandler(this.dirBox_TextChanged);
             // 
             // grbVersion
             // 
@@ -424,74 +467,18 @@ namespace MCLauncher
             this.javaBox.TabIndex = 8;
             this.javaBox.TextChanged += new System.EventHandler(this.javaBox_TextChanged);
             // 
-            // opendirBtn
-            // 
-            this.opendirBtn.Location = new System.Drawing.Point(503, 358);
-            this.opendirBtn.Name = "opendirBtn";
-            this.opendirBtn.Size = new System.Drawing.Size(75, 23);
-            this.opendirBtn.TabIndex = 25;
-            this.opendirBtn.Text = "Open dir";
-            this.opendirBtn.UseVisualStyleBackColor = true;
-            this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
-            // 
-            // closeBtn
-            // 
-            this.closeBtn.Location = new System.Drawing.Point(8, 358);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(75, 23);
-            this.closeBtn.TabIndex = 26;
-            this.closeBtn.Text = "Cancel";
-            this.closeBtn.UseVisualStyleBackColor = true;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
-            // 
-            // saveBtn
-            // 
-            this.saveBtn.Location = new System.Drawing.Point(584, 358);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 28;
-            this.saveBtn.Text = "Save";
-            this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.javaPage);
-            this.tabControl1.Controls.Add(this.x360Page);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(668, 353);
             this.tabControl1.TabIndex = 33;
-            // 
-            // javaPage
-            // 
-            this.javaPage.Controls.Add(this.grbInfo);
-            this.javaPage.Controls.Add(this.grbVersion);
-            this.javaPage.Controls.Add(this.grbExperts);
-            this.javaPage.Location = new System.Drawing.Point(4, 22);
-            this.javaPage.Margin = new System.Windows.Forms.Padding(2);
-            this.javaPage.Name = "javaPage";
-            this.javaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.javaPage.Size = new System.Drawing.Size(660, 327);
-            this.javaPage.TabIndex = 0;
-            this.javaPage.Text = "Java Edition";
-            this.javaPage.UseVisualStyleBackColor = true;
-            // 
-            // x360Page
-            // 
-            this.x360Page.Location = new System.Drawing.Point(4, 22);
-            this.x360Page.Margin = new System.Windows.Forms.Padding(2);
-            this.x360Page.Name = "x360Page";
-            this.x360Page.Padding = new System.Windows.Forms.Padding(2);
-            this.x360Page.Size = new System.Drawing.Size(660, 327);
-            this.x360Page.TabIndex = 1;
-            this.x360Page.Text = "Xbox 360 Edition";
-            this.x360Page.UseVisualStyleBackColor = true;
             // 
             // InstanceManager
             // 
@@ -506,6 +493,7 @@ namespace MCLauncher
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstanceManager";
             this.Text = "Profile Manager";
+            this.javaPage.ResumeLayout(false);
             this.grbInfo.ResumeLayout(false);
             this.grbInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).EndInit();
@@ -515,48 +503,45 @@ namespace MCLauncher
             this.grbExperts.ResumeLayout(false);
             this.grbExperts.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.javaPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Button opendirBtn;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.TabPage javaPage;
+        private System.Windows.Forms.GroupBox grbInfo;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox resBoxHeight;
+        private System.Windows.Forms.TextBox resBoxWidth;
+        private System.Windows.Forms.NumericUpDown minRamBox;
+        private System.Windows.Forms.NumericUpDown maxRamBox;
+        private System.Windows.Forms.Button dirBtn;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.TextBox dirBox;
-        private System.Windows.Forms.GroupBox grbInfo;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox grbVersion;
+        private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox grbExperts;
+        private System.Windows.Forms.Button jarBtn;
+        private System.Windows.Forms.CheckBox jarCheck;
+        private System.Windows.Forms.TextBox jarBox;
+        private System.Windows.Forms.CheckBox offlineModeCheck;
+        private System.Windows.Forms.Button javaBtn;
         private System.Windows.Forms.CheckBox jvmCheck;
         private System.Windows.Forms.TextBox jvmBox;
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.TextBox javaBox;
-        private System.Windows.Forms.Button opendirBtn;
-        private System.Windows.Forms.Button closeBtn;
-        private System.Windows.Forms.ComboBox editionBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button saveBtn;
-        private System.Windows.Forms.Button dirBtn;
-        private System.Windows.Forms.Button javaBtn;
-        private System.Windows.Forms.NumericUpDown minRamBox;
-        private System.Windows.Forms.NumericUpDown maxRamBox;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage javaPage;
-        private System.Windows.Forms.TabPage x360Page;
-        private System.Windows.Forms.CheckBox offlineModeCheck;
-        private System.Windows.Forms.TextBox resBoxHeight;
-        private System.Windows.Forms.TextBox resBoxWidth;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button jarBtn;
-        private System.Windows.Forms.CheckBox jarCheck;
-        private System.Windows.Forms.TextBox jarBox;
     }
 }

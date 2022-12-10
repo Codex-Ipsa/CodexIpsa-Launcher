@@ -56,6 +56,7 @@ namespace MCLauncher
         public static string launchJvmArgs;
         public static string launchMethod;
         public static bool useOfflineMode;
+        public static string launchDir;
 
         public static string gameDir;
         public static string assetDir;
@@ -200,13 +201,22 @@ namespace MCLauncher
                 //Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxyOld}");
                 launchNativePath = $"\"{Globals.currentPath}/.codexipsa/libs/natives/\"";
                 Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
-                workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}"; //TODO, customise
-                Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
-                gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft"; //TODO, customise
-                Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
-                if(assetIndexType != null && assetIndexType.Contains("legacy"))
+                if(launchDir == null || launchDir == String.Empty || launchDir == "/")
                 {
-                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{assetIndexType}"; //TODO, customise
+                    workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}";
+                    gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft";
+                }
+                else
+                {
+                    workDir = $"{launchDir}/";
+                    gameDir = $"{launchDir}/.minecraft";
+                }
+                Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
+                Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
+
+                if (assetIndexType != null && assetIndexType.Contains("legacy"))
+                {
+                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{assetIndexType}";
                 }
                 else
                 {
@@ -282,6 +292,7 @@ namespace MCLauncher
 
                     if(!File.Exists($"{workDir}\\.minecraft\\{fileName}"))
                     {
+                        Directory.CreateDirectory($"{workDir}\\.minecraft\\");
                         DownloadProgress.url = javaagentJar;
                         DownloadProgress.savePath = $"{workDir}\\.minecraft\\{fileName}";
                         DownloadProgress dp4j = new DownloadProgress();
@@ -414,7 +425,7 @@ namespace MCLauncher
                     {
                         Logger.logMessage("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
                     }
-                    process.StartInfo.WorkingDirectory = $"{gameDir}";
+                    //process.StartInfo.WorkingDirectory = $"{gameDir}"; // this crashes when using custom dirs
                     process.EnableRaisingEvents = true;
                     process.Exited += new EventHandler(ClosedGame);
                     process.Start();

@@ -21,8 +21,8 @@ namespace MCLauncher
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
-        public static bool isDebug = false; //Change this on release to false
-        public static bool requireAuth = true; //Change this on release to true
+        public static bool isDebug = true; //Change this on release to false
+        public static bool requireAuth = false; //Change this on release to true
 
         //Links
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe

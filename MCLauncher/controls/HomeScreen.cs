@@ -192,7 +192,7 @@ namespace MCLauncher
                     Logger.logMessage("[HomeScreen/ReloadInstance]", "Load Java base");
                     selectedEdition = "java";
                     LaunchJava.currentInstance = instName;
-                    //LaunchJava.gameDir TODO
+                    LaunchJava.launchDir = item.directory;
                     LaunchJava.launchResX = item.resolutionX;
                     LaunchJava.launchResY = item.resolutionY;
                     LaunchJava.launchRamMax = item.ramMax;

@@ -19,8 +19,6 @@ namespace MCLauncher
 
         public static void LaunchGame()
         {
-            //TODO: ATTEMPT FIXING BLACK SCREEN BY COPYING BASE GAME INTO XENIA?
-
             //Create required dirs
             Directory.CreateDirectory($"{Globals.dataPath}");
             Directory.CreateDirectory($"{Globals.dataPath}\\versions");
@@ -86,7 +84,7 @@ namespace MCLauncher
                 if(Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000"))
                     Directory.Delete($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000", true);
 
-                Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe", $"\"{Globals.dataPath}\\versions\\x360\\{ver}\\default.xex\"");
+                Process.Start($"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"", $"\"{Globals.dataPath}\\versions\\x360\\{ver}\\default.xex\"");
             }
             else if(type == "update")
             {
@@ -148,12 +146,12 @@ namespace MCLauncher
                     }
 
                     //Copy all the files & Replaces any files with the same name
+                    Logger.logMessage("[LaunchXbox360]", "Preparing update files...");
                     foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\versions\\x360\\{ver}", "*.*", SearchOption.AllDirectories))
                     {
-                        Logger.logMessage("[LaunchXbox360]", "Copying update files...");
                         File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"), true);
-                        Logger.logMessage("[LaunchXbox360]", "Done!");
                     }
+                    Logger.logMessage("[LaunchXbox360]", "Done!");
                 }
 
                 Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe", $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"");
