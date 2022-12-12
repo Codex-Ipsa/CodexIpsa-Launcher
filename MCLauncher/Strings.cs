@@ -40,8 +40,9 @@ namespace MCLauncher
         public static string lblName = "Profile name:";
         public static string lblDir = "Directory (blank = default):";
         public static string lblRes = "Resolution:";
-        public static string lblResMin = "Min:";
-        public static string lblResMax = "Max:";
+        public static string lblMin = "Min:";
+        public static string lblMax = "Max:";
+        public static string lblRam = "Memory:";
 
         public static string grbVersion = "Version selection";
         public static string lblEdition = "Edition:";
@@ -52,6 +53,7 @@ namespace MCLauncher
         public static string lblJvmArgs = "JVM arguments:";
         public static string lblCustJar = "Custom JAR:";
         public static string lblOfflineLaunch = "Launch in offline mode";
+        public static string lblUseProxy = "Use skin and sound proxy (use up to 1.5.2)";
 
 
         public static void reloadLangs()

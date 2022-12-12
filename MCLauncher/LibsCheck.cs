@@ -85,6 +85,7 @@ namespace MCLauncher
                                 string file = "/" + entry.FullName;
                                 Logger.logError("[LibsCheck]", $"Exctract part: {entry.FullName}");
                                 Logger.logError("[LibsCheck]", $"Exctract dir: {dir}");
+                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\META-INF\\");
 
                                 if (File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}"))
                                 {

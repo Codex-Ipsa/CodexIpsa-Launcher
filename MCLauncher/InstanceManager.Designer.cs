@@ -55,6 +55,7 @@ namespace MCLauncher
             this.verBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.grbExperts = new System.Windows.Forms.GroupBox();
+            this.proxyCheck = new System.Windows.Forms.CheckBox();
             this.jarBtn = new System.Windows.Forms.Button();
             this.jarCheck = new System.Windows.Forms.CheckBox();
             this.jarBox = new System.Windows.Forms.TextBox();
@@ -76,7 +77,7 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(503, 358);
+            this.opendirBtn.Location = new System.Drawing.Point(500, 373);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(75, 23);
             this.opendirBtn.TabIndex = 25;
@@ -86,7 +87,7 @@ namespace MCLauncher
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(8, 358);
+            this.closeBtn.Location = new System.Drawing.Point(12, 373);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
@@ -96,7 +97,7 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(584, 358);
+            this.saveBtn.Location = new System.Drawing.Point(581, 373);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
@@ -113,7 +114,7 @@ namespace MCLauncher
             this.javaPage.Margin = new System.Windows.Forms.Padding(2);
             this.javaPage.Name = "javaPage";
             this.javaPage.Padding = new System.Windows.Forms.Padding(2);
-            this.javaPage.Size = new System.Drawing.Size(660, 327);
+            this.javaPage.Size = new System.Drawing.Size(660, 346);
             this.javaPage.TabIndex = 0;
             this.javaPage.Text = "Profile editor";
             this.javaPage.UseVisualStyleBackColor = true;
@@ -148,27 +149,27 @@ namespace MCLauncher
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(6, 42);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(131, 13);
+            this.label9.Size = new System.Drawing.Size(33, 13);
             this.label9.TabIndex = 37;
-            this.label9.Text = "Directory (blank = default):";
+            this.label9.Text = "lbl.Dir";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(6, 67);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.Size = new System.Drawing.Size(39, 13);
             this.label8.TabIndex = 36;
-            this.label8.Text = "Resolution:";
+            this.label8.Text = "lbl.Res";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 94);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 35;
-            this.label7.Text = "Memory:";
+            this.label7.Text = "lbl.Mem";
             // 
             // resBoxHeight
             // 
@@ -257,18 +258,18 @@ namespace MCLauncher
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(390, 94);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 25;
-            this.label5.Text = "Max:";
+            this.label5.Text = "lbl.Max";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(123, 94);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 24;
-            this.label3.Text = "Min:";
+            this.label3.Text = "lbl.Min";
             // 
             // label4
             // 
@@ -333,9 +334,9 @@ namespace MCLauncher
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 23;
-            this.label2.Text = "Version:";
+            this.label2.Text = "lbl.Version";
             // 
             // verBox
             // 
@@ -352,13 +353,14 @@ namespace MCLauncher
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(6, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Edition:";
+            this.label6.Text = "lbl.Edition";
             // 
             // grbExperts
             // 
             this.grbExperts.BackColor = System.Drawing.Color.Transparent;
+            this.grbExperts.Controls.Add(this.proxyCheck);
             this.grbExperts.Controls.Add(this.jarBtn);
             this.grbExperts.Controls.Add(this.jarCheck);
             this.grbExperts.Controls.Add(this.jarBox);
@@ -371,10 +373,20 @@ namespace MCLauncher
             this.grbExperts.ForeColor = System.Drawing.Color.Black;
             this.grbExperts.Location = new System.Drawing.Point(5, 207);
             this.grbExperts.Name = "grbExperts";
-            this.grbExperts.Size = new System.Drawing.Size(650, 114);
+            this.grbExperts.Size = new System.Drawing.Size(650, 136);
             this.grbExperts.TabIndex = 24;
             this.grbExperts.TabStop = false;
             this.grbExperts.Text = "grb.Experts";
+            // 
+            // proxyCheck
+            // 
+            this.proxyCheck.AutoSize = true;
+            this.proxyCheck.Location = new System.Drawing.Point(6, 116);
+            this.proxyCheck.Name = "proxyCheck";
+            this.proxyCheck.Size = new System.Drawing.Size(82, 17);
+            this.proxyCheck.TabIndex = 35;
+            this.proxyCheck.Text = "lbl.useProxy";
+            this.proxyCheck.UseVisualStyleBackColor = true;
             // 
             // jarBtn
             // 
@@ -392,9 +404,9 @@ namespace MCLauncher
             this.jarCheck.AutoSize = true;
             this.jarCheck.Location = new System.Drawing.Point(6, 67);
             this.jarCheck.Name = "jarCheck";
-            this.jarCheck.Size = new System.Drawing.Size(87, 17);
+            this.jarCheck.Size = new System.Drawing.Size(74, 17);
             this.jarCheck.TabIndex = 33;
-            this.jarCheck.Text = "Custom JAR:";
+            this.jarCheck.Text = "lbl.CustJar";
             this.jarCheck.UseVisualStyleBackColor = true;
             this.jarCheck.CheckedChanged += new System.EventHandler(this.jarCheck_CheckedChanged);
             // 
@@ -412,9 +424,9 @@ namespace MCLauncher
             this.offlineModeCheck.AutoSize = true;
             this.offlineModeCheck.Location = new System.Drawing.Point(6, 93);
             this.offlineModeCheck.Name = "offlineModeCheck";
-            this.offlineModeCheck.Size = new System.Drawing.Size(133, 17);
+            this.offlineModeCheck.Size = new System.Drawing.Size(94, 17);
             this.offlineModeCheck.TabIndex = 30;
-            this.offlineModeCheck.Text = "Launch in offline mode";
+            this.offlineModeCheck.Text = "lbl.offlineMode";
             this.offlineModeCheck.UseVisualStyleBackColor = true;
             // 
             // javaBtn
@@ -433,9 +445,9 @@ namespace MCLauncher
             this.jvmCheck.AutoSize = true;
             this.jvmCheck.Location = new System.Drawing.Point(6, 41);
             this.jvmCheck.Name = "jvmCheck";
-            this.jvmCheck.Size = new System.Drawing.Size(102, 17);
+            this.jvmCheck.Size = new System.Drawing.Size(79, 17);
             this.jvmCheck.TabIndex = 23;
-            this.jvmCheck.Text = "JVM arguments:";
+            this.jvmCheck.Text = "lbl.JvmArgs";
             this.jvmCheck.UseVisualStyleBackColor = true;
             this.jvmCheck.CheckedChanged += new System.EventHandler(this.jvmCheck_CheckedChanged);
             // 
@@ -452,9 +464,9 @@ namespace MCLauncher
             this.javaCheck.AutoSize = true;
             this.javaCheck.Location = new System.Drawing.Point(6, 15);
             this.javaCheck.Name = "javaCheck";
-            this.javaCheck.Size = new System.Drawing.Size(81, 17);
+            this.javaCheck.Size = new System.Drawing.Size(89, 17);
             this.javaCheck.TabIndex = 21;
-            this.javaCheck.Text = "Java install:";
+            this.javaCheck.Text = "lbl.JavaInstall";
             this.javaCheck.UseVisualStyleBackColor = true;
             this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
             // 
@@ -477,7 +489,7 @@ namespace MCLauncher
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(668, 353);
+            this.tabControl1.Size = new System.Drawing.Size(668, 372);
             this.tabControl1.TabIndex = 33;
             // 
             // InstanceManager
@@ -485,7 +497,7 @@ namespace MCLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(668, 386);
+            this.ClientSize = new System.Drawing.Size(668, 405);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.closeBtn);
@@ -543,5 +555,6 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.CheckBox proxyCheck;
     }
 }

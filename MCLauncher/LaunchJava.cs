@@ -55,7 +55,9 @@ namespace MCLauncher
         public static bool useCustJvm;
         public static string launchJvmArgs;
         public static string launchMethod;
-        public static bool useOfflineMode;
+        public static bool useOfflineMode; 
+        public static bool useProxy;
+
         public static string launchDir;
 
         public static string gameDir;
@@ -300,7 +302,7 @@ namespace MCLauncher
                     }
                     launchCommand += $"-javaagent:\"{workDir}\\.minecraft\\{fileName}\" ";
                 }
-                if (launchProxy != "null")
+                if (launchProxy != "null" && useProxy == true)
                 {
                     launchCommand += $"{launchProxy} ";
                 }

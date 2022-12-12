@@ -46,6 +46,7 @@ namespace MCLauncher
         public static string customJar;
         public static bool useCustomJar = false;
 
+        public static bool useProxy;
         public static bool offlineMode;
 
         public static string tempName;
@@ -65,8 +66,10 @@ namespace MCLauncher
             lblName.Text = Strings.lblName;
             label9.Text = Strings.lblDir;
             label8.Text = Strings.lblRes;
-            label3.Text = Strings.lblResMin;
-            label5.Text = Strings.lblResMax;
+            label3.Text = Strings.lblMin;
+            label5.Text = Strings.lblMax;
+            label7.Text = Strings.lblRam;
+            proxyCheck.Text = Strings.lblUseProxy;
 
             grbVersion.Text = Strings.grbVersion;
             label6.Text = Strings.lblEdition;
@@ -145,6 +148,7 @@ namespace MCLauncher
                 customJar = "";
                 useCustomJar = false;
                 offlineMode = false;
+                useProxy = true;
             }
             else if (mode == "new")
             {
@@ -201,6 +205,8 @@ namespace MCLauncher
                 This.jarCheck.Checked = false;
                 offlineMode = false;
                 This.offlineModeCheck.Checked = false;
+                useProxy = false;
+                This.proxyCheck.Checked = false;
 
                 This.opendirBtn.Visible = false;
             }
@@ -232,6 +238,10 @@ namespace MCLauncher
                         useCustomJar = bool.Parse(vers.useCustomJar);
                     }
                     offlineMode = bool.Parse(vers.offlineMode);
+                    if(json.Contains("useProxy"))
+                    {
+                        useProxy = bool.Parse(vers.useProxy);
+                    }
                 }
 
                 This.nameBox.Enabled = false;
@@ -273,13 +283,14 @@ namespace MCLauncher
                 This.jarBox.Enabled = useCustomJar;
                 This.jarBox.Text = customJar;
                 This.offlineModeCheck.Checked = offlineMode;
+                This.proxyCheck.Checked = useProxy;
             }
         }
 
         public static void setData()
         {
-            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "customJar", "useCustomJar", "offlineMode" };
-            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}" };
+            varNames = new List<string>() { "name", "edition", "version", "type", "url", "directory", "resolutionX", "resolutionY", "ramMin", "ramMax", "customJava", "useCustomJava", "jvmArgs", "useJvmArgs", "customJar", "useCustomJar", "offlineMode", "useProxy" };
+            varValues = new List<string>() { $"{name}", $"{edition}", $"{version}", $"{type}", $"{url}", $"{directory}", $"{resolutionX}", $"{resolutionY}", $"{ramMin}", $"{ramMax}", $"{customJava}", $"{useCustomJava}", $"{jvmArgs}", $"{useJvmArgs}", $"{customJar}", $"{useCustomJar}", $"{offlineMode}", $"{useProxy}" };
         }
 
         public static void saveInstance(string instanceName, string mode)
@@ -311,6 +322,7 @@ namespace MCLauncher
                 useCustomJar = This.jarCheck.Checked;
                 customJar = This.jarBox.Text;
                 offlineMode = This.offlineModeCheck.Checked;
+                useProxy = This.proxyCheck.Checked;
             }
 
             setData();
@@ -499,6 +511,7 @@ namespace MCLauncher
         {
             dirBox.Text = dirBox.Text.Replace('\\', '/');
         }
+
     }
 
     public class instanceObjects
@@ -522,5 +535,6 @@ namespace MCLauncher
         public string customJar { get; set; }
         public string useCustomJar { get; set; }
         public string offlineMode { get; set; }
+        public string useProxy { get; set; }
     }
 }

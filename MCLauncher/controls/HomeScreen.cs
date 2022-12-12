@@ -211,6 +211,10 @@ namespace MCLauncher
                         LaunchJava.custJarLocation = item.customJar;
                     }
                     LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
+                    if(json.Contains("useProxy"))
+                    {
+                        LaunchJava.useProxy = bool.Parse(item.useProxy);
+                    }
                     Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
                 }
                 else if (item.edition == "Xbox 360 Edition")
