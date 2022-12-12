@@ -347,7 +347,14 @@ namespace MCLauncher
                     launchCmdAddon = launchCmdAddon.Replace("{gameDir}", $"\"{gameDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{assetDir}", $"\"{assetDir}\"");
                     launchCmdAddon = launchCmdAddon.Replace("{playerName}", $"{launchPlayerName}");
-                    launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName}");
+                    if(useCustJar  == true)
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName} [Custom]");
+                    }
+                    else
+                    {
+                        launchCmdAddon = launchCmdAddon.Replace("{version}", $"{launchVerName}");
+                    }
                     launchCmdAddon = launchCmdAddon.Replace("{workDir}", $"\"{workDir}\"");
                     if(useOfflineMode == true)
                     {
@@ -427,7 +434,7 @@ namespace MCLauncher
                     {
                         Logger.logMessage("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
                     }
-                    //process.StartInfo.WorkingDirectory = $"{gameDir}"; // this crashes when using custom dirs
+                    process.StartInfo.WorkingDirectory = $"{gameDir}"; // this crashes when using custom dirs ??? it doesn't anymore ???
                     process.EnableRaisingEvents = true;
                     process.Exited += new EventHandler(ClosedGame);
                     process.Start();
