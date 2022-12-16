@@ -21,14 +21,30 @@ namespace MCLauncher
     public partial class HomeScreen : UserControl
     {
         public static HomeScreen Instance;
-        public static string selectedEdition; //TODO: LOAD THIS FROM INSTANCE
+        public static string selectedEdition;
         public static string msPlayerName;
-        public static string selectedInstance = "Default"; //TODO: SAVE LAST OPENED INSTANCE AND LOAD It here
+        public static string selectedInstance = "Default";
 
         public HomeScreen()
         {
+              
             Instance = this;
             InitializeComponent();
+
+            //TODO
+            /*if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
+            {
+                cmbInstaces.SelectedItem = "Default";
+                selectedInstance = "Default";
+                Logger.logMessage("[HomeScreen]", "Last saved instance is empty");
+            }
+            else
+            {
+                //cmbInstaces.SelectedIndex = cmbInstaces.FindStringExact(Properties.Settings.Default.lastInstance);
+                selectedInstance = Properties.Settings.Default.lastInstance;
+                Logger.logMessage("[HomeScreen]", $"Last saved instance is {selectedInstance}");
+                cmbInstaces.SelectedIndex = cmbInstaces.FindString(Properties.Settings.Default.lastInstance);
+            }*/
 
             //Load lang
             btnPlay.Text = Strings.btnPlay;
@@ -66,6 +82,7 @@ namespace MCLauncher
             loadInstanceList();
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+            Logger.logMessage("[HomeScreen]", $"Selected instance: {selectedInstance}");
             //Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
@@ -425,6 +442,8 @@ namespace MCLauncher
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             reloadInstance(cmbInstaces.Text);
+            Properties.Settings.Default.lastInstance = cmbInstaces.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)

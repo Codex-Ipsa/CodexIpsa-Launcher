@@ -443,7 +443,21 @@ namespace MCLauncher
 
         private void opendirBtn_Click(object sender, EventArgs e)
         {
-            Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
+            if(directory != String.Empty || directory != "" || directory != null)
+            {
+                try
+                {
+                    Process.Start(directory);
+                }
+                catch(Exception)
+                {
+                    Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
+                }
+            }
+            else
+            {
+                Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
+            }
         }
 
         private void javaBox_TextChanged(object sender, EventArgs e)
