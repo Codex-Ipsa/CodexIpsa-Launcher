@@ -1,7 +1,6 @@
-﻿
-namespace MCLauncher
+﻿namespace MCLauncher
 {
-    partial class DownloadProgress
+    partial class CopyProgress
     {
         /// <summary>
         /// Required designer variable.
@@ -29,53 +28,52 @@ namespace MCLauncher
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadProgress));
+            this.cancelBtn = new System.Windows.Forms.Button();
+            this.ProgressLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBarDownload = new System.Windows.Forms.ProgressBar();
-            this.ProgressLabel = new System.Windows.Forms.Label();
-            this.cancelBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // cancelBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Downloading files...";
-            // 
-            // progressBarDownload
-            // 
-            this.progressBarDownload.Location = new System.Drawing.Point(12, 25);
-            this.progressBarDownload.Name = "progressBarDownload";
-            this.progressBarDownload.Size = new System.Drawing.Size(213, 23);
-            this.progressBarDownload.TabIndex = 0;
+            this.cancelBtn.Location = new System.Drawing.Point(81, 69);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.cancelBtn.TabIndex = 8;
+            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // ProgressLabel
             // 
             this.ProgressLabel.AutoSize = true;
             this.ProgressLabel.BackColor = System.Drawing.Color.Transparent;
             this.ProgressLabel.ForeColor = System.Drawing.Color.Black;
-            this.ProgressLabel.Location = new System.Drawing.Point(12, 51);
+            this.ProgressLabel.Location = new System.Drawing.Point(12, 53);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(54, 13);
-            this.ProgressLabel.TabIndex = 3;
+            this.ProgressLabel.TabIndex = 7;
             this.ProgressLabel.Text = "Loading...";
             // 
-            // cancelBtn
+            // label1
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(81, 67);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.cancelBtn.TabIndex = 4;
-            this.cancelBtn.Text = "Cancel";
-            this.cancelBtn.UseVisualStyleBackColor = true;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Copying files...";
             // 
-            // DownloadProgress
+            // progressBarDownload
+            // 
+            this.progressBarDownload.Location = new System.Drawing.Point(12, 27);
+            this.progressBarDownload.Name = "progressBarDownload";
+            this.progressBarDownload.Size = new System.Drawing.Size(213, 23);
+            this.progressBarDownload.TabIndex = 5;
+            // 
+            // CopyProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,18 +82,18 @@ namespace MCLauncher
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBarDownload);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DownloadProgress";
-            this.Text = "Downloading...";
+            this.Name = "CopyProgress";
+            this.Text = "CopyProgress";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBarDownload;
-        private System.Windows.Forms.Label ProgressLabel;
-        private System.Windows.Forms.Button cancelBtn;
     }
 }

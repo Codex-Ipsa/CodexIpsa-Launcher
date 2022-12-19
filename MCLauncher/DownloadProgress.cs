@@ -18,7 +18,6 @@ namespace MCLauncher
         public static string url;
         public static string savePath;
         WebClient wc;
-        WebClient check;
         public static int fileSize = 0; //0 - null; 1 = can download; 2 = cancel //<-- what does this even mean????
 
         public DownloadProgress()
