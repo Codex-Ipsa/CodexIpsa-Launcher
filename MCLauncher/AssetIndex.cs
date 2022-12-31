@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.progressbars;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace MCLauncher
 
         public static List<string> nameList = new List<string>();
         public static List<string> hashList = new List<string>();
+        public static int totalSize = 0;
 
         public static void start(string indexUrl, string indexName)
         {
@@ -56,12 +58,18 @@ namespace MCLauncher
                         var itemProps = itemObj.Properties();
                         foreach (var iProp in itemProps)
                         {
-                            if(iProp.Name == "hash")
+                            if (iProp.Name == "hash")
                             {
                                 object iVal = iProp.Value;
                                 Logger.logMessage("[AssetIndex]", $"Name: {aKey}; hash: {iVal}");
                                 nameList.Add(aKey);
                                 hashList.Add(iVal.ToString());
+                            }
+                            else if (iProp.Name == "size")
+                            {
+                                object iVal = iProp.Value;
+                                totalSize += int.Parse(iVal.ToString());
+                                Logger.logMessage("[AssetIndex]", $"Current size: {iVal}; totalSize: {totalSize}");
                             }
                         }
                     }
@@ -77,6 +85,10 @@ namespace MCLauncher
                     Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\");
                     int indexInt = 0;
                     WebClient wc = new WebClient();
+                    
+                    List<string> urls = new List<string>();
+                    List<string> paths = new List<string>();
+
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];
@@ -92,16 +104,21 @@ namespace MCLauncher
                         if (index2 >= 0)
                             fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}"))
                         {
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
-                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
-                            Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
+                            urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                            paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+
+                            //wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            //Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
                         }
 
                         indexInt++;
                     }
+                    DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                    dpm.ShowDialog();
+
                     isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
@@ -113,6 +130,10 @@ namespace MCLauncher
 
                     int indexInt = 0;
                     WebClient wc = new WebClient();
+                    
+                    List<string> urls = new List<string>();
+                    List<string> paths = new List<string>();
+
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];
@@ -120,13 +141,18 @@ namespace MCLauncher
 
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}"))
                         {
+                            urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                            paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
-                            wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
-                            Logger.logMessage("[AssetIndex]", $"Downloaded {name} to {firstTwo}/{fullHash}");
+                            //wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            //Logger.logMessage("[AssetIndex]", $"Downloaded {name} to {firstTwo}/{fullHash}");
                         }
 
                         indexInt++;
                     }
+                    DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                    dpm.ShowDialog();
+
                     isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();

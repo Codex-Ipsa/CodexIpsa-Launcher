@@ -40,7 +40,7 @@ namespace MCLauncher
 
         private void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            //this.Close();
+            this.Close();
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)

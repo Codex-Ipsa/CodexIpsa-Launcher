@@ -148,16 +148,9 @@ namespace MCLauncher
 
                     //Copy all the files & Replaces any files with the same name
                     Logger.logMessage("[LaunchXbox360]", "Preparing update files...");
-                    /*List<string> source = new List<string>();
-                    List<string> destination = new List<string>();
-                    int fullSize = 0;*/
                     foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\versions\\x360\\{ver}", "*.*", SearchOption.AllDirectories))
                     {
-                        /*source.Add(newPath);
-                        destination.Add(newPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"));
-                        fullSize += newPath.Length;*/
                         File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"), true);
-                        //Console.WriteLine(fullSize + " - " + newPath);
                     }
                     /*CopyProgressMulti cpd = new CopyProgressMulti(source, destination, fullSize);
                     cpd.ShowDialog();*/
