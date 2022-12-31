@@ -130,7 +130,7 @@ namespace MCLauncher
                     }
                     if(urls.Count != 0)
                     {
-                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, "Downloading assets...");
                         dpm.ShowDialog();
                     }
 
@@ -180,7 +180,7 @@ namespace MCLauncher
                     }
                     if(urls.Count != 0)
                     {
-                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, "Downloading assets...");
                         dpm.ShowDialog();
                     }
 

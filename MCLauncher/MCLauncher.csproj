@@ -102,12 +102,6 @@
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="progressbars\CopyProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="progressbars\CopyProgress.Designer.cs">
-      <DependentUpon>CopyProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="DebugTools.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,12 +137,6 @@
     </Compile>
     <Compile Include="NoJava.Designer.cs">
       <DependentUpon>NoJava.cs</DependentUpon>
-    </Compile>
-    <Compile Include="progressbars\CopyProgressMulti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="progressbars\CopyProgressMulti.Designer.cs">
-      <DependentUpon>CopyProgressMulti.cs</DependentUpon>
     </Compile>
     <Compile Include="progressbars\DownloadProgressMulti.cs">
       <SubType>Form</SubType>
@@ -227,9 +215,6 @@
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="progressbars\CopyProgress.resx">
-      <DependentUpon>CopyProgress.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DebugTools.resx">
       <DependentUpon>DebugTools.cs</DependentUpon>
     </EmbeddedResource>
@@ -262,9 +247,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OfflineMode.resx">
       <DependentUpon>OfflineMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="progressbars\CopyProgressMulti.resx">
-      <DependentUpon>CopyProgressMulti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="progressbars\DownloadProgressMulti.resx">
       <DependentUpon>DownloadProgressMulti.cs</DependentUpon>

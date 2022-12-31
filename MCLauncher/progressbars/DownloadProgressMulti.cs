@@ -9,22 +9,21 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MCLauncher.progressbars
 {
     public partial class DownloadProgressMulti : Form
     {
         WebClient client;
-
         List<string> theUrls = new List<string>();
         List<string> thePaths = new List<string>();
         int theSize;
         int sizeReceived = 0;
         bool hasAdded = false;
-
         int currentInt = 0;
 
-        public DownloadProgressMulti(List<string> urls, List<string> paths, int totalSize)
+        public DownloadProgressMulti(List<string> urls, List<string> paths, int totalSize, string message)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -32,6 +31,7 @@ namespace MCLauncher.progressbars
             this.MinimizeBox = false;
             this.ControlBox = false;
             progressBarDownload.Maximum = totalSize;
+            label1.Text = message;
 
             theUrls = urls;
             thePaths = paths;
@@ -48,7 +48,7 @@ namespace MCLauncher.progressbars
             if(currentInt < theUrls.Count)
             {
                 hasAdded = false;
-                Console.WriteLine($"Downloading {theUrls[currentInt]}");
+                Logger.logMessage("[DownloadProgressMulti]",$"Downloading {theUrls[currentInt]}...");
                 client.DownloadFileAsync(new Uri(theUrls[currentInt]), thePaths[currentInt]);
                 currentInt++;
             }
@@ -56,13 +56,13 @@ namespace MCLauncher.progressbars
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            Console.WriteLine("THIS GOT CALLED");
+            //Console.WriteLine("THIS GOT CALLED");
             if(e.ProgressPercentage == 100 && hasAdded == false)
             {
-                Console.WriteLine("THAT GOT CALLED");
+                //Console.WriteLine("THAT GOT CALLED");
                 hasAdded = true;
                 sizeReceived += (int)e.BytesReceived;
-                Console.WriteLine("PERCENTAGE IS 100%");
+                //Console.WriteLine("PERCENTAGE IS 100%");
                 ProgressLabel.Text = (sizeReceived * 100.0 / theSize).ToString("N0") + "% | " + (sizeReceived) + " bytes / " + theSize + " bytes";
 
                 progressBarDownload.Value = sizeReceived;
@@ -83,7 +83,16 @@ namespace MCLauncher.progressbars
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
+            currentInt = theUrls.Count;
+            client.CancelAsync();
 
+            foreach(string path in thePaths)
+            {
+                if(File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
         }
     }
 }
