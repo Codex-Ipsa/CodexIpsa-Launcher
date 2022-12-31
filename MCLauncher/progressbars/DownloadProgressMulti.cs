@@ -63,14 +63,9 @@ namespace MCLauncher.progressbars
                 hasAdded = true;
                 sizeReceived += (int)e.BytesReceived;
                 Console.WriteLine("PERCENTAGE IS 100%");
-                ProgressLabel.Text = e.ProgressPercentage + "% | " + (sizeReceived) + " bytes / " + theSize + " bytes";
+                ProgressLabel.Text = (sizeReceived * 100.0 / theSize).ToString("N0") + "% | " + (sizeReceived) + " bytes / " + theSize + " bytes";
 
-                //progressBarDownload.Value = sizeReceived + (int)e.BytesReceived;
-            }
-
-            if (sizeReceived + e.BytesReceived > theSize)
-            {
-                Console.WriteLine("WARNING!!!!");
+                progressBarDownload.Value = sizeReceived;
             }
         }
 
