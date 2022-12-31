@@ -19,6 +19,8 @@ namespace MCLauncher.progressbars
         List<string> theUrls = new List<string>();
         List<string> thePaths = new List<string>();
         int theSize;
+        int sizeReceived = 0;
+        bool hasAdded = false;
 
         int currentInt = 0;
 
@@ -45,6 +47,7 @@ namespace MCLauncher.progressbars
         {
             if(currentInt < theUrls.Count)
             {
+                hasAdded = false;
                 Console.WriteLine($"Downloading {theUrls[currentInt]}");
                 client.DownloadFileAsync(new Uri(theUrls[currentInt]), thePaths[currentInt]);
                 currentInt++;
@@ -53,8 +56,22 @@ namespace MCLauncher.progressbars
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            ProgressLabel.Text = e.ProgressPercentage + "% | " + e.BytesReceived + " bytes / " + theSize + " bytes";
-            //progressBarDownload.Value += (int)e.BytesReceived;
+            Console.WriteLine("THIS GOT CALLED");
+            if(e.ProgressPercentage == 100 && hasAdded == false)
+            {
+                Console.WriteLine("THAT GOT CALLED");
+                hasAdded = true;
+                sizeReceived += (int)e.BytesReceived;
+                Console.WriteLine("PERCENTAGE IS 100%");
+                ProgressLabel.Text = e.ProgressPercentage + "% | " + (sizeReceived) + " bytes / " + theSize + " bytes";
+
+                //progressBarDownload.Value = sizeReceived + (int)e.BytesReceived;
+            }
+
+            if (sizeReceived + e.BytesReceived > theSize)
+            {
+                Console.WriteLine("WARNING!!!!");
+            }
         }
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
