@@ -15,7 +15,7 @@ namespace MCLauncher
 
         public static List<string> nameList = new List<string>();
         public static List<string> hashList = new List<string>();
-        public static int totalSize = 0;
+        public static List<int> sizeList = new List<int>();
 
         public static void start(string indexUrl, string indexName)
         {
@@ -68,8 +68,8 @@ namespace MCLauncher
                             else if (iProp.Name == "size")
                             {
                                 object iVal = iProp.Value;
-                                totalSize += int.Parse(iVal.ToString());
-                                Logger.logMessage("[AssetIndex]", $"Current size: {iVal}; totalSize: {totalSize}");
+                                sizeList.Add(int.Parse(iVal.ToString()));
+                                Logger.logMessage("[AssetIndex]", $"Current size: {iVal}");
                             }
                         }
                     }
@@ -89,6 +89,7 @@ namespace MCLauncher
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
 
+                    int totalSize = 0;
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];
@@ -106,23 +107,38 @@ namespace MCLauncher
 
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}"))
                         {
+                            totalSize += sizeList[indexInt];
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
                             urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                             paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
-
-                            //wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
-                            //Logger.logMessage("[AssetIndex]", $"Downloaded {fileName} to {fileDirectory}");
+                        }
+                        else
+                        {
+                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            if (fi.Length != sizeList[indexInt])
+                            {
+                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash}");
+                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                totalSize += sizeList[indexInt];
+                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
+                                urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                                paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            }
                         }
 
                         indexInt++;
                     }
-                    DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
-                    dpm.ShowDialog();
+                    if(urls.Count != 0)
+                    {
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                        dpm.ShowDialog();
+                    }
 
                     isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
                     nameList.Clear();
+                    totalSize = 0;
                 }
                 else if (isLegacy == false)
                 {
@@ -133,7 +149,7 @@ namespace MCLauncher
                     
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
-
+                    int totalSize = 0;
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];
@@ -141,22 +157,38 @@ namespace MCLauncher
 
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}"))
                         {
+                            totalSize += sizeList[indexInt];
                             urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                             paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
-                            //wc.DownloadFile($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}", $"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
-                            //Logger.logMessage("[AssetIndex]", $"Downloaded {name} to {firstTwo}/{fullHash}");
+                        }
+                        else
+                        {
+                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            if (fi.Length != sizeList[indexInt])
+                            {
+                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash}");
+                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                totalSize += sizeList[indexInt];
+                                urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                                paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
+                            }
                         }
 
                         indexInt++;
                     }
-                    DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
-                    dpm.ShowDialog();
+                    if(urls.Count != 0)
+                    {
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize);
+                        dpm.ShowDialog();
+                    }
 
                     isLegacy = false;
                     indexInt = 0;
                     hashList.Clear();
                     nameList.Clear();
+                    totalSize = 0;
                 }
             }
         }
