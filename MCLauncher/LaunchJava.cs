@@ -247,7 +247,6 @@ namespace MCLauncher
                             File.Copy(newPath, newPath.Replace(assetDir, realPath), true);
                         }
                     }
-
                 }
 
                 //Download client

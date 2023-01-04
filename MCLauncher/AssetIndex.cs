@@ -61,7 +61,7 @@ namespace MCLauncher
                             if (iProp.Name == "hash")
                             {
                                 object iVal = iProp.Value;
-                                Logger.logMessage("[AssetIndex]", $"Name: {aKey}; hash: {iVal}");
+                                //Logger.logMessage("[AssetIndex]", $"Name: {aKey}; hash: {iVal}");
                                 nameList.Add(aKey);
                                 hashList.Add(iVal.ToString());
                             }
@@ -69,7 +69,7 @@ namespace MCLauncher
                             {
                                 object iVal = iProp.Value;
                                 sizeList.Add(int.Parse(iVal.ToString()));
-                                Logger.logMessage("[AssetIndex]", $"Current size: {iVal}");
+                                //Logger.logMessage("[AssetIndex]", $"Current size: {iVal}");
                             }
                         }
                     }
@@ -114,11 +114,12 @@ namespace MCLauncher
                         }
                         else
                         {
-                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            //Logger.logError("[AssetIndex]", "aa " + $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             if (fi.Length != sizeList[indexInt])
                             {
-                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash}");
-                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                Logger.logError("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName}");
+                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                                 totalSize += sizeList[indexInt];
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
                                 urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
