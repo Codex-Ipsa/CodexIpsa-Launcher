@@ -441,6 +441,8 @@ namespace MCLauncher
                     process.BeginErrorReadLine();
                     process.BeginOutputReadLine();
 
+                    //HomeScreen.playBtnDis("Can't launch the same instance twice!");
+
                     //MainWindow.loadLog();
 
                     //VerSelect.checkTab = "java";
@@ -471,6 +473,7 @@ namespace MCLauncher
                     Directory.Delete(realPath, true);
                 }
             }
+            //HomeScreen.playBtnEn("");
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)

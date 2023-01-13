@@ -118,7 +118,7 @@ namespace MCLauncher
                             FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             if (fi.Length != sizeList[indexInt])
                             {
-                                Logger.logError("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName}");
+                                Logger.logError("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName} {fi.Length}::{sizeList[indexInt]}");
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                                 totalSize += sizeList[indexInt];
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
@@ -168,7 +168,7 @@ namespace MCLauncher
                             FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             if (fi.Length != sizeList[indexInt])
                             {
-                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash}");
+                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash} {fi.Length}::{sizeList[indexInt]}");
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                                 totalSize += sizeList[indexInt];
                                 urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");

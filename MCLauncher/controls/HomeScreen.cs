@@ -455,6 +455,18 @@ namespace MCLauncher
         {
             pnlChangelog.Invalidate();
         }
+
+        /*public static void playBtnDis(string label)
+        {
+            Instance.btnPlay.Enabled = false;
+            Instance.lblLogInWarn.Text = label;
+        }
+
+        public static void playBtnEn(string label)
+        {
+            Instance.btnPlay.Enabled = true;
+            Instance.lblLogInWarn.Text = label;
+        }*/
     }
 
     public class changelogJson
