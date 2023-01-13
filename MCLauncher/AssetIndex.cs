@@ -109,7 +109,7 @@ namespace MCLauncher
                         {
                             totalSize += sizeList[indexInt];
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
-                            urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                            urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                             paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                         }
                         else
@@ -122,7 +122,7 @@ namespace MCLauncher
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                                 totalSize += sizeList[indexInt];
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
-                                urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                                urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                                 paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             }
                         }
@@ -159,7 +159,7 @@ namespace MCLauncher
                         if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}"))
                         {
                             totalSize += sizeList[indexInt];
-                            urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                            urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                             paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
                         }
@@ -171,7 +171,7 @@ namespace MCLauncher
                                 Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash} {fi.Length}::{sizeList[indexInt]}");
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                                 totalSize += sizeList[indexInt];
-                                urls.Add($"http://resources.download.minecraft.net/{firstTwo}/{fullHash}");
+                                urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
                                 paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
                             }
