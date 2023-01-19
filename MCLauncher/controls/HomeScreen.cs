@@ -31,20 +31,12 @@ namespace MCLauncher
             Instance = this;
             InitializeComponent();
 
-            //TODO
-            /*if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
-            {
-                cmbInstaces.SelectedItem = "Default";
+            Logger.logMessage("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
+
+            if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
                 selectedInstance = "Default";
-                Logger.logMessage("[HomeScreen]", "Last saved instance is empty");
-            }
             else
-            {
-                //cmbInstaces.SelectedIndex = cmbInstaces.FindStringExact(Properties.Settings.Default.lastInstance);
                 selectedInstance = Properties.Settings.Default.lastInstance;
-                Logger.logMessage("[HomeScreen]", $"Last saved instance is {selectedInstance}");
-                cmbInstaces.SelectedIndex = cmbInstaces.FindString(Properties.Settings.Default.lastInstance);
-            }*/
 
             //Load lang
             btnPlay.Text = Strings.btnPlay;
@@ -80,6 +72,13 @@ namespace MCLauncher
 
             //Load instance list
             loadInstanceList();
+            if(!File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg"))
+            {
+                selectedInstance = "Default";
+            }
+            cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
+            reloadInstance(selectedInstance);
+
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
             Logger.logMessage("[HomeScreen]", $"Selected instance: {selectedInstance}");
