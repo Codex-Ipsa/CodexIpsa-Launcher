@@ -22,7 +22,7 @@ namespace MCLauncher
         public static string htmlChangelogFailed = $"Failed to load changelog";
 
         //CreditsScreen
-        public static string lblLauncherBy = $"MineC#raft Launcher {Globals.verDisplay} by";
+        public static string lblLauncherBy = $"Codex-Ipsa Launcher {Globals.verDisplay} by";
         public static string lblDejvossIpsa = $"DEJVOSS Productions, Codex-Ipsa";
         public static string lblCopyright = $"(c) 2022-2023";
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";

@@ -96,40 +96,10 @@ namespace MCLauncher
         public void loadMainWindow()
         {
             //Set the window name
-            Logger.logMessage($"[MainWindow]", $"MineC#raft Launcher has started!");
-            this.Text = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
-            Console.Title = $"MineC#raft Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
+            Logger.logMessage($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
+            this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
+            Console.Title = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
             Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
-
-
-
-            //Offline check
-            /*try
-            {
-                HttpWebRequest request = WebRequest.Create("https://codex-ipsa.dejvoss.cz/") as HttpWebRequest;
-                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-                response.Close();
-                Logger.logMessage($"[MainWindow]", $"Connected to internet, launcher will start in online mode");
-
-            }
-            catch (Exception ex)
-            {
-                Logger.logError($"[MainWindow]", $"No connection, launcher will start in offline mode");
-                Globals.offlineMode = true;
-            }*/
-
-            /*if(Globals.offlineMode)
-            {
-                webBrowser1.Document.Write("<center><p>Unable to load changelog</p></center>");
-                Logger.logError($"[MainWindow]", $"Unable to set changelog");
-                webBrowser1.Refresh();
-            }
-            else
-            {
-                webBrowser1.Url = new Uri(Globals.changelog, UriKind.Absolute);
-                webBrowser1.Refresh();
-                Logger.logMessage($"[MainWindow]", $"Changelog loaded");
-            }*/
 
             //Create directories
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
