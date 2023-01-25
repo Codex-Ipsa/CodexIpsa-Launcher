@@ -66,6 +66,7 @@ namespace MCLauncher
             this.javaCheck = new System.Windows.Forms.CheckBox();
             this.javaBox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
@@ -492,12 +493,23 @@ namespace MCLauncher
             this.tabControl1.Size = new System.Drawing.Size(668, 372);
             this.tabControl1.TabIndex = 33;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(419, 373);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 34;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(668, 405);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.closeBtn);
@@ -556,5 +568,6 @@ namespace MCLauncher
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.CheckBox proxyCheck;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

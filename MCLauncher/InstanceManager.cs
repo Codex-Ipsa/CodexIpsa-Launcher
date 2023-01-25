@@ -526,6 +526,11 @@ namespace MCLauncher
             dirBox.Text = dirBox.Text.Replace('\\', '/');
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteWarn dw = new DeleteWarn(name);
+            dw.ShowDialog();
+        }
     }
 
     public class instanceObjects
