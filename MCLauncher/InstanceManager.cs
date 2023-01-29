@@ -305,6 +305,15 @@ namespace MCLauncher
         {
             if(mode != "initial")
             {
+                instanceName = instanceName.Replace("?", "_");
+                instanceName = instanceName.Replace("\\", "_");
+                instanceName = instanceName.Replace("/", "_");
+                instanceName = instanceName.Replace(":", "_");
+                instanceName = instanceName.Replace("*", "_");
+                instanceName = instanceName.Replace("\"", "_");
+                instanceName = instanceName.Replace("<", "_");
+                instanceName = instanceName.Replace(">", "_");
+                instanceName = instanceName.Replace("|", "_");
                 name = instanceName;
                 edition = This.editionBox.Text;
                 //version = This.verBox.Text;
@@ -361,7 +370,6 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             saveInstance(nameBox.Text, "other");
-            HomeScreen.reloadInstance(name);
             this.Close();
         }
 

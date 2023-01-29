@@ -397,6 +397,8 @@ namespace MCLauncher
         {
             InstanceManager man = new InstanceManager("New profile", "new");
             man.ShowDialog();
+
+            //change aisudhgbiauksd
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
