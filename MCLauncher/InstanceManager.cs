@@ -52,6 +52,8 @@ namespace MCLauncher
         public static string tempName;
         public static int tempInt = 0;
 
+        public static bool didClickDelete = false;
+
         public InstanceManager(string instanceName, string mode)
         {
             This = this;
@@ -209,6 +211,7 @@ namespace MCLauncher
                 This.proxyCheck.Checked = false;
 
                 This.opendirBtn.Visible = false;
+                This.btnDelete.Visible = false;
             }
             else if(mode == "edit")
             {
@@ -284,6 +287,11 @@ namespace MCLauncher
                 This.jarBox.Text = customJar;
                 This.offlineModeCheck.Checked = offlineMode;
                 This.proxyCheck.Checked = useProxy;
+
+                if (name == "Default")
+                {
+                    This.btnDelete.Visible = false;
+                }
             }
         }
 
@@ -530,6 +538,13 @@ namespace MCLauncher
         {
             DeleteWarn dw = new DeleteWarn(name);
             dw.ShowDialog();
+
+            if(didClickDelete == true)
+            {
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(HomeScreen.selectedInstance);
+                didClickDelete = false;
+                this.Close();
+            }
         }
     }
 

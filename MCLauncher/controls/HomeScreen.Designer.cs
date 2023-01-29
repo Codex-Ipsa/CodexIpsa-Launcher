@@ -210,11 +210,11 @@
         private System.Windows.Forms.Label lblSelInst;
         private System.Windows.Forms.Button btnEditInst;
         private System.Windows.Forms.Button btnNewInst;
-        private System.Windows.Forms.ComboBox cmbInstaces;
         private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Label lblLogInWarn;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Panel pnlChangelog;
         public System.Windows.Forms.Button btnPlay;
+        public System.Windows.Forms.ComboBox cmbInstaces;
     }
 }

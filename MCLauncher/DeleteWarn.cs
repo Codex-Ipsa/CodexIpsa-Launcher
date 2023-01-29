@@ -18,13 +18,18 @@ namespace MCLauncher
         public DeleteWarn(string nameI)
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             name = nameI;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Directory.Delete($"{Globals.dataPath}\\instance\\{name}", true);
+            HomeScreen.selectedInstance = "Default";
             HomeScreen.reloadInstance("Default");
+            InstanceManager.didClickDelete = true;
             this.Close();
         }
 
