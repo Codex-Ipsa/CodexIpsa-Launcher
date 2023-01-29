@@ -98,7 +98,7 @@ namespace MCLauncher
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(581, 373);
+            this.saveBtn.Location = new System.Drawing.Point(584, 373);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;

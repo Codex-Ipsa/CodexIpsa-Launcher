@@ -162,7 +162,7 @@ namespace MCLauncher
             }
         }
 
-        public void loadInstanceList()
+        public static void loadInstanceList()
         {
             List<string> instanceList = new List<string>();
             string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
@@ -191,9 +191,9 @@ namespace MCLauncher
 
                 //Console.WriteLine(dir);
             }
-            cmbInstaces.DataSource = instanceList;
-            cmbInstaces.Refresh();
-            LaunchJava.currentInstance = cmbInstaces.Text;
+            Instance.cmbInstaces.DataSource = instanceList;
+            Instance.cmbInstaces.Refresh();
+            LaunchJava.currentInstance = Instance.cmbInstaces.Text;
         }
 
         public static void reloadInstance(string instName)
@@ -397,8 +397,6 @@ namespace MCLauncher
         {
             InstanceManager man = new InstanceManager("New profile", "new");
             man.ShowDialog();
-
-            //change aisudhgbiauksd
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)

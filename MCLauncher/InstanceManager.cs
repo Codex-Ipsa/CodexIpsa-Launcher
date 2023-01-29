@@ -370,6 +370,9 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             saveInstance(nameBox.Text, "other");
+            HomeScreen.reloadInstance(nameBox.Text);
+            HomeScreen.loadInstanceList();
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(nameBox.Text);
             this.Close();
         }
 
