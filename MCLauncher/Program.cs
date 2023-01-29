@@ -25,6 +25,10 @@ namespace MCLauncher
                     {
                         Globals.isDebug = true;
                         Logger.logMessage("[Startup]", $"Starting in debug mode...");
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\n __    __   ____  ____   ____   ____  ____    ____ \n|  |__|  | /    ||    \\ |    \\ |    ||    \\  /    |\n|  |  |  ||  o  ||  D  )|  _  | |  | |  _  ||   __|\n|  |  |  ||     ||    / |  |  | |  | |  |  ||  |  |\n|  `  '  ||  _  ||    \\ |  |  | |  | |  |  ||  |_ |\n \\      / |  |  ||  .  \\|  |  | |  | |  |  ||     |\n  \\_/\\_/  |__|__||__|\\_||__|__||____||__|__||___,_|\nWARNING: USING DEBUG MODE CAN REVEAL VARIOUS INFORMATION SUCH AS YOUR LOGIN DETAILS!\nDO NOT COPY ANYTHING FROM HERE!\n");
+                        Console.ForegroundColor= ConsoleColor.Gray;
                     }
                     else
                     {

@@ -360,8 +360,13 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             string origName = nameBox.Text;
+            if (string.IsNullOrWhiteSpace(origName) || string.IsNullOrEmpty(origName))
+            {
+                origName = "New profile";
+            }
             string newName = origName;
             int num = 1;
+
             do
             {
                 if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
