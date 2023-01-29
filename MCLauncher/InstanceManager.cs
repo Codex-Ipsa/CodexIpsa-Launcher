@@ -303,10 +303,6 @@ namespace MCLauncher
                 instanceName = instanceName.Replace("<", "_");
                 instanceName = instanceName.Replace(">", "_");
                 instanceName = instanceName.Replace("|", "_");
-                if (instanceName.ToLower() == "con")
-                {
-                    instanceName = "ILLEGALL_NAME";
-                }
 
                 name = instanceName;
                 edition = This.editionBox.Text;
@@ -369,14 +365,14 @@ namespace MCLauncher
             do
             {
                 if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
-                if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg") || newName.ToLower() == "con" || newName.ToLower() == "prn" || newName.ToLower() == "nul" || newName.ToLower() == "aux" || newName.ToLower().StartsWith("lpt") || newName.ToLower().StartsWith("com"))
                 {
                     newName = $"{origName}_{num}";
                     num++;
                 }
             }
             while (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"));
-            //Logger.logError("[InstanceManager]", "TROLLING AND LOL'ING");
+            
 
             saveInstance(newName, "other");
             HomeScreen.reloadInstance(newName);
