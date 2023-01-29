@@ -99,18 +99,7 @@ namespace MCLauncher
             }
             else if (mode == "new")
             {
-                //Logger.logMessage("[InstanceManager]", $"{tempName}_{tempInt}");
-                if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
-                {
-                    tempInt++;
-                    Start($"{tempName}_{tempInt}", "new");
-                }
-                else
-                {
-                    loadDefault(instanceName, "new");
-                    tempInt = 0;
-                    tempName = "";
-                }
+                loadDefault(instanceName, "new");
             }
             else if (mode == "edit")
             {
@@ -213,7 +202,7 @@ namespace MCLauncher
                 This.opendirBtn.Visible = false;
                 This.btnDelete.Visible = false;
             }
-            else if(mode == "edit")
+            else if (mode == "edit")
             {
                 This.editionBox.DataSource = editionNames;
 
@@ -235,13 +224,13 @@ namespace MCLauncher
                     useCustomJava = bool.Parse(vers.useCustomJava);
                     jvmArgs = vers.jvmArgs;
                     useJvmArgs = bool.Parse(vers.useJvmArgs);
-                    if(json.Contains("customJar"))
+                    if (json.Contains("customJar"))
                     {
                         customJar = vers.customJar;
                         useCustomJar = bool.Parse(vers.useCustomJar);
                     }
                     offlineMode = bool.Parse(vers.offlineMode);
-                    if(json.Contains("useProxy"))
+                    if (json.Contains("useProxy"))
                     {
                         useProxy = bool.Parse(vers.useProxy);
                     }
@@ -266,7 +255,7 @@ namespace MCLauncher
 
                 This.verBox.DataSource = verList;
                 This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
-                if(This.verBox.SelectedIndex == -1)
+                if (This.verBox.SelectedIndex == -1)
                 {
                     This.verBox.SelectedIndex = This.verBox.FindString(version + " (");
                 }
@@ -303,7 +292,7 @@ namespace MCLauncher
 
         public static void saveInstance(string instanceName, string mode)
         {
-            if(mode != "initial")
+            if (mode != "initial")
             {
                 instanceName = instanceName.Replace("?", "_");
                 instanceName = instanceName.Replace("\\", "_");
@@ -314,10 +303,15 @@ namespace MCLauncher
                 instanceName = instanceName.Replace("<", "_");
                 instanceName = instanceName.Replace(">", "_");
                 instanceName = instanceName.Replace("|", "_");
+                if (instanceName.ToLower() == "con")
+                {
+                    instanceName = "ILLEGALL_NAME";
+                }
+
                 name = instanceName;
                 edition = This.editionBox.Text;
                 //version = This.verBox.Text;
-                if(This.verBox.Text.Contains("("))
+                if (This.verBox.Text.Contains("("))
                 {
                     int index = This.verBox.Text.IndexOf(" (");
                     if (index >= 0)
@@ -350,12 +344,12 @@ namespace MCLauncher
 
             if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
                 File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg");
-            
+
             using (FileStream fs = File.Create($"{Globals.dataPath}\\instance\\{instanceName}\\instance.cfg"))
             {
                 string final = $"[\n  {{\n";
                 int i = 0;
-                foreach(var varname in varNames)
+                foreach (var varname in varNames)
                 {
                     final += $"    \"{varname}\":\"{varValues[i]}\",\n";
                     i++;
@@ -369,10 +363,25 @@ namespace MCLauncher
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            saveInstance(nameBox.Text, "other");
-            HomeScreen.reloadInstance(nameBox.Text);
+            string origName = nameBox.Text;
+            string newName = origName;
+            int num = 1;
+            do
+            {
+                if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
+                if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"))
+                {
+                    newName = $"{origName}_{num}";
+                    num++;
+                }
+            }
+            while (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"));
+            //Logger.logError("[InstanceManager]", "TROLLING AND LOL'ING");
+
+            saveInstance(newName, "other");
+            HomeScreen.reloadInstance(newName);
             HomeScreen.loadInstanceList();
-            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(nameBox.Text);
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(newName);
             this.Close();
         }
 
@@ -423,7 +432,7 @@ namespace MCLauncher
                 url = urlList[i];
                 type = typeList[i];
             }
-            catch(ArgumentOutOfRangeException aore)
+            catch (ArgumentOutOfRangeException aore)
             {
                 Logger.logError("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
@@ -431,7 +440,7 @@ namespace MCLauncher
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(javaCheck.Checked)
+            if (javaCheck.Checked)
             {
                 javaBox.Enabled = true;
                 javaBtn.Enabled = true;
@@ -462,13 +471,13 @@ namespace MCLauncher
 
         private void opendirBtn_Click(object sender, EventArgs e)
         {
-            if(directory != String.Empty || directory != "" || directory != null)
+            if (directory != String.Empty || directory != "" || directory != null)
             {
                 try
                 {
                     Process.Start(directory);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     Process.Start($"{Globals.dataPath}\\instance\\{name}\\");
                 }
@@ -550,7 +559,7 @@ namespace MCLauncher
             DeleteWarn dw = new DeleteWarn(name);
             dw.ShowDialog();
 
-            if(didClickDelete == true)
+            if (didClickDelete == true)
             {
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(HomeScreen.selectedInstance);
                 didClickDelete = false;

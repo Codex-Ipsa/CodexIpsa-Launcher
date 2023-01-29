@@ -12,8 +12,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "mojang-data"; //0.0.7-dev //mojang-data
         public static string branch = "dev"; //dev //dev-instances
-        public static string verCurrent = "0.1.0-pre3"; //Change this on release
-        public static string verDisplay = "0.1.0-pre3"; //Change this on release
+        public static string verCurrent = "0.1.0-pre4"; //Change this on release
+        public static string verDisplay = "0.1.0-pre4"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -21,7 +21,7 @@ namespace MCLauncher
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         //Switches
-        public static bool isDebug = true; //Change this on release to false
+        public static bool isDebug = false; //Change this on release to false
         public static bool requireAuth = false; //Change this on release to true
 
         //Links
