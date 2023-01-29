@@ -339,7 +339,7 @@ namespace MCLauncher
                     launchClientPath = custJarLocation;
                 }
 
-                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} ";
+                launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} "; //{launchMethod} net.minecraft.client.Minecraft
                 if (launchCmdAddon != string.Empty)
                 {
                     //This needs a better system

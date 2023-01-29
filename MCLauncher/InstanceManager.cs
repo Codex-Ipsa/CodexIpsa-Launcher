@@ -53,6 +53,7 @@ namespace MCLauncher
         public static int tempInt = 0;
 
         public static bool didClickDelete = false;
+        public static string mode2;
 
         public InstanceManager(string instanceName, string mode)
         {
@@ -84,6 +85,7 @@ namespace MCLauncher
             offlineModeCheck.Text = Strings.lblOfflineLaunch;
 
             tempName = instanceName;
+            mode2 = mode;
             Start(instanceName, mode);
         }
 
@@ -360,30 +362,40 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             string origName = nameBox.Text;
-            if (string.IsNullOrWhiteSpace(origName) || string.IsNullOrEmpty(origName))
+            if(mode2 == "new" || mode2 == "initial")
             {
-                origName = "New profile";
-            }
-            string newName = origName;
-            int num = 1;
-
-            do
-            {
-                if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
-                if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg") || newName.ToLower() == "con" || newName.ToLower() == "prn" || newName.ToLower() == "nul" || newName.ToLower() == "aux" || newName.ToLower().StartsWith("lpt") || newName.ToLower().StartsWith("com"))
+                if (string.IsNullOrWhiteSpace(origName) || string.IsNullOrEmpty(origName))
                 {
-                    newName = $"{origName}_{num}";
-                    num++;
+                    origName = "New profile";
                 }
-            }
-            while (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"));
-            
+                string newName = origName;
+                int num = 1;
 
-            saveInstance(newName, "other");
-            HomeScreen.reloadInstance(newName);
-            HomeScreen.loadInstanceList();
-            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(newName);
-            this.Close();
+                do
+                {
+                    if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg") || newName.ToLower() == "con" || newName.ToLower() == "prn" || newName.ToLower() == "nul" || newName.ToLower() == "aux" || newName.ToLower().StartsWith("lpt") || newName.ToLower().StartsWith("com"))
+                    {
+                        newName = $"{origName}_{num}";
+                        num++;
+                    }
+                }
+                while (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg"));
+
+
+                saveInstance(newName, "other");
+                HomeScreen.reloadInstance(newName);
+                HomeScreen.loadInstanceList();
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(newName);
+                this.Close();
+            }
+            else if(mode2 == "edit")
+            {
+                saveInstance(origName, "other");
+                HomeScreen.reloadInstance(origName);
+                this.Close();
+            }
+
         }
 
         private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
