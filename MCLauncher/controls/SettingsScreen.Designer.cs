@@ -82,6 +82,7 @@
             this.cmbLangSelect.Name = "cmbLangSelect";
             this.cmbLangSelect.Size = new System.Drawing.Size(330, 21);
             this.cmbLangSelect.TabIndex = 0;
+            this.cmbLangSelect.SelectedIndexChanged += new System.EventHandler(this.cmbLangSelect_SelectedIndexChanged);
             // 
             // grbUpdates
             // 

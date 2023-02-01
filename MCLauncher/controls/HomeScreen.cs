@@ -38,16 +38,6 @@ namespace MCLauncher
             else
                 selectedInstance = Properties.Settings.Default.lastInstance;
 
-            //Load lang
-            btnPlay.Text = Strings.btnPlay;
-            btnLogIn.Text = Strings.btnLogIn;
-            btnLogOut.Text = Strings.btnLogOut;
-            btnNewInst.Text = Strings.btnNewInst;
-            btnEditInst.Text = Strings.btnEditInst;
-            lblSelInst.Text = Strings.lblSelInst;
-            lblWelcome.Text = Strings.lblWelcome;
-            lblReady.Text = Strings.lblReady;
-
             pnlChangelog.AutoScroll = true;
 
             if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))

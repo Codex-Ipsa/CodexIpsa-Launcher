@@ -66,7 +66,7 @@
             // btnLogOut
             // 
             this.btnLogOut.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLogOut.Location = new System.Drawing.Point(621, 38);
+            this.btnLogOut.Location = new System.Drawing.Point(621, 37);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(75, 23);
             this.btnLogOut.TabIndex = 21;
@@ -205,16 +205,16 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.Label lblReady;
-        private System.Windows.Forms.Label lblSelInst;
-        private System.Windows.Forms.Button btnEditInst;
-        private System.Windows.Forms.Button btnNewInst;
-        private System.Windows.Forms.Button btnLogIn;
-        private System.Windows.Forms.Label lblLogInWarn;
-        private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Panel pnlChangelog;
         public System.Windows.Forms.Button btnPlay;
         public System.Windows.Forms.ComboBox cmbInstaces;
+        public System.Windows.Forms.Label lblSelInst;
+        public System.Windows.Forms.Button btnEditInst;
+        public System.Windows.Forms.Button btnNewInst;
+        public System.Windows.Forms.Label lblLogInWarn;
+        public System.Windows.Forms.Button btnLogOut;
+        public System.Windows.Forms.Label lblWelcome;
+        public System.Windows.Forms.Label lblReady;
+        public System.Windows.Forms.Button btnLogIn;
     }
 }

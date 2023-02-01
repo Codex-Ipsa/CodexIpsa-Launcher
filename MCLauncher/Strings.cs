@@ -1,13 +1,23 @@
-﻿using System;
+﻿using MCLauncher.controls;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
+using System.Threading;
 
 namespace MCLauncher
 {
     class Strings
     {
+        //Main window
+        public static string cntHome = "Home";
+        public static string cntSettings = "Settings";
+        public static string cntAbout = "About";
+
         //Home screen
         public static string btnPlay = $"Play";
         public static string btnLogIn = $"Log-in";
@@ -55,16 +65,57 @@ namespace MCLauncher
         public static string lblUseProxy = "Use skin and sound proxy (use up to 1.5.2)";
 
 
-        public static void reloadLangs()
+        public static void reloadLangs(string selected, string culture)
         {
-            /*if(Properties.Settings.Default.prefLanguage == "cs")
-            {
+            Logger.logMessage("[Strings]", $"Setting language {selected} ({culture})");
+            string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/language/{selected}.json";
+            WebClient cl = new WebClient();
+            string json = cl.DownloadString(url);
+            byte[] jsonArr = Encoding.Default.GetBytes(json);
+            string newJson= Encoding.UTF8.GetString(jsonArr);
+            Console.WriteLine(newJson);
 
-            }
-            else
+
+            List<stringJson> data = JsonConvert.DeserializeObject<List<stringJson>>(newJson);
+            foreach (var str in data)
             {
-                //Default to english
-            }*/
+                CultureInfo ci = new CultureInfo(culture);
+                Thread.CurrentThread.CurrentCulture = ci;
+                Thread.CurrentThread.CurrentUICulture = ci;
+
+                btnPlay = str.btnPlay;
+                btnLogIn = str.btnLogIn;
+                btnLogOut = str.btnLogOut;
+                btnEditInst = str.btnEditInst;
+                btnNewInst = str.btnNewInst;
+                lblWelcome = str.lblWelcome;
+                lblReady = str.lblReady;
+                lblSelInst = str.lblSelInst;
+                lblLogInWarn = str.lblLogInWarn;
+            }
+
+            HomeScreen.Instance.btnPlay.Text = btnPlay;
+            HomeScreen.Instance.btnLogIn.Text = btnLogIn;
+            HomeScreen.Instance.btnLogOut.Text = btnLogOut;
+            HomeScreen.Instance.btnEditInst.Text = btnEditInst;
+            HomeScreen.Instance.btnNewInst.Text = btnNewInst;
+            HomeScreen.Instance.lblWelcome.Text = lblWelcome;
+            HomeScreen.Instance.lblReady.Text = lblReady;
+            HomeScreen.Instance.lblSelInst.Text = lblSelInst;
+            HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
         }
+    }
+
+    public class stringJson
+    {
+        public string btnPlay { get; set; }
+        public string btnLogIn { get; set; }
+        public string btnLogOut { get; set; }
+        public string btnEditInst { get; set; }
+        public string btnNewInst { get; set; }
+        public string lblWelcome { get; set; }
+        public string lblReady { get; set; }
+        public string lblSelInst { get; set; }
+        public string lblLogInWarn { get; set; }
     }
 }

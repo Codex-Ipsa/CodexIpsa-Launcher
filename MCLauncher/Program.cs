@@ -17,7 +17,7 @@ namespace MCLauncher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Logger.logMessage("[Startup]", "Launch args: " + args.Length);
-            if(args.Length > 0)
+            if (args.Length > 0)
             {
                 foreach(string arg in args)
                 {

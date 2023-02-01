@@ -22,6 +22,7 @@ namespace MCLauncher.controls
         public static List<string> noteList = new List<string>();
 
         public static List<string> languageList = new List<string>();
+        public static List<string> cultureList = new List<string>();
 
         public static string updateCheckMode;
         public static SettingsScreen InstanceSetting;
@@ -87,7 +88,17 @@ namespace MCLauncher.controls
                 versionList.Add(vers.brVer);
                 noteList.Add(vers.brNote);
             }
-            languageList.Add("English");
+
+            string langData = client.DownloadString(Globals.languageIndex);
+            List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
+            foreach (var vers in lang)
+            {
+                languageList.Add(vers.title);
+                cultureList.Add(vers.code);
+            }
+
+
+            //languageList.Add("English");
         }
 
         public static void checkForUpdates(string branchToCheck)
@@ -126,6 +137,11 @@ namespace MCLauncher.controls
         {
             checkForUpdates(idList[branchIndex]);
         }
+
+        private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Strings.reloadLangs(cmbLangSelect.Text.ToLower(), cultureList[cmbLangSelect.SelectedIndex]);
+        }
     }
 
     public class settingsJson
@@ -135,5 +151,8 @@ namespace MCLauncher.controls
         public string brId { get; set; }
         public string brUrl { get; set; }
         public string brNote { get; set; }
+
+        public string title { get; set; }
+        public string code { get; set; }
     }
 }
