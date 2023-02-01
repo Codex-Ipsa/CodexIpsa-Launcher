@@ -19,7 +19,6 @@ namespace MCLauncher
         public static string lblSelInst = $"Select profile:";
         public static string lblLogInWarn = $"You need to log in to use the launcher!";
         public static string lblLogInWarn_Debug = $"MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
-        public static string htmlChangelogFailed = $"Failed to load changelog";
 
         //CreditsScreen
         public static string lblLauncherBy = $"Codex-Ipsa Launcher {Globals.verDisplay} by";

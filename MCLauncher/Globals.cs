@@ -41,5 +41,7 @@ namespace MCLauncher
         public static string jre8Link = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/jre8-latest.json";
         public static string seasonalDirt = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/seasonal/dirt.png";
         public static string seasonalStone = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/seasonal/stone.png";
+
+        public static string languageIndex = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/languages/index.json";
     }
 }
