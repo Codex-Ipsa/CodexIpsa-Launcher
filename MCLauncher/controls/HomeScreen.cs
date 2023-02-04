@@ -148,7 +148,6 @@ namespace MCLauncher
                     Instance.cmbInstaces.Enabled = true;
                     Instance.btnEditInst.Enabled = true;
                     Instance.btnNewInst.Enabled = true;
-
                 }
             }
         }

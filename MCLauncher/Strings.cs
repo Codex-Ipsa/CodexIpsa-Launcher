@@ -72,7 +72,7 @@ namespace MCLauncher
             WebClient cl = new WebClient();
             string json = cl.DownloadString(url);
             byte[] jsonArr = Encoding.Default.GetBytes(json);
-            string newJson= Encoding.UTF8.GetString(jsonArr);
+            string newJson = Encoding.UTF8.GetString(jsonArr);
 
             List<stringJson> data = JsonConvert.DeserializeObject<List<stringJson>>(newJson);
             foreach (var str in data)
@@ -101,6 +101,23 @@ namespace MCLauncher
                 lblDejvossIpsa = str.lblDejvossIpsa;
                 lblTeam = str.lblTeam;
                 lblSpecialThanks = str.lblSpecialThanks;
+
+                grbInfo = str.grbInfo;
+                lblName = str.lblName;
+                lblDir = str.lblDir;
+                lblRes = str.lblRes;
+                lblMin = str.lblMin;
+                lblMax = str.lblMax;
+                lblRam = str.lblRam;
+                grbVersion = str.grbVersion;
+                lblEdition = str.lblEdition;
+                lblVersion = str.lblVersion;
+                grbExperts = str.grbExperts;
+                lblJavaInstall = str.lblJavaInstall;
+                lblJvmArgs = str.lblJvmArgs;
+                lblCustJar = str.lblCustJar;
+                lblOfflineLaunch = str.lblOfflineLaunch;
+                lblUseProxy = str.lblUseProxy;
             }
 
             MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
@@ -165,5 +182,22 @@ namespace MCLauncher
         public string lblDejvossIpsa { get; set; }
         public string lblTeam { get; set; }
         public string lblSpecialThanks { get; set; }
+
+        public string grbInfo { get; set; }
+        public string lblName { get; set; }
+        public string lblDir { get; set; }
+        public string lblRes { get; set; }
+        public string lblMin { get; set; }
+        public string lblMax { get; set; }
+        public string lblRam { get; set; }
+        public string grbVersion { get; set; }
+        public string lblEdition { get; set; }
+        public string lblVersion { get; set; }
+        public string grbExperts { get; set; }
+        public string lblJavaInstall { get; set; }
+        public string lblJvmArgs { get; set; }
+        public string lblCustJar { get; set; }
+        public string lblOfflineLaunch { get; set; }
+        public string lblUseProxy { get; set; }
     }
 }
