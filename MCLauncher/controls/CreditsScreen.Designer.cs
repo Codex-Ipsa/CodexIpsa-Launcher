@@ -49,7 +49,7 @@
             this.pnlCenter.Controls.Add(this.lblCopyright);
             this.pnlCenter.Controls.Add(this.lblLauncherBy);
             this.pnlCenter.Location = new System.Drawing.Point(228, 92);
-            this.pnlCenter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCenter.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(341, 193);
             this.pnlCenter.TabIndex = 21;
@@ -129,7 +129,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.pnlCenter);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "CreditsScreen";
             this.Size = new System.Drawing.Size(784, 387);
@@ -142,10 +142,10 @@
         #endregion
         private System.Windows.Forms.Panel pnlCenter;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel lblDejvossIpsa;
-        private System.Windows.Forms.Label lblSpecialThanks;
-        private System.Windows.Forms.Label lblTeam;
-        private System.Windows.Forms.Label lblCopyright;
-        private System.Windows.Forms.Label lblLauncherBy;
+        public System.Windows.Forms.LinkLabel lblDejvossIpsa;
+        public System.Windows.Forms.Label lblSpecialThanks;
+        public System.Windows.Forms.Label lblTeam;
+        public System.Windows.Forms.Label lblCopyright;
+        public System.Windows.Forms.Label lblLauncherBy;
     }
 }

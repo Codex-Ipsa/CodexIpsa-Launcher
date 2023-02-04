@@ -151,12 +151,12 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlCenter;
-        private System.Windows.Forms.GroupBox grbLauncher;
-        private System.Windows.Forms.Label lblLang;
         private System.Windows.Forms.ComboBox cmbLangSelect;
-        private System.Windows.Forms.GroupBox grbUpdates;
-        private System.Windows.Forms.Button btnCheckUpdates;
-        private System.Windows.Forms.Label lblBranch;
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
+        public System.Windows.Forms.GroupBox grbLauncher;
+        public System.Windows.Forms.Label lblLang;
+        public System.Windows.Forms.GroupBox grbUpdates;
+        public System.Windows.Forms.Button btnCheckUpdates;
+        public System.Windows.Forms.Label lblBranch;
     }
 }

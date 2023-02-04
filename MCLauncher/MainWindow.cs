@@ -188,9 +188,6 @@ namespace MCLauncher
                 consoleScr = new ConsoleScreen();
                 addHome();
             }
-
-            //TODO: LANG STUFF
-            //menuStrip1.Items[0].Text = "test";
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)

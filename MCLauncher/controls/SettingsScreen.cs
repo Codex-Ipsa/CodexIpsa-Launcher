@@ -22,7 +22,6 @@ namespace MCLauncher.controls
         public static List<string> noteList = new List<string>();
 
         public static List<string> languageList = new List<string>();
-        public static List<string> cultureList = new List<string>();
 
         public static string updateCheckMode;
         public static SettingsScreen InstanceSetting;
@@ -35,13 +34,6 @@ namespace MCLauncher.controls
         {
             InstanceSetting = this;
             InitializeComponent();
-
-            //Load lang
-            grbLauncher.Text = Strings.grbLauncher;
-            grbUpdates.Text = Strings.grbUpdates;
-            lblBranch.Text = Strings.lblBranch;
-            lblLang.Text = Strings.lblLang;
-            btnCheckUpdates.Text = Strings.btnCheckUpdates;
 
             //Seasonal background
             if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
@@ -94,11 +86,7 @@ namespace MCLauncher.controls
             foreach (var vers in lang)
             {
                 languageList.Add(vers.title);
-                cultureList.Add(vers.code);
             }
-
-
-            //languageList.Add("English");
         }
 
         public static void checkForUpdates(string branchToCheck)
@@ -140,7 +128,7 @@ namespace MCLauncher.controls
 
         private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Strings.reloadLangs(cmbLangSelect.Text.ToLower(), cultureList[cmbLangSelect.SelectedIndex]);
+            Strings.reloadLangs(cmbLangSelect.Text.ToLower());
         }
     }
 
@@ -153,6 +141,5 @@ namespace MCLauncher.controls
         public string brNote { get; set; }
 
         public string title { get; set; }
-        public string code { get; set; }
     }
 }

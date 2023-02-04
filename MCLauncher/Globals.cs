@@ -10,10 +10,10 @@ namespace MCLauncher
     class Globals
     {
         //Manual
-        public static string codebase = "mojang-data"; //0.0.7-dev //mojang-data
-        public static string branch = "stable"; //dev //dev-instances
-        public static string verCurrent = "0.1.0"; //Change this on release
-        public static string verDisplay = "0.1.0"; //Change this on release
+        public static string codebase = "0.1.1"; //0.0.7-dev //mojang-data
+        public static string branch = "dev"; //dev //stable //dev-instances
+        public static string verCurrent = "0.1.1-dev1"; //Change this on release
+        public static string verDisplay = "0.1.1-dev1"; //Change this on release
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -22,7 +22,7 @@ namespace MCLauncher
 
         //Switches
         public static bool isDebug = false; //Change this on release to false
-        public static bool requireAuth = false; //Change this on release to true
+        public static bool requireAuth = true; //Change this on release to true
 
         //Links
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe

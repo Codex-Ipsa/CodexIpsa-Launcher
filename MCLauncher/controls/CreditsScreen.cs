@@ -13,16 +13,12 @@ namespace MCLauncher.controls
 {
     public partial class CreditsScreen : UserControl
     {
+        public static CreditsScreen Instance;
+
         public CreditsScreen()
         {
             InitializeComponent();
-
-            //Load lang
-            lblLauncherBy.Text = Strings.lblLauncherBy;
-            lblDejvossIpsa.Text = Strings.lblDejvossIpsa;
-            lblCopyright.Text = Strings.lblCopyright;
-            lblTeam.Text = Strings.lblTeam;
-            lblSpecialThanks.Text = Strings.lblSpecialThanks;
+            Instance = this;
 
             //Seasonal background
             if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))

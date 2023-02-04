@@ -65,23 +65,21 @@ namespace MCLauncher
         public static string lblUseProxy = "Use skin and sound proxy (use up to 1.5.2)";
 
 
-        public static void reloadLangs(string selected, string culture)
+        public static void reloadLangs(string selected)
         {
-            Logger.logMessage("[Strings]", $"Setting language {selected} ({culture})");
+            Logger.logMessage("[Strings]", $"Setting language {selected}");
             string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/language/{selected}.json";
             WebClient cl = new WebClient();
             string json = cl.DownloadString(url);
             byte[] jsonArr = Encoding.Default.GetBytes(json);
             string newJson= Encoding.UTF8.GetString(jsonArr);
-            Console.WriteLine(newJson);
-
 
             List<stringJson> data = JsonConvert.DeserializeObject<List<stringJson>>(newJson);
             foreach (var str in data)
             {
-                CultureInfo ci = new CultureInfo(culture);
-                Thread.CurrentThread.CurrentCulture = ci;
-                Thread.CurrentThread.CurrentUICulture = ci;
+                cntHome = str.cntHome;
+                cntSettings = str.cntSettings;
+                cntAbout = str.cntAbout;
 
                 btnPlay = str.btnPlay;
                 btnLogIn = str.btnLogIn;
@@ -92,22 +90,61 @@ namespace MCLauncher
                 lblReady = str.lblReady;
                 lblSelInst = str.lblSelInst;
                 lblLogInWarn = str.lblLogInWarn;
+
+                grbLauncher = str.grbLauncher;
+                grbUpdates = str.grbUpdates;
+                lblLang = str.lblLang;
+                lblBranch = str.lblBranch;
+                btnCheckUpdates = str.btnCheckUpdates;
+
+                lblLauncherBy = str.lblLauncherBy.Replace("{version}", Globals.verDisplay);
+                lblDejvossIpsa = str.lblDejvossIpsa;
+                lblTeam = str.lblTeam;
+                lblSpecialThanks = str.lblSpecialThanks;
             }
+
+            MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
+            MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
+            MainWindow.Instance.menuStrip1.Items[4].Text = cntAbout;
 
             HomeScreen.Instance.btnPlay.Text = btnPlay;
             HomeScreen.Instance.btnLogIn.Text = btnLogIn;
             HomeScreen.Instance.btnLogOut.Text = btnLogOut;
             HomeScreen.Instance.btnEditInst.Text = btnEditInst;
             HomeScreen.Instance.btnNewInst.Text = btnNewInst;
-            HomeScreen.Instance.lblWelcome.Text = lblWelcome;
-            HomeScreen.Instance.lblReady.Text = lblReady;
+            if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
+            {
+                HomeScreen.Instance.lblWelcome.Text = lblWelcome + " Guest";
+                HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
+            }
+            else
+            {
+                HomeScreen.Instance.lblWelcome.Text = lblWelcome + " " + HomeScreen.msPlayerName;
+                HomeScreen.Instance.lblLogInWarn.Text = "";
+            }
+            HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
             HomeScreen.Instance.lblSelInst.Text = lblSelInst;
-            HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
+
+            SettingsScreen.InstanceSetting.grbLauncher.Text = grbLauncher;
+            SettingsScreen.InstanceSetting.lblLang.Text = lblLang;
+            SettingsScreen.InstanceSetting.grbUpdates.Text = grbUpdates;
+            SettingsScreen.InstanceSetting.lblBranch.Text = lblBranch;
+            SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
+
+            CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
+            CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
+            CreditsScreen.Instance.lblTeam.Text = lblTeam;
+            CreditsScreen.Instance.lblCopyright.Text = lblCopyright;
+            CreditsScreen.Instance.lblSpecialThanks.Text = lblSpecialThanks;
         }
     }
 
     public class stringJson
     {
+        public string cntHome { get; set; }
+        public string cntSettings { get; set; }
+        public string cntAbout { get; set; }
+
         public string btnPlay { get; set; }
         public string btnLogIn { get; set; }
         public string btnLogOut { get; set; }
@@ -117,5 +154,16 @@ namespace MCLauncher
         public string lblReady { get; set; }
         public string lblSelInst { get; set; }
         public string lblLogInWarn { get; set; }
+
+        public string grbLauncher { get; set; }
+        public string grbUpdates { get; set; }
+        public string lblLang { get; set; }
+        public string lblBranch { get; set; }
+        public string btnCheckUpdates { get; set; }
+
+        public string lblLauncherBy { get; set; }
+        public string lblDejvossIpsa { get; set; }
+        public string lblTeam { get; set; }
+        public string lblSpecialThanks { get; set; }
     }
 }

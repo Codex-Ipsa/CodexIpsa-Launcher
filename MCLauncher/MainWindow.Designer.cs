@@ -161,13 +161,13 @@ namespace MCLauncher
         #endregion
         private System.Windows.Forms.Panel pnlBackground;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 

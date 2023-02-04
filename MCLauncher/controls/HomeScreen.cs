@@ -24,6 +24,7 @@ namespace MCLauncher
         public static string selectedEdition;
         public static string msPlayerName;
         public static string selectedInstance = "Default";
+        public static string selectedVersion; //for the "ready to play X" string
 
         public HomeScreen()
         {
@@ -204,6 +205,7 @@ namespace MCLauncher
                     LaunchJava.launchRamMax = item.ramMax;
                     LaunchJava.launchRamMin = item.ramMin;
                     LaunchJava.launchVerName = item.version;
+                    selectedVersion = item.version;
                     LaunchJava.launchVerType = item.type;
                     LaunchJava.launchVerUrl = item.url;
                     LaunchJava.launchJavaLocation = item.customJava;
@@ -228,6 +230,7 @@ namespace MCLauncher
                     Logger.logMessage("[HomeScreen/ReloadInstance]", "Load X360 base");
                     selectedEdition = "x360";
                     LaunchXbox360.ver = item.version;
+                    selectedVersion = item.version;
                     LaunchXbox360.url = item.url;
                     LaunchXbox360.type = item.type;
                     Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
