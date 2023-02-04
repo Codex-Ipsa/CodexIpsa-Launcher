@@ -65,6 +65,8 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Load lang
+            this.Text = Strings.titleProfileMan;
+            tabControl1.TabPages[0].Text = Strings.tabEditor;
             grbInfo.Text = Strings.grbInfo;
             lblName.Text = Strings.lblName;
             label9.Text = Strings.lblDir;
@@ -83,6 +85,12 @@ namespace MCLauncher
             jvmCheck.Text = Strings.lblJvmArgs;
             jarCheck.Text = Strings.lblCustJar;
             offlineModeCheck.Text = Strings.lblOfflineLaunch;
+
+            closeBtn.Text = Strings.btnCancel;
+            btnDelete.Text = Strings.btnDeleteInst;
+            opendirBtn.Text = Strings.btnOpenDir;
+            saveBtn.Text = Strings.btnSaveInst;
+
 
             tempName = instanceName;
             mode2 = mode;

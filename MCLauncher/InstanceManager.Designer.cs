@@ -81,11 +81,11 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(500, 373);
+            this.opendirBtn.Location = new System.Drawing.Point(401, 373);
             this.opendirBtn.Name = "opendirBtn";
-            this.opendirBtn.Size = new System.Drawing.Size(75, 23);
+            this.opendirBtn.Size = new System.Drawing.Size(92, 23);
             this.opendirBtn.TabIndex = 25;
-            this.opendirBtn.Text = "Open dir";
+            this.opendirBtn.Text = "btn.OpenDir";
             this.opendirBtn.UseVisualStyleBackColor = true;
             this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
             // 
@@ -95,7 +95,7 @@ namespace MCLauncher
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(75, 23);
             this.closeBtn.TabIndex = 26;
-            this.closeBtn.Text = "Cancel";
+            this.closeBtn.Text = "btn.Cancel";
             this.closeBtn.UseVisualStyleBackColor = true;
             this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
@@ -105,17 +105,17 @@ namespace MCLauncher
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 28;
-            this.saveBtn.Text = "Save";
+            this.saveBtn.Text = "btn.SaveInst";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(419, 373);
+            this.btnDelete.Location = new System.Drawing.Point(499, 373);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(79, 23);
             this.btnDelete.TabIndex = 34;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "btn.DeleteInst";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 

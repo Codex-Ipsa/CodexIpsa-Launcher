@@ -128,6 +128,8 @@ namespace MCLauncher.controls
 
         private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Properties.Settings.Default.prefLanguage = cmbLangSelect.Text.ToLower();
+            Properties.Settings.Default.Save();
             Strings.reloadLangs(cmbLangSelect.Text.ToLower());
         }
     }

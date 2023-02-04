@@ -18,6 +18,15 @@ namespace MCLauncher
         public static string cntSettings = "Settings";
         public static string cntAbout = "About";
 
+        //Buttons
+        public static string btnCancel = "Cancel";
+        public static string btnOk = "OK";
+        public static string btnSaveInst = "Save profile";
+        public static string btnDeleteInst = "Delete profile";
+        public static string btnOpenDir = "Open directory";
+        public static string btnYes = "Yes";
+        public static string btnNo = "No";
+
         //Home screen
         public static string btnPlay = $"Play";
         public static string btnLogIn = $"Log-in";
@@ -63,7 +72,13 @@ namespace MCLauncher
         public static string lblCustJar = "Custom JAR:";
         public static string lblOfflineLaunch = "Launch in offline mode";
         public static string lblUseProxy = "Use skin and sound proxy (use up to 1.5.2)";
+        public static string titleProfileMan = "Profile manager";
+        public static string tabEditor = "Profile editor";
 
+        //Login
+        public static string titleLogin = "Log-in";
+        public static string labelPleaseLog = "To log-in, please go to";
+        public static string labelCode = "And enter the following code:";
 
         public static void reloadLangs(string selected)
         {
@@ -118,86 +133,116 @@ namespace MCLauncher
                 lblCustJar = str.lblCustJar;
                 lblOfflineLaunch = str.lblOfflineLaunch;
                 lblUseProxy = str.lblUseProxy;
+                titleProfileMan = str.titleProfileMan;
+                tabEditor = str.tabEditor;
+
+                btnCancel = str.btnCancel;
+                btnOk = str.btnOk;
+                btnSaveInst = str.btnSaveInst;
+                btnDeleteInst = str.btnDeleteInst;
+                btnOpenDir = str.btnOpenDir;
+                btnYes = str.btnYes;
+                btnNo = str.btnNo;
+
+
+                titleLogin = str.titleLogin;
+                labelPleaseLog = str.labelPleaseLog;
+                labelCode = str.labelCode;
+
+
+                MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
+                MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
+                MainWindow.Instance.menuStrip1.Items[4].Text = cntAbout;
+
+                HomeScreen.Instance.btnPlay.Text = btnPlay;
+                HomeScreen.Instance.btnLogIn.Text = btnLogIn;
+                HomeScreen.Instance.btnLogOut.Text = btnLogOut;
+                HomeScreen.Instance.btnEditInst.Text = btnEditInst;
+                HomeScreen.Instance.btnNewInst.Text = btnNewInst;
+                if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
+                {
+                    HomeScreen.Instance.lblWelcome.Text = lblWelcome + " Guest";
+                    HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
+                }
+                else
+                {
+                    HomeScreen.Instance.lblWelcome.Text = lblWelcome + " " + HomeScreen.msPlayerName;
+                    HomeScreen.Instance.lblLogInWarn.Text = "";
+                }
+                HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
+                HomeScreen.Instance.lblSelInst.Text = lblSelInst;
+
+                SettingsScreen.InstanceSetting.grbLauncher.Text = grbLauncher;
+                SettingsScreen.InstanceSetting.lblLang.Text = lblLang;
+                SettingsScreen.InstanceSetting.grbUpdates.Text = grbUpdates;
+                SettingsScreen.InstanceSetting.lblBranch.Text = lblBranch;
+                SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
+
+                CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
+                CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
+                CreditsScreen.Instance.lblTeam.Text = lblTeam;
+                CreditsScreen.Instance.lblCopyright.Text = lblCopyright;
+                CreditsScreen.Instance.lblSpecialThanks.Text = lblSpecialThanks;
             }
-
-            MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
-            MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
-            MainWindow.Instance.menuStrip1.Items[4].Text = cntAbout;
-
-            HomeScreen.Instance.btnPlay.Text = btnPlay;
-            HomeScreen.Instance.btnLogIn.Text = btnLogIn;
-            HomeScreen.Instance.btnLogOut.Text = btnLogOut;
-            HomeScreen.Instance.btnEditInst.Text = btnEditInst;
-            HomeScreen.Instance.btnNewInst.Text = btnNewInst;
-            if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
-            {
-                HomeScreen.Instance.lblWelcome.Text = lblWelcome + " Guest";
-                HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
-            }
-            else
-            {
-                HomeScreen.Instance.lblWelcome.Text = lblWelcome + " " + HomeScreen.msPlayerName;
-                HomeScreen.Instance.lblLogInWarn.Text = "";
-            }
-            HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
-            HomeScreen.Instance.lblSelInst.Text = lblSelInst;
-
-            SettingsScreen.InstanceSetting.grbLauncher.Text = grbLauncher;
-            SettingsScreen.InstanceSetting.lblLang.Text = lblLang;
-            SettingsScreen.InstanceSetting.grbUpdates.Text = grbUpdates;
-            SettingsScreen.InstanceSetting.lblBranch.Text = lblBranch;
-            SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
-
-            CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
-            CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
-            CreditsScreen.Instance.lblTeam.Text = lblTeam;
-            CreditsScreen.Instance.lblCopyright.Text = lblCopyright;
-            CreditsScreen.Instance.lblSpecialThanks.Text = lblSpecialThanks;
         }
-    }
 
-    public class stringJson
-    {
-        public string cntHome { get; set; }
-        public string cntSettings { get; set; }
-        public string cntAbout { get; set; }
+        public class stringJson
+        {
+            public string cntHome { get; set; }
+            public string cntSettings { get; set; }
+            public string cntAbout { get; set; }
 
-        public string btnPlay { get; set; }
-        public string btnLogIn { get; set; }
-        public string btnLogOut { get; set; }
-        public string btnEditInst { get; set; }
-        public string btnNewInst { get; set; }
-        public string lblWelcome { get; set; }
-        public string lblReady { get; set; }
-        public string lblSelInst { get; set; }
-        public string lblLogInWarn { get; set; }
+            public string btnPlay { get; set; }
+            public string btnLogIn { get; set; }
+            public string btnLogOut { get; set; }
+            public string btnEditInst { get; set; }
+            public string btnNewInst { get; set; }
+            public string lblWelcome { get; set; }
+            public string lblReady { get; set; }
+            public string lblSelInst { get; set; }
+            public string lblLogInWarn { get; set; }
 
-        public string grbLauncher { get; set; }
-        public string grbUpdates { get; set; }
-        public string lblLang { get; set; }
-        public string lblBranch { get; set; }
-        public string btnCheckUpdates { get; set; }
+            public string grbLauncher { get; set; }
+            public string grbUpdates { get; set; }
+            public string lblLang { get; set; }
+            public string lblBranch { get; set; }
+            public string btnCheckUpdates { get; set; }
 
-        public string lblLauncherBy { get; set; }
-        public string lblDejvossIpsa { get; set; }
-        public string lblTeam { get; set; }
-        public string lblSpecialThanks { get; set; }
+            public string lblLauncherBy { get; set; }
+            public string lblDejvossIpsa { get; set; }
+            public string lblTeam { get; set; }
+            public string lblSpecialThanks { get; set; }
 
-        public string grbInfo { get; set; }
-        public string lblName { get; set; }
-        public string lblDir { get; set; }
-        public string lblRes { get; set; }
-        public string lblMin { get; set; }
-        public string lblMax { get; set; }
-        public string lblRam { get; set; }
-        public string grbVersion { get; set; }
-        public string lblEdition { get; set; }
-        public string lblVersion { get; set; }
-        public string grbExperts { get; set; }
-        public string lblJavaInstall { get; set; }
-        public string lblJvmArgs { get; set; }
-        public string lblCustJar { get; set; }
-        public string lblOfflineLaunch { get; set; }
-        public string lblUseProxy { get; set; }
+            public string grbInfo { get; set; }
+            public string lblName { get; set; }
+            public string lblDir { get; set; }
+            public string lblRes { get; set; }
+            public string lblMin { get; set; }
+            public string lblMax { get; set; }
+            public string lblRam { get; set; }
+            public string grbVersion { get; set; }
+            public string lblEdition { get; set; }
+            public string lblVersion { get; set; }
+            public string grbExperts { get; set; }
+            public string lblJavaInstall { get; set; }
+            public string lblJvmArgs { get; set; }
+            public string lblCustJar { get; set; }
+            public string lblOfflineLaunch { get; set; }
+            public string lblUseProxy { get; set; }
+            public string titleProfileMan { get; set; }
+            public string tabEditor { get; set; }
+
+            public string btnCancel { get; set; }
+            public string btnOk { get; set; }
+            public string btnSaveInst { get; set; }
+            public string btnDeleteInst { get; set; }
+            public string btnOpenDir { get; set; }
+            public string btnYes { get; set; }
+            public string btnNo { get; set; }
+
+            public string titleLogin { get; set; }
+            public string labelPleaseLog { get; set; }
+            public string labelCode { get; set; }
+        }
     }
 }

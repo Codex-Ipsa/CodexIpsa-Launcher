@@ -42,18 +42,18 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 13);
+            this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "And enter the following code:";
+            this.label1.Text = "label.Code";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "To log-in, please go to";
+            this.label2.Text = "label.PleaseLog";
             // 
             // linkLabel1
             // 
@@ -78,7 +78,7 @@
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(277, 23);
             this.cancelBtn.TabIndex = 3;
-            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.Text = "btn.Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 

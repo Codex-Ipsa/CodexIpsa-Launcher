@@ -95,6 +95,12 @@ namespace MCLauncher
                     Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
                 }
             }
+
+            //load pref language TODO: THIS THROWS
+            /*if(Properties.Settings.Default.prefLanguage.ToLower() != "english" || Properties.Settings.Default.prefLanguage.ToLower() != null || Properties.Settings.Default.prefLanguage.ToLower() != String.Empty)
+            {
+                Strings.reloadLangs(Properties.Settings.Default.prefLanguage);
+            }*/
         }
 
         public static void checkAuth()
