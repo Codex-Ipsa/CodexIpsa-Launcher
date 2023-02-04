@@ -164,18 +164,9 @@ namespace MCLauncher
                 }
                 This.verBox.DataSource = verList;
 
-                using (WebClient client = new WebClient())
-                {
-                    string json2 = client.DownloadString(Globals.defaultVer);
-                    List<jsonObject> data2 = JsonConvert.DeserializeObject<List<jsonObject>>(json2);
-
-                    foreach (var vers in data2)
-                    {
-                        version = vers.verName;
-                        type = vers.verType;
-                        url = vers.verLink;
-                    }
-                }
+                version = verList[0];
+                type = typeList[0];
+                url = urlList[0];
 
                 directory = $"";
                 This.dirBox.Text = directory;
