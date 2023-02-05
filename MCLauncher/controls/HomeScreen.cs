@@ -445,7 +445,7 @@ namespace MCLauncher
 
         private void cmbInstaces_Click(object sender, EventArgs e)
         {
-            loadInstanceList();
+            //loadInstanceList();
         }
 
         private void pnlChangelog_Scroll(object sender, ScrollEventArgs e)

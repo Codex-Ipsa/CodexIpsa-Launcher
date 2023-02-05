@@ -574,6 +574,7 @@ namespace MCLauncher
             if (didClickDelete == true)
             {
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(HomeScreen.selectedInstance);
+                HomeScreen.loadInstanceList();
                 didClickDelete = false;
                 this.Close();
             }
