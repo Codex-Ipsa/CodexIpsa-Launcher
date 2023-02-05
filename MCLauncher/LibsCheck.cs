@@ -52,17 +52,28 @@ namespace MCLauncher
 
                 foreach (var libs in data)
                 {
-                    if(libs.extract == "null")
+                    string savePath;
+
+                    if(libs.extract == "null" && !libs.name.Contains("{gameDir}"))
                     {
                         //Add names to a list for LaunchJava - this is here so natives don't get added to the list
                         libsList.Add(libs.name);
                     }
 
                     //Download required libraries
-                    if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
+                    if(libs.name.StartsWith("{gameDir}"))
+                    {
+                        savePath = libs.name.Replace("{gameDir}", LaunchJava.gameDir);
+                    }
+                    else
+                    {
+                        savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
+                    }
+                    Console.WriteLine(savePath);
+                    if (!File.Exists(savePath))
                     {
                         DownloadProgress.url = libs.link;
-                        DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
+                        DownloadProgress.savePath = savePath;
                         DownloadProgress download = new DownloadProgress();
                         download.ShowDialog();
                     }
@@ -71,7 +82,7 @@ namespace MCLauncher
                     {
                         //TODO: get rid of this
                         Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
-                        using (ZipArchive archive = ZipFile.OpenRead($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}"))
+                        using (ZipArchive archive = ZipFile.OpenRead(savePath))
                         {
                             //TODO: if they don't exist, extract/replace them
                             foreach (ZipArchiveEntry entry in archive.Entries)
@@ -101,9 +112,6 @@ namespace MCLauncher
                                 }
                             }
                         }
-                        /*string zipPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
-                        string extractPath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}";
-                        ZipFile.ExtractToDirectory(zipPath, extractPath);*/
                     }
                 }
                 Logger.logMessage("[LibsCheck]", $"Done");

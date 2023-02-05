@@ -303,6 +303,7 @@ namespace MCLauncher
                 }
                 if (launchProxy != "null" && useProxy == true)
                 {
+                    launchProxy = launchProxy.Replace("{gameDir}", $"\"{gameDir}\"");
                     launchCommand += $"{launchProxy} ";
                 }
                 if (useCustJvm == true)
