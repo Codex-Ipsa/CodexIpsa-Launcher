@@ -26,12 +26,12 @@ namespace MCLauncher
 
         public static void Check()
         {
-            Logger.logMessage("[LibsCheck]", $"Starting LibsCheck");
+            Logger.Info("[LibsCheck]", $"Starting LibsCheck");
             libsList.Clear();
             //string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/libraries-{type}.json";
             string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-libs/{type}.json"; //THIS IS FOR THE MAJOR LIBRARIES + VER JSON MERGE
-            Logger.logMessage("[LibsCheck]", $"Type: {type}");
-            Logger.logMessage("[LibsCheck]", $"Url: {url}");
+            Logger.Info("[LibsCheck]", $"Type: {type}");
+            Logger.Info("[LibsCheck]", $"Url: {url}");
 
             using (WebClient client = new WebClient())
             {
@@ -96,8 +96,8 @@ namespace MCLauncher
                                 string file = "/" + entry.FullName;
                                 if(Globals.isDebug)
                                 {
-                                    Logger.logMessage("[LibsCheck]", $"Exctract part: {entry.FullName}");
-                                    Logger.logMessage("[LibsCheck]", $"Exctract dir: {dir}");
+                                    Logger.Info("[LibsCheck]", $"Exctract part: {entry.FullName}");
+                                    Logger.Info("[LibsCheck]", $"Exctract dir: {dir}");
 
                                 }
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\META-INF\\");
@@ -118,7 +118,7 @@ namespace MCLauncher
                         }
                     }
                 }
-                Logger.logMessage("[LibsCheck]", $"Done");
+                Logger.Info("[LibsCheck]", $"Done");
                 isDone = true;
             }
         }

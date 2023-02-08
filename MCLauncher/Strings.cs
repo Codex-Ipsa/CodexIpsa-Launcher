@@ -80,9 +80,25 @@ namespace MCLauncher
         public static string labelPleaseLog = "To log-in, please go to";
         public static string labelCode = "And enter the following code:";
 
+        //Other
+        public static string lblDlFiles = "Downloading files...";
+        public static string lblLoading = "Loading...";
+        public static string lblDlAssets = "Downloading assets...";
+        public static string lblCopyUpd = "Copying update files...";
+        public static string bytes = "bytes";
+
+        public static string warning = "Warning!";
+        public static string lblDel1 = "Are you sure you want to delete this profile?";
+        public static string lblDel2 = "This can't be taken back!";
+
+        public static string joinServer = "Join a server";
+        public static string lblServer1 = "Please enter a server IP and port:";
+        public static string lblServer2 = "(Leave blank for singleplayer)";
+        public static string btnStartGame = "Start game";
+
         public static void reloadLangs(string selected)
         {
-            Logger.logMessage("[Strings]", $"Setting language {selected}");
+            Logger.Info("[Strings]", $"Setting language {selected}");
             string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/language/{selected}.json";
             WebClient cl = new WebClient();
             string json = cl.DownloadString(url);
@@ -144,11 +160,24 @@ namespace MCLauncher
                 btnYes = str.btnYes;
                 btnNo = str.btnNo;
 
-
                 titleLogin = str.titleLogin;
                 labelPleaseLog = str.labelPleaseLog;
                 labelCode = str.labelCode;
 
+                lblDlFiles = str.lblDlFiles;
+                lblLoading = str.lblLoading;
+                lblDlAssets = str.lblDlAssets;
+                lblCopyUpd = str.lblCopyUpd;
+
+                bytes = str.bytes;
+                warning = str.warning;
+                lblDel1 = str.lblDel1;
+                lblDel2 = str.lblDel2;
+
+                joinServer = str.joinServer;
+                lblServer1 = str.lblServer1;
+                lblServer2 = str.lblServer2;
+                btnStartGame = str.btnStartGame;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
@@ -243,6 +272,21 @@ namespace MCLauncher
             public string titleLogin { get; set; }
             public string labelPleaseLog { get; set; }
             public string labelCode { get; set; }
+
+            public string lblDlFiles { get; set; }
+            public string lblLoading { get; set; }
+            public string lblDlAssets { get; set; }
+            public string lblCopyUpd { get; set; }
+            public string bytes { get; set; }
+
+            public string warning { get; set; }
+            public string lblDel1 { get; set; }
+            public string lblDel2 { get; set; }
+
+            public string joinServer { get; set; }
+            public string lblServer1 { get; set; }
+            public string lblServer2 { get; set; }
+            public string btnStartGame { get; set; }
         }
     }
 }

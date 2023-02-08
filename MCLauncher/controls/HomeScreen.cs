@@ -32,7 +32,7 @@ namespace MCLauncher
             Instance = this;
             InitializeComponent();
 
-            Logger.logMessage("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
+            Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
 
             if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
                 selectedInstance = "Default";
@@ -72,7 +72,7 @@ namespace MCLauncher
 
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            Logger.logMessage("[HomeScreen]", $"Selected instance: {selectedInstance}");
+            Logger.Info("[HomeScreen]", $"Selected instance: {selectedInstance}");
             //Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
@@ -107,7 +107,7 @@ namespace MCLauncher
         {
             if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
             {
-                Logger.logError($"[HomeScreen]", "User is not logged in");
+                Logger.Error($"[HomeScreen]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
                 Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
@@ -134,11 +134,11 @@ namespace MCLauncher
             }
             else
             {
-                Logger.logMessage($"[HomeScreen]", "User is logged in, re-checking everything");
+                Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
                 MSAuth.usernameFromRefreshToken();
                 if (MSAuth.hasErrored == true)
                 {
-                    Logger.logMessage($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
+                    Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
                     MSAuth.hasErrored = false;
                     Properties.Settings.Default.msRefreshToken = String.Empty;
                     Properties.Settings.Default.Save();
@@ -194,14 +194,14 @@ namespace MCLauncher
 
         public static void reloadInstance(string instName)
         {
-            Logger.logMessage("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
+            Logger.Info("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
             string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{instName}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
             foreach (var item in data)
             {
                 if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
                 {
-                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load Java base");
+                    Logger.Info("[HomeScreen/ReloadInstance]", "Load Java base");
                     selectedEdition = "java";
                     LaunchJava.currentInstance = instName;
                     LaunchJava.launchDir = item.directory;
@@ -232,7 +232,7 @@ namespace MCLauncher
                 }
                 else if (item.edition == "Xbox 360 Edition")
                 {
-                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load X360 base");
+                    Logger.Info("[HomeScreen/ReloadInstance]", "Load X360 base");
                     selectedEdition = "x360";
                     LaunchXbox360.ver = item.version;
                     selectedVersion = item.version;
@@ -242,11 +242,11 @@ namespace MCLauncher
                 }
                 else if (item.edition == "PlayStation3 Edition")
                 {
-                    Logger.logMessage("[HomeScreen/ReloadInstance]", "Load PS3 base");
+                    Logger.Info("[HomeScreen/ReloadInstance]", "Load PS3 base");
                 }
                 else
                 {
-                    Logger.logError("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
+                    Logger.Error("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
                 }
             }
         }
@@ -371,7 +371,7 @@ namespace MCLauncher
             text = text.Replace("\"useCustJar\":\"False\",", String.Empty);
             text = text.Replace("\"instCustJar\":\"\",", String.Empty);
             text = text.Replace("useOfflineMode", "offlineMode");
-            Logger.logMessage("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
+            Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
             Console.WriteLine(text);
             File.WriteAllText($"{path}\\instance.cfg", text);
         }
@@ -406,13 +406,13 @@ namespace MCLauncher
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             //Calling MSAuth
-            Logger.logMessage($"[HomeScreen]", "Calling MSAuth");
+            Logger.Info($"[HomeScreen]", "Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
 
             if (MSAuth.hasErrored == true)
             {
-                Logger.logMessage($"[HomeScreen]", $"MSAuth returned hasErrored. Please try again.");
+                Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please try again.");
                 MSAuth.hasErrored = false;
             }
             else
@@ -426,7 +426,7 @@ namespace MCLauncher
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Logger.logMessage($"[HomeScreen]", "Logging out");
+            Logger.Info($"[HomeScreen]", "Logging out");
             LaunchJava.launchPlayerName = "Guest";
             LaunchJava.launchPlayerUUID = "null";
             LaunchJava.launchPlayerAccessToken = "null";

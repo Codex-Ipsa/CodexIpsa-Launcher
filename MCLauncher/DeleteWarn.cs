@@ -21,6 +21,13 @@ namespace MCLauncher
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+
+            //Lang
+            this.Text = Strings.warning;
+            label1.Text = Strings.lblDel1;
+            label2.Text = Strings.lblDel2;
+            button1.Text = Strings.btnYes;
+            button2.Text = Strings.btnNo;
             name = nameI;
         }
 

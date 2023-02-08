@@ -79,7 +79,7 @@ namespace MCLauncher
         {
             //Deserialize the versiontype json
             launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{launchVerType}.json";
-            Logger.logMessage("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
+            Logger.Info("[LaunchJava]", $"Loading version data from {launchJsonUrl}");
 
             using (WebClient client = new WebClient())
             {
@@ -89,52 +89,52 @@ namespace MCLauncher
                 foreach (var vers in data)
                 {
                     launchJavaReq = vers.minJava;
-                    Logger.logMessage("[LaunchJava]", $"Minimum java: {launchJavaReq}");
+                    Logger.Info("[LaunchJava]", $"Minimum java: {launchJavaReq}");
                     launchMethod = vers.launchMethod;
-                    Logger.logMessage("[LaunchJava]", $"Main class: {launchMethod}");
+                    Logger.Info("[LaunchJava]", $"Main class: {launchMethod}");
                     launchLibsType = vers.libsType;
-                    Logger.logMessage("[LaunchJava]", $"Libs type: {launchLibsType}");
+                    Logger.Info("[LaunchJava]", $"Libs type: {launchLibsType}");
                     launchProxy = vers.proxy;
-                    Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxy}");
+                    Logger.Info("[LaunchJava]", $"Proxy: {launchProxy}");
                     launchCmdAddon = vers.addCmd;
-                    Logger.logMessage("[LaunchJava]", $"Addon: {launchCmdAddon}");
+                    Logger.Info("[LaunchJava]", $"Addon: {launchCmdAddon}");
                     assetIndexUrl = vers.assetIndex;
-                    Logger.logMessage("[LaunchJava]", $"Asset index: {assetIndexUrl}");
+                    Logger.Info("[LaunchJava]", $"Asset index: {assetIndexUrl}");
                     assetIndexDir = vers.assetDir;
-                    Logger.logMessage("[LaunchJava]", $"Asset dir: {assetIndexDir}");
+                    Logger.Info("[LaunchJava]", $"Asset dir: {assetIndexDir}");
                     loggingXml = vers.logging;
-                    Logger.logMessage("[LaunchJava]", $"Logging url: {loggingXml}");
+                    Logger.Info("[LaunchJava]", $"Logging url: {loggingXml}");
                     javaagentJar = vers.javaagent;
-                    Logger.logMessage("[LaunchJava]", $"Javaagent url: {javaagentJar}");
+                    Logger.Info("[LaunchJava]", $"Javaagent url: {javaagentJar}");
                     serverUrl = vers.server;
-                    Logger.logMessage("[LaunchJava]", $"Server url: {serverUrl}");
+                    Logger.Info("[LaunchJava]", $"Server url: {serverUrl}");
                     if (vers.getServer == "true")
                     {
-                        Logger.logMessage("[LaunchJava]", $"getServer returned true");
+                        Logger.Info("[LaunchJava]", $"getServer returned true");
                         EnterIp ei = new EnterIp();
                         ei.ShowDialog();
 
                         if (EnterIp.inputedText == String.Empty || EnterIp.inputedText == null)
                         {
                             launchJoinMP = false;
-                            Logger.logMessage("[LaunchJava]", $"serverIP returned empty");
+                            Logger.Info("[LaunchJava]", $"serverIP returned empty");
                         }
                         else
                         {
                             launchServerIP = EnterIp.serverIP;
                             launchServerPort = EnterIp.serverPort;
                             launchJoinMP = true;
-                            Logger.logMessage("[LaunchJava]", $"Server IP: {launchServerIP}");
-                            Logger.logMessage("[LaunchJava]", $"Server port: {launchServerPort}");
+                            Logger.Info("[LaunchJava]", $"Server IP: {launchServerIP}");
+                            Logger.Info("[LaunchJava]", $"Server port: {launchServerPort}");
                         }
                     }
                     else
                     {
-                        Logger.logMessage("[LaunchJava]", $"getServer returned false");
+                        Logger.Info("[LaunchJava]", $"getServer returned false");
                     }
                 }
             }
-            Logger.logMessage("[LaunchJava]", $"Version data succesfully loaded");            
+            Logger.Info("[LaunchJava]", $"Version data succesfully loaded");            
 
             if(launchJoinMP == true)
             {
@@ -147,7 +147,7 @@ namespace MCLauncher
 
             if (MSAuth.hasErrored == true)
             {
-                Logger.logError("[MSAuth/LaunchJava]", $"Could not authenticate you!");
+                Logger.Error("[MSAuth/LaunchJava]", $"Could not authenticate you!");
                 MSAuth.hasErrored = false;
             }
             else
@@ -161,12 +161,12 @@ namespace MCLauncher
                         if(jvmArg.StartsWith("-D"))
                         {
                             proxyArgs.Add(jvmArg);
-                            Logger.logMessage("[LaunchJava]", $"Arg type is 1: \"{jvmArg}\"");
+                            Logger.Info("[LaunchJava]", $"Arg type is 1: \"{jvmArg}\"");
                         }
                         else
                         {
                             otherArgs.Add(jvmArg);
-                            Logger.logMessage("[LaunchJava]", $"Arg type is 2: \"{jvmArg}\"");
+                            Logger.Info("[LaunchJava]", $"Arg type is 2: \"{jvmArg}\"");
                         }
                     }
                 }
@@ -179,30 +179,30 @@ namespace MCLauncher
                     input1 = input1.Replace(".json", "");
                     input1 = input1.Replace("/", "");
                     assetIndexType = input1;
-                    Logger.logMessage("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
+                    Logger.Info("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
                     AssetIndex.start(assetIndexUrl, assetIndexType);
                 }
 
-                Logger.logMessage("[LaunchJava]", $"Mppass: {launchMpPass}");
+                Logger.Info("[LaunchJava]", $"Mppass: {launchMpPass}");
                 //Create required dirs
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions\\java");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
-                Logger.logMessage("[LaunchJava]", $"Directories created");
+                Logger.Info("[LaunchJava]", $"Directories created");
 
-                Logger.logMessage("[LaunchJava]", $"Version name: {launchVerName}");
-                Logger.logMessage("[LaunchJava]", $"Version type: {launchVerType}");
-                Logger.logMessage("[LaunchJava]", $"Version URL: {launchVerUrl}");
-                Logger.logMessage("[LaunchJava]", $"Version AssetIndex: {assetIndexUrl}");
+                Logger.Info("[LaunchJava]", $"Version name: {launchVerName}");
+                Logger.Info("[LaunchJava]", $"Version type: {launchVerType}");
+                Logger.Info("[LaunchJava]", $"Version URL: {launchVerUrl}");
+                Logger.Info("[LaunchJava]", $"Version AssetIndex: {assetIndexUrl}");
 
                 //Set required stuff
                 launchClientPath = $"{Globals.currentPath}/.codexipsa/versions/java/{launchVerName}.jar";
-                Logger.logMessage("[LaunchJava]", $"Client path: {launchClientPath}");
+                Logger.Info("[LaunchJava]", $"Client path: {launchClientPath}");
                 //launchProxyOld = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxy} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
                 //Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxyOld}");
                 launchNativePath = $"\"{Globals.currentPath}/.codexipsa/libs/natives/\"";
-                Logger.logMessage("[LaunchJava]", $"Native path: {launchNativePath}");
+                Logger.Info("[LaunchJava]", $"Native path: {launchNativePath}");
                 if(launchDir == null || launchDir == String.Empty || launchDir == "/")
                 {
                     workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}";
@@ -213,8 +213,8 @@ namespace MCLauncher
                     workDir = $"{launchDir}/";
                     gameDir = $"{launchDir}/.minecraft";
                 }
-                Logger.logMessage("[LaunchJava]", $"WorkDir: {workDir}");
-                Logger.logMessage("[LaunchJava]", $"GameDir: {gameDir}");
+                Logger.Info("[LaunchJava]", $"WorkDir: {workDir}");
+                Logger.Info("[LaunchJava]", $"GameDir: {gameDir}");
 
                 if (assetIndexType != null && assetIndexType.Contains("legacy"))
                 {
@@ -224,14 +224,14 @@ namespace MCLauncher
                 {
                     assetDir = $"{Globals.currentPath}\\.codexipsa\\assets"; //TODO, customise
                 }
-                Logger.logMessage("[LaunchJava]", $"AssetDir: {assetDir}");
-                Logger.logMessage("[LaunchJava]", $"Player name: {launchPlayerName}");
+                Logger.Info("[LaunchJava]", $"AssetDir: {assetDir}");
+                Logger.Info("[LaunchJava]", $"Player name: {launchPlayerName}");
 
                 //copy assets to required dir (if needed)
                 if (assetIndexDir != String.Empty)
                 {
                     string realPath = assetIndexDir.Replace("{workDir}", $"{workDir}");
-                    Logger.logMessage("[LaunchJava]", $"Assets are being copied to {realPath}");
+                    Logger.Info("[LaunchJava]", $"Assets are being copied to {realPath}");
                     Directory.CreateDirectory(realPath);
 
                     foreach (string dirPath in Directory.GetDirectories(assetDir, "*", SearchOption.AllDirectories))
@@ -258,22 +258,22 @@ namespace MCLauncher
                     DownloadProgress dl = new DownloadProgress();
                     dl.ShowDialog();
                 }
-                Logger.logMessage("[LaunchJava]", $"Downloaded client.jar");
+                Logger.Info("[LaunchJava]", $"Downloaded client.jar");
 
                 LibsCheck.type = launchLibsType;
                 LibsCheck.Check();
 
                 foreach (var lib in LibsCheck.libsList)
                 {
-                    Logger.logMessage("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
+                    Logger.Info("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
                     launchLibsPath += $"{Globals.currentPath}\\.codexipsa\\libs\\{lib};";
                 }
 
                 //TODO: CHECK IF AUTHENTICATED
                 if (launchPlayerAccessToken == String.Empty || launchPlayerAccessToken == null)
                 {
-                    Logger.logError("[LaunchJava]", $"Failed to authenticate");
-                    Logger.logError("[LaunchJava]", $"The game will start in offline mode");
+                    Logger.Error("[LaunchJava]", $"Failed to authenticate");
+                    Logger.Error("[LaunchJava]", $"The game will start in offline mode");
                     launchPlayerAccessToken = "null";
                     launchPlayerUUID = "null";
                     launchMpPass = "null";
@@ -285,7 +285,7 @@ namespace MCLauncher
                 launchCommand = $"-Xmx{launchRamMax}m -Xms{launchRamMin}m ";
                 if(javaagentJar != "false")
                 {
-                    Logger.logMessage("[LaunchJava]", "Javaagent active!");
+                    Logger.Info("[LaunchJava]", "Javaagent active!");
                     string fileName = javaagentJar;
                     int index2 = fileName.IndexOf("/");
                     if (index2 >= 0)
@@ -315,7 +315,7 @@ namespace MCLauncher
                 }
                 if (loggingXml != "false")
                 {
-                    Logger.logMessage("[LaunchJava]", "Log4j active!");
+                    Logger.Info("[LaunchJava]", "Log4j active!");
                     string fileName = loggingXml;
                     int index2 = fileName.IndexOf("/");
                     if (index2 >= 0)
@@ -394,22 +394,22 @@ namespace MCLauncher
                     DownloadProgress dl = new DownloadProgress();
                     dl.ShowDialog();
 
-                    Logger.logMessage("[LaunchJava]", "Applied early 1.3 snapshot fix");
+                    Logger.Info("[LaunchJava]", "Applied early 1.3 snapshot fix");
                 }
 
                 //Check if Java exists
                 try
                 {
-                    Logger.logMessage("[LaunchJava]", $"Launching the game");
+                    Logger.Info("[LaunchJava]", $"Launching the game");
 
                     //Get current appdata for later
                     tempAppdata = Environment.GetEnvironmentVariable("Appdata");
-                    Logger.logMessage("[LaunchJava]", $"Current Appdata is {Environment.GetEnvironmentVariable("Appdata")}");
+                    Logger.Info("[LaunchJava]", $"Current Appdata is {Environment.GetEnvironmentVariable("Appdata")}");
 
                     //Set appdata to instance dir
                     Environment.SetEnvironmentVariable("Appdata", workDir);
-                    Logger.logMessage("[LaunchJava]", $"Changed Appdata to {Environment.GetEnvironmentVariable("Appdata")}");
-                    Logger.logMessage("[LaunchJava]", $"Game output:");
+                    Logger.Info("[LaunchJava]", $"Changed Appdata to {Environment.GetEnvironmentVariable("Appdata")}");
+                    Logger.Info("[LaunchJava]", $"Game output:");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     //Start the game
                     Process process = new Process();
@@ -432,7 +432,7 @@ namespace MCLauncher
                     process.StartInfo.Arguments = launchCommand;
                     if (Globals.isDebug)
                     {
-                        Logger.logMessage("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
+                        Logger.Info("[LaunchJava]", $"Launch cmd done: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
                     }
                     process.StartInfo.WorkingDirectory = $"{gameDir}"; // this crashes when using custom dirs ??? it doesn't anymore ???
                     process.EnableRaisingEvents = true;
@@ -453,7 +453,7 @@ namespace MCLauncher
                 catch (System.ComponentModel.Win32Exception ex)
                 {
                     //TODO: start some java install wizard thing LMFAO
-                    Logger.logError("[LaunchJava]", $"Could not find Java: {ex.Message}");
+                    Logger.Error("[LaunchJava]", $"Could not find Java: {ex.Message}");
                 }
             }
         }
@@ -462,8 +462,8 @@ namespace MCLauncher
         {
             //Reset appdata back to original
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
-            Logger.logMessage("[LaunchJava]", $"Changed Appdata back to {Environment.GetEnvironmentVariable("Appdata")}");
-            Logger.logMessage("[LaunchJava]", $"Game closed");
+            Logger.Info("[LaunchJava]", $"Changed Appdata back to {Environment.GetEnvironmentVariable("Appdata")}");
+            Logger.Info("[LaunchJava]", $"Game closed");
 
             //Delete temp assets folder
             if(assetIndexDir != string.Empty)

@@ -21,6 +21,12 @@ namespace MCLauncher
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+
+            //Lang
+            this.Text = Strings.joinServer;
+            label1.Text = Strings.lblServer1;
+            label2.Text = Strings.lblServer2;
+            button1.Text = Strings.btnStartGame;
         }
 
         private void button1_Click(object sender, EventArgs e)

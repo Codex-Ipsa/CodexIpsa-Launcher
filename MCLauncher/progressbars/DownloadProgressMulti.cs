@@ -26,6 +26,13 @@ namespace MCLauncher.progressbars
         public DownloadProgressMulti(List<string> urls, List<string> paths, int totalSize, string message)
         {
             InitializeComponent();
+
+            //Lang
+            this.Text = Strings.lblDlFiles;
+            label1.Text = Strings.lblDlFiles;
+            ProgressLabel.Text = Strings.lblLoading;
+            cancelBtn.Text = Strings.btnCancel;
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -48,7 +55,7 @@ namespace MCLauncher.progressbars
             if(currentInt < theUrls.Count)
             {
                 hasAdded = false;
-                Logger.logMessage("[DownloadProgressMulti]",$"Downloading {theUrls[currentInt]}...");
+                Logger.Info("[DownloadProgressMulti]",$"Downloading {theUrls[currentInt]}...");
                 client.DownloadFileAsync(new Uri(theUrls[currentInt]), thePaths[currentInt]);
                 currentInt++;
             }
@@ -63,7 +70,7 @@ namespace MCLauncher.progressbars
                 hasAdded = true;
                 sizeReceived += (int)e.BytesReceived;
                 //Console.WriteLine("PERCENTAGE IS 100%");
-                ProgressLabel.Text = (sizeReceived * 100.0 / theSize).ToString("N0") + "% | " + (sizeReceived) + " bytes / " + theSize + " bytes";
+                ProgressLabel.Text = $"{(sizeReceived * 100.0 / theSize).ToString("N0")}% | {sizeReceived} {Strings.bytes} / {theSize} {Strings.bytes}";
 
                 progressBarDownload.Value = sizeReceived;
             }

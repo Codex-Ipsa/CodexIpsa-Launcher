@@ -372,7 +372,7 @@ namespace MCLauncher
 
                 do
                 {
-                    if (Globals.isDebug) { Logger.logError("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
+                    if (Globals.isDebug) { Logger.Error("[InstanceManager]", $"o: {origName}, n: {newName}, i: {num}"); }
                     if (File.Exists($"{Globals.dataPath}\\instance\\{newName}\\instance.cfg") || newName.ToLower() == "con" || newName.ToLower() == "prn" || newName.ToLower() == "nul" || newName.ToLower() == "aux" || newName.ToLower().StartsWith("lpt") || newName.ToLower().StartsWith("com"))
                     {
                         newName = $"{origName}_{num}";
@@ -401,7 +401,7 @@ namespace MCLauncher
         {
             edition = editionBox.Text;
             int i = editionBox.SelectedIndex;
-            Logger.logMessage("[InstanceManager]", i.ToString() + editionUrls[i]);
+            Logger.Info("[InstanceManager]", i.ToString() + editionUrls[i]);
 
             verList = new List<string>();
             typeList = new List<string>();
@@ -422,7 +422,7 @@ namespace MCLauncher
             verBox.DataSource = verList;
             verBox.SelectedIndex = 0;
 
-            Logger.logMessage("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
+            Logger.Info("[InstanceManager]", $"Index: {i} ({verList[i]}, {typeList[i]}, {urlList[i]})");
         }
 
         private void verBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -446,7 +446,7 @@ namespace MCLauncher
             }
             catch (ArgumentOutOfRangeException aore)
             {
-                Logger.logError("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
+                Logger.Error("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
         }
 

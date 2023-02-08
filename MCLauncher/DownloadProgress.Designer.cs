@@ -43,9 +43,9 @@ namespace MCLauncher
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Downloading files...";
+            this.label1.Text = "lbl.DlFiles";
             // 
             // progressBarDownload
             // 
@@ -61,9 +61,9 @@ namespace MCLauncher
             this.ProgressLabel.ForeColor = System.Drawing.Color.Black;
             this.ProgressLabel.Location = new System.Drawing.Point(12, 51);
             this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(54, 13);
+            this.ProgressLabel.Size = new System.Drawing.Size(58, 13);
             this.ProgressLabel.TabIndex = 3;
-            this.ProgressLabel.Text = "Loading...";
+            this.ProgressLabel.Text = "lbl.Loading";
             // 
             // cancelBtn
             // 
@@ -71,7 +71,7 @@ namespace MCLauncher
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 4;
-            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.Text = "btn.Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 

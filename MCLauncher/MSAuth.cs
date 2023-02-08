@@ -67,7 +67,7 @@ namespace MCLauncher
             var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
             var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
             if (Globals.isDebug)
-                Logger.logMessage("[MSAuth]", $"Deviceflow response: {deviceResponseString}");
+                Logger.Info("[MSAuth]", $"Deviceflow response: {deviceResponseString}");
 
             string deviceJson = $"[{deviceResponseString}]";
 
@@ -79,8 +79,8 @@ namespace MCLauncher
                 deviceUrl = vers.verification_uri;
                 if(Globals.isDebug)
                 {
-                    Logger.logMessage("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
-                    Logger.logMessage("[MSAuth]", $"Device code: {deviceCode}");
+                    Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
+                    Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
                 }
                 textBox1.Text = $"{userCode}";
                 textBox1.ReadOnly = true;
@@ -93,7 +93,7 @@ namespace MCLauncher
         public static void deviceFlowPing(object source, ElapsedEventArgs e)
         {
             if (Globals.isDebug)
-                Logger.logMessage("[MSAuth]", $"Test! 1s! {deviceCurrent}");
+                Logger.Info("[MSAuth]", $"Test! 1s! {deviceCurrent}");
             var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.microsoftonline.com/consumers/oauth2/v2.0/token");
             var tokenPostData = "grant_type=urn:ietf:params:oauth:grant-type:device_code";
             tokenPostData += "&client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09";
@@ -104,7 +104,7 @@ namespace MCLauncher
             tokenRequest.ContentLength = tokenData.Length;
             tokenRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
             if (Globals.isDebug)
-                Logger.logMessage("[MSAuth]", $"Post data: {tokenPostData}");
+                Logger.Info("[MSAuth]", $"Post data: {tokenPostData}");
 
             //This has to be done because of MS's shitty service - thanks!
             try
@@ -117,9 +117,9 @@ namespace MCLauncher
                 var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
                 deviceCurrent = 181;
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"Response string: {tokenResponseString}");
+                    Logger.Info("[MSAuth]", $"Response string: {tokenResponseString}");
                 else
-                    Logger.logMessage("[MSAuth]", "Got Token response!");
+                    Logger.Info("[MSAuth]", "Got Token response!");
                 string tokenJson = $"[{tokenResponseString}]";
                 List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
                 foreach (var vers in authTokenData)
@@ -128,8 +128,8 @@ namespace MCLauncher
                     refreshToken = vers.refresh_token;
                     if(Globals.isDebug)
                     {
-                        Logger.logMessage("[MSAuth]", $"AccessToken: {accessToken}");
-                        Logger.logMessage("[MSAuth]", $"RefreshToken: {refreshToken}");
+                        Logger.Info("[MSAuth]", $"AccessToken: {accessToken}");
+                        Logger.Info("[MSAuth]", $"RefreshToken: {refreshToken}");
                     }
                 }
             }
@@ -137,7 +137,7 @@ namespace MCLauncher
             {
                 using (WebResponse response = ex.Response)
                 {
-                    Logger.logMessage("[MSAuth]", $"Waiting for user to log in...");
+                    Logger.Info("[MSAuth]", $"Waiting for user to log in...");
                     HttpWebResponse httpResponse = (HttpWebResponse)response;
                     using (Stream data = response.GetResponseStream())
                     using (var reader = new StreamReader(data))
@@ -145,7 +145,7 @@ namespace MCLauncher
                         string text = reader.ReadToEnd();
 
                         if (Globals.isDebug)
-                            Logger.logMessage("[MSAuth]", $"Response: \n{text}");
+                            Logger.Info("[MSAuth]", $"Response: \n{text}");
                     }
                 }
                 deviceCurrent++;
@@ -168,7 +168,7 @@ namespace MCLauncher
 
                     streamWriter.Write(json);
                     if(Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"XBL Request: {json}");
+                        Logger.Info("[MSAuth]", $"XBL Request: {json}");
                 }
 
                 var xblResponse = (HttpWebResponse)xblRequest.GetResponse();
@@ -177,9 +177,9 @@ namespace MCLauncher
                 {
                     xblResponseString = streamReader.ReadToEnd();
                     if(Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"XBL Response: {xblResponseString}");
+                        Logger.Info("[MSAuth]", $"XBL Response: {xblResponseString}");
                     else
-                        Logger.logMessage("[MSAuth]", $"Got XBL response");
+                        Logger.Info("[MSAuth]", $"Got XBL response");
                 }
 
                 string xblJson = $"[{xblResponseString}]";
@@ -188,28 +188,28 @@ namespace MCLauncher
                 {
                     xblToken = vers.Token;
                     if (Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"xblToken: {xblToken}");
+                        Logger.Info("[MSAuth]", $"xblToken: {xblToken}");
                 }
 
                 string s = xblJson.Substring(xblJson.LastIndexOf("[{"));
                 string s2 = s.Replace("}}", "");
                 string s3 = s2.Replace("]]", "]");
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"Array of xui: {s3}");
+                    Logger.Info("[MSAuth]", $"Array of xui: {s3}");
 
                 List<jsonObject> uhsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(s3);
                 foreach (var vers in uhsTokenData)
                 {
                     userHash = vers.uhs;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"userHash: {userHash}");
+                        Logger.Info($"[MSAuth]", $"userHash: {userHash}");
                     else
-                        Logger.logMessage($"[MSAuth]", $"Got userHash!");
+                        Logger.Info($"[MSAuth]", $"Got userHash!");
                 }
             }
             catch (WebException e)
             {
-                Logger.logError("[MSAuth]", $"XBL request returned an error: {e.Message}");
+                Logger.Error("[MSAuth]", $"XBL request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -228,7 +228,7 @@ namespace MCLauncher
 
                 streamWriter.Write(json);
                 if(Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"XSTS Request: {json}");
+                    Logger.Info("[MSAuth]", $"XSTS Request: {json}");
             }
 
             try
@@ -239,9 +239,9 @@ namespace MCLauncher
                 {
                     xstsResponseString = streamReader.ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"XSTS Response: {xstsResponseString}");
+                        Logger.Info($"[MSAuth]", $"XSTS Response: {xstsResponseString}");
                     else
-                        Logger.logMessage($"[MSAuth]", $"Got XSTS response");
+                        Logger.Info($"[MSAuth]", $"Got XSTS response");
                 }
 
                 List<jsonObject> xstsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{xstsResponseString}]");
@@ -249,15 +249,15 @@ namespace MCLauncher
                 {
                     xstsToken = vers.Token;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"xstsToken: {xstsToken}");
+                        Logger.Info($"[MSAuth]", $"xstsToken: {xstsToken}");
                     XError = vers.XErr;
-                    Logger.logError($"[MSAuth]", $"xError: {XError}");
+                    Logger.Error($"[MSAuth]", $"xError: {XError}");
                 }
 
             }
             catch (WebException e)
             {
-                Logger.logError("[MSAuth]", $"XSTS request returned an error: {e.Message}");
+                Logger.Error("[MSAuth]", $"XSTS request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -278,7 +278,7 @@ namespace MCLauncher
 
                     streamWriter.Write(json);
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"MC Request: {json}");
+                        Logger.Info($"[MSAuth]", $"MC Request: {json}");
                 }
                 var mcResponse = (HttpWebResponse)mcRequest.GetResponse();
                 var mcResponseString = "";
@@ -286,9 +286,9 @@ namespace MCLauncher
                 {
                     mcResponseString = streamReader.ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"MC Response: {mcResponseString}");
+                        Logger.Info($"[MSAuth]", $"MC Response: {mcResponseString}");
                     else
-                        Logger.logMessage($"[MSAuth]", $"Got MC response");
+                        Logger.Info($"[MSAuth]", $"Got MC response");
                 }
 
                 List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
@@ -296,13 +296,13 @@ namespace MCLauncher
                 {
                     mcAccessToken = vers.access_token;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"mcAccessToken: {mcAccessToken}");
+                        Logger.Info($"[MSAuth]", $"mcAccessToken: {mcAccessToken}");
                 }
             }
             catch (WebException e)
             {
                 hasErrored = true;
-                Logger.logError("[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
+                Logger.Error("[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
             }
 
         }
@@ -325,13 +325,13 @@ namespace MCLauncher
                 {
                     ownResponseString = streamReader.ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"Own Response: {ownResponseString}");
+                        Logger.Info($"[MSAuth]", $"Own Response: {ownResponseString}");
                 }
             }
             catch (WebException e)
             {
                 hasErrored = true;
-                Logger.logError("[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
+                Logger.Error("[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
             }
             //TODO: VERIFY THE USER ACTALLY OWNS THE GAME, ALONG OTHER GAMES LIKE BEDROCK AND DUNGEONS [maybe it works without it?]
         }
@@ -357,9 +357,9 @@ namespace MCLauncher
                 var tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
                 var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
                 if (Globals.isDebug)
-                    Logger.logMessage($"[MSAuth]", $"RefreshToken Response: {tokenResponseString}");
+                    Logger.Info($"[MSAuth]", $"RefreshToken Response: {tokenResponseString}");
                 else
-                    Logger.logMessage($"[MSAuth]", $"Got RefreshToken response");
+                    Logger.Info($"[MSAuth]", $"Got RefreshToken response");
 
                 string tokenJson = $"[{tokenResponseString}]";
                 List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
@@ -367,12 +367,12 @@ namespace MCLauncher
                 {
                     accessToken = vers.access_token;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"accessToken: {accessToken}");
+                        Logger.Info($"[MSAuth]", $"accessToken: {accessToken}");
                 }
             }
             catch (WebException e)
             {
-                Logger.logError("[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
+                Logger.Error("[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -395,9 +395,9 @@ namespace MCLauncher
                 {
                     profileResponseString = streamReader.ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"Profile Response: {profileResponseString}");
+                        Logger.Info($"[MSAuth]", $"Profile Response: {profileResponseString}");
                     else
-                        Logger.logMessage("[MSAuth]", "Got profile response");
+                        Logger.Info("[MSAuth]", "Got profile response");
                 }
 
                 List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
@@ -405,15 +405,15 @@ namespace MCLauncher
                 {
                     playerName = vers.name;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"Player name: {playerName}");
+                        Logger.Info($"[MSAuth]", $"Player name: {playerName}");
                     playerUUID = vers.id;
                     if (Globals.isDebug)
-                        Logger.logMessage($"[MSAuth]", $"Player UUID: {playerUUID}");
+                        Logger.Info($"[MSAuth]", $"Player UUID: {playerUUID}");
                 }
             }
             catch (WebException e)
             {
-                Logger.logError("[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
+                Logger.Error("[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -431,7 +431,7 @@ namespace MCLauncher
                 var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}"));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"sha1 (serverId): {sha1}");
+                    Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
 
                 using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
                 {
@@ -439,7 +439,7 @@ namespace MCLauncher
 
                     streamWriter.Write(json);
                     if (Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"Mojpass Request: {json}");
+                        Logger.Info("[MSAuth]", $"Mojpass Request: {json}");
                 }
                 var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
                 var mojpassResponseString = "";
@@ -447,12 +447,12 @@ namespace MCLauncher
                 {
                     mojpassResponseString = streamReader.ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"Mojpass Response: {mojpassResponseString}");
+                        Logger.Info("[MSAuth]", $"Mojpass Response: {mojpassResponseString}");
                     else
-                        Logger.logMessage("[MSAuth]", "Got Mojpass response");
+                        Logger.Info("[MSAuth]", "Got Mojpass response");
                 }
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"Mojpass code: {mojpassResponse.StatusCode}");
+                    Logger.Info("[MSAuth]", $"Mojpass code: {mojpassResponse.StatusCode}");
 
                 if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
                 {
@@ -467,28 +467,28 @@ namespace MCLauncher
                     var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
                     var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
                     if (Globals.isDebug)
-                        Logger.logMessage("[MSAuth]", $"MPpass Response: {mppassResponseString}");
+                        Logger.Info("[MSAuth]", $"MPpass Response: {mppassResponseString}");
                     else
-                        Logger.logMessage("[MSAuth]", "Got Mppass response");
+                        Logger.Info("[MSAuth]", "Got Mppass response");
                     mpPass = mppassResponseString;
 
                 }
                 else
                 {
-                    Logger.logError("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
+                    Logger.Error("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
                     mpPass = "-";
                 }
             }
             catch (WebException e)
             {
-                Logger.logError("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
+                Logger.Error("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
 
         public static void deviceFlow()
         {
-            Logger.logMessage($"[MSAuth]", $"deviceFlow was called!");
+            Logger.Info($"[MSAuth]", $"deviceFlow was called!");
             xblAuth();
             xstsAuth();
             minecraftAuth();
@@ -498,16 +498,16 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
+                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
             }
             else
             {
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"Refresh token to save: {refreshToken}");
+                    Logger.Info("[MSAuth]", $"Refresh token to save: {refreshToken}");
                 Properties.Settings.Default.msRefreshToken = refreshToken;
                 Properties.Settings.Default.Save();
                 if (Globals.isDebug)
-                    Logger.logMessage("[MSAuth]", $"Saved refresh token: {Properties.Settings.Default.msRefreshToken}");
+                    Logger.Info("[MSAuth]", $"Saved refresh token: {Properties.Settings.Default.msRefreshToken}");
                 HomeScreen.msPlayerName = playerName;
                 HomeScreen.checkAuth();
             }
@@ -525,7 +525,7 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
+                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
                 hasErrored = false;
             }
             else
@@ -551,7 +551,7 @@ namespace MCLauncher
 
             if (hasErrored == true)
             {
-                Logger.logError($"[MSAuth]", $"Could not authenticate you.");
+                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
                 hasErrored = false;
             }
             else
@@ -586,7 +586,7 @@ namespace MCLauncher
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            Logger.logError("[MSAuth]", "User cancelled the operation!");
+            Logger.Error("[MSAuth]", "User cancelled the operation!");
             hasErrored = true;
             this.Close();
         }
@@ -598,7 +598,7 @@ namespace MCLauncher
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Logger.logMessage("[MSAuth]", "Worker completed!");
+            Logger.Info("[MSAuth]", "Worker completed!");
             deviceFlow();
             this.Close();
         }

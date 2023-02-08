@@ -96,10 +96,10 @@ namespace MCLauncher
         public void loadMainWindow()
         {
             //Set the window name
-            Logger.logMessage($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
+            Logger.Info($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
             this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
             Console.Title = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
-            Logger.logMessage($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
+            Logger.Info($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
 
             //Create directories
             Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
@@ -114,7 +114,7 @@ namespace MCLauncher
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
 
             //Check for updates
-            Logger.logMessage($"[MainWindow]", "Checking for updates..");
+            Logger.Info($"[MainWindow]", "Checking for updates..");
             List<string> branchIds = new List<string>();
 
             using (WebClient client = new WebClient())
@@ -128,11 +128,11 @@ namespace MCLauncher
                 }
 
                 int index = branchIds.FindIndex(x => x.StartsWith(Globals.branch));
-                Logger.logMessage($"[MainWindow]", $"Branch {Globals.branch} is on {index}");
+                Logger.Info($"[MainWindow]", $"Branch {Globals.branch} is on {index}");
 
                 if (index == -1)
                 {
-                    Logger.logError("[MainWindow]", $"Current branch is no longer supported!");
+                    Logger.Error("[MainWindow]", $"Current branch is no longer supported!");
                     Warning wrn = new Warning("Your branch is no longer supported!");
                     wrn.ShowDialog();
                 }

@@ -26,22 +26,22 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360");
             Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia");
             Directory.CreateDirectory($"{Globals.docsPath}\\Xenia\\content\\584111F7\\000B0000");
-            Logger.logMessage("[LaunchXbox360]", $"Directories created");
+            Logger.Info("[LaunchXbox360]", $"Directories created");
 
             //Get latest xenia version
             WebClient wc = new WebClient();
             string xeniaJson = wc.DownloadString(Globals.xeniaInfo);
             if(Globals.isDebug)
-                Logger.logError("[LaunchXbox360]" , xeniaJson);
+                Logger.Error("[LaunchXbox360]" , xeniaJson);
 
             List<xeniaObject> data = JsonConvert.DeserializeObject<List<xeniaObject>>(xeniaJson);
             foreach (var vers in data)
             {
                 if (Globals.isDebug)
                 {
-                    Logger.logMessage("[LaunchXbox360]", vers.id);
-                    Logger.logMessage("[LaunchXbox360]", vers.ver);
-                    Logger.logMessage("[LaunchXbox360]", vers.url);
+                    Logger.Info("[LaunchXbox360]", vers.id);
+                    Logger.Info("[LaunchXbox360]", vers.ver);
+                    Logger.Info("[LaunchXbox360]", vers.url);
                 }
 
 
@@ -78,7 +78,7 @@ namespace MCLauncher
                 }
             }
             if (Globals.isDebug)
-                Logger.logMessage("[LaunchXbox360]", $"Ver: {ver}, Url: {url}, Type: {type}");
+                Logger.Info("[LaunchXbox360]", $"Ver: {ver}, Url: {url}, Type: {type}");
             
             if(type  == "base")
             {
@@ -147,7 +147,7 @@ namespace MCLauncher
                     }
 
                     //Copy all the files & Replaces any files with the same name
-                    Logger.logMessage("[LaunchXbox360]", "Preparing update files...");
+                    Logger.Info("[LaunchXbox360]", "Preparing update files...");
                     List<string> sources = new List<string>();
                     List<string> destinations = new List<string>();
                     int totalSize = 0;
@@ -159,10 +159,10 @@ namespace MCLauncher
                         totalSize += (int)fi.Length;
                         //File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\versions\\x360\\{ver}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{ver}"), true);
                     }
-                    DownloadProgressMulti dpm = new DownloadProgressMulti(sources, destinations, totalSize, "Copying update files...");
+                    DownloadProgressMulti dpm = new DownloadProgressMulti(sources, destinations, totalSize, Strings.lblCopyUpd);
                     dpm.ShowDialog();
 
-                    Logger.logMessage("[LaunchXbox360]", "Done!");
+                    Logger.Info("[LaunchXbox360]", "Done!");
                 }
 
                 Process.Start($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe", $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"");
@@ -178,7 +178,7 @@ namespace MCLauncher
                 if(!file.ToString().Contains("content"))
                 {
                     if (Globals.isDebug)
-                        Logger.logMessage("[LaunchXbox360/updateXenia]", file.ToString());
+                        Logger.Info("[LaunchXbox360/updateXenia]", file.ToString());
 
                     file.Delete();
                 }
@@ -188,7 +188,7 @@ namespace MCLauncher
                 if (!dir.ToString().Contains("content"))
                 {
                     if (Globals.isDebug)
-                        Logger.logMessage("[LaunchXbox360/updateXenia]", dir.ToString());
+                        Logger.Info("[LaunchXbox360/updateXenia]", dir.ToString());
 
                     dir.Delete(true);
                 }

@@ -94,17 +94,17 @@ namespace MCLauncher.controls
             loadData();
             branchIndex = idList.FindIndex(collection => collection.SequenceEqual(branchToCheck));
 
-            Logger.logMessage("[Settings]", $"Branch to check: {idList[branchIndex]}");
+            Logger.Info("[Settings]", $"Branch to check: {idList[branchIndex]}");
 
             if (Globals.verCurrent != versionList[branchIndex])
             {
-                Logger.logMessage("[Settings]", $"New update is available!");
+                Logger.Info("[Settings]", $"New update is available!");
                 Update upd = new Update(versionList[branchIndex], noteList[branchIndex], urlList[branchIndex]);
                 upd.ShowDialog();
             }
             else
             {
-                Logger.logMessage("[Settings]", $"No new update is available.");
+                Logger.Info("[Settings]", $"No new update is available.");
             }
         }
 
@@ -113,11 +113,11 @@ namespace MCLauncher.controls
             branchIndex = cmbUpdateSelect.SelectedIndex;
             try
             {
-                Logger.logMessage("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
+                Logger.Info("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
             }
             catch(ArgumentOutOfRangeException exc)
             {
-                Logger.logMessage("[Settings]", $"Got an exception, index: {branchIndex}");
+                Logger.Info("[Settings]", $"Got an exception, index: {branchIndex}");
             }
         }
 

@@ -22,7 +22,7 @@ namespace MCLauncher
             if (indexName.Contains("legacy"))
             {
                 isLegacy = true;
-                Logger.logMessage("[AssetIndex]", "isLegacy returned true!");
+                Logger.Info("[AssetIndex]", "isLegacy returned true!");
             }
             else
             {
@@ -76,10 +76,10 @@ namespace MCLauncher
                 }
                 else
                 {
-                    Logger.logError("[AssetIndex]", $"Unknown key: {oKey}, with value: {oVal}");
+                    Logger.Error("[AssetIndex]", $"Unknown key: {oKey}, with value: {oVal}");
                 }
 
-                Logger.logError("[AssetIndex]", $"isLegacy: {isLegacy}");
+                Logger.Error("[AssetIndex]", $"isLegacy: {isLegacy}");
                 if (isLegacy == true)
                 {
                     Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\");
@@ -118,7 +118,7 @@ namespace MCLauncher
                             FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             if (fi.Length != sizeList[indexInt])
                             {
-                                Logger.logError("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName} {fi.Length}::{sizeList[indexInt]}");
+                                Logger.Error("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName} {fi.Length}::{sizeList[indexInt]}");
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                                 totalSize += sizeList[indexInt];
                                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
@@ -131,7 +131,7 @@ namespace MCLauncher
                     }
                     if(urls.Count != 0)
                     {
-                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, "Downloading assets...");
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, Strings.lblDlAssets);
                         dpm.ShowDialog();
                     }
 
@@ -168,7 +168,7 @@ namespace MCLauncher
                             FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                             if (fi.Length != sizeList[indexInt])
                             {
-                                Logger.logError("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash} {fi.Length}::{sizeList[indexInt]}");
+                                Logger.Error("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash} {fi.Length}::{sizeList[indexInt]}");
                                 File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
                                 totalSize += sizeList[indexInt];
                                 urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
@@ -181,7 +181,7 @@ namespace MCLauncher
                     }
                     if(urls.Count != 0)
                     {
-                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, "Downloading assets...");
+                        DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, Strings.lblDlAssets);
                         dpm.ShowDialog();
                     }
 

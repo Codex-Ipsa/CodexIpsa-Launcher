@@ -27,6 +27,14 @@ namespace MCLauncher
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ControlBox = false;
+
+            //Lang
+            this.Text = Strings.lblDlFiles;
+            label1.Text = Strings.lblDlFiles;
+            cancelBtn.Text = Strings.btnCancel;
+            ProgressLabel.Text = Strings.lblLoading;
+
+
             wc = new WebClient();
             startDownload();
         }
@@ -50,7 +58,7 @@ namespace MCLauncher
 
         private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            ProgressLabel.Text = e.ProgressPercentage + "% | " + e.BytesReceived + " bytes / " + e.TotalBytesToReceive + " bytes";
+            ProgressLabel.Text = $"{e.ProgressPercentage}% | {e.BytesReceived} {Strings.bytes} / {e.TotalBytesToReceive} {Strings.bytes}";
 
             progressBarDownload.Value = e.ProgressPercentage;
         }
