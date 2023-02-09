@@ -44,7 +44,7 @@ namespace MCLauncher
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
             this.cancelBtn.TabIndex = 0;
-            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.Text = "btn.No";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
@@ -55,7 +55,7 @@ namespace MCLauncher
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(75, 23);
             this.updateBtn.TabIndex = 1;
-            this.updateBtn.Text = "Ok";
+            this.updateBtn.Text = "btn.Yes";
             this.updateBtn.UseVisualStyleBackColor = true;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
@@ -67,9 +67,9 @@ namespace MCLauncher
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "There is an update available!";
+            this.label1.Text = "lbl.UpdateAvail";
             // 
             // label2
             // 
@@ -79,9 +79,9 @@ namespace MCLauncher
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(12, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 13);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Wish to download it?";
+            this.label2.Text = "lbl.DoDown";
             // 
             // infoLabel
             // 

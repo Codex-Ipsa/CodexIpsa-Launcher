@@ -23,7 +23,15 @@ namespace MCLauncher
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            infoLabel.Text = $"{ver}\n\n{info}";
+
+            //Lang
+            this.Text = Strings.updateAvail;
+            label1.Text = Strings.lblUpdateAvail;
+            cancelBtn.Text = Strings.btnNo;
+            updateBtn.Text = Strings.btnYes;
+            label2.Text = Strings.lblDoDown;
+
+            infoLabel.Text = $"{ver}\n\n{Strings.lblWhatsNew}\n{info}";
             UrlString = url;
         }
 

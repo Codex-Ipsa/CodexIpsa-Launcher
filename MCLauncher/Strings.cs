@@ -96,6 +96,11 @@ namespace MCLauncher
         public static string lblServer2 = "(Leave blank for singleplayer)";
         public static string btnStartGame = "Start game";
 
+        public static string updateAvail = "Update available";
+        public static string lblUpdateAvail = "There is an update available!";
+        public static string lblWhatsNew = "What's new:";
+        public static string lblDoDown = "Do you wish to download it?";
+
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
@@ -178,6 +183,11 @@ namespace MCLauncher
                 lblServer1 = str.lblServer1;
                 lblServer2 = str.lblServer2;
                 btnStartGame = str.btnStartGame;
+
+                updateAvail = str.updateAvail;
+                lblUpdateAvail = str.lblUpdateAvail;
+                lblWhatsNew = str.lblWhatsNew;
+                lblDoDown = str.lblDoDown;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
@@ -287,6 +297,11 @@ namespace MCLauncher
             public string lblServer1 { get; set; }
             public string lblServer2 { get; set; }
             public string btnStartGame { get; set; }
+
+            public string updateAvail { get; set; }
+            public string lblUpdateAvail { get; set; }
+            public string lblWhatsNew { get; set; }
+            public string lblDoDown { get; set; }
         }
     }
 }
