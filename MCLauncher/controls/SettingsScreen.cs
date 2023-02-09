@@ -29,6 +29,7 @@ namespace MCLauncher.controls
         public static int branchIndex;
 
         public static bool isUpdating;
+        public static bool isFirstLangCheck = true;
 
         public SettingsScreen()
         {
@@ -115,7 +116,7 @@ namespace MCLauncher.controls
             {
                 Logger.Info("[Settings]", $"Index: {branchIndex}, version: {versionList[branchIndex]}, branch: {idList[branchIndex]}");
             }
-            catch(ArgumentOutOfRangeException exc)
+            catch (ArgumentOutOfRangeException exc)
             {
                 Logger.Info("[Settings]", $"Got an exception, index: {branchIndex}");
             }
@@ -128,9 +129,26 @@ namespace MCLauncher.controls
 
         private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.prefLanguage = cmbLangSelect.Text.ToLower();
-            Properties.Settings.Default.Save();
-            Strings.reloadLangs(cmbLangSelect.Text.ToLower());
+            Logger.Info("[Settings]", $"PrefLang: {Properties.Settings.Default.prefLanguage}");
+
+            if (isFirstLangCheck)
+            {
+                Logger.Info("[Settings]", "First lang!");
+                string lower = Properties.Settings.Default.prefLanguage;
+                string capital = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lower.ToLower());
+
+                Strings.reloadLangs(lower);
+                isFirstLangCheck = false;
+                //cmbLangSelect.SelectedIndex = cmbLangSelect.FindStringExact(capital);
+                //Strings.reloadLangs(lower);
+            }
+            else
+            {
+                Logger.Info("[Settings]", "Not first lang");
+                Properties.Settings.Default.prefLanguage = cmbLangSelect.Text.ToLower();
+                Properties.Settings.Default.Save();
+                Strings.reloadLangs(cmbLangSelect.Text.ToLower());
+            }
         }
     }
 
