@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
@@ -58,7 +58,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(121, 9);
+            this.linkLabel1.Location = new System.Drawing.Point(12, 22);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(93, 13);
             this.linkLabel1.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             // cancelBtn
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(12, 65);
+            this.cancelBtn.Location = new System.Drawing.Point(12, 58);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(277, 23);
             this.cancelBtn.TabIndex = 3;
@@ -84,7 +84,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(163, 28);
+            this.textBox1.Location = new System.Drawing.Point(189, 32);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 100);
+            this.ClientSize = new System.Drawing.Size(301, 89);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.linkLabel1);
