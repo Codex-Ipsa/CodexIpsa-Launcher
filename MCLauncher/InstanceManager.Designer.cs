@@ -78,7 +78,7 @@ namespace MCLauncher
             // 
             // opendirBtn
             // 
-            this.opendirBtn.Location = new System.Drawing.Point(401, 373);
+            this.opendirBtn.Location = new System.Drawing.Point(486, 373);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(92, 23);
             this.opendirBtn.TabIndex = 25;
@@ -108,7 +108,7 @@ namespace MCLauncher
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(499, 373);
+            this.btnDelete.Location = new System.Drawing.Point(401, 373);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(79, 23);
             this.btnDelete.TabIndex = 34;
