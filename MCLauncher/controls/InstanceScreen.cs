@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,34 +17,51 @@ namespace MCLauncher.controls
         public InstanceScreen()
         {
             InitializeComponent();
-            ImageList iconList = new ImageList();
-            iconList.ImageSize = new Size(32, 32);
 
-            //iconList.Images.Add(Image.FromFile(@"D:\Source Code\MineC-raft-Launcher\MCLauncher\image\icon64.png"));
+            listView1.Columns[0].Width = 150;
+            listView1.Columns[1].Width = -1;
+
+            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
+
+            foreach (string dir in dirs)
+            {
+                var dirN = new DirectoryInfo(dir);
+                var dirName = dirN.Name;
+                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
+                {
+                    string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg");
+                    List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
+                    ListViewItem item = new ListViewItem(dirName);
+                    foreach (var thing in data)
+                    {
+                        item.SubItems.Add(thing.version);
+                    }
+
+                    listView1.Items.Add(item);
+                }
+            }
 
 
-            ListViewGroup group = new ListViewGroup("List item text", HorizontalAlignment.Left);
-            ListViewGroup group2 = new ListViewGroup("Group test", HorizontalAlignment.Left);
+            //ListViewGroup group = new ListViewGroup("List item text", HorizontalAlignment.Left);
+            //ListViewGroup group2 = new ListViewGroup("Group test", HorizontalAlignment.Left);
 
-            listView1.LargeImageList = iconList;
-            listView1.LargeImageList.ColorDepth = ColorDepth.Depth24Bit;
             /*for(int i = 0; i <= 10; i++)
             {
                 var item = new ListViewItem { Text = "Test" + i, Group = myGroup };
             }*/
 
-            for (int i = 1; i <= 15; i++)
+            /*for (int i = 1; i <= 15; i++)
             {
-                listView1.Items.Add(new ListViewItem("Test", 0, group));
+                listView1.Items.Add(new ListViewItem("Test", 0/*, group));
             }
 
             for (int i = 1; i <= 35; i++)
             {
-                listView1.Items.Add(new ListViewItem("Test", 0, group2));
-            }
+                listView1.Items.Add(new ListViewItem("Test", 0/*, group2));
+            }*/
 
-            listView1.Groups.Add(group);
-            listView1.Groups.Add(group2);
+            /*listView1.Groups.Add(group);
+            listView1.Groups.Add(group2);*/
 
         }
     }

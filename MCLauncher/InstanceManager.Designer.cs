@@ -67,6 +67,8 @@ namespace MCLauncher
             this.javaCheck = new System.Windows.Forms.CheckBox();
             this.javaBox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.verPage = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
@@ -496,12 +498,32 @@ namespace MCLauncher
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.javaPage);
+            this.tabControl1.Controls.Add(this.verPage);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(668, 372);
             this.tabControl1.TabIndex = 33;
+            // 
+            // verPage
+            // 
+            this.verPage.Location = new System.Drawing.Point(4, 22);
+            this.verPage.Name = "verPage";
+            this.verPage.Size = new System.Drawing.Size(660, 346);
+            this.verPage.TabIndex = 1;
+            this.verPage.Text = "verPage";
+            this.verPage.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(660, 346);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "modsPage";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // InstanceManager
             // 
@@ -569,5 +591,7 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage verPage;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
