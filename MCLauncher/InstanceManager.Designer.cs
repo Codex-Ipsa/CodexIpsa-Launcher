@@ -81,7 +81,7 @@ namespace MCLauncher
             this.opendirBtn.Location = new System.Drawing.Point(486, 373);
             this.opendirBtn.Name = "opendirBtn";
             this.opendirBtn.Size = new System.Drawing.Size(92, 23);
-            this.opendirBtn.TabIndex = 25;
+            this.opendirBtn.TabIndex = 28;
             this.opendirBtn.Text = "btn.OpenDir";
             this.opendirBtn.UseVisualStyleBackColor = true;
             this.opendirBtn.Click += new System.EventHandler(this.opendirBtn_Click);
@@ -101,7 +101,7 @@ namespace MCLauncher
             this.saveBtn.Location = new System.Drawing.Point(584, 373);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 28;
+            this.saveBtn.TabIndex = 25;
             this.saveBtn.Text = "btn.SaveInst";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
