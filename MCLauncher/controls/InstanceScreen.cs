@@ -20,6 +20,7 @@ namespace MCLauncher.controls
 
             listView1.Columns[0].Width = 150;
             listView1.Columns[1].Width = -1;
+            listView1.Columns[2].Width = -1;
 
             string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
 
@@ -35,6 +36,7 @@ namespace MCLauncher.controls
                     foreach (var thing in data)
                     {
                         item.SubItems.Add(thing.version);
+                        item.SubItems.Add(thing.edition);
                     }
 
                     listView1.Items.Add(item);
@@ -63,6 +65,24 @@ namespace MCLauncher.controls
             /*listView1.Groups.Add(group);
             listView1.Groups.Add(group2);*/
 
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            string selectedName = "";
+            if (listView1.SelectedIndices.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = listView1.SelectedIndices[0];
+            if (intselectedindex >= 0)
+            {
+                selectedName = listView1.Items[intselectedindex].Text;
+
+            }
+
+            InstanceManager man = new InstanceManager(selectedName, "edit");
+            man.ShowDialog();
         }
     }
 }
