@@ -249,10 +249,16 @@ namespace MCLauncher
                     foreach (var vers in data2)
                     {
                         verList.Add(vers.verName + vers.verNote);
+                        ListViewItem item = new ListViewItem(new[] { vers.verName + vers.verNote, "01-01-1970", vers.verCat });
+                        This.listView2.Items.Add(item);
+                        
                         typeList.Add(vers.verType);
                         urlList.Add(vers.verLink);
                     }
                 }
+                This.listView2.Columns[0].Width = -1;
+                This.listView2.Columns[1].Width = -1;
+                This.listView2.Columns[2].Width = -1;
 
                 This.verBox.DataSource = verList;
                 This.verBox.SelectedIndex = This.verBox.FindStringExact(version);
@@ -444,7 +450,7 @@ namespace MCLauncher
                 url = urlList[i];
                 type = typeList[i];
             }
-            catch (ArgumentOutOfRangeException aore)
+            catch (ArgumentOutOfRangeException)
             {
                 Logger.Error("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
@@ -577,6 +583,36 @@ namespace MCLauncher
                 HomeScreen.loadInstanceList();
                 didClickDelete = false;
                 this.Close();
+            }
+        }
+
+        private void releaseBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int i = listView2.Items.IndexOf(listView2.SelectedItems[0]);
+                if (verList[i].Contains("("))
+                {
+                    int index = verList[i].IndexOf(" (");
+                    if (index >= 0)
+                        version = verList[i].Substring(0, index);
+                }
+                else
+                {
+                    version = verList[i];
+                }
+
+                url = urlList[i];
+                type = typeList[i];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Logger.Error("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
             }
         }
     }

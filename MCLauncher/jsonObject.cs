@@ -13,6 +13,7 @@ namespace MCLauncher
         public string verNote { get; set; }
         public string verLink { get; set; }
         public string verType { get; set; }
+        public string verCat { get; set; }
 
         //Mods
         public string modID { get; set; }
