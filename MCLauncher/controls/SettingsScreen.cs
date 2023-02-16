@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -22,6 +23,7 @@ namespace MCLauncher.controls
         public static List<string> noteList = new List<string>();
 
         public static List<string> languageList = new List<string>();
+        public static List<string> langNameList = new List<string>();
 
         public static string updateCheckMode;
         public static SettingsScreen InstanceSetting;
@@ -54,7 +56,7 @@ namespace MCLauncher.controls
             int index1 = idList.FindIndex(collection => collection.SequenceEqual(Globals.branch));
             cmbUpdateSelect.SelectedIndex = index1;
             branchIndex = cmbUpdateSelect.SelectedIndex;
-            cmbLangSelect.DataSource = languageList;
+            cmbLangSelect.DataSource = langNameList;
         }
 
         public static void loadData()
@@ -66,6 +68,7 @@ namespace MCLauncher.controls
             urlList.Clear();
             noteList.Clear();
             languageList.Clear();
+            langNameList.Clear();
 
             //Get update info
             WebClient client = new WebClient();
@@ -80,11 +83,14 @@ namespace MCLauncher.controls
                 noteList.Add(vers.brNote);
             }
 
-            string langData = client.DownloadString(Globals.languageIndex);
+            string json = client.DownloadString(Globals.languageIndex);
+            byte[] jsonArr = Encoding.Default.GetBytes(json);
+            string langData = Encoding.UTF8.GetString(jsonArr);
             List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
             foreach (var vers in lang)
             {
                 languageList.Add(vers.title);
+                langNameList.Add(vers.name);
             }
         }
 
@@ -129,6 +135,7 @@ namespace MCLauncher.controls
         {
             if(isFirstLangCheck)
             {
+                Logger.Info("[Settings]", $"PrefLang: {Properties.Settings.Default.prefLanguage}");
                 isFirstLangCheck = false;
 
                 if(Properties.Settings.Default.prefLanguage == "english" || Properties.Settings.Default.prefLanguage == String.Empty || Properties.Settings.Default.prefLanguage == null)
@@ -137,16 +144,17 @@ namespace MCLauncher.controls
                 }
                 else
                 {
-                    cmbLangSelect.SelectedIndex = cmbLangSelect.FindString(Properties.Settings.Default.prefLanguage);
+                    int index = languageList.FindIndex(a => a.Contains(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Properties.Settings.Default.prefLanguage.ToLower())));
+                    Logger.Error("[Settings]", $"Lang {Properties.Settings.Default.prefLanguage} found on {index}");
+                    cmbLangSelect.SelectedIndex = cmbLangSelect.FindString(langNameList[index]);
                 }
             }
             else
             {
-                Logger.Info("[Settings]", $"PrefLang: {Properties.Settings.Default.prefLanguage}");
-
-                Properties.Settings.Default.prefLanguage = cmbLangSelect.Text.ToLower();
+                int index = langNameList.FindIndex(a => a.Contains(cmbLangSelect.Text));
+                Properties.Settings.Default.prefLanguage = languageList[index].ToLower();
                 Properties.Settings.Default.Save();
-                Strings.reloadLangs(cmbLangSelect.Text.ToLower());
+                Strings.reloadLangs(languageList[index].ToLower());
             }
         }
     }
@@ -160,5 +168,6 @@ namespace MCLauncher.controls
         public string brNote { get; set; }
 
         public string title { get; set; }
+        public string name { get; set; }
     }
 }
