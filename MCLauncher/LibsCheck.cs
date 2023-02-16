@@ -39,7 +39,7 @@ namespace MCLauncher
                 List<LibsJson> data = JsonConvert.DeserializeObject<List<LibsJson>>(json);
 
                 //delete natives
-                System.IO.DirectoryInfo di = new DirectoryInfo($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
+                DirectoryInfo di = new DirectoryInfo($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
                 Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
                 foreach (FileInfo file in di.GetFiles())
                 {
