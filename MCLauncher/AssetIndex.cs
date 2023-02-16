@@ -35,6 +35,22 @@ namespace MCLauncher
             {
                 client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
             }
+            else
+            {
+                FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(indexUrl);
+                req.Method = "HEAD";
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                long urlSize = resp.ContentLength;
+
+                if(urlSize != fi.Length)
+                {
+                    Logger.Info("[AssetIndex]", "Index has changed! Redownloading json.");
+                    File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+                    client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+                }
+            }
             string origJson = client.DownloadString(indexUrl);
 
             JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
