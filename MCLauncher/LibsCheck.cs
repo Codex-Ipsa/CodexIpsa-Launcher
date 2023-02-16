@@ -63,6 +63,7 @@ namespace MCLauncher
                     //Download required libraries
                     if(libs.name.StartsWith("{gameDir}"))
                     {
+                        Directory.CreateDirectory($"{LaunchJava.gameDir}\\lib");
                         savePath = libs.name.Replace("{gameDir}", LaunchJava.gameDir);
                     }
                     else
@@ -72,6 +73,10 @@ namespace MCLauncher
                     Console.WriteLine(savePath);
                     if (!File.Exists(savePath))
                     {
+                        if (Globals.isDebug)
+                        {
+                            Logger.Info("[LibsCheck]", $"Downloading {libs.link} {savePath}");
+                        }
                         DownloadProgress.url = libs.link;
                         DownloadProgress.savePath = savePath;
                         DownloadProgress download = new DownloadProgress();
