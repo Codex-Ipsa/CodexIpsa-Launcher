@@ -86,7 +86,6 @@ namespace MCLauncher
             this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
             this.instanceToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.instanceToolStripMenuItem.Text = "Profiles";
-            this.instanceToolStripMenuItem.Visible = false;
             this.instanceToolStripMenuItem.Click += new System.EventHandler(this.instanceToolStripMenuItem1_Click);
             // 
             // consoleToolStripMenuItem

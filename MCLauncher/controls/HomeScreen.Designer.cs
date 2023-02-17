@@ -205,7 +205,6 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel pnlChangelog;
         public System.Windows.Forms.Button btnPlay;
         public System.Windows.Forms.ComboBox cmbInstaces;
         public System.Windows.Forms.Label lblSelInst;
@@ -216,5 +215,6 @@
         public System.Windows.Forms.Label lblWelcome;
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
+        private System.Windows.Forms.Panel pnlChangelog;
     }
 }
