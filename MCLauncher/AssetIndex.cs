@@ -41,7 +41,7 @@ namespace MCLauncher
 
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(indexUrl);
                 req.Method = "HEAD";
-                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse(); //fix rate limit
                 long urlSize = resp.ContentLength;
 
                 if(urlSize != fi.Length)
@@ -51,7 +51,7 @@ namespace MCLauncher
                     client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
                 }
             }
-            string origJson = client.DownloadString(indexUrl);
+            string origJson = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
 
             JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
             var origProps = origObj.Properties();
