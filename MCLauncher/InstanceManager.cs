@@ -593,7 +593,7 @@ namespace MCLauncher
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 int i = listView2.Items.IndexOf(listView2.SelectedItems[0]);
                 if (verList[i].Contains("("))
@@ -613,7 +613,12 @@ namespace MCLauncher
             catch (ArgumentOutOfRangeException)
             {
                 Logger.Error("[InstanceManager]", "Ignore this error (*ArgumentOutOfRangeException)");
-            }
+            }*/
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
