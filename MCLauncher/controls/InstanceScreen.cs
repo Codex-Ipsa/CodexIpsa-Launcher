@@ -18,7 +18,7 @@ namespace MCLauncher.controls
         {
             InitializeComponent();
 
-            listView1.Columns[0].Width = 150;
+            /*listView1.Columns[0].Width = 150;
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -1;
 
@@ -41,35 +41,12 @@ namespace MCLauncher.controls
 
                     listView1.Items.Add(item);
                 }
-            }
-
-
-            //ListViewGroup group = new ListViewGroup("List item text", HorizontalAlignment.Left);
-            //ListViewGroup group2 = new ListViewGroup("Group test", HorizontalAlignment.Left);
-
-            /*for(int i = 0; i <= 10; i++)
-            {
-                var item = new ListViewItem { Text = "Test" + i, Group = myGroup };
             }*/
-
-            /*for (int i = 1; i <= 15; i++)
-            {
-                listView1.Items.Add(new ListViewItem("Test", 0/*, group));
-            }
-
-            for (int i = 1; i <= 35; i++)
-            {
-                listView1.Items.Add(new ListViewItem("Test", 0/*, group2));
-            }*/
-
-            /*listView1.Groups.Add(group);
-            listView1.Groups.Add(group2);*/
-
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            string selectedName = "";
+            /*string selectedName = "";
             if (listView1.SelectedIndices.Count <= 0)
             {
                 return;
@@ -82,7 +59,12 @@ namespace MCLauncher.controls
             }
 
             InstanceManager man = new InstanceManager(selectedName, "edit");
-            man.ShowDialog();
+            man.ShowDialog();*/
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

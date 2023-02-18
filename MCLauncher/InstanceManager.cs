@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher
 {
@@ -634,6 +635,7 @@ namespace MCLauncher
 
         static void reloadModsList()
         {
+            This.modView.Items.Clear();
             //TODO: make a json for mod data
 
             if(!File.Exists($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg"))
@@ -655,6 +657,17 @@ namespace MCLauncher
             {
                 Console.WriteLine(file.Name);
                 This.modView.Items.Add(file.Name);
+            }
+            This.modView.Columns[0].Width = -1;
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if(This.modView.SelectedItems.Count > 0)
+            {
+                File.Delete($"{Globals.dataPath}\\instance\\{name}\\jarmods\\{This.modView.SelectedItems[0].Text}");
+                reloadModsList();
+                //Console.WriteLine(This.modView.SelectedItems[0].Text);
             }
         }
     }
