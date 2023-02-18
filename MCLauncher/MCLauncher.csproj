@@ -152,6 +152,7 @@
     <Compile Include="GameConsole.Designer.cs">
       <DependentUpon>GameConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="JavaModHelper.cs" />
     <Compile Include="NoJava.cs">
       <SubType>Form</SubType>
     </Compile>

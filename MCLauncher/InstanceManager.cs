@@ -288,6 +288,7 @@ namespace MCLauncher
                 {
                     This.btnDelete.Visible = false;
                 }
+                reloadModsList();
             }
         }
 
@@ -618,7 +619,43 @@ namespace MCLauncher
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.zip, *.jar)|*.zip;*.jar";
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
+                    //todo: save to json
+                    reloadModsList();
+                }
+            }
+        }
+
+        static void reloadModsList()
+        {
+            //TODO: make a json for mod data
+
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg"))
+            {
+                //File.CreateText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", "[]");
+            }
+
+            string filepath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\";
+            DirectoryInfo d = new DirectoryInfo(filepath);
+
+            foreach (var file in d.GetFiles("*.jar"))
+            {
+                Console.WriteLine(file.Name);
+                This.modView.Items.Add(file.Name);
+            }
+
+            foreach (var file in d.GetFiles("*.zip"))
+            {
+                Console.WriteLine(file.Name);
+                This.modView.Items.Add(file.Name);
+            }
         }
     }
 

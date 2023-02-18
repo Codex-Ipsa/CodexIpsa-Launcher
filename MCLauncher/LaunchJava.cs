@@ -340,6 +340,9 @@ namespace MCLauncher
                     launchClientPath = custJarLocation;
                 }
 
+                //MODS
+                JavaModHelper.Start(currentInstance, launchClientPath);
+
                 launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} "; //{launchMethod} net.minecraft.client.Minecraft
                 if (launchCmdAddon != string.Empty)
                 {

@@ -97,7 +97,7 @@ namespace MCLauncher
             this.btnForge = new System.Windows.Forms.Button();
             this.btnReplace = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
@@ -769,7 +769,7 @@ namespace MCLauncher
             this.modsPage.Controls.Add(this.btnForge);
             this.modsPage.Controls.Add(this.btnReplace);
             this.modsPage.Controls.Add(this.btnAdd);
-            this.modsPage.Controls.Add(this.listView1);
+            this.modsPage.Controls.Add(this.modView);
             this.modsPage.Location = new System.Drawing.Point(4, 22);
             this.modsPage.Name = "modsPage";
             this.modsPage.Size = new System.Drawing.Size(660, 346);
@@ -868,19 +868,20 @@ namespace MCLauncher
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // listView1
+            // modView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.modView.CheckBoxes = true;
+            this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(526, 340);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.modView.FullRowSelect = true;
+            this.modView.HideSelection = false;
+            this.modView.Location = new System.Drawing.Point(3, 3);
+            this.modView.MultiSelect = false;
+            this.modView.Name = "modView";
+            this.modView.Size = new System.Drawing.Size(526, 340);
+            this.modView.TabIndex = 0;
+            this.modView.UseCompatibleStateImageBehavior = false;
+            this.modView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -961,7 +962,7 @@ namespace MCLauncher
         private System.Windows.Forms.TabPage verPage;
         private System.Windows.Forms.TabPage modsPage;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView modView;
         private System.Windows.Forms.CheckBox preclassBox;
         private System.Windows.Forms.CheckBox indevBox;
         private System.Windows.Forms.CheckBox infdevBox;
