@@ -88,7 +88,6 @@ namespace MCLauncher
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.modsPage = new System.Windows.Forms.TabPage();
             this.btnRepo = new System.Windows.Forms.Button();
-            this.btnOpen = new System.Windows.Forms.Button();
             this.btnMloader = new System.Windows.Forms.Button();
             this.btnFabric = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
@@ -99,6 +98,7 @@ namespace MCLauncher
             this.btnAdd = new System.Windows.Forms.Button();
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnOpen = new System.Windows.Forms.Button();
             this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
@@ -786,15 +786,6 @@ namespace MCLauncher
             this.btnRepo.Text = "Mod repositories";
             this.btnRepo.UseVisualStyleBackColor = true;
             // 
-            // btnOpen
-            // 
-            this.btnOpen.Location = new System.Drawing.Point(535, 320);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(117, 23);
-            this.btnOpen.TabIndex = 9;
-            this.btnOpen.Text = "Open .minecraft";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            // 
             // btnMloader
             // 
             this.btnMloader.Location = new System.Drawing.Point(535, 173);
@@ -889,6 +880,15 @@ namespace MCLauncher
             this.columnHeader1.Text = "Name";
             this.columnHeader1.Width = 89;
             // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(535, 320);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(117, 23);
+            this.btnOpen.TabIndex = 9;
+            this.btnOpen.Text = "Open .minecraft";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            // 
             // InstanceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -970,7 +970,6 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox releaseBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Button btnMloader;
         private System.Windows.Forms.Button btnFabric;
         private System.Windows.Forms.Button btnDown;
@@ -992,5 +991,6 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox experimentBox;
         private System.Windows.Forms.CheckBox snapshotBox;
         private System.Windows.Forms.Button btnRepo;
+        private System.Windows.Forms.Button btnOpen;
     }
 }
