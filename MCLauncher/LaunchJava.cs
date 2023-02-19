@@ -309,7 +309,7 @@ namespace MCLauncher
                 }
                 //MODS
                 JavaModHelper.Start(currentInstance, launchClientPath);
-                launchCommand += $"{launchProxy.Replace("{gameDir}", $"\"{gameDir}\"")}";
+                launchCommand += $"{launchProxy.Replace("{gameDir}", $"\"{gameDir}\"").Replace("null", "")}";
                 if (useCustJvm == true)
                 {
                     foreach (string arg in proxyArgs)
