@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -35,43 +37,82 @@ namespace MCLauncher
 
             if (modNum > 0)
             {
+                string toHash = "";
                 Logger.Info("[ModHelper]", "Mods detected!");
 
-                if(Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\"))
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
-
-                ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
-                int modCount = 0;
+                //get patchhash first
+                using (var md5 = MD5.Create())
+                {
+                    using (var stream = File.OpenRead(clientPath))
+                    {
+                        var hash = md5.ComputeHash(stream);
+                        toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                    }
+                }
                 foreach (var mod in modList)
                 {
-                    ZipFile.ExtractToDirectory(mod, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{modCount}\\");
-                    modCount++;
+                    using (var md5 = MD5.Create())
+                    {
+                        using (var stream = File.OpenRead(mod))
+                        {
+                            var hash = md5.ComputeHash(stream);
+                            toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                        }
+                    }
                 }
-
-                for(int i = 0; i < modCount; i++)
+                toHash += "CodexIpsa";
+                Console.WriteLine(toHash);
+                string patchHash = "";
+                using (var md5 = MD5.Create())
                 {
-                    string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{i}\\";
+                    byte[] inputBytes = Encoding.ASCII.GetBytes(toHash);
+                    byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-                    foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                    {
-                        Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
-                    }
-
-                    foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                    {
-                        File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
-                    }
+                    patchHash = BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
+                    Console.WriteLine(patchHash);
                 }
 
-                Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
+                if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
+                {
+                    //create patch TODO: THIS IS SHIT AND NEEDS TO BE IMPROVED
+                    if (Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\"))
+                        Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
 
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
 
-                File.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar");
-                ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar");
+                    ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
 
-                Logger.Info("[ModHelper]", "Created patched jar!");
-                LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar";
+                    int modCount = 0;
+                    foreach (var mod in modList)
+                    {
+                        ZipFile.ExtractToDirectory(mod, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{modCount}\\");
+                        modCount++;
+                    }
+
+                    for (int i = 0; i < modCount; i++)
+                    {
+                        string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{i}\\";
+
+                        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                        {
+                            Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
+                        }
+
+                        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                        {
+                            File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
+                        }
+                    }
+
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
+                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
+                    File.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar");
+                    ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar");
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
+
+                    Logger.Info("[ModHelper]", "Created patched jar!");
+                }
+
+                LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
 
                 string aa = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
                 if (aa.Contains("\"forge\":true"))
