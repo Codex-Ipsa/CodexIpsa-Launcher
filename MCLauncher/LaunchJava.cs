@@ -301,11 +301,15 @@ namespace MCLauncher
                     }
                     launchCommand += $"-javaagent:\"{workDir}\\.minecraft\\{fileName}\" ";
                 }
+
                 if (launchProxy != "null" && useProxy == true)
                 {
                     launchProxy = launchProxy.Replace("{gameDir}", $"\"{gameDir}\"");
-                    launchCommand += $"{launchProxy} ";
+                    launchProxy = launchProxy + " ";
                 }
+                //MODS
+                JavaModHelper.Start(currentInstance, launchClientPath);
+                launchCommand += $"{launchProxy.Replace("{gameDir}", $"\"{gameDir}\"")}";
                 if (useCustJvm == true)
                 {
                     foreach (string arg in proxyArgs)
@@ -339,9 +343,6 @@ namespace MCLauncher
                 {
                     launchClientPath = custJarLocation;
                 }
-
-                //MODS
-                JavaModHelper.Start(currentInstance, launchClientPath);
 
                 launchCommand += $"-Djava.library.path={launchNativePath} -cp \"{launchClientPath};{launchLibsPath}\" {launchMethod} "; //{launchMethod} net.minecraft.client.Minecraft
                 if (launchCmdAddon != string.Empty)

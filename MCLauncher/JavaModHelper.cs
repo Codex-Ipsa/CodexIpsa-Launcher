@@ -72,6 +72,13 @@ namespace MCLauncher
 
                 Logger.Info("[ModHelper]", "Created patched jar!");
                 LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar";
+
+                string aa = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
+                if (aa.Contains("\"forge\":true"))
+                {
+                    LaunchJava.launchProxy += "-Dhttp.nonProxyHosts=codex-ipsa.dejvoss.cz -Dminecraft.applet.TargetDirectory={gameDir} -Dfml.core.libraries.mirror=http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/forgelib/%s ";
+                    Logger.Info("[ModHelper]", "Forge tweaks on!");
+                }
             }
         }
     }

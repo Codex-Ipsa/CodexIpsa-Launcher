@@ -641,7 +641,7 @@ namespace MCLauncher
             if(!File.Exists($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg"))
             {
                 //File.CreateText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg");
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", "[]");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", "[{\"forge\":false}]");
             }
 
             string filepath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\";
@@ -658,7 +658,7 @@ namespace MCLauncher
                 Console.WriteLine(file.Name);
                 This.modView.Items.Add(file.Name);
             }
-            This.modView.Columns[0].Width = -1;
+            This.modView.Columns[0].Width = 522;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -694,5 +694,10 @@ namespace MCLauncher
         public string useCustomJar { get; set; }
         public string offlineMode { get; set; }
         public string useProxy { get; set; }
+    }
+
+    public class modsObjects
+    {
+        public bool forge { get; set; }
     }
 }
