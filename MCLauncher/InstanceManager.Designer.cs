@@ -779,6 +779,7 @@ namespace MCLauncher
             // 
             // btnRepo
             // 
+            this.btnRepo.Enabled = false;
             this.btnRepo.Location = new System.Drawing.Point(535, 223);
             this.btnRepo.Name = "btnRepo";
             this.btnRepo.Size = new System.Drawing.Size(117, 23);
@@ -788,6 +789,7 @@ namespace MCLauncher
             // 
             // btnMloader
             // 
+            this.btnMloader.Enabled = false;
             this.btnMloader.Location = new System.Drawing.Point(535, 173);
             this.btnMloader.Name = "btnMloader";
             this.btnMloader.Size = new System.Drawing.Size(117, 23);
@@ -797,6 +799,7 @@ namespace MCLauncher
             // 
             // btnFabric
             // 
+            this.btnFabric.Enabled = false;
             this.btnFabric.Location = new System.Drawing.Point(535, 144);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
@@ -806,6 +809,7 @@ namespace MCLauncher
             // 
             // btnDown
             // 
+            this.btnDown.Enabled = false;
             this.btnDown.Location = new System.Drawing.Point(535, 32);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(117, 23);
@@ -825,6 +829,7 @@ namespace MCLauncher
             // 
             // btnUp
             // 
+            this.btnUp.Enabled = false;
             this.btnUp.Location = new System.Drawing.Point(535, 3);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(117, 23);
@@ -834,6 +839,7 @@ namespace MCLauncher
             // 
             // btnForge
             // 
+            this.btnForge.Enabled = false;
             this.btnForge.Location = new System.Drawing.Point(535, 115);
             this.btnForge.Name = "btnForge";
             this.btnForge.Size = new System.Drawing.Size(117, 23);
@@ -843,6 +849,7 @@ namespace MCLauncher
             // 
             // btnReplace
             // 
+            this.btnReplace.Enabled = false;
             this.btnReplace.Location = new System.Drawing.Point(535, 281);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(117, 23);
@@ -862,7 +869,6 @@ namespace MCLauncher
             // 
             // modView
             // 
-            this.modView.CheckBoxes = true;
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.modView.FullRowSelect = true;
@@ -888,6 +894,7 @@ namespace MCLauncher
             this.btnOpen.TabIndex = 9;
             this.btnOpen.Text = "Open .minecraft";
             this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // InstanceManager
             // 

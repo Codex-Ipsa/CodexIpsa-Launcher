@@ -670,6 +670,25 @@ namespace MCLauncher
                 //Console.WriteLine(This.modView.SelectedItems[0].Text);
             }
         }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            if (directory != String.Empty || directory != "" || directory != null)
+            {
+                try
+                {
+                    Process.Start(directory);
+                }
+                catch (Exception)
+                {
+                    Process.Start($"{Globals.dataPath}\\instance\\{name}\\.minecraft\\");
+                }
+            }
+            else
+            {
+                Process.Start($"{Globals.dataPath}\\instance\\{name}\\.minecraft\\");
+            }
+        }
     }
 
     public class instanceObjects
