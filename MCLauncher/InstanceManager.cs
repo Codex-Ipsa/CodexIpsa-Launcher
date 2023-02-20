@@ -640,8 +640,9 @@ namespace MCLauncher
 
             if(!File.Exists($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg"))
             {
+                string test = "aa";
                 //File.CreateText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg");
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", "[{\"forge\":false}]");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", $"[{{\"forge\":false, \"items\":[{{\"name\": \"{test}\"}}]}}]");
             }
 
             string filepath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\";
