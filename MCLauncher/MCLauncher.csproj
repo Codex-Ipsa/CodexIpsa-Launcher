@@ -165,6 +165,7 @@
     <Compile Include="progressbars\DownloadProgressMulti.Designer.cs">
       <DependentUpon>DownloadProgressMulti.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingData.cs" />
     <Compile Include="Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
       <SubType>UserControl</SubType>
