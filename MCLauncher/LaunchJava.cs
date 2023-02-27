@@ -60,7 +60,7 @@ namespace MCLauncher
 
         public static string launchDir;
 
-        public static string gameDir;
+        public static string gameDir;   
         public static string assetDir;
         public static string workDir;
 

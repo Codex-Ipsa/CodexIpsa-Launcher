@@ -27,6 +27,12 @@ namespace MCLauncher
             }
 
             string json = File.ReadAllText(indexPath);
+
+            if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
+            {
+                json = LegacyUpdate(indexPath, json, instName);
+            }
+
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
             foreach (string str in mj.items)
             {
@@ -126,6 +132,26 @@ namespace MCLauncher
                     Logger.Info("[ModHelper]", "Forge tweaks on!");
                 }
             }
+        }
+
+        public static string LegacyUpdate(string indexPath, string json, string instName)
+        {
+            DirectoryInfo d = new DirectoryInfo($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\");
+
+            string toJson = "";
+            foreach (var file in d.GetFiles("*.jar"))
+            {
+                toJson += $"\"{file.Name}?jarmod\",";
+            }
+            foreach (var file in d.GetFiles("*.zip"))
+            {
+                toJson += $"\"{file.Name}?jarmod\",";
+            }
+            if (toJson.Contains(","))
+                toJson = toJson.Remove(toJson.LastIndexOf(','));
+            File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[{toJson}]}}");
+            json = $"{{\"forge\":false,\"items\":[{toJson}]}}";
+            return json;
         }
     }
 }

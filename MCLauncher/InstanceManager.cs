@@ -255,7 +255,7 @@ namespace MCLauncher
                         verList.Add(vers.verName + vers.verNote);
                         ListViewItem item = new ListViewItem(new[] { vers.verName + vers.verNote, "01-01-1970", vers.verCat });
                         This.listView2.Items.Add(item);
-                        
+
                         typeList.Add(vers.verType);
                         urlList.Add(vers.verLink);
                     }
@@ -372,7 +372,7 @@ namespace MCLauncher
         private void saveBtn_Click(object sender, EventArgs e)
         {
             string origName = nameBox.Text;
-            if(mode2 == "new" || mode2 == "initial")
+            if (mode2 == "new" || mode2 == "initial")
             {
                 if (string.IsNullOrWhiteSpace(origName) || string.IsNullOrEmpty(origName))
                 {
@@ -399,7 +399,7 @@ namespace MCLauncher
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(newName);
                 this.Close();
             }
-            else if(mode2 == "edit")
+            else if (mode2 == "edit")
             {
                 saveInstance(origName, "other");
                 HomeScreen.reloadInstance(origName);
@@ -676,12 +676,12 @@ namespace MCLauncher
             string itemsStr = "";
             foreach (string str in itemsList)
             {
-                if(!str.Contains(modName))
+                if (!str.Contains(modName))
                 {
                     itemsStr += $"\"{str}\",";
                 }
             }
-            if(itemsStr.Contains(","))
+            if (itemsStr.Contains(","))
             {
                 itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
             }
@@ -700,6 +700,12 @@ namespace MCLauncher
             }
 
             string json = File.ReadAllText(indexPath);
+            //legacy for old launcher versions
+            if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
+            {
+                json = JavaModHelper.LegacyUpdate(indexPath, json, name);
+            }
+
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
             bool useForge = mj.forge;
             foreach (string str in mj.items)
@@ -712,7 +718,7 @@ namespace MCLauncher
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if(This.modView.SelectedItems.Count > 0)
+            if (This.modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{name}\\jarmods\\{This.modView.SelectedItems[0].Text}");
                 removeFromModsList(This.modView.SelectedItems[0].Text);
@@ -766,10 +772,7 @@ namespace MCLauncher
 
     class ModJson
     {
-        public bool forge;
-        public string[] items;
-
-        public string name;
-        public string type;
+        public bool forge { get; set; }
+        public string[] items { get; set; }
     }
 }
