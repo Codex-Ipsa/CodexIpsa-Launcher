@@ -86,12 +86,6 @@
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="controls\EI_Version.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\EI_Version.Designer.cs">
-      <DependentUpon>EI_Version.cs</DependentUpon>
-    </Compile>
     <Compile Include="controls\InstanceScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,9 +201,6 @@
     </Compile>
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="controls\EI_Version.resx">
-      <DependentUpon>EI_Version.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\InstanceScreen.resx">
       <DependentUpon>InstanceScreen.cs</DependentUpon>
