@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher
@@ -203,6 +204,8 @@ namespace MCLauncher
 
                 This.opendirBtn.Visible = false;
                 This.btnDelete.Visible = false;
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[2]);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[2]);
             }
             else if (mode == "edit")
             {
@@ -626,11 +629,65 @@ namespace MCLauncher
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    //Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{name}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
-                    //todo: save to json
+                    addToModsList(openFileDialog.SafeFileName, "jarmod");
                     reloadModsList();
                 }
             }
+        }
+
+        static void addToModsList(string modName, string modType)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+            itemsList.Add($"{modName}?{modType}");
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+        static void removeFromModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+            {
+                if(!str.Contains(modName))
+                {
+                    itemsStr += $"\"{str}\",";
+                }
+            }
+            if(itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
         }
 
         static void reloadModsList()
@@ -642,7 +699,7 @@ namespace MCLauncher
             {
                 string test = "aa";
                 //File.CreateText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg");
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", $"[{{\"forge\":false, \"items\":[{{\"name\": \"{test}\"}}]}}]");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", $"{{\"forge\":false,\"items\":[]}}");
             }
 
             string filepath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\";
@@ -667,6 +724,7 @@ namespace MCLauncher
             if(This.modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{name}\\jarmods\\{This.modView.SelectedItems[0].Text}");
+                removeFromModsList(This.modView.SelectedItems[0].Text);
                 reloadModsList();
                 //Console.WriteLine(This.modView.SelectedItems[0].Text);
             }
@@ -716,8 +774,12 @@ namespace MCLauncher
         public string useProxy { get; set; }
     }
 
-    public class modsObjects
+    class ModJson
     {
-        public bool forge { get; set; }
+        public bool forge;
+        public string[] items;
+
+        public string name;
+        public string type;
     }
 }

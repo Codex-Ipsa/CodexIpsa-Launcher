@@ -12,6 +12,7 @@ namespace MCLauncher
     {
         public static string playerRefreshToken = "";
         public static string preferredLanguage = "";
+        public static string lastInstance = "";
 
         public static void refData()
         {

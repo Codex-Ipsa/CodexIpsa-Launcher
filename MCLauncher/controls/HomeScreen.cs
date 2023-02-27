@@ -32,6 +32,12 @@ namespace MCLauncher
             Instance = this;
             InitializeComponent();
 
+            /*if (!File.Exists($"{Globals.dataPath}\\settings.cfg"))
+            {
+                SettingData.saveData("null")
+            }
+            SettingData.saveData();*/
+
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
 
             if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)

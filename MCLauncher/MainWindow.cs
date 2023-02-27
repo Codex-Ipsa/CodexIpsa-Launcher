@@ -173,9 +173,6 @@ namespace MCLauncher
                         File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
                     }
                 }
-
-
-                //TODO: set selectedIndex
             }
 
             if(SettingsScreen.isUpdating == false)
