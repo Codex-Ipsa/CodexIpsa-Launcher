@@ -694,12 +694,13 @@ namespace MCLauncher
             This.modView.Items.Clear();
 
             string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            string json = "";
             if (!File.Exists(indexPath))
             {
-                File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[]}}");
+                string n = JavaModHelper.LegacyUpdate(indexPath, json, name);
             }
 
-            string json = File.ReadAllText(indexPath);
+            json = File.ReadAllText(indexPath);
             //legacy for old launcher versions
             if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
             {

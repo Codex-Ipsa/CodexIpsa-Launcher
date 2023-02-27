@@ -18,15 +18,16 @@ namespace MCLauncher
         public static void Start(string instName, string clientPath)
         {
             int modNum = 0;
+            string json = "";
             List<string> jarModList = new List<string>();
 
             string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg";
             if (!File.Exists(indexPath))
             {
-                File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[]}}");
+                string n = LegacyUpdate(indexPath, json, instName);
             }
 
-            string json = File.ReadAllText(indexPath);
+            json = File.ReadAllText(indexPath);
 
             if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
             {
