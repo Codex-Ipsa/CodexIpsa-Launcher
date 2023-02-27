@@ -20,7 +20,6 @@ namespace MCLauncher
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
         InstanceScreen instanceScr;
-        ConsoleScreen consoleScr;
 
         public MainWindow()
         {
@@ -40,7 +39,6 @@ namespace MCLauncher
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
             this.Controls.Remove(instanceScr);
-            this.Controls.Remove(consoleScr);
         }
 
         public void addCredits()
@@ -53,7 +51,6 @@ namespace MCLauncher
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
             this.Controls.Remove(instanceScr);
-            this.Controls.Remove(consoleScr);
         }
 
         public void addSettings()
@@ -66,7 +63,6 @@ namespace MCLauncher
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(instanceScr);
-            this.Controls.Remove(consoleScr);
         }
         public void addInstance()
         {
@@ -78,19 +74,6 @@ namespace MCLauncher
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-            this.Controls.Remove(consoleScr);
-        }
-        public void addConsole()
-        {
-            consoleScr.Location = new Point(0, 24);
-            consoleScr.Dock = DockStyle.Fill;
-            consoleScr.Padding = new Padding(0, 24, 0, 0);
-
-            this.Controls.Add(consoleScr);
-            this.Controls.Remove(homeScr);
-            this.Controls.Remove(creditsScr);
-            this.Controls.Remove(settingsScr);
-            this.Controls.Remove(instanceScr);
         }
 
         public void loadMainWindow()
@@ -182,7 +165,6 @@ namespace MCLauncher
                 creditsScr = new CreditsScreen();
                 settingsScr = new SettingsScreen();
                 instanceScr = new InstanceScreen();
-                consoleScr = new ConsoleScreen();
                 addHome();
             }
         }
@@ -221,16 +203,6 @@ namespace MCLauncher
         private void instanceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             addInstance();
-        }
-
-        private void consoleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            addConsole();
-        }
-
-        public static void loadLog()
-        {
-            Instance.addConsole();
         }
     }
 }

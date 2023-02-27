@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>image\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -80,23 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetIndex.cs" />
-    <Compile Include="controls\ConsoleScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\ConsoleScreen.Designer.cs">
-      <DependentUpon>ConsoleScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="controls\EditInstanceScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\EditInstanceScreen.Designer.cs">
-      <DependentUpon>EditInstanceScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="controls\EI_Version.cs">
       <SubType>UserControl</SubType>
@@ -140,11 +128,11 @@
     <Compile Include="EnterIp.Designer.cs">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameConsole.cs">
+    <Compile Include="forms\ModLoaders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameConsole.Designer.cs">
-      <DependentUpon>GameConsole.cs</DependentUpon>
+    <Compile Include="forms\ModLoaders.Designer.cs">
+      <DependentUpon>ModLoaders.cs</DependentUpon>
     </Compile>
     <Compile Include="JavaModHelper.cs" />
     <Compile Include="ModsRepo.cs">
@@ -181,8 +169,6 @@
     </Compile>
     <Compile Include="jsonObject.cs" />
     <Compile Include="LaunchJava.cs" />
-    <Compile Include="LaunchPS3.cs" />
-    <Compile Include="LaunchWin10.cs" />
     <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="LibsCheck.cs" />
@@ -205,12 +191,6 @@
     <Compile Include="OfflineMode.Designer.cs">
       <DependentUpon>OfflineMode.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectVerInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SelectVerInfo.Designer.cs">
-      <DependentUpon>SelectVerInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,14 +205,8 @@
     <Compile Include="Warning.Designer.cs">
       <DependentUpon>Warning.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="controls\ConsoleScreen.resx">
-      <DependentUpon>ConsoleScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="controls\EditInstanceScreen.resx">
-      <DependentUpon>EditInstanceScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\EI_Version.resx">
       <DependentUpon>EI_Version.cs</DependentUpon>
@@ -255,8 +229,8 @@
     <EmbeddedResource Include="EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameConsole.resx">
-      <DependentUpon>GameConsole.cs</DependentUpon>
+    <EmbeddedResource Include="forms\ModLoaders.resx">
+      <DependentUpon>ModLoaders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\HomeScreen.resx">
       <DependentUpon>HomeScreen.cs</DependentUpon>
@@ -287,9 +261,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectVerInfo.resx">
-      <DependentUpon>SelectVerInfo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
     </EmbeddedResource>
@@ -316,17 +287,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
-    <Content Include="icon64.ico" />
     <Content Include="image\dirt-large-dark.png" />
-    <Content Include="image\dirt-large.png" />
-    <Content Include="image\dirt.png" />
     <Content Include="image\grass.png" />
     <Content Include="image\icon.ico" />
     <Content Include="image\icon.png" />
     <Content Include="image\stone-large-dark.png" />
-    <Content Include="image\stone-large.png" />
-    <Content Include="image\stone.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -340,5 +305,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

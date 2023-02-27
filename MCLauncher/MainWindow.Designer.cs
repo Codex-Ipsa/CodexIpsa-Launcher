@@ -34,7 +34,6 @@ namespace MCLauncher
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +60,6 @@ namespace MCLauncher
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
             this.instanceToolStripMenuItem,
-            this.consoleToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.debugToolStripMenuItem});
@@ -88,15 +86,6 @@ namespace MCLauncher
             this.instanceToolStripMenuItem.Text = "Profiles";
             this.instanceToolStripMenuItem.Visible = false;
             this.instanceToolStripMenuItem.Click += new System.EventHandler(this.instanceToolStripMenuItem1_Click);
-            // 
-            // consoleToolStripMenuItem
-            // 
-            this.consoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.consoleToolStripMenuItem.Text = "Console";
-            this.consoleToolStripMenuItem.Visible = false;
-            this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -166,7 +155,6 @@ namespace MCLauncher
         public System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

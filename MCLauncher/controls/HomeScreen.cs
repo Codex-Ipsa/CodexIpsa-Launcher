@@ -390,9 +390,6 @@ namespace MCLauncher
             else if (selectedEdition == "x360")
                 LaunchXbox360.LaunchGame();
 
-            else if (selectedEdition == "ps3")
-                LaunchPS3.LaunchGame();
-
             else if (selectedEdition == "edu")
                 LaunchJava.LaunchGame();
         }
