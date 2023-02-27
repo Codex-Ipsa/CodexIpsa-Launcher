@@ -629,7 +629,6 @@ namespace MCLauncher
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{name}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
                     addToModsList(openFileDialog.SafeFileName, "jarmod");
                     reloadModsList();
@@ -693,30 +692,22 @@ namespace MCLauncher
         static void reloadModsList()
         {
             This.modView.Items.Clear();
-            //TODO: make a json for mod data
 
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg"))
+            string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            if (!File.Exists(indexPath))
             {
-                string test = "aa";
-                //File.CreateText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg");
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg", $"{{\"forge\":false,\"items\":[]}}");
+                File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[]}}");
             }
 
-            string filepath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\";
-            DirectoryInfo d = new DirectoryInfo(filepath);
-
-            foreach (var file in d.GetFiles("*.jar"))
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            foreach (string str in mj.items)
             {
-                Console.WriteLine(file.Name);
-                This.modView.Items.Add(file.Name);
+                ListViewItem item = new ListViewItem(new[] { str.Substring(0, str.IndexOf("?")), str.Substring(str.IndexOf("?") + 1) });
+                This.modView.Items.Add(item);
             }
-
-            foreach (var file in d.GetFiles("*.zip"))
-            {
-                Console.WriteLine(file.Name);
-                This.modView.Items.Add(file.Name);
-            }
-            This.modView.Columns[0].Width = 522;
+            This.modView.Columns[0].Width = 350;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -726,7 +717,6 @@ namespace MCLauncher
                 File.Delete($"{Globals.dataPath}\\instance\\{name}\\jarmods\\{This.modView.SelectedItems[0].Text}");
                 removeFromModsList(This.modView.SelectedItems[0].Text);
                 reloadModsList();
-                //Console.WriteLine(This.modView.SelectedItems[0].Text);
             }
         }
 

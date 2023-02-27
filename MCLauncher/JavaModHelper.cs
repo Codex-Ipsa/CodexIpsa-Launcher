@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -7,6 +8,7 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace MCLauncher
@@ -16,29 +18,32 @@ namespace MCLauncher
         public static void Start(string instName, string clientPath)
         {
             int modNum = 0;
-            List<string> modList = new List<string>();
+            List<string> jarModList = new List<string>();
 
-            string filepath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\";
-            DirectoryInfo d = new DirectoryInfo(filepath);
-
-            foreach (var file in d.GetFiles("*.jar"))
+            string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg";
+            if (!File.Exists(indexPath))
             {
-                Console.WriteLine(file.Name);
-                modNum++;
-                modList.Add(file.FullName);
+                File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[]}}");
             }
 
-            foreach (var file in d.GetFiles("*.zip"))
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            foreach (string str in mj.items)
             {
-                Console.WriteLine(file.Name);
-                modNum++;
-                modList.Add(file.FullName);
+                string name = str.Substring(0, str.IndexOf("?"));
+                string type = str.Substring(str.IndexOf("?") + 1);
+
+                if (type == "jarmod")
+                {
+                    jarModList.Add($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{name}");
+                    Logger.Info("[ModHelper]", $"Mod detected: {name}");
+                    modNum++;
+                }
             }
 
             if (modNum > 0)
             {
                 string toHash = "";
-                Logger.Info("[ModHelper]", "Mods detected!");
 
                 //get patchhash first
                 using (var md5 = MD5.Create())
@@ -49,7 +54,7 @@ namespace MCLauncher
                         toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
                     }
                 }
-                foreach (var mod in modList)
+                foreach (var mod in jarModList)
                 {
                     using (var md5 = MD5.Create())
                     {
@@ -82,7 +87,7 @@ namespace MCLauncher
                     ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
 
                     int modCount = 0;
-                    foreach (var mod in modList)
+                    foreach (var mod in jarModList)
                     {
                         ZipFile.ExtractToDirectory(mod, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{modCount}\\");
                         modCount++;

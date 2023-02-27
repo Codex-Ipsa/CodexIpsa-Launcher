@@ -88,6 +88,7 @@ namespace MCLauncher
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.modsPage = new System.Windows.Forms.TabPage();
             this.btnRepo = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
             this.btnMloader = new System.Windows.Forms.Button();
             this.btnFabric = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
@@ -98,7 +99,7 @@ namespace MCLauncher
             this.btnAdd = new System.Windows.Forms.Button();
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnOpen = new System.Windows.Forms.Button();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.javaPage.SuspendLayout();
             this.grbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minRamBox)).BeginInit();
@@ -787,6 +788,16 @@ namespace MCLauncher
             this.btnRepo.Text = "Mod repositories";
             this.btnRepo.UseVisualStyleBackColor = true;
             // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(535, 320);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(117, 23);
+            this.btnOpen.TabIndex = 9;
+            this.btnOpen.Text = "Open .minecraft";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
             // btnMloader
             // 
             this.btnMloader.Enabled = false;
@@ -870,7 +881,8 @@ namespace MCLauncher
             // modView
             // 
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader5});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
             this.modView.Location = new System.Drawing.Point(3, 3);
@@ -886,15 +898,10 @@ namespace MCLauncher
             this.columnHeader1.Text = "Name";
             this.columnHeader1.Width = 89;
             // 
-            // btnOpen
+            // columnHeader5
             // 
-            this.btnOpen.Location = new System.Drawing.Point(535, 320);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(117, 23);
-            this.btnOpen.TabIndex = 9;
-            this.btnOpen.Text = "Open .minecraft";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 77;
             // 
             // InstanceManager
             // 
@@ -999,5 +1006,6 @@ namespace MCLauncher
         private System.Windows.Forms.CheckBox snapshotBox;
         private System.Windows.Forms.Button btnRepo;
         private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
