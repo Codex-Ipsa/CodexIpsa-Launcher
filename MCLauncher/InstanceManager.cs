@@ -745,6 +745,17 @@ namespace MCLauncher
                 Process.Start($"{Globals.dataPath}\\instance\\{name}\\.minecraft\\");
             }
         }
+
+        private void btnRepo_Click(object sender, EventArgs e)
+        {
+            ModsRepo mr = new ModsRepo();
+            mr.ShowDialog();
+        }
+
+        private void btnForge_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class instanceObjects

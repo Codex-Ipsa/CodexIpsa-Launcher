@@ -8,13 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MCLauncher.forms
+namespace MCLauncher
 {
-    public partial class NewProfile : Form
+    public partial class ModsRepo : Form
     {
-        public NewProfile()
+
+        public ModsRepo()
         {
             InitializeComponent();
+            listView1.Groups.Add(new ListViewGroup("ModName"));
         }
     }
 }
+

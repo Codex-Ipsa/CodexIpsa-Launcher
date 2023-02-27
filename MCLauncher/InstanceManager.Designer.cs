@@ -780,13 +780,13 @@ namespace MCLauncher
             // 
             // btnRepo
             // 
-            this.btnRepo.Enabled = false;
             this.btnRepo.Location = new System.Drawing.Point(535, 223);
             this.btnRepo.Name = "btnRepo";
             this.btnRepo.Size = new System.Drawing.Size(117, 23);
             this.btnRepo.TabIndex = 10;
             this.btnRepo.Text = "Mod repositories";
             this.btnRepo.UseVisualStyleBackColor = true;
+            this.btnRepo.Click += new System.EventHandler(this.btnRepo_Click);
             // 
             // btnOpen
             // 
@@ -857,6 +857,7 @@ namespace MCLauncher
             this.btnForge.TabIndex = 3;
             this.btnForge.Text = "Install Forge";
             this.btnForge.UseVisualStyleBackColor = true;
+            this.btnForge.Click += new System.EventHandler(this.btnForge_Click);
             // 
             // btnReplace
             // 
