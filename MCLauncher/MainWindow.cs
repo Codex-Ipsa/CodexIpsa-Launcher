@@ -85,12 +85,12 @@ namespace MCLauncher
             Logger.Info($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
 
             //Create directories
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\instance");
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets");
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\data");
+            Directory.CreateDirectory($"{Globals.dataPath}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance");
+            Directory.CreateDirectory($"{Globals.dataPath}\\libs");
+            Directory.CreateDirectory($"{Globals.dataPath}\\assets");
+            Directory.CreateDirectory($"{Globals.dataPath}\\data");
 
             //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
@@ -129,15 +129,15 @@ namespace MCLauncher
                 {
                     using (WebClient cl = new WebClient())
                     {
-                        cl.DownloadFile(Globals.seasonalDirt, $"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
+                        cl.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
                     }
-                    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
+                    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
                 }
                 catch (WebException e)
                 {
-                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))
+                    if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
                     {
-                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
+                        File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
                     }
                 }
 
@@ -145,15 +145,15 @@ namespace MCLauncher
                 {
                     using (WebClient cl = new WebClient())
                     {
-                        cl.DownloadFile(Globals.seasonalStone, $"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                        cl.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
                     }
-                    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
                 }
                 catch (WebException e)
                 {
-                    if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+                    if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
                     {
-                        File.Delete($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                        File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
                     }
                 }
             }

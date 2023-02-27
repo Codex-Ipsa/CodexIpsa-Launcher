@@ -21,9 +21,9 @@ namespace MCLauncher.controls
             Instance = this;
 
             //Seasonal background
-            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+            if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
-                this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //Center the panel

@@ -47,13 +47,13 @@ namespace MCLauncher
 
             pnlChangelog.AutoScroll = true;
 
-            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png"))
+            if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
             {
-                panel1.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalDirt.png");
+                panel1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
             }
-            if (File.Exists($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png"))
+            if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
-                this.BackgroundImage = Image.FromFile($"{Globals.currentPath}\\.codexipsa\\data\\seasonalStone.png");
+                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //JSON changelog system
@@ -62,24 +62,24 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!Directory.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\Default"))
+            if (!Directory.Exists($"{Globals.dataPath}\\instance\\Default"))
             {
                 InstanceManager.Start("Default", "initial");
             }       
 
             //Load instance list
             loadInstanceList();
-            if(!File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg"))
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg"))
             {
                 selectedInstance = "Default";
             }
             cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
             reloadInstance(selectedInstance);
 
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
             Logger.Info("[HomeScreen]", $"Selected instance: {selectedInstance}");
-            //Logger.logError("[HomeScreen]", $"{Globals.currentPath}\\.codexipsa\\instance\\{selectedInstance}\\instance.cfg");
+            //Logger.logError("[HomeScreen]", $"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
 
             //Set the LaunchJava stuff
             foreach (var vers in data)
@@ -167,18 +167,18 @@ namespace MCLauncher
         public static void loadInstanceList()
         {
             List<string> instanceList = new List<string>();
-            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
+            string[] dirs = Directory.GetDirectories($"{Globals.dataPath}\\instance\\", "*");
 
             foreach (string dir in dirs)
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
-                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
-                    string text = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg");
+                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
                     if(text.Contains("instVer") && text.Contains("instType"))
                     {
-                        updateFromLegacyInst($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}");
+                        updateFromLegacyInst($"{Globals.dataPath}\\instance\\{dirName}");
                         instanceList.Add(dirName);
                     }
                     else
@@ -201,7 +201,7 @@ namespace MCLauncher
         public static void reloadInstance(string instName)
         {
             Logger.Info("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
-            string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{instName}\\instance.cfg");
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
             foreach (var item in data)
             {

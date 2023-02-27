@@ -30,14 +30,14 @@ namespace MCLauncher
             }
 
             WebClient client = new WebClient();
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\");
-            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json"))
+            Directory.CreateDirectory($"{Globals.dataPath}\\assets\\indexes\\");
+            if (!File.Exists($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json"))
             {
-                client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+                client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
             }
             else
             {
-                FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+                FileInfo fi = new FileInfo($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
 
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(indexUrl);
                 req.Method = "HEAD";
@@ -47,11 +47,11 @@ namespace MCLauncher
                 if(urlSize != fi.Length)
                 {
                     Logger.Info("[AssetIndex]", "Index has changed! Redownloading json.");
-                    File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
-                    client.DownloadFile(indexUrl, $"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+                    File.Delete($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
+                    client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
                 }
             }
-            string origJson = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\assets\\indexes\\{indexName}.json");
+            string origJson = File.ReadAllText($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
 
             JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
             var origProps = origObj.Properties();
@@ -98,7 +98,7 @@ namespace MCLauncher
                 Logger.Error("[AssetIndex]", $"isLegacy: {isLegacy}");
                 if (isLegacy == true)
                 {
-                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\");
+                    Directory.CreateDirectory($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\");
                     int indexInt = 0;
                     WebClient wc = new WebClient();
                     
@@ -121,25 +121,25 @@ namespace MCLauncher
                         if (index2 >= 0)
                             fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}"))
+                        if (!File.Exists($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}"))
                         {
                             totalSize += sizeList[indexInt];
-                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
+                            Directory.CreateDirectory($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}");
                             urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
-                            paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            paths.Add($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                         }
                         else
                         {
-                            //Logger.logError("[AssetIndex]", "aa " + $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
-                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            //Logger.logError("[AssetIndex]", "aa " + $"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                            FileInfo fi = new FileInfo($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             if (fi.Length != sizeList[indexInt])
                             {
                                 Logger.Error("[AssetIndex]", $"Bad item! {indexName}/{fileDirectory}/{fileName} {fi.Length}::{sizeList[indexInt]}");
-                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                                File.Delete($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                                 totalSize += sizeList[indexInt];
-                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}");
+                                Directory.CreateDirectory($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}");
                                 urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
-                                paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
+                                paths.Add($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             }
                         }
 
@@ -159,7 +159,7 @@ namespace MCLauncher
                 }
                 else if (isLegacy == false)
                 {
-                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\");
+                    Directory.CreateDirectory($"{Globals.dataPath}\\assets\\objects\\");
 
                     int indexInt = 0;
                     WebClient wc = new WebClient();
@@ -172,24 +172,24 @@ namespace MCLauncher
                         string fullHash = hashList[indexInt];
                         string firstTwo = fullHash.Substring(0, 2);
 
-                        if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}"))
+                        if (!File.Exists($"{Globals.dataPath}\\assets\\objects\\{firstTwo}\\{fullHash}"))
                         {
                             totalSize += sizeList[indexInt];
                             urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
-                            paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
-                            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
+                            paths.Add($"{Globals.dataPath}\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            Directory.CreateDirectory($"{Globals.dataPath}\\assets\\objects\\{firstTwo}");
                         }
                         else
                         {
-                            FileInfo fi = new FileInfo($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                            FileInfo fi = new FileInfo($"{Globals.dataPath}\\assets\\objects\\{firstTwo}\\{fullHash}");
                             if (fi.Length != sizeList[indexInt])
                             {
                                 Logger.Error("[AssetIndex]", $"Bad item! {firstTwo}/{fullHash} {fi.Length}::{sizeList[indexInt]}");
-                                File.Delete($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                File.Delete($"{Globals.dataPath}\\assets\\objects\\{firstTwo}\\{fullHash}");
                                 totalSize += sizeList[indexInt];
                                 urls.Add($"https://resources.download.minecraft.net/{firstTwo}/{fullHash}");
-                                paths.Add($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}\\{fullHash}");
-                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\assets\\objects\\{firstTwo}");
+                                paths.Add($"{Globals.dataPath}\\assets\\objects\\{firstTwo}\\{fullHash}");
+                                Directory.CreateDirectory($"{Globals.dataPath}\\assets\\objects\\{firstTwo}");
                             }
                         }
 

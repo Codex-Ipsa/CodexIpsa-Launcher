@@ -185,10 +185,10 @@ namespace MCLauncher
 
                 Logger.Info("[LaunchJava]", $"Mppass: {launchMpPass}");
                 //Create required dirs
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\versions\\java");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs");
+                Directory.CreateDirectory($"{Globals.dataPath}");
+                Directory.CreateDirectory($"{Globals.dataPath}\\versions");
+                Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
+                Directory.CreateDirectory($"{Globals.dataPath}\\libs");
                 Logger.Info("[LaunchJava]", $"Directories created");
 
                 Logger.Info("[LaunchJava]", $"Version name: {launchVerName}");
@@ -205,8 +205,8 @@ namespace MCLauncher
                 Logger.Info("[LaunchJava]", $"Native path: {launchNativePath}");
                 if(launchDir == null || launchDir == String.Empty || launchDir == "/")
                 {
-                    workDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}";
-                    gameDir = $"{Globals.currentPath}\\.codexipsa\\instance\\{currentInstance}\\.minecraft";
+                    workDir = $"{Globals.dataPath}\\instance\\{currentInstance}";
+                    gameDir = $"{Globals.dataPath}\\instance\\{currentInstance}\\.minecraft";
                 }
                 else
                 {
@@ -218,11 +218,11 @@ namespace MCLauncher
 
                 if (assetIndexType != null && assetIndexType.Contains("legacy"))
                 {
-                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets\\virtual\\{assetIndexType}";
+                    assetDir = $"{Globals.dataPath}\\assets\\virtual\\{assetIndexType}";
                 }
                 else
                 {
-                    assetDir = $"{Globals.currentPath}\\.codexipsa\\assets"; //TODO, customise
+                    assetDir = $"{Globals.dataPath}\\assets"; //TODO, customise
                 }
                 Logger.Info("[LaunchJava]", $"AssetDir: {assetDir}");
                 Logger.Info("[LaunchJava]", $"Player name: {launchPlayerName}");
@@ -251,10 +251,10 @@ namespace MCLauncher
 
                 //Download client
                 var dlClient = new WebClient();
-                if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\versions\\java\\{launchVerName}.jar"))
+                if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{launchVerName}.jar"))
                 {
                     DownloadProgress.url = launchVerUrl;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\versions\\java\\{launchVerName}.jar";
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\java\\{launchVerName}.jar";
                     DownloadProgress dl = new DownloadProgress();
                     dl.ShowDialog();
                 }
@@ -266,7 +266,7 @@ namespace MCLauncher
                 foreach (var lib in LibsCheck.libsList)
                 {
                     Logger.Info("[LibsCheck/LaunchJava]", $"Loaded a lib from list: {lib}");
-                    launchLibsPath += $"{Globals.currentPath}\\.codexipsa\\libs\\{lib};";
+                    launchLibsPath += $"{Globals.dataPath}\\libs\\{lib};";
                 }
 
                 //TODO: CHECK IF AUTHENTICATED
@@ -325,15 +325,15 @@ namespace MCLauncher
                     if (index2 >= 0)
                         fileName = fileName.Substring(fileName.LastIndexOf("/"));
 
-                    if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}"))
+                    if (!File.Exists($"{Globals.dataPath}\\libs\\log4j\\{fileName}"))
                     {
-                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\log4j");
+                        Directory.CreateDirectory($"{Globals.dataPath}\\libs\\log4j");
                         DownloadProgress.url = loggingXml;
-                        DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}";
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\libs\\log4j\\{fileName}";
                         DownloadProgress dp4j = new DownloadProgress();
                         dp4j.ShowDialog();
                     }
-                    launchCommand += $"-Dlog4j.configurationFile=\"{Globals.currentPath}\\.codexipsa\\libs\\log4j\\{fileName}\" ";
+                    launchCommand += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\log4j\\{fileName}\" ";
                 }
                 if (launchJoinMP == true)
                 {

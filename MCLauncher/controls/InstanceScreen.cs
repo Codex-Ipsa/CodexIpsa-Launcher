@@ -22,15 +22,15 @@ namespace MCLauncher.controls
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -1;
 
-            string[] dirs = Directory.GetDirectories($"{Globals.currentPath}\\.codexipsa\\instance\\", "*");
+            string[] dirs = Directory.GetDirectories($"{Globals.dataPath}\\instance\\", "*");
 
             foreach (string dir in dirs)
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
-                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
-                    string json = File.ReadAllText($"{Globals.currentPath}\\.codexipsa\\instance\\{dirName}\\instance.cfg");
+                    string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
                     List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
                     ListViewItem item = new ListViewItem(dirName);
                     foreach (var thing in data)

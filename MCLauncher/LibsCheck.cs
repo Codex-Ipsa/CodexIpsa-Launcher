@@ -39,8 +39,8 @@ namespace MCLauncher
                 List<LibsJson> data = JsonConvert.DeserializeObject<List<LibsJson>>(json);
 
                 //delete natives
-                DirectoryInfo di = new DirectoryInfo($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
-                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\natives\\");
+                DirectoryInfo di = new DirectoryInfo($"{Globals.dataPath}\\libs\\natives\\");
+                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives\\");
                 foreach (FileInfo file in di.GetFiles())
                 {
                     file.Delete();
@@ -68,7 +68,7 @@ namespace MCLauncher
                     }
                     else
                     {
-                        savePath = $"{Globals.currentPath}\\.codexipsa\\libs\\{libs.name}";
+                        savePath = $"{Globals.dataPath}\\libs\\{libs.name}";
                     }
                     Console.WriteLine(savePath);
                     if (!File.Exists(savePath))
@@ -86,7 +86,7 @@ namespace MCLauncher
                     if (libs.extract != "null")
                     {
                         //TODO: get rid of this
-                        Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}");
+                        Directory.CreateDirectory($"{Globals.dataPath}\\libs\\{libs.extract}");
                         using (ZipArchive archive = ZipFile.OpenRead(savePath))
                         {
                             //TODO: if they don't exist, extract/replace them
@@ -105,19 +105,19 @@ namespace MCLauncher
                                     Logger.Info("[LibsCheck]", $"Exctract dir: {dir}");
 
                                 }
-                                Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\META-INF\\");
+                                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\{libs.extract}\\META-INF\\");
 
-                                if (File.Exists($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}"))
+                                if (File.Exists($"{Globals.dataPath}\\libs\\{libs.extract}\\{entry.FullName}"))
                                 {
-                                    File.Delete($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    File.Delete($"{Globals.dataPath}\\libs\\{libs.extract}\\{entry.FullName}");
                                 }
                                 if (entry.FullName.EndsWith("/"))
                                 {
-                                    Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    Directory.CreateDirectory($"{Globals.dataPath}\\libs\\{libs.extract}\\{entry.FullName}");
                                 }
                                 else
                                 {
-                                    entry.ExtractToFile($"{Globals.currentPath}\\.codexipsa\\libs\\{libs.extract}\\{entry.FullName}");
+                                    entry.ExtractToFile($"{Globals.dataPath}\\libs\\{libs.extract}\\{entry.FullName}");
                                 }
                             }
                         }

@@ -17,7 +17,7 @@ namespace MCLauncher
     public partial class DebugTools : Form
     {
         public static bool cstJava = false;
-        public static string newPath = $"{Globals.currentPath}\\.codexipsa\\java\\bin\\java.exe";
+        public static string newPath = $"{Globals.dataPath}\\java\\bin\\java.exe";
         public static string dlLink;
         public static string dlVer;
 
@@ -38,7 +38,7 @@ namespace MCLauncher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Directory.CreateDirectory($"{Globals.currentPath}\\.codexipsa\\java");
+            Directory.CreateDirectory($"{Globals.dataPath}\\java");
 
             using (var client = new WebClient())
             {
@@ -52,9 +52,9 @@ namespace MCLauncher
                 }
             }
 
-            if (!File.Exists($"{Globals.currentPath}\\.codexipsa\\java\\ver.txt"))
+            if (!File.Exists($"{Globals.dataPath}\\java\\ver.txt"))
             {
-                using (StreamWriter writer = new StreamWriter($"{Globals.currentPath}\\.codexipsa\\java\\ver.txt"))
+                using (StreamWriter writer = new StreamWriter($"{Globals.dataPath}\\java\\ver.txt"))
                 {
                     writer.Write(dlVer);
                 }
@@ -62,13 +62,13 @@ namespace MCLauncher
                 using (var client = new WebClient())
                 {
                     DownloadProgress.url = dlLink;
-                    DownloadProgress.savePath = $"{Globals.currentPath}\\.codexipsa\\java\\java.zip";
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\java\\java.zip";
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();
                 }
 
-                ZipFile.ExtractToDirectory($"{Globals.currentPath}\\.codexipsa\\java\\java.zip", $"{Globals.currentPath}\\.codexipsa\\java");
-                File.Delete($"{Globals.currentPath}\\.codexipsa\\java\\java.zip");
+                ZipFile.ExtractToDirectory($"{Globals.dataPath}\\java\\java.zip", $"{Globals.dataPath}\\java");
+                File.Delete($"{Globals.dataPath}\\java\\java.zip");
             }
             else
             {
