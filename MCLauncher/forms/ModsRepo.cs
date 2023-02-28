@@ -9,61 +9,81 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MCLauncher
 {
     public partial class ModsRepo : Form
     {
+        List<string> modNames = new List<string>();
+        List<string> modIds = new List<string>();
+        List<string> modVers = new List<string>();
+        List<string> modTypes = new List<string>();
+        List<string> modUrls = new List<string>();
+
+        string json = "";
 
         public ModsRepo()
         {
             InitializeComponent();
-            listView1.Columns[0].Width = 150;
 
             WebClient wc = new WebClient();
-            string json = wc.DownloadString(Globals.CIModsJson);
+            json = wc.DownloadString(Globals.CIModsJson);
             var rj = JsonConvert.DeserializeObject<List<RepoJson>>(json);
             foreach (var r in rj)
             {
-                ListViewGroup group = new ListViewGroup($"{r.name} (for {r.baseJar})", HorizontalAlignment.Left);
-                Logger.Info("[ModsRepo]", $"{r.name}, {r.id}");
+                modNames.Add(r.name);
+                modIds.Add(r.id);
+            }
+            listBox1.DataSource = modNames;
+        }
 
-                foreach (var i in r.items)
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            modVers.Clear();
+            modUrls.Clear();
+            modTypes.Clear();
+            var rj = JsonConvert.DeserializeObject<List<RepoJson>>(json);
+            foreach (var r in rj)
+            {
+                Console.WriteLine(r.name);
+                if (r.name == listBox1.GetItemText(listBox1.SelectedItem))
                 {
-                    listView1.Items.Add(new ListViewItem(i.version, 0, group));
-                    listView1.Groups.Add(group);
-                    Logger.Info("[ModsRepo]", $"{i.version}, {i.url}");
+                    foreach (var i in r.items)
+                    {
+                        modVers.Add(i.version);
+                        modUrls.Add(i.url);
+                        modTypes.Add(i.type);
+                        Console.WriteLine(i.version);
+                    }
                 }
             }
 
-
-            /*for (int i = 0; i <= 10; i++)
+            foreach(string s in modVers)
             {
-                var item = new ListViewItem { Text = "Test" + i, Group = group };
-            }*/
-
-            /*for (int i = 1; i <= 15; i++)
-            {
-                listView1.Items.Add(new ListViewItem("Test", 0, group));
+                Console.WriteLine("--- "+s);
             }
-            for (int i = 1; i <= 35; i++)
-            {
-                listView1.Items.Add(new ListViewItem("Test", 0, group2));
-            }*/
-
-            /*listView1.Groups.Add(group);
-            listView1.Groups.Add(group2);*/
-            listView1.Columns[0].Width = -1;
+            listBox2.DataSource = null;
+            listBox2.DataSource = modVers;
+            listBox2.Refresh();
+            Console.WriteLine("GOT CALLLED YAAAY");
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (this.listView1.SelectedItems.Count == 0)
-                return;
+            if(listBox2.SelectedItems.Count > 0)
+            {
+                int index = listBox1.FindString(listBox1.GetItemText(listBox1.SelectedItem));
+                DownloadProgress.url = modUrls[listBox2.SelectedIndex];
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{InstanceManager.name}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
+                DownloadProgress dp = new DownloadProgress();
+                dp.ShowDialog();
+                InstanceManager.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex]);
+                InstanceManager.reloadModsList();
 
-            string name = listView1.SelectedItems[0].Text.ToString();
-            string group = listView1.SelectedItems[0].Group.ToString();
-            Logger.Info("[ModsRepo]", $"aa: {name}, {group.Substring(0, group.IndexOf(" ("))}");
+                Console.WriteLine(modUrls[listBox2.SelectedIndex]);
+            }
         }
     }
 
@@ -79,6 +99,7 @@ namespace MCLauncher
     class RepoInfo
     {
         public string version { get; set; }
+        public string type { get; set; }
         public string url { get; set; }
     }
 }

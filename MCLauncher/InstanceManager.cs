@@ -636,7 +636,7 @@ namespace MCLauncher
             }
         }
 
-        static void addToModsList(string modName, string modType)
+        public static void addToModsList(string modName, string modType)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
             string json = File.ReadAllText(indexPath);
@@ -768,7 +768,7 @@ namespace MCLauncher
             File.WriteAllText(indexPath, newJson);
         }
 
-        static void reloadModsList()
+        public static void reloadModsList()
         {
             This.modView.Items.Clear();
 
