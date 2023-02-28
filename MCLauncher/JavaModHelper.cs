@@ -46,6 +46,11 @@ namespace MCLauncher
                     Logger.Info("[ModHelper]", $"Mod detected: {name}");
                     modNum++;
                 }
+                else if(type == "cusjar")
+                {
+                    clientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{name}";
+                    modNum++;
+                }
             }
 
             if (modNum > 0)
