@@ -661,6 +661,85 @@ namespace MCLauncher
             File.WriteAllText(indexPath, newJson);
         }
 
+        static void moveUpInModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            int i = 0;
+            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
+            {
+                if (str2.Contains(modName) && i != 0)
+                {
+                    Console.WriteLine("index " + i);
+                    itemsList.RemoveAt(i);
+                    int i2 = i - 1;
+                    Console.WriteLine("change to " + i2);
+                    itemsList.Insert(i2, str2);
+                    //break;
+                }
+                i++;
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+        static void moveDownInModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            int i = 0;
+            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
+            {
+                if (str2.Contains(modName) && i != itemsList.Count)
+                {
+                    Console.WriteLine("index " + i);
+                    itemsList.RemoveAt(i);
+                    int i2 = i + 1;
+                    Console.WriteLine("change to " + i2);
+                    itemsList.Insert(i2, str2);
+                    //break;
+                }
+                i++;
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+
         static void removeFromModsList(string modName)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
@@ -755,6 +834,39 @@ namespace MCLauncher
         private void btnForge_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.jar)|*.jar";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
+                    addToModsList(openFileDialog.SafeFileName, "cusjar");
+                    reloadModsList();
+                }
+            }
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            if (This.modView.SelectedItems.Count > 0)
+            {
+                moveUpInModsList(This.modView.SelectedItems[0].Text);
+                reloadModsList();
+            }
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            if (This.modView.SelectedItems.Count > 0)
+            {
+                moveDownInModsList(This.modView.SelectedItems[0].Text);
+                reloadModsList();
+            }
         }
     }
 

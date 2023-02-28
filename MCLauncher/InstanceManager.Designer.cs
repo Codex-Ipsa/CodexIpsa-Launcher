@@ -820,13 +820,13 @@ namespace MCLauncher
             // 
             // btnDown
             // 
-            this.btnDown.Enabled = false;
             this.btnDown.Location = new System.Drawing.Point(535, 32);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(117, 23);
             this.btnDown.TabIndex = 6;
             this.btnDown.Text = "Move down";
             this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnRemove
             // 
@@ -840,13 +840,13 @@ namespace MCLauncher
             // 
             // btnUp
             // 
-            this.btnUp.Enabled = false;
             this.btnUp.Location = new System.Drawing.Point(535, 3);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(117, 23);
             this.btnUp.TabIndex = 4;
             this.btnUp.Text = "Move up";
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnForge
             // 
@@ -861,13 +861,13 @@ namespace MCLauncher
             // 
             // btnReplace
             // 
-            this.btnReplace.Enabled = false;
             this.btnReplace.Location = new System.Drawing.Point(535, 281);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(117, 23);
             this.btnReplace.TabIndex = 2;
             this.btnReplace.Text = "Replace minecraft.jar";
             this.btnReplace.UseVisualStyleBackColor = true;
+            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // btnAdd
             // 

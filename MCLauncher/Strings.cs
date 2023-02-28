@@ -190,8 +190,8 @@ namespace MCLauncher
                 lblDoDown = str.lblDoDown;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
-                MainWindow.Instance.menuStrip1.Items[3].Text = cntSettings;
-                MainWindow.Instance.menuStrip1.Items[4].Text = cntAbout;
+                MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
+                MainWindow.Instance.menuStrip1.Items[3].Text = cntAbout;
 
                 HomeScreen.Instance.btnPlay.Text = btnPlay;
                 HomeScreen.Instance.btnLogIn.Text = btnLogIn;

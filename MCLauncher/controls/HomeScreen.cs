@@ -200,7 +200,7 @@ namespace MCLauncher
 
         public static void reloadInstance(string instName)
         {
-            Logger.Info("[HomeScreen/ReloadInstance]", "ReloadInstance called!");
+            Logger.Info("[HomeScreen/ReloadInstance]", $"ReloadInstance called: {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.cfg");
             List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
             foreach (var item in data)

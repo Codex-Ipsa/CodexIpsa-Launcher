@@ -129,10 +129,10 @@
       <DependentUpon>ModLoaders.cs</DependentUpon>
     </Compile>
     <Compile Include="JavaModHelper.cs" />
-    <Compile Include="ModsRepo.cs">
+    <Compile Include="forms\ModsRepo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModsRepo.Designer.cs">
+    <Compile Include="forms\ModsRepo.Designer.cs">
       <DependentUpon>ModsRepo.cs</DependentUpon>
     </Compile>
     <Compile Include="NoJava.cs">
@@ -232,7 +232,7 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModsRepo.resx">
+    <EmbeddedResource Include="forms\ModsRepo.resx">
       <DependentUpon>ModsRepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MSAuth.resx">
