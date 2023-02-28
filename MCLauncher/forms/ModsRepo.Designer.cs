@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModsRepo));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ciPage = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
@@ -93,8 +94,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 310);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ModsRepo";
-            this.Text = "ModsRepo";
+            this.Text = "Mod repositories";
             this.tabControl1.ResumeLayout(false);
             this.ciPage.ResumeLayout(false);
             this.ResumeLayout(false);
