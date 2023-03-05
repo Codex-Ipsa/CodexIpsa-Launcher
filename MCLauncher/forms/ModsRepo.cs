@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.forms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,9 @@ namespace MCLauncher
     {
         List<string> modNames = new List<string>();
         List<string> modIds = new List<string>();
+        List<string> baseJars = new List<string>();
+        List<string> baseUrls = new List<string>();
+        List<string> baseTypes = new List<string>();
         List<string> modVers = new List<string>();
         List<string> modTypes = new List<string>();
         List<string> modUrls = new List<string>();
@@ -34,6 +38,9 @@ namespace MCLauncher
             {
                 modNames.Add(r.name);
                 modIds.Add(r.id);
+                baseJars.Add(r.baseJar);
+                baseUrls.Add(r.baseUrl);
+                baseTypes.Add(r.baseType);
             }
             listBox1.DataSource = modNames;
         }
@@ -47,7 +54,7 @@ namespace MCLauncher
             var rj = JsonConvert.DeserializeObject<List<RepoJson>>(json);
             foreach (var r in rj)
             {
-                Console.WriteLine(r.name);
+                //Console.WriteLine(r.name);
                 if (r.name == listBox1.GetItemText(listBox1.SelectedItem))
                 {
                     foreach (var i in r.items)
@@ -55,19 +62,19 @@ namespace MCLauncher
                         modVers.Add(i.version);
                         modUrls.Add(i.url);
                         modTypes.Add(i.type);
-                        Console.WriteLine(i.version);
+                        //Console.WriteLine(i.version);
                     }
                 }
             }
 
             foreach(string s in modVers)
             {
-                Console.WriteLine("--- "+s);
+                //Console.WriteLine("--- "+s);
             }
             listBox2.DataSource = null;
             listBox2.DataSource = modVers;
             listBox2.Refresh();
-            Console.WriteLine("GOT CALLLED YAAAY");
+            //Console.WriteLine("GOT CALLLED YAAAY");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,7 +89,24 @@ namespace MCLauncher
                 InstanceManager.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex]);
                 InstanceManager.reloadModsList();
 
-                Console.WriteLine(modUrls[listBox2.SelectedIndex]);
+                //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
+
+                if(baseJars[index] != InstanceManager.version)
+                {
+                    ModWarn mw = new ModWarn();
+                    mw.ShowDialog();
+                    if(mw.isYes)
+                    {
+                        InstanceManager.This.verBox.SelectedIndex = InstanceManager.This.verBox.FindString(baseJars[index]);
+                        InstanceManager.url = baseUrls[index];
+                        InstanceManager.type = baseTypes[index];
+                    }
+
+                    this.Close();
+                    /*InstanceManager.version = baseJars[index];
+                    InstanceManager.url = baseUrls[index];
+                    InstanceManager.type = baseTypes[index];*/
+                }
             }
         }
     }
@@ -93,6 +117,7 @@ namespace MCLauncher
         public string id { get; set; }
         public string baseJar { get; set; }
         public string baseUrl { get; set; }
+        public string baseType { get; set; }
         public RepoInfo[] items { get; set; }
     }
 

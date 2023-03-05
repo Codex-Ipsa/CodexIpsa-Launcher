@@ -961,7 +961,6 @@ namespace MCLauncher
         private System.Windows.Forms.GroupBox grbVersion;
         private System.Windows.Forms.ComboBox editionBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox verBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox grbExperts;
         private System.Windows.Forms.CheckBox proxyCheck;
@@ -1008,5 +1007,6 @@ namespace MCLauncher
         private System.Windows.Forms.Button btnRepo;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        public System.Windows.Forms.ComboBox verBox;
     }
 }
