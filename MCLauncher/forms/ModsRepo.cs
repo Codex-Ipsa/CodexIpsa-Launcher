@@ -91,7 +91,7 @@ namespace MCLauncher
 
                 //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
 
-                if(baseJars[index] != InstanceManager.version)
+                if(baseTypes[index] != InstanceManager.type)
                 {
                     ModWarn mw = new ModWarn();
                     mw.ShowDialog();
