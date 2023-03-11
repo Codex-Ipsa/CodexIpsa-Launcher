@@ -43,7 +43,7 @@ namespace MCLauncher
             this.cancelBtn.Location = new System.Drawing.Point(111, 129);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(75, 23);
-            this.cancelBtn.TabIndex = 0;
+            this.cancelBtn.TabIndex = 1;
             this.cancelBtn.Text = "btn.No";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
@@ -54,7 +54,7 @@ namespace MCLauncher
             this.updateBtn.Location = new System.Drawing.Point(12, 129);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(75, 23);
-            this.updateBtn.TabIndex = 1;
+            this.updateBtn.TabIndex = 0;
             this.updateBtn.Text = "btn.Yes";
             this.updateBtn.UseVisualStyleBackColor = true;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);

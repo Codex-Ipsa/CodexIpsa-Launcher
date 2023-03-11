@@ -204,8 +204,9 @@ namespace MCLauncher
 
                 This.opendirBtn.Visible = false;
                 This.btnDelete.Visible = false;
-                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[2]);
-                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[2]);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[1]);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[1]);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[1]);
             }
             else if (mode == "edit")
             {
@@ -243,6 +244,8 @@ namespace MCLauncher
 
                 This.nameBox.Enabled = false;
                 This.editionBox.SelectedIndex = This.editionBox.FindStringExact(edition);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[1]);
+                This.tabControl1.TabPages.Remove(This.tabControl1.TabPages[1]);
 
                 int i = This.editionBox.FindStringExact(edition);
                 using (WebClient client = new WebClient())
