@@ -60,7 +60,7 @@ namespace MCLauncher
 
         public static string launchDir;
 
-        public static string gameDir;   
+        public static string gameDir;
         public static string assetDir;
         public static string workDir;
 
@@ -83,6 +83,10 @@ namespace MCLauncher
 
             using (WebClient client = new WebClient())
             {
+                //MODS
+                launchClientPath = $"{Globals.currentPath}/.codexipsa/versions/java/{launchVerName}.jar";
+                JavaModHelper.Start(currentInstance, launchClientPath);
+
                 string json = client.DownloadString(launchJsonUrl);
                 List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
@@ -197,7 +201,6 @@ namespace MCLauncher
                 Logger.Info("[LaunchJava]", $"Version AssetIndex: {assetIndexUrl}");
 
                 //Set required stuff
-                launchClientPath = $"{Globals.currentPath}/.codexipsa/versions/java/{launchVerName}.jar";
                 Logger.Info("[LaunchJava]", $"Client path: {launchClientPath}");
                 //launchProxyOld = $"-DproxySet=true -Dhttp.proxyHost=betacraft.uk -Dhttp.proxyPort={launchProxy} -Djava.util.Arrays.useLegacyMergeSort=true -Dstand-alone=true"; //TO DISABLE 1.6 has been release flag use -Dhttp.nonProxyHosts=assets.minecraft.net
                 //Logger.logMessage("[LaunchJava]", $"Proxy: {launchProxyOld}");
@@ -307,8 +310,7 @@ namespace MCLauncher
                     launchProxy = launchProxy.Replace("{gameDir}", $"\"{gameDir}\"");
                     launchProxy = launchProxy + " ";
                 }
-                //MODS
-                JavaModHelper.Start(currentInstance, launchClientPath);
+
                 launchCommand += $"{launchProxy.Replace("{gameDir}", $"\"{gameDir}\"").Replace("null", "")}";
                 if (useCustJvm == true)
                 {

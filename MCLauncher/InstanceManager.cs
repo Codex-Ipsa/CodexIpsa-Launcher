@@ -633,13 +633,13 @@ namespace MCLauncher
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
-                    addToModsList(openFileDialog.SafeFileName, "jarmod");
+                    addToModsList(openFileDialog.SafeFileName, "jarmod", "");
                     reloadModsList();
                 }
             }
         }
 
-        public static void addToModsList(string modName, string modType)
+        public static void addToModsList(string modName, string modType, string launchType)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{name}\\jarmods\\index.cfg";
             string json = File.ReadAllText(indexPath);
@@ -650,7 +650,7 @@ namespace MCLauncher
             {
                 itemsList.Add(str);
             }
-            itemsList.Add($"{modName}?{modType}");
+            itemsList.Add($"{modName}?{modType}?{launchType}");
 
             string itemsStr = "";
             foreach (string str in itemsList)
@@ -848,7 +848,7 @@ namespace MCLauncher
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{name}\\jarmods\\{openFileDialog.SafeFileName}");
-                    addToModsList(openFileDialog.SafeFileName, "cusjar");
+                    addToModsList(openFileDialog.SafeFileName, "cusjar", "");
                     reloadModsList();
                 }
             }

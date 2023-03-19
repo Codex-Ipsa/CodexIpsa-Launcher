@@ -86,13 +86,14 @@ namespace MCLauncher
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{InstanceManager.name}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
                 DownloadProgress dp = new DownloadProgress();
                 dp.ShowDialog();
-                InstanceManager.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex]);
+                InstanceManager.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
                 InstanceManager.reloadModsList();
 
                 //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
 
                 if(baseTypes[index] != InstanceManager.type)
                 {
+                    Logger.Info("[ModsRepo]", $"{baseTypes[index]} != {InstanceManager.type}");
                     ModWarn mw = new ModWarn();
                     mw.ShowDialog();
                     if(mw.isYes)
@@ -118,6 +119,7 @@ namespace MCLauncher
         public string baseJar { get; set; }
         public string baseUrl { get; set; }
         public string baseType { get; set; }
+        public string baseClass { get; set; }
         public RepoInfo[] items { get; set; }
     }
 

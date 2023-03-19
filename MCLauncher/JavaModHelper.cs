@@ -5,11 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace MCLauncher
 {
@@ -20,6 +16,7 @@ namespace MCLauncher
             int modNum = 0;
             string json = "";
             List<string> jarModList = new List<string>();
+            List<string> typeList = new List<string>();
 
             string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg";
             if (!File.Exists(indexPath))
@@ -37,8 +34,15 @@ namespace MCLauncher
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
             foreach (string str in mj.items)
             {
-                string name = str.Substring(0, str.IndexOf("?"));
-                string type = str.Substring(str.IndexOf("?") + 1);
+                string[] items = str.Split('?');
+                string name = items[0];
+                string type = items[1];
+                if(items.Count() > 2)
+                {
+                    Console.WriteLine("AAAAAAAAAAAAAAAA: " + items[2]);
+                    if (items[2] != "" && items[2] != null && items[2] != string.Empty)
+                        typeList.Add(items[2]);
+                }
 
                 if (type == "jarmod")
                 {
@@ -132,6 +136,11 @@ namespace MCLauncher
                 }
 
                 LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
+                if (typeList.Count > 0)
+                {
+                    LaunchJava.launchVerType = typeList[0];
+                    LaunchJava.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
+                }
 
                 string aa = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
                 if (aa.Contains("\"forge\":true"))
