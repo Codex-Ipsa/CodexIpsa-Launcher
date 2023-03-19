@@ -173,10 +173,10 @@
     <Compile Include="Globals.cs" />
     <Compile Include="LibsCheck.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="MainWindow.cs">
+    <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MSAuth.cs">
@@ -238,7 +238,7 @@
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModsRepo.resx">

@@ -263,86 +263,100 @@ namespace MCLauncher
             {
                 int y = 5;
                 int x = 2;
-                string json = client.DownloadString(Globals.changelogJson);
-                List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
-
-                foreach (var vers in data)
+                try
                 {
-                    if (vers.type == "header")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 14 * 3;
-                    }
-                    else if (vers.type == "post")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 14, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 13 * 2;
+                    string json = client.DownloadString(Globals.changelogJson);
+                    List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
 
-                        Label labelDate = new Label();
-                        labelDate.Text = $"{vers.date}";
-                        labelDate.Location = new Point(x, y);
-                        labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
-                        labelDate.AutoSize = true;
-                        labelDate.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelDate);
-                        y += 12 * 2;
-
-                        int strLog = 1;
-                        string[] result = vers.content.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
-                        foreach(string s in result)
+                    foreach (var vers in data)
+                    {
+                        if (vers.type == "header")
                         {
-                            Label labelText = new Label();
-                            labelText.Text = $"{s}";
-                            labelText.Location = new Point(x, y);
-                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
-                            labelText.AutoSize = true;
-                            labelText.ForeColor = Color.White;
-                            Instance.pnlChangelog.Controls.Add(labelText);
-                            if(strLog < result.Length)
-                            {
-                                y += 12 * 2;
-                            }
-                            else if(strLog >= result.Length)
-                            {
-                                y += 12 * 3;
-                            }
-                            strLog++;
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point(x, y);
+                            labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 14 * 3;
                         }
-                        strLog = 1;
-                    }
-                    else if (vers.type == "announcement")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.Red;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 12 * 3;
-                    }
-                }
+                        else if (vers.type == "post")
+                        {
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point(x, y);
+                            labelHead.Font = new Font("Arial", 14, FontStyle.Regular);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 13 * 2;
 
-                y = y -= 12 * 2;
-                Label labelEmpty = new Label();
-                labelEmpty.Text = $"";
-                labelEmpty.Location = new Point(x, y);
-                labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
-                labelEmpty.AutoSize = true;
-                labelEmpty.ForeColor = Color.Red;
-                Instance.pnlChangelog.Controls.Add(labelEmpty);
+                            Label labelDate = new Label();
+                            labelDate.Text = $"{vers.date}";
+                            labelDate.Location = new Point(x, y);
+                            labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
+                            labelDate.AutoSize = true;
+                            labelDate.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelDate);
+                            y += 12 * 2;
+
+                            int strLog = 1;
+                            string[] result = vers.content.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (string s in result)
+                            {
+                                Label labelText = new Label();
+                                labelText.Text = $"{s}";
+                                labelText.Location = new Point(x, y);
+                                labelText.Font = new Font("Arial", 12, FontStyle.Regular);
+                                labelText.AutoSize = true;
+                                labelText.ForeColor = Color.White;
+                                Instance.pnlChangelog.Controls.Add(labelText);
+                                if (strLog < result.Length)
+                                {
+                                    y += 12 * 2;
+                                }
+                                else if (strLog >= result.Length)
+                                {
+                                    y += 12 * 3;
+                                }
+                                strLog++;
+                            }
+                            strLog = 1;
+                        }
+                        else if (vers.type == "announcement")
+                        {
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point(x, y);
+                            labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.Red;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 12 * 3;
+                        }
+                    }
+
+                    y = y -= 12 * 2;
+                    Label labelEmpty = new Label();
+                    labelEmpty.Text = $"";
+                    labelEmpty.Location = new Point(x, y);
+                    labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
+                    labelEmpty.AutoSize = true;
+                    labelEmpty.ForeColor = Color.Red;
+                    Instance.pnlChangelog.Controls.Add(labelEmpty);
+                }
+                catch (WebException e)
+                {
+                    Label labelHead = new Label();
+                    labelHead.Text = $"Failed to load changelog!";
+                    labelHead.Location = new Point(x, y);
+                    labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                    labelHead.AutoSize = true;
+                    labelHead.ForeColor = Color.Red;
+                    Instance.pnlChangelog.Controls.Add(labelHead);
+                    y += 12 * 3;
+                }
             }
         }
 
