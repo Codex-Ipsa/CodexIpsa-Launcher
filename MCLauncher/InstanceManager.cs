@@ -19,6 +19,8 @@ namespace MCLauncher
     public partial class InstanceManager : Form
     {
         public static InstanceManager This;
+        public static WebClient client = new WebClient();
+
         public static List<string> editionNames = new List<string>() { "Java Edition", "MinecraftEdu", "Xbox 360 Edition" }; //Xbox 360 Edition, Playstation 3 Edition, MinecraftEdu
         public static List<string> editionUrls = new List<string>() { Globals.javaJson, Globals.javaeduJson, Globals.x360Json };
 
@@ -127,18 +129,17 @@ namespace MCLauncher
             {
                 name = instanceName;
                 edition = editionNames[0];
-                using (var client = new WebClient())
-                {
-                    string json = client.DownloadString(Globals.defaultVer);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
-                    foreach (var vers in data)
-                    {
-                        version = vers.verName;
-                        type = vers.verType;
-                        url = vers.verLink;
-                    }
+                string json = client.DownloadString(Globals.defaultVer);
+                List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
+
+                foreach (var vers in data)
+                {
+                    version = vers.verName;
+                    type = vers.verType;
+                    url = vers.verLink;
                 }
+
                 directory = $"";
                 resolutionX = 854;
                 resolutionY = 480;
@@ -160,17 +161,14 @@ namespace MCLauncher
                 This.editionBox.DataSource = editionNames;
                 edition = editionNames[0];
                 int i = This.editionBox.FindStringExact(edition);
-                using (WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(editionUrls[i]);
-                    List<jsonObject> data = JsonConvert.DeserializeObject<List<jsonObject>>(json);
 
-                    foreach (var vers in data)
-                    {
-                        verList.Add(vers.verName + vers.verNote);
-                        typeList.Add(vers.verType);
-                        urlList.Add(vers.verLink);
-                    }
+                string json = client.DownloadString(editionUrls[i]);
+                var vj = JsonConvert.DeserializeObject<List<VersionListJson>>(json);
+
+                foreach (var v in vj)
+                {
+                    verList.Add($"{v.id} ({v.note})");
+                    typeList.Add(v.type);
                 }
                 This.verBox.DataSource = verList;
 
@@ -869,9 +867,10 @@ namespace MCLauncher
 
     public class VersionListJson
     {
-        string id { get; set; }
-        string type { get; set; }
-        string released { get; set; }
+        public string id { get; set; }
+        public string note { get; set; }
+        public string type { get; set; }
+        public string released { get; set; }
     }
 
     public class VersionInfoJson

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.forms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -410,14 +411,18 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            InstanceManager man = new InstanceManager("New profile", "new");
-            man.ShowDialog();
+            Profile pr = new Profile();
+            pr.ShowDialog();
+            /*InstanceManager man = new InstanceManager("New profile", "new");
+            man.ShowDialog();*/
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
-            man.ShowDialog();
+            Profile pr = new Profile();
+            pr.ShowDialog();
+            /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
+            man.ShowDialog();*/
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)

@@ -134,6 +134,12 @@
     <Compile Include="forms\ModWarn.Designer.cs">
       <DependentUpon>ModWarn.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Profile.Designer.cs">
+      <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
     <Compile Include="JavaModHelper.cs" />
     <Compile Include="forms\ModsRepo.cs">
       <SubType>Form</SubType>
@@ -234,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModWarn.resx">
       <DependentUpon>ModWarn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\Profile.resx">
+      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstanceManager.resx">
       <DependentUpon>InstanceManager.cs</DependentUpon>
