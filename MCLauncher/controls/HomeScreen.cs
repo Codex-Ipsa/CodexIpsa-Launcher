@@ -1,4 +1,5 @@
-﻿using MCLauncher.forms;
+﻿using MCLauncher.classes;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,12 +33,6 @@ namespace MCLauncher
               
             Instance = this;
             InitializeComponent();
-
-            /*if (!File.Exists($"{Globals.dataPath}\\settings.cfg"))
-            {
-                SettingData.saveData("null")
-            }
-            SettingData.saveData();*/
 
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
 
@@ -399,19 +394,20 @@ namespace MCLauncher
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (selectedEdition == "java")
+            JavaLauncher.Launch("Test", $"{Globals.dataPath}\\data\\json\\{Profile.version}.json", Profile.version);
+            /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 
             else if (selectedEdition == "x360")
                 LaunchXbox360.LaunchGame();
 
             else if (selectedEdition == "edu")
-                LaunchJava.LaunchGame();
+                LaunchJava.LaunchGame();*/
         }
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile();
+            Profile pr = new Profile("new");
             pr.ShowDialog();
             /*InstanceManager man = new InstanceManager("New profile", "new");
             man.ShowDialog();*/
@@ -419,7 +415,7 @@ namespace MCLauncher
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile();
+            Profile pr = new Profile("edit");
             pr.ShowDialog();
             /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
             man.ShowDialog();*/

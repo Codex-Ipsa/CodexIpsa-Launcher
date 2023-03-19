@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace MCLauncher
 {
     class Globals
     {
+        //System
+        public static WebClient client = new WebClient();
+
         //Manual
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
         public static string branch = "omega13"; //dev //omega13 //stable //dev-instances
@@ -25,8 +29,8 @@ namespace MCLauncher
         public static bool requireAuth = false; //Change this on release to true
 
         //Links
-        public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";
-
+        public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";
+        public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/{{ver}}.json";
 
 
 

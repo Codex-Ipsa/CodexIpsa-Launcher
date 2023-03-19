@@ -90,7 +90,7 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.dataPath}\\instance");
             Directory.CreateDirectory($"{Globals.dataPath}\\libs");
             Directory.CreateDirectory($"{Globals.dataPath}\\assets");
-            Directory.CreateDirectory($"{Globals.dataPath}\\data");
+            Directory.CreateDirectory($"{Globals.dataPath}\\data\\json");
 
             //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
