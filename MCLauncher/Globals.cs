@@ -25,13 +25,17 @@ namespace MCLauncher
         public static bool requireAuth = false; //Change this on release to true
 
         //Links
+        public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";
+
+
+
+
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
         public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/version/list.json";
         public static string xeniaInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/emulator/xenia.json";
         public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
         public static string changelogJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.json";
         public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
-        public static string javaJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/java_version.json";
         public static string javaeduJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/javaedu_version.json";
         public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/x360_version.json";
         public static string x360Base = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_base.txt";
