@@ -13,7 +13,7 @@ namespace MCLauncher.forms
 {
     public partial class Profile : Form
     {
-        public static string version = "";
+        public static string version = "b1.7.3";
 
         public Profile(string mode)
         {

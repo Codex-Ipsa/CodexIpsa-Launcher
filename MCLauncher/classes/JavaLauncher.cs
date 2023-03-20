@@ -44,9 +44,35 @@ namespace MCLauncher.classes
 
             //Console.WriteLine($"{javaPath} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath}");
             Process proc = new Process();
+            proc.OutputDataReceived += OnOutputDataReceived;
+            proc.ErrorDataReceived += OnErrorDataReceived;
+            proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.CreateNoWindow = true;
+
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; //todo
             proc.StartInfo.FileName = javaPath;
             proc.StartInfo.Arguments = $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath}";
+
             proc.Start();
+            proc.BeginErrorReadLine();
+            proc.BeginOutputReadLine();
+        }
+
+        static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(e.Data);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(e.Data);
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 
