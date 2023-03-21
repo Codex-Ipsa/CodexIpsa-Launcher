@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using MCLauncher.classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -556,10 +557,15 @@ namespace MCLauncher
             }
             else
             {
-                LaunchJava.launchPlayerName = playerName;
+                JavaLauncher.msPlayerName = playerName;
+                JavaLauncher.msPlayerUUID = playerUUID;
+                JavaLauncher.msPlayerAccessToken = mcAccessToken;
+                JavaLauncher.msPlayerMPPass = mpPass;
+
+                /*LaunchJava.launchPlayerName = playerName;
                 LaunchJava.launchPlayerUUID = playerUUID;
                 LaunchJava.launchPlayerAccessToken = mcAccessToken;
-                LaunchJava.launchMpPass = mpPass;
+                LaunchJava.launchMpPass = mpPass;*/
             }
         }
 

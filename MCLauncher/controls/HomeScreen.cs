@@ -72,37 +72,11 @@ namespace MCLauncher
             cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
             reloadInstance(selectedInstance);
 
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
-            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            Logger.Info("[HomeScreen]", $"Selected instance: {selectedInstance}");
-            //Logger.logError("[HomeScreen]", $"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
-
-            //Set the LaunchJava stuff
-            foreach (var vers in data)
-            {
-                if(vers.edition == "Xbox 360 Edition")
-                {
-                    LaunchXbox360.ver = vers.version;
-                    LaunchXbox360.url = vers.url;
-                    LaunchXbox360.type = vers.type;
-                    selectedEdition = "x360";
-                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchXbox360.ver}";
-                }
-                else 
-                {
-                    LaunchJava.launchVerName = vers.version;
-                    LaunchJava.launchVerUrl = vers.url;
-                    LaunchJava.launchVerType = vers.type;
-                    selectedEdition = "java";
-                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
-                }
-            }
-
-            //load pref language TODO: THIS THROWS
-            /*if(Properties.Settings.Default.prefLanguage.ToLower() != "english" || Properties.Settings.Default.prefLanguage.ToLower() != null || Properties.Settings.Default.prefLanguage.ToLower() != String.Empty)
-            {
-                Strings.reloadLangs(Properties.Settings.Default.prefLanguage);
-            }*/
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json");
+            var pj = JsonConvert.DeserializeObject<VersionInfo>(json);
+            Profile.version = pj.version;
+            selectedVersion = pj.version;
+            Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
         }
 
         public static void checkAuth()
@@ -196,61 +170,11 @@ namespace MCLauncher
 
         public static void reloadInstance(string instName)
         {
-            Logger.Info("[HomeScreen/ReloadInstance]", $"ReloadInstance called: {instName}");
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.cfg");
-            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            foreach (var item in data)
-            {
-                if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
-                {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load Java base");
-                    selectedEdition = "java";
-                    LaunchJava.currentInstance = instName;
-                    LaunchJava.launchDir = item.directory;
-                    LaunchJava.launchResX = item.resolutionX;
-                    LaunchJava.launchResY = item.resolutionY;
-                    LaunchJava.launchRamMax = item.ramMax;
-                    LaunchJava.launchRamMin = item.ramMin;
-                    LaunchJava.launchVerName = item.version;
-                    selectedVersion = item.version;
-                    LaunchJava.launchVerType = item.type;
-                    LaunchJava.launchVerUrl = item.url;
-                    LaunchJava.launchJavaLocation = item.customJava;
-                    LaunchJava.useCustJava = bool.Parse(item.useCustomJava);
-                    LaunchJava.launchJvmArgs = item.jvmArgs;
-                    LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
-                    //LaunchJava.launchMethod = item.launchMethod;
-                    if (json.Contains("customJar"))
-                    {
-                        LaunchJava.useCustJar = bool.Parse(item.useCustomJar);
-                        LaunchJava.custJarLocation = item.customJar;
-                    }
-                    LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
-                    if(json.Contains("useProxy"))
-                    {
-                        LaunchJava.useProxy = bool.Parse(item.useProxy);
-                    }
-                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
-                }
-                else if (item.edition == "Xbox 360 Edition")
-                {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load X360 base");
-                    selectedEdition = "x360";
-                    LaunchXbox360.ver = item.version;
-                    selectedVersion = item.version;
-                    LaunchXbox360.url = item.url;
-                    LaunchXbox360.type = item.type;
-                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
-                }
-                else if (item.edition == "PlayStation3 Edition")
-                {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load PS3 base");
-                }
-                else
-                {
-                    Logger.Error("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
-                }
-            }
+            Logger.Info("HomeScreen/reloadInstance", $"Reload for {instName}");
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
+            var pj = JsonConvert.DeserializeObject<VersionInfo>(json);
+            selectedVersion = pj.version;
+            Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
         }
 
         public static void loadChangelog()
@@ -394,7 +318,7 @@ namespace MCLauncher
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            JavaLauncher.Launch("Test", $"{Globals.dataPath}\\data\\json\\{Profile.version}.json", Profile.version);
+            JavaLauncher.Launch(selectedInstance, $"{Globals.dataPath}\\data\\json\\{Profile.version}.json", Profile.version);
             /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 
@@ -407,7 +331,7 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile("new");
+            Profile pr = new Profile("New profile");
             pr.ShowDialog();
             /*InstanceManager man = new InstanceManager("New profile", "new");
             man.ShowDialog();*/
@@ -415,7 +339,7 @@ namespace MCLauncher
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile("edit");
+            Profile pr = new Profile(cmbInstaces.Text);
             pr.ShowDialog();
             /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
             man.ShowDialog();*/
@@ -491,5 +415,10 @@ namespace MCLauncher
         public string date { get; set; }
         public string content { get; set; }
         public string brNote { get; set; }
+    }
+
+    public class profileJson
+    {
+        public string version { get; set; }
     }
 }

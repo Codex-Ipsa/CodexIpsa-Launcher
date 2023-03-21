@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,20 +14,23 @@ namespace MCLauncher.forms
 {
     public partial class Profile : Form
     {
+        public static string profileName = "";
         public static string version = "b1.7.3";
 
-        public Profile(string mode)
+        public Profile(string profile)
         {
             InitializeComponent();
+
+            profileName = profile;
 
             listView1.Columns.Add("Name");
             listView1.Columns.Add("Type");
             listView1.Columns.Add("Released");
 
             string manifest = Globals.client.DownloadString(Globals.javaManifest);
-            var vj = JsonConvert.DeserializeObject < List<VersionManifest>> (manifest);
+            var vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
 
-            foreach(var ver in vj)
+            foreach (var ver in vj)
             {
                 string[] row = { ver.type, ver.released.ToString() };
                 listView1.Items.Add(ver.id).SubItems.AddRange(row);
@@ -49,6 +53,17 @@ namespace MCLauncher.forms
 
                 Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
             }
+
+            string saveData = "";
+            saveData += $"{{\n";
+            saveData += $"  \"data\": 1,\n";
+            saveData += $"  \"edition\": \"java\",\n";
+            saveData += $"  \"version\": \"{version}\"\n";
+            saveData += $"}}";
+
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
+
+            HomeScreen.reloadInstance(profileName);
 
             this.Close();
         }

@@ -12,12 +12,19 @@ namespace MCLauncher.classes
 {
     internal class JavaLauncher
     {
+        public static string msPlayerName;
+        public static string msPlayerUUID;
+        public static string msPlayerAccessToken;
+        public static string msPlayerMPPass;
+
         public static void Launch(string profileName, string launchJsonPath, string versionName)
         {
             Logger.Info("JavaLauncher/Launch", "");
 
             string manifestJson = File.ReadAllText(launchJsonPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
+
+            MSAuth.onGameStart(false);
 
             string jars = "";
             if(!File.Exists($"{Globals.dataPath}\\versions\\{versionName}.jar"))
@@ -55,7 +62,6 @@ namespace MCLauncher.classes
                 .Replace("{height}", defRes[1]) //todo customize
                 .Replace("{workDir}", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
 
-            //Console.WriteLine($"{javaPath} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath}");
             Process proc = new Process();
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
