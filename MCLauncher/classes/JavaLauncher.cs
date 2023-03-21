@@ -24,6 +24,8 @@ namespace MCLauncher.classes
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{versionName}.jar");
             jars += $"\"{Globals.dataPath}\\versions\\{versionName}.jar\";";
 
+            Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
+
             foreach (var lib in vi.libraries)
             {
                 string[] split = lib.name.Split(':');
@@ -32,15 +34,26 @@ namespace MCLauncher.classes
                 if (!File.Exists($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar"))
                 {
                     Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar");
+                }
 
-                    if (lib.extract == true)
-                    {
-                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar", $"{Globals.dataPath}\\libs\\natives");
-                    }
+                if (lib.extract == true)
+                {
+                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar", $"{Globals.dataPath}\\libs\\natives");
                 }
             }
-            jars = jars.Remove(jars.LastIndexOf(';'));  
+            jars = jars.Remove(jars.LastIndexOf(';'));
             string javaPath = "\"C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.362.9-hotspot\\bin\\java.exe\""; //temp
+
+            string[] defRes = vi.defRes.Split(' ');
+
+            vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
+                .Replace("{version}", vi.version)
+                .Replace("{playerName}", HomeScreen.msPlayerName)
+                .Replace("{accessToken}", "")
+                .Replace("{uuid}", "")
+                .Replace("{width}", defRes[0]) //todo customize
+                .Replace("{height}", defRes[1]) //todo customize
+                .Replace("{workDir}", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
 
             //Console.WriteLine($"{javaPath} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath}");
             Process proc = new Process();
@@ -54,11 +67,15 @@ namespace MCLauncher.classes
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; //todo
             proc.StartInfo.FileName = javaPath;
-            proc.StartInfo.Arguments = $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath}";
+            proc.StartInfo.Arguments = $"{vi.cmdBef} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
+            string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
+            Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.Start();
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
+
+            Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -78,10 +95,15 @@ namespace MCLauncher.classes
 
     public class VersionInfo
     {
+        public string game { get; set; }
+        public string version { get; set; }
         public string url { get; set; }
         public int size { get; set; }
         public int java { get; set; }
         public string classpath { get; set; }
+        public string cmdBef { get; set; }
+        public string cmdAft { get; set; }
+        public string defRes { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
     }
 
