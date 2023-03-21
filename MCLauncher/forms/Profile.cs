@@ -39,7 +39,15 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
-            listView1.Items[0].Selected = true;
+            var item = listView1.FindItemWithText(version);
+
+            if (item != null)
+            {
+                listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
+                listView1.EnsureVisible(listView1.Items.IndexOf(item));
+            }
+            else 
+                listView1.Items[0].Selected = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -51,7 +59,7 @@ namespace MCLauncher.forms
                 string date = listView1.SelectedItems[0].SubItems[2].Text;
                 Logger.Info(this.GetType().Name, $"ver {version}, type {type}, date {date}");
 
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
+                //Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
             }
 
             string saveData = "";

@@ -21,10 +21,17 @@ namespace MCLauncher.classes
         {
             Logger.Info("JavaLauncher/Launch", "");
 
+            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", versionName), $"{Globals.dataPath}\\data\\json\\{versionName}.json");
+
             string manifestJson = File.ReadAllText(launchJsonPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
             MSAuth.onGameStart(false);
+
+            if(vi.assets.url != null)
+            {
+                AssetIndex.start(vi.assets.url, vi.assets.name);
+            }
 
             string jars = "";
             if(!File.Exists($"{Globals.dataPath}\\versions\\{versionName}.jar"))
@@ -110,6 +117,7 @@ namespace MCLauncher.classes
         public string cmdBef { get; set; }
         public string cmdAft { get; set; }
         public string defRes { get; set; }
+        public VersionInfoAssets assets {get; set;}
         public VersionInfoLibrary[] libraries { get; set; }
     }
 
@@ -119,5 +127,11 @@ namespace MCLauncher.classes
         public string url { get; set; }
         public int size { get; set; }
         public bool extract { get; set; }
+    }
+
+    public class VersionInfoAssets
+    {
+        public string name { get; set; }
+        public string url { get; set; }
     }
 }
