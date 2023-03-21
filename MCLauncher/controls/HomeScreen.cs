@@ -23,8 +23,8 @@ namespace MCLauncher
     public partial class HomeScreen : UserControl
     {
         public static HomeScreen Instance;
-        public static string selectedEdition;
-        public static string msPlayerName;
+        public static string selectedEdition; //for checking which edition to launch
+        public static string msPlayerName; //for "welcome" string
         public static string selectedInstance = "Default";
         public static string selectedVersion; //for the "ready to play X" string
 
@@ -73,9 +73,10 @@ namespace MCLauncher
             reloadInstance(selectedInstance);
 
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json");
-            var pj = JsonConvert.DeserializeObject<VersionInfo>(json);
+            var pj = JsonConvert.DeserializeObject<profileJson>(json);
             Profile.version = pj.version;
             selectedVersion = pj.version;
+            selectedEdition = pj.edition;
             Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
         }
 
@@ -172,8 +173,9 @@ namespace MCLauncher
         {
             Logger.Info("HomeScreen/reloadInstance", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
-            var pj = JsonConvert.DeserializeObject<VersionInfo>(json);
+            var pj = JsonConvert.DeserializeObject<profileJson>(json);
             selectedVersion = pj.version;
+            selectedEdition = pj.edition;
             Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
         }
 
@@ -419,6 +421,8 @@ namespace MCLauncher
 
     public class profileJson
     {
+        public int data { get; set; }
         public string version { get; set; }
+        public string edition { get; set; }
     }
 }
