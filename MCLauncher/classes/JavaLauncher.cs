@@ -64,9 +64,9 @@ namespace MCLauncher.classes
 
             string assetsDir = "";
             if (vi.assets.name == "legacy")
-                assetsDir = $"{Globals.dataPath}\\assets";
-            else
                 assetsDir = $"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}";
+            else
+                assetsDir = $"{Globals.dataPath}\\assets";
 
             vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
                 .Replace("{version}", vi.version)
@@ -77,7 +77,8 @@ namespace MCLauncher.classes
                 .Replace("{height}", defRes[1]) //todo customize
                 .Replace("{workDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\"")
                 .Replace("{gameDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\"")
-                .Replace("{assetDir}", $"\"{assetsDir}\"");
+                .Replace("{assetDir}", $"\"{assetsDir}\"")
+                .Replace("{assetName}", $"\"{vi.assets.name}\"");
 
             Process proc = new Process();
             proc.OutputDataReceived += OnOutputDataReceived;
@@ -88,9 +89,9 @@ namespace MCLauncher.classes
             proc.StartInfo.CreateNoWindow = true;
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; //todo
-            proc.StartInfo.FileName = "java.exe";
-            proc.StartInfo.Arguments = $"{vi.cmdBef} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; 
+            proc.StartInfo.FileName = "\"C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.362.9-hotspot\\bin\\java.exe\""; //java.exe
+            proc.StartInfo.Arguments = $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
