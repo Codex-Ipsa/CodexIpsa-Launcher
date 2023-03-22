@@ -67,6 +67,7 @@ namespace MCLauncher
                 saveData += $"  \"version\": \"b1.7.3\"\n";
                 saveData += $"}}";
 
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\Default\\");
                 File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", saveData);
             }       
 
@@ -153,10 +154,10 @@ namespace MCLauncher
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
-                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
-                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
-                    if(text.Contains("instVer") && text.Contains("instType"))
+                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.json");
+                    if (text.Contains("instVer") && text.Contains("instType"))
                     {
                         updateFromLegacyInst($"{Globals.dataPath}\\instance\\{dirName}");
                         instanceList.Add(dirName);
@@ -296,7 +297,7 @@ namespace MCLauncher
             int index = path.LastIndexOf("\\") + 1;
             string name = path.Substring(index, path.Length - index);
 
-            string text = File.ReadAllText($"{path}\\instance.cfg");
+            string text = File.ReadAllText($"{path}\\instance.json");
             if (text.Contains("classroom"))
             {
                 text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");

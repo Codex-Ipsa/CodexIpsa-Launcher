@@ -19,8 +19,6 @@ namespace MCLauncher.classes
 
         public static void Launch(string profileName, string launchJsonPath, string versionName)
         {
-            Logger.Info("JavaLauncher/Launch", "");
-
             Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", versionName), $"{Globals.dataPath}\\data\\json\\{versionName}.json");
 
             string manifestJson = File.ReadAllText(launchJsonPath);
@@ -57,8 +55,6 @@ namespace MCLauncher.classes
                 }
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
-
-            string javaPath = "***REMOVED***"; //temp
 
             string[] defRes = vi.defRes.Split(' ');
 
