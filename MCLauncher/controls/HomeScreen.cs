@@ -58,14 +58,21 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!Directory.Exists($"{Globals.dataPath}\\instance\\Default"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json"))
             {
-                InstanceManager.Start("Default", "initial");
+                string saveData = "";
+                saveData += $"{{\n";
+                saveData += $"  \"data\": 1,\n";
+                saveData += $"  \"edition\": \"java\",\n";
+                saveData += $"  \"version\": \"b1.7.3\"\n";
+                saveData += $"}}";
+
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", saveData);
             }       
 
             //Load instance list
             loadInstanceList();
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg"))
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
             {
                 selectedInstance = "Default";
             }

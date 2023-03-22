@@ -58,8 +58,6 @@ namespace MCLauncher.forms
                 string type = listView1.SelectedItems[0].SubItems[1].Text;
                 string date = listView1.SelectedItems[0].SubItems[2].Text;
                 Logger.Info(this.GetType().Name, $"ver {version}, type {type}, date {date}");
-
-                //Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
             }
 
             string saveData = "";

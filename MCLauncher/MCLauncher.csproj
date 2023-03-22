@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetIndex.cs" />
+    <Compile Include="classes\DownloadJava.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>

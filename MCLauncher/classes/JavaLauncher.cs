@@ -79,12 +79,25 @@ namespace MCLauncher.classes
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; //todo
-            proc.StartInfo.FileName = javaPath;
+            proc.StartInfo.FileName = "java.exe";
             proc.StartInfo.Arguments = $"{vi.cmdBef} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.Start();
+            try
+            {
+                proc.Start();
+            }
+            catch(System.ComponentModel.Win32Exception e)
+            {
+                Logger.Error("JavaLauncher", "Could not find java!");
+                if(!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
+                    DownloadJava.Start();
+
+                proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
+                proc.Start();
+            }
+
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
 

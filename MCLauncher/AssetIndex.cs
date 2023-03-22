@@ -131,7 +131,6 @@ namespace MCLauncher
                         }
                         else
                         {
-                            //Logger.logError("[AssetIndex]", "aa " + $"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             FileInfo fi = new FileInfo($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\{fileDirectory}\\{fileName}");
                             if (fi.Length != sizeList[indexInt])
                             {
