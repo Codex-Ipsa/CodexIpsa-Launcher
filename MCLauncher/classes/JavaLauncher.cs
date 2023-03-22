@@ -57,6 +57,7 @@ namespace MCLauncher.classes
                 }
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
+
             string javaPath = "***REMOVED***"; //temp
 
             string[] defRes = vi.defRes.Split(' ');
