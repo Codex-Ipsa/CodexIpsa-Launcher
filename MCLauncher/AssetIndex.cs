@@ -31,6 +31,7 @@ namespace MCLauncher
 
             WebClient client = new WebClient();
             Directory.CreateDirectory($"{Globals.dataPath}\\assets\\indexes\\");
+
             if (!File.Exists($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json"))
             {
                 client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");

@@ -28,7 +28,7 @@ namespace MCLauncher.classes
 
             MSAuth.onGameStart(false);
 
-            if(vi.assets.url != null)
+            if(vi.assets.url != "")
             {
                 AssetIndex.start(vi.assets.url, vi.assets.name);
             }
@@ -38,7 +38,8 @@ namespace MCLauncher.classes
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{versionName}.jar");
             jars += $"\"{Globals.dataPath}\\versions\\{versionName}.jar\";";
 
-            Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
+            if(Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
+                Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
 
             foreach (var lib in vi.libraries)
             {
@@ -49,14 +50,13 @@ namespace MCLauncher.classes
                 {
                     Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar");
                 }
-
                 if (lib.extract == true)
                 {
                     ZipFile.ExtractToDirectory($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar", $"{Globals.dataPath}\\libs\\natives");
                 }
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
-            string javaPath = "\"C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.362.9-hotspot\\bin\\java.exe\""; //temp
+            string javaPath = "***REMOVED***"; //temp
 
             string[] defRes = vi.defRes.Split(' ');
 

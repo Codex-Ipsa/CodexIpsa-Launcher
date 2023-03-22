@@ -32,7 +32,7 @@ namespace MCLauncher.forms
 
             foreach (var ver in vj)
             {
-                string[] row = { ver.type, ver.released.ToString() };
+                string[] row = { ver.type, ver.released.ToString("dd.MM.yyyy hh:mm:ss") };
                 listView1.Items.Add(ver.id).SubItems.AddRange(row);
             }
             listView1.Columns[0].Width = -1;
