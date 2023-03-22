@@ -95,10 +95,12 @@ namespace MCLauncher
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
                 Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
-                LaunchJava.launchPlayerName = "Guest";
-                LaunchJava.launchPlayerUUID = "null";
-                LaunchJava.launchPlayerAccessToken = "null";
-                LaunchJava.launchMpPass = "null";
+
+                JavaLauncher.msPlayerName = "Guest";
+                JavaLauncher.msPlayerAccessToken = "-";
+                JavaLauncher.msPlayerUUID = "-";
+                JavaLauncher.msPlayerMPPass = "-";
+
                 if (Globals.requireAuth == true)
                 {
                     Instance.btnPlay.Enabled = false;
@@ -378,10 +380,12 @@ namespace MCLauncher
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             Logger.Info($"[HomeScreen]", "Logging out");
-            LaunchJava.launchPlayerName = "Guest";
-            LaunchJava.launchPlayerUUID = "null";
-            LaunchJava.launchPlayerAccessToken = "null";
-            LaunchJava.launchMpPass = "null";
+
+            JavaLauncher.msPlayerName = "Guest";
+            JavaLauncher.msPlayerAccessToken = "-";
+            JavaLauncher.msPlayerUUID = "-";
+            JavaLauncher.msPlayerMPPass = "-";
+
             Properties.Settings.Default.msRefreshToken = String.Empty;
             Properties.Settings.Default.Save();
             checkAuth();

@@ -28,17 +28,18 @@ namespace MCLauncher.classes
 
             MSAuth.onGameStart(false);
 
-            if(vi.assets.url != "")
+
+            if (vi.assets.url != "")
             {
                 AssetIndex.start(vi.assets.url, vi.assets.name);
             }
 
             string jars = "";
-            if(!File.Exists($"{Globals.dataPath}\\versions\\{versionName}.jar"))
+            if (!File.Exists($"{Globals.dataPath}\\versions\\{versionName}.jar"))
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{versionName}.jar");
             jars += $"\"{Globals.dataPath}\\versions\\{versionName}.jar\";";
 
-            if(Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
+            if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
                 Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
 
             foreach (var lib in vi.libraries)
@@ -60,14 +61,22 @@ namespace MCLauncher.classes
 
             string[] defRes = vi.defRes.Split(' ');
 
+            string assetsDir = "";
+            if (vi.assets.name == "legacy")
+                assetsDir = $"{Globals.dataPath}\\assets";
+            else
+                assetsDir = $"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}";
+
             vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
                 .Replace("{version}", vi.version)
-                .Replace("{playerName}", HomeScreen.msPlayerName)
-                .Replace("{accessToken}", "")
-                .Replace("{uuid}", "")
+                .Replace("{playerName}", msPlayerName)
+                .Replace("{accessToken}", msPlayerAccessToken)
+                .Replace("{uuid}", msPlayerUUID)
                 .Replace("{width}", defRes[0]) //todo customize
                 .Replace("{height}", defRes[1]) //todo customize
-                .Replace("{workDir}", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
+                .Replace("{workDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\"")
+                .Replace("{gameDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\"")
+                .Replace("{assetDir}", $"\"{assetsDir}\"");
 
             Process proc = new Process();
             proc.OutputDataReceived += OnOutputDataReceived;
@@ -82,16 +91,18 @@ namespace MCLauncher.classes
             proc.StartInfo.FileName = "java.exe";
             proc.StartInfo.Arguments = $"{vi.cmdBef} -Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
+            Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
+
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             try
             {
                 proc.Start();
             }
-            catch(System.ComponentModel.Win32Exception e)
+            catch (System.ComponentModel.Win32Exception e)
             {
                 Logger.Error("JavaLauncher", "Could not find java!");
-                if(!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
+                if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();
 
                 proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
@@ -130,7 +141,7 @@ namespace MCLauncher.classes
         public string cmdBef { get; set; }
         public string cmdAft { get; set; }
         public string defRes { get; set; }
-        public VersionInfoAssets assets {get; set;}
+        public VersionInfoAssets assets { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
     }
 
