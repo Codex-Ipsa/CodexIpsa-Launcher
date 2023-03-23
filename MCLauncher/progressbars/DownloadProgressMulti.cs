@@ -18,12 +18,12 @@ namespace MCLauncher.progressbars
         WebClient client;
         List<string> theUrls = new List<string>();
         List<string> thePaths = new List<string>();
-        int theSize;
+        double theSize;
         int sizeReceived = 0;
         bool hasAdded = false;
         int currentInt = 0;
 
-        public DownloadProgressMulti(List<string> urls, List<string> paths, int totalSize, string message)
+        public DownloadProgressMulti(List<string> urls, List<string> paths, double totalSize, string message)
         {
             InitializeComponent();
 
@@ -37,7 +37,7 @@ namespace MCLauncher.progressbars
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ControlBox = false;
-            progressBarDownload.Maximum = totalSize;
+            progressBarDownload.Maximum = (int)totalSize;
             label1.Text = message;
 
             theUrls = urls;

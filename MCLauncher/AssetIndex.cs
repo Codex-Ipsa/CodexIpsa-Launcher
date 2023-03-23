@@ -15,9 +15,9 @@ namespace MCLauncher
 
         public static List<string> nameList = new List<string>();
         public static List<string> hashList = new List<string>();
-        public static List<int> sizeList = new List<int>();
+        public static List<double> sizeList = new List<double>();
 
-        public static void start(string indexUrl, string indexName)
+        public static void Start(string indexUrl, string indexName)
         {
             if (indexName.Contains("legacy"))
             {
@@ -85,7 +85,7 @@ namespace MCLauncher
                             else if (iProp.Name == "size")
                             {
                                 object iVal = iProp.Value;
-                                sizeList.Add(int.Parse(iVal.ToString()));
+                                sizeList.Add(double.Parse(iVal.ToString()));
                                 //Logger.logMessage("[AssetIndex]", $"Current size: {iVal}");
                             }
                         }
@@ -106,7 +106,7 @@ namespace MCLauncher
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
 
-                    int totalSize = 0;
+                    double totalSize = 0;
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];
@@ -166,7 +166,7 @@ namespace MCLauncher
                     
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
-                    int totalSize = 0;
+                    double totalSize = 0;
                     foreach (var name in nameList)
                     {
                         string fullHash = hashList[indexInt];

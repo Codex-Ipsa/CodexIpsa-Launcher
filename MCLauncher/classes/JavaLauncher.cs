@@ -29,7 +29,7 @@ namespace MCLauncher.classes
 
             if (vi.assets.url != "")
             {
-                AssetIndex.start(vi.assets.url, vi.assets.name);
+                AssetIndex.Start(vi.assets.url, vi.assets.name);
             }
 
             string jars = "";
@@ -40,19 +40,32 @@ namespace MCLauncher.classes
             if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
                 Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
 
+            Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives\\");
+
             foreach (var lib in vi.libraries)
             {
-                string[] split = lib.name.Split(':');
-                jars += $"\"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar\";";
-
-                if (!File.Exists($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar"))
+                if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
                 {
-                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar");
+                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
                 }
+
                 if (lib.extract == true)
                 {
-                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\libs\\{split[1]}-{split[2]}.jar", $"{Globals.dataPath}\\libs\\natives");
+                    var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    foreach (var zipArchiveEntry in archive.Entries)
+                    {
+                        Console.WriteLine(zipArchiveEntry);
+                        if (!zipArchiveEntry.ToString().Contains("META-INF"))
+                        {
+                            if (zipArchiveEntry.ToString().EndsWith("/"))
+                                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives\\{zipArchiveEntry}");
+                            else
+                                zipArchiveEntry.ExtractToFile($"{Globals.dataPath}\\libs\\natives\\{zipArchiveEntry}");
+                        }
+                    }
                 }
+                else
+                    jars += $"\"{Globals.dataPath}\\libs\\{lib.name}.jar\";";
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 
@@ -85,9 +98,11 @@ namespace MCLauncher.classes
             proc.StartInfo.CreateNoWindow = true;
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\"; 
-            proc.StartInfo.FileName = "\"C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.362.9-hotspot\\bin\\java.exe\""; //java.exe
-            proc.StartInfo.Arguments = $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
+            proc.StartInfo.FileName = "java.exe"; //java.exe
+            if(vi.cmdBef != "")
+                proc.StartInfo.Arguments = $"{vi.cmdBef} ";
+            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft} --versionType literally_anything_else";
 
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
