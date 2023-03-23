@@ -1,8 +1,10 @@
-﻿using MCLauncher.progressbars;
+﻿using MCLauncher.classes;
+using MCLauncher.progressbars;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -19,6 +21,7 @@ namespace MCLauncher
 
         public static void Start(string indexUrl, string indexName)
         {
+
             if (indexName.Contains("legacy"))
             {
                 isLegacy = true;
@@ -29,12 +32,11 @@ namespace MCLauncher
                 isLegacy = false;
             }
 
-            WebClient client = new WebClient();
             Directory.CreateDirectory($"{Globals.dataPath}\\assets\\indexes\\");
 
             if (!File.Exists($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json"))
             {
-                client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
+                Globals.client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
             }
             else
             {
@@ -49,12 +51,16 @@ namespace MCLauncher
                 {
                     Logger.Info("[AssetIndex]", "Index has changed! Redownloading json.");
                     File.Delete($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
-                    client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
+                    Globals.client.DownloadFile(indexUrl, $"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
                 }
             }
-            string origJson = File.ReadAllText($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
+            string manifest = File.ReadAllText($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
 
-            JObject origObj = JsonConvert.DeserializeObject<JObject>(origJson);
+            var vi = JsonConvert.DeserializeObject<AssetIndexManifest>(manifest);
+
+            //Dictionary<string, AssetIndexObject> dict = JsonConvert.DeserializeObject<Dictionary<string, AssetIndexObject>>(vi.objects.ToString());
+
+            JObject origObj = JsonConvert.DeserializeObject<JObject>(manifest);
             var origProps = origObj.Properties();
 
             foreach (var oProp in origProps)
@@ -209,5 +215,16 @@ namespace MCLauncher
                 }
             }
         }
+    }
+
+    public class AssetIndexManifest
+    {
+        public AssetIndexObject objects { get; set; }
+        public bool isVirtual { get; set; }
+    }
+
+    public class AssetIndexObject
+    {
+        public int size { get; set; }
     }
 }
