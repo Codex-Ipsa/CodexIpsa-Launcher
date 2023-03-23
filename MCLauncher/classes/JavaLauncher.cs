@@ -29,7 +29,7 @@ namespace MCLauncher.classes
 
             if (vi.assets.url != "")
             {
-                AssetIndex.Start(vi.assets.url, vi.assets.name);
+                AssetIndexWorker.Start(vi.assets.url, vi.assets.name);
             }
 
             string jars = "";
@@ -102,7 +102,7 @@ namespace MCLauncher.classes
             proc.StartInfo.FileName = "java.exe"; //java.exe
             if(vi.cmdBef != "")
                 proc.StartInfo.Arguments = $"{vi.cmdBef} ";
-            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft} --versionType literally_anything_else";
+            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 

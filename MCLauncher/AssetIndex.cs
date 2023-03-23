@@ -9,7 +9,7 @@ using System.Net;
 
 namespace MCLauncher
 {
-    public class AssetIndex
+    public class AssetIndexWorker
     {
         public static bool isLegacy;
 
@@ -45,7 +45,7 @@ namespace MCLauncher
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse(); //fix rate limit
                 long urlSize = resp.ContentLength;
 
-                if(urlSize != fi.Length)
+                if (urlSize != fi.Length)
                 {
                     Logger.Info("[AssetIndex]", "Index has changed! Redownloading json.");
                     File.Delete($"{Globals.dataPath}\\assets\\indexes\\{indexName}.json");
@@ -102,7 +102,7 @@ namespace MCLauncher
                     Directory.CreateDirectory($"{Globals.dataPath}\\assets\\virtual\\{indexName}\\");
                     int indexInt = 0;
                     WebClient wc = new WebClient();
-                    
+
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
 
@@ -145,7 +145,7 @@ namespace MCLauncher
 
                         indexInt++;
                     }
-                    if(urls.Count != 0)
+                    if (urls.Count != 0)
                     {
                         DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, Strings.lblDlAssets);
                         dpm.ShowDialog();
@@ -163,7 +163,7 @@ namespace MCLauncher
 
                     int indexInt = 0;
                     WebClient wc = new WebClient();
-                    
+
                     List<string> urls = new List<string>();
                     List<string> paths = new List<string>();
                     double totalSize = 0;
@@ -195,7 +195,7 @@ namespace MCLauncher
 
                         indexInt++;
                     }
-                    if(urls.Count != 0)
+                    if (urls.Count != 0)
                     {
                         DownloadProgressMulti dpm = new DownloadProgressMulti(urls, paths, totalSize, Strings.lblDlAssets);
                         dpm.ShowDialog();
@@ -209,5 +209,10 @@ namespace MCLauncher
                 }
             }
         }
+    }
+
+    public class AssetIndex
+    {
+        bool virtuals {get; set;}
     }
 }

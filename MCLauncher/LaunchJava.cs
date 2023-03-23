@@ -184,7 +184,7 @@ namespace MCLauncher
                     input1 = input1.Replace("/", "");
                     assetIndexType = input1;
                     Logger.Info("[AssetIndex/LaunchJava]", $"indexType: {assetIndexType}");
-                    AssetIndex.Start(assetIndexUrl, assetIndexType);
+                    AssetIndexWorker.Start(assetIndexUrl, assetIndexType);
                 }
 
                 Logger.Info("[LaunchJava]", $"Mppass: {launchMpPass}");
