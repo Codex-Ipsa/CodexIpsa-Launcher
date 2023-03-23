@@ -29,7 +29,7 @@ namespace MCLauncher.classes
 
             if (vi.assets.url != "")
             {
-                AssetIndexWorker.Start(vi.assets.url, vi.assets.name);
+                AssetIndex.Start(vi.assets.url, vi.assets.name);
             }
 
             string jars = "";

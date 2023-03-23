@@ -9,7 +9,7 @@ using System.Net;
 
 namespace MCLauncher
 {
-    public class AssetIndexWorker
+    public class AssetIndex
     {
         public static bool isLegacy;
 
@@ -209,10 +209,5 @@ namespace MCLauncher
                 }
             }
         }
-    }
-
-    public class AssetIndex
-    {
-        bool virtuals {get; set;}
     }
 }
