@@ -110,7 +110,16 @@ namespace MCLauncher.forms
             saveData += $"{{\n";
             saveData += $"  \"data\": 1,\n";
             saveData += $"  \"edition\": \"java\",\n";
-            saveData += $"  \"version\": \"{version}\"\n";
+            saveData += $"  \"version\": \"{version}\",\n";
+            saveData += $"  \"directory\": \"\",\n";
+            saveData += $"  \"resolution\": \"854 480\",\n";
+            saveData += $"  \"memory\": \"512 512\",\n";
+            saveData += $"  \"befCmd\": \"\",\n";
+            saveData += $"  \"aftCmd\": \"\",\n";
+            saveData += $"  \"javaPath\": \"\",\n";
+            saveData += $"  \"demo\": false,\n";
+            saveData += $"  \"offline\": false,\n";
+            saveData += $"  \"proxy\": false\n";
             saveData += $"}}";
 
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
