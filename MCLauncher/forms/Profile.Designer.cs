@@ -54,6 +54,18 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkClassic = new System.Windows.Forms.CheckBox();
+            this.checkIndev = new System.Windows.Forms.CheckBox();
+            this.checkInfdev = new System.Windows.Forms.CheckBox();
+            this.checkAlpha = new System.Windows.Forms.CheckBox();
+            this.checkBeta = new System.Windows.Forms.CheckBox();
+            this.checkRelease = new System.Windows.Forms.CheckBox();
+            this.checkSnapshot = new System.Windows.Forms.CheckBox();
+            this.checkExperimental = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.checkPreClassic = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -66,14 +78,16 @@
             this.listView1.Location = new System.Drawing.Point(12, 12);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(328, 381);
+            this.listView1.Size = new System.Drawing.Size(328, 355);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listView1_ColumnWidthChanging);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(12, 415);
+            this.btnSave.Location = new System.Drawing.Point(713, 422);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -282,11 +296,167 @@
             this.checkBox3.Text = "Launch demo";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // checkClassic
+            // 
+            this.checkClassic.AutoSize = true;
+            this.checkClassic.Checked = true;
+            this.checkClassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkClassic.Location = new System.Drawing.Point(95, 373);
+            this.checkClassic.Name = "checkClassic";
+            this.checkClassic.Size = new System.Drawing.Size(59, 17);
+            this.checkClassic.TabIndex = 26;
+            this.checkClassic.Text = "Classic";
+            this.checkClassic.UseVisualStyleBackColor = true;
+            this.checkClassic.CheckedChanged += new System.EventHandler(this.checkClassic_CheckedChanged);
+            // 
+            // checkIndev
+            // 
+            this.checkIndev.AutoSize = true;
+            this.checkIndev.Checked = true;
+            this.checkIndev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkIndev.Location = new System.Drawing.Point(160, 373);
+            this.checkIndev.Name = "checkIndev";
+            this.checkIndev.Size = new System.Drawing.Size(53, 17);
+            this.checkIndev.TabIndex = 27;
+            this.checkIndev.Text = "Indev";
+            this.checkIndev.UseVisualStyleBackColor = true;
+            this.checkIndev.CheckedChanged += new System.EventHandler(this.checkIndev_CheckedChanged);
+            // 
+            // checkInfdev
+            // 
+            this.checkInfdev.AutoSize = true;
+            this.checkInfdev.Checked = true;
+            this.checkInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkInfdev.Location = new System.Drawing.Point(219, 373);
+            this.checkInfdev.Name = "checkInfdev";
+            this.checkInfdev.Size = new System.Drawing.Size(56, 17);
+            this.checkInfdev.TabIndex = 28;
+            this.checkInfdev.Text = "Infdev";
+            this.checkInfdev.UseVisualStyleBackColor = true;
+            this.checkInfdev.CheckedChanged += new System.EventHandler(this.checkInfdev_CheckedChanged);
+            // 
+            // checkAlpha
+            // 
+            this.checkAlpha.AutoSize = true;
+            this.checkAlpha.Checked = true;
+            this.checkAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAlpha.Location = new System.Drawing.Point(281, 373);
+            this.checkAlpha.Name = "checkAlpha";
+            this.checkAlpha.Size = new System.Drawing.Size(53, 17);
+            this.checkAlpha.TabIndex = 29;
+            this.checkAlpha.Text = "Alpha";
+            this.checkAlpha.UseVisualStyleBackColor = true;
+            this.checkAlpha.CheckedChanged += new System.EventHandler(this.checkAlpha_CheckedChanged);
+            // 
+            // checkBeta
+            // 
+            this.checkBeta.AutoSize = true;
+            this.checkBeta.Checked = true;
+            this.checkBeta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBeta.Location = new System.Drawing.Point(12, 399);
+            this.checkBeta.Name = "checkBeta";
+            this.checkBeta.Size = new System.Drawing.Size(48, 17);
+            this.checkBeta.TabIndex = 30;
+            this.checkBeta.Text = "Beta";
+            this.checkBeta.UseVisualStyleBackColor = true;
+            this.checkBeta.CheckedChanged += new System.EventHandler(this.checkBeta_CheckedChanged);
+            // 
+            // checkRelease
+            // 
+            this.checkRelease.AutoSize = true;
+            this.checkRelease.Checked = true;
+            this.checkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkRelease.Location = new System.Drawing.Point(66, 399);
+            this.checkRelease.Name = "checkRelease";
+            this.checkRelease.Size = new System.Drawing.Size(65, 17);
+            this.checkRelease.TabIndex = 31;
+            this.checkRelease.Text = "Release";
+            this.checkRelease.UseVisualStyleBackColor = true;
+            this.checkRelease.CheckedChanged += new System.EventHandler(this.checkRelease_CheckedChanged);
+            // 
+            // checkSnapshot
+            // 
+            this.checkSnapshot.AutoSize = true;
+            this.checkSnapshot.Checked = true;
+            this.checkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkSnapshot.Location = new System.Drawing.Point(137, 399);
+            this.checkSnapshot.Name = "checkSnapshot";
+            this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
+            this.checkSnapshot.TabIndex = 32;
+            this.checkSnapshot.Text = "Snapshot";
+            this.checkSnapshot.UseVisualStyleBackColor = true;
+            this.checkSnapshot.CheckedChanged += new System.EventHandler(this.checkSnapshot_CheckedChanged);
+            // 
+            // checkExperimental
+            // 
+            this.checkExperimental.AutoSize = true;
+            this.checkExperimental.Checked = true;
+            this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkExperimental.Location = new System.Drawing.Point(214, 399);
+            this.checkExperimental.Name = "checkExperimental";
+            this.checkExperimental.Size = new System.Drawing.Size(86, 17);
+            this.checkExperimental.TabIndex = 33;
+            this.checkExperimental.Text = "Experimental";
+            this.checkExperimental.UseVisualStyleBackColor = true;
+            this.checkExperimental.CheckedChanged += new System.EventHandler(this.checkExperimental_CheckedChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(632, 422);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 34;
+            this.button3.Text = "btn.OpenDir";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(551, 422);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 35;
+            this.button4.Text = "btn.Delete";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 422);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 36;
+            this.button5.Text = "btn.Mods";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // checkPreClassic
+            // 
+            this.checkPreClassic.AutoSize = true;
+            this.checkPreClassic.Checked = true;
+            this.checkPreClassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkPreClassic.Location = new System.Drawing.Point(12, 373);
+            this.checkPreClassic.Name = "checkPreClassic";
+            this.checkPreClassic.Size = new System.Drawing.Size(77, 17);
+            this.checkPreClassic.TabIndex = 37;
+            this.checkPreClassic.Text = "Pre-classic";
+            this.checkPreClassic.UseVisualStyleBackColor = true;
+            this.checkPreClassic.CheckedChanged += new System.EventHandler(this.checkPreClassic_CheckedChanged);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 451);
+            this.Controls.Add(this.checkPreClassic);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.checkExperimental);
+            this.Controls.Add(this.checkSnapshot);
+            this.Controls.Add(this.checkRelease);
+            this.Controls.Add(this.checkBeta);
+            this.Controls.Add(this.checkAlpha);
+            this.Controls.Add(this.checkInfdev);
+            this.Controls.Add(this.checkIndev);
+            this.Controls.Add(this.checkClassic);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -350,5 +520,17 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkClassic;
+        private System.Windows.Forms.CheckBox checkIndev;
+        private System.Windows.Forms.CheckBox checkInfdev;
+        private System.Windows.Forms.CheckBox checkAlpha;
+        private System.Windows.Forms.CheckBox checkBeta;
+        private System.Windows.Forms.CheckBox checkRelease;
+        private System.Windows.Forms.CheckBox checkSnapshot;
+        private System.Windows.Forms.CheckBox checkExperimental;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkPreClassic;
     }
 }
