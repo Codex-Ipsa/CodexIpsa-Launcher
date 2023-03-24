@@ -54,7 +54,6 @@ namespace MCLauncher.classes
                     var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{lib.name}.jar");
                     foreach (var zipArchiveEntry in archive.Entries)
                     {
-                        //Console.WriteLine(zipArchiveEntry);
                         if (!zipArchiveEntry.ToString().Contains("META-INF"))
                         {
                             if (zipArchiveEntry.ToString().EndsWith("/"))
@@ -100,8 +99,21 @@ namespace MCLauncher.classes
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
             proc.StartInfo.FileName = "java.exe"; //java.exe
-            if(vi.cmdBef != "")
+
+            if (vi.cmdBef != "")
                 proc.StartInfo.Arguments = $"{vi.cmdBef} ";
+
+            if (vi.logging != "")
+            {
+                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\logging\\");
+                string fileName = vi.logging.Substring(vi.logging.LastIndexOf('/') + 1);
+                string hash = vi.logging.Substring(0, vi.logging.LastIndexOf('/') - 1);
+                hash = hash.Substring(hash.LastIndexOf('/') + 1);
+                Globals.client.DownloadFile(vi.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
+                Console.WriteLine("[DEBUG] " + hash);
+                proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
+            }
+
             proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
@@ -154,6 +166,7 @@ namespace MCLauncher.classes
         public string cmdBef { get; set; }
         public string cmdAft { get; set; }
         public string defRes { get; set; }
+        public string logging { get; set; }
         public VersionInfoAssets assets { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
     }
