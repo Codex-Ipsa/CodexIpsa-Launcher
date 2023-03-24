@@ -54,7 +54,7 @@ namespace MCLauncher.classes
                     var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{lib.name}.jar");
                     foreach (var zipArchiveEntry in archive.Entries)
                     {
-                        Console.WriteLine(zipArchiveEntry);
+                        //Console.WriteLine(zipArchiveEntry);
                         if (!zipArchiveEntry.ToString().Contains("META-INF"))
                         {
                             if (zipArchiveEntry.ToString().EndsWith("/"))
