@@ -66,6 +66,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.checkPreClassic = new System.Windows.Forms.CheckBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -269,7 +273,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(349, 222);
+            this.checkBox1.Location = new System.Drawing.Point(349, 248);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(133, 17);
             this.checkBox1.TabIndex = 23;
@@ -279,7 +283,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(349, 245);
+            this.checkBox2.Location = new System.Drawing.Point(349, 271);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(187, 17);
             this.checkBox2.TabIndex = 24;
@@ -289,7 +293,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(349, 199);
+            this.checkBox3.Location = new System.Drawing.Point(349, 225);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(91, 17);
             this.checkBox3.TabIndex = 25;
@@ -440,11 +444,49 @@
             this.checkPreClassic.UseVisualStyleBackColor = true;
             this.checkPreClassic.CheckedChanged += new System.EventHandler(this.checkPreClassic_CheckedChanged);
             // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(446, 197);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(287, 20);
+            this.textBox8.TabIndex = 38;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(739, 197);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(49, 20);
+            this.button6.TabIndex = 39;
+            this.button6.Text = "...";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(346, 201);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(74, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Launch JSON";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(626, 406);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(162, 13);
+            this.label12.TabIndex = 41;
+            this.label12.Text = "Work in progress - UNFINISHED";
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.textBox8);
             this.Controls.Add(this.checkPreClassic);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -532,5 +574,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.CheckBox checkPreClassic;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }

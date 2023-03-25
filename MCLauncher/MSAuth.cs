@@ -472,17 +472,6 @@ namespace MCLauncher
                     else
                         Logger.Info("[MSAuth]", "Got Mppass response");
                     mpPass = mppassResponseString;
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-                    Logger.Info("[DEBUG]", $"MPpass: {mpPass}");
-
                 }
                 else
                 {
