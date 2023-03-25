@@ -125,8 +125,8 @@ namespace MCLauncher
                         }
                         else
                         {
-                            launchServerIP = EnterIp.serverIP;
-                            launchServerPort = EnterIp.serverPort;
+                            /*launchServerIP = EnterIp.serverIP;
+                            launchServerPort = EnterIp.serverPort;*/
                             launchJoinMP = true;
                             Logger.Info("[LaunchJava]", $"Server IP: {launchServerIP}");
                             Logger.Info("[LaunchJava]", $"Server port: {launchServerPort}");

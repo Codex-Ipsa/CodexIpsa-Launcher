@@ -17,6 +17,9 @@ namespace MCLauncher.classes
         public static string msPlayerAccessToken;
         public static string msPlayerMPPass;
 
+        public static string srvIP;
+        public static string srvPort;
+
         public static void Launch(string profileName, string launchJsonPath, string versionName)
         {
             Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", versionName), $"{Globals.dataPath}\\data\\json\\{versionName}.json");
@@ -24,8 +27,18 @@ namespace MCLauncher.classes
             string manifestJson = File.ReadAllText(launchJsonPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
-            MSAuth.onGameStart(false);
+            if (vi.srvJoin == true)
+            {
+                EnterIp ei = new EnterIp();
+                ei.ShowDialog();
 
+                if (EnterIp.inputedText != String.Empty || EnterIp.inputedText != null)
+                {
+                    MSAuth.onGameStart(true);
+                }
+            }
+            else
+                MSAuth.onGameStart(false);
 
             if (vi.assets.url != "")
             {
@@ -110,8 +123,13 @@ namespace MCLauncher.classes
                 string hash = vi.logging.Substring(0, vi.logging.LastIndexOf('/') - 1);
                 hash = hash.Substring(hash.LastIndexOf('/') + 1);
                 Globals.client.DownloadFile(vi.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
-                Console.WriteLine("[DEBUG] " + hash);
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
+            }
+
+            if(vi.srvJoin)
+            {
+                proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
+                Logger.Info("JavaLauncher", $"Server active!");
             }
 
             proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
@@ -167,6 +185,7 @@ namespace MCLauncher.classes
         public string cmdAft { get; set; }
         public string defRes { get; set; }
         public string logging { get; set; }
+        public bool srvJoin { get; set; }
         public VersionInfoAssets assets { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
     }
