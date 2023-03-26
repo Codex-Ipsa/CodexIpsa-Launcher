@@ -119,7 +119,8 @@ namespace MCLauncher.forms
             saveData += $"  \"javaPath\": \"\",\n";
             saveData += $"  \"demo\": false,\n";
             saveData += $"  \"offline\": false,\n";
-            saveData += $"  \"proxy\": false\n";
+            saveData += $"  \"proxy\": false,\n";
+            saveData += $"  \"multiplayer\": false\n";
             saveData += $"}}";
 
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
