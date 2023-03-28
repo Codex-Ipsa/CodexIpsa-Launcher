@@ -29,31 +29,31 @@
         private void InitializeComponent()
         {
             this.listView1 = new System.Windows.Forms.ListView();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.nameBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.dirBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.javaBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.javaBox = new System.Windows.Forms.TextBox();
+            this.resXBox = new System.Windows.Forms.TextBox();
+            this.resYBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.ramMaxBox = new System.Windows.Forms.NumericUpDown();
+            this.ramMinBox = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.aftBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.befBox = new System.Windows.Forms.TextBox();
+            this.offlineCheck = new System.Windows.Forms.CheckBox();
+            this.proxyCheck = new System.Windows.Forms.CheckBox();
+            this.demoCheck = new System.Windows.Forms.CheckBox();
             this.checkClassic = new System.Windows.Forms.CheckBox();
             this.checkIndev = new System.Windows.Forms.CheckBox();
             this.checkInfdev = new System.Windows.Forms.CheckBox();
@@ -62,17 +62,17 @@
             this.checkRelease = new System.Windows.Forms.CheckBox();
             this.checkSnapshot = new System.Windows.Forms.CheckBox();
             this.checkExperimental = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.openBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
+            this.modsBtn = new System.Windows.Forms.Button();
             this.checkPreClassic = new System.Windows.Forms.CheckBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.jsonBox = new System.Windows.Forms.TextBox();
+            this.jsonBtn = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.mpCheck = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listView1
@@ -90,22 +90,22 @@
             this.listView1.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listView1_ColumnWidthChanging);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // btnSave
+            // saveBtn
             // 
-            this.btnSave.Location = new System.Drawing.Point(713, 422);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "btn.Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.saveBtn.Location = new System.Drawing.Point(713, 422);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 1;
+            this.saveBtn.Text = "btn.Save";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // textBox1
+            // nameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(446, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(342, 20);
-            this.textBox1.TabIndex = 2;
+            this.nameBox.Location = new System.Drawing.Point(446, 12);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(342, 20);
+            this.nameBox.TabIndex = 2;
             // 
             // label1
             // 
@@ -116,12 +116,12 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Profile name";
             // 
-            // textBox2
+            // dirBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(446, 39);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(287, 20);
-            this.textBox2.TabIndex = 4;
+            this.dirBox.Location = new System.Drawing.Point(446, 39);
+            this.dirBox.Name = "dirBox";
+            this.dirBox.Size = new System.Drawing.Size(287, 20);
+            this.dirBox.TabIndex = 4;
             // 
             // label2
             // 
@@ -141,14 +141,14 @@
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // javaBtn
             // 
-            this.button2.Location = new System.Drawing.Point(739, 170);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(49, 20);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.javaBtn.Location = new System.Drawing.Point(739, 170);
+            this.javaBtn.Name = "javaBtn";
+            this.javaBtn.Size = new System.Drawing.Size(49, 20);
+            this.javaBtn.TabIndex = 9;
+            this.javaBtn.Text = "...";
+            this.javaBtn.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -159,26 +159,26 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Java location";
             // 
-            // textBox3
+            // javaBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(446, 171);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(287, 20);
-            this.textBox3.TabIndex = 7;
+            this.javaBox.Location = new System.Drawing.Point(446, 171);
+            this.javaBox.Name = "javaBox";
+            this.javaBox.Size = new System.Drawing.Size(287, 20);
+            this.javaBox.TabIndex = 7;
             // 
-            // textBox4
+            // resXBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(446, 65);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(150, 20);
-            this.textBox4.TabIndex = 10;
+            this.resXBox.Location = new System.Drawing.Point(446, 65);
+            this.resXBox.Name = "resXBox";
+            this.resXBox.Size = new System.Drawing.Size(150, 20);
+            this.resXBox.TabIndex = 10;
             // 
-            // textBox5
+            // resYBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(638, 65);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(150, 20);
-            this.textBox5.TabIndex = 11;
+            this.resYBox.Location = new System.Drawing.Point(638, 65);
+            this.resYBox.Name = "resYBox";
+            this.resYBox.Size = new System.Drawing.Size(150, 20);
+            this.resYBox.TabIndex = 11;
             // 
             // label4
             // 
@@ -207,19 +207,59 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Memory";
             // 
-            // numericUpDown1
+            // ramMaxBox
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(446, 91);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(150, 20);
-            this.numericUpDown1.TabIndex = 15;
+            this.ramMaxBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.ramMaxBox.Location = new System.Drawing.Point(446, 91);
+            this.ramMaxBox.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+            this.ramMaxBox.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.ramMaxBox.Name = "ramMaxBox";
+            this.ramMaxBox.Size = new System.Drawing.Size(150, 20);
+            this.ramMaxBox.TabIndex = 15;
+            this.ramMaxBox.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
             // 
-            // numericUpDown2
+            // ramMinBox
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(638, 93);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(150, 20);
-            this.numericUpDown2.TabIndex = 16;
+            this.ramMinBox.Increment = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.ramMinBox.Location = new System.Drawing.Point(638, 93);
+            this.ramMinBox.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+            this.ramMinBox.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.ramMinBox.Name = "ramMinBox";
+            this.ramMinBox.Size = new System.Drawing.Size(150, 20);
+            this.ramMinBox.TabIndex = 16;
+            this.ramMinBox.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
             // 
             // label7
             // 
@@ -248,12 +288,12 @@
             this.label9.TabIndex = 20;
             this.label9.Text = "After command";
             // 
-            // textBox6
+            // aftBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(446, 145);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(342, 20);
-            this.textBox6.TabIndex = 19;
+            this.aftBox.Location = new System.Drawing.Point(446, 145);
+            this.aftBox.Name = "aftBox";
+            this.aftBox.Size = new System.Drawing.Size(342, 20);
+            this.aftBox.TabIndex = 19;
             // 
             // label10
             // 
@@ -264,42 +304,42 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Before command";
             // 
-            // textBox7
+            // befBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(446, 119);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(342, 20);
-            this.textBox7.TabIndex = 21;
+            this.befBox.Location = new System.Drawing.Point(446, 119);
+            this.befBox.Name = "befBox";
+            this.befBox.Size = new System.Drawing.Size(342, 20);
+            this.befBox.TabIndex = 21;
             // 
-            // checkBox1
+            // offlineCheck
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(349, 248);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(133, 17);
-            this.checkBox1.TabIndex = 23;
-            this.checkBox1.Text = "Launch in offline mode";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.offlineCheck.AutoSize = true;
+            this.offlineCheck.Location = new System.Drawing.Point(349, 248);
+            this.offlineCheck.Name = "offlineCheck";
+            this.offlineCheck.Size = new System.Drawing.Size(133, 17);
+            this.offlineCheck.TabIndex = 23;
+            this.offlineCheck.Text = "Launch in offline mode";
+            this.offlineCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // proxyCheck
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(349, 271);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(187, 17);
-            this.checkBox2.TabIndex = 24;
-            this.checkBox2.Text = "Use skin and sound proxy (<1.5.2)";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.proxyCheck.AutoSize = true;
+            this.proxyCheck.Location = new System.Drawing.Point(349, 271);
+            this.proxyCheck.Name = "proxyCheck";
+            this.proxyCheck.Size = new System.Drawing.Size(193, 17);
+            this.proxyCheck.TabIndex = 24;
+            this.proxyCheck.Text = "Use skin and sound proxy (<=1.5.2)";
+            this.proxyCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // demoCheck
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(349, 225);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(91, 17);
-            this.checkBox3.TabIndex = 25;
-            this.checkBox3.Text = "Launch demo";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.demoCheck.AutoSize = true;
+            this.demoCheck.Location = new System.Drawing.Point(349, 225);
+            this.demoCheck.Name = "demoCheck";
+            this.demoCheck.Size = new System.Drawing.Size(150, 17);
+            this.demoCheck.TabIndex = 25;
+            this.demoCheck.Text = "Launch demo (>=12w16a)";
+            this.demoCheck.UseVisualStyleBackColor = true;
             // 
             // checkClassic
             // 
@@ -405,32 +445,33 @@
             this.checkExperimental.UseVisualStyleBackColor = true;
             this.checkExperimental.CheckedChanged += new System.EventHandler(this.checkExperimental_CheckedChanged);
             // 
-            // button3
+            // openBtn
             // 
-            this.button3.Location = new System.Drawing.Point(632, 422);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 34;
-            this.button3.Text = "btn.OpenDir";
-            this.button3.UseVisualStyleBackColor = true;
+            this.openBtn.Location = new System.Drawing.Point(632, 422);
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(75, 23);
+            this.openBtn.TabIndex = 34;
+            this.openBtn.Text = "btn.OpenDir";
+            this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
             // 
-            // button4
+            // deleteBtn
             // 
-            this.button4.Location = new System.Drawing.Point(551, 422);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 35;
-            this.button4.Text = "btn.Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.deleteBtn.Location = new System.Drawing.Point(551, 422);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBtn.TabIndex = 35;
+            this.deleteBtn.Text = "btn.Delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // modsBtn
             // 
-            this.button5.Location = new System.Drawing.Point(12, 422);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 36;
-            this.button5.Text = "btn.Mods";
-            this.button5.UseVisualStyleBackColor = true;
+            this.modsBtn.Location = new System.Drawing.Point(12, 422);
+            this.modsBtn.Name = "modsBtn";
+            this.modsBtn.Size = new System.Drawing.Size(75, 23);
+            this.modsBtn.TabIndex = 36;
+            this.modsBtn.Text = "btn.Mods";
+            this.modsBtn.UseVisualStyleBackColor = true;
             // 
             // checkPreClassic
             // 
@@ -445,21 +486,21 @@
             this.checkPreClassic.UseVisualStyleBackColor = true;
             this.checkPreClassic.CheckedChanged += new System.EventHandler(this.checkPreClassic_CheckedChanged);
             // 
-            // textBox8
+            // jsonBox
             // 
-            this.textBox8.Location = new System.Drawing.Point(446, 197);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(287, 20);
-            this.textBox8.TabIndex = 38;
+            this.jsonBox.Location = new System.Drawing.Point(446, 197);
+            this.jsonBox.Name = "jsonBox";
+            this.jsonBox.Size = new System.Drawing.Size(287, 20);
+            this.jsonBox.TabIndex = 38;
             // 
-            // button6
+            // jsonBtn
             // 
-            this.button6.Location = new System.Drawing.Point(739, 197);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(49, 20);
-            this.button6.TabIndex = 39;
-            this.button6.Text = "...";
-            this.button6.UseVisualStyleBackColor = true;
+            this.jsonBtn.Location = new System.Drawing.Point(739, 197);
+            this.jsonBtn.Name = "jsonBtn";
+            this.jsonBtn.Size = new System.Drawing.Size(49, 20);
+            this.jsonBtn.TabIndex = 39;
+            this.jsonBtn.Text = "...";
+            this.jsonBtn.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -479,30 +520,30 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "Work in progress - UNFINISHED";
             // 
-            // checkBox4
+            // mpCheck
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(349, 294);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(105, 17);
-            this.checkBox4.TabIndex = 42;
-            this.checkBox4.Text = "Force multiplayer";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.mpCheck.AutoSize = true;
+            this.mpCheck.Location = new System.Drawing.Point(349, 294);
+            this.mpCheck.Name = "mpCheck";
+            this.mpCheck.Size = new System.Drawing.Size(105, 17);
+            this.mpCheck.TabIndex = 42;
+            this.mpCheck.Text = "Force multiplayer";
+            this.mpCheck.UseVisualStyleBackColor = true;
             // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
-            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.mpCheck);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.jsonBtn);
+            this.Controls.Add(this.jsonBox);
             this.Controls.Add(this.checkPreClassic);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.modsBtn);
+            this.Controls.Add(this.deleteBtn);
+            this.Controls.Add(this.openBtn);
             this.Controls.Add(this.checkExperimental);
             this.Controls.Add(this.checkSnapshot);
             this.Controls.Add(this.checkRelease);
@@ -511,36 +552,36 @@
             this.Controls.Add(this.checkInfdev);
             this.Controls.Add(this.checkIndev);
             this.Controls.Add(this.checkClassic);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.demoCheck);
+            this.Controls.Add(this.proxyCheck);
+            this.Controls.Add(this.offlineCheck);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.befBox);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.aftBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.ramMinBox);
+            this.Controls.Add(this.ramMaxBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.resYBox);
+            this.Controls.Add(this.resXBox);
+            this.Controls.Add(this.javaBtn);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.javaBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.dirBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.nameBox);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.listView1);
             this.Name = "Profile";
             this.Text = "Profile";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,31 +590,31 @@
         #endregion
 
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox dirBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button javaBtn;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox javaBox;
+        private System.Windows.Forms.TextBox resXBox;
+        private System.Windows.Forms.TextBox resYBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown ramMaxBox;
+        private System.Windows.Forms.NumericUpDown ramMinBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox aftBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.TextBox befBox;
+        private System.Windows.Forms.CheckBox offlineCheck;
+        private System.Windows.Forms.CheckBox proxyCheck;
+        private System.Windows.Forms.CheckBox demoCheck;
         private System.Windows.Forms.CheckBox checkClassic;
         private System.Windows.Forms.CheckBox checkIndev;
         private System.Windows.Forms.CheckBox checkInfdev;
@@ -582,14 +623,14 @@
         private System.Windows.Forms.CheckBox checkRelease;
         private System.Windows.Forms.CheckBox checkSnapshot;
         private System.Windows.Forms.CheckBox checkExperimental;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button openBtn;
+        private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button modsBtn;
         private System.Windows.Forms.CheckBox checkPreClassic;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox jsonBox;
+        private System.Windows.Forms.Button jsonBtn;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox mpCheck;
     }
 }

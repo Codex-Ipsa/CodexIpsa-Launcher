@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,11 +22,43 @@ namespace MCLauncher.forms
         public List<VersionManifest> vj = new List<VersionManifest>();
         public string lastSelected;
 
-        public Profile(string profile)
+        public Profile(string profile, string mode)
         {
             InitializeComponent();
 
             profileName = profile;
+
+            if(mode == "new")
+            {
+                nameBox.Text = profileName;
+                resXBox.Text = "854";
+                resYBox.Text = "480";
+                ramMaxBox.Value = 512;
+                ramMinBox.Value = 512;
+            }
+            else if(mode == "edit")
+            {
+                string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+                var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
+
+                version = dj.version;
+                nameBox.Text = profileName;
+                dirBox.Text = dj.directory;
+                string[] res = dj.resolution.Split(' ');
+                resXBox.Text = res[0];
+                resYBox.Text = res[1];
+                string[] mem = dj.memory.Split(' ');
+                ramMaxBox.Value = int.Parse(mem[0]);
+                ramMinBox.Value = int.Parse(mem[1]);
+                befBox.Text = dj.befCmd;
+                aftBox.Text = dj.aftCmd;
+                javaBox.Text = dj.javaPath;
+                jsonBox.Text = dj.jsonPath;
+                demoCheck.Checked = dj.demo;
+                offlineCheck.Checked = dj.offline;
+                proxyCheck.Checked = dj.proxy;
+                mpCheck.Checked = dj.multiplayer;
+            }
 
             listView1.Columns.Add("Name");
             listView1.Columns.Add("Type");
@@ -81,53 +115,15 @@ namespace MCLauncher.forms
             {
                 listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
                 listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                btnSave.Enabled = true;
+                saveBtn.Enabled = true;
             }
             else if(listView1.Items.Count == 0)
-                btnSave.Enabled = false;
+                saveBtn.Enabled = false;
             else
             {
-                btnSave.Enabled = true;
+                saveBtn.Enabled = true;
                 listView1.Items[0].Selected = true;
             }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (listView1.SelectedIndices.Count == 1)
-            {
-                version = listView1.SelectedItems[0].SubItems[0].Text;
-                string type = listView1.SelectedItems[0].SubItems[1].Text;
-                string date = listView1.SelectedItems[0].SubItems[2].Text;
-                Logger.Info(this.GetType().Name, $"ver {version}, type {type}, date {date}");
-            }
-            else
-            {
-                version = lastSelected;
-            }
-
-            string saveData = "";
-            saveData += $"{{\n";
-            saveData += $"  \"data\": 1,\n";
-            saveData += $"  \"edition\": \"java\",\n";
-            saveData += $"  \"version\": \"{version}\",\n";
-            saveData += $"  \"directory\": \"\",\n";
-            saveData += $"  \"resolution\": \"854 480\",\n";
-            saveData += $"  \"memory\": \"512 512\",\n";
-            saveData += $"  \"befCmd\": \"\",\n";
-            saveData += $"  \"aftCmd\": \"\",\n";
-            saveData += $"  \"javaPath\": \"\",\n";
-            saveData += $"  \"demo\": false,\n";
-            saveData += $"  \"offline\": false,\n";
-            saveData += $"  \"proxy\": false,\n";
-            saveData += $"  \"multiplayer\": false\n";
-            saveData += $"}}";
-
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
-
-            HomeScreen.reloadInstance(profileName);
-
-            this.Close();
         }
 
         private void listView1_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -189,6 +185,50 @@ namespace MCLauncher.forms
                 Console.WriteLine(lastSelected);
             }
         }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedIndices.Count == 1)
+            {
+                version = listView1.SelectedItems[0].SubItems[0].Text;
+                string type = listView1.SelectedItems[0].SubItems[1].Text;
+                string date = listView1.SelectedItems[0].SubItems[2].Text;
+                Logger.Info(this.GetType().Name, $"ver {version}, type {type}, date {date}");
+            }
+            else
+            {
+                version = lastSelected;
+            }
+
+            string saveData = "";
+            saveData += $"{{\n";
+            saveData += $"  \"data\": 1,\n";
+            saveData += $"  \"edition\": \"java\",\n";
+            saveData += $"  \"version\": \"{version}\",\n";
+            saveData += $"  \"directory\": \"{dirBox.Text}\",\n";
+            saveData += $"  \"resolution\": \"{resXBox.Text} {resYBox.Text}\",\n";
+            saveData += $"  \"memory\": \"{ramMaxBox.Value} {ramMinBox.Value}\",\n";
+            saveData += $"  \"befCmd\": \"{befBox.Text}\",\n";
+            saveData += $"  \"aftCmd\": \"{aftBox.Text}\",\n";
+            saveData += $"  \"javaPath\": \"{javaBox.Text}\",\n";
+            saveData += $"  \"jsonPath\": \"{jsonBox.Text}\",\n";
+            saveData += $"  \"demo\": {demoCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"offline\": {offlineCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"proxy\": {proxyCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
+            saveData += $"}}";
+
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
+
+            HomeScreen.reloadInstance(profileName);
+
+            this.Close();
+        }
+
+        private void openBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start($"{Globals.dataPath}\\instance\\{profileName}\\");
+        }
     }
 
     public class VersionManifest
@@ -196,5 +236,23 @@ namespace MCLauncher.forms
         public string id { get; set; }
         public string type { get; set; }
         public DateTime released { get; set; }
+    }
+
+    public class ProfileInfo
+    {
+        public int data { get; set; }
+        public string edition { get; set; }
+        public string version { get; set; }
+        public string directory { get; set; }
+        public string resolution { get; set; }
+        public string memory { get; set; }
+        public string befCmd { get; set; }
+        public string aftCmd { get; set; }
+        public string javaPath { get; set; }
+        public string jsonPath { get; set; }
+        public bool demo { get; set; }
+        public bool offline { get; set; }
+        public bool proxy { get; set; }
+        public bool multiplayer { get; set; }
     }
 }

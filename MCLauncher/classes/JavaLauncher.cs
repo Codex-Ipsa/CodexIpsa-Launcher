@@ -17,8 +17,8 @@ namespace MCLauncher.classes
         public static string msPlayerAccessToken;
         public static string msPlayerMPPass;
 
-        public static string srvIP;
-        public static string srvPort;
+        public static string srvIP = "";
+        public static string srvPort = "";
 
         public static void Launch(string profileName, string launchJsonPath, string versionName)
         {
@@ -126,7 +126,7 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
-            if(vi.srvJoin)
+            if(srvIP != "")
             {
                 proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
                 Logger.Info("JavaLauncher", $"Server active!");
