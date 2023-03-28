@@ -330,7 +330,7 @@ namespace MCLauncher
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            JavaLauncher.Launch(selectedInstance, $"{Globals.dataPath}\\data\\json\\{Profile.version}.json", Profile.version);
+            JavaLauncher.Launch(selectedInstance);
             /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 

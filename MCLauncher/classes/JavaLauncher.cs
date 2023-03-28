@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.forms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,11 +21,14 @@ namespace MCLauncher.classes
         public static string srvIP = "";
         public static string srvPort = "";
 
-        public static void Launch(string profileName, string launchJsonPath, string versionName)
+        public static void Launch(string profileName)
         {
-            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", versionName), $"{Globals.dataPath}\\data\\json\\{versionName}.json");
+            string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+            var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
-            string manifestJson = File.ReadAllText(launchJsonPath);
+            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+
+            string manifestJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{dj.version}.json"); //todo: custom launch json
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
             if (vi.srvJoin == true)
@@ -46,9 +50,9 @@ namespace MCLauncher.classes
             }
 
             string jars = "";
-            if (!File.Exists($"{Globals.dataPath}\\versions\\{versionName}.jar"))
-                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{versionName}.jar");
-            jars += $"\"{Globals.dataPath}\\versions\\{versionName}.jar\";";
+            if (!File.Exists($"{Globals.dataPath}\\versions\\{dj.version}.jar"))
+                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{dj.version}.jar");
+            jars += $"\"{Globals.dataPath}\\versions\\{dj.version}.jar\";";
 
             if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
                 Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
