@@ -273,6 +273,22 @@ namespace MCLauncher.forms
                 }
             }
         }
+
+        private void ramMinBox_ValueChanged(object sender, EventArgs e)
+        {
+            if(ramMinBox.Value > ramMaxBox.Value)
+            {
+                ramMaxBox.Value = ramMinBox.Value;
+            }
+        }
+
+        private void ramMaxBox_ValueChanged(object sender, EventArgs e)
+        {
+            if(ramMaxBox.Value < ramMinBox.Value)
+            {
+                ramMinBox.Value = ramMaxBox.Value;
+            }
+        }
     }
 
     public class VersionManifest

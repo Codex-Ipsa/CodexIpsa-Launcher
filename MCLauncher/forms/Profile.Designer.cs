@@ -239,6 +239,7 @@
             0,
             0,
             0});
+            this.ramMaxBox.ValueChanged += new System.EventHandler(this.ramMaxBox_ValueChanged);
             // 
             // ramMinBox
             // 
@@ -266,6 +267,7 @@
             0,
             0,
             0});
+            this.ramMinBox.ValueChanged += new System.EventHandler(this.ramMinBox_ValueChanged);
             // 
             // label7
             // 

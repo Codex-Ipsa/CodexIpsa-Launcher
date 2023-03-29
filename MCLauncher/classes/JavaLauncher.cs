@@ -121,8 +121,15 @@ namespace MCLauncher.classes
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
             proc.StartInfo.FileName = "java.exe"; //java.exe
 
-            if (vi.cmdBef != "")
-                proc.StartInfo.Arguments = $"{vi.cmdBef} ";
+            string[] ram = dj.memory.Split(' ');
+
+            proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
+
+            if (vi.cmdBef != "" && dj.proxy == true)
+                proc.StartInfo.Arguments += $"{vi.cmdBef} ";
+            if (dj.befCmd != "")
+                proc.StartInfo.Arguments += $"{dj.befCmd} ";
+
 
             if (vi.logging != "")
             {
@@ -142,6 +149,8 @@ namespace MCLauncher.classes
 
             proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
+            if(dj.aftCmd != "")
+                proc.StartInfo.Arguments += $" {dj.aftCmd}";
             if (dj.demo)
                 proc.StartInfo.Arguments += " --demo";
 
