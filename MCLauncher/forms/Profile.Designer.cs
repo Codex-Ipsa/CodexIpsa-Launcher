@@ -320,7 +320,7 @@
             // offlineCheck
             // 
             this.offlineCheck.AutoSize = true;
-            this.offlineCheck.Location = new System.Drawing.Point(6, 202);
+            this.offlineCheck.Location = new System.Drawing.Point(9, 201);
             this.offlineCheck.Name = "offlineCheck";
             this.offlineCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineCheck.TabIndex = 23;
