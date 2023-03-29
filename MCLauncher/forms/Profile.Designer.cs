@@ -122,6 +122,7 @@
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(287, 20);
             this.dirBox.TabIndex = 4;
+            this.dirBox.TextChanged += new System.EventHandler(this.DirBox_TextChanged);
             // 
             // label2
             // 
@@ -140,6 +141,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // javaBtn
             // 

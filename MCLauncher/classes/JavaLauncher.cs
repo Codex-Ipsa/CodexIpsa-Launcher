@@ -85,7 +85,7 @@ namespace MCLauncher.classes
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 
-            string[] defRes = vi.defRes.Split(' ');
+            string[] defRes = dj.resolution.Split(' ');
 
             string assetsDir = "";
             if (vi.assets.name == "legacy")
@@ -93,15 +93,19 @@ namespace MCLauncher.classes
             else
                 assetsDir = $"{Globals.dataPath}\\assets";
 
+            string workDir = $"{Globals.dataPath}\\instance\\{profileName}";
+            if (!string.IsNullOrWhiteSpace(dj.directory) && !string.IsNullOrEmpty(dj.directory))
+                workDir = dj.directory;
+
             vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
                 .Replace("{version}", vi.version)
                 .Replace("{playerName}", msPlayerName)
                 .Replace("{accessToken}", msPlayerAccessToken)
                 .Replace("{uuid}", msPlayerUUID)
-                .Replace("{width}", defRes[0]) //todo customize
-                .Replace("{height}", defRes[1]) //todo customize
-                .Replace("{workDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\"")
-                .Replace("{gameDir}", $"\"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\"")
+                .Replace("{width}", defRes[0])
+                .Replace("{height}", defRes[1])
+                .Replace("{workDir}", $"\"{workDir}\"")
+                .Replace("{gameDir}", $"\"{workDir}\\.minecraft\"")
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
                 .Replace("{assetName}", $"\"{vi.assets.name}\"");
 

@@ -255,6 +255,24 @@ namespace MCLauncher.forms
         {
             Process.Start($"{Globals.dataPath}\\instance\\{profileName}\\");
         }
+
+        private void DirBox_TextChanged(object sender, EventArgs e)
+        {
+            dirBox.Text = dirBox.Text.Replace("\\", "/");
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    dirBox.Text = fbd.SelectedPath;
+                }
+            }
+        }
     }
 
     public class VersionManifest
