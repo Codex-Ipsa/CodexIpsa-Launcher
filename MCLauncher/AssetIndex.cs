@@ -64,6 +64,8 @@ namespace MCLauncher
 
                 if (!File.Exists(filePath))
                 {
+                    string path = filePath.Substring(0, filePath.LastIndexOf("/"));
+                    Directory.CreateDirectory(path);
                     Globals.client.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                     Logger.Info("AssetIndex", $"Downloaded {entry.Key}");
                 }

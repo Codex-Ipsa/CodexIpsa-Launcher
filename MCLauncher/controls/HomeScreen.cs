@@ -60,7 +60,9 @@ namespace MCLauncher
 
             if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json"))
             {
-                string saveData = "";
+                Profile prof = new Profile("Default", "def");
+                //prof.ShowDialog();
+                /*string saveData = "";
                 saveData += $"{{\n";
                 saveData += $"  \"data\": 1,\n";
                 saveData += $"  \"edition\": \"java\",\n";
@@ -68,7 +70,7 @@ namespace MCLauncher
                 saveData += $"}}";
 
                 Directory.CreateDirectory($"{Globals.dataPath}\\instance\\Default\\");
-                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", saveData);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", saveData);*/
             }       
 
             //Load instance list

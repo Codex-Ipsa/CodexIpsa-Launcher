@@ -138,6 +138,9 @@ namespace MCLauncher.classes
 
             proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
+            if (dj.demo)
+                proc.StartInfo.Arguments += " --demo";
+
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");

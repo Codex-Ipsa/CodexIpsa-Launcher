@@ -28,7 +28,7 @@ namespace MCLauncher.forms
 
             profileName = profile;
 
-            if(mode == "new")
+            if (mode == "new")
             {
                 nameBox.Text = profileName;
                 resXBox.Text = "854";
@@ -36,7 +36,15 @@ namespace MCLauncher.forms
                 ramMaxBox.Value = 512;
                 ramMinBox.Value = 512;
             }
-            else if(mode == "edit")
+            else if (mode == "def")
+            {
+                nameBox.Text = profileName;
+                resXBox.Text = "854";
+                resYBox.Text = "480";
+                ramMaxBox.Value = 512;
+                ramMinBox.Value = 512;
+            }
+            else if (mode == "edit")
             {
                 string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
                 var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
@@ -68,6 +76,13 @@ namespace MCLauncher.forms
             vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
 
             reloadVerBox();
+
+            if (mode == "def")
+            {
+                listView1.SelectedItems.Clear();
+                lastSelected = "b1.7.3";
+                saveData();
+            }
         }
 
         public void reloadVerBox()
@@ -117,7 +132,7 @@ namespace MCLauncher.forms
                 listView1.EnsureVisible(listView1.Items.IndexOf(item));
                 saveBtn.Enabled = true;
             }
-            else if(listView1.Items.Count == 0)
+            else if (listView1.Items.Count == 0)
                 saveBtn.Enabled = false;
             else
             {
@@ -179,7 +194,7 @@ namespace MCLauncher.forms
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(listView1.SelectedItems.Count > 0)
+            if (listView1.SelectedItems.Count > 0)
             {
                 lastSelected = listView1.SelectedItems[0].SubItems[0].Text;
                 Console.WriteLine(lastSelected);
@@ -187,6 +202,11 @@ namespace MCLauncher.forms
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
+        {
+            saveData();
+        }
+
+        public void saveData()
         {
             if (listView1.SelectedIndices.Count == 1)
             {
@@ -218,11 +238,17 @@ namespace MCLauncher.forms
             saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
             HomeScreen.reloadInstance(profileName);
 
             this.Close();
+        }
+
+        public bool nameCheck()
+        {
+            return false;
         }
 
         private void openBtn_Click(object sender, EventArgs e)
