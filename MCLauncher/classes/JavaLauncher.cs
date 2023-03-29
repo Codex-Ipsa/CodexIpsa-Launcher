@@ -118,7 +118,7 @@ namespace MCLauncher.classes
             proc.StartInfo.CreateNoWindow = true;
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\";
             proc.StartInfo.FileName = "java.exe"; //java.exe
 
             string[] ram = dj.memory.Split(' ');
@@ -157,7 +157,7 @@ namespace MCLauncher.classes
             Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
-            Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
+            Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
             try
             {
                 proc.Start();

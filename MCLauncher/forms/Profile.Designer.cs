@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.listView1 = new System.Windows.Forms.ListView();
             this.saveBtn = new System.Windows.Forms.Button();
             this.nameBox = new System.Windows.Forms.TextBox();
@@ -606,6 +607,7 @@
             this.Controls.Add(this.checkClassic);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.listView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
             this.Text = "Profile";
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
