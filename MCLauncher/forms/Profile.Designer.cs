@@ -71,8 +71,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.mpCheck = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
@@ -102,15 +106,15 @@
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(446, 12);
+            this.nameBox.Location = new System.Drawing.Point(100, 19);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(342, 20);
+            this.nameBox.Size = new System.Drawing.Size(333, 20);
             this.nameBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(346, 15);
+            this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 3;
@@ -118,7 +122,7 @@
             // 
             // dirBox
             // 
-            this.dirBox.Location = new System.Drawing.Point(446, 39);
+            this.dirBox.Location = new System.Drawing.Point(100, 45);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(287, 20);
             this.dirBox.TabIndex = 4;
@@ -127,7 +131,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 42);
+            this.label2.Location = new System.Drawing.Point(4, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 5;
@@ -135,9 +139,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(739, 38);
+            this.button1.Location = new System.Drawing.Point(393, 45);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 20);
+            this.button1.Size = new System.Drawing.Size(39, 20);
             this.button1.TabIndex = 6;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
@@ -145,9 +149,9 @@
             // 
             // javaBtn
             // 
-            this.javaBtn.Location = new System.Drawing.Point(739, 170);
+            this.javaBtn.Location = new System.Drawing.Point(390, 19);
             this.javaBtn.Name = "javaBtn";
-            this.javaBtn.Size = new System.Drawing.Size(49, 20);
+            this.javaBtn.Size = new System.Drawing.Size(43, 20);
             this.javaBtn.TabIndex = 9;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
@@ -155,7 +159,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(346, 174);
+            this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 8;
@@ -163,21 +167,21 @@
             // 
             // javaBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(446, 171);
+            this.javaBox.Location = new System.Drawing.Point(97, 19);
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(287, 20);
             this.javaBox.TabIndex = 7;
             // 
             // resXBox
             // 
-            this.resXBox.Location = new System.Drawing.Point(446, 65);
+            this.resXBox.Location = new System.Drawing.Point(101, 71);
             this.resXBox.Name = "resXBox";
             this.resXBox.Size = new System.Drawing.Size(150, 20);
             this.resXBox.TabIndex = 10;
             // 
             // resYBox
             // 
-            this.resYBox.Location = new System.Drawing.Point(638, 65);
+            this.resYBox.Location = new System.Drawing.Point(283, 71);
             this.resYBox.Name = "resYBox";
             this.resYBox.Size = new System.Drawing.Size(150, 20);
             this.resYBox.TabIndex = 11;
@@ -185,7 +189,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(346, 68);
+            this.label4.Location = new System.Drawing.Point(6, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 12;
@@ -194,7 +198,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(611, 68);
+            this.label5.Location = new System.Drawing.Point(257, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 13);
             this.label5.TabIndex = 13;
@@ -203,7 +207,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(346, 93);
+            this.label6.Location = new System.Drawing.Point(6, 99);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 14;
@@ -216,7 +220,7 @@
             0,
             0,
             0});
-            this.ramMaxBox.Location = new System.Drawing.Point(446, 91);
+            this.ramMaxBox.Location = new System.Drawing.Point(100, 97);
             this.ramMaxBox.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -243,7 +247,7 @@
             0,
             0,
             0});
-            this.ramMinBox.Location = new System.Drawing.Point(638, 93);
+            this.ramMinBox.Location = new System.Drawing.Point(282, 97);
             this.ramMinBox.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -266,7 +270,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(608, 95);
+            this.label7.Location = new System.Drawing.Point(257, 99);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(24, 13);
             this.label7.TabIndex = 17;
@@ -275,7 +279,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(413, 95);
+            this.label8.Location = new System.Drawing.Point(67, 99);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 13);
             this.label8.TabIndex = 18;
@@ -284,7 +288,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(346, 148);
+            this.label9.Location = new System.Drawing.Point(6, 152);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 13);
             this.label9.TabIndex = 20;
@@ -292,15 +296,15 @@
             // 
             // aftBox
             // 
-            this.aftBox.Location = new System.Drawing.Point(446, 145);
+            this.aftBox.Location = new System.Drawing.Point(99, 149);
             this.aftBox.Name = "aftBox";
-            this.aftBox.Size = new System.Drawing.Size(342, 20);
+            this.aftBox.Size = new System.Drawing.Size(333, 20);
             this.aftBox.TabIndex = 19;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(346, 122);
+            this.label10.Location = new System.Drawing.Point(6, 126);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 13);
             this.label10.TabIndex = 22;
@@ -308,15 +312,15 @@
             // 
             // befBox
             // 
-            this.befBox.Location = new System.Drawing.Point(446, 119);
+            this.befBox.Location = new System.Drawing.Point(99, 123);
             this.befBox.Name = "befBox";
-            this.befBox.Size = new System.Drawing.Size(342, 20);
+            this.befBox.Size = new System.Drawing.Size(333, 20);
             this.befBox.TabIndex = 21;
             // 
             // offlineCheck
             // 
             this.offlineCheck.AutoSize = true;
-            this.offlineCheck.Location = new System.Drawing.Point(349, 248);
+            this.offlineCheck.Location = new System.Drawing.Point(6, 202);
             this.offlineCheck.Name = "offlineCheck";
             this.offlineCheck.Size = new System.Drawing.Size(133, 17);
             this.offlineCheck.TabIndex = 23;
@@ -326,7 +330,7 @@
             // proxyCheck
             // 
             this.proxyCheck.AutoSize = true;
-            this.proxyCheck.Location = new System.Drawing.Point(349, 271);
+            this.proxyCheck.Location = new System.Drawing.Point(9, 177);
             this.proxyCheck.Name = "proxyCheck";
             this.proxyCheck.Size = new System.Drawing.Size(193, 17);
             this.proxyCheck.TabIndex = 24;
@@ -336,7 +340,7 @@
             // demoCheck
             // 
             this.demoCheck.AutoSize = true;
-            this.demoCheck.Location = new System.Drawing.Point(349, 225);
+            this.demoCheck.Location = new System.Drawing.Point(282, 179);
             this.demoCheck.Name = "demoCheck";
             this.demoCheck.Size = new System.Drawing.Size(150, 17);
             this.demoCheck.TabIndex = 25;
@@ -490,16 +494,16 @@
             // 
             // jsonBox
             // 
-            this.jsonBox.Location = new System.Drawing.Point(446, 197);
+            this.jsonBox.Location = new System.Drawing.Point(97, 46);
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(287, 20);
             this.jsonBox.TabIndex = 38;
             // 
             // jsonBtn
             // 
-            this.jsonBtn.Location = new System.Drawing.Point(739, 197);
+            this.jsonBtn.Location = new System.Drawing.Point(390, 45);
             this.jsonBtn.Name = "jsonBtn";
-            this.jsonBtn.Size = new System.Drawing.Size(49, 20);
+            this.jsonBtn.Size = new System.Drawing.Size(43, 20);
             this.jsonBtn.TabIndex = 39;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
@@ -507,7 +511,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(346, 201);
+            this.label11.Location = new System.Drawing.Point(6, 49);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 13);
             this.label11.TabIndex = 40;
@@ -525,23 +529,67 @@
             // mpCheck
             // 
             this.mpCheck.AutoSize = true;
-            this.mpCheck.Location = new System.Drawing.Point(349, 294);
+            this.mpCheck.Location = new System.Drawing.Point(6, 74);
             this.mpCheck.Name = "mpCheck";
             this.mpCheck.Size = new System.Drawing.Size(105, 17);
             this.mpCheck.TabIndex = 42;
             this.mpCheck.Text = "Force multiplayer";
             this.mpCheck.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.jsonBtn);
+            this.groupBox1.Controls.Add(this.mpCheck);
+            this.groupBox1.Controls.Add(this.jsonBox);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.javaBox);
+            this.groupBox1.Controls.Add(this.javaBtn);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(349, 242);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(439, 96);
+            this.groupBox1.TabIndex = 43;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "For experts";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.offlineCheck);
+            this.groupBox2.Controls.Add(this.demoCheck);
+            this.groupBox2.Controls.Add(this.proxyCheck);
+            this.groupBox2.Controls.Add(this.aftBox);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.befBox);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.ramMaxBox);
+            this.groupBox2.Controls.Add(this.ramMinBox);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.resXBox);
+            this.groupBox2.Controls.Add(this.resYBox);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.nameBox);
+            this.groupBox2.Controls.Add(this.dirBox);
+            this.groupBox2.Location = new System.Drawing.Point(349, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(439, 224);
+            this.groupBox2.TabIndex = 44;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Game";
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
-            this.Controls.Add(this.mpCheck);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.jsonBtn);
-            this.Controls.Add(this.jsonBox);
             this.Controls.Add(this.checkPreClassic);
             this.Controls.Add(this.modsBtn);
             this.Controls.Add(this.deleteBtn);
@@ -554,36 +602,16 @@
             this.Controls.Add(this.checkInfdev);
             this.Controls.Add(this.checkIndev);
             this.Controls.Add(this.checkClassic);
-            this.Controls.Add(this.demoCheck);
-            this.Controls.Add(this.proxyCheck);
-            this.Controls.Add(this.offlineCheck);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.befBox);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.aftBox);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.ramMinBox);
-            this.Controls.Add(this.ramMaxBox);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.resYBox);
-            this.Controls.Add(this.resXBox);
-            this.Controls.Add(this.javaBtn);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.javaBox);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dirBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.nameBox);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.listView1);
             this.Name = "Profile";
             this.Text = "Profile";
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -634,5 +662,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox mpCheck;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
