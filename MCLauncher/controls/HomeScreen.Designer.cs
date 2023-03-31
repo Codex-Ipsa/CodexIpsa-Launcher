@@ -183,7 +183,7 @@
             this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
             this.pnlChangelog.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChangelog.Name = "pnlChangelog";
-            this.pnlChangelog.Size = new System.Drawing.Size(784, 325);
+            this.pnlChangelog.Size = new System.Drawing.Size(784, 327);
             this.pnlChangelog.TabIndex = 4;
             this.pnlChangelog.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChangelog_Scroll);
             // 
@@ -194,6 +194,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.pnlChangelog);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlChangelog);
             this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "HomeScreen";
             this.Size = new System.Drawing.Size(784, 387);

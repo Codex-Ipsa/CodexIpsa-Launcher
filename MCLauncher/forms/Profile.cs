@@ -20,7 +20,9 @@ namespace MCLauncher.forms
         public static string version = "b1.7.3";
 
         public List<VersionManifest> vj = new List<VersionManifest>();
-        public string lastSelected;
+        public static string lastSelected;
+        public static string lastDate;
+        public static string lastType;
 
         public Profile(string profile, string mode)
         {
@@ -197,7 +199,10 @@ namespace MCLauncher.forms
             if (listView1.SelectedItems.Count > 0)
             {
                 lastSelected = listView1.SelectedItems[0].SubItems[0].Text;
-                Console.WriteLine(lastSelected);
+                lastType = listView1.SelectedItems[0].SubItems[1].Text;
+                lastDate = listView1.SelectedItems[0].SubItems[2].Text;
+                lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
+                Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
             }
         }
 

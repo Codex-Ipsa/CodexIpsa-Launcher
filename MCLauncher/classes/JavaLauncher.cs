@@ -29,6 +29,33 @@ namespace MCLauncher.classes
             Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
 
             string manifestJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{dj.version}.json"); //todo: custom launch json
+
+            if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
+            {
+                string toAdd = $"[\n";
+                toAdd += $"  {{\n";
+                toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
+                toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
+                toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
+                toAdd += $"  }}\n";
+                toAdd += $"]";
+                File.WriteAllText($"{Globals.dataPath}\\data\\downloaded.json", toAdd);
+            }
+            else if (Profile.lastSelected != "")
+            {
+                string toAdd = $"  {{\n";
+                toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
+                toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
+                toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
+                toAdd += $"  }},";
+                string existing = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
+                if (!existing.Contains(toAdd))
+                {
+                    string newStr = toAdd;
+                    newStr += existing.Replace("[", "").Replace("]", "");
+                    File.WriteAllText($"{Globals.dataPath}\\data\\downloaded.json", $"[\n{newStr}]");
+                }
+            }
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
             if (vi.srvJoin == true)
@@ -141,7 +168,7 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
-            if(srvIP != "")
+            if (srvIP != "")
             {
                 proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
                 Logger.Info("JavaLauncher", $"Server active!");
@@ -149,7 +176,7 @@ namespace MCLauncher.classes
 
             proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
 
-            if(dj.aftCmd != "")
+            if (dj.aftCmd != "")
                 proc.StartInfo.Arguments += $" {dj.aftCmd}";
             if (dj.demo)
                 proc.StartInfo.Arguments += " --demo";
