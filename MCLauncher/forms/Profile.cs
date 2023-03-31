@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace MCLauncher.forms
     {
         public static string profileName = "";
         public static string version = "b1.7.3";
+        public static string profMode = "";
 
         public List<VersionManifest> vj = new List<VersionManifest>();
         public static string lastSelected;
@@ -29,8 +31,9 @@ namespace MCLauncher.forms
             InitializeComponent();
 
             profileName = profile;
+            profMode = mode;
 
-            if (mode == "new")
+            if (profMode == "new")
             {
                 nameBox.Text = profileName;
                 resXBox.Text = "854";
@@ -38,7 +41,7 @@ namespace MCLauncher.forms
                 ramMaxBox.Value = 512;
                 ramMinBox.Value = 512;
             }
-            else if (mode == "def")
+            else if (profMode == "def")
             {
                 nameBox.Text = profileName;
                 resXBox.Text = "854";
@@ -46,7 +49,7 @@ namespace MCLauncher.forms
                 ramMaxBox.Value = 512;
                 ramMinBox.Value = 512;
             }
-            else if (mode == "edit")
+            else if (profMode == "edit")
             {
                 string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
                 var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
@@ -79,7 +82,7 @@ namespace MCLauncher.forms
 
             reloadVerBox();
 
-            if (mode == "def")
+            if (profMode == "def")
             {
                 listView1.SelectedItems.Clear();
                 lastSelected = "b1.7.3";
@@ -225,6 +228,8 @@ namespace MCLauncher.forms
                 version = lastSelected;
             }
 
+            profileName = nameBox.Text;
+
             string saveData = "";
             saveData += $"{{\n";
             saveData += $"  \"data\": 1,\n";
@@ -243,10 +248,29 @@ namespace MCLauncher.forms
             saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
+            if(profMode == "new")
+            {
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"))
+                {
+                    int iter = 1;
+                    do
+                    {
+                        if(profileName.Contains("_"))
+                            profileName = profileName.Substring(0, profileName.LastIndexOf("_")) + "_" + iter;
+                        else
+                            profileName = profileName + "_" + iter;
+                        iter++;
+                    }
+                    while (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"));
+                }
+            }
+
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
             HomeScreen.reloadInstance(profileName);
+            HomeScreen.loadInstanceList();
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
 
             this.Close();
         }

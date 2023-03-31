@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -151,7 +152,7 @@ namespace MCLauncher
                     string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.json");
                     if (text.Contains("instVer") && text.Contains("instType"))
                     {
-                        updateFromLegacyInst($"{Globals.dataPath}\\instance\\{dirName}");
+                        updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
                         instanceList.Add(dirName);
                     }
                     else
@@ -159,9 +160,9 @@ namespace MCLauncher
                         instanceList.Add(dirName);
                     }
                 }
-                else
+                else if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
-                    //do nothing
+                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
                 }
 
                 //Console.WriteLine(dir);
@@ -284,7 +285,37 @@ namespace MCLauncher
             }
         }
 
-        public static void updateFromLegacyInst(string path)
+        public static void updateFromSecondInst(string path)
+        {
+            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(path);
+
+            foreach (var oj in orig)
+            {
+                string saveData = "";
+                saveData += $"{{\n";
+                saveData += $"  \"data\": 1,\n";
+                if (oj.edition == "Java Edition")
+                    saveData += $"  \"edition\": \"java\",\n";
+                else if (oj.edition == "Xbox 360 Edition")
+                    saveData += $"  \"edition\": \"x360\",\n";
+                saveData += $"  \"version\": \"{oj.version}\",\n";
+                saveData += $"  \"directory\": \"{oj.directory}\",\n";
+                saveData += $"  \"resolution\": \"{oj.resolutionX} {oj.resolutionY}\",\n";
+                saveData += $"  \"memory\": \"{oj.ramMax} {oj.ramMin}\",\n";
+                saveData += $"  \"befCmd\": \"\",\n";
+                saveData += $"  \"aftCmd\": \"{oj.jvmArgs}\",\n";
+                saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
+                saveData += $"  \"jsonPath\": \"\",\n";
+                saveData += $"  \"demo\": false,\n";
+                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToLower())},\n";
+                saveData += $"  \"proxy\": {bool.Parse(oj.useProxy.ToLower())},\n";
+                saveData += $"  \"multiplayer\": false\n";
+                saveData += $"}}";
+                //TODO
+            }
+        }
+
+        public static void updateFromFirstInst(string path)
         {
             int index = path.LastIndexOf("\\") + 1;
             string name = path.Substring(index, path.Length - index);
@@ -428,5 +459,21 @@ namespace MCLauncher
         public int data { get; set; }
         public string version { get; set; }
         public string edition { get; set; }
+    }
+
+    public class instanceV2
+    {
+        public string name { get; set; }
+        public string edition { get; set; }
+        public string version { get; set; }
+        public string directory { get; set; }
+        public string resolutionX { get; set; }
+        public string resolutionY { get; set; }
+        public string ramMin { get; set; }
+        public string ramMax { get; set; }
+        public string customJava { get; set; }
+        public string offlineMode { get; set; }
+        public string useProxy { get; set; }
+        public string jvmArgs { get; set; }
     }
 }

@@ -609,7 +609,7 @@
             this.Controls.Add(this.listView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
-            this.Text = "Profile";
+            this.Text = "Profile manager";
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).EndInit();
             this.groupBox1.ResumeLayout(false);

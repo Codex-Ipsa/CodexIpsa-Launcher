@@ -15,7 +15,7 @@ namespace MCLauncher
 
         //Manual
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
-        public static string branch = "omega13"; //dev //omega13 //stable //dev-instances
+        public static string branch = "experimental"; //dev //omega13 //stable //dev-instances
         public static string verCurrent = "0.2.0-dev6"; //Change this on release
         public static string verDisplay = "0.2.0-dev6"; //Change this on release
         public static bool offlineMode = false;
