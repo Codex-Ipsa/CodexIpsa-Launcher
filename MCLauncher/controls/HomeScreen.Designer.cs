@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.adPanel = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblLogInWarn = new System.Windows.Forms.Label();
             this.btnEditInst = new System.Windows.Forms.Button();
@@ -62,6 +63,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 62);
             this.panel1.TabIndex = 3;
+            // 
+            // adPanel
+            // 
+            this.adPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.adPanel.BackColor = System.Drawing.Color.White;
+            this.adPanel.Location = new System.Drawing.Point(179, 250);
+            this.adPanel.Name = "adPanel";
+            this.adPanel.Size = new System.Drawing.Size(426, 68);
+            this.adPanel.TabIndex = 0;
+            this.adPanel.Click += new System.EventHandler(this.adPanel_Click);
             // 
             // btnLogOut
             // 
@@ -192,7 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.Controls.Add(this.pnlChangelog);
+            this.Controls.Add(this.adPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlChangelog);
             this.MinimumSize = new System.Drawing.Size(784, 387);
@@ -217,5 +228,6 @@
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Panel pnlChangelog;
+        private System.Windows.Forms.Panel adPanel;
     }
 }
