@@ -73,7 +73,7 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
             {
                 Profile prof = new Profile("Default", "def");
             }       
@@ -167,16 +167,15 @@ namespace MCLauncher
                     if (text.Contains("instVer") && text.Contains("instType"))
                     {
                         updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
-                        instanceList.Add(dirName);
                     }
-                    else
-                    {
-                        instanceList.Add(dirName);
-                    }
+
+                    instanceList.Add(dirName);
                 }
                 else if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
-                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
+                    Console.WriteLine("GOT CALLED FUCK YOU");
+                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
+                    instanceList.Add(dirName);
                 }
 
                 //Console.WriteLine(dir);
@@ -301,7 +300,8 @@ namespace MCLauncher
 
         public static void updateFromSecondInst(string path)
         {
-            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(path);
+            string content = File.ReadAllText($"{path}\\instance.cfg");
+            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(content);
 
             foreach (var oj in orig)
             {
@@ -321,11 +321,14 @@ namespace MCLauncher
                 saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
                 saveData += $"  \"jsonPath\": \"\",\n";
                 saveData += $"  \"demo\": false,\n";
-                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToLower())},\n";
-                saveData += $"  \"proxy\": {bool.Parse(oj.useProxy.ToLower())},\n";
+                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
+                saveData += $"  \"proxy\": {bool.Parse(oj.useProxy.ToString().ToLower()).ToString().ToLower()},\n";
                 saveData += $"  \"multiplayer\": false\n";
                 saveData += $"}}";
-                //TODO
+                Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
+                Console.WriteLine(saveData);
+                File.WriteAllText($"{path}\\instance.json", saveData);
+                File.Delete($"{path}\\instance.cfg");
             }
         }
 

@@ -8,6 +8,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MCLauncher.classes
 {
@@ -26,7 +27,15 @@ namespace MCLauncher.classes
             string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
             var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
-            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+            try
+            {
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+            }
+            catch (System.Net.WebException)
+            {
+                Logger.Error("JavaLauncher", "Could not download version JSON. Please connect to the internet.");
+                return;
+            }
 
             string manifestJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{dj.version}.json"); //todo: custom launch json
 
