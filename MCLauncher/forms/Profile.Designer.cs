@@ -65,7 +65,6 @@
             this.checkExperimental = new System.Windows.Forms.CheckBox();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.modsBtn = new System.Windows.Forms.Button();
             this.checkPreClassic = new System.Windows.Forms.CheckBox();
             this.jsonBox = new System.Windows.Forms.TextBox();
             this.jsonBtn = new System.Windows.Forms.Button();
@@ -74,10 +73,29 @@
             this.mpCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnRepo = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
+            this.btnMloader = new System.Windows.Forms.Button();
+            this.btnFabric = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnForge = new System.Windows.Forms.Button();
+            this.btnReplace = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.modView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
@@ -85,10 +103,10 @@
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 12);
+            this.listView1.Location = new System.Drawing.Point(6, 6);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(328, 355);
+            this.listView1.Size = new System.Drawing.Size(328, 324);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -97,7 +115,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(713, 422);
+            this.saveBtn.Location = new System.Drawing.Point(711, 353);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 1;
@@ -355,7 +373,7 @@
             this.checkClassic.AutoSize = true;
             this.checkClassic.Checked = true;
             this.checkClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkClassic.Location = new System.Drawing.Point(95, 373);
+            this.checkClassic.Location = new System.Drawing.Point(89, 336);
             this.checkClassic.Name = "checkClassic";
             this.checkClassic.Size = new System.Drawing.Size(59, 17);
             this.checkClassic.TabIndex = 26;
@@ -368,7 +386,7 @@
             this.checkIndev.AutoSize = true;
             this.checkIndev.Checked = true;
             this.checkIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkIndev.Location = new System.Drawing.Point(160, 373);
+            this.checkIndev.Location = new System.Drawing.Point(154, 336);
             this.checkIndev.Name = "checkIndev";
             this.checkIndev.Size = new System.Drawing.Size(53, 17);
             this.checkIndev.TabIndex = 27;
@@ -381,7 +399,7 @@
             this.checkInfdev.AutoSize = true;
             this.checkInfdev.Checked = true;
             this.checkInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkInfdev.Location = new System.Drawing.Point(219, 373);
+            this.checkInfdev.Location = new System.Drawing.Point(213, 336);
             this.checkInfdev.Name = "checkInfdev";
             this.checkInfdev.Size = new System.Drawing.Size(56, 17);
             this.checkInfdev.TabIndex = 28;
@@ -394,7 +412,7 @@
             this.checkAlpha.AutoSize = true;
             this.checkAlpha.Checked = true;
             this.checkAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlpha.Location = new System.Drawing.Point(281, 373);
+            this.checkAlpha.Location = new System.Drawing.Point(275, 336);
             this.checkAlpha.Name = "checkAlpha";
             this.checkAlpha.Size = new System.Drawing.Size(53, 17);
             this.checkAlpha.TabIndex = 29;
@@ -407,7 +425,7 @@
             this.checkBeta.AutoSize = true;
             this.checkBeta.Checked = true;
             this.checkBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBeta.Location = new System.Drawing.Point(12, 399);
+            this.checkBeta.Location = new System.Drawing.Point(6, 359);
             this.checkBeta.Name = "checkBeta";
             this.checkBeta.Size = new System.Drawing.Size(48, 17);
             this.checkBeta.TabIndex = 30;
@@ -420,7 +438,7 @@
             this.checkRelease.AutoSize = true;
             this.checkRelease.Checked = true;
             this.checkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkRelease.Location = new System.Drawing.Point(66, 399);
+            this.checkRelease.Location = new System.Drawing.Point(60, 359);
             this.checkRelease.Name = "checkRelease";
             this.checkRelease.Size = new System.Drawing.Size(65, 17);
             this.checkRelease.TabIndex = 31;
@@ -433,7 +451,7 @@
             this.checkSnapshot.AutoSize = true;
             this.checkSnapshot.Checked = true;
             this.checkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSnapshot.Location = new System.Drawing.Point(137, 399);
+            this.checkSnapshot.Location = new System.Drawing.Point(131, 359);
             this.checkSnapshot.Name = "checkSnapshot";
             this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
             this.checkSnapshot.TabIndex = 32;
@@ -446,7 +464,7 @@
             this.checkExperimental.AutoSize = true;
             this.checkExperimental.Checked = true;
             this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkExperimental.Location = new System.Drawing.Point(214, 399);
+            this.checkExperimental.Location = new System.Drawing.Point(208, 359);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
             this.checkExperimental.TabIndex = 33;
@@ -456,7 +474,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(632, 422);
+            this.openBtn.Location = new System.Drawing.Point(630, 352);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 34;
@@ -466,28 +484,19 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(551, 422);
+            this.deleteBtn.Location = new System.Drawing.Point(549, 352);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(75, 23);
             this.deleteBtn.TabIndex = 35;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
             // 
-            // modsBtn
-            // 
-            this.modsBtn.Location = new System.Drawing.Point(12, 422);
-            this.modsBtn.Name = "modsBtn";
-            this.modsBtn.Size = new System.Drawing.Size(75, 23);
-            this.modsBtn.TabIndex = 36;
-            this.modsBtn.Text = "btn.Mods";
-            this.modsBtn.UseVisualStyleBackColor = true;
-            // 
             // checkPreClassic
             // 
             this.checkPreClassic.AutoSize = true;
             this.checkPreClassic.Checked = true;
             this.checkPreClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkPreClassic.Location = new System.Drawing.Point(12, 373);
+            this.checkPreClassic.Location = new System.Drawing.Point(6, 336);
             this.checkPreClassic.Name = "checkPreClassic";
             this.checkPreClassic.Size = new System.Drawing.Size(77, 17);
             this.checkPreClassic.TabIndex = 37;
@@ -523,7 +532,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(626, 406);
+            this.label12.Location = new System.Drawing.Point(620, 333);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(162, 13);
             this.label12.TabIndex = 41;
@@ -548,7 +557,7 @@
             this.groupBox1.Controls.Add(this.javaBox);
             this.groupBox1.Controls.Add(this.javaBtn);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(349, 242);
+            this.groupBox1.Location = new System.Drawing.Point(350, 234);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(439, 96);
             this.groupBox1.TabIndex = 43;
@@ -578,35 +587,195 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.nameBox);
             this.groupBox2.Controls.Add(this.dirBox);
-            this.groupBox2.Location = new System.Drawing.Point(349, 12);
+            this.groupBox2.Location = new System.Drawing.Point(350, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(439, 224);
             this.groupBox2.TabIndex = 44;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(800, 409);
+            this.tabControl1.TabIndex = 45;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.saveBtn);
+            this.tabPage1.Controls.Add(this.openBtn);
+            this.tabPage1.Controls.Add(this.deleteBtn);
+            this.tabPage1.Controls.Add(this.checkPreClassic);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.checkIndev);
+            this.tabPage1.Controls.Add(this.checkBeta);
+            this.tabPage1.Controls.Add(this.checkRelease);
+            this.tabPage1.Controls.Add(this.checkSnapshot);
+            this.tabPage1.Controls.Add(this.checkExperimental);
+            this.tabPage1.Controls.Add(this.checkClassic);
+            this.tabPage1.Controls.Add(this.checkInfdev);
+            this.tabPage1.Controls.Add(this.checkAlpha);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(792, 383);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Home";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnRepo);
+            this.tabPage2.Controls.Add(this.btnOpen);
+            this.tabPage2.Controls.Add(this.btnMloader);
+            this.tabPage2.Controls.Add(this.btnFabric);
+            this.tabPage2.Controls.Add(this.btnDown);
+            this.tabPage2.Controls.Add(this.btnRemove);
+            this.tabPage2.Controls.Add(this.btnUp);
+            this.tabPage2.Controls.Add(this.btnForge);
+            this.tabPage2.Controls.Add(this.btnReplace);
+            this.tabPage2.Controls.Add(this.btnAdd);
+            this.tabPage2.Controls.Add(this.modView);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 383);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Mods";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnRepo
+            // 
+            this.btnRepo.Location = new System.Drawing.Point(667, 225);
+            this.btnRepo.Name = "btnRepo";
+            this.btnRepo.Size = new System.Drawing.Size(117, 23);
+            this.btnRepo.TabIndex = 21;
+            this.btnRepo.Text = "Mod repositories";
+            this.btnRepo.UseVisualStyleBackColor = true;
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(667, 332);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(117, 23);
+            this.btnOpen.TabIndex = 20;
+            this.btnOpen.Text = "Open .minecraft";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            // 
+            // btnMloader
+            // 
+            this.btnMloader.Enabled = false;
+            this.btnMloader.Location = new System.Drawing.Point(667, 171);
+            this.btnMloader.Name = "btnMloader";
+            this.btnMloader.Size = new System.Drawing.Size(117, 23);
+            this.btnMloader.TabIndex = 19;
+            this.btnMloader.Text = "Install ModLoader";
+            this.btnMloader.UseVisualStyleBackColor = true;
+            // 
+            // btnFabric
+            // 
+            this.btnFabric.Enabled = false;
+            this.btnFabric.Location = new System.Drawing.Point(667, 142);
+            this.btnFabric.Name = "btnFabric";
+            this.btnFabric.Size = new System.Drawing.Size(117, 23);
+            this.btnFabric.TabIndex = 18;
+            this.btnFabric.Text = "Install Fabric";
+            this.btnFabric.UseVisualStyleBackColor = true;
+            // 
+            // btnDown
+            // 
+            this.btnDown.Location = new System.Drawing.Point(667, 35);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(117, 23);
+            this.btnDown.TabIndex = 17;
+            this.btnDown.Text = "Move down";
+            this.btnDown.UseVisualStyleBackColor = true;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(667, 64);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(117, 23);
+            this.btnRemove.TabIndex = 16;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnUp
+            // 
+            this.btnUp.Location = new System.Drawing.Point(667, 6);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(117, 23);
+            this.btnUp.TabIndex = 15;
+            this.btnUp.Text = "Move up";
+            this.btnUp.UseVisualStyleBackColor = true;
+            // 
+            // btnForge
+            // 
+            this.btnForge.Enabled = false;
+            this.btnForge.Location = new System.Drawing.Point(667, 113);
+            this.btnForge.Name = "btnForge";
+            this.btnForge.Size = new System.Drawing.Size(117, 23);
+            this.btnForge.TabIndex = 14;
+            this.btnForge.Text = "Install Forge";
+            this.btnForge.UseVisualStyleBackColor = true;
+            // 
+            // btnReplace
+            // 
+            this.btnReplace.Location = new System.Drawing.Point(667, 283);
+            this.btnReplace.Name = "btnReplace";
+            this.btnReplace.Size = new System.Drawing.Size(117, 23);
+            this.btnReplace.TabIndex = 13;
+            this.btnReplace.Text = "Replace minecraft.jar";
+            this.btnReplace.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(667, 254);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(117, 23);
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Add to minecraft.jar";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // modView
+            // 
+            this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader5});
+            this.modView.FullRowSelect = true;
+            this.modView.HideSelection = false;
+            this.modView.Location = new System.Drawing.Point(8, 6);
+            this.modView.MultiSelect = false;
+            this.modView.Name = "modView";
+            this.modView.Size = new System.Drawing.Size(653, 369);
+            this.modView.TabIndex = 11;
+            this.modView.UseCompatibleStateImageBehavior = false;
+            this.modView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 89;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 77;
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 451);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.checkPreClassic);
-            this.Controls.Add(this.modsBtn);
-            this.Controls.Add(this.deleteBtn);
-            this.Controls.Add(this.openBtn);
-            this.Controls.Add(this.checkExperimental);
-            this.Controls.Add(this.checkSnapshot);
-            this.Controls.Add(this.checkRelease);
-            this.Controls.Add(this.checkBeta);
-            this.Controls.Add(this.checkAlpha);
-            this.Controls.Add(this.checkInfdev);
-            this.Controls.Add(this.checkIndev);
-            this.Controls.Add(this.checkClassic);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(800, 409);
+            this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
             this.Text = "Profile manager";
@@ -616,8 +785,11 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -659,7 +831,6 @@
         private System.Windows.Forms.CheckBox checkExperimental;
         private System.Windows.Forms.Button openBtn;
         private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.Button modsBtn;
         private System.Windows.Forms.CheckBox checkPreClassic;
         private System.Windows.Forms.TextBox jsonBox;
         private System.Windows.Forms.Button jsonBtn;
@@ -668,5 +839,21 @@
         private System.Windows.Forms.CheckBox mpCheck;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button btnRepo;
+        private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Button btnMloader;
+        private System.Windows.Forms.Button btnFabric;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnForge;
+        private System.Windows.Forms.Button btnReplace;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ListView modView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

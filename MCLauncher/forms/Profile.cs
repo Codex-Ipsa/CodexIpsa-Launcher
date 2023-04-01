@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace MCLauncher.forms
 {
@@ -36,6 +37,7 @@ namespace MCLauncher.forms
             if (profMode == "new")
             {
                 nameBox.Text = profileName;
+                dirBox.Text = $"{Globals.dataPath}\\instance\\{profileName}\\";
                 resXBox.Text = "854";
                 resYBox.Text = "480";
                 ramMaxBox.Value = 512;
@@ -87,6 +89,12 @@ namespace MCLauncher.forms
                 listView1.SelectedItems.Clear();
                 lastSelected = "b1.7.3";
                 saveData();
+            }
+            else if(profMode == "new")
+            {
+                var item = listView1.FindItemWithText("b1.7.3");
+                listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
+                listView1.EnsureVisible(listView1.Items.IndexOf(item));
             }
         }
 
@@ -294,6 +302,7 @@ namespace MCLauncher.forms
         {
             using (var fbd = new FolderBrowserDialog())
             {
+                fbd.SelectedPath = $"{Globals.dataPath}\\instance\\{profileName}\\";
                 DialogResult result = fbd.ShowDialog();
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
@@ -317,6 +326,41 @@ namespace MCLauncher.forms
             {
                 ramMinBox.Value = ramMaxBox.Value;
             }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnForge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -33,8 +33,9 @@ namespace MCLauncher.classes
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("JavaLauncher", "Could not download version JSON. Please connect to the internet.");
-                return;
+                Logger.Error("JavaLauncher", "Could not (re)download version JSON.");
+                if (!File.Exists($"{Globals.dataPath}\\data\\json\\{dj.version}.json"))
+                    return;
             }
 
             string manifestJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{dj.version}.json"); //todo: custom launch json
