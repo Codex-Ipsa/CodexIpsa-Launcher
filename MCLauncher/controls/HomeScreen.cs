@@ -321,6 +321,7 @@ namespace MCLauncher
                 saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
                 saveData += $"  \"jsonPath\": \"\",\n";
                 saveData += $"  \"demo\": false,\n";
+                saveData += $"  \"modded\": false,\n";
                 saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
                 saveData += $"  \"proxy\": {bool.Parse(oj.useProxy.ToString().ToLower()).ToString().ToLower()},\n";
                 saveData += $"  \"multiplayer\": false\n";

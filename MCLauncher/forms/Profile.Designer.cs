@@ -660,6 +660,7 @@
             this.btnRepo.TabIndex = 21;
             this.btnRepo.Text = "Mod repositories";
             this.btnRepo.UseVisualStyleBackColor = true;
+            this.btnRepo.Click += new System.EventHandler(this.btnRepo_Click);
             // 
             // btnOpen
             // 
@@ -698,6 +699,7 @@
             this.btnDown.TabIndex = 17;
             this.btnDown.Text = "Move down";
             this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click_1);
             // 
             // btnRemove
             // 
@@ -707,6 +709,7 @@
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click_1);
             // 
             // btnUp
             // 
@@ -716,6 +719,7 @@
             this.btnUp.TabIndex = 15;
             this.btnUp.Text = "Move up";
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click_1);
             // 
             // btnForge
             // 
@@ -735,6 +739,7 @@
             this.btnReplace.TabIndex = 13;
             this.btnReplace.Text = "Replace minecraft.jar";
             this.btnReplace.UseVisualStyleBackColor = true;
+            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click_1);
             // 
             // btnAdd
             // 
@@ -744,6 +749,7 @@
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Add to minecraft.jar";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
             // 
             // modView
             // 

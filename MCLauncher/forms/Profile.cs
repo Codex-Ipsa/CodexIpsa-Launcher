@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace MCLauncher.forms
 {
@@ -251,6 +252,7 @@ namespace MCLauncher.forms
             saveData += $"  \"javaPath\": \"{javaBox.Text}\",\n";
             saveData += $"  \"jsonPath\": \"{jsonBox.Text}\",\n";
             saveData += $"  \"demo\": {demoCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {offlineCheck.Checked.ToString().ToLower()},\n";
             saveData += $"  \"proxy\": {proxyCheck.Checked.ToString().ToLower()},\n";
             saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
@@ -361,6 +363,70 @@ namespace MCLauncher.forms
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRepo_Click(object sender, EventArgs e)
+        {
+            ModsRepo mr = new ModsRepo();
+            mr.ShowDialog();
+        }
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.zip, *.jar)|*.zip;*.jar";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
+                    addToModsList(openFileDialog.SafeFileName, "jarmod", "");
+                    reloadModsList();
+                }
+            }
+        }
+
+        private void btnReplace_Click_1(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.jar)|*.jar";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
+                    addToModsList(openFileDialog.SafeFileName, "cusjar", "");
+                    reloadModsList();
+                }
+            }
+        }
+
+        private void btnRemove_Click_1(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+            {
+                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{modView.SelectedItems[0].Text}");
+                removeFromModsList(modView.SelectedItems[0].Text);
+                reloadModsList();
+            }
+        }
+
+        private void btnDown_Click_1(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+            {
+                moveDownInModsList(modView.SelectedItems[0].Text);
+                reloadModsList();
+            }
+        }
+
+        private void btnUp_Click_1(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+            {
+                moveUpInModsList(modView.SelectedItems[0].Text);
+                reloadModsList();
+            }
         }
     }
 
