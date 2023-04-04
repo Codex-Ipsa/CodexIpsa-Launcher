@@ -27,10 +27,13 @@ namespace MCLauncher.forms
         public static string lastSelected;
         public static string lastDate;
         public static string lastType;
+        public static Profile Instance;
 
         public Profile(string profile, string mode)
         {
             InitializeComponent();
+
+            Instance = this;
 
             profileName = profile;
             profMode = mode;
@@ -43,6 +46,11 @@ namespace MCLauncher.forms
                 resYBox.Text = "480";
                 ramMaxBox.Value = 512;
                 ramMinBox.Value = 512;
+                classBox.Enabled = false;
+                jsonBox.Enabled = false;
+                jsonBtn.Enabled = false;
+                javaBox.Enabled = false;
+                javaBtn.Enabled = false;
             }
             else if (profMode == "def")
             {
@@ -68,8 +76,36 @@ namespace MCLauncher.forms
                 ramMinBox.Value = int.Parse(mem[1]);
                 befBox.Text = dj.befCmd;
                 aftBox.Text = dj.aftCmd;
+                javaCheck.Checked = dj.useJava;
                 javaBox.Text = dj.javaPath;
+                if (javaCheck.Checked)
+                {
+                    javaBox.Enabled = true;
+                    javaBtn.Enabled = true;
+                }
+                else
+                {
+                    javaBox.Enabled = false;
+                    javaBtn.Enabled = false;
+                }
+                jsonCheck.Checked = dj.useJson;
                 jsonBox.Text = dj.jsonPath;
+                if (jsonCheck.Checked)
+                {
+                    jsonBox.Enabled = true;
+                    jsonBtn.Enabled = true;
+                }
+                else
+                {
+                    jsonBox.Enabled = false;
+                    jsonBtn.Enabled = false;
+                }
+                classCheck.Checked = dj.useClass;
+                if (classCheck.Checked)
+                    classBox.Enabled = true;
+                else
+                    classBox.Enabled = false;
+                classBox.Text = dj.classpath;
                 demoCheck.Checked = dj.demo;
                 offlineCheck.Checked = dj.offline;
                 proxyCheck.Checked = dj.proxy;
@@ -91,7 +127,7 @@ namespace MCLauncher.forms
                 lastSelected = "b1.7.3";
                 saveData();
             }
-            else if(profMode == "new")
+            else if (profMode == "new")
             {
                 var item = listView1.FindItemWithText("b1.7.3");
                 listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
@@ -249,8 +285,12 @@ namespace MCLauncher.forms
             saveData += $"  \"memory\": \"{ramMaxBox.Value} {ramMinBox.Value}\",\n";
             saveData += $"  \"befCmd\": \"{befBox.Text}\",\n";
             saveData += $"  \"aftCmd\": \"{aftBox.Text}\",\n";
+            saveData += $"  \"useJava\": {javaCheck.Checked.ToString().ToLower()},\n";
             saveData += $"  \"javaPath\": \"{javaBox.Text}\",\n";
+            saveData += $"  \"useJson\": {jsonCheck.Checked.ToString().ToLower()},\n";
             saveData += $"  \"jsonPath\": \"{jsonBox.Text}\",\n";
+            saveData += $"  \"useClass\": {classCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"classpath\": \"{classBox.Text}\",\n";
             saveData += $"  \"demo\": {demoCheck.Checked.ToString().ToLower()},\n";
             saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {offlineCheck.Checked.ToString().ToLower()},\n";
@@ -258,14 +298,14 @@ namespace MCLauncher.forms
             saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
-            if(profMode == "new")
+            if (profMode == "new")
             {
                 if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"))
                 {
                     int iter = 1;
                     do
                     {
-                        if(profileName.Contains("_"))
+                        if (profileName.Contains("_"))
                             profileName = profileName.Substring(0, profileName.LastIndexOf("_")) + "_" + iter;
                         else
                             profileName = profileName + "_" + iter;
@@ -316,7 +356,7 @@ namespace MCLauncher.forms
 
         private void ramMinBox_ValueChanged(object sender, EventArgs e)
         {
-            if(ramMinBox.Value > ramMaxBox.Value)
+            if (ramMinBox.Value > ramMaxBox.Value)
             {
                 ramMaxBox.Value = ramMinBox.Value;
             }
@@ -324,7 +364,7 @@ namespace MCLauncher.forms
 
         private void ramMaxBox_ValueChanged(object sender, EventArgs e)
         {
-            if(ramMaxBox.Value < ramMinBox.Value)
+            if (ramMaxBox.Value < ramMinBox.Value)
             {
                 ramMinBox.Value = ramMaxBox.Value;
             }
@@ -428,6 +468,206 @@ namespace MCLauncher.forms
                 reloadModsList();
             }
         }
+
+        public static void addToModsList(string modName, string modType, string launchType)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+            itemsList.Add($"{modName}?{modType}?{launchType}");
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+        static void moveUpInModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            int i = 0;
+            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
+            {
+                if (str2.Contains(modName) && i != 0)
+                {
+                    Console.WriteLine("index " + i);
+                    itemsList.RemoveAt(i);
+                    int i2 = i - 1;
+                    Console.WriteLine("change to " + i2);
+                    itemsList.Insert(i2, str2);
+                    //break;
+                }
+                i++;
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+        static void moveDownInModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            int i = 0;
+            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
+            {
+                if (str2.Contains(modName) && i != itemsList.Count)
+                {
+                    Console.WriteLine("index " + i);
+                    itemsList.RemoveAt(i);
+                    int i2 = i + 1;
+                    Console.WriteLine("change to " + i2);
+                    itemsList.Insert(i2, str2);
+                    //break;
+                }
+                i++;
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+                itemsStr += $"\"{str}\",";
+
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+
+        static void removeFromModsList(string modName)
+        {
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            List<string> itemsList = new List<string>();
+            foreach (string str in mj.items)
+            {
+                itemsList.Add(str);
+            }
+
+            string itemsStr = "";
+            foreach (string str in itemsList)
+            {
+                if (!str.Contains(modName))
+                {
+                    itemsStr += $"\"{str}\",";
+                }
+            }
+            if (itemsStr.Contains(","))
+            {
+                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+            }
+            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
+            File.WriteAllText(indexPath, newJson);
+        }
+
+        public static void reloadModsList()
+        {
+            Instance.modView.Items.Clear();
+
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string json = "";
+            if (!File.Exists(indexPath))
+            {
+                string n = JavaModHelper.LegacyUpdate(indexPath, json, profileName);
+            }
+
+            json = File.ReadAllText(indexPath);
+            //legacy for old launcher versions
+            if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
+            {
+                json = JavaModHelper.LegacyUpdate(indexPath, json, profileName);
+            }
+
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            bool useForge = mj.forge;
+            foreach (string str in mj.items)
+            {
+                ListViewItem item = new ListViewItem(new[] { str.Substring(0, str.IndexOf("?")), str.Substring(str.IndexOf("?") + 1) });
+                Instance.modView.Items.Add(item);
+            }
+            Instance.modView.Columns[0].Width = 350;
+        }
+
+        private void javaCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (javaCheck.Checked)
+            {
+                javaBox.Enabled = true;
+                javaBtn.Enabled = true;
+            }
+            else
+            {
+                javaBox.Enabled = false;
+                javaBtn.Enabled = false;
+            }
+        }
+
+        private void jsonCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (jsonCheck.Checked)
+            {
+                jsonBox.Enabled = true;
+                jsonBtn.Enabled = true;
+            }
+            else
+            {
+                jsonBox.Enabled = false;
+                jsonBtn.Enabled = false;
+            }
+        }
+
+        private void classCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (classCheck.Checked)
+            {
+                classBox.Enabled = true;
+            }
+            else
+            {
+                classBox.Enabled = false;
+            }
+        }
     }
 
     public class VersionManifest
@@ -447,8 +687,12 @@ namespace MCLauncher.forms
         public string memory { get; set; }
         public string befCmd { get; set; }
         public string aftCmd { get; set; }
+        public bool useJava { get; set; }
         public string javaPath { get; set; }
+        public bool useJson { get; set; }
         public string jsonPath { get; set; }
+        public bool useClass { get; set; }
+        public string classpath { get; set; }
         public bool demo { get; set; }
         public bool offline { get; set; }
         public bool proxy { get; set; }

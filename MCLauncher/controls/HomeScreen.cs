@@ -318,8 +318,12 @@ namespace MCLauncher
                 saveData += $"  \"memory\": \"{oj.ramMax} {oj.ramMin}\",\n";
                 saveData += $"  \"befCmd\": \"\",\n";
                 saveData += $"  \"aftCmd\": \"{oj.jvmArgs}\",\n";
+                saveData += $"  \"useJava\": {bool.Parse(oj.useCustomJava.ToString().ToLower()).ToString().ToLower()},\n";
                 saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
+                saveData += $"  \"useJson\": false,\n";
                 saveData += $"  \"jsonPath\": \"\",\n";
+                saveData += $"  \"useClass\": false,\n";
+                saveData += $"  \"classpath\": \"\",\n";
                 saveData += $"  \"demo\": false,\n";
                 saveData += $"  \"modded\": false,\n";
                 saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
@@ -494,6 +498,7 @@ namespace MCLauncher
         public string resolutionY { get; set; }
         public string ramMin { get; set; }
         public string ramMax { get; set; }
+        public string useCustomJava { get; set; }
         public string customJava { get; set; }
         public string offlineMode { get; set; }
         public string useProxy { get; set; }

@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.javaBtn = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.javaBox = new System.Windows.Forms.TextBox();
             this.resXBox = new System.Windows.Forms.TextBox();
             this.resYBox = new System.Windows.Forms.TextBox();
@@ -68,8 +67,6 @@
             this.checkPreClassic = new System.Windows.Forms.CheckBox();
             this.jsonBox = new System.Windows.Forms.TextBox();
             this.jsonBtn = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.mpCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -89,6 +86,10 @@
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.classCheck = new System.Windows.Forms.CheckBox();
+            this.classBox = new System.Windows.Forms.TextBox();
+            this.jsonCheck = new System.Windows.Forms.CheckBox();
+            this.javaCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -174,15 +175,6 @@
             this.javaBtn.TabIndex = 9;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Java location";
             // 
             // javaBox
             // 
@@ -520,28 +512,10 @@
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 49);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(74, 13);
-            this.label11.TabIndex = 40;
-            this.label11.Text = "Launch JSON";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(620, 333);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(162, 13);
-            this.label12.TabIndex = 41;
-            this.label12.Text = "Work in progress - UNFINISHED";
-            // 
             // mpCheck
             // 
             this.mpCheck.AutoSize = true;
-            this.mpCheck.Location = new System.Drawing.Point(6, 74);
+            this.mpCheck.Location = new System.Drawing.Point(282, 201);
             this.mpCheck.Name = "mpCheck";
             this.mpCheck.Size = new System.Drawing.Size(105, 17);
             this.mpCheck.TabIndex = 42;
@@ -550,16 +524,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.javaCheck);
+            this.groupBox1.Controls.Add(this.jsonCheck);
+            this.groupBox1.Controls.Add(this.classBox);
+            this.groupBox1.Controls.Add(this.classCheck);
             this.groupBox1.Controls.Add(this.jsonBtn);
-            this.groupBox1.Controls.Add(this.mpCheck);
             this.groupBox1.Controls.Add(this.jsonBox);
-            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.javaBox);
             this.groupBox1.Controls.Add(this.javaBtn);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(350, 234);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 96);
+            this.groupBox1.Size = new System.Drawing.Size(439, 100);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "For experts";
@@ -569,6 +544,7 @@
             this.groupBox2.Controls.Add(this.offlineCheck);
             this.groupBox2.Controls.Add(this.demoCheck);
             this.groupBox2.Controls.Add(this.proxyCheck);
+            this.groupBox2.Controls.Add(this.mpCheck);
             this.groupBox2.Controls.Add(this.aftBox);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.befBox);
@@ -608,7 +584,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.listView1);
-            this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.saveBtn);
             this.tabPage1.Controls.Add(this.openBtn);
@@ -776,6 +751,46 @@
             this.columnHeader5.Text = "Type";
             this.columnHeader5.Width = 77;
             // 
+            // classCheck
+            // 
+            this.classCheck.AutoSize = true;
+            this.classCheck.Location = new System.Drawing.Point(6, 74);
+            this.classCheck.Name = "classCheck";
+            this.classCheck.Size = new System.Drawing.Size(72, 17);
+            this.classCheck.TabIndex = 45;
+            this.classCheck.Text = "Classpath";
+            this.classCheck.UseVisualStyleBackColor = true;
+            this.classCheck.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
+            // 
+            // classBox
+            // 
+            this.classBox.Location = new System.Drawing.Point(97, 72);
+            this.classBox.Name = "classBox";
+            this.classBox.Size = new System.Drawing.Size(335, 20);
+            this.classBox.TabIndex = 46;
+            // 
+            // jsonCheck
+            // 
+            this.jsonCheck.AutoSize = true;
+            this.jsonCheck.Location = new System.Drawing.Point(6, 48);
+            this.jsonCheck.Name = "jsonCheck";
+            this.jsonCheck.Size = new System.Drawing.Size(93, 17);
+            this.jsonCheck.TabIndex = 47;
+            this.jsonCheck.Text = "Launch JSON";
+            this.jsonCheck.UseVisualStyleBackColor = true;
+            this.jsonCheck.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
+            // 
+            // javaCheck
+            // 
+            this.javaCheck.AutoSize = true;
+            this.javaCheck.Location = new System.Drawing.Point(6, 21);
+            this.javaCheck.Name = "javaCheck";
+            this.javaCheck.Size = new System.Drawing.Size(89, 17);
+            this.javaCheck.TabIndex = 48;
+            this.javaCheck.Text = "Java location";
+            this.javaCheck.UseVisualStyleBackColor = true;
+            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -809,7 +824,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button javaBtn;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.TextBox resXBox;
         private System.Windows.Forms.TextBox resYBox;
@@ -840,8 +854,6 @@
         private System.Windows.Forms.CheckBox checkPreClassic;
         private System.Windows.Forms.TextBox jsonBox;
         private System.Windows.Forms.Button jsonBtn;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox mpCheck;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -861,5 +873,9 @@
         private System.Windows.Forms.ListView modView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.TextBox classBox;
+        private System.Windows.Forms.CheckBox classCheck;
+        private System.Windows.Forms.CheckBox javaCheck;
+        private System.Windows.Forms.CheckBox jsonCheck;
     }
 }
