@@ -173,7 +173,6 @@ namespace MCLauncher
                 }
                 else if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
-                    Console.WriteLine("GOT CALLED FUCK YOU");
                     updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
                     instanceList.Add(dirName);
                 }

@@ -69,6 +69,10 @@
             this.jsonBtn = new System.Windows.Forms.Button();
             this.mpCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.javaCheck = new System.Windows.Forms.CheckBox();
+            this.jsonCheck = new System.Windows.Forms.CheckBox();
+            this.classBox = new System.Windows.Forms.TextBox();
+            this.classCheck = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -86,10 +90,6 @@
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.classCheck = new System.Windows.Forms.CheckBox();
-            this.classBox = new System.Windows.Forms.TextBox();
-            this.jsonCheck = new System.Windows.Forms.CheckBox();
-            this.javaCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -539,6 +539,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "For experts";
             // 
+            // javaCheck
+            // 
+            this.javaCheck.AutoSize = true;
+            this.javaCheck.Location = new System.Drawing.Point(9, 19);
+            this.javaCheck.Name = "javaCheck";
+            this.javaCheck.Size = new System.Drawing.Size(87, 17);
+            this.javaCheck.TabIndex = 48;
+            this.javaCheck.Text = "Custom Java";
+            this.javaCheck.UseVisualStyleBackColor = true;
+            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
+            // 
+            // jsonCheck
+            // 
+            this.jsonCheck.AutoSize = true;
+            this.jsonCheck.Location = new System.Drawing.Point(9, 48);
+            this.jsonCheck.Name = "jsonCheck";
+            this.jsonCheck.Size = new System.Drawing.Size(92, 17);
+            this.jsonCheck.TabIndex = 47;
+            this.jsonCheck.Text = "Custom JSON";
+            this.jsonCheck.UseVisualStyleBackColor = true;
+            this.jsonCheck.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
+            // 
+            // classBox
+            // 
+            this.classBox.Location = new System.Drawing.Point(97, 72);
+            this.classBox.Name = "classBox";
+            this.classBox.Size = new System.Drawing.Size(335, 20);
+            this.classBox.TabIndex = 46;
+            // 
+            // classCheck
+            // 
+            this.classCheck.AutoSize = true;
+            this.classCheck.Location = new System.Drawing.Point(9, 74);
+            this.classCheck.Name = "classCheck";
+            this.classCheck.Size = new System.Drawing.Size(72, 17);
+            this.classCheck.TabIndex = 45;
+            this.classCheck.Text = "Classpath";
+            this.classCheck.UseVisualStyleBackColor = true;
+            this.classCheck.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.offlineCheck);
@@ -750,46 +790,6 @@
             // 
             this.columnHeader5.Text = "Type";
             this.columnHeader5.Width = 77;
-            // 
-            // classCheck
-            // 
-            this.classCheck.AutoSize = true;
-            this.classCheck.Location = new System.Drawing.Point(6, 74);
-            this.classCheck.Name = "classCheck";
-            this.classCheck.Size = new System.Drawing.Size(72, 17);
-            this.classCheck.TabIndex = 45;
-            this.classCheck.Text = "Classpath";
-            this.classCheck.UseVisualStyleBackColor = true;
-            this.classCheck.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
-            // 
-            // classBox
-            // 
-            this.classBox.Location = new System.Drawing.Point(97, 72);
-            this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(335, 20);
-            this.classBox.TabIndex = 46;
-            // 
-            // jsonCheck
-            // 
-            this.jsonCheck.AutoSize = true;
-            this.jsonCheck.Location = new System.Drawing.Point(6, 48);
-            this.jsonCheck.Name = "jsonCheck";
-            this.jsonCheck.Size = new System.Drawing.Size(93, 17);
-            this.jsonCheck.TabIndex = 47;
-            this.jsonCheck.Text = "Launch JSON";
-            this.jsonCheck.UseVisualStyleBackColor = true;
-            this.jsonCheck.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
-            // 
-            // javaCheck
-            // 
-            this.javaCheck.AutoSize = true;
-            this.javaCheck.Location = new System.Drawing.Point(6, 21);
-            this.javaCheck.Name = "javaCheck";
-            this.javaCheck.Size = new System.Drawing.Size(89, 17);
-            this.javaCheck.TabIndex = 48;
-            this.javaCheck.Text = "Java location";
-            this.javaCheck.UseVisualStyleBackColor = true;
-            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
             // 
             // Profile
             // 
