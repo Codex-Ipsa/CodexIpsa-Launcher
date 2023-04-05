@@ -64,7 +64,7 @@ namespace MCLauncher
             }
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
-                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+                //this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //JSON changelog system
@@ -176,8 +176,6 @@ namespace MCLauncher
                     updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
                     instanceList.Add(dirName);
                 }
-
-                //Console.WriteLine(dir);
             }
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
@@ -198,8 +196,8 @@ namespace MCLauncher
         {
             using (WebClient client = new WebClient())
             {
-                int y = 5;
-                int x = 2;
+                double y = 5;
+                double x = 2;
                 try
                 {
                     string json = client.DownloadString(Globals.changelogJson);
@@ -211,8 +209,8 @@ namespace MCLauncher
                         {
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
-                            labelHead.Location = new Point(x, y);
-                            labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                            labelHead.Location = new Point((int)x, (int)y);
+                            labelHead.Font = new Font("Arial", 16, FontStyle.Bold);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.White;
                             Instance.pnlChangelog.Controls.Add(labelHead);
@@ -222,8 +220,8 @@ namespace MCLauncher
                         {
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
-                            labelHead.Location = new Point(x, y);
-                            labelHead.Font = new Font("Arial", 14, FontStyle.Regular);
+                            labelHead.Location = new Point((int)x, (int)y);
+                            labelHead.Font = new Font("Arial", 11, FontStyle.Bold);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.White;
                             Instance.pnlChangelog.Controls.Add(labelHead);
@@ -231,12 +229,12 @@ namespace MCLauncher
 
                             Label labelDate = new Label();
                             labelDate.Text = $"{vers.date}";
-                            labelDate.Location = new Point(x, y);
-                            labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
+                            labelDate.Location = new Point((int)x, (int)y);
+                            labelDate.Font = new Font("Arial", 11, FontStyle.Italic);
                             labelDate.AutoSize = true;
                             labelDate.ForeColor = Color.White;
                             Instance.pnlChangelog.Controls.Add(labelDate);
-                            y += 12 * 2;
+                            y += 12 * 1.5;
 
                             int strLog = 1;
                             string[] result = vers.content.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -244,14 +242,14 @@ namespace MCLauncher
                             {
                                 Label labelText = new Label();
                                 labelText.Text = $"{s}";
-                                labelText.Location = new Point(x, y);
-                                labelText.Font = new Font("Arial", 12, FontStyle.Regular);
+                                labelText.Location = new Point((int)x, (int)y);
+                                labelText.Font = new Font("Arial", 11, FontStyle.Regular);
                                 labelText.AutoSize = true;
                                 labelText.ForeColor = Color.White;
                                 Instance.pnlChangelog.Controls.Add(labelText);
                                 if (strLog < result.Length)
                                 {
-                                    y += 12 * 2;
+                                    y += 12 * 1.5;
                                 }
                                 else if (strLog >= result.Length)
                                 {
@@ -265,7 +263,7 @@ namespace MCLauncher
                         {
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
-                            labelHead.Location = new Point(x, y);
+                            labelHead.Location = new Point((int)x, (int)y);
                             labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.Red;
@@ -277,7 +275,7 @@ namespace MCLauncher
                     y = y -= 12 * 2;
                     Label labelEmpty = new Label();
                     labelEmpty.Text = $"";
-                    labelEmpty.Location = new Point(x, y);
+                    labelEmpty.Location = new Point((int)x, (int)y);
                     labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
                     labelEmpty.AutoSize = true;
                     labelEmpty.ForeColor = Color.Red;
@@ -287,7 +285,7 @@ namespace MCLauncher
                 {
                     Label labelHead = new Label();
                     labelHead.Text = $"Failed to load changelog!";
-                    labelHead.Location = new Point(x, y);
+                    labelHead.Location = new Point((int)x, (int)y);
                     labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
                     labelHead.AutoSize = true;
                     labelHead.ForeColor = Color.Red;

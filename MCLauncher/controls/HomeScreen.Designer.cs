@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeScreen));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.adPanel = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblLogInWarn = new System.Windows.Forms.Label();
             this.btnEditInst = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.adPanel = new System.Windows.Forms.Panel();
             this.pnlChangelog = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,16 +63,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 62);
             this.panel1.TabIndex = 3;
-            // 
-            // adPanel
-            // 
-            this.adPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.adPanel.BackColor = System.Drawing.Color.White;
-            this.adPanel.Location = new System.Drawing.Point(179, 250);
-            this.adPanel.Name = "adPanel";
-            this.adPanel.Size = new System.Drawing.Size(426, 68);
-            this.adPanel.TabIndex = 0;
-            this.adPanel.Click += new System.EventHandler(this.adPanel_Click);
             // 
             // btnLogOut
             // 
@@ -185,6 +175,16 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
+            // adPanel
+            // 
+            this.adPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.adPanel.BackColor = System.Drawing.Color.White;
+            this.adPanel.Location = new System.Drawing.Point(179, 250);
+            this.adPanel.Name = "adPanel";
+            this.adPanel.Size = new System.Drawing.Size(426, 68);
+            this.adPanel.TabIndex = 0;
+            this.adPanel.Click += new System.EventHandler(this.adPanel_Click);
+            // 
             // pnlChangelog
             // 
             this.pnlChangelog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -202,7 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.adPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlChangelog);

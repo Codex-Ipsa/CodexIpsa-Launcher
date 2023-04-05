@@ -148,6 +148,7 @@ namespace MCLauncher
                         cl.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
                     }
                     pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+                    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
                 }
                 catch (WebException e)
                 {
