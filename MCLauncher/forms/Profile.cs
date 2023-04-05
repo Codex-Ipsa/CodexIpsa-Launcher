@@ -110,6 +110,8 @@ namespace MCLauncher.forms
                 offlineCheck.Checked = dj.offline;
                 proxyCheck.Checked = dj.proxy;
                 mpCheck.Checked = dj.multiplayer;
+
+                reloadModsList();
             }
 
             listView1.Columns.Add("Name");
@@ -316,6 +318,11 @@ namespace MCLauncher.forms
             }
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg"))
+            {
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg", $"{{\"forge\":false,\"items\":[]}}");
+            }
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
             HomeScreen.reloadInstance(profileName);
@@ -419,6 +426,7 @@ namespace MCLauncher.forms
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
                     addToModsList(openFileDialog.SafeFileName, "jarmod", "");
                     reloadModsList();
@@ -455,7 +463,7 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                moveDownInModsList(modView.SelectedItems[0].Text);
+                moveInModList(modView.SelectedItems[0].Text, "down");
                 reloadModsList();
             }
         }
@@ -464,7 +472,7 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                moveUpInModsList(modView.SelectedItems[0].Text);
+                moveInModList(modView.SelectedItems[0].Text, "up");
                 reloadModsList();
             }
         }
@@ -494,46 +502,7 @@ namespace MCLauncher.forms
             File.WriteAllText(indexPath, newJson);
         }
 
-        static void moveUpInModsList(string modName)
-        {
-            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
-            string json = File.ReadAllText(indexPath);
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            bool useForge = mj.forge;
-            List<string> itemsList = new List<string>();
-            foreach (string str in mj.items)
-            {
-                itemsList.Add(str);
-            }
-
-            int i = 0;
-            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
-            {
-                if (str2.Contains(modName) && i != 0)
-                {
-                    Console.WriteLine("index " + i);
-                    itemsList.RemoveAt(i);
-                    int i2 = i - 1;
-                    Console.WriteLine("change to " + i2);
-                    itemsList.Insert(i2, str2);
-                    //break;
-                }
-                i++;
-            }
-
-            string itemsStr = "";
-            foreach (string str in itemsList)
-                itemsStr += $"\"{str}\",";
-
-            if (itemsStr.Contains(","))
-            {
-                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
-            }
-            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
-            File.WriteAllText(indexPath, newJson);
-        }
-
-        static void moveDownInModsList(string modName)
+        static void moveInModList(string modName, string mode)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
             string json = File.ReadAllText(indexPath);
@@ -552,7 +521,11 @@ namespace MCLauncher.forms
                 {
                     Console.WriteLine("index " + i);
                     itemsList.RemoveAt(i);
-                    int i2 = i + 1;
+                    int i2 = 0;
+                    if (mode == "up")
+                        i2 = i + 1;
+                    else if (mode == "down")
+                        i2 = i + 1;
                     Console.WriteLine("change to " + i2);
                     itemsList.Insert(i2, str2);
                     //break;
@@ -571,7 +544,6 @@ namespace MCLauncher.forms
             string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
             File.WriteAllText(indexPath, newJson);
         }
-
 
         static void removeFromModsList(string modName)
         {
@@ -626,7 +598,8 @@ namespace MCLauncher.forms
                 ListViewItem item = new ListViewItem(new[] { str.Substring(0, str.IndexOf("?")), str.Substring(str.IndexOf("?") + 1) });
                 Instance.modView.Items.Add(item);
             }
-            Instance.modView.Columns[0].Width = 350;
+            Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
+            Instance.modView.Columns[0].Width = -2;
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)

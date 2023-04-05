@@ -19,6 +19,8 @@ namespace MCLauncher.classes
         public static string msPlayerAccessToken;
         public static string msPlayerMPPass;
 
+        public static string modClientPath = "";
+
         public static string srvIP = "";
         public static string srvPort = "";
 
@@ -38,7 +40,12 @@ namespace MCLauncher.classes
                     return;
             }
 
-            string manifestJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{dj.version}.json"); //todo: custom launch json
+            string manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
+
+            if (dj.useJson)
+                manifestPath = dj.jsonPath;
+
+            string manifestJson = File.ReadAllText(manifestPath);
 
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
             {
@@ -89,7 +96,12 @@ namespace MCLauncher.classes
             string jars = "";
             if (!File.Exists($"{Globals.dataPath}\\versions\\{dj.version}.jar"))
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{dj.version}.jar");
-            jars += $"\"{Globals.dataPath}\\versions\\{dj.version}.jar\";";
+
+            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\versions\\{dj.version}.jar");
+            if(modClientPath != "")
+                jars += $"\"{modClientPath}\";";
+            else
+                jars += $"\"{Globals.dataPath}\\versions\\{dj.version}.jar\";";
 
             if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
                 Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
@@ -184,7 +196,11 @@ namespace MCLauncher.classes
                 Logger.Info("JavaLauncher", $"Server active!");
             }
 
-            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {vi.classpath} {vi.cmdAft}";
+            string classpath = vi.classpath;
+            if (dj.useClass)
+                classpath = dj.classpath;
+
+            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {classpath} {vi.cmdAft}";
 
             if (dj.aftCmd != "")
                 proc.StartInfo.Arguments += $" {dj.aftCmd}";

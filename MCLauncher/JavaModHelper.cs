@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -135,15 +136,16 @@ namespace MCLauncher
                     Logger.Info("[ModHelper]", "Created patched jar!");
                 }
 
-                LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
-                if (typeList.Count > 0)
+                JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
+                Logger.Error("JavaModHelper", $"Client path; {JavaLauncher.modClientPath}");
+                /*if (typeList.Count > 0) //Will it crash?
                 {
-                    LaunchJava.launchVerType = typeList[0];
-                    LaunchJava.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
-                }
+                    JavaLauncher.launchVerType = typeList[0];
+                    JavaLauncher.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
+                }*/
 
-                string aa = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
-                if (aa.Contains("\"forge\":true"))
+                string index = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
+                if (index.Contains("\"forge\":true"))
                 {
                     LaunchJava.launchProxy += "-Dhttp.nonProxyHosts=codex-ipsa.dejvoss.cz -Dminecraft.applet.TargetDirectory={gameDir} -Dfml.core.libraries.mirror=http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/forgelib/%s ";
                     Logger.Info("[ModHelper]", "Forge tweaks on!");
