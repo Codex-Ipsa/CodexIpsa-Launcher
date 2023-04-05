@@ -34,21 +34,6 @@ namespace MCLauncher
               
             Instance = this;
             InitializeComponent();
-            
-            DateTime ignore = new DateTime(2023, 4, 1);
-            if (ignore.ToString("d-M-yyyy") == DateTime.Now.ToString("d-M-yyyy"))
-            {
-                int count = int.Parse(Globals.client.DownloadString("http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/april2023/count.txt"));
-                Random ran = new Random();
-                int adI = ran.Next(1, count);
-                Directory.CreateDirectory($"{Globals.dataPath}\\data\\ignore\\");
-                Globals.client.DownloadFile($"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/april2023/{adI}.png", $"{Globals.dataPath}\\data\\ignore\\{adI}.png");
-                adPanel.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\ignore\\{adI}.png");
-                adPanel.BringToFront();
-            }
-            else
-                adPanel.Visible = false;
-
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
 
             if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
@@ -61,10 +46,6 @@ namespace MCLauncher
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
             {
                 panel1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            }
-            if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-            {
-                //this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //JSON changelog system
@@ -449,11 +430,6 @@ namespace MCLauncher
         private void pnlChangelog_Scroll(object sender, ScrollEventArgs e)
         {
             pnlChangelog.Invalidate();
-        }
-
-        private void adPanel_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://dejvoss.cz/secret/");
         }
 
         /*public static void playBtnDis(string label)
