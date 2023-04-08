@@ -42,7 +42,7 @@ namespace MCLauncher.classes
 
             string manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
 
-            if (dj.useJson)
+            if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
                 manifestPath = dj.jsonPath;
 
             string manifestJson = File.ReadAllText(manifestPath);

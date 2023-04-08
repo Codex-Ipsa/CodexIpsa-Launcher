@@ -773,10 +773,10 @@
             this.columnHeader5});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
-            this.modView.Location = new System.Drawing.Point(8, 6);
+            this.modView.Location = new System.Drawing.Point(6, 6);
             this.modView.MultiSelect = false;
             this.modView.Name = "modView";
-            this.modView.Size = new System.Drawing.Size(653, 369);
+            this.modView.Size = new System.Drawing.Size(655, 369);
             this.modView.TabIndex = 11;
             this.modView.UseCompatibleStateImageBehavior = false;
             this.modView.View = System.Windows.Forms.View.Details;

@@ -83,17 +83,17 @@ namespace MCLauncher
             {
                 int index = listBox1.FindString(listBox1.GetItemText(listBox1.SelectedItem));
                 DownloadProgress.url = modUrls[listBox2.SelectedIndex];
-                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{InstanceManager.name}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
                 DownloadProgress dp = new DownloadProgress();
                 dp.ShowDialog();
-                InstanceManager.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
-                InstanceManager.reloadModsList();
+                Profile.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
+                Profile.reloadModsList();
 
                 //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
 
-                if(baseTypes[index] != InstanceManager.type)
+                /*if(baseTypes[index] != Profile.type)
                 {
-                    Logger.Info("[ModsRepo]", $"{baseTypes[index]} != {InstanceManager.type}");
+                    Logger.Info("[ModsRepo]", $"{baseTypes[index]} != {Profile.lastType}");
                     ModWarn mw = new ModWarn();
                     mw.ShowDialog();
                     if(mw.isYes)
@@ -104,10 +104,7 @@ namespace MCLauncher
                     }
 
                     this.Close();
-                    /*InstanceManager.version = baseJars[index];
-                    InstanceManager.url = baseUrls[index];
-                    InstanceManager.type = baseTypes[index];*/
-                }
+                }*/
             }
         }
     }
