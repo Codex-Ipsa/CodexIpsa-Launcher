@@ -90,6 +90,7 @@
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -714,7 +715,7 @@
             this.btnDown.TabIndex = 17;
             this.btnDown.Text = "Move down";
             this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click_1);
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnRemove
             // 
@@ -724,7 +725,7 @@
             this.btnRemove.TabIndex = 16;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click_1);
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnUp
             // 
@@ -734,7 +735,7 @@
             this.btnUp.TabIndex = 15;
             this.btnUp.Text = "Move up";
             this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click_1);
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnForge
             // 
@@ -754,7 +755,7 @@
             this.btnReplace.TabIndex = 13;
             this.btnReplace.Text = "Replace minecraft.jar";
             this.btnReplace.UseVisualStyleBackColor = true;
-            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click_1);
+            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // btnAdd
             // 
@@ -764,13 +765,14 @@
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Add to minecraft.jar";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // modView
             // 
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader2});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
             this.modView.Location = new System.Drawing.Point(6, 6);
@@ -790,6 +792,10 @@
             // 
             this.columnHeader5.Text = "Type";
             this.columnHeader5.Width = 77;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Config";
             // 
             // Profile
             // 
@@ -877,5 +883,6 @@
         private System.Windows.Forms.CheckBox classCheck;
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.CheckBox jsonCheck;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

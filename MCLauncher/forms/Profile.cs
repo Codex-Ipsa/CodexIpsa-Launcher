@@ -319,9 +319,9 @@ namespace MCLauncher.forms
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg"))
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json"))
             {
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg", $"{{\"forge\":false,\"items\":[]}}");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"forge\":false,\"items\":[]}}");
             }
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
@@ -377,48 +377,13 @@ namespace MCLauncher.forms
             }
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnForge_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnReplace_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnRepo_Click(object sender, EventArgs e)
         {
             ModsRepo mr = new ModsRepo();
             mr.ShowDialog();
         }
 
-        private void btnAdd_Click_1(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -428,13 +393,13 @@ namespace MCLauncher.forms
                 {
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    addToModsList(openFileDialog.SafeFileName, "jarmod", "");
+                    modListWorker("add", openFileDialog.SafeFileName, "jarmod", "");
                     reloadModsList();
                 }
             }
         }
 
-        private void btnReplace_Click_1(object sender, EventArgs e)
+        private void btnReplace_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -443,65 +408,144 @@ namespace MCLauncher.forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    addToModsList(openFileDialog.SafeFileName, "cusjar", "");
+                    modListWorker("add", openFileDialog.SafeFileName, "cusjar", "");
                     reloadModsList();
                 }
             }
         }
 
-        private void btnRemove_Click_1(object sender, EventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
             if (modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{modView.SelectedItems[0].Text}");
-                removeFromModsList(modView.SelectedItems[0].Text);
+                modListWorker("remove", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
 
-        private void btnDown_Click_1(object sender, EventArgs e)
+        private void btnDown_Click(object sender, EventArgs e)
         {
             if (modView.SelectedItems.Count > 0)
             {
-                moveInModList(modView.SelectedItems[0].Text, "down");
+                modListWorker("mdown", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
 
-        private void btnUp_Click_1(object sender, EventArgs e)
+        private void btnUp_Click(object sender, EventArgs e)
         {
             if (modView.SelectedItems.Count > 0)
             {
-                moveInModList(modView.SelectedItems[0].Text, "up");
+                modListWorker("mup", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
 
-        public static void addToModsList(string modName, string modType, string launchType)
+        public static void modListWorker(string mode, string modName, string modType, string modJson)
         {
-            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
+            if (!File.Exists(indexPath))
+                File.WriteAllText(indexPath, $"{{\"forge\": false, \"items\": []}}");
             string json = File.ReadAllText(indexPath);
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            bool useForge = mj.forge;
-            List<string> itemsList = new List<string>();
-            foreach (string str in mj.items)
-            {
-                itemsList.Add(str);
-            }
-            itemsList.Add($"{modName}?{modType}?{launchType}");
 
-            string itemsStr = "";
-            foreach (string str in itemsList)
-                itemsStr += $"\"{str}\",";
+            List<ModJsonEntry> entries = new List<ModJsonEntry>();
 
-            if (itemsStr.Contains(","))
+            foreach (ModJsonEntry ent in mj.items)
             {
-                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
+                entries.Add(ent);
             }
-            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
-            File.WriteAllText(indexPath, newJson);
+
+            if (mode == "add")
+            {
+                ModJsonEntry newEntry = new ModJsonEntry();
+                newEntry.name = modName;
+                newEntry.type = modType;
+                newEntry.json = modJson;
+                entries.Add(newEntry);
+            }
+            else if (mode == "remove")
+            {
+                int i = 0;
+                foreach (ModJsonEntry ent in mj.items)
+                {
+                    if(ent.name == modName)
+                    {
+                        break;
+                    }
+                    i++;
+                }
+                entries.RemoveAt(i);
+            }
+            else if (mode == "mup")
+            {
+                int i = 0;
+                ModJsonEntry item = new ModJsonEntry();
+                foreach (ModJsonEntry ent in mj.items)
+                {
+                    if (ent.name == modName)
+                    {
+                        item = ent;
+                        break;
+                    }
+                    i++;
+                }
+                if(i > 0)
+                {
+                    entries.RemoveAt(i);
+                    entries.Insert(i - 1, item);
+                }
+            }
+            else if (mode == "mdown")
+            {
+                int i = 0;
+                ModJsonEntry item = new ModJsonEntry();
+                foreach (ModJsonEntry ent in mj.items)
+                {
+                    if (ent.name == modName)
+                    {
+                        item = ent;
+                        break;
+                    }
+                    i++;
+                }
+                if (i + 1 < entries.Count)
+                {
+                    Console.WriteLine(i);
+                    Console.WriteLine(entries.Count);
+                    entries.RemoveAt(i);
+                    Console.WriteLine(i);
+                    Console.WriteLine(entries.Count);
+                    entries.Insert(i+1, item);
+                }
+            }
+
+            string toSave = $"{{\n";
+            toSave += $"  \"forge\": {mj.forge.ToString().ToLower()},\n";
+            toSave += $"  \"items\": [\n";
+            int y = 0;
+            foreach (ModJsonEntry ent in entries)
+            {
+                toSave += $"    {{\n";
+                toSave += $"      \"name\": \"{ent.name}\",\n";
+                toSave += $"      \"type\": \"{ent.type}\",\n";
+                toSave += $"      \"json\": \"{ent.json}\"\n";
+                toSave += $"    }},\n";
+                y++;
+            }
+            if(y > 0)
+            {
+                toSave = toSave.Remove(toSave.LastIndexOf(",")) + "\n";
+            }
+            toSave += $"  ]\n";
+            toSave += $"}}";
+
+            File.WriteAllText(indexPath, toSave);
+            Console.WriteLine(toSave);
         }
 
+        /*
         static void moveInModList(string modName, string mode)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
@@ -528,7 +572,6 @@ namespace MCLauncher.forms
                         i2 = i + 1;
                     Console.WriteLine("change to " + i2);
                     itemsList.Insert(i2, str2);
-                    //break;
                 }
                 i++;
             }
@@ -543,9 +586,9 @@ namespace MCLauncher.forms
             }
             string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
             File.WriteAllText(indexPath, newJson);
-        }
+        }*/
 
-        static void removeFromModsList(string modName)
+        /*static void removeFromModsList(string modName)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
             string json = File.ReadAllText(indexPath);
@@ -571,35 +614,34 @@ namespace MCLauncher.forms
             }
             string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
             File.WriteAllText(indexPath, newJson);
-        }
+        }*/
 
         public static void reloadModsList()
         {
+            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
+            if (!File.Exists(indexPath))
+                File.WriteAllText(indexPath, $"{{\"forge\": false, \"items\": []}}");
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+
+            List<ModJsonEntry> entries = new List<ModJsonEntry>();
+
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                entries.Add(ent);
+            }
+
             Instance.modView.Items.Clear();
 
-            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
-            string json = "";
-            if (!File.Exists(indexPath))
+            foreach (ModJsonEntry mje in mj.items)
             {
-                string n = JavaModHelper.LegacyUpdate(indexPath, json, profileName);
-            }
-
-            json = File.ReadAllText(indexPath);
-            //legacy for old launcher versions
-            if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
-            {
-                json = JavaModHelper.LegacyUpdate(indexPath, json, profileName);
-            }
-
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            bool useForge = mj.forge;
-            foreach (string str in mj.items)
-            {
-                ListViewItem item = new ListViewItem(new[] { str.Substring(0, str.IndexOf("?")), str.Substring(str.IndexOf("?") + 1) });
+                ListViewItem item = new ListViewItem(new[] { mje.name, mje.type });
                 Instance.modView.Items.Add(item);
             }
+
             Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
-            Instance.modView.Columns[0].Width = -2;
+            Instance.modView.Columns[1].Width = Instance.modView.Width / 3;
+            Instance.modView.Columns[2].Width = -2;
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
@@ -670,5 +712,18 @@ namespace MCLauncher.forms
         public bool offline { get; set; }
         public bool proxy { get; set; }
         public bool multiplayer { get; set; }
+    }
+
+    class ModJson
+    {
+        public bool forge { get; set; }
+        public ModJsonEntry[] items { get; set; }
+    }
+
+    class ModJsonEntry
+    {
+        public string name { get; set; }
+        public string type { get; set; }
+        public string json { get; set; }
     }
 }

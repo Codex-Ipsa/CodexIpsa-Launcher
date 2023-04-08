@@ -86,7 +86,7 @@ namespace MCLauncher
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
                 DownloadProgress dp = new DownloadProgress();
                 dp.ShowDialog();
-                Profile.addToModsList($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
+                //Profile.modListWorker($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
                 Profile.reloadModsList();
 
                 //Console.WriteLine(modUrls[listBox2.SelectedIndex]);

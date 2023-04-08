@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,9 +34,10 @@ namespace MCLauncher
             }
 
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            foreach (string str in mj.items)
+            foreach (ModJsonEntry str in mj.items)
             {
-                string[] items = str.Split('?');
+                /*string[] items = str.Split('?');*/
+                string[] items = new string[0]; //temp
                 string name = items[0];
                 string type = items[1];
                 if(items.Count() > 2)

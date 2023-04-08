@@ -169,12 +169,6 @@
     <Compile Include="controls\HomeScreen.Designer.cs">
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstanceManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InstanceManager.Designer.cs">
-      <DependentUpon>InstanceManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="jsonObject.cs" />
     <Compile Include="LaunchJava.cs" />
     <Compile Include="LaunchXbox360.cs" />
@@ -245,9 +239,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InstanceManager.resx">
-      <DependentUpon>InstanceManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
