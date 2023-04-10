@@ -20,6 +20,7 @@ namespace MCLauncher.classes
         public static string msPlayerMPPass;
 
         public static string modClientPath = "";
+        public static string modVersion = "";
 
         public static string srvIP = "";
         public static string srvPort = "";

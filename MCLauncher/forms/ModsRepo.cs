@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,15 +18,6 @@ namespace MCLauncher
 {
     public partial class ModsRepo : Form
     {
-        List<string> modNames = new List<string>();
-        List<string> modIds = new List<string>();
-        List<string> baseJars = new List<string>();
-        List<string> baseUrls = new List<string>();
-        List<string> baseTypes = new List<string>();
-        List<string> modVers = new List<string>();
-        List<string> modTypes = new List<string>();
-        List<string> modUrls = new List<string>();
-
         List<RepoJson> repoJsons = new List<RepoJson>();
 
         public ModsRepo()
@@ -55,48 +47,63 @@ namespace MCLauncher
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            //Console.WriteLine("got aclled?");
-            /*modVers.Clear();
-            modUrls.Clear();
-            modTypes.Clear();
+            listBox2.Items.Clear();
+            int i = 0;
             foreach (var r in repoJsons)
             {
-                //Console.WriteLine(r.name);
-                if (r.name == listBox1.GetItemText(listBox1.SelectedItem))
+                if (i == listBox1.SelectedIndex)
                 {
-                    foreach (var i in r.items)
+                    foreach (var t in r.items)
                     {
-                        modVers.Add(i.version);
-                        modUrls.Add(i.url);
-                        modTypes.Add(i.type);
-                        //Console.WriteLine(i.version);
+                        listBox2.Items.Add(t.version);
                     }
                 }
+                i++;
             }
-
-            foreach(string s in modVers)
-            {
-                //Console.WriteLine("--- "+s);
-            }
-            listBox2.DataSource = null;
-            listBox2.DataSource = modVers;
-            listBox2.Refresh();*/
-            //Console.WriteLine("GOT CALLLED YAAAY");
+            listBox2.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(listBox2.SelectedItems.Count > 0)
+            if(listBox2.SelectedItems.Count > 0) //just in case
             {
-                int index = listBox1.FindString(listBox1.GetItemText(listBox1.SelectedItem));
+                int i = 0;
+                foreach (var r in repoJsons)
+                {
+                    if (i == listBox1.SelectedIndex)
+                    {
+                        int y = 0;
+                        foreach (var t in r.items)
+                        {
+                            if(y == listBox2.SelectedIndex)
+                            {
+                                Logger.Info("[ModsRepo]", $"{r.id}, {t.version}, {t.url}, {t.json}");
+
+                                DownloadProgress.url = t.url;
+                                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{r.id}-{t.version}.zip";
+                                DownloadProgress dp = new DownloadProgress();
+                                dp.ShowDialog();
+
+                                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", t.json), $"{Globals.dataPath}\\data\\json\\{t.json}.json");
+                                Profile.modListWorker("add", $"{r.id}-{t.version}.zip", t.type, t.json);
+
+                                Profile.reloadModsList();
+                                this.Close();
+                            }
+                            y++;
+                        }
+                    }
+                    i++;
+                }
+
+                /*int index = listBox1.FindString(listBox1.GetItemText(listBox1.SelectedItem));
                 DownloadProgress.url = modUrls[listBox2.SelectedIndex];
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
                 DownloadProgress dp = new DownloadProgress();
-                dp.ShowDialog();
+                dp.ShowDialog();*/
                 //Profile.modListWorker("add", openFileDialog.SafeFileName, "jarmod", "");
                 //Profile.modListWorker($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
-                Profile.reloadModsList();
+                /*Profile.reloadModsList();*/
 
                 //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
 
@@ -122,10 +129,6 @@ namespace MCLauncher
     {
         public string name { get; set; }
         public string id { get; set; }
-        public string baseJar { get; set; }
-        public string baseUrl { get; set; }
-        public string baseType { get; set; }
-        public string baseClass { get; set; }
         public RepoInfo[] items { get; set; }
     }
 
@@ -134,6 +137,7 @@ namespace MCLauncher
         public string version { get; set; }
         public string type { get; set; }
         public string url { get; set; }
+        public string json { get; set; }
     }
 }
 

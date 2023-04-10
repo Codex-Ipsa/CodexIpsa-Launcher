@@ -112,6 +112,9 @@ namespace MCLauncher.forms
                 proxyCheck.Checked = dj.proxy;
                 mpCheck.Checked = dj.multiplayer;
 
+                if(dj.edition == "java")
+                    editionBox.SelectedIndex = 0;
+
                 reloadModsList();
             }
 
@@ -565,7 +568,7 @@ namespace MCLauncher.forms
 
             foreach (ModJsonEntry mje in mj.items)
             {
-                ListViewItem item = new ListViewItem(new[] { mje.name, mje.type });
+                ListViewItem item = new ListViewItem(new[] { mje.name, mje.type, mje.json });
                 Instance.modView.Items.Add(item);
             }
 

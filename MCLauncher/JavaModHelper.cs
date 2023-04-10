@@ -1,5 +1,6 @@
 ﻿using MCLauncher.classes;
 using MCLauncher.forms;
+using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -104,34 +105,13 @@ namespace MCLauncher
                 }
                 Logger.Info("[JavaModHelper]", $"Created patched jar");
                 JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
+
+                if(jsonList.Count > 0)
+                {
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", jsonList[0]), $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+                    JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json";
+                }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-            /*
-            Logger.Error("JavaModHelper", $"Client path; {JavaLauncher.modClientPath}");
-            /*if (typeList.Count > 0) //Will it crash?
-            {
-                JavaLauncher.launchVerType = typeList[0];
-                JavaLauncher.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
-            }*/
-
-            /*string index = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
-            if (index.Contains("\"forge\":true"))
-            {
-                LaunchJava.launchProxy += "-Dhttp.nonProxyHosts=codex-ipsa.dejvoss.cz -Dminecraft.applet.TargetDirectory={gameDir} -Dfml.core.libraries.mirror=http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/forgelib/%s ";
-                Logger.Info("[ModHelper]", "Forge tweaks on!");
-            }
-        }*/
         }
 
         public static string LegacyUpdate(string indexPath, string json, string instName)
