@@ -101,6 +101,8 @@ namespace MCLauncher.classes
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar"))
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
 
+            Logger.Info("[Javalauncher]", $"Mod path: {modClientPath}");
+
             if(modClientPath != "")
                 jars += $"\"{modClientPath}\";";
             else

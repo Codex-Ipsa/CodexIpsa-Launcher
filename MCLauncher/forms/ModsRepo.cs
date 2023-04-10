@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static MCLauncher.Strings;
 
 namespace MCLauncher
 {
@@ -25,34 +26,41 @@ namespace MCLauncher
         List<string> modTypes = new List<string>();
         List<string> modUrls = new List<string>();
 
-        string json = "";
+        List<RepoJson> repoJsons = new List<RepoJson>();
 
         public ModsRepo()
         {
             InitializeComponent();
 
-            WebClient wc = new WebClient();
-            json = wc.DownloadString(Globals.CIModsJson);
-            var rj = JsonConvert.DeserializeObject<List<RepoJson>>(json);
-            foreach (var r in rj)
+            string json = Globals.client.DownloadString(Globals.CIModsJson);
+            repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(json);
+
+            int i = 0;
+            foreach (var r in repoJsons)
             {
-                modNames.Add(r.name);
-                modIds.Add(r.id);
-                baseJars.Add(r.baseJar);
-                baseUrls.Add(r.baseUrl);
-                baseTypes.Add(r.baseType);
+                listBox1.Items.Add(r.name);
+                if (i == 0)
+                {
+                    foreach (var t in r.items)
+                    {
+                        listBox2.Items.Add(t.version);
+                    }
+                }
+                i++;
             }
-            listBox1.DataSource = modNames;
+            listBox1.SelectedIndex = 0;
+            listBox2.SelectedIndex = 0;
         }
 
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            modVers.Clear();
+
+            //Console.WriteLine("got aclled?");
+            /*modVers.Clear();
             modUrls.Clear();
             modTypes.Clear();
-            var rj = JsonConvert.DeserializeObject<List<RepoJson>>(json);
-            foreach (var r in rj)
+            foreach (var r in repoJsons)
             {
                 //Console.WriteLine(r.name);
                 if (r.name == listBox1.GetItemText(listBox1.SelectedItem))
@@ -73,7 +81,7 @@ namespace MCLauncher
             }
             listBox2.DataSource = null;
             listBox2.DataSource = modVers;
-            listBox2.Refresh();
+            listBox2.Refresh();*/
             //Console.WriteLine("GOT CALLLED YAAAY");
         }
 
@@ -86,6 +94,7 @@ namespace MCLauncher
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
                 DownloadProgress dp = new DownloadProgress();
                 dp.ShowDialog();
+                //Profile.modListWorker("add", openFileDialog.SafeFileName, "jarmod", "");
                 //Profile.modListWorker($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
                 Profile.reloadModsList();
 
