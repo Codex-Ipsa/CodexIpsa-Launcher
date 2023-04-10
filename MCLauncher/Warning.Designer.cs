@@ -68,7 +68,7 @@ namespace MCLauncher
             this.okBtn.UseVisualStyleBackColor = true;
             this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
             // 
-            // JavaCheck
+            // Warning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,7 +78,7 @@ namespace MCLauncher
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "JavaCheck";
+            this.Name = "Warning";
             this.Text = "Warning";
             this.ResumeLayout(false);
             this.PerformLayout();

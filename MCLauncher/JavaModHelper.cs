@@ -15,7 +15,47 @@ namespace MCLauncher
     {
         public static void Start(string instName, string clientPath)
         {
-            int modNum = 0;
+            string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json";
+            if (!File.Exists(indexPath))
+                File.WriteAllText(indexPath, $"{{\"forge\": false, \"items\": []}}");
+
+            Logger.Info("[JavaModHelper]", "Start for " + indexPath);
+
+            string json = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+
+            List<string> jsonList = new List<string>();
+            jsonList.Clear();
+
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                Logger.Info("[JavaModHelper]", $"Found mod {ent.name}, type: {ent.type}, json: {ent.json}");
+
+                if (ent.json != "")
+                {
+                    jsonList.Add(ent.json);
+                    Logger.Info("[JavaModHelper]", "ent.json: " + ent.json);
+                }
+            }
+
+            if(mj.items.Count() > 0)
+            {
+                Logger.Info("[JavaModHelper]", "count: " + mj.items.Count());
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            /*int modNum = 0;
             string json = "";
             List<string> jarModList = new List<string>();
             List<string> typeList = new List<string>();
@@ -37,7 +77,7 @@ namespace MCLauncher
             foreach (ModJsonEntry str in mj.items)
             {
                 /*string[] items = str.Split('?');*/
-                string[] items = new string[0]; //temp
+                /*string[] items = new string[0]; //temp
                 string name = items[0];
                 string type = items[1];
                 if(items.Count() > 2)
@@ -146,13 +186,13 @@ namespace MCLauncher
                     JavaLauncher.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
                 }*/
 
-                string index = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
+                /*string index = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
                 if (index.Contains("\"forge\":true"))
                 {
                     LaunchJava.launchProxy += "-Dhttp.nonProxyHosts=codex-ipsa.dejvoss.cz -Dminecraft.applet.TargetDirectory={gameDir} -Dfml.core.libraries.mirror=http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/forgelib/%s ";
                     Logger.Info("[ModHelper]", "Forge tweaks on!");
                 }
-            }
+            }*/
         }
 
         public static string LegacyUpdate(string indexPath, string json, string instName)

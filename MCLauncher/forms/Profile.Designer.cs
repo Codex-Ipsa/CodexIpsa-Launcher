@@ -91,6 +91,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.editionBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -105,10 +106,10 @@
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 6);
+            this.listView1.Location = new System.Drawing.Point(6, 33);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(328, 324);
+            this.listView1.Size = new System.Drawing.Size(328, 301);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -117,7 +118,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(711, 353);
+            this.saveBtn.Location = new System.Drawing.Point(711, 349);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 1;
@@ -366,7 +367,7 @@
             this.checkClassic.AutoSize = true;
             this.checkClassic.Checked = true;
             this.checkClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkClassic.Location = new System.Drawing.Point(89, 336);
+            this.checkClassic.Location = new System.Drawing.Point(91, 340);
             this.checkClassic.Name = "checkClassic";
             this.checkClassic.Size = new System.Drawing.Size(59, 17);
             this.checkClassic.TabIndex = 26;
@@ -379,7 +380,7 @@
             this.checkIndev.AutoSize = true;
             this.checkIndev.Checked = true;
             this.checkIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkIndev.Location = new System.Drawing.Point(154, 336);
+            this.checkIndev.Location = new System.Drawing.Point(218, 340);
             this.checkIndev.Name = "checkIndev";
             this.checkIndev.Size = new System.Drawing.Size(53, 17);
             this.checkIndev.TabIndex = 27;
@@ -392,7 +393,7 @@
             this.checkInfdev.AutoSize = true;
             this.checkInfdev.Checked = true;
             this.checkInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkInfdev.Location = new System.Drawing.Point(213, 336);
+            this.checkInfdev.Location = new System.Drawing.Point(156, 340);
             this.checkInfdev.Name = "checkInfdev";
             this.checkInfdev.Size = new System.Drawing.Size(56, 17);
             this.checkInfdev.TabIndex = 28;
@@ -405,7 +406,7 @@
             this.checkAlpha.AutoSize = true;
             this.checkAlpha.Checked = true;
             this.checkAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlpha.Location = new System.Drawing.Point(275, 336);
+            this.checkAlpha.Location = new System.Drawing.Point(277, 340);
             this.checkAlpha.Name = "checkAlpha";
             this.checkAlpha.Size = new System.Drawing.Size(53, 17);
             this.checkAlpha.TabIndex = 29;
@@ -418,7 +419,7 @@
             this.checkBeta.AutoSize = true;
             this.checkBeta.Checked = true;
             this.checkBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBeta.Location = new System.Drawing.Point(6, 359);
+            this.checkBeta.Location = new System.Drawing.Point(8, 358);
             this.checkBeta.Name = "checkBeta";
             this.checkBeta.Size = new System.Drawing.Size(48, 17);
             this.checkBeta.TabIndex = 30;
@@ -431,7 +432,7 @@
             this.checkRelease.AutoSize = true;
             this.checkRelease.Checked = true;
             this.checkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkRelease.Location = new System.Drawing.Point(60, 359);
+            this.checkRelease.Location = new System.Drawing.Point(62, 358);
             this.checkRelease.Name = "checkRelease";
             this.checkRelease.Size = new System.Drawing.Size(65, 17);
             this.checkRelease.TabIndex = 31;
@@ -444,7 +445,7 @@
             this.checkSnapshot.AutoSize = true;
             this.checkSnapshot.Checked = true;
             this.checkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSnapshot.Location = new System.Drawing.Point(131, 359);
+            this.checkSnapshot.Location = new System.Drawing.Point(133, 358);
             this.checkSnapshot.Name = "checkSnapshot";
             this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
             this.checkSnapshot.TabIndex = 32;
@@ -457,7 +458,7 @@
             this.checkExperimental.AutoSize = true;
             this.checkExperimental.Checked = true;
             this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkExperimental.Location = new System.Drawing.Point(208, 359);
+            this.checkExperimental.Location = new System.Drawing.Point(210, 358);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
             this.checkExperimental.TabIndex = 33;
@@ -467,7 +468,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(630, 352);
+            this.openBtn.Location = new System.Drawing.Point(630, 349);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 34;
@@ -477,7 +478,7 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(549, 352);
+            this.deleteBtn.Location = new System.Drawing.Point(549, 349);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(75, 23);
             this.deleteBtn.TabIndex = 35;
@@ -489,7 +490,7 @@
             this.checkPreClassic.AutoSize = true;
             this.checkPreClassic.Checked = true;
             this.checkPreClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkPreClassic.Location = new System.Drawing.Point(6, 336);
+            this.checkPreClassic.Location = new System.Drawing.Point(8, 340);
             this.checkPreClassic.Name = "checkPreClassic";
             this.checkPreClassic.Size = new System.Drawing.Size(77, 17);
             this.checkPreClassic.TabIndex = 37;
@@ -619,11 +620,12 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 409);
+            this.tabControl1.Size = new System.Drawing.Size(800, 404);
             this.tabControl1.TabIndex = 45;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.saveBtn);
@@ -642,7 +644,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 383);
+            this.tabPage1.Size = new System.Drawing.Size(792, 378);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -797,11 +799,24 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
+            // editionBox
+            // 
+            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.editionBox.FormattingEnabled = true;
+            this.editionBox.Items.AddRange(new object[] {
+            "Java Edition",
+            "Xbox 360 Edition",
+            "MinecraftEdu"});
+            this.editionBox.Location = new System.Drawing.Point(8, 6);
+            this.editionBox.Name = "editionBox";
+            this.editionBox.Size = new System.Drawing.Size(326, 21);
+            this.editionBox.TabIndex = 45;
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 409);
+            this.ClientSize = new System.Drawing.Size(800, 404);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
@@ -884,5 +899,6 @@
         private System.Windows.Forms.CheckBox javaCheck;
         private System.Windows.Forms.CheckBox jsonCheck;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ComboBox editionBox;
     }
 }

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -40,8 +41,8 @@ namespace MCLauncher.forms
 
             if (profMode == "new")
             {
+                editionBox.SelectedIndex = editionBox.Items.IndexOf("Java Edition");
                 nameBox.Text = profileName;
-                dirBox.Text = $"{Globals.dataPath}\\instance\\{profileName}\\";
                 resXBox.Text = "854";
                 resYBox.Text = "480";
                 ramMaxBox.Value = 512;
@@ -544,77 +545,6 @@ namespace MCLauncher.forms
             File.WriteAllText(indexPath, toSave);
             Console.WriteLine(toSave);
         }
-
-        /*
-        static void moveInModList(string modName, string mode)
-        {
-            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
-            string json = File.ReadAllText(indexPath);
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            bool useForge = mj.forge;
-            List<string> itemsList = new List<string>();
-            foreach (string str in mj.items)
-            {
-                itemsList.Add(str);
-            }
-
-            int i = 0;
-            foreach (string str2 in itemsList.ToList()) //crashes if not .ToList()
-            {
-                if (str2.Contains(modName) && i != itemsList.Count)
-                {
-                    Console.WriteLine("index " + i);
-                    itemsList.RemoveAt(i);
-                    int i2 = 0;
-                    if (mode == "up")
-                        i2 = i + 1;
-                    else if (mode == "down")
-                        i2 = i + 1;
-                    Console.WriteLine("change to " + i2);
-                    itemsList.Insert(i2, str2);
-                }
-                i++;
-            }
-
-            string itemsStr = "";
-            foreach (string str in itemsList)
-                itemsStr += $"\"{str}\",";
-
-            if (itemsStr.Contains(","))
-            {
-                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
-            }
-            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
-            File.WriteAllText(indexPath, newJson);
-        }*/
-
-        /*static void removeFromModsList(string modName)
-        {
-            string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\index.cfg";
-            string json = File.ReadAllText(indexPath);
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            bool useForge = mj.forge;
-            List<string> itemsList = new List<string>();
-            foreach (string str in mj.items)
-            {
-                itemsList.Add(str);
-            }
-
-            string itemsStr = "";
-            foreach (string str in itemsList)
-            {
-                if (!str.Contains(modName))
-                {
-                    itemsStr += $"\"{str}\",";
-                }
-            }
-            if (itemsStr.Contains(","))
-            {
-                itemsStr = itemsStr.Remove(itemsStr.LastIndexOf(','));
-            }
-            string newJson = $"{{\"forge\":{mj.forge.ToString().ToLower()},\"items\":[{itemsStr}]}}";
-            File.WriteAllText(indexPath, newJson);
-        }*/
 
         public static void reloadModsList()
         {

@@ -24,6 +24,8 @@ namespace MCLauncher.classes
         public static string srvIP = "";
         public static string srvPort = "";
 
+        public static string manifestPath = "";
+
         public static void Launch(string profileName)
         {
             string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
@@ -35,18 +37,15 @@ namespace MCLauncher.classes
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("JavaLauncher", "Could not (re)download version JSON.");
+                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON.");
                 if (!File.Exists($"{Globals.dataPath}\\data\\json\\{dj.version}.json"))
                     return;
             }
 
-            string manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
+            manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
+            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
 
-            if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
-                manifestPath = dj.jsonPath;
-
-            string manifestJson = File.ReadAllText(manifestPath);
-
+            //todo move this after downloading jar
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
             {
                 string toAdd = $"[\n";
@@ -73,6 +72,11 @@ namespace MCLauncher.classes
                     File.WriteAllText($"{Globals.dataPath}\\data\\downloaded.json", $"[\n{newStr}]");
                 }
             }
+
+            if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
+                manifestPath = dj.jsonPath;
+
+            string manifestJson = File.ReadAllText(manifestPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
             if (vi.srvJoin == true)
@@ -94,14 +98,13 @@ namespace MCLauncher.classes
             }
 
             string jars = "";
-            if (!File.Exists($"{Globals.dataPath}\\versions\\{dj.version}.jar"))
-                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\{dj.version}.jar");
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar"))
+                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
 
-            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\versions\\{dj.version}.jar");
             if(modClientPath != "")
                 jars += $"\"{modClientPath}\";";
             else
-                jars += $"\"{Globals.dataPath}\\versions\\{dj.version}.jar\";";
+                jars += $"\"{Globals.dataPath}\\versions\\java\\{dj.version}.jar\";";
 
             if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
                 Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
@@ -193,7 +196,7 @@ namespace MCLauncher.classes
             if (srvIP != "")
             {
                 proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
-                Logger.Info("JavaLauncher", $"Server active!");
+                Logger.Info("[JavaLauncher]", $"Server active!");
             }
 
             string classpath = vi.classpath;
@@ -207,7 +210,7 @@ namespace MCLauncher.classes
             if (dj.demo)
                 proc.StartInfo.Arguments += " --demo";
 
-            Logger.Info("JavaLauncher", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
+            Logger.Info("[JavaLauncher]", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
@@ -217,7 +220,7 @@ namespace MCLauncher.classes
             }
             catch (System.ComponentModel.Win32Exception e)
             {
-                Logger.Error("JavaLauncher", "Could not find java!");
+                Logger.Error("[JavaLauncher]", "Could not find java!");
                 if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();
 
