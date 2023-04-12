@@ -31,15 +31,14 @@ namespace MCLauncher
 
         public HomeScreen()
         {
-              
+
             Instance = this;
             InitializeComponent();
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
+            selectedInstance = Properties.Settings.Default.lastInstance;
 
-            if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
+            if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
                 selectedInstance = "Default";
-            else
-                selectedInstance = Properties.Settings.Default.lastInstance;
 
             pnlChangelog.AutoScroll = true;
 
@@ -57,11 +56,11 @@ namespace MCLauncher
             if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
             {
                 Profile prof = new Profile("Default", "def");
-            }       
+            }
 
             //Load instance list
             loadInstanceList();
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
             {
                 selectedInstance = "Default";
             }
@@ -153,7 +152,7 @@ namespace MCLauncher
 
                     instanceList.Add(dirName);
                 }
-                else if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
+                else if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
                 {
                     updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
                     instanceList.Add(dirName);
@@ -161,7 +160,7 @@ namespace MCLauncher
             }
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
-            LaunchJava.currentInstance = Instance.cmbInstaces.Text;
+            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void reloadInstance(string instName)
@@ -247,7 +246,7 @@ namespace MCLauncher
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
                             labelHead.Location = new Point((int)x, (int)y);
-                            labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                            labelHead.Font = new Font("Arial", 16, FontStyle.Bold);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.Red;
                             Instance.pnlChangelog.Controls.Add(labelHead);
@@ -419,6 +418,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Logger.Info("[TEST2]", cmbInstaces.Text);
             reloadInstance(cmbInstaces.Text);
             Properties.Settings.Default.lastInstance = cmbInstaces.Text;
             Properties.Settings.Default.Save();
