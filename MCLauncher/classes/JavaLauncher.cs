@@ -44,7 +44,7 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
-            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
+            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
 
             //todo move this after downloading jar
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")

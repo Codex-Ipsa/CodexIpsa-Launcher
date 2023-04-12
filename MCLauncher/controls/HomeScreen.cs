@@ -66,6 +66,7 @@ namespace MCLauncher
                 selectedInstance = "Default";
             }
             cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
+            Logger.Info("[TEST]", selectedInstance);
             reloadInstance(selectedInstance);
 
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json");

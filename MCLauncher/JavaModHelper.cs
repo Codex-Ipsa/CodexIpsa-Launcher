@@ -15,8 +15,11 @@ namespace MCLauncher
 {
     internal class JavaModHelper
     {
-        public static void Start(string instName, string clientPath)
+        public static void Start(string instName, string manifestPath)
         {
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
+            string clientJson = File.ReadAllText(manifestPath);
+            VersionInfo vi = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
             string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
                 File.WriteAllText(indexPath, $"{{\"forge\": false, \"items\": []}}");
@@ -46,7 +49,11 @@ namespace MCLauncher
 
                 string toHash = "";
                 var md5 = MD5.Create();
-                var stream = File.OpenRead(clientPath);
+                if(!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar"))
+                {
+                    Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
+                }
+                var stream = File.OpenRead($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
 
                 var hash = md5.ComputeHash(stream);
                 toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
@@ -77,7 +84,7 @@ namespace MCLauncher
 
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full");
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch");
-                    ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
+                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
 
                     int count = 0;
                     foreach (ModJsonEntry ent in mj.items)
