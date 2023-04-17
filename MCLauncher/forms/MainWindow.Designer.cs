@@ -118,6 +118,7 @@ namespace MCLauncher
             this.pnlBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBackground.BackColor = System.Drawing.Color.Transparent;
             this.pnlBackground.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlBackground.BackgroundImage")));
             this.pnlBackground.Location = new System.Drawing.Point(-1, 24);
             this.pnlBackground.Name = "pnlBackground";

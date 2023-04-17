@@ -180,6 +180,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChangelog.BackColor = System.Drawing.Color.Transparent;
+            this.pnlChangelog.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlChangelog.BackgroundImage")));
             this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
             this.pnlChangelog.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChangelog.Name = "pnlChangelog";

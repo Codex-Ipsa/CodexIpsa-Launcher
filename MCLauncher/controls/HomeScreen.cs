@@ -31,20 +31,19 @@ namespace MCLauncher
 
         public HomeScreen()
         {
-
             Instance = this;
             InitializeComponent();
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
-            selectedInstance = Properties.Settings.Default.lastInstance;
-
-            if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
-                selectedInstance = "Default";
 
             pnlChangelog.AutoScroll = true;
 
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
             {
                 panel1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
+            }
+            if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
+            {
+                pnlChangelog.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //JSON changelog system
@@ -58,17 +57,27 @@ namespace MCLauncher
                 Profile prof = new Profile("Default", "def");
             }
 
+            Logger.Info("[TEST0]", selectedInstance);
             //Load instance list
             loadInstanceList();
+
+            /*if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
+                selectedInstance = "Default";
+            else 
+                selectedInstance = Properties.Settings.Default.lastInstance;
+
+            Logger.Info("[TEST1]", selectedInstance);
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
             {
                 selectedInstance = "Default";
             }
+            Logger.Info("[TEST3]", selectedInstance);
             cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
             Logger.Info("[TEST]", selectedInstance);
-            reloadInstance(selectedInstance);
+            reloadInstance(selectedInstance);*/
+            cmbInstaces.SelectedIndex = cmbInstaces.FindString(Properties.Settings.Default.lastInstance);
 
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json");
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{Properties.Settings.Default.lastInstance}\\instance.json");
             var pj = JsonConvert.DeserializeObject<profileJson>(json);
             Profile.version = pj.version;
             selectedVersion = pj.version;
