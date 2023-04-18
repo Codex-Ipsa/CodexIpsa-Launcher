@@ -330,8 +330,8 @@ namespace MCLauncher.forms
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
             HomeScreen.loadInstanceList();
-            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
-            HomeScreen.reloadInstance(profileName);
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(nameBox.Text);
+            HomeScreen.reloadInstance(nameBox.Text);
 
             this.Close();
         }

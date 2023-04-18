@@ -44,6 +44,7 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
+            modClientPath = "";
             JavaModHelper.Start(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
 
             //todo move this after downloading jar

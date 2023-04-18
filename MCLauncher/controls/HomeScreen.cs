@@ -29,11 +29,14 @@ namespace MCLauncher
         public static string selectedInstance = "Default";
         public static string selectedVersion; //for the "ready to play X" string
 
+        public static string lastInstance;
+
         public HomeScreen()
         {
             Instance = this;
             InitializeComponent();
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
+            lastInstance = Properties.Settings.Default.lastInstance;
 
             pnlChangelog.AutoScroll = true;
 
@@ -58,8 +61,12 @@ namespace MCLauncher
             }
 
             Logger.Info("[TEST0]", selectedInstance);
-            //Load instance list
             loadInstanceList();
+            selectedInstance = lastInstance;
+            if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
+                selectedInstance = "Default";   
+            Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(selectedInstance);
+            reloadInstance(selectedInstance);
 
             /*if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
                 selectedInstance = "Default";
@@ -181,6 +188,7 @@ namespace MCLauncher
             selectedVersion = pj.version;
             selectedEdition = pj.edition;
             Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void loadChangelog()
