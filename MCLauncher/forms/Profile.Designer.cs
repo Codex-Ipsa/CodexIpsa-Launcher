@@ -76,6 +76,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.editionBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepo = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
@@ -91,7 +92,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.editionBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -153,7 +153,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 49);
+            this.label2.Location = new System.Drawing.Point(6, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 5;
@@ -649,6 +649,19 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // editionBox
+            // 
+            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.editionBox.FormattingEnabled = true;
+            this.editionBox.Items.AddRange(new object[] {
+            "Java Edition",
+            "Xbox 360 Edition",
+            "MinecraftEdu"});
+            this.editionBox.Location = new System.Drawing.Point(8, 6);
+            this.editionBox.Name = "editionBox";
+            this.editionBox.Size = new System.Drawing.Size(326, 21);
+            this.editionBox.TabIndex = 45;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btnRepo);
@@ -665,7 +678,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 383);
+            this.tabPage2.Size = new System.Drawing.Size(792, 378);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mods";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -798,19 +811,6 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Config";
-            // 
-            // editionBox
-            // 
-            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.editionBox.FormattingEnabled = true;
-            this.editionBox.Items.AddRange(new object[] {
-            "Java Edition",
-            "Xbox 360 Edition",
-            "MinecraftEdu"});
-            this.editionBox.Location = new System.Drawing.Point(8, 6);
-            this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(326, 21);
-            this.editionBox.TabIndex = 45;
             // 
             // Profile
             // 

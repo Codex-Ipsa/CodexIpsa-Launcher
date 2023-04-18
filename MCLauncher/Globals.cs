@@ -26,7 +26,7 @@ namespace MCLauncher
 
         //Switches
         public static bool isDebug = false;
-        public static bool requireAuth = true; //Change this on release to true
+        public static bool requireAuth = false; //Change this on release to true
 
         //Links
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";
