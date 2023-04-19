@@ -101,6 +101,25 @@ namespace MCLauncher
         public static string lblWhatsNew = "What's new:";
         public static string lblDoDown = "Do you wish to download it?";
 
+        //New Profile
+        public static string grbGame = "Game";
+        public static string lblProfName = "Profile name";
+        public static string lblGameDir = "Game directory";
+        public static string lblReso = "Resolution";
+        public static string lblMem = "Memory";
+        public static string lblMemMax = "Max";
+        public static string lblMemMin = "Min";
+        public static string lblBefCmd = "Before command";
+        public static string lblAftCmd = "After command";
+        public static string chkProxy = "Use skin and sound proxy (<=1.5.2)";
+        public static string chkUseDemo = "Launch demo (>=12w16a)";
+        public static string chkOffline = "Launch in offline mode";
+        public static string chkMulti = "Force multiplayer";
+        public static string grbForExp = "For experts";
+        public static string chkCustJava = "Custom Java";
+        public static string chkCustJson = "Custom JSON";
+        public static string chkClasspath = "Classpath";
+
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
@@ -189,7 +208,25 @@ namespace MCLauncher
                 lblWhatsNew = str.lblWhatsNew;
                 lblDoDown = str.lblDoDown;
 
-                MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
+                grbGame = str.grbGame;
+                lblProfName = str.lblProfName;
+                lblGameDir = str.lblGameDir;
+                lblReso = str.lblReso;
+                lblMem = str.lblMem;
+                lblMemMax = str.lblMemMax;
+                lblMemMin = str.lblMemMin;
+                lblBefCmd = str.lblBefCmd;
+                lblAftCmd = str.lblAftCmd;
+                chkProxy = str.chkProxy;
+                chkUseDemo = str.chkUseDemo;
+                chkOffline = str.chkOffline;
+                chkMulti = str.chkMulti;
+                grbForExp = str.grbForExp;
+                chkCustJava = str.chkCustJava;
+                chkCustJson = str.chkCustJson;
+                chkClasspath = str.chkClasspath;
+
+        MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntAbout;
 
@@ -302,6 +339,24 @@ namespace MCLauncher
             public string lblUpdateAvail { get; set; }
             public string lblWhatsNew { get; set; }
             public string lblDoDown { get; set; }
+
+            public string grbGame { get; set; }
+            public string lblProfName { get; set; }
+            public string lblGameDir { get; set; }
+            public string lblReso { get; set; }
+            public string lblMem { get; set; }
+            public string lblMemMax { get; set; }
+            public string lblMemMin { get; set; }
+            public string lblBefCmd { get; set; }
+            public string lblAftCmd { get; set; }
+            public string chkProxy { get; set; }
+            public string chkUseDemo { get; set; }
+            public string chkOffline { get; set; }
+            public string chkMulti { get; set; }
+            public string grbForExp { get; set; }
+            public string chkCustJava { get; set; }
+            public string chkCustJson { get; set; }
+            public string chkClasspath { get; set; }
         }
     }
 }

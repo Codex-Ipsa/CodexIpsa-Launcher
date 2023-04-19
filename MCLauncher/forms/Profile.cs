@@ -36,6 +36,28 @@ namespace MCLauncher.forms
 
             Instance = this;
 
+            //Load lang
+            grbGame.Text = Strings.grbGame;
+            lblProfName.Text = Strings.lblProfName;
+            lblGameDir.Text = Strings.lblGameDir;
+            lblReso.Text = Strings.lblReso;
+            lblMem.Text = Strings.lblMem;
+            lblMemMax.Text = Strings.lblMemMax;
+            lblMemMin.Text = Strings.lblMemMin;
+            lblBefCmd.Text = Strings.lblBefCmd;
+            lblAftCmd.Text = Strings.lblAftCmd;
+            chkProxy.Text = Strings.chkProxy;
+            chkUseDemo.Text = Strings.chkUseDemo;
+            chkOffline.Text = Strings.chkOffline;
+            chkMulti.Text = Strings.chkMulti;
+            grbForExp.Text = Strings.grbForExp;
+            chkCustJava.Text = Strings.chkCustJava;
+            chkCustJson.Text = Strings.chkCustJson;
+            chkClasspath.Text = Strings.chkClasspath;
+            saveBtn.Text = Strings.btnSaveInst;
+            openBtn.Text = Strings.btnOpenDir;
+            deleteBtn.Text = Strings.btnDeleteInst;
+
             profileName = profile;
             profMode = mode;
 
@@ -78,9 +100,9 @@ namespace MCLauncher.forms
                 ramMinBox.Value = int.Parse(mem[1]);
                 befBox.Text = dj.befCmd;
                 aftBox.Text = dj.aftCmd;
-                javaCheck.Checked = dj.useJava;
+                chkCustJava.Checked = dj.useJava;
                 javaBox.Text = dj.javaPath;
-                if (javaCheck.Checked)
+                if (chkCustJava.Checked)
                 {
                     javaBox.Enabled = true;
                     javaBtn.Enabled = true;
@@ -90,9 +112,9 @@ namespace MCLauncher.forms
                     javaBox.Enabled = false;
                     javaBtn.Enabled = false;
                 }
-                jsonCheck.Checked = dj.useJson;
+                chkCustJson.Checked = dj.useJson;
                 jsonBox.Text = dj.jsonPath;
-                if (jsonCheck.Checked)
+                if (chkCustJson.Checked)
                 {
                     jsonBox.Enabled = true;
                     jsonBtn.Enabled = true;
@@ -102,16 +124,16 @@ namespace MCLauncher.forms
                     jsonBox.Enabled = false;
                     jsonBtn.Enabled = false;
                 }
-                classCheck.Checked = dj.useClass;
-                if (classCheck.Checked)
+                chkClasspath.Checked = dj.useClass;
+                if (chkClasspath.Checked)
                     classBox.Enabled = true;
                 else
                     classBox.Enabled = false;
                 classBox.Text = dj.classpath;
-                demoCheck.Checked = dj.demo;
-                offlineCheck.Checked = dj.offline;
-                proxyCheck.Checked = dj.proxy;
-                mpCheck.Checked = dj.multiplayer;
+                chkUseDemo.Checked = dj.demo;
+                chkOffline.Checked = dj.offline;
+                chkProxy.Checked = dj.proxy;
+                chkMulti.Checked = dj.multiplayer;
 
                 if(dj.edition == "java")
                     editionBox.SelectedIndex = 0;
@@ -292,17 +314,17 @@ namespace MCLauncher.forms
             saveData += $"  \"memory\": \"{ramMaxBox.Value} {ramMinBox.Value}\",\n";
             saveData += $"  \"befCmd\": \"{befBox.Text}\",\n";
             saveData += $"  \"aftCmd\": \"{aftBox.Text}\",\n";
-            saveData += $"  \"useJava\": {javaCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"useJava\": {chkCustJava.Checked.ToString().ToLower()},\n";
             saveData += $"  \"javaPath\": \"{javaBox.Text}\",\n";
-            saveData += $"  \"useJson\": {jsonCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"useJson\": {chkCustJson.Checked.ToString().ToLower()},\n";
             saveData += $"  \"jsonPath\": \"{jsonBox.Text}\",\n";
-            saveData += $"  \"useClass\": {classCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"useClass\": {chkClasspath.Checked.ToString().ToLower()},\n";
             saveData += $"  \"classpath\": \"{classBox.Text}\",\n";
-            saveData += $"  \"demo\": {demoCheck.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"demo\": {chkUseDemo.Checked.ToString().ToLower()},\n";
             saveData += $"  \"modded\": false,\n";
-            saveData += $"  \"offline\": {offlineCheck.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"proxy\": {proxyCheck.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"multiplayer\": {mpCheck.Checked.ToString().ToLower()}\n";
+            saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"proxy\": {chkProxy.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
             if (profMode == "new")
@@ -580,7 +602,7 @@ namespace MCLauncher.forms
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (javaCheck.Checked)
+            if (chkCustJava.Checked)
             {
                 javaBox.Enabled = true;
                 javaBtn.Enabled = true;
@@ -594,7 +616,7 @@ namespace MCLauncher.forms
 
         private void jsonCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (jsonCheck.Checked)
+            if (chkCustJson.Checked)
             {
                 jsonBox.Enabled = true;
                 jsonBtn.Enabled = true;
@@ -608,7 +630,7 @@ namespace MCLauncher.forms
 
         private void classCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if (classCheck.Checked)
+            if (chkClasspath.Checked)
             {
                 classBox.Enabled = true;
             }

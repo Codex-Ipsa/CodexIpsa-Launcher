@@ -32,28 +32,28 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.saveBtn = new System.Windows.Forms.Button();
             this.nameBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblProfName = new System.Windows.Forms.Label();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblGameDir = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.javaBtn = new System.Windows.Forms.Button();
             this.javaBox = new System.Windows.Forms.TextBox();
             this.resXBox = new System.Windows.Forms.TextBox();
             this.resYBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblReso = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblMem = new System.Windows.Forms.Label();
             this.ramMaxBox = new System.Windows.Forms.NumericUpDown();
             this.ramMinBox = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblMemMin = new System.Windows.Forms.Label();
+            this.lblMemMax = new System.Windows.Forms.Label();
+            this.lblAftCmd = new System.Windows.Forms.Label();
             this.aftBox = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblBefCmd = new System.Windows.Forms.Label();
             this.befBox = new System.Windows.Forms.TextBox();
-            this.offlineCheck = new System.Windows.Forms.CheckBox();
-            this.proxyCheck = new System.Windows.Forms.CheckBox();
-            this.demoCheck = new System.Windows.Forms.CheckBox();
+            this.chkOffline = new System.Windows.Forms.CheckBox();
+            this.chkProxy = new System.Windows.Forms.CheckBox();
+            this.chkUseDemo = new System.Windows.Forms.CheckBox();
             this.checkClassic = new System.Windows.Forms.CheckBox();
             this.checkIndev = new System.Windows.Forms.CheckBox();
             this.checkInfdev = new System.Windows.Forms.CheckBox();
@@ -67,13 +67,13 @@
             this.checkPreClassic = new System.Windows.Forms.CheckBox();
             this.jsonBox = new System.Windows.Forms.TextBox();
             this.jsonBtn = new System.Windows.Forms.Button();
-            this.mpCheck = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.javaCheck = new System.Windows.Forms.CheckBox();
-            this.jsonCheck = new System.Windows.Forms.CheckBox();
+            this.chkMulti = new System.Windows.Forms.CheckBox();
+            this.grbForExp = new System.Windows.Forms.GroupBox();
+            this.chkCustJava = new System.Windows.Forms.CheckBox();
+            this.chkCustJson = new System.Windows.Forms.CheckBox();
             this.classBox = new System.Windows.Forms.TextBox();
-            this.classCheck = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkClasspath = new System.Windows.Forms.CheckBox();
+            this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.editionBox = new System.Windows.Forms.ComboBox();
@@ -94,8 +94,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grbForExp.SuspendLayout();
+            this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -133,14 +133,14 @@
             this.nameBox.Size = new System.Drawing.Size(333, 20);
             this.nameBox.TabIndex = 12;
             // 
-            // label1
+            // lblProfName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Profile name";
+            this.lblProfName.AutoSize = true;
+            this.lblProfName.Location = new System.Drawing.Point(6, 22);
+            this.lblProfName.Name = "lblProfName";
+            this.lblProfName.Size = new System.Drawing.Size(67, 13);
+            this.lblProfName.TabIndex = 3;
+            this.lblProfName.Text = "lbl.ProfName";
             // 
             // dirBox
             // 
@@ -150,14 +150,14 @@
             this.dirBox.TabIndex = 13;
             this.dirBox.TextChanged += new System.EventHandler(this.DirBox_TextChanged);
             // 
-            // label2
+            // lblGameDir
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Game directory";
+            this.lblGameDir.AutoSize = true;
+            this.lblGameDir.Location = new System.Drawing.Point(6, 49);
+            this.lblGameDir.Name = "lblGameDir";
+            this.lblGameDir.Size = new System.Drawing.Size(61, 13);
+            this.lblGameDir.TabIndex = 5;
+            this.lblGameDir.Text = "lbl.GameDir";
             // 
             // button1
             // 
@@ -199,14 +199,14 @@
             this.resYBox.Size = new System.Drawing.Size(150, 20);
             this.resYBox.TabIndex = 16;
             // 
-            // label4
+            // lblReso
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 74);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Resolution";
+            this.lblReso.AutoSize = true;
+            this.lblReso.Location = new System.Drawing.Point(6, 74);
+            this.lblReso.Name = "lblReso";
+            this.lblReso.Size = new System.Drawing.Size(45, 13);
+            this.lblReso.TabIndex = 12;
+            this.lblReso.Text = "lbl.Reso";
             // 
             // label5
             // 
@@ -217,14 +217,14 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "x";
             // 
-            // label6
+            // lblMem
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 99);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Memory";
+            this.lblMem.AutoSize = true;
+            this.lblMem.Location = new System.Drawing.Point(6, 99);
+            this.lblMem.Name = "lblMem";
+            this.lblMem.Size = new System.Drawing.Size(43, 13);
+            this.lblMem.TabIndex = 14;
+            this.lblMem.Text = "lbl.Mem";
             // 
             // ramMaxBox
             // 
@@ -282,32 +282,32 @@
             0});
             this.ramMinBox.ValueChanged += new System.EventHandler(this.ramMinBox_ValueChanged);
             // 
-            // label7
+            // lblMemMin
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(257, 99);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(24, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Min";
+            this.lblMemMin.AutoSize = true;
+            this.lblMemMin.Location = new System.Drawing.Point(257, 99);
+            this.lblMemMin.Name = "lblMemMin";
+            this.lblMemMin.Size = new System.Drawing.Size(60, 13);
+            this.lblMemMin.TabIndex = 17;
+            this.lblMemMin.Text = "lbl.MemMin";
             // 
-            // label8
+            // lblMemMax
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(67, 99);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(27, 13);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Max";
+            this.lblMemMax.AutoSize = true;
+            this.lblMemMax.Location = new System.Drawing.Point(67, 99);
+            this.lblMemMax.Name = "lblMemMax";
+            this.lblMemMax.Size = new System.Drawing.Size(63, 13);
+            this.lblMemMax.TabIndex = 18;
+            this.lblMemMax.Text = "lbl.MemMax";
             // 
-            // label9
+            // lblAftCmd
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 152);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "After command";
+            this.lblAftCmd.AutoSize = true;
+            this.lblAftCmd.Location = new System.Drawing.Point(6, 152);
+            this.lblAftCmd.Name = "lblAftCmd";
+            this.lblAftCmd.Size = new System.Drawing.Size(54, 13);
+            this.lblAftCmd.TabIndex = 20;
+            this.lblAftCmd.Text = "lbl.AftCmd";
             // 
             // aftBox
             // 
@@ -316,14 +316,14 @@
             this.aftBox.Size = new System.Drawing.Size(333, 20);
             this.aftBox.TabIndex = 20;
             // 
-            // label10
+            // lblBefCmd
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 126);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Before command";
+            this.lblBefCmd.AutoSize = true;
+            this.lblBefCmd.Location = new System.Drawing.Point(6, 126);
+            this.lblBefCmd.Name = "lblBefCmd";
+            this.lblBefCmd.Size = new System.Drawing.Size(57, 13);
+            this.lblBefCmd.TabIndex = 22;
+            this.lblBefCmd.Text = "lbl.BefCmd";
             // 
             // befBox
             // 
@@ -332,35 +332,35 @@
             this.befBox.Size = new System.Drawing.Size(333, 20);
             this.befBox.TabIndex = 19;
             // 
-            // offlineCheck
+            // chkOffline
             // 
-            this.offlineCheck.AutoSize = true;
-            this.offlineCheck.Location = new System.Drawing.Point(9, 201);
-            this.offlineCheck.Name = "offlineCheck";
-            this.offlineCheck.Size = new System.Drawing.Size(133, 17);
-            this.offlineCheck.TabIndex = 23;
-            this.offlineCheck.Text = "Launch in offline mode";
-            this.offlineCheck.UseVisualStyleBackColor = true;
+            this.chkOffline.AutoSize = true;
+            this.chkOffline.Location = new System.Drawing.Point(9, 201);
+            this.chkOffline.Name = "chkOffline";
+            this.chkOffline.Size = new System.Drawing.Size(77, 17);
+            this.chkOffline.TabIndex = 23;
+            this.chkOffline.Text = "chk.Offline";
+            this.chkOffline.UseVisualStyleBackColor = true;
             // 
-            // proxyCheck
+            // chkProxy
             // 
-            this.proxyCheck.AutoSize = true;
-            this.proxyCheck.Location = new System.Drawing.Point(9, 177);
-            this.proxyCheck.Name = "proxyCheck";
-            this.proxyCheck.Size = new System.Drawing.Size(193, 17);
-            this.proxyCheck.TabIndex = 21;
-            this.proxyCheck.Text = "Use skin and sound proxy (<=1.5.2)";
-            this.proxyCheck.UseVisualStyleBackColor = true;
+            this.chkProxy.AutoSize = true;
+            this.chkProxy.Location = new System.Drawing.Point(9, 177);
+            this.chkProxy.Name = "chkProxy";
+            this.chkProxy.Size = new System.Drawing.Size(73, 17);
+            this.chkProxy.TabIndex = 21;
+            this.chkProxy.Text = "chk.Proxy";
+            this.chkProxy.UseVisualStyleBackColor = true;
             // 
-            // demoCheck
+            // chkUseDemo
             // 
-            this.demoCheck.AutoSize = true;
-            this.demoCheck.Location = new System.Drawing.Point(282, 179);
-            this.demoCheck.Name = "demoCheck";
-            this.demoCheck.Size = new System.Drawing.Size(150, 17);
-            this.demoCheck.TabIndex = 22;
-            this.demoCheck.Text = "Launch demo (>=12w16a)";
-            this.demoCheck.UseVisualStyleBackColor = true;
+            this.chkUseDemo.AutoSize = true;
+            this.chkUseDemo.Location = new System.Drawing.Point(282, 179);
+            this.chkUseDemo.Name = "chkUseDemo";
+            this.chkUseDemo.Size = new System.Drawing.Size(94, 17);
+            this.chkUseDemo.TabIndex = 22;
+            this.chkUseDemo.Text = "chk.UseDemo";
+            this.chkUseDemo.UseVisualStyleBackColor = true;
             // 
             // checkClassic
             // 
@@ -468,9 +468,9 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(630, 349);
+            this.openBtn.Location = new System.Drawing.Point(614, 349);
             this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(75, 23);
+            this.openBtn.Size = new System.Drawing.Size(91, 23);
             this.openBtn.TabIndex = 35;
             this.openBtn.Text = "btn.OpenDir";
             this.openBtn.UseVisualStyleBackColor = true;
@@ -478,9 +478,9 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(549, 349);
+            this.deleteBtn.Location = new System.Drawing.Point(528, 349);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBtn.Size = new System.Drawing.Size(80, 23);
             this.deleteBtn.TabIndex = 34;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
@@ -514,54 +514,54 @@
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
             // 
-            // mpCheck
+            // chkMulti
             // 
-            this.mpCheck.AutoSize = true;
-            this.mpCheck.Location = new System.Drawing.Point(282, 201);
-            this.mpCheck.Name = "mpCheck";
-            this.mpCheck.Size = new System.Drawing.Size(105, 17);
-            this.mpCheck.TabIndex = 24;
-            this.mpCheck.Text = "Force multiplayer";
-            this.mpCheck.UseVisualStyleBackColor = true;
+            this.chkMulti.AutoSize = true;
+            this.chkMulti.Location = new System.Drawing.Point(282, 201);
+            this.chkMulti.Name = "chkMulti";
+            this.chkMulti.Size = new System.Drawing.Size(69, 17);
+            this.chkMulti.TabIndex = 24;
+            this.chkMulti.Text = "chk.Multi";
+            this.chkMulti.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // grbForExp
             // 
-            this.groupBox1.Controls.Add(this.javaCheck);
-            this.groupBox1.Controls.Add(this.jsonCheck);
-            this.groupBox1.Controls.Add(this.classBox);
-            this.groupBox1.Controls.Add(this.classCheck);
-            this.groupBox1.Controls.Add(this.jsonBtn);
-            this.groupBox1.Controls.Add(this.jsonBox);
-            this.groupBox1.Controls.Add(this.javaBox);
-            this.groupBox1.Controls.Add(this.javaBtn);
-            this.groupBox1.Location = new System.Drawing.Point(350, 234);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 100);
-            this.groupBox1.TabIndex = 25;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "For experts";
+            this.grbForExp.Controls.Add(this.chkCustJava);
+            this.grbForExp.Controls.Add(this.chkCustJson);
+            this.grbForExp.Controls.Add(this.classBox);
+            this.grbForExp.Controls.Add(this.chkClasspath);
+            this.grbForExp.Controls.Add(this.jsonBtn);
+            this.grbForExp.Controls.Add(this.jsonBox);
+            this.grbForExp.Controls.Add(this.javaBox);
+            this.grbForExp.Controls.Add(this.javaBtn);
+            this.grbForExp.Location = new System.Drawing.Point(350, 234);
+            this.grbForExp.Name = "grbForExp";
+            this.grbForExp.Size = new System.Drawing.Size(439, 100);
+            this.grbForExp.TabIndex = 25;
+            this.grbForExp.TabStop = false;
+            this.grbForExp.Text = "grb.ForExp";
             // 
-            // javaCheck
+            // chkCustJava
             // 
-            this.javaCheck.AutoSize = true;
-            this.javaCheck.Location = new System.Drawing.Point(9, 19);
-            this.javaCheck.Name = "javaCheck";
-            this.javaCheck.Size = new System.Drawing.Size(87, 17);
-            this.javaCheck.TabIndex = 26;
-            this.javaCheck.Text = "Custom Java";
-            this.javaCheck.UseVisualStyleBackColor = true;
-            this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
+            this.chkCustJava.AutoSize = true;
+            this.chkCustJava.Location = new System.Drawing.Point(9, 19);
+            this.chkCustJava.Name = "chkCustJava";
+            this.chkCustJava.Size = new System.Drawing.Size(91, 17);
+            this.chkCustJava.TabIndex = 26;
+            this.chkCustJava.Text = "chk.CustJava";
+            this.chkCustJava.UseVisualStyleBackColor = true;
+            this.chkCustJava.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
             // 
-            // jsonCheck
+            // chkCustJson
             // 
-            this.jsonCheck.AutoSize = true;
-            this.jsonCheck.Location = new System.Drawing.Point(9, 48);
-            this.jsonCheck.Name = "jsonCheck";
-            this.jsonCheck.Size = new System.Drawing.Size(92, 17);
-            this.jsonCheck.TabIndex = 29;
-            this.jsonCheck.Text = "Custom JSON";
-            this.jsonCheck.UseVisualStyleBackColor = true;
-            this.jsonCheck.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
+            this.chkCustJson.AutoSize = true;
+            this.chkCustJson.Location = new System.Drawing.Point(9, 48);
+            this.chkCustJson.Name = "chkCustJson";
+            this.chkCustJson.Size = new System.Drawing.Size(90, 17);
+            this.chkCustJson.TabIndex = 29;
+            this.chkCustJson.Text = "chk.CustJson";
+            this.chkCustJson.UseVisualStyleBackColor = true;
+            this.chkCustJson.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
             // 
             // classBox
             // 
@@ -570,47 +570,47 @@
             this.classBox.Size = new System.Drawing.Size(335, 20);
             this.classBox.TabIndex = 33;
             // 
-            // classCheck
+            // chkClasspath
             // 
-            this.classCheck.AutoSize = true;
-            this.classCheck.Location = new System.Drawing.Point(9, 74);
-            this.classCheck.Name = "classCheck";
-            this.classCheck.Size = new System.Drawing.Size(72, 17);
-            this.classCheck.TabIndex = 32;
-            this.classCheck.Text = "Classpath";
-            this.classCheck.UseVisualStyleBackColor = true;
-            this.classCheck.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
+            this.chkClasspath.AutoSize = true;
+            this.chkClasspath.Location = new System.Drawing.Point(9, 74);
+            this.chkClasspath.Name = "chkClasspath";
+            this.chkClasspath.Size = new System.Drawing.Size(93, 17);
+            this.chkClasspath.TabIndex = 32;
+            this.chkClasspath.Text = "chk.Classpath";
+            this.chkClasspath.UseVisualStyleBackColor = true;
+            this.chkClasspath.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
             // 
-            // groupBox2
+            // grbGame
             // 
-            this.groupBox2.Controls.Add(this.offlineCheck);
-            this.groupBox2.Controls.Add(this.demoCheck);
-            this.groupBox2.Controls.Add(this.proxyCheck);
-            this.groupBox2.Controls.Add(this.mpCheck);
-            this.groupBox2.Controls.Add(this.aftBox);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.befBox);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.ramMaxBox);
-            this.groupBox2.Controls.Add(this.ramMinBox);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.resXBox);
-            this.groupBox2.Controls.Add(this.resYBox);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.nameBox);
-            this.groupBox2.Controls.Add(this.dirBox);
-            this.groupBox2.Location = new System.Drawing.Point(350, 7);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(439, 224);
-            this.groupBox2.TabIndex = 11;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Game";
+            this.grbGame.Controls.Add(this.chkOffline);
+            this.grbGame.Controls.Add(this.chkUseDemo);
+            this.grbGame.Controls.Add(this.chkProxy);
+            this.grbGame.Controls.Add(this.chkMulti);
+            this.grbGame.Controls.Add(this.aftBox);
+            this.grbGame.Controls.Add(this.lblAftCmd);
+            this.grbGame.Controls.Add(this.befBox);
+            this.grbGame.Controls.Add(this.lblBefCmd);
+            this.grbGame.Controls.Add(this.ramMaxBox);
+            this.grbGame.Controls.Add(this.ramMinBox);
+            this.grbGame.Controls.Add(this.lblMemMin);
+            this.grbGame.Controls.Add(this.lblMemMax);
+            this.grbGame.Controls.Add(this.lblMem);
+            this.grbGame.Controls.Add(this.resXBox);
+            this.grbGame.Controls.Add(this.resYBox);
+            this.grbGame.Controls.Add(this.label5);
+            this.grbGame.Controls.Add(this.lblProfName);
+            this.grbGame.Controls.Add(this.lblGameDir);
+            this.grbGame.Controls.Add(this.button1);
+            this.grbGame.Controls.Add(this.lblReso);
+            this.grbGame.Controls.Add(this.nameBox);
+            this.grbGame.Controls.Add(this.dirBox);
+            this.grbGame.Location = new System.Drawing.Point(350, 7);
+            this.grbGame.Name = "grbGame";
+            this.grbGame.Size = new System.Drawing.Size(439, 224);
+            this.grbGame.TabIndex = 11;
+            this.grbGame.TabStop = false;
+            this.grbGame.Text = "grb.Game";
             // 
             // tabControl1
             // 
@@ -627,12 +627,12 @@
             // 
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
-            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.grbForExp);
             this.tabPage1.Controls.Add(this.saveBtn);
             this.tabPage1.Controls.Add(this.openBtn);
             this.tabPage1.Controls.Add(this.deleteBtn);
             this.tabPage1.Controls.Add(this.checkPreClassic);
-            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.grbGame);
             this.tabPage1.Controls.Add(this.checkIndev);
             this.tabPage1.Controls.Add(this.checkBeta);
             this.tabPage1.Controls.Add(this.checkRelease);
@@ -823,10 +823,10 @@
             this.Text = "Profile manager";
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grbForExp.ResumeLayout(false);
+            this.grbForExp.PerformLayout();
+            this.grbGame.ResumeLayout(false);
+            this.grbGame.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -840,28 +840,28 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblProfName;
         private System.Windows.Forms.TextBox dirBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblGameDir;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button javaBtn;
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.TextBox resXBox;
         private System.Windows.Forms.TextBox resYBox;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblReso;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblMem;
         private System.Windows.Forms.NumericUpDown ramMaxBox;
         private System.Windows.Forms.NumericUpDown ramMinBox;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblMemMin;
+        private System.Windows.Forms.Label lblMemMax;
+        private System.Windows.Forms.Label lblAftCmd;
         private System.Windows.Forms.TextBox aftBox;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblBefCmd;
         private System.Windows.Forms.TextBox befBox;
-        private System.Windows.Forms.CheckBox offlineCheck;
-        private System.Windows.Forms.CheckBox proxyCheck;
-        private System.Windows.Forms.CheckBox demoCheck;
+        private System.Windows.Forms.CheckBox chkOffline;
+        private System.Windows.Forms.CheckBox chkProxy;
+        private System.Windows.Forms.CheckBox chkUseDemo;
         private System.Windows.Forms.CheckBox checkClassic;
         private System.Windows.Forms.CheckBox checkIndev;
         private System.Windows.Forms.CheckBox checkInfdev;
@@ -875,9 +875,9 @@
         private System.Windows.Forms.CheckBox checkPreClassic;
         private System.Windows.Forms.TextBox jsonBox;
         private System.Windows.Forms.Button jsonBtn;
-        private System.Windows.Forms.CheckBox mpCheck;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chkMulti;
+        private System.Windows.Forms.GroupBox grbForExp;
+        private System.Windows.Forms.GroupBox grbGame;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -895,9 +895,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TextBox classBox;
-        private System.Windows.Forms.CheckBox classCheck;
-        private System.Windows.Forms.CheckBox javaCheck;
-        private System.Windows.Forms.CheckBox jsonCheck;
+        private System.Windows.Forms.CheckBox chkClasspath;
+        private System.Windows.Forms.CheckBox chkCustJava;
+        private System.Windows.Forms.CheckBox chkCustJson;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ComboBox editionBox;
     }
