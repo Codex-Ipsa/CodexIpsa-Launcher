@@ -81,7 +81,7 @@ namespace MCLauncher.classes
             string manifestJson = File.ReadAllText(manifestPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
 
-            if (vi.srvJoin == true)
+            if (vi.srvJoin == true || dj.multiplayer == true)
             {
                 EnterIp ei = new EnterIp();
                 ei.ShowDialog();
@@ -165,6 +165,9 @@ namespace MCLauncher.classes
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
                 .Replace("{assetName}", $"\"{vi.assets.name}\"");
 
+            if(dj.offline)
+                vi.cmdAft = vi.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
+
             Process proc = new Process();
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
@@ -199,6 +202,8 @@ namespace MCLauncher.classes
 
             if (srvIP != "")
             {
+                if (dj.offline)
+                    msPlayerMPPass = "-";
                 proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
                 Logger.Info("[JavaLauncher]", $"Server active!");
             }

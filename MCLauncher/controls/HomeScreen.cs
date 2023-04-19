@@ -209,11 +209,11 @@ namespace MCLauncher
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
                             labelHead.Location = new Point((int)x, (int)y);
-                            labelHead.Font = new Font("Arial", 16, FontStyle.Bold);
+                            labelHead.Font = new Font("Arial", 14, FontStyle.Bold);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.White;
                             Instance.pnlChangelog.Controls.Add(labelHead);
-                            y += 14 * 3;
+                            y += 12 * 3;
                         }
                         else if (vers.type == "post")
                         {
@@ -263,7 +263,7 @@ namespace MCLauncher
                             Label labelHead = new Label();
                             labelHead.Text = $"{vers.title}";
                             labelHead.Location = new Point((int)x, (int)y);
-                            labelHead.Font = new Font("Arial", 16, FontStyle.Bold);
+                            labelHead.Font = new Font("Arial", 14, FontStyle.Bold);
                             labelHead.AutoSize = true;
                             labelHead.ForeColor = Color.Red;
                             Instance.pnlChangelog.Controls.Add(labelHead);

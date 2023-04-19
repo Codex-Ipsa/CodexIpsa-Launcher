@@ -110,7 +110,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(328, 301);
-            this.listView1.TabIndex = 0;
+            this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listView1_ColumnWidthChanging);
@@ -121,7 +121,7 @@
             this.saveBtn.Location = new System.Drawing.Point(711, 349);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 1;
+            this.saveBtn.TabIndex = 36;
             this.saveBtn.Text = "btn.Save";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
@@ -131,7 +131,7 @@
             this.nameBox.Location = new System.Drawing.Point(100, 19);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(333, 20);
-            this.nameBox.TabIndex = 2;
+            this.nameBox.TabIndex = 12;
             // 
             // label1
             // 
@@ -147,7 +147,7 @@
             this.dirBox.Location = new System.Drawing.Point(100, 45);
             this.dirBox.Name = "dirBox";
             this.dirBox.Size = new System.Drawing.Size(287, 20);
-            this.dirBox.TabIndex = 4;
+            this.dirBox.TabIndex = 13;
             this.dirBox.TextChanged += new System.EventHandler(this.DirBox_TextChanged);
             // 
             // label2
@@ -164,7 +164,7 @@
             this.button1.Location = new System.Drawing.Point(393, 45);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(39, 20);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 14;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
@@ -174,7 +174,7 @@
             this.javaBtn.Location = new System.Drawing.Point(390, 19);
             this.javaBtn.Name = "javaBtn";
             this.javaBtn.Size = new System.Drawing.Size(43, 20);
-            this.javaBtn.TabIndex = 9;
+            this.javaBtn.TabIndex = 28;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
             // 
@@ -183,21 +183,21 @@
             this.javaBox.Location = new System.Drawing.Point(97, 19);
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(287, 20);
-            this.javaBox.TabIndex = 7;
+            this.javaBox.TabIndex = 27;
             // 
             // resXBox
             // 
             this.resXBox.Location = new System.Drawing.Point(101, 71);
             this.resXBox.Name = "resXBox";
             this.resXBox.Size = new System.Drawing.Size(150, 20);
-            this.resXBox.TabIndex = 10;
+            this.resXBox.TabIndex = 15;
             // 
             // resYBox
             // 
             this.resYBox.Location = new System.Drawing.Point(283, 71);
             this.resYBox.Name = "resYBox";
             this.resYBox.Size = new System.Drawing.Size(150, 20);
-            this.resYBox.TabIndex = 11;
+            this.resYBox.TabIndex = 16;
             // 
             // label4
             // 
@@ -246,7 +246,7 @@
             0});
             this.ramMaxBox.Name = "ramMaxBox";
             this.ramMaxBox.Size = new System.Drawing.Size(150, 20);
-            this.ramMaxBox.TabIndex = 15;
+            this.ramMaxBox.TabIndex = 17;
             this.ramMaxBox.Value = new decimal(new int[] {
             128,
             0,
@@ -274,7 +274,7 @@
             0});
             this.ramMinBox.Name = "ramMinBox";
             this.ramMinBox.Size = new System.Drawing.Size(150, 20);
-            this.ramMinBox.TabIndex = 16;
+            this.ramMinBox.TabIndex = 18;
             this.ramMinBox.Value = new decimal(new int[] {
             128,
             0,
@@ -314,7 +314,7 @@
             this.aftBox.Location = new System.Drawing.Point(99, 149);
             this.aftBox.Name = "aftBox";
             this.aftBox.Size = new System.Drawing.Size(333, 20);
-            this.aftBox.TabIndex = 19;
+            this.aftBox.TabIndex = 20;
             // 
             // label10
             // 
@@ -330,7 +330,7 @@
             this.befBox.Location = new System.Drawing.Point(99, 123);
             this.befBox.Name = "befBox";
             this.befBox.Size = new System.Drawing.Size(333, 20);
-            this.befBox.TabIndex = 21;
+            this.befBox.TabIndex = 19;
             // 
             // offlineCheck
             // 
@@ -348,7 +348,7 @@
             this.proxyCheck.Location = new System.Drawing.Point(9, 177);
             this.proxyCheck.Name = "proxyCheck";
             this.proxyCheck.Size = new System.Drawing.Size(193, 17);
-            this.proxyCheck.TabIndex = 24;
+            this.proxyCheck.TabIndex = 21;
             this.proxyCheck.Text = "Use skin and sound proxy (<=1.5.2)";
             this.proxyCheck.UseVisualStyleBackColor = true;
             // 
@@ -358,7 +358,7 @@
             this.demoCheck.Location = new System.Drawing.Point(282, 179);
             this.demoCheck.Name = "demoCheck";
             this.demoCheck.Size = new System.Drawing.Size(150, 17);
-            this.demoCheck.TabIndex = 25;
+            this.demoCheck.TabIndex = 22;
             this.demoCheck.Text = "Launch demo (>=12w16a)";
             this.demoCheck.UseVisualStyleBackColor = true;
             // 
@@ -370,7 +370,7 @@
             this.checkClassic.Location = new System.Drawing.Point(91, 340);
             this.checkClassic.Name = "checkClassic";
             this.checkClassic.Size = new System.Drawing.Size(59, 17);
-            this.checkClassic.TabIndex = 26;
+            this.checkClassic.TabIndex = 3;
             this.checkClassic.Text = "Classic";
             this.checkClassic.UseVisualStyleBackColor = true;
             this.checkClassic.CheckedChanged += new System.EventHandler(this.checkClassic_CheckedChanged);
@@ -383,7 +383,7 @@
             this.checkIndev.Location = new System.Drawing.Point(218, 340);
             this.checkIndev.Name = "checkIndev";
             this.checkIndev.Size = new System.Drawing.Size(53, 17);
-            this.checkIndev.TabIndex = 27;
+            this.checkIndev.TabIndex = 5;
             this.checkIndev.Text = "Indev";
             this.checkIndev.UseVisualStyleBackColor = true;
             this.checkIndev.CheckedChanged += new System.EventHandler(this.checkIndev_CheckedChanged);
@@ -396,7 +396,7 @@
             this.checkInfdev.Location = new System.Drawing.Point(156, 340);
             this.checkInfdev.Name = "checkInfdev";
             this.checkInfdev.Size = new System.Drawing.Size(56, 17);
-            this.checkInfdev.TabIndex = 28;
+            this.checkInfdev.TabIndex = 4;
             this.checkInfdev.Text = "Infdev";
             this.checkInfdev.UseVisualStyleBackColor = true;
             this.checkInfdev.CheckedChanged += new System.EventHandler(this.checkInfdev_CheckedChanged);
@@ -409,7 +409,7 @@
             this.checkAlpha.Location = new System.Drawing.Point(277, 340);
             this.checkAlpha.Name = "checkAlpha";
             this.checkAlpha.Size = new System.Drawing.Size(53, 17);
-            this.checkAlpha.TabIndex = 29;
+            this.checkAlpha.TabIndex = 6;
             this.checkAlpha.Text = "Alpha";
             this.checkAlpha.UseVisualStyleBackColor = true;
             this.checkAlpha.CheckedChanged += new System.EventHandler(this.checkAlpha_CheckedChanged);
@@ -422,7 +422,7 @@
             this.checkBeta.Location = new System.Drawing.Point(8, 358);
             this.checkBeta.Name = "checkBeta";
             this.checkBeta.Size = new System.Drawing.Size(48, 17);
-            this.checkBeta.TabIndex = 30;
+            this.checkBeta.TabIndex = 7;
             this.checkBeta.Text = "Beta";
             this.checkBeta.UseVisualStyleBackColor = true;
             this.checkBeta.CheckedChanged += new System.EventHandler(this.checkBeta_CheckedChanged);
@@ -435,7 +435,7 @@
             this.checkRelease.Location = new System.Drawing.Point(62, 358);
             this.checkRelease.Name = "checkRelease";
             this.checkRelease.Size = new System.Drawing.Size(65, 17);
-            this.checkRelease.TabIndex = 31;
+            this.checkRelease.TabIndex = 8;
             this.checkRelease.Text = "Release";
             this.checkRelease.UseVisualStyleBackColor = true;
             this.checkRelease.CheckedChanged += new System.EventHandler(this.checkRelease_CheckedChanged);
@@ -448,7 +448,7 @@
             this.checkSnapshot.Location = new System.Drawing.Point(133, 358);
             this.checkSnapshot.Name = "checkSnapshot";
             this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
-            this.checkSnapshot.TabIndex = 32;
+            this.checkSnapshot.TabIndex = 9;
             this.checkSnapshot.Text = "Snapshot";
             this.checkSnapshot.UseVisualStyleBackColor = true;
             this.checkSnapshot.CheckedChanged += new System.EventHandler(this.checkSnapshot_CheckedChanged);
@@ -461,7 +461,7 @@
             this.checkExperimental.Location = new System.Drawing.Point(210, 358);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
-            this.checkExperimental.TabIndex = 33;
+            this.checkExperimental.TabIndex = 10;
             this.checkExperimental.Text = "Experimental";
             this.checkExperimental.UseVisualStyleBackColor = true;
             this.checkExperimental.CheckedChanged += new System.EventHandler(this.checkExperimental_CheckedChanged);
@@ -471,7 +471,7 @@
             this.openBtn.Location = new System.Drawing.Point(630, 349);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
-            this.openBtn.TabIndex = 34;
+            this.openBtn.TabIndex = 35;
             this.openBtn.Text = "btn.OpenDir";
             this.openBtn.UseVisualStyleBackColor = true;
             this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
@@ -481,7 +481,7 @@
             this.deleteBtn.Location = new System.Drawing.Point(549, 349);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(75, 23);
-            this.deleteBtn.TabIndex = 35;
+            this.deleteBtn.TabIndex = 34;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
             // 
@@ -493,7 +493,7 @@
             this.checkPreClassic.Location = new System.Drawing.Point(8, 340);
             this.checkPreClassic.Name = "checkPreClassic";
             this.checkPreClassic.Size = new System.Drawing.Size(77, 17);
-            this.checkPreClassic.TabIndex = 37;
+            this.checkPreClassic.TabIndex = 2;
             this.checkPreClassic.Text = "Pre-classic";
             this.checkPreClassic.UseVisualStyleBackColor = true;
             this.checkPreClassic.CheckedChanged += new System.EventHandler(this.checkPreClassic_CheckedChanged);
@@ -503,14 +503,14 @@
             this.jsonBox.Location = new System.Drawing.Point(97, 46);
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(287, 20);
-            this.jsonBox.TabIndex = 38;
+            this.jsonBox.TabIndex = 30;
             // 
             // jsonBtn
             // 
             this.jsonBtn.Location = new System.Drawing.Point(390, 45);
             this.jsonBtn.Name = "jsonBtn";
             this.jsonBtn.Size = new System.Drawing.Size(43, 20);
-            this.jsonBtn.TabIndex = 39;
+            this.jsonBtn.TabIndex = 31;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
             // 
@@ -520,7 +520,7 @@
             this.mpCheck.Location = new System.Drawing.Point(282, 201);
             this.mpCheck.Name = "mpCheck";
             this.mpCheck.Size = new System.Drawing.Size(105, 17);
-            this.mpCheck.TabIndex = 42;
+            this.mpCheck.TabIndex = 24;
             this.mpCheck.Text = "Force multiplayer";
             this.mpCheck.UseVisualStyleBackColor = true;
             // 
@@ -537,7 +537,7 @@
             this.groupBox1.Location = new System.Drawing.Point(350, 234);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(439, 100);
-            this.groupBox1.TabIndex = 43;
+            this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "For experts";
             // 
@@ -547,7 +547,7 @@
             this.javaCheck.Location = new System.Drawing.Point(9, 19);
             this.javaCheck.Name = "javaCheck";
             this.javaCheck.Size = new System.Drawing.Size(87, 17);
-            this.javaCheck.TabIndex = 48;
+            this.javaCheck.TabIndex = 26;
             this.javaCheck.Text = "Custom Java";
             this.javaCheck.UseVisualStyleBackColor = true;
             this.javaCheck.CheckedChanged += new System.EventHandler(this.javaCheck_CheckedChanged);
@@ -558,7 +558,7 @@
             this.jsonCheck.Location = new System.Drawing.Point(9, 48);
             this.jsonCheck.Name = "jsonCheck";
             this.jsonCheck.Size = new System.Drawing.Size(92, 17);
-            this.jsonCheck.TabIndex = 47;
+            this.jsonCheck.TabIndex = 29;
             this.jsonCheck.Text = "Custom JSON";
             this.jsonCheck.UseVisualStyleBackColor = true;
             this.jsonCheck.CheckedChanged += new System.EventHandler(this.jsonCheck_CheckedChanged);
@@ -568,7 +568,7 @@
             this.classBox.Location = new System.Drawing.Point(97, 72);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(335, 20);
-            this.classBox.TabIndex = 46;
+            this.classBox.TabIndex = 33;
             // 
             // classCheck
             // 
@@ -576,7 +576,7 @@
             this.classCheck.Location = new System.Drawing.Point(9, 74);
             this.classCheck.Name = "classCheck";
             this.classCheck.Size = new System.Drawing.Size(72, 17);
-            this.classCheck.TabIndex = 45;
+            this.classCheck.TabIndex = 32;
             this.classCheck.Text = "Classpath";
             this.classCheck.UseVisualStyleBackColor = true;
             this.classCheck.CheckedChanged += new System.EventHandler(this.classCheck_CheckedChanged);
@@ -608,7 +608,7 @@
             this.groupBox2.Location = new System.Drawing.Point(350, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(439, 224);
-            this.groupBox2.TabIndex = 44;
+            this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game";
             // 
@@ -660,7 +660,7 @@
             this.editionBox.Location = new System.Drawing.Point(8, 6);
             this.editionBox.Name = "editionBox";
             this.editionBox.Size = new System.Drawing.Size(326, 21);
-            this.editionBox.TabIndex = 45;
+            this.editionBox.TabIndex = 0;
             // 
             // tabPage2
             // 

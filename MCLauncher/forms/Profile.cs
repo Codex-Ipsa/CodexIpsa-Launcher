@@ -52,6 +52,7 @@ namespace MCLauncher.forms
                 jsonBtn.Enabled = false;
                 javaBox.Enabled = false;
                 javaBtn.Enabled = false;
+                tabControl1.TabPages.Remove(tabControl1.TabPages[1]);
             }
             else if (profMode == "def")
             {
