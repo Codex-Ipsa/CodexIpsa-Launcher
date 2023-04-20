@@ -17,9 +17,11 @@ namespace MCLauncher
     {
         public static void Start(string instName, string manifestPath)
         {
+            //When I wrote this, only I and my beer can knew how it worked,
+            //now nobody does
+
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
             string clientJson = File.ReadAllText(manifestPath);
-            VersionInfo vi = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
             string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
                 File.WriteAllText(indexPath, $"{{\"forge\": false, \"items\": []}}");
@@ -41,6 +43,26 @@ namespace MCLauncher
                     jsonList.Add(ent.json);
                     Logger.Info("[JavaModHelper]", "ent.json: " + ent.json);
                 }
+
+                if(ent.type == "cusjar")
+                {
+
+                }
+            }
+
+            VersionInfo vi = new VersionInfo();
+            if (jsonList.Count > 0)
+            {
+                Console.WriteLine($"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", jsonList[0]), $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+                string newJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+
+                JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json";
+                vi = JsonConvert.DeserializeObject<VersionInfo>(newJson);
+            }
+            else
+            {
+                vi = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
             }
 
             if (mj.items.Count() > 0)
@@ -49,7 +71,7 @@ namespace MCLauncher
 
                 string toHash = "";
                 var md5 = MD5.Create();
-                if(!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar"))
+                if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar"))
                 {
                     Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
                 }
@@ -77,7 +99,7 @@ namespace MCLauncher
                 patchHash = BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
                 Logger.Info("[JavaModHelper]", $"PatchHash: {patchHash}");
 
-                if(!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
+                if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
                 {
                     if (Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\"))
                         Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
@@ -112,12 +134,6 @@ namespace MCLauncher
                 }
                 Logger.Info("[JavaModHelper]", $"Created patched jar");
                 JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
-
-                if(jsonList.Count > 0)
-                {
-                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", jsonList[0]), $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
-                    JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json";
-                }
             }
         }
 
