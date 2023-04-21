@@ -33,6 +33,8 @@ namespace MCLauncher
 
             List<string> jsonList = new List<string>();
             jsonList.Clear();
+            List<string> cusJarList = new List<string>();
+            cusJarList.Clear();
 
             foreach (ModJsonEntry ent in mj.items)
             {
@@ -43,10 +45,9 @@ namespace MCLauncher
                     jsonList.Add(ent.json);
                     Logger.Info("[JavaModHelper]", "ent.json: " + ent.json);
                 }
-
                 if(ent.type == "cusjar")
                 {
-
+                    cusJarList.Add($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.name}");
                 }
             }
 
@@ -67,15 +68,21 @@ namespace MCLauncher
 
             if (mj.items.Count() > 0)
             {
+                string clientPath = $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar";
+                if (cusJarList.Count() > 0)
+                {
+                    clientPath = cusJarList[0];
+                }
+                Logger.Info("[JavaModHelper]", "clientPath: " + clientPath);
                 Logger.Info("[JavaModHelper]", "count: " + mj.items.Count());
 
                 string toHash = "";
                 var md5 = MD5.Create();
-                if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar"))
+                if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar") && clientPath == $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar")
                 {
                     Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
                 }
-                var stream = File.OpenRead($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
+                var stream = File.OpenRead(clientPath);
 
                 var hash = md5.ComputeHash(stream);
                 toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
@@ -83,9 +90,12 @@ namespace MCLauncher
 
                 foreach (ModJsonEntry ent in mj.items)
                 {
-                    stream = File.OpenRead($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.name}");
-                    hash = md5.ComputeHash(stream);
-                    toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                    if(ent.type != "cusjar")
+                    {
+                        stream = File.OpenRead($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.name}");
+                        hash = md5.ComputeHash(stream);
+                        toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                    }
                 }
 
                 toHash += "CodexIpsa";
@@ -106,27 +116,33 @@ namespace MCLauncher
 
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full");
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch");
-                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
+                    ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
 
                     int count = 0;
                     foreach (ModJsonEntry ent in mj.items)
                     {
-                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.name}", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\");
-                        string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\";
-
-                        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                        if (ent.type != "cusjar")
                         {
-                            Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
-                        }
+                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.name}", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\");
+                            string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\";
 
-                        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                        {
-                            File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
+                            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                            {
+                                Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
+                            }
+
+                            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                            {
+                                File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
+                            }
+                            count++;
                         }
-                        count++;
                     }
 
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
+                    if(cusJarList.Count() <= 0)
+                    {
+                        Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
+                    }
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
                     File.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar");
                     ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar");
