@@ -78,16 +78,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnRepo = new System.Windows.Forms.Button();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.btnMloader = new System.Windows.Forms.Button();
+            this.btnRepos = new System.Windows.Forms.Button();
+            this.btnOpenDotMc = new System.Windows.Forms.Button();
+            this.btnMLoader = new System.Windows.Forms.Button();
             this.btnFabric = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
+            this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnForge = new System.Windows.Forms.Button();
-            this.btnReplace = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnReplaceJar = new System.Windows.Forms.Button();
+            this.btnAddToJar = new System.Windows.Forms.Button();
             this.modView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -664,16 +664,16 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btnRepo);
-            this.tabPage2.Controls.Add(this.btnOpen);
-            this.tabPage2.Controls.Add(this.btnMloader);
+            this.tabPage2.Controls.Add(this.btnRepos);
+            this.tabPage2.Controls.Add(this.btnOpenDotMc);
+            this.tabPage2.Controls.Add(this.btnMLoader);
             this.tabPage2.Controls.Add(this.btnFabric);
-            this.tabPage2.Controls.Add(this.btnDown);
+            this.tabPage2.Controls.Add(this.btnMoveDown);
             this.tabPage2.Controls.Add(this.btnRemove);
-            this.tabPage2.Controls.Add(this.btnUp);
+            this.tabPage2.Controls.Add(this.btnMoveUp);
             this.tabPage2.Controls.Add(this.btnForge);
-            this.tabPage2.Controls.Add(this.btnReplace);
-            this.tabPage2.Controls.Add(this.btnAdd);
+            this.tabPage2.Controls.Add(this.btnReplaceJar);
+            this.tabPage2.Controls.Add(this.btnAddToJar);
             this.tabPage2.Controls.Add(this.modView);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -683,34 +683,34 @@
             this.tabPage2.Text = "Mods";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnRepo
+            // btnRepos
             // 
-            this.btnRepo.Location = new System.Drawing.Point(667, 225);
-            this.btnRepo.Name = "btnRepo";
-            this.btnRepo.Size = new System.Drawing.Size(117, 23);
-            this.btnRepo.TabIndex = 21;
-            this.btnRepo.Text = "Mod repositories";
-            this.btnRepo.UseVisualStyleBackColor = true;
-            this.btnRepo.Click += new System.EventHandler(this.btnRepo_Click);
+            this.btnRepos.Location = new System.Drawing.Point(667, 225);
+            this.btnRepos.Name = "btnRepos";
+            this.btnRepos.Size = new System.Drawing.Size(117, 23);
+            this.btnRepos.TabIndex = 21;
+            this.btnRepos.Text = "btn.Repos";
+            this.btnRepos.UseVisualStyleBackColor = true;
+            this.btnRepos.Click += new System.EventHandler(this.btnRepo_Click);
             // 
-            // btnOpen
+            // btnOpenDotMc
             // 
-            this.btnOpen.Location = new System.Drawing.Point(667, 332);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(117, 23);
-            this.btnOpen.TabIndex = 20;
-            this.btnOpen.Text = "Open .minecraft";
-            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpenDotMc.Location = new System.Drawing.Point(667, 332);
+            this.btnOpenDotMc.Name = "btnOpenDotMc";
+            this.btnOpenDotMc.Size = new System.Drawing.Size(117, 23);
+            this.btnOpenDotMc.TabIndex = 20;
+            this.btnOpenDotMc.Text = "btn.OpenDotMc";
+            this.btnOpenDotMc.UseVisualStyleBackColor = true;
             // 
-            // btnMloader
+            // btnMLoader
             // 
-            this.btnMloader.Enabled = false;
-            this.btnMloader.Location = new System.Drawing.Point(667, 171);
-            this.btnMloader.Name = "btnMloader";
-            this.btnMloader.Size = new System.Drawing.Size(117, 23);
-            this.btnMloader.TabIndex = 19;
-            this.btnMloader.Text = "Install ModLoader";
-            this.btnMloader.UseVisualStyleBackColor = true;
+            this.btnMLoader.Enabled = false;
+            this.btnMLoader.Location = new System.Drawing.Point(667, 171);
+            this.btnMLoader.Name = "btnMLoader";
+            this.btnMLoader.Size = new System.Drawing.Size(117, 23);
+            this.btnMLoader.TabIndex = 19;
+            this.btnMLoader.Text = "btn.MLoader";
+            this.btnMLoader.UseVisualStyleBackColor = true;
             // 
             // btnFabric
             // 
@@ -719,18 +719,18 @@
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
             this.btnFabric.TabIndex = 18;
-            this.btnFabric.Text = "Install Fabric";
+            this.btnFabric.Text = "btn.Fabric";
             this.btnFabric.UseVisualStyleBackColor = true;
             // 
-            // btnDown
+            // btnMoveDown
             // 
-            this.btnDown.Location = new System.Drawing.Point(667, 35);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(117, 23);
-            this.btnDown.TabIndex = 17;
-            this.btnDown.Text = "Move down";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.btnMoveDown.Location = new System.Drawing.Point(667, 35);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(117, 23);
+            this.btnMoveDown.TabIndex = 17;
+            this.btnMoveDown.Text = "btn.MoveDown";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnRemove
             // 
@@ -738,19 +738,19 @@
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(117, 23);
             this.btnRemove.TabIndex = 16;
-            this.btnRemove.Text = "Remove";
+            this.btnRemove.Text = "btn.Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // btnUp
+            // btnMoveUp
             // 
-            this.btnUp.Location = new System.Drawing.Point(667, 6);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(117, 23);
-            this.btnUp.TabIndex = 15;
-            this.btnUp.Text = "Move up";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.btnMoveUp.Location = new System.Drawing.Point(667, 6);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(117, 23);
+            this.btnMoveUp.TabIndex = 15;
+            this.btnMoveUp.Text = "btn.MoveUp";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnForge
             // 
@@ -759,28 +759,28 @@
             this.btnForge.Name = "btnForge";
             this.btnForge.Size = new System.Drawing.Size(117, 23);
             this.btnForge.TabIndex = 14;
-            this.btnForge.Text = "Install Forge";
+            this.btnForge.Text = "btn.Forge";
             this.btnForge.UseVisualStyleBackColor = true;
             // 
-            // btnReplace
+            // btnReplaceJar
             // 
-            this.btnReplace.Location = new System.Drawing.Point(667, 283);
-            this.btnReplace.Name = "btnReplace";
-            this.btnReplace.Size = new System.Drawing.Size(117, 23);
-            this.btnReplace.TabIndex = 13;
-            this.btnReplace.Text = "Replace minecraft.jar";
-            this.btnReplace.UseVisualStyleBackColor = true;
-            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
+            this.btnReplaceJar.Location = new System.Drawing.Point(667, 283);
+            this.btnReplaceJar.Name = "btnReplaceJar";
+            this.btnReplaceJar.Size = new System.Drawing.Size(117, 23);
+            this.btnReplaceJar.TabIndex = 13;
+            this.btnReplaceJar.Text = "btn.ReplaceJar";
+            this.btnReplaceJar.UseVisualStyleBackColor = true;
+            this.btnReplaceJar.Click += new System.EventHandler(this.btnReplace_Click);
             // 
-            // btnAdd
+            // btnAddToJar
             // 
-            this.btnAdd.Location = new System.Drawing.Point(667, 254);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(117, 23);
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "Add to minecraft.jar";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddToJar.Location = new System.Drawing.Point(667, 254);
+            this.btnAddToJar.Name = "btnAddToJar";
+            this.btnAddToJar.Size = new System.Drawing.Size(117, 23);
+            this.btnAddToJar.TabIndex = 12;
+            this.btnAddToJar.Text = "btn.AddToJar";
+            this.btnAddToJar.UseVisualStyleBackColor = true;
+            this.btnAddToJar.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // modView
             // 
@@ -818,6 +818,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 404);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
             this.Text = "Profile manager";
@@ -881,16 +882,16 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnRepo;
-        private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.Button btnMloader;
+        private System.Windows.Forms.Button btnRepos;
+        private System.Windows.Forms.Button btnOpenDotMc;
+        private System.Windows.Forms.Button btnMLoader;
         private System.Windows.Forms.Button btnFabric;
-        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnForge;
-        private System.Windows.Forms.Button btnReplace;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnReplaceJar;
+        private System.Windows.Forms.Button btnAddToJar;
         private System.Windows.Forms.ListView modView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;

@@ -35,6 +35,7 @@ namespace MCLauncher.forms
             InitializeComponent();
 
             Instance = this;
+            this.MaximizeBox = false;
 
             //Load lang
             grbGame.Text = Strings.grbGame;
@@ -57,6 +58,18 @@ namespace MCLauncher.forms
             saveBtn.Text = Strings.btnSaveInst;
             openBtn.Text = Strings.btnOpenDir;
             deleteBtn.Text = Strings.btnDeleteInst;
+
+            btnMoveUp.Text = Strings.btnMoveUp;
+            btnMoveDown.Text = Strings.btnMoveDown;
+            btnRemove.Text = Strings.btnRemove;
+            btnForge.Text = Strings.btnForge;
+            btnFabric.Text = Strings.btnFabric;
+            btnMLoader.Text = Strings.btnMLoader;
+            btnRepos.Text = Strings.btnRepos;
+            btnAddToJar.Text = Strings.btnAddToJar;
+            btnReplaceJar.Text = Strings.btnReplaceJar;
+            btnOpenDotMc.Text = Strings.btnOpenDotMc;
+
 
             profileName = profile;
             profMode = mode;
@@ -135,15 +148,15 @@ namespace MCLauncher.forms
                 chkProxy.Checked = dj.proxy;
                 chkMulti.Checked = dj.multiplayer;
 
-                if(dj.edition == "java")
+                if (dj.edition == "java")
                     editionBox.SelectedIndex = 0;
 
                 reloadModsList();
             }
 
-            listView1.Columns.Add("Name");
-            listView1.Columns.Add("Type");
-            listView1.Columns.Add("Released");
+            listView1.Columns.Add(Strings.rowName);
+            listView1.Columns.Add(Strings.rowType);
+            listView1.Columns.Add(Strings.rowReleased); //TODO
 
             string manifest = Globals.client.DownloadString(Globals.javaManifest);
             vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -346,7 +359,7 @@ namespace MCLauncher.forms
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json"))
             {
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"forge\":false,\"items\":[]}}");
             }
@@ -497,7 +510,7 @@ namespace MCLauncher.forms
                 int i = 0;
                 foreach (ModJsonEntry ent in mj.items)
                 {
-                    if(ent.name == modName)
+                    if (ent.name == modName)
                     {
                         break;
                     }
@@ -518,7 +531,7 @@ namespace MCLauncher.forms
                     }
                     i++;
                 }
-                if(i > 0)
+                if (i > 0)
                 {
                     entries.RemoveAt(i);
                     entries.Insert(i - 1, item);
@@ -544,7 +557,7 @@ namespace MCLauncher.forms
                     entries.RemoveAt(i);
                     Console.WriteLine(i);
                     Console.WriteLine(entries.Count);
-                    entries.Insert(i+1, item);
+                    entries.Insert(i + 1, item);
                 }
             }
 
@@ -561,7 +574,7 @@ namespace MCLauncher.forms
                 toSave += $"    }},\n";
                 y++;
             }
-            if(y > 0)
+            if (y > 0)
             {
                 toSave = toSave.Remove(toSave.LastIndexOf(",")) + "\n";
             }

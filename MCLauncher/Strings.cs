@@ -120,6 +120,28 @@ namespace MCLauncher
         public static string chkCustJson = "Custom JSON";
         public static string chkClasspath = "Classpath";
 
+        //Mods
+        public static string btnMoveUp = "Move up";
+        public static string btnMoveDown = "Move down";
+        public static string btnRemove = "Remove";
+        public static string btnForge = "Install Forge";
+        public static string btnFabric = "Install Fabric";
+        public static string btnMLoader = "Install ModLoader";
+        public static string btnRepos = "Mod repositories";
+        public static string btnAddToJar = "Add to minecraft.jar";
+        public static string btnReplaceJar = "Replace minecraft.jar";
+        public static string btnOpenDotMc = "Open.minecraft";
+        public static string rowName = "Name";
+        public static string rowType = "Type";
+        public static string rowConfig = "Config";
+        public static string rowReleased = "Released";
+
+        //Mod repo
+        public static string btnDownload = "Download";
+        public static string lblAlwaysUpdate = "Always update";
+
+        public static string lblNotReady = "This feature is not ready yet.";
+
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
@@ -226,7 +248,27 @@ namespace MCLauncher
                 chkCustJson = str.chkCustJson;
                 chkClasspath = str.chkClasspath;
 
-        MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
+                btnMoveUp = str.btnMoveUp;
+                btnMoveDown = str.btnMoveDown;
+                btnRemove = str.btnRemove;
+                btnForge = str.btnForge;
+                btnFabric = str.btnFabric;
+                btnMLoader = str.btnMLoader;
+                btnRepos = str.btnRepos;
+                btnAddToJar = str.btnAddToJar;
+                btnReplaceJar = str.btnReplaceJar;
+                btnOpenDotMc = str.btnOpenDotMc;
+                rowName = str.rowName;
+                rowType = str.rowType;
+                rowConfig = str.rowConfig;
+                rowReleased = str.rowReleased;
+
+                btnDownload = str.btnDownload;
+                lblAlwaysUpdate = str.lblAlwaysUpdate;
+
+                lblNotReady = str.lblNotReady;
+
+                MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntAbout;
 
@@ -357,6 +399,26 @@ namespace MCLauncher
             public string chkCustJava { get; set; }
             public string chkCustJson { get; set; }
             public string chkClasspath { get; set; }
+
+            public string btnMoveUp { get; set; }
+            public string btnMoveDown { get; set; }
+            public string btnRemove { get; set; }
+            public string btnForge { get; set; }
+            public string btnFabric { get; set; }
+            public string btnMLoader { get; set; }
+            public string btnRepos { get; set; }
+            public string btnAddToJar { get; set; }
+            public string btnReplaceJar { get; set; }
+            public string btnOpenDotMc { get; set; }
+            public string rowName { get; set; }
+            public string rowType { get; set; }
+            public string rowConfig { get; set; }
+            public string rowReleased { get; set; }
+
+            public string btnDownload { get; set; }
+            public string lblAlwaysUpdate { get; set; }
+
+            public string lblNotReady { get; set; }
         }
     }
 }
