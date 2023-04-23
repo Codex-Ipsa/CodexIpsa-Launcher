@@ -89,9 +89,9 @@
             this.btnReplaceJar = new System.Windows.Forms.Button();
             this.btnAddToJar = new System.Windows.Forms.Button();
             this.modView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -798,19 +798,18 @@
             this.modView.UseCompatibleStateImageBehavior = false;
             this.modView.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // columnHeader2
             // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 89;
+            this.columnHeader2.Text = "Config";
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Type";
-            this.columnHeader5.Width = 77;
             // 
-            // columnHeader2
+            // columnHeader1
             // 
-            this.columnHeader2.Text = "Config";
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 77;
             // 
             // Profile
             // 
@@ -893,13 +892,13 @@
         private System.Windows.Forms.Button btnReplaceJar;
         private System.Windows.Forms.Button btnAddToJar;
         private System.Windows.Forms.ListView modView;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TextBox classBox;
         private System.Windows.Forms.CheckBox chkClasspath;
         private System.Windows.Forms.CheckBox chkCustJava;
         private System.Windows.Forms.CheckBox chkCustJson;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ComboBox editionBox;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

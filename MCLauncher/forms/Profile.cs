@@ -156,7 +156,11 @@ namespace MCLauncher.forms
 
             listView1.Columns.Add(Strings.rowName);
             listView1.Columns.Add(Strings.rowType);
-            listView1.Columns.Add(Strings.rowReleased); //TODO
+            listView1.Columns.Add(Strings.rowReleased);
+
+            modView.Columns[0].Text = Strings.rowName;
+            modView.Columns[1].Text = Strings.rowType;
+            modView.Columns[2].Text = Strings.rowConfig;
 
             string manifest = Globals.client.DownloadString(Globals.javaManifest);
             vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
