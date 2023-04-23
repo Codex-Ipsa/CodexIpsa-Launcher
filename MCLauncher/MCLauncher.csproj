@@ -136,6 +136,12 @@
     <Compile Include="forms\ModWarn.Designer.cs">
       <DependentUpon>ModWarn.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\Output.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Output.Designer.cs">
+      <DependentUpon>Output.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModWarn.resx">
       <DependentUpon>ModWarn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\Output.resx">
+      <DependentUpon>Output.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>

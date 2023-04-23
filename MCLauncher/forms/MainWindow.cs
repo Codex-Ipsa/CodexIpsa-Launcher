@@ -1,4 +1,5 @@
 ﻿using MCLauncher.controls;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,9 @@ namespace MCLauncher
 
         public void loadMainWindow()
         {
+            /*Output ou = new Output();
+            ou.Show();*/
+
             //Set the window name
             Logger.Info($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
             this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name

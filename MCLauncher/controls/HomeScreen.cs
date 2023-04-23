@@ -181,7 +181,7 @@ namespace MCLauncher
 
         public static void reloadInstance(string instName)
         {
-            Logger.Info("HomeScreen/reloadInstance", $"Reload for {instName}");
+            Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
             var pj = JsonConvert.DeserializeObject<profileJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
