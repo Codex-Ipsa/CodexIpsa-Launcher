@@ -13,7 +13,7 @@ namespace MCLauncher
         {
             //Output.AddHeader("#16C60C", header, text);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] [{header}]");
+            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
         }
@@ -22,7 +22,7 @@ namespace MCLauncher
         {
             //Output.AddHeader("#E74856", header, text);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"ERROR  [{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] [{header}] ");
+            Console.Write($"ERROR  [{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine(" " + text);
         }
