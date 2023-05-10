@@ -94,11 +94,23 @@
     <Compile Include="controls\InstanceScreen.Designer.cs">
       <DependentUpon>InstanceScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="controls\JavaProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\JavaProfile.Designer.cs">
+      <DependentUpon>JavaProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="controls\SettingsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\XboxProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\XboxProfile.Designer.cs">
+      <DependentUpon>XboxProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugTools.cs">
       <SubType>Form</SubType>
@@ -219,8 +231,14 @@
     <EmbeddedResource Include="controls\InstanceScreen.resx">
       <DependentUpon>InstanceScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="controls\JavaProfile.resx">
+      <DependentUpon>JavaProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\XboxProfile.resx">
+      <DependentUpon>XboxProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebugTools.resx">
       <DependentUpon>DebugTools.cs</DependentUpon>
