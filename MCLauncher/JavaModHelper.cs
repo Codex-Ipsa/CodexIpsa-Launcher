@@ -149,7 +149,16 @@ namespace MCLauncher
                     Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
                 }
                 Logger.Info("[JavaModHelper]", $"Created patched jar");
-                JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
+
+                //this is a shitty fix
+                if(cusJarList.Count == 1 && mj.items.Length == 1)
+                {
+                    JavaLauncher.modClientPath = cusJarList[0];
+                }
+                else
+                {
+                    JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
+                }
             }
         }
 
