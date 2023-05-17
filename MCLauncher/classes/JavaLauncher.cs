@@ -178,7 +178,10 @@ namespace MCLauncher.classes
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\";
-            proc.StartInfo.FileName = "java.exe"; //java.exe
+            if(dj.useJava)
+                proc.StartInfo.FileName = dj.javaPath;
+            else
+                proc.StartInfo.FileName = "java.exe";
 
             string[] ram = dj.memory.Split(' ');
 

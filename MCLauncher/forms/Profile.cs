@@ -656,6 +656,26 @@ namespace MCLauncher.forms
                 classBox.Enabled = false;
             }
         }
+
+        private void JavaBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                javaBox.Text = ofd.FileName;
+            }
+        }
+
+        private void JsonBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void JavaBox_TextChanged(object sender, EventArgs e)
+        {
+            javaBox.Text = javaBox.Text.Replace("\\", "/");
+        }
     }
 
     public class VersionManifest

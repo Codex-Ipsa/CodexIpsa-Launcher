@@ -76,7 +76,6 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepos = new System.Windows.Forms.Button();
@@ -178,6 +177,7 @@
             this.javaBtn.TabIndex = 28;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
+            this.javaBtn.Click += new System.EventHandler(this.JavaBtn_Click);
             // 
             // javaBox
             // 
@@ -185,6 +185,7 @@
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(287, 20);
             this.javaBox.TabIndex = 27;
+            this.javaBox.TextChanged += new System.EventHandler(this.JavaBox_TextChanged);
             // 
             // resXBox
             // 
@@ -514,6 +515,7 @@
             this.jsonBtn.TabIndex = 31;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
+            this.jsonBtn.Click += new System.EventHandler(this.JsonBtn_Click);
             // 
             // chkMulti
             // 
@@ -626,7 +628,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Controls.Add(this.grbForExp);
@@ -650,14 +651,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(343, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(446, 332);
-            this.panel1.TabIndex = 37;
-            this.panel1.Visible = false;
             // 
             // editionBox
             // 
@@ -910,6 +903,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Panel panel1;
     }
 }
