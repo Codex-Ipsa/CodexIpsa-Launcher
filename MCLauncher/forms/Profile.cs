@@ -669,12 +669,22 @@ namespace MCLauncher.forms
 
         private void JsonBtn_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".JSON files|*.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                jsonBox.Text = ofd.FileName;
+            }
         }
 
         private void JavaBox_TextChanged(object sender, EventArgs e)
         {
             javaBox.Text = javaBox.Text.Replace("\\", "/");
+        }
+
+        private void JsonBox_TextChanged(object sender, EventArgs e)
+        {
+            jsonBox.Text = jsonBox.Text.Replace("\\", "/");
         }
     }
 

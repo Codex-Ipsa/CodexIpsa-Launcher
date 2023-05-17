@@ -506,6 +506,7 @@
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(287, 20);
             this.jsonBox.TabIndex = 30;
+            this.jsonBox.TextChanged += new System.EventHandler(this.JsonBox_TextChanged);
             // 
             // jsonBtn
             // 
