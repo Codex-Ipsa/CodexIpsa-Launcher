@@ -76,6 +76,10 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.xboxPanel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.javaPanel = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepos = new System.Windows.Forms.Button();
@@ -98,6 +102,9 @@
             this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.xboxPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.javaPanel.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -538,7 +545,7 @@
             this.grbForExp.Controls.Add(this.jsonBox);
             this.grbForExp.Controls.Add(this.javaBox);
             this.grbForExp.Controls.Add(this.javaBtn);
-            this.grbForExp.Location = new System.Drawing.Point(350, 234);
+            this.grbForExp.Location = new System.Drawing.Point(5, 227);
             this.grbForExp.Name = "grbForExp";
             this.grbForExp.Size = new System.Drawing.Size(439, 100);
             this.grbForExp.TabIndex = 25;
@@ -609,7 +616,7 @@
             this.grbGame.Controls.Add(this.lblReso);
             this.grbGame.Controls.Add(this.nameBox);
             this.grbGame.Controls.Add(this.dirBox);
-            this.grbGame.Location = new System.Drawing.Point(350, 7);
+            this.grbGame.Location = new System.Drawing.Point(5, 3);
             this.grbGame.Name = "grbGame";
             this.grbGame.Size = new System.Drawing.Size(439, 224);
             this.grbGame.TabIndex = 11;
@@ -629,14 +636,14 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.xboxPanel);
+            this.tabPage1.Controls.Add(this.javaPanel);
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
-            this.tabPage1.Controls.Add(this.grbForExp);
             this.tabPage1.Controls.Add(this.saveBtn);
             this.tabPage1.Controls.Add(this.openBtn);
             this.tabPage1.Controls.Add(this.deleteBtn);
             this.tabPage1.Controls.Add(this.checkPreClassic);
-            this.tabPage1.Controls.Add(this.grbGame);
             this.tabPage1.Controls.Add(this.checkIndev);
             this.tabPage1.Controls.Add(this.checkBeta);
             this.tabPage1.Controls.Add(this.checkRelease);
@@ -653,18 +660,57 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // xboxPanel
+            // 
+            this.xboxPanel.Controls.Add(this.groupBox1);
+            this.xboxPanel.Location = new System.Drawing.Point(340, 6);
+            this.xboxPanel.Name = "xboxPanel";
+            this.xboxPanel.Size = new System.Drawing.Size(452, 328);
+            this.xboxPanel.TabIndex = 26;
+            this.xboxPanel.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox3);
+            this.groupBox1.Location = new System.Drawing.Point(5, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(439, 46);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "grb.Game";
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(9, 19);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(75, 17);
+            this.checkBox3.TabIndex = 21;
+            this.checkBox3.Text = "chk.Demo";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // javaPanel
+            // 
+            this.javaPanel.Controls.Add(this.grbGame);
+            this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Location = new System.Drawing.Point(340, 6);
+            this.javaPanel.Name = "javaPanel";
+            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.TabIndex = 25;
+            // 
             // editionBox
             // 
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.editionBox.FormattingEnabled = true;
             this.editionBox.Items.AddRange(new object[] {
             "Java Edition",
-            "Xbox 360 Edition",
-            "MinecraftEdu"});
+            "MinecraftEdu",
+            "Xbox 360 Edition"});
             this.editionBox.Location = new System.Drawing.Point(8, 6);
             this.editionBox.Name = "editionBox";
             this.editionBox.Size = new System.Drawing.Size(326, 21);
             this.editionBox.TabIndex = 0;
+            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -834,6 +880,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.xboxPanel.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.javaPanel.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -904,5 +954,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Panel javaPanel;
+        private System.Windows.Forms.Panel xboxPanel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }

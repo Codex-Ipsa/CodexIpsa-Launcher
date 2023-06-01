@@ -2,19 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -22,6 +12,7 @@ namespace MCLauncher.forms
     {
         public static string profileName = "";
         public static string version = "b1.7.3";
+        public static string edition = "java";
         public static string profMode = "";
 
         public List<VersionManifest> vj = new List<VersionManifest>();
@@ -148,8 +139,21 @@ namespace MCLauncher.forms
                 chkProxy.Checked = dj.proxy;
                 chkMulti.Checked = dj.multiplayer;
 
-                if (dj.edition == "java")
+                if (dj.edition == "x360")
+                {
+                    edition = "x360";
+                    editionBox.SelectedIndex = 2;
+                }
+                else if (dj.edition == "javaedu")
+                {
+                    edition = "javaedu";
+                    editionBox.SelectedIndex = 1;
+                }
+                else
+                {
+                    edition = "java";
                     editionBox.SelectedIndex = 0;
+                }
 
                 reloadModsList();
             }
@@ -324,7 +328,7 @@ namespace MCLauncher.forms
             string saveData = "";
             saveData += $"{{\n";
             saveData += $"  \"data\": 1,\n";
-            saveData += $"  \"edition\": \"java\",\n";
+            saveData += $"  \"edition\": \"{edition}\",\n";
             saveData += $"  \"version\": \"{version}\",\n";
             saveData += $"  \"directory\": \"{dirBox.Text}\",\n";
             saveData += $"  \"resolution\": \"{resXBox.Text} {resYBox.Text}\",\n";
@@ -661,7 +665,7 @@ namespace MCLauncher.forms
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Executables|*.exe";
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 javaBox.Text = ofd.FileName;
             }
@@ -685,6 +689,28 @@ namespace MCLauncher.forms
         private void JsonBox_TextChanged(object sender, EventArgs e)
         {
             jsonBox.Text = jsonBox.Text.Replace("\\", "/");
+        }
+
+        private void editionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (editionBox.Text.Contains("Xbox 360"))
+            {
+                edition = "x360";
+                javaPanel.Visible = false;
+                xboxPanel.Visible = true;
+            }
+            if (editionBox.Text.Contains("MinecraftEdu"))
+            {
+                edition = "javaedu";
+                javaPanel.Visible = true;
+                xboxPanel.Visible = false;
+            }
+            else
+            {
+                edition = "java";
+                javaPanel.Visible = true;
+                xboxPanel.Visible = false;
+            }
         }
     }
 
