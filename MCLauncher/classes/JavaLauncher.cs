@@ -53,6 +53,7 @@ namespace MCLauncher.classes
                 string toAdd = $"[\n";
                 toAdd += $"  {{\n";
                 toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
+                toAdd += $"    \"alt\": \"{Profile.lastAlt}\",\n";
                 toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
                 toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
                 toAdd += $"  }}\n";
@@ -63,6 +64,7 @@ namespace MCLauncher.classes
             {
                 string toAdd = $"  {{\n";
                 toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
+                toAdd += $"    \"alt\": \"{Profile.lastAlt}\",\n";
                 toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
                 toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
                 toAdd += $"  }},";

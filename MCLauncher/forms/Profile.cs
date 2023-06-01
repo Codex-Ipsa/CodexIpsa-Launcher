@@ -17,6 +17,7 @@ namespace MCLauncher.forms
 
         public List<VersionManifest> vj = new List<VersionManifest>();
         public static string lastSelected;
+        public static string lastAlt;
         public static string lastDate;
         public static string lastType;
         public static Profile Instance;
@@ -194,31 +195,31 @@ namespace MCLauncher.forms
                 string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 
                 if (checkPreClassic.Checked && row[0] == "pre-classic")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkClassic.Checked && row[0] == "classic")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkIndev.Checked && row[0] == "indev")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkInfdev.Checked && row[0] == "infdev")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkAlpha.Checked && row[0] == "alpha")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkBeta.Checked && row[0] == "beta")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkRelease.Checked && row[0] == "release")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkSnapshot.Checked && row[0] == "snapshot")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (checkExperimental.Checked && row[0] == "experimental")
-                    listView1.Items.Add(ver.id).SubItems.AddRange(row);
+                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -1;
@@ -297,6 +298,15 @@ namespace MCLauncher.forms
             if (listView1.SelectedItems.Count > 0)
             {
                 lastSelected = listView1.SelectedItems[0].SubItems[0].Text;
+
+                if (lastSelected.Contains(" ("))
+                    lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
+
+                if (listView1.SelectedItems[0].SubItems[0].Text.Contains(" ("))
+                    lastAlt = listView1.SelectedItems[0].SubItems[0].Text.Split('(', ')')[1];
+                else
+                    lastAlt = "";
+
                 lastType = listView1.SelectedItems[0].SubItems[1].Text;
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
@@ -313,7 +323,12 @@ namespace MCLauncher.forms
         {
             if (listView1.SelectedIndices.Count == 1)
             {
+
                 version = listView1.SelectedItems[0].SubItems[0].Text;
+
+                if (version.Contains(" ("))
+                    version = version.Substring(0, version.IndexOf(" ("));
+
                 string type = listView1.SelectedItems[0].SubItems[1].Text;
                 string date = listView1.SelectedItems[0].SubItems[2].Text;
                 Logger.Info(this.GetType().Name, $"ver {version}, type {type}, date {date}");
@@ -321,6 +336,8 @@ namespace MCLauncher.forms
             else
             {
                 version = lastSelected;
+                if (version.Contains(" ("))
+                    version = version.Substring(0, version.IndexOf(" ("));
             }
 
             profileName = nameBox.Text;
@@ -717,6 +734,7 @@ namespace MCLauncher.forms
     public class VersionManifest
     {
         public string id { get; set; }
+        public string alt { get; set; }
         public string type { get; set; }
         public DateTime released { get; set; }
     }
