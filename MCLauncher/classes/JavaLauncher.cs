@@ -167,7 +167,21 @@ namespace MCLauncher.classes
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
                 .Replace("{assetName}", $"\"{vi.assets.name}\"");
 
-            if(dj.offline)
+            if (vi.supplement != null)
+            {
+                foreach (var sup in vi.supplement)
+                {
+                    string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft");
+                    if (!File.Exists(supPath + sup.name) || sup.renew)
+                    {
+                        Logger.Info("[JavaLauncher]", $"Downloading supplement {sup.name}...");
+                        Directory.CreateDirectory(supPath);
+                        Globals.client.DownloadFile(sup.url, supPath + sup.name);
+                    }
+                }
+            }
+
+            if (dj.offline)
                 vi.cmdAft = vi.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
 
             Process proc = new Process();
@@ -278,6 +292,7 @@ namespace MCLauncher.classes
         public bool srvJoin { get; set; }
         public VersionInfoAssets assets { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
+        public VersionInfoSupplement[] supplement { get; set; }
     }
 
     public class VersionInfoLibrary
@@ -292,5 +307,13 @@ namespace MCLauncher.classes
     {
         public string name { get; set; }
         public string url { get; set; }
+    }
+
+    public class VersionInfoSupplement
+    {
+        public string url { get; set; }
+        public string path { get; set; }
+        public string name { get; set; }
+        public bool renew { get; set; }
     }
 }
