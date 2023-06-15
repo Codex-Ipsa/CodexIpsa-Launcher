@@ -636,7 +636,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.xboxPanel);
             this.tabPage1.Controls.Add(this.javaPanel);
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
@@ -652,6 +651,7 @@
             this.tabPage1.Controls.Add(this.checkClassic);
             this.tabPage1.Controls.Add(this.checkInfdev);
             this.tabPage1.Controls.Add(this.checkAlpha);
+            this.tabPage1.Controls.Add(this.xboxPanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -691,8 +691,8 @@
             // 
             // javaPanel
             // 
-            this.javaPanel.Controls.Add(this.grbGame);
             this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Controls.Add(this.grbGame);
             this.javaPanel.Location = new System.Drawing.Point(340, 6);
             this.javaPanel.Name = "javaPanel";
             this.javaPanel.Size = new System.Drawing.Size(452, 328);
