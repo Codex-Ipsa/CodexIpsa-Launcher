@@ -124,6 +124,12 @@
     <Compile Include="EnterIp.Designer.cs">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\AssetsDownloader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\AssetsDownloader.Designer.cs">
+      <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\ModLoaders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\AssetsDownloader.resx">
+      <DependentUpon>AssetsDownloader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModLoaders.resx">
       <DependentUpon>ModLoaders.cs</DependentUpon>

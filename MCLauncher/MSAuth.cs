@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using MCLauncher.classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher
 {
@@ -606,6 +607,17 @@ namespace MCLauncher
             Logger.Info("[MSAuth]", "Worker completed!");
             deviceFlow();
             this.Close();
+        }
+
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(textBox1.Text);
+        }
+
+        private void textBox1_MouseHover(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
+            toolTip.SetToolTip(textBox1, "Click to copy to clipboard");
         }
     }
 }
