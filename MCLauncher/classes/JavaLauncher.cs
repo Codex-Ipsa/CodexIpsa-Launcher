@@ -203,7 +203,7 @@ namespace MCLauncher.classes
 
             proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
 
-            if (vi.cmdBef != "" && dj.proxy == true)
+            if (vi.cmdBef != "" && dj.disProxy == false)
                 proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft")} ";
             if (dj.befCmd != "")
                 proc.StartInfo.Arguments += $"{dj.befCmd} ";

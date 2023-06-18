@@ -137,7 +137,7 @@ namespace MCLauncher.forms
                 classBox.Text = dj.classpath;
                 chkUseDemo.Checked = dj.demo;
                 chkOffline.Checked = dj.offline;
-                chkProxy.Checked = dj.proxy;
+                chkProxy.Checked = dj.disProxy;
                 chkMulti.Checked = dj.multiplayer;
 
                 if (dj.edition == "x360")
@@ -361,7 +361,7 @@ namespace MCLauncher.forms
             saveData += $"  \"demo\": {chkUseDemo.Checked.ToString().ToLower()},\n";
             saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"proxy\": {chkProxy.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"disProxy\": {chkProxy.Checked.ToString().ToLower()},\n";
             saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
@@ -757,7 +757,7 @@ namespace MCLauncher.forms
         public string classpath { get; set; }
         public bool demo { get; set; }
         public bool offline { get; set; }
-        public bool proxy { get; set; }
+        public bool disProxy { get; set; }
         public bool multiplayer { get; set; }
     }
 

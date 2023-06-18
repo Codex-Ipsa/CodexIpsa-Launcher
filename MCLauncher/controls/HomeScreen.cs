@@ -165,6 +165,16 @@ namespace MCLauncher
                     {
                         updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
                     }
+                    if(text.Contains("\"proxy\": true"))
+                    {
+                        text = text.Replace("\"proxy\": true", "\"disProxy\": false");
+                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
+                    }
+                    else if(text.Contains("\"proxy\": false"))
+                    {
+                        text = text.Replace("\"proxy\": false", "\"disProxy\": false");
+                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
+                    }
 
                     instanceList.Add(dirName);
                 }

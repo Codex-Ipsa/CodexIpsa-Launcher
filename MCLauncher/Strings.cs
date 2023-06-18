@@ -71,7 +71,7 @@ namespace MCLauncher
         public static string lblJvmArgs = "JVM arguments:";
         public static string lblCustJar = "Custom JAR:";
         public static string lblOfflineLaunch = "Launch in offline mode";
-        public static string lblUseProxy = "Use skin and sound proxy (use up to 1.5.2)";
+        public static string lblUseProxy = "Disable skin and sound fixes";
         public static string titleProfileMan = "Profile manager";
         public static string tabEditor = "Profile editor";
 
