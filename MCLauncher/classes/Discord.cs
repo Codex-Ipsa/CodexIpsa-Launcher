@@ -36,7 +36,7 @@ namespace MCLauncher.classes
                 Logger.Error("[Discord]", "Could not initialize DiscordClient! Connect to the internet!");
             }
         }
-        public static async Task ChangeMessage(string message)
+        public static void ChangeMessage(string message)
         {
             if (client != null)
             {
@@ -50,35 +50,10 @@ namespace MCLauncher.classes
                     },
                     Timestamps = new Timestamps()
                     {
-                        Start = DateTime.Now
+                        Start = DateTime.UtcNow
                     }
 
                 });
-            }
-        }
-
-        public static async Task UpdateTimer(string message, int minutes)
-        {
-            if (client != null)
-            {
-                minutes++;
-                client.SetPresence(new RichPresence()
-                {
-                    Details = message,
-                    Assets = new Assets()
-                    {
-                        LargeImageKey = "discord",
-                        LargeImageText = "Codex-Ipsa Launcher"
-                    },
-                    Timestamps = new Timestamps()
-                    {
-                        Start = DateTime.Now
-                    }
-
-                });
-
-                await Task.Delay(60000);
-                    UpdateTimer(message, minutes);
             }
         }
     }
