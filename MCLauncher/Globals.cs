@@ -18,7 +18,7 @@ namespace MCLauncher
         public static string branch = "experimental"; //dev //omega13 //stable //dev-instances
         public static string verCurrent = "0.2.0-re6"; //Change this on release
         public static string verDisplay = "0.2.0-re6"; //Change this on release
-        public static string discordClient = "1120382404801069096"; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
+        public static string discordClient = "***REMOVED***"; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
