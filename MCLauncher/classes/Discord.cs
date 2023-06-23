@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Threading;
+using MCLauncher.Properties;
 
 namespace MCLauncher.classes
 {
@@ -18,18 +19,21 @@ namespace MCLauncher.classes
         {
             try
             {
-                client = new DiscordRpcClient(Globals.discordClient);
-                client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
-                client.OnReady += (sender, e) =>
+                if(Properties.Settings.Default.discordRpc)
                 {
-                    Console.WriteLine("Received Ready from user {0}", e.User.Username);
-                };
+                    client = new DiscordRpcClient(Globals.discordClient);
+                    client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
+                    client.OnReady += (sender, e) =>
+                    {
+                        Console.WriteLine("Received Ready from user {0}", e.User.Username);
+                    };
 
-                client.OnPresenceUpdate += (sender, e) =>
-                {
-                    Console.WriteLine("Received Update! {0}", e.Presence);
-                };
-                client.Initialize();
+                    client.OnPresenceUpdate += (sender, e) =>
+                    {
+                        Console.WriteLine("Received Update! {0}", e.Presence);
+                    };
+                    client.Initialize();
+                }
             }
             catch
             {
@@ -38,7 +42,7 @@ namespace MCLauncher.classes
         }
         public static void ChangeMessage(string message)
         {
-            if (client != null)
+            if (client != null && Properties.Settings.Default.discordRpc)
             {
                 client.SetPresence(new RichPresence()
                 {

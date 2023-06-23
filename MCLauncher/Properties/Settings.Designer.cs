@@ -12,7 +12,7 @@ namespace MCLauncher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -32,54 +32,6 @@ namespace MCLauncher.Properties {
             }
             set {
                 this["playerName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool isDemo {
-            get {
-                return ((bool)(this["isDemo"]));
-            }
-            set {
-                this["isDemo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
-        public decimal ramXMX {
-            get {
-                return ((decimal)(this["ramXMX"]));
-            }
-            set {
-                this["ramXMX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("512")]
-        public decimal ramXMS {
-            get {
-                return ((decimal)(this["ramXMS"]));
-            }
-            set {
-                this["ramXMS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ownJava {
-            get {
-                return ((bool)(this["ownJava"]));
-            }
-            set {
-                this["ownJava"] = value;
             }
         }
         
@@ -126,6 +78,18 @@ namespace MCLauncher.Properties {
             }
             set {
                 this["lastInstance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool discordRpc {
+            get {
+                return ((bool)(this["discordRpc"]));
+            }
+            set {
+                this["discordRpc"] = value;
             }
         }
     }

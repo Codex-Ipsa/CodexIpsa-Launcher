@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbLauncher = new System.Windows.Forms.GroupBox();
+            this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
             this.lblLang = new System.Windows.Forms.Label();
             this.cmbLangSelect = new System.Windows.Forms.ComboBox();
             this.grbUpdates = new System.Windows.Forms.GroupBox();
@@ -47,23 +48,37 @@
             this.pnlCenter.BackColor = System.Drawing.Color.Transparent;
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
-            this.pnlCenter.Location = new System.Drawing.Point(169, 116);
+            this.pnlCenter.Location = new System.Drawing.Point(169, 110);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(446, 154);
-            this.pnlCenter.TabIndex = 22;
+            this.pnlCenter.Size = new System.Drawing.Size(446, 166);
+            this.pnlCenter.TabIndex = 23;
             // 
             // grbLauncher
             // 
             this.grbLauncher.BackColor = System.Drawing.Color.Transparent;
+            this.grbLauncher.Controls.Add(this.chkDiscordRpc);
             this.grbLauncher.Controls.Add(this.lblLang);
             this.grbLauncher.Controls.Add(this.cmbLangSelect);
             this.grbLauncher.ForeColor = System.Drawing.Color.White;
             this.grbLauncher.Location = new System.Drawing.Point(0, 0);
             this.grbLauncher.Name = "grbLauncher";
-            this.grbLauncher.Size = new System.Drawing.Size(446, 58);
+            this.grbLauncher.Size = new System.Drawing.Size(446, 70);
             this.grbLauncher.TabIndex = 20;
             this.grbLauncher.TabStop = false;
             this.grbLauncher.Text = "grb.launcher";
+            // 
+            // chkDiscordRpc
+            // 
+            this.chkDiscordRpc.AutoSize = true;
+            this.chkDiscordRpc.Checked = true;
+            this.chkDiscordRpc.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDiscordRpc.Location = new System.Drawing.Point(9, 48);
+            this.chkDiscordRpc.Name = "chkDiscordRpc";
+            this.chkDiscordRpc.Size = new System.Drawing.Size(101, 17);
+            this.chkDiscordRpc.TabIndex = 2;
+            this.chkDiscordRpc.Text = "chk.discordRpc";
+            this.chkDiscordRpc.UseVisualStyleBackColor = true;
+            this.chkDiscordRpc.CheckedChanged += new System.EventHandler(this.chkDiscordRpc_CheckedChanged);
             // 
             // lblLang
             // 
@@ -91,7 +106,7 @@
             this.grbUpdates.Controls.Add(this.lblBranch);
             this.grbUpdates.Controls.Add(this.cmbUpdateSelect);
             this.grbUpdates.ForeColor = System.Drawing.Color.White;
-            this.grbUpdates.Location = new System.Drawing.Point(0, 64);
+            this.grbUpdates.Location = new System.Drawing.Point(0, 76);
             this.grbUpdates.Name = "grbUpdates";
             this.grbUpdates.Size = new System.Drawing.Size(446, 90);
             this.grbUpdates.TabIndex = 21;
@@ -151,12 +166,13 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlCenter;
-        private System.Windows.Forms.ComboBox cmbLangSelect;
-        private System.Windows.Forms.ComboBox cmbUpdateSelect;
         public System.Windows.Forms.GroupBox grbLauncher;
         public System.Windows.Forms.Label lblLang;
+        private System.Windows.Forms.ComboBox cmbLangSelect;
         public System.Windows.Forms.GroupBox grbUpdates;
         public System.Windows.Forms.Button btnCheckUpdates;
         public System.Windows.Forms.Label lblBranch;
+        private System.Windows.Forms.ComboBox cmbUpdateSelect;
+        public System.Windows.Forms.CheckBox chkDiscordRpc;
     }
 }
