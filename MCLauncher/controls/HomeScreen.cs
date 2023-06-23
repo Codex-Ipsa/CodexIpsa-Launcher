@@ -1,4 +1,6 @@
-﻿using MCLauncher.classes;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
+using MCLauncher.classes;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
@@ -90,6 +92,9 @@ namespace MCLauncher
             selectedVersion = pj.version;
             selectedEdition = pj.edition;
             Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+
+            Discord.Init();
+            Discord.ChangeMessage("Idling");
         }
 
         public static void checkAuth()
