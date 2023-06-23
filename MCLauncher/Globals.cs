@@ -16,8 +16,9 @@ namespace MCLauncher
         //Manual
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
         public static string branch = "experimental"; //dev //omega13 //stable //dev-instances
-        public static string verCurrent = "0.2.0-re5"; //Change this on release
-        public static string verDisplay = "0.2.0-re5"; //Change this on release
+        public static string verCurrent = "0.2.0-re6"; //Change this on release
+        public static string verDisplay = "0.2.0-re6"; //Change this on release
+        public static string discordClient = "***REMOVED***"; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
         public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -26,7 +27,7 @@ namespace MCLauncher
 
         //Switches
         public static bool isDebug = false;
-        public static bool requireAuth = false; //Change this on release to true
+        public static bool requireAuth = true; //Change this on release to true
 
         //Links
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";

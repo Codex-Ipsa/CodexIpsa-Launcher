@@ -187,6 +187,7 @@ namespace MCLauncher.classes
             Process proc = new Process();
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
+            proc.Exited += OnProcessExited;
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -244,6 +245,7 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
             try
             {
+                Discord.ChangeMessage($"Playing {vi.game} {vi.version}");
                 proc.Start();
             }
             catch (System.ComponentModel.Win32Exception e)
@@ -253,6 +255,7 @@ namespace MCLauncher.classes
                     DownloadJava.Start();
 
                 proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
+                Discord.ChangeMessage($"Playing {vi.game} {vi.version}");
                 proc.Start();
             }
 
@@ -260,6 +263,11 @@ namespace MCLauncher.classes
             proc.BeginOutputReadLine();
 
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
+        }
+
+        private static void OnProcessExited(object sender, EventArgs e)
+        {
+            Discord.ChangeMessage($"Idling");
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
