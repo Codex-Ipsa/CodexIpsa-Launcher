@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
+using System.Threading;
 
 namespace MCLauncher.classes
 {
     internal class Discord
     {
         public static DiscordRpcClient client;
-        public static bool work = true;
 
         public static async void Init()
         {
@@ -37,34 +38,46 @@ namespace MCLauncher.classes
         }
         public static async Task ChangeMessage(string message)
         {
-            if(client != null)
+            if (client != null)
             {
-                work = false;
-                
-                //todo
-                //await Task.Delay(60000);
-                UpdateTimer(message, 0);
+                client.SetPresence(new RichPresence()
+                {
+                    Details = message,
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = "discord",
+                        LargeImageText = "Codex-Ipsa Launcher"
+                    },
+                    Timestamps = new Timestamps()
+                    {
+                        Start = DateTime.Now
+                    }
+
+                });
             }
         }
 
         public static async Task UpdateTimer(string message, int minutes)
         {
-            if(client != null)
+            if (client != null)
             {
                 minutes++;
                 client.SetPresence(new RichPresence()
                 {
                     Details = message,
-                    State = $"for {minutes} minutes",
                     Assets = new Assets()
                     {
                         LargeImageKey = "discord",
                         LargeImageText = "Codex-Ipsa Launcher"
+                    },
+                    Timestamps = new Timestamps()
+                    {
+                        Start = DateTime.Now
                     }
+
                 });
 
                 await Task.Delay(60000);
-                if(work)
                     UpdateTimer(message, minutes);
             }
         }
