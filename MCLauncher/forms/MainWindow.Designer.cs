@@ -138,6 +138,7 @@ namespace MCLauncher
             this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "MainWindow";
             this.Text = "Launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.ResizeBegin += new System.EventHandler(this.MainWindow_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.MainWindow_ResizeEnd);
             this.panel3.ResumeLayout(false);

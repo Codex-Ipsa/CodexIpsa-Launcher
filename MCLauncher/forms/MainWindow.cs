@@ -1,4 +1,5 @@
-﻿using MCLauncher.controls;
+﻿using MCLauncher.classes;
+using MCLauncher.controls;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
@@ -208,6 +209,11 @@ namespace MCLauncher
         private void instanceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             addInstance();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Discord.client.Dispose();
         }
     }
 }

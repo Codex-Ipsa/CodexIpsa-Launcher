@@ -185,6 +185,7 @@ namespace MCLauncher.classes
                 vi.cmdAft = vi.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
 
             Process proc = new Process();
+            proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
             proc.Exited += OnProcessExited;
