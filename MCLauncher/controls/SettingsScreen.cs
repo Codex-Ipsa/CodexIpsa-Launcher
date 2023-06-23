@@ -57,6 +57,11 @@ namespace MCLauncher.controls
             cmbUpdateSelect.SelectedIndex = index1;
             branchIndex = cmbUpdateSelect.SelectedIndex;
             cmbLangSelect.DataSource = langNameList;
+
+            if (Properties.Settings.Default.discordRpc)
+                chkDiscordRpc.Checked = true;
+            else
+                chkDiscordRpc.Checked = false;
         }
 
         public static void loadData()
@@ -155,6 +160,20 @@ namespace MCLauncher.controls
                 Properties.Settings.Default.prefLanguage = languageList[index].ToLower();
                 Properties.Settings.Default.Save();
                 Strings.reloadLangs(languageList[index].ToLower());
+            }
+        }
+
+        private void chkDiscordRpc_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkDiscordRpc.Checked)
+            {
+                Properties.Settings.Default.discordRpc = true;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.discordRpc = false;
+                Properties.Settings.Default.Save();
             }
         }
     }

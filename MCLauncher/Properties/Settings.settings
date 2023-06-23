@@ -5,18 +5,6 @@
     <Setting Name="playerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Player</Value>
     </Setting>
-    <Setting Name="isDemo" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ramXMX" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1024</Value>
-    </Setting>
-    <Setting Name="ramXMS" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">512</Value>
-    </Setting>
-    <Setting Name="ownJava" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="msRefreshToken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -28,6 +16,9 @@
     </Setting>
     <Setting Name="lastInstance" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="discordRpc" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

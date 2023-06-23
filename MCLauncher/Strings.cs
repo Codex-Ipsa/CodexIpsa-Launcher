@@ -52,6 +52,7 @@ namespace MCLauncher
         public static string lblLang = "Language";
         public static string lblBranch = "Branch";
         public static string btnCheckUpdates = "Check for updates";
+        public static string chkDiscordRpc = "Discord rich presence";
 
         //InstanceManager
         public static string grbInfo = "Profile info";
@@ -173,6 +174,7 @@ namespace MCLauncher
                 lblLang = str.lblLang;
                 lblBranch = str.lblBranch;
                 btnCheckUpdates = str.btnCheckUpdates;
+                chkDiscordRpc = str.chkDiscordRpc;
 
                 lblLauncherBy = str.lblLauncherBy.Replace("{version}", Globals.verDisplay);
                 lblDejvossIpsa = str.lblDejvossIpsa;
@@ -295,6 +297,7 @@ namespace MCLauncher
                 SettingsScreen.InstanceSetting.grbUpdates.Text = grbUpdates;
                 SettingsScreen.InstanceSetting.lblBranch.Text = lblBranch;
                 SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
+                SettingsScreen.InstanceSetting.chkDiscordRpc.Text = chkDiscordRpc;
 
                 CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
                 CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
@@ -325,6 +328,7 @@ namespace MCLauncher
             public string lblLang { get; set; }
             public string lblBranch { get; set; }
             public string btnCheckUpdates { get; set; }
+            public string chkDiscordRpc { get; set; }
 
             public string lblLauncherBy { get; set; }
             public string lblDejvossIpsa { get; set; }
