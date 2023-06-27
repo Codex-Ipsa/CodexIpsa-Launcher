@@ -218,7 +218,8 @@ namespace MCLauncher
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Discord.client.Dispose();
+            if(Discord.client != null)
+                Discord.client.Dispose();
         }
     }
 }
