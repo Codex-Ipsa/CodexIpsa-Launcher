@@ -68,6 +68,10 @@ namespace MCLauncher.forms
             profileName = profile;
             profMode = mode;
 
+            listView1.Columns.Add(Strings.rowName);
+            listView1.Columns.Add(Strings.rowType);
+            listView1.Columns.Add(Strings.rowReleased);
+
             if (profMode == "new")
             {
                 editionBox.SelectedIndex = editionBox.Items.IndexOf("Java Edition");
@@ -82,6 +86,10 @@ namespace MCLauncher.forms
                 javaBox.Enabled = false;
                 javaBtn.Enabled = false;
                 tabControl1.TabPages.Remove(tabControl1.TabPages[1]);
+
+                string manifest = Globals.client.DownloadString(Globals.javaManifest);
+                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                reloadVerBox("java");
             }
             else if (profMode == "def")
             {
@@ -158,21 +166,25 @@ namespace MCLauncher.forms
                     editionBox.SelectedIndex = 0;
                 }
 
+                string manifest = "";
+                if (dj.edition == "java")
+                    manifest = Globals.client.DownloadString(Globals.javaManifest);
+                else if(dj.edition == "x360")
+                    manifest = Globals.client.DownloadString(Globals.x360Manifest);
+                else if(dj.edition == "javaedu")
+                    manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+
+                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                reloadVerBox(dj.edition);
+
+
                 reloadModsList();
                 isInitial = false;
             }
 
-            listView1.Columns.Add(Strings.rowName);
-            listView1.Columns.Add(Strings.rowType);
-            listView1.Columns.Add(Strings.rowReleased);
-
             modView.Columns[0].Text = Strings.rowName;
             modView.Columns[1].Text = Strings.rowType;
             modView.Columns[2].Text = Strings.rowConfig;
-
-            string manifest = Globals.client.DownloadString(Globals.javaManifest);
-            vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
-            reloadVerBox("java");
 
             if (profMode == "def")
             {
@@ -332,7 +344,6 @@ namespace MCLauncher.forms
         {
             if (listView1.SelectedIndices.Count == 1)
             {
-
                 version = listView1.SelectedItems[0].SubItems[0].Text;
 
                 if (version.Contains(" ("))
@@ -386,10 +397,13 @@ namespace MCLauncher.forms
                         else
                             profileName = profileName + "_" + iter;
                         iter++;
+                        Console.WriteLine(profileName);
                     }
                     while (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"));
                 }
             }
+
+            Console.WriteLine("AAAA++ " + profileName);
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
@@ -399,9 +413,10 @@ namespace MCLauncher.forms
             }
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
+            string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
             HomeScreen.loadInstanceList();
-            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(nameBox.Text);
-            HomeScreen.reloadInstance(nameBox.Text);
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
+            HomeScreen.reloadInstance(tempName);
 
             this.Close();
         }
