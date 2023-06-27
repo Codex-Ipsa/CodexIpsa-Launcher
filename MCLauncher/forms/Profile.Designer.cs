@@ -76,11 +76,11 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.javaPanel = new System.Windows.Forms.Panel();
+            this.editionBox = new System.Windows.Forms.ComboBox();
             this.xboxPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.javaPanel = new System.Windows.Forms.Panel();
-            this.editionBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepos = new System.Windows.Forms.Button();
             this.btnOpenDotMc = new System.Windows.Forms.Button();
@@ -102,9 +102,9 @@
             this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.javaPanel.SuspendLayout();
             this.xboxPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.javaPanel.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -441,7 +441,7 @@
             this.checkRelease.AutoSize = true;
             this.checkRelease.Checked = true;
             this.checkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkRelease.Location = new System.Drawing.Point(62, 358);
+            this.checkRelease.Location = new System.Drawing.Point(91, 358);
             this.checkRelease.Name = "checkRelease";
             this.checkRelease.Size = new System.Drawing.Size(65, 17);
             this.checkRelease.TabIndex = 8;
@@ -454,7 +454,7 @@
             this.checkSnapshot.AutoSize = true;
             this.checkSnapshot.Checked = true;
             this.checkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSnapshot.Location = new System.Drawing.Point(133, 358);
+            this.checkSnapshot.Location = new System.Drawing.Point(156, 358);
             this.checkSnapshot.Name = "checkSnapshot";
             this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
             this.checkSnapshot.TabIndex = 9;
@@ -467,7 +467,7 @@
             this.checkExperimental.AutoSize = true;
             this.checkExperimental.Checked = true;
             this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkExperimental.Location = new System.Drawing.Point(210, 358);
+            this.checkExperimental.Location = new System.Drawing.Point(233, 358);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
             this.checkExperimental.TabIndex = 10;
@@ -660,6 +660,29 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // javaPanel
+            // 
+            this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Controls.Add(this.grbGame);
+            this.javaPanel.Location = new System.Drawing.Point(340, 6);
+            this.javaPanel.Name = "javaPanel";
+            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.TabIndex = 25;
+            // 
+            // editionBox
+            // 
+            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.editionBox.FormattingEnabled = true;
+            this.editionBox.Items.AddRange(new object[] {
+            "Java Edition",
+            "MinecraftEdu",
+            "Xbox 360 Edition"});
+            this.editionBox.Location = new System.Drawing.Point(8, 6);
+            this.editionBox.Name = "editionBox";
+            this.editionBox.Size = new System.Drawing.Size(326, 21);
+            this.editionBox.TabIndex = 0;
+            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
+            // 
             // xboxPanel
             // 
             this.xboxPanel.Controls.Add(this.groupBox1);
@@ -688,29 +711,6 @@
             this.checkBox3.TabIndex = 21;
             this.checkBox3.Text = "chk.Demo";
             this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // javaPanel
-            // 
-            this.javaPanel.Controls.Add(this.grbForExp);
-            this.javaPanel.Controls.Add(this.grbGame);
-            this.javaPanel.Location = new System.Drawing.Point(340, 6);
-            this.javaPanel.Name = "javaPanel";
-            this.javaPanel.Size = new System.Drawing.Size(452, 328);
-            this.javaPanel.TabIndex = 25;
-            // 
-            // editionBox
-            // 
-            this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.editionBox.FormattingEnabled = true;
-            this.editionBox.Items.AddRange(new object[] {
-            "Java Edition",
-            "MinecraftEdu",
-            "Xbox 360 Edition"});
-            this.editionBox.Location = new System.Drawing.Point(8, 6);
-            this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(326, 21);
-            this.editionBox.TabIndex = 0;
-            this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -880,10 +880,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.javaPanel.ResumeLayout(false);
             this.xboxPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.javaPanel.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 

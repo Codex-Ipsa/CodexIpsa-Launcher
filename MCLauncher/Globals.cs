@@ -17,7 +17,7 @@ namespace MCLauncher
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
         public static string branch = "experimental"; //dev //omega13 //stable //dev-instances
         public static string verCurrent = "0.2.0-re7"; //Change this on release
-        public static string verDisplay = "0.2.0-re7"; //Change this on release
+        public static string verDisplay = "0.2.0-wip"; //Change this on release
         public static string discordClient = ""; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
         public static bool offlineMode = false;
 
@@ -32,6 +32,8 @@ namespace MCLauncher
         //Links
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_manifest.json";
         public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/data/{{ver}}.json";
+        public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/javaedu_manifest.json";
+        public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_manifest.json";
 
 
 
@@ -40,7 +42,7 @@ namespace MCLauncher
         public static string xeniaInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/emulator/xenia.json";
         public static string changelog = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.html";
         public static string changelogJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/changelog.json";
-        public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
+        //public static string defaultVer = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/java_basever.json";
         public static string javaeduJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/javaedu_version.json";
         public static string x360Json = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/ver-list/x360_version.json";
         public static string x360Base = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_base.txt";
