@@ -22,12 +22,15 @@ namespace MCLauncher.forms
         public static string lastType;
         public static Profile Instance;
 
+        public static bool isInitial;
+
         public Profile(string profile, string mode)
         {
             InitializeComponent();
 
             Instance = this;
             this.MaximizeBox = false;
+            isInitial = true;
 
             //Load lang
             grbGame.Text = Strings.grbGame;
@@ -62,7 +65,6 @@ namespace MCLauncher.forms
             btnReplaceJar.Text = Strings.btnReplaceJar;
             btnOpenDotMc.Text = Strings.btnOpenDotMc;
 
-
             profileName = profile;
             profMode = mode;
 
@@ -91,7 +93,7 @@ namespace MCLauncher.forms
             }
             else if (profMode == "edit")
             {
-                string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+                string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
                 var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
                 version = dj.version;
@@ -157,6 +159,7 @@ namespace MCLauncher.forms
                 }
 
                 reloadModsList();
+                isInitial = false;
             }
 
             listView1.Columns.Add(Strings.rowName);
@@ -169,8 +172,7 @@ namespace MCLauncher.forms
 
             string manifest = Globals.client.DownloadString(Globals.javaManifest);
             vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
-
-            reloadVerBox();
+            reloadVerBox("java");
 
             if (profMode == "def")
             {
@@ -186,7 +188,7 @@ namespace MCLauncher.forms
             }
         }
 
-        public void reloadVerBox()
+        public void reloadVerBox(string edition)
         {
             listView1.Items.Clear();
 
@@ -194,32 +196,39 @@ namespace MCLauncher.forms
             {
                 string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 
-                if (checkPreClassic.Checked && row[0] == "pre-classic")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                if(edition == "java")
+                {
+                    if (checkPreClassic.Checked && row[0] == "pre-classic")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkClassic.Checked && row[0] == "classic")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkClassic.Checked && row[0] == "classic")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkIndev.Checked && row[0] == "indev")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkIndev.Checked && row[0] == "indev")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkInfdev.Checked && row[0] == "infdev")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkInfdev.Checked && row[0] == "infdev")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkAlpha.Checked && row[0] == "alpha")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkAlpha.Checked && row[0] == "alpha")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkBeta.Checked && row[0] == "beta")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkBeta.Checked && row[0] == "beta")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkRelease.Checked && row[0] == "release")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkRelease.Checked && row[0] == "release")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkSnapshot.Checked && row[0] == "snapshot")
-                    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkSnapshot.Checked && row[0] == "snapshot")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (checkExperimental.Checked && row[0] == "experimental")
+                    if (checkExperimental.Checked && row[0] == "experimental")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                }
+                else
+                {
                     listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                }
             }
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -1;
@@ -250,47 +259,47 @@ namespace MCLauncher.forms
 
         private void checkPreClassic_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkClassic_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkIndev_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkInfdev_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkAlpha_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkBeta_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkRelease_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkSnapshot_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void checkExperimental_CheckedChanged(object sender, EventArgs e)
         {
-            reloadVerBox();
+            reloadVerBox("java");
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -715,19 +724,66 @@ namespace MCLauncher.forms
                 edition = "x360";
                 javaPanel.Visible = false;
                 xboxPanel.Visible = true;
+
+                checkPreClassic.Visible = false;
+                checkClassic.Visible = false;
+                checkIndev.Visible = false;
+                checkInfdev.Visible = false;
+                checkAlpha.Visible = false;
+                checkBeta.Visible = false;
+                checkRelease.Visible = false;
+                checkSnapshot.Visible = false;
+                checkExperimental.Visible = false;
+
+                string manifest = Globals.client.DownloadString(Globals.x360Manifest);
+                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                reloadVerBox("x360");
             }
-            if (editionBox.Text.Contains("MinecraftEdu"))
+            else if (editionBox.Text.Contains("MinecraftEdu"))
             {
                 edition = "javaedu";
                 javaPanel.Visible = true;
                 xboxPanel.Visible = false;
+
+                checkPreClassic.Visible = false;
+                checkClassic.Visible = false;
+                checkIndev.Visible = false;
+                checkInfdev.Visible = false;
+                checkAlpha.Visible = false;
+                checkBeta.Visible = false;
+                checkRelease.Visible = false;
+                checkSnapshot.Visible = false;
+                checkExperimental.Visible = false;
+
+                string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                reloadVerBox("java");
             }
             else
             {
                 edition = "java";
                 javaPanel.Visible = true;
                 xboxPanel.Visible = false;
+
+                checkPreClassic.Visible = true;
+                checkClassic.Visible = true;
+                checkIndev.Visible = true;
+                checkInfdev.Visible = true;
+                checkAlpha.Visible = true;
+                checkBeta.Visible = true;
+                checkRelease.Visible = true;
+                checkSnapshot.Visible = true;
+                checkExperimental.Visible = true;
+
+                if(!isInitial) //shitty fix but it doesn't crash anymore :troll:
+                {
+                    string manifest = Globals.client.DownloadString(Globals.javaManifest);
+                    vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                    reloadVerBox("java");
+                }
             }
+
+            Logger.Error("[Profile]", $"EDITION: {edition}");
         }
     }
 
