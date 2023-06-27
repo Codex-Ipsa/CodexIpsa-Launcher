@@ -397,13 +397,10 @@ namespace MCLauncher.forms
                         else
                             profileName = profileName + "_" + iter;
                         iter++;
-                        Console.WriteLine(profileName);
                     }
                     while (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"));
                 }
             }
-
-            Console.WriteLine("AAAA++ " + profileName);
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
