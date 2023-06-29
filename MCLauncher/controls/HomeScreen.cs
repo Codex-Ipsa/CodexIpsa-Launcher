@@ -387,7 +387,7 @@ namespace MCLauncher
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (selectedEdition == "x360")
-                Logger.Error("[HomeScreen]", "Not implemented yet!");
+                XboxLauncher.Launch(selectedInstance);
             else
                 JavaLauncher.Launch(selectedInstance);
             /*if (selectedEdition == "java")

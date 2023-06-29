@@ -1,0 +1,100 @@
+﻿using MCLauncher.forms;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MCLauncher.classes
+{
+    internal class XboxLauncher
+    {
+        public static void Launch(string profileName)
+        {
+            //download/update xenia
+            Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\");
+            var xm = JsonConvert.DeserializeObject<XeniaManifest>(Globals.client.DownloadString(Globals.xeniaManifest));
+            if(File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version.cfg"))
+            {
+                File.Move($"{Globals.dataPath}\\emulator\\xenia\\version.cfg", $"{Globals.dataPath}\\emulator\\xenia\\version");
+            }
+
+            if(!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version") || !File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\version").Contains(xm.ver))
+            {
+                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe");
+                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\LICENSE");
+
+                DownloadProgress.url = xm.url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\emulator\\xenia\\xenia.zip";
+                DownloadProgress download = new DownloadProgress();
+                download.ShowDialog();
+
+                ZipFile.ExtractToDirectory($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip", $"{Globals.dataPath}\\emulator\\xenia\\");
+                File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\version", xm.ver);
+                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip");
+
+                Logger.Info("[XboxLauncher]", "Updated Xenia");
+            }
+
+            //downloading game
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+            var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
+
+            string url = Globals.client.DownloadString(Globals.x360Url) + dj.version + ".zip";
+
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360\\");
+            if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{dj.version}"))
+            {
+                DownloadProgress.url = url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\{dj.version}.zip";
+                DownloadProgress download = new DownloadProgress();
+                download.ShowDialog();
+
+                ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\x360\\{dj.version}.zip", $"{Globals.dataPath}\\versions\\x360\\{dj.version}");
+                File.Delete($"{Globals.dataPath}\\versions\\x360\\{dj.version}.zip");
+            }
+
+            //launching bases
+            if (dj.version.Contains("pre") || dj.version == "tu0")
+            {
+                Process proc = new Process();
+                proc.EnableRaisingEvents = true;
+                proc.StartInfo.FileName = $"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"";
+                proc.StartInfo.Arguments = $"\"{Globals.dataPath}\\versions\\x360\\{dj.version}\\default.xex\"";
+                proc.Exited += OnProcessExited;
+                proc.Start();
+                Discord.ChangeMessage($"Playing Xbox 360 Edition ({dj.version})");
+            }
+            //launching updates
+            else
+            {
+                //download base
+                if (!File.Exists($"{Globals.dataPath}\\versions\\x360\\tu0.zip"))
+                {
+                    DownloadProgress.url = Globals.client.DownloadString(Globals.x360Base);
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\tu0.zip";
+                    DownloadProgress download = new DownloadProgress();
+                    download.ShowDialog();
+                }
+            }
+
+            Logger.Error("[HomeScreen]", "Not implemented yet!");
+        }
+
+        private static void OnProcessExited(object sender, EventArgs e)
+        {
+            Discord.ChangeMessage($"Idling");
+        }
+    }
+
+    public class XeniaManifest
+    {
+        public string ver { get; set; }
+        public string url { get; set; }
+    }
+}

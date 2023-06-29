@@ -29,7 +29,7 @@ namespace MCLauncher.classes
 
         public static void Launch(string profileName)
         {
-            string data = Globals.client.DownloadString($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
             var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
             try
@@ -246,7 +246,7 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
             try
             {
-                Discord.ChangeMessage($"Playing {vi.game} {vi.version}");
+                Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
                 proc.Start();
             }
             catch (System.ComponentModel.Win32Exception e)
@@ -256,7 +256,7 @@ namespace MCLauncher.classes
                     DownloadJava.Start();
 
                 proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
-                Discord.ChangeMessage($"Playing {vi.game} {vi.version}");
+                Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
                 proc.Start();
             }
 
