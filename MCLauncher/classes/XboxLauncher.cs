@@ -110,25 +110,23 @@ namespace MCLauncher.classes
                     {
                         string fileName = file.FullName.Replace($"{Globals.dataPath}\\versions\\x360\\{dj.version}", "");
                         string path = fileName.Substring(0, fileName.LastIndexOf("\\") + 1);
-                        Console.WriteLine(file.FullName);
-                        Console.WriteLine(path + fileName);
-                        Console.WriteLine("-----------");
+                        //Console.WriteLine(file.FullName);
+                        //Console.WriteLine(path + fileName);
+                        //Console.WriteLine("-----------");
                         Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}\\{path}");
                         File.Copy($"{file.FullName}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}\\{fileName}");
                     }
-
-                    Process proc = new Process();
-                    proc.EnableRaisingEvents = true;
-                    proc.StartInfo.FileName = $"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"";
-                    proc.StartInfo.Arguments = $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"";
-                    proc.Exited += OnProcessExited;
-                    proc.Start();
-                    Logger.Info("[XboxLauncher]", "Launched xenia @ update");
-                    Discord.ChangeMessage($"Playing Xbox 360 Edition ({dj.version})");
                 }
-            }
 
-            Logger.Error("[HomeScreen]", "Not implemented yet!");
+                Process proc = new Process();
+                proc.EnableRaisingEvents = true;
+                proc.StartInfo.FileName = $"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"";
+                proc.StartInfo.Arguments = $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"";
+                proc.Exited += OnProcessExited;
+                proc.Start();
+                Logger.Info("[XboxLauncher]", "Launched xenia @ update");
+                Discord.ChangeMessage($"Playing Xbox 360 Edition ({dj.version})");
+            }
         }
 
         private static void OnProcessExited(object sender, EventArgs e)

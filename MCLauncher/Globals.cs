@@ -37,7 +37,7 @@ namespace MCLauncher
         public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_manifest.json";
         public static string x360Url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_url.txt";
         public static string x360Base = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{codebase}/x360_base.txt";
-        public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/emu/xenia.json";
+        public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/emulator/xenia_manifest.json";
 
         public static string CIModsJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/modrepo/manifest.json";
 
