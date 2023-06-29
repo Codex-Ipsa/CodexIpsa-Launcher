@@ -86,6 +86,7 @@
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\DownloadJava.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
+    <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
