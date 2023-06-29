@@ -15,11 +15,11 @@ namespace MCLauncher
 
         //Manual
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
-        public static string branch = "experimental"; //dev //omega13 //stable //dev-instances
-        public static string verCurrent = "0.2.0-re7"; //Change this on release
-        public static string verDisplay = "0.2.0-wip"; //Change this on release
+        public static string branch = "dev"; //dev //omega13 //stable //dev-instances //experimental
+        public static string verCurrent = "0.2.0-pre1"; //Change this on release
+        public static string verDisplay = "0.2.0-pre1"; //Change this on release
         public static string discordClient = ""; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
-        public static bool offlineMode = false;
+        //public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
         public static string dataPath = Directory.GetCurrentDirectory() + "\\.codexipsa";
