@@ -76,11 +76,11 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.javaPanel = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.xboxPanel = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.javaPanel = new System.Windows.Forms.Panel();
+            this.grbXboxGame = new System.Windows.Forms.GroupBox();
+            this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepos = new System.Windows.Forms.Button();
             this.btnOpenDotMc = new System.Windows.Forms.Button();
@@ -102,9 +102,9 @@
             this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.javaPanel.SuspendLayout();
             this.xboxPanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.javaPanel.SuspendLayout();
+            this.grbXboxGame.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -660,15 +660,6 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // javaPanel
-            // 
-            this.javaPanel.Controls.Add(this.grbForExp);
-            this.javaPanel.Controls.Add(this.grbGame);
-            this.javaPanel.Location = new System.Drawing.Point(340, 6);
-            this.javaPanel.Name = "javaPanel";
-            this.javaPanel.Size = new System.Drawing.Size(452, 328);
-            this.javaPanel.TabIndex = 25;
-            // 
             // editionBox
             // 
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -685,32 +676,41 @@
             // 
             // xboxPanel
             // 
-            this.xboxPanel.Controls.Add(this.groupBox1);
+            this.xboxPanel.Controls.Add(this.grbXboxGame);
             this.xboxPanel.Location = new System.Drawing.Point(340, 6);
             this.xboxPanel.Name = "xboxPanel";
             this.xboxPanel.Size = new System.Drawing.Size(452, 328);
             this.xboxPanel.TabIndex = 26;
             this.xboxPanel.Visible = false;
             // 
-            // groupBox1
+            // javaPanel
             // 
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Location = new System.Drawing.Point(5, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 46);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "grb.Game";
+            this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Controls.Add(this.grbGame);
+            this.javaPanel.Location = new System.Drawing.Point(340, 6);
+            this.javaPanel.Name = "javaPanel";
+            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.TabIndex = 25;
             // 
-            // checkBox3
+            // grbXboxGame
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(9, 19);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(75, 17);
-            this.checkBox3.TabIndex = 21;
-            this.checkBox3.Text = "chk.Demo";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.grbXboxGame.Controls.Add(this.chkXboxDemo);
+            this.grbXboxGame.Location = new System.Drawing.Point(5, 3);
+            this.grbXboxGame.Name = "grbXboxGame";
+            this.grbXboxGame.Size = new System.Drawing.Size(439, 46);
+            this.grbXboxGame.TabIndex = 11;
+            this.grbXboxGame.TabStop = false;
+            this.grbXboxGame.Text = "grb.Game";
+            // 
+            // chkXboxDemo
+            // 
+            this.chkXboxDemo.AutoSize = true;
+            this.chkXboxDemo.Location = new System.Drawing.Point(9, 19);
+            this.chkXboxDemo.Name = "chkXboxDemo";
+            this.chkXboxDemo.Size = new System.Drawing.Size(75, 17);
+            this.chkXboxDemo.TabIndex = 21;
+            this.chkXboxDemo.Text = "chk.Demo";
+            this.chkXboxDemo.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -880,10 +880,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.javaPanel.ResumeLayout(false);
             this.xboxPanel.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.javaPanel.ResumeLayout(false);
+            this.grbXboxGame.ResumeLayout(false);
+            this.grbXboxGame.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -956,7 +956,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Panel javaPanel;
         private System.Windows.Forms.Panel xboxPanel;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.GroupBox grbXboxGame;
+        private System.Windows.Forms.CheckBox chkXboxDemo;
     }
 }

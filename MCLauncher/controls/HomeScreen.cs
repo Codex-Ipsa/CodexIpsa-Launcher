@@ -318,7 +318,7 @@ namespace MCLauncher
             {
                 string saveData = "";
                 saveData += $"{{\n";
-                saveData += $"  \"data\": 1,\n";
+                saveData += $"  \"data\": 2,\n";
                 if (oj.edition == "Java Edition")
                     saveData += $"  \"edition\": \"java\",\n";
                 else if (oj.edition == "Xbox 360 Edition")
@@ -338,8 +338,9 @@ namespace MCLauncher
                 saveData += $"  \"demo\": false,\n";
                 saveData += $"  \"modded\": false,\n";
                 saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"proxy\": {bool.Parse(oj.useProxy.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"multiplayer\": false\n";
+                saveData += $"  \"disProxy\": false,\n";
+                saveData += $"  \"multiplayer\": false,\n";
+                saveData += $"  \"xboxDemo\": false\n";
                 saveData += $"}}";
                 Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
                 Console.WriteLine(saveData);

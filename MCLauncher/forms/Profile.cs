@@ -65,6 +65,9 @@ namespace MCLauncher.forms
             btnReplaceJar.Text = Strings.btnReplaceJar;
             btnOpenDotMc.Text = Strings.btnOpenDotMc;
 
+            grbXboxGame.Text = Strings.grbGame;
+            chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf("("));
+
             profileName = profile;
             profMode = mode;
 
@@ -149,6 +152,7 @@ namespace MCLauncher.forms
                 chkOffline.Checked = dj.offline;
                 chkProxy.Checked = dj.disProxy;
                 chkMulti.Checked = dj.multiplayer;
+                chkXboxDemo.Checked = dj.xboxDemo;
 
                 if (dj.edition == "x360")
                 {
@@ -364,7 +368,7 @@ namespace MCLauncher.forms
 
             string saveData = "";
             saveData += $"{{\n";
-            saveData += $"  \"data\": 1,\n";
+            saveData += $"  \"data\": 2,\n";
             saveData += $"  \"edition\": \"{edition}\",\n";
             saveData += $"  \"version\": \"{version}\",\n";
             saveData += $"  \"directory\": \"{dirBox.Text}\",\n";
@@ -382,7 +386,8 @@ namespace MCLauncher.forms
             saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
             saveData += $"  \"disProxy\": {chkProxy.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()}\n";
+            saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"xboxDemo\": {chkXboxDemo.Checked.ToString().ToLower()}\n";
             saveData += $"}}";
 
             if (profMode == "new")
@@ -827,6 +832,7 @@ namespace MCLauncher.forms
         public bool offline { get; set; }
         public bool disProxy { get; set; }
         public bool multiplayer { get; set; }
+        public bool xboxDemo { get; set; }
     }
 
     class ModJson

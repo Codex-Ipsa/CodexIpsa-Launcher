@@ -102,21 +102,21 @@ namespace MCLauncher
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
 
             //Check for internet
-            try
-            {
-                string tets = Globals.client.DownloadString("codex-ipsa.dejvoss.cz");
-            }
-            catch
-            {
-                Globals.offlineMode = true;
-            }
+            //try
+            //{
+            //    string tets = Globals.client.DownloadString("codex-ipsa.dejvoss.cz");
+            //}
+            //catch
+            //{
+            //    Globals.offlineMode = true;
+            //}
 
             //Check for updates
             Logger.Info($"[MainWindow]", "Checking for updates..");
             List<string> branchIds = new List<string>();
 
-            if(!Globals.offlineMode)
-            {
+            //if(!Globals.offlineMode)
+            //{
                 string jsonUpd = Globals.client.DownloadString(Globals.updateInfo);
                 List<jsonObject> dataUpd = JsonConvert.DeserializeObject<List<jsonObject>>(jsonUpd);
 
@@ -138,7 +138,7 @@ namespace MCLauncher
                 {
                     SettingsScreen.checkForUpdates(Globals.branch);
                 }
-            }
+            //}
 
             //Seasonal background
             try
