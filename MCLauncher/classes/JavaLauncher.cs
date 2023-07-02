@@ -274,14 +274,20 @@ namespace MCLauncher.classes
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(e.Data);
+            string data = e.Data;
+            if (data != null)
+                data = data.Replace(msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(msPlayerUUID, "[UUID]");
+            Console.WriteLine(data);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.Data);
+            string data = e.Data;
+            if (data != null)
+                data = data.Replace(msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(msPlayerUUID, "[UUID]");
+            Console.WriteLine(data);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
