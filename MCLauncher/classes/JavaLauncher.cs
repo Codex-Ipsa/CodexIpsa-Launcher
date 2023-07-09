@@ -273,16 +273,14 @@ namespace MCLauncher.classes
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(e.Data);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            if (e.Data != null)
+                Logger.GameInfo(e.Data);
         }
 
         static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.Data);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            if(e.Data != null)
+                Logger.GameError(e.Data);
         }
     }
 

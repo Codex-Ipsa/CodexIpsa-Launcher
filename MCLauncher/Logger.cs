@@ -1,4 +1,5 @@
-﻿using MCLauncher.forms;
+﻿using MCLauncher.classes;
+using MCLauncher.forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
+            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
+                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
             Console.WriteLine(" " + text);
         }
 
@@ -24,15 +27,25 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write($"ERROR  [{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
             Console.ForegroundColor = ConsoleColor.Gray;
+            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
+                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
             Console.WriteLine(" " + text);
         }
 
-        public static void Game(string text)
+        public static void GameInfo(string text)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("[Game]");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(" " + text);
+        }
+
+        public static void GameError(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }
