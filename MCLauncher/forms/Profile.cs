@@ -42,7 +42,7 @@ namespace MCLauncher.forms
             lblMemMin.Text = Strings.lblMemMin;
             lblBefCmd.Text = Strings.lblBefCmd;
             lblAftCmd.Text = Strings.lblAftCmd;
-            chkProxy.Text = Strings.chkProxy;
+            //chkProxy.Text = Strings.chkProxy;
             chkUseDemo.Text = Strings.chkUseDemo;
             chkOffline.Text = Strings.chkOffline;
             chkMulti.Text = Strings.chkMulti;
@@ -150,7 +150,7 @@ namespace MCLauncher.forms
                 classBox.Text = dj.classpath;
                 chkUseDemo.Checked = dj.demo;
                 chkOffline.Checked = dj.offline;
-                chkProxy.Checked = dj.disProxy;
+                //chkProxy.Checked = dj.disProxy;
                 chkMulti.Checked = dj.multiplayer;
                 chkXboxDemo.Checked = dj.xboxDemo;
 
@@ -385,7 +385,7 @@ namespace MCLauncher.forms
             saveData += $"  \"demo\": {chkUseDemo.Checked.ToString().ToLower()},\n";
             saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"disProxy\": {chkProxy.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"disProxy\": false,\n";
             saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()},\n";
             saveData += $"  \"xboxDemo\": {chkXboxDemo.Checked.ToString().ToLower()}\n";
             saveData += $"}}";

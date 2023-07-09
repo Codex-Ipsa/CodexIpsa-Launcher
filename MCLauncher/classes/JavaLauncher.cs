@@ -165,13 +165,14 @@ namespace MCLauncher.classes
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{gameDir}", $"\"{workDir}\\.minecraft\"")
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
-                .Replace("{assetName}", $"\"{vi.assets.name}\"");
+                .Replace("{assetName}", $"\"{vi.assets.name}\"")
+                .Replace("{libsDir}", $"{Globals.dataPath}\\libs");
 
             if (vi.supplement != null)
             {
                 foreach (var sup in vi.supplement)
                 {
-                    string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft");
+                    string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs");
                     if (!File.Exists(supPath + sup.name) || sup.renew)
                     {
                         Logger.Info("[JavaLauncher]", $"Downloading supplement {sup.name}...");
@@ -206,7 +207,7 @@ namespace MCLauncher.classes
             proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
 
             if (vi.cmdBef != "" && dj.disProxy == false)
-                proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft")} ";
+                proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs").Replace("{game}", $"{vi.game}").Replace("{version}", $"{vi.version}")} ";
             if (dj.befCmd != "")
                 proc.StartInfo.Arguments += $"{dj.befCmd} ";
 

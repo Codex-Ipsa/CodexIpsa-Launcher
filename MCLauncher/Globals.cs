@@ -14,7 +14,7 @@ namespace MCLauncher
         public static WebClient client = new WebClient();
 
         //Manual
-        public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data
+        public static string codebase = "legacyfix"; //legacyfix //0.2.0 //omega13 //0.0.7-dev //mojang-data
         public static string branch = "dev"; //dev //omega13 //stable //dev-instances //experimental
         public static string verCurrent = "0.2.0-pre1"; //Change this on release
         public static string verDisplay = "0.2.0-pre1"; //Change this on release

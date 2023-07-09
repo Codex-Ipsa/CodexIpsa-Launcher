@@ -52,7 +52,6 @@
             this.lblBefCmd = new System.Windows.Forms.Label();
             this.befBox = new System.Windows.Forms.TextBox();
             this.chkOffline = new System.Windows.Forms.CheckBox();
-            this.chkProxy = new System.Windows.Forms.CheckBox();
             this.chkUseDemo = new System.Windows.Forms.CheckBox();
             this.checkClassic = new System.Windows.Forms.CheckBox();
             this.checkIndev = new System.Windows.Forms.CheckBox();
@@ -76,9 +75,9 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.javaPanel = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.xboxPanel = new System.Windows.Forms.Panel();
-            this.javaPanel = new System.Windows.Forms.Panel();
             this.grbXboxGame = new System.Windows.Forms.GroupBox();
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -102,8 +101,8 @@
             this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.xboxPanel.SuspendLayout();
             this.javaPanel.SuspendLayout();
+            this.xboxPanel.SuspendLayout();
             this.grbXboxGame.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
@@ -351,16 +350,6 @@
             this.chkOffline.Text = "chk.Offline";
             this.chkOffline.UseVisualStyleBackColor = true;
             // 
-            // chkProxy
-            // 
-            this.chkProxy.AutoSize = true;
-            this.chkProxy.Location = new System.Drawing.Point(9, 177);
-            this.chkProxy.Name = "chkProxy";
-            this.chkProxy.Size = new System.Drawing.Size(73, 17);
-            this.chkProxy.TabIndex = 21;
-            this.chkProxy.Text = "chk.Proxy";
-            this.chkProxy.UseVisualStyleBackColor = true;
-            // 
             // chkUseDemo
             // 
             this.chkUseDemo.AutoSize = true;
@@ -596,7 +585,6 @@
             // 
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
-            this.grbGame.Controls.Add(this.chkProxy);
             this.grbGame.Controls.Add(this.chkMulti);
             this.grbGame.Controls.Add(this.aftBox);
             this.grbGame.Controls.Add(this.lblAftCmd);
@@ -660,6 +648,15 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // javaPanel
+            // 
+            this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Controls.Add(this.grbGame);
+            this.javaPanel.Location = new System.Drawing.Point(340, 6);
+            this.javaPanel.Name = "javaPanel";
+            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.TabIndex = 25;
+            // 
             // editionBox
             // 
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -682,15 +679,6 @@
             this.xboxPanel.Size = new System.Drawing.Size(452, 328);
             this.xboxPanel.TabIndex = 26;
             this.xboxPanel.Visible = false;
-            // 
-            // javaPanel
-            // 
-            this.javaPanel.Controls.Add(this.grbForExp);
-            this.javaPanel.Controls.Add(this.grbGame);
-            this.javaPanel.Location = new System.Drawing.Point(340, 6);
-            this.javaPanel.Name = "javaPanel";
-            this.javaPanel.Size = new System.Drawing.Size(452, 328);
-            this.javaPanel.TabIndex = 25;
             // 
             // grbXboxGame
             // 
@@ -880,8 +868,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.xboxPanel.ResumeLayout(false);
             this.javaPanel.ResumeLayout(false);
+            this.xboxPanel.ResumeLayout(false);
             this.grbXboxGame.ResumeLayout(false);
             this.grbXboxGame.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -914,7 +902,6 @@
         private System.Windows.Forms.Label lblBefCmd;
         private System.Windows.Forms.TextBox befBox;
         private System.Windows.Forms.CheckBox chkOffline;
-        private System.Windows.Forms.CheckBox chkProxy;
         private System.Windows.Forms.CheckBox chkUseDemo;
         private System.Windows.Forms.CheckBox checkClassic;
         private System.Windows.Forms.CheckBox checkIndev;
