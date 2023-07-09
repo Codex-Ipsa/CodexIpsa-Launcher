@@ -187,10 +187,7 @@
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonObject.cs" />
-    <Compile Include="LaunchJava.cs" />
-    <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="LibsCheck.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>

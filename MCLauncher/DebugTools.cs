@@ -24,16 +24,6 @@ namespace MCLauncher
         public DebugTools()
         {
             InitializeComponent();
-            if(cstJava == false)
-            {
-                checkBox1.Checked = false;
-                LaunchJava.launchJavaLocation = "java.exe";
-            }
-            else
-            {
-                checkBox1.Checked = true;
-                LaunchJava.launchJavaLocation = newPath;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,16 +69,7 @@ namespace MCLauncher
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == false)
-            {
-                cstJava = false;
-                LaunchJava.launchJavaLocation = "java.exe";
-            }
-            else
-            {
-                cstJava = true;
-                LaunchJava.launchJavaLocation = newPath;
-            }
+            
         }
     }
 }
