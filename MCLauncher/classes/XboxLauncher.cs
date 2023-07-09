@@ -66,18 +66,17 @@ namespace MCLauncher.classes
             }
             else
             {
+                string config = File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml");
+                config = config.Replace("discord = true", "discord = false");
                 if (!dj.xboxDemo)
                 {
-                    string original = File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml");
-                    string edited = original.Replace("license_mask = 0", "license_mask = 1").Replace("license_mask = -1", "license_mask = 1");
-                    File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml", edited);
+                    config = config.Replace("license_mask = 0", "license_mask = 1").Replace("license_mask = -1", "license_mask = 1");
                 }
                 else
                 {
-                    string original = File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml");
-                    string edited = original.Replace("license_mask = 1", "license_mask = 0").Replace("license_mask = -1", "license_mask = 0");
-                    File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml", edited);
+                    config = config.Replace("license_mask = 1", "license_mask = 0").Replace("license_mask = -1", "license_mask = 0");
                 }
+                File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml", config);
             }
 
             //launching bases
