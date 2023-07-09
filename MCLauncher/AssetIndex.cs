@@ -94,5 +94,6 @@ namespace MCLauncher
     {
         public int size { get; set; }
         public string hash { get; set; }
+        public string custom_url { get; set; }
     }
 }
