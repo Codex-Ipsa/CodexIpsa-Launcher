@@ -96,7 +96,7 @@ namespace MCLauncher.classes
             else
                 MSAuth.onGameStart(false);
 
-            if (vi.assets != null)
+            if (vi.assets.url != "")
             {
                 AssetIndex.Start(vi.assets.url, vi.assets.name);
             }
