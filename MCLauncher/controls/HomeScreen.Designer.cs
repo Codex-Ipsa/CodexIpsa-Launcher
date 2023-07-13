@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeScreen));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblLogInWarn = new System.Windows.Forms.Label();
             this.btnEditInst = new System.Windows.Forms.Button();
@@ -41,7 +42,10 @@
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.pnlChangelog = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -62,6 +66,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 62);
             this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel2.Location = new System.Drawing.Point(584, 213);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(69, 106);
+            this.panel2.TabIndex = 0;
             // 
             // btnLogOut
             // 
@@ -181,12 +196,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChangelog.BackColor = System.Drawing.Color.Transparent;
             this.pnlChangelog.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlChangelog.BackgroundImage")));
-            this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
+            this.pnlChangelog.Location = new System.Drawing.Point(0, 2);
             this.pnlChangelog.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChangelog.Name = "pnlChangelog";
-            this.pnlChangelog.Size = new System.Drawing.Size(784, 327);
+            this.pnlChangelog.Size = new System.Drawing.Size(784, 325);
             this.pnlChangelog.TabIndex = 4;
             this.pnlChangelog.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChangelog_Scroll);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Location = new System.Drawing.Point(647, 160);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(112, 59);
+            this.panel3.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(10, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 59);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Minecraft 1.6 is available for manual download!";
             // 
             // HomeScreen
             // 
@@ -194,6 +229,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlChangelog);
             this.MinimumSize = new System.Drawing.Size(784, 387);
@@ -201,6 +238,7 @@
             this.Size = new System.Drawing.Size(784, 387);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -218,5 +256,8 @@
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Panel pnlChangelog;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -14,11 +14,11 @@ namespace MCLauncher
         public static WebClient client = new WebClient();
 
         //Manual
-        public static string codebase = "legacyfix"; //legacyfix //0.2.0 //omega13 //0.0.7-dev //mojang-data
+        public static string codebase = "omega13"; //legacyfix //0.2.0 //omega13 //0.0.7-dev //mojang-data
         public static string branch = "dev"; //dev //omega13 //stable //dev-instances //experimental
         public static string verCurrent = "0.2.0-pre3"; //Change this on release
         public static string verDisplay = "0.2.0-pre3"; //Change this on release
-        public static string discordClient = ""; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
+        public static string discordClient = "***REMOVED***"; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
         //public static bool offlineMode = false;
 
         public static string currentPath = Directory.GetCurrentDirectory();
