@@ -38,7 +38,27 @@ namespace MCLauncher
 
             foreach (ModJsonEntry ent in mj.items)
             {
-                Logger.Info("[JavaModHelper]", $"Found mod {ent.name}, type: {ent.type}, json: {ent.json}");
+                Logger.Info("[JavaModHelper]", $"Found mod {ent.name}, type: {ent.type}, json: {ent.json}, update: {ent.update}");
+
+                if(ent.update == true)
+                {
+                    string modManifest = Globals.client.DownloadString(Globals.CIModsJson);
+                    List<RepoJson> repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(modManifest);
+                    foreach(var entry in repoJsons)
+                    {
+                        if (ent.name.Contains(entry.id))
+                        {
+                            if (ent.name.EndsWith(entry.items[0].version + ".zip"))
+                            {
+                                Logger.Error("[JavaModHelper]", "MOD IS UP TO DATE");
+                            }
+                            else
+                            {
+                                Logger.Error("[JavaModHelper]", "MOD UPDATE AVAILABLE");
+                            }
+                        }
+                    }
+                }
 
                 if (ent.json != "")
                 {

@@ -484,7 +484,7 @@ namespace MCLauncher.forms
                 {
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", openFileDialog.SafeFileName, "jarmod", "");
+                    modListWorker("add", openFileDialog.SafeFileName, "jarmod", "", false);
                     reloadModsList();
                 }
             }
@@ -499,7 +499,7 @@ namespace MCLauncher.forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", openFileDialog.SafeFileName, "cusjar", "");
+                    modListWorker("add", openFileDialog.SafeFileName, "cusjar", "", false);
                     reloadModsList();
                 }
             }
@@ -510,7 +510,7 @@ namespace MCLauncher.forms
             if (modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{modView.SelectedItems[0].Text}");
-                modListWorker("remove", modView.SelectedItems[0].Text, "", "");
+                modListWorker("remove", modView.SelectedItems[0].Text, "", "", false);
                 reloadModsList();
             }
         }
@@ -519,7 +519,7 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mdown", modView.SelectedItems[0].Text, "", "");
+                modListWorker("mdown", modView.SelectedItems[0].Text, "", "", false);
                 reloadModsList();
             }
         }
@@ -528,12 +528,12 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mup", modView.SelectedItems[0].Text, "", "");
+                modListWorker("mup", modView.SelectedItems[0].Text, "", "", false);
                 reloadModsList();
             }
         }
 
-        public static void modListWorker(string mode, string modName, string modType, string modJson)
+        public static void modListWorker(string mode, string modName, string modType, string modJson, bool modUpdate)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
@@ -554,6 +554,7 @@ namespace MCLauncher.forms
                 newEntry.name = modName;
                 newEntry.type = modType;
                 newEntry.json = modJson;
+                newEntry.update = modUpdate;
                 entries.Add(newEntry);
             }
             else if (mode == "remove")
@@ -621,7 +622,8 @@ namespace MCLauncher.forms
                 toSave += $"    {{\n";
                 toSave += $"      \"name\": \"{ent.name}\",\n";
                 toSave += $"      \"type\": \"{ent.type}\",\n";
-                toSave += $"      \"json\": \"{ent.json}\"\n";
+                toSave += $"      \"json\": \"{ent.json}\",\n";
+                toSave += $"      \"update\": {ent.update.ToString().ToLower()}\n";
                 toSave += $"    }},\n";
                 y++;
             }
@@ -655,13 +657,14 @@ namespace MCLauncher.forms
 
             foreach (ModJsonEntry mje in mj.items)
             {
-                ListViewItem item = new ListViewItem(new[] { mje.name, mje.type, mje.json });
+                ListViewItem item = new ListViewItem(new[] { mje.name, mje.type, mje.json, mje.update.ToString() });
                 Instance.modView.Items.Add(item);
             }
 
-            Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
-            Instance.modView.Columns[1].Width = Instance.modView.Width / 3;
-            Instance.modView.Columns[2].Width = -2;
+            Instance.modView.Columns[0].Width = Instance.modView.Width / 3;
+            Instance.modView.Columns[1].Width = Instance.modView.Width / 4;
+            Instance.modView.Columns[2].Width = Instance.modView.Width / 4;
+            Instance.modView.Columns[3].Width = -2;
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
@@ -846,5 +849,6 @@ namespace MCLauncher.forms
         public string name { get; set; }
         public string type { get; set; }
         public string json { get; set; }
+        public bool update { get; set; }
     }
 }

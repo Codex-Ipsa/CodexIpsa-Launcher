@@ -85,7 +85,7 @@ namespace MCLauncher
                                 dp.ShowDialog();
 
                                 Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", t.json), $"{Globals.dataPath}\\data\\json\\{t.json}.json");
-                                Profile.modListWorker("add", $"{r.id}-{t.version}.zip", t.type, t.json);
+                                Profile.modListWorker("add", $"{r.id}-{t.version}.zip", t.type, t.json, checkBox1.Checked);
 
                                 Profile.reloadModsList();
                                 this.Close();
@@ -122,6 +122,11 @@ namespace MCLauncher
                     this.Close();
                 }*/
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

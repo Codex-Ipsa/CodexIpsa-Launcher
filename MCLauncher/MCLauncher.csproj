@@ -135,12 +135,6 @@
     <Compile Include="forms\ModLoaders.Designer.cs">
       <DependentUpon>ModLoaders.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\ModWarn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ModWarn.Designer.cs">
-      <DependentUpon>ModWarn.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms\Output.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,9 +229,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\HomeScreen.resx">
       <DependentUpon>HomeScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ModWarn.resx">
-      <DependentUpon>ModWarn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Output.resx">
       <DependentUpon>Output.cs</DependentUpon>

@@ -76,9 +76,9 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.javaPanel = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.xboxPanel = new System.Windows.Forms.Panel();
-            this.javaPanel = new System.Windows.Forms.Panel();
             this.grbXboxGame = new System.Windows.Forms.GroupBox();
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -96,14 +96,15 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
             this.grbGame.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.xboxPanel.SuspendLayout();
             this.javaPanel.SuspendLayout();
+            this.xboxPanel.SuspendLayout();
             this.grbXboxGame.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
@@ -660,6 +661,15 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // javaPanel
+            // 
+            this.javaPanel.Controls.Add(this.grbForExp);
+            this.javaPanel.Controls.Add(this.grbGame);
+            this.javaPanel.Location = new System.Drawing.Point(340, 6);
+            this.javaPanel.Name = "javaPanel";
+            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.TabIndex = 25;
+            // 
             // editionBox
             // 
             this.editionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -682,15 +692,6 @@
             this.xboxPanel.Size = new System.Drawing.Size(452, 328);
             this.xboxPanel.TabIndex = 26;
             this.xboxPanel.Visible = false;
-            // 
-            // javaPanel
-            // 
-            this.javaPanel.Controls.Add(this.grbForExp);
-            this.javaPanel.Controls.Add(this.grbGame);
-            this.javaPanel.Location = new System.Drawing.Point(340, 6);
-            this.javaPanel.Name = "javaPanel";
-            this.javaPanel.Size = new System.Drawing.Size(452, 328);
-            this.javaPanel.TabIndex = 25;
             // 
             // grbXboxGame
             // 
@@ -837,7 +838,8 @@
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader5,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
             this.modView.Location = new System.Drawing.Point(6, 6);
@@ -861,6 +863,10 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Update";
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -880,8 +886,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.xboxPanel.ResumeLayout(false);
             this.javaPanel.ResumeLayout(false);
+            this.xboxPanel.ResumeLayout(false);
             this.grbXboxGame.ResumeLayout(false);
             this.grbXboxGame.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -958,5 +964,6 @@
         private System.Windows.Forms.Panel xboxPanel;
         private System.Windows.Forms.GroupBox grbXboxGame;
         private System.Windows.Forms.CheckBox chkXboxDemo;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }
