@@ -35,7 +35,8 @@ namespace MCLauncher
         public static void GameInfo(string text)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if(text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
+                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
 
             if (text.Contains("<log4j:Event"))
             {
@@ -62,7 +63,8 @@ namespace MCLauncher
         public static void GameError(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
+                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.Gray;
         }

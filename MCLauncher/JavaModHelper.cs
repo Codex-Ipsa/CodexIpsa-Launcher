@@ -17,8 +17,10 @@ namespace MCLauncher
     {
         public static void Start(string instName, string manifestPath)
         {
-            //When I wrote this, only I and my beer can knew how it worked,
+            //When I wrote this, only I and my beer bottle knew how it worked,
             //now nobody does
+
+            //Note 29.7.2023 - this needs to be rewritten lmao
 
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
             string clientJson = File.ReadAllText(manifestPath);
@@ -54,6 +56,23 @@ namespace MCLauncher
                             }
                             else
                             {
+                                if(!File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{entry.id}-{entry.items[0].version}.zip"))
+                                {
+                                    DownloadProgress.url = entry.items[0].url;
+                                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{entry.id}-{entry.items[0].version}.zip";
+                                    DownloadProgress dp = new DownloadProgress();
+                                    dp.ShowDialog();
+                                }
+
+                                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", entry.items[0].json), $"{Globals.dataPath}\\data\\json\\{entry.items[0].json}.json");
+                                Profile.modListWorker("add", $"{entry.id}-{entry.items[0].version}.zip", entry.items[0].type, entry.items[0].json, true);
+                                Profile.modListWorker("remove", ent.name, "", "", false);
+                                File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{ent.name}");
+                                //Profile.reloadModsList();
+
+                                json = File.ReadAllText(indexPath);
+                                mj = JsonConvert.DeserializeObject<ModJson>(json);
+
                                 Logger.Error("[JavaModHelper]", "MOD UPDATE AVAILABLE");
                             }
                         }
