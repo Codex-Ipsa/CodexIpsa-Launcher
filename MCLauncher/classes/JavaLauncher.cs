@@ -98,7 +98,9 @@ namespace MCLauncher.classes
 
             if (vi.assets.url != "")
             {
-                AssetIndex.Start(vi.assets.url, vi.assets.name);
+                //AssetIndex.Start(vi.assets.url, vi.assets.name);
+                AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
+                ad.ShowDialog();
             }
 
             string jars = "";
@@ -107,7 +109,7 @@ namespace MCLauncher.classes
 
             Logger.Info("[Javalauncher]", $"Mod path: {modClientPath}");
 
-            if(modClientPath != "")
+            if (modClientPath != "")
                 jars += $"\"{modClientPath}\";";
             else
                 jars += $"\"{Globals.dataPath}\\versions\\java\\{dj.version}.jar\";";
@@ -196,7 +198,7 @@ namespace MCLauncher.classes
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\";
-            if(dj.useJava)
+            if (dj.useJava)
                 proc.StartInfo.FileName = dj.javaPath;
             else
                 proc.StartInfo.FileName = "java.exe";
@@ -274,13 +276,17 @@ namespace MCLauncher.classes
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             if (e.Data != null)
+            {
                 Logger.GameInfo(e.Data);
+            }
         }
 
         static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            if(e.Data != null)
+            if (e.Data != null)
+            {
                 Logger.GameError(e.Data);
+            }
         }
     }
 

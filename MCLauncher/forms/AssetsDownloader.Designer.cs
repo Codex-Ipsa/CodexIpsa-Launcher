@@ -30,9 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetsDownloader));
             this.cancelBtn = new System.Windows.Forms.Button();
-            this.ProgressLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLoading = new System.Windows.Forms.Label();
+            this.lblDlFiles = new System.Windows.Forms.Label();
             this.progressBarDownload = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // cancelBtn
@@ -43,28 +44,29 @@
             this.cancelBtn.TabIndex = 12;
             this.cancelBtn.Text = "btn.Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // ProgressLabel
+            // lblLoading
             // 
-            this.ProgressLabel.AutoSize = true;
-            this.ProgressLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ProgressLabel.ForeColor = System.Drawing.Color.Black;
-            this.ProgressLabel.Location = new System.Drawing.Point(12, 53);
-            this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.Size = new System.Drawing.Size(58, 13);
-            this.ProgressLabel.TabIndex = 11;
-            this.ProgressLabel.Text = "lbl.Loading";
+            this.lblLoading.AutoSize = true;
+            this.lblLoading.BackColor = System.Drawing.Color.Transparent;
+            this.lblLoading.ForeColor = System.Drawing.Color.Black;
+            this.lblLoading.Location = new System.Drawing.Point(12, 53);
+            this.lblLoading.Name = "lblLoading";
+            this.lblLoading.Size = new System.Drawing.Size(58, 13);
+            this.lblLoading.TabIndex = 11;
+            this.lblLoading.Text = "lbl.Loading";
             // 
-            // label1
+            // lblDlFiles
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "lbl.DlFiles";
+            this.lblDlFiles.AutoSize = true;
+            this.lblDlFiles.BackColor = System.Drawing.Color.Transparent;
+            this.lblDlFiles.ForeColor = System.Drawing.Color.Black;
+            this.lblDlFiles.Location = new System.Drawing.Point(12, 11);
+            this.lblDlFiles.Name = "lblDlFiles";
+            this.lblDlFiles.Size = new System.Drawing.Size(51, 13);
+            this.lblDlFiles.TabIndex = 10;
+            this.lblDlFiles.Text = "lbl.DlFiles";
             // 
             // progressBarDownload
             // 
@@ -73,14 +75,22 @@
             this.progressBarDownload.Size = new System.Drawing.Size(213, 23);
             this.progressBarDownload.TabIndex = 9;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // AssetsDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 102);
             this.Controls.Add(this.cancelBtn);
-            this.Controls.Add(this.ProgressLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLoading);
+            this.Controls.Add(this.lblDlFiles);
             this.Controls.Add(this.progressBarDownload);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AssetsDownloader";
@@ -93,8 +103,9 @@
         #endregion
 
         private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.Label ProgressLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLoading;
+        private System.Windows.Forms.Label lblDlFiles;
         private System.Windows.Forms.ProgressBar progressBarDownload;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

@@ -36,7 +36,26 @@ namespace MCLauncher
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
-            Console.WriteLine(text);
+
+            if (text.Contains("<log4j:Event"))
+            {
+                DateTime dt = UnixTimeStampToDateTime(Double.Parse(Splitter(text, "timestamp=\"", "\" level=")));
+                Console.Write($"[{dt.Hour}:{dt.Minute}:{dt.Second}] [{Splitter(text, "thread=\"", "\">")}/{Splitter(text, "level=\"", "\" thread=")}]: ");
+            }
+            else if (text.Contains("<log4j:Message"))
+            {
+                Console.Write(Splitter(text, "<log4j:Message><![CDATA[", "]]></log4j:Message>"));
+            }
+            else if (text.Contains("</log4j:Event"))
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine(text);
+            }
+
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
@@ -46,6 +65,20 @@ namespace MCLauncher
             text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        static string Splitter(string input, string before, string after)
+        {
+            //shitty void for splitting strings
+            int start = input.IndexOf(before) + before.Length;
+            return input.Substring(start, input.IndexOf(after) - start);
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
         }
     }
 }
