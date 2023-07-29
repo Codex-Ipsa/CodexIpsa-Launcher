@@ -166,12 +166,6 @@
     <Compile Include="NoJava.Designer.cs">
       <DependentUpon>NoJava.cs</DependentUpon>
     </Compile>
-    <Compile Include="progressbars\DownloadProgressMulti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="progressbars\DownloadProgressMulti.Designer.cs">
-      <DependentUpon>DownloadProgressMulti.cs</DependentUpon>
-    </Compile>
     <Compile Include="classes\SettingData.cs" />
     <Compile Include="Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
@@ -265,9 +259,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OfflineMode.resx">
       <DependentUpon>OfflineMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="progressbars\DownloadProgressMulti.resx">
-      <DependentUpon>DownloadProgressMulti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

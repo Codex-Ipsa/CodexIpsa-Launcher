@@ -40,7 +40,7 @@ namespace MCLauncher
             if (text.Contains("<log4j:Event"))
             {
                 DateTime dt = UnixTimeStampToDateTime(Double.Parse(Splitter(text, "timestamp=\"", "\" level=")));
-                Console.Write($"[{dt.Hour}:{dt.Minute}:{dt.Second}] [{Splitter(text, "thread=\"", "\">")}/{Splitter(text, "level=\"", "\" thread=")}]: ");
+                Console.Write($"[{dt.ToString("HH:mm:ss")}] [{Splitter(text, "thread=\"", "\">")}/{Splitter(text, "level=\"", "\" thread=")}]: ");
             }
             else if (text.Contains("<log4j:Message"))
             {

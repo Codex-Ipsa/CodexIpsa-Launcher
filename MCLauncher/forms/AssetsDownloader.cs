@@ -31,6 +31,7 @@ namespace MCLauncher.forms
             //Load lang
             lblDlFiles.Text = Strings.lblDlAssets;
             lblLoading.Text = Strings.lblLoading;
+            cancelBtn.Text = Strings.btnCancel;
 
             Logger.Info("[AssetsDownloader]", $"Starting for {assetsName};{assetsUrl}");
 
