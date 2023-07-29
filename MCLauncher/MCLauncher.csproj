@@ -105,12 +105,6 @@
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="DebugTools.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebugTools.Designer.cs">
-      <DependentUpon>DebugTools.cs</DependentUpon>
-    </Compile>
     <Compile Include="DeleteWarn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,10 +181,7 @@
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonObject.cs" />
-    <Compile Include="LaunchJava.cs" />
-    <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="LibsCheck.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>
@@ -232,9 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DebugTools.resx">
-      <DependentUpon>DebugTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteWarn.resx">
       <DependentUpon>DeleteWarn.cs</DependentUpon>

@@ -36,7 +36,6 @@ namespace MCLauncher
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -61,8 +60,7 @@ namespace MCLauncher
             this.homeToolStripMenuItem,
             this.instanceToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.debugToolStripMenuItem});
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -102,16 +100,6 @@ namespace MCLauncher
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
-            this.debugToolStripMenuItem.Visible = false;
-            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // pnlBackground
             // 
@@ -154,7 +142,6 @@ namespace MCLauncher
         private System.Windows.Forms.Panel panel3;
         public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem instanceToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;

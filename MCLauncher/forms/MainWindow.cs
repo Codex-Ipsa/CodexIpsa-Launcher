@@ -192,8 +192,7 @@ namespace MCLauncher
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DebugTools dt = new DebugTools();
-            dt.ShowDialog();
+
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
