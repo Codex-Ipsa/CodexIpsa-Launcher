@@ -169,9 +169,12 @@ namespace MCLauncher.classes
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
                 .Replace("{assetName}", $"\"{vi.assets.name}\"");
 
-            vi.cmdBef = vi.cmdBef.Replace("{assetDir}", $"\"{assetsDir}\"")
-                .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vi.assets.name}.json\"")
-                .Replace("{uuid}", msPlayerUUID);
+            vi.cmdBef = vi.cmdBef.Replace("{assetDir}", $"\"{assetsDir}/\"").Replace("\\", "/")
+                .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vi.assets.name}.json\"").Replace("\\", "/")
+                .Replace("{uuid}", msPlayerUUID)
+                .Replace("{workDir}", $"\"{workDir}\"")
+                .Replace("{game}", $"\"{vi.game}\"")
+                .Replace("{version}", $"\"{vi.version}\"");
 
             if (vi.supplement != null)
             {
@@ -262,6 +265,7 @@ namespace MCLauncher.classes
                     DownloadJava.Start();
 
                 proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
+                proc.StartInfo.WorkingDirectory = $"\"{workDir}\\.minecraft\"";
                 Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
                 proc.Start();
             }
