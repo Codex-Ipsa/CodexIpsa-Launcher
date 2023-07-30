@@ -169,6 +169,10 @@ namespace MCLauncher.classes
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
                 .Replace("{assetName}", $"\"{vi.assets.name}\"");
 
+            vi.cmdBef = vi.cmdBef.Replace("{assetDir}", $"\"{assetsDir}\"")
+                .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vi.assets.name}.json\"")
+                .Replace("{uuid}", msPlayerUUID);
+
             if (vi.supplement != null)
             {
                 foreach (var sup in vi.supplement)
@@ -208,7 +212,7 @@ namespace MCLauncher.classes
             proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
 
             if (vi.cmdBef != "" && dj.disProxy == false)
-                proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft")} ";
+                proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs")} ";
             if (dj.befCmd != "")
                 proc.StartInfo.Arguments += $"{dj.befCmd} ";
 
