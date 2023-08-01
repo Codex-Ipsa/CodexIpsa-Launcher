@@ -160,6 +160,7 @@
             this.chkDiscordRpc.TabIndex = 2;
             this.chkDiscordRpc.Text = "chk.discordRpc";
             this.chkDiscordRpc.UseVisualStyleBackColor = true;
+            this.chkDiscordRpc.CheckedChanged += new System.EventHandler(this.chkDiscordRpc_CheckedChanged);
             // 
             // lblLang
             // 
@@ -178,6 +179,7 @@
             this.cmbLangSelect.Name = "cmbLangSelect";
             this.cmbLangSelect.Size = new System.Drawing.Size(330, 21);
             this.cmbLangSelect.TabIndex = 0;
+            this.cmbLangSelect.SelectedIndexChanged += new System.EventHandler(this.cmbLangSelect_SelectedIndexChanged);
             // 
             // grbUpdates
             // 
@@ -202,6 +204,7 @@
             this.btnCheckUpdates.TabIndex = 3;
             this.btnCheckUpdates.Text = "btn.checkUpdates";
             this.btnCheckUpdates.UseVisualStyleBackColor = true;
+            this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);
             // 
             // lblBranch
             // 
@@ -221,6 +224,7 @@
             this.cmbUpdateSelect.Name = "cmbUpdateSelect";
             this.cmbUpdateSelect.Size = new System.Drawing.Size(330, 21);
             this.cmbUpdateSelect.TabIndex = 0;
+            this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
             // 
             // SettingsScreen
             // 
