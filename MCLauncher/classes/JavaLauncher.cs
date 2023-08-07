@@ -38,7 +38,7 @@ namespace MCLauncher.classes
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON.");
+                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{ver}", dj.version));
                 if (!File.Exists($"{Globals.dataPath}\\data\\json\\{dj.version}.json"))
                     return;
             }
@@ -204,7 +204,7 @@ namespace MCLauncher.classes
             proc.StartInfo.CreateNoWindow = true;
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\";
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
             if (dj.useJava)
                 proc.StartInfo.FileName = dj.javaPath;
             else

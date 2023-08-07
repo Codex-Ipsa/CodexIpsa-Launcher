@@ -71,9 +71,17 @@ namespace MCLauncher
 
         static string Splitter(string input, string before, string after)
         {
+            //return input;
             //shitty void for splitting strings
             int start = input.IndexOf(before) + before.Length;
-            return input.Substring(start, input.IndexOf(after) - start);
+            if(!input.Contains(after))
+            {
+                return input.Replace(before, "");
+            }
+            else
+            {
+                return input.Substring(start, input.IndexOf(after) - start);
+            }
         }
 
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
