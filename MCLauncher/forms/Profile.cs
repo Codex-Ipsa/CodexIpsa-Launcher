@@ -262,8 +262,13 @@ namespace MCLauncher.forms
                 saveBtn.Enabled = false;
             else
             {
-                saveBtn.Enabled = true;
-                listView1.Items[0].Selected = true;
+                item = listView1.FindItemWithText(version, true, 0);
+                if (item != null)
+                {
+                    saveBtn.Enabled = true;
+                    listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
+                    listView1.EnsureVisible(listView1.Items.IndexOf(item));
+                }
             }
         }
 
