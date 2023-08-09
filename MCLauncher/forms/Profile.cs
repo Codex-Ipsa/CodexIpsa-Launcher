@@ -250,7 +250,7 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
-            var item = listView1.FindItemWithText(version);
+            var item = listView1.FindItemWithText(version, true, 0, false);
 
             if (item != null)
             {
