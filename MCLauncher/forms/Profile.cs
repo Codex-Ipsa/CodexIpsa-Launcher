@@ -269,6 +269,11 @@ namespace MCLauncher.forms
                     listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
                     listView1.EnsureVisible(listView1.Items.IndexOf(item));
                 }
+                else
+                {
+                    listView1.Items[0].Selected = true;
+                    listView1.EnsureVisible(listView1.Items[0].Index);
+                }
             }
         }
 
