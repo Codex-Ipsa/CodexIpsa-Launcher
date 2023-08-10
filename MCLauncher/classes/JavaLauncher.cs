@@ -303,6 +303,7 @@ namespace MCLauncher.classes
 
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
+        //can git see this
 
         private void OnProcessExited(object sender, EventArgs e)
         {
