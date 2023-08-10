@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Security.Policy;
 
 namespace MCLauncher
 {
@@ -24,6 +25,9 @@ namespace MCLauncher
         public static string currentPath = Directory.GetCurrentDirectory();
         public static string dataPath = Directory.GetCurrentDirectory() + "\\.codexipsa";
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        //GameInfos
+        public static Dictionary<string, string> running = new Dictionary<string, string>();
 
         //Switches
         public static bool isDebug = false;

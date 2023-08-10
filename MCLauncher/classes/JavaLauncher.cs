@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,8 +28,22 @@ namespace MCLauncher.classes
 
         public static string manifestPath = "";
 
-        public static void Launch(string profileName)
+        public string runID = "";
+
+        public void Launch(string profileName)
         {
+            if (Globals.running.ContainsValue(profileName))
+            {
+                DialogResult result = MessageBox.Show($"Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+            Globals.running.Add(runID, profileName);
+
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
             var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
@@ -114,10 +129,23 @@ namespace MCLauncher.classes
             else
                 jars += $"\"{Globals.dataPath}\\versions\\java\\{dj.version}.jar\";";
 
-            if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
-                Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
+            string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.AllDirectories);
+            foreach (string oldNative in oldNatives)
+            {
+                string dir = oldNative.Replace($"{Globals.dataPath}\\libs\\", "");
+                if (dir.StartsWith("natives") && dir.Contains("-"))
+                {
+                    string timestamp = dir.Substring(dir.IndexOf("-") + 1);
+                    if (!Globals.running.ContainsKey(timestamp))
+                    {
+                        Directory.Delete($"{Globals.dataPath}\\libs\\{dir}", true);
+                    }
+                }
+            }
+            //if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
+            //    Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
 
-            Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives\\");
+            Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives-{runID}\\");
 
             foreach (var lib in vi.libraries)
             {
@@ -134,9 +162,9 @@ namespace MCLauncher.classes
                         if (!zipArchiveEntry.ToString().Contains("META-INF"))
                         {
                             if (zipArchiveEntry.ToString().EndsWith("/"))
-                                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives\\{zipArchiveEntry}");
+                                Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives-{runID}\\{zipArchiveEntry}");
                             else
-                                zipArchiveEntry.ExtractToFile($"{Globals.dataPath}\\libs\\natives\\{zipArchiveEntry}");
+                                zipArchiveEntry.ExtractToFile($"{Globals.dataPath}\\libs\\natives-{runID}\\{zipArchiveEntry}");
                         }
                     }
                 }
@@ -242,7 +270,7 @@ namespace MCLauncher.classes
             if (dj.useClass)
                 classpath = dj.classpath;
 
-            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives\" -cp {jars} {classpath} {vi.cmdAft}";
+            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives-{runID}\" -cp {jars} {classpath} {vi.cmdAft}";
 
             if (dj.aftCmd != "")
                 proc.StartInfo.Arguments += $" {dj.aftCmd}";
@@ -276,9 +304,10 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
-        private static void OnProcessExited(object sender, EventArgs e)
+        private void OnProcessExited(object sender, EventArgs e)
         {
             Discord.ChangeMessage($"Idling");
+            Globals.running.Remove(runID);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)

@@ -390,7 +390,10 @@ namespace MCLauncher
             if (selectedEdition == "x360")
                 XboxLauncher.Launch(selectedInstance);
             else
-                JavaLauncher.Launch(selectedInstance);
+            {
+                JavaLauncher jl = new JavaLauncher();
+                jl.Launch(selectedInstance);
+            }
             /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 
