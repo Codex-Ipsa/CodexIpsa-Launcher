@@ -131,9 +131,8 @@ namespace MCLauncher
                 if (index == -1)
                 {
                     Logger.Error("[MainWindow]", $"Current branch is no longer supported!");
-                    Warning wrn = new Warning("Your branch is no longer supported!");
-                    wrn.ShowDialog();
-                }
+                    MessageBox.Show($"Your branch is no longer supported!\nPlease update your launcher.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
                 else
                 {
                     SettingsScreen.checkForUpdates(Globals.branch);

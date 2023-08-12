@@ -20,8 +20,8 @@ namespace MCLauncher
         public static string discordClient = ""; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
         public static string verCurrent = "0.2.0-pre8"; //Change this on release
         public static string verDisplay = "0.2.0-pre8"; //Change this on release
-        //public static bool offlineMode = false;
 
+        //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
         public static string dataPath = Directory.GetCurrentDirectory() + "\\.codexipsa";
         public static string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
