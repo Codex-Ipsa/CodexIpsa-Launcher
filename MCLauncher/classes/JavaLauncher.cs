@@ -22,6 +22,7 @@ namespace MCLauncher.classes
 
         public static string modClientPath = "";
         public static string modVersion = "";
+        public static string modName = "";
 
         public static string srvIP = "";
         public static string srvPort = "";
@@ -32,6 +33,8 @@ namespace MCLauncher.classes
 
         public void Launch(string profileName)
         {
+            modVersion = "";
+            modName = "";
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show($"Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -184,6 +187,12 @@ namespace MCLauncher.classes
             string workDir = $"{Globals.dataPath}\\instance\\{profileName}";
             if (!string.IsNullOrWhiteSpace(dj.directory) && !string.IsNullOrEmpty(dj.directory))
                 workDir = dj.directory;
+
+            if (modVersion != "")
+            {
+                vi.game = modName;
+                vi.version = modVersion;
+            }
 
             vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
                 .Replace("{version}", vi.version)
