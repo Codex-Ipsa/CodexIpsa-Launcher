@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Threading;
+using System.Web;
 
 namespace MCLauncher
 {
@@ -44,7 +45,7 @@ namespace MCLauncher
         public static string lblDejvossIpsa = $"DEJVOSS Productions";
         public static string lblCopyright = $"(c) 2022-2023";
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";
-        public static string lblSpecialThanks = $"Special thanks:\nBetaCraft; proxy, inspiration.\nOmniarchive; inspiration.\nMisterSheeple; file hosting.";
+        public static string lblSpecialThanks = $"Special thanks:\nBetaCraft; LegacyFix, BCWrapper.\nOmniarchive; inspiration, version files.\nMisterSheeple; file hosting.\nAnd you; for using the launcher.";
 
         //SettingsScreen
         public static string grbLauncher = "Launcher";
@@ -53,6 +54,7 @@ namespace MCLauncher
         public static string lblBranch = "Branch";
         public static string btnCheckUpdates = "Check for updates";
         public static string chkDiscordRpc = "Discord rich presence";
+        public static string grbDefaults = "Defaults";
 
         //InstanceManager
         public static string grbInfo = "Profile info";
@@ -103,6 +105,7 @@ namespace MCLauncher
         public static string lblDoDown = "Do you wish to download it?";
 
         //New Profile
+        public static string tabMods = "Mods";
         public static string grbGame = "Game";
         public static string lblProfName = "Profile name";
         public static string lblGameDir = "Game directory";
@@ -136,12 +139,14 @@ namespace MCLauncher
         public static string rowType = "Type";
         public static string rowConfig = "Config";
         public static string rowReleased = "Released";
+        public static string rowUpdate = "Update";
 
         //Mod repo
         public static string btnDownload = "Download";
         public static string lblAlwaysUpdate = "Always update";
 
         public static string lblNotReady = "This feature is not ready yet.";
+        public static string wrnRunning = "Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!";
 
         public static void reloadLangs(string selected)
         {
@@ -175,6 +180,7 @@ namespace MCLauncher
                 lblBranch = str.lblBranch;
                 btnCheckUpdates = str.btnCheckUpdates;
                 chkDiscordRpc = str.chkDiscordRpc;
+                grbDefaults = str.grbDefaults;
 
                 lblLauncherBy = str.lblLauncherBy.Replace("{version}", Globals.verDisplay);
                 lblDejvossIpsa = str.lblDejvossIpsa;
@@ -232,6 +238,7 @@ namespace MCLauncher
                 lblWhatsNew = str.lblWhatsNew;
                 lblDoDown = str.lblDoDown;
 
+                tabMods = str.tabMods;
                 grbGame = str.grbGame;
                 lblProfName = str.lblProfName;
                 lblGameDir = str.lblGameDir;
@@ -264,11 +271,13 @@ namespace MCLauncher
                 rowType = str.rowType;
                 rowConfig = str.rowConfig;
                 rowReleased = str.rowReleased;
+                rowUpdate = str.rowUpdate;
 
                 btnDownload = str.btnDownload;
                 lblAlwaysUpdate = str.lblAlwaysUpdate;
 
                 lblNotReady = str.lblNotReady;
+                wrnRunning = str.wrnRunning;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
@@ -298,6 +307,7 @@ namespace MCLauncher
                 SettingsScreen.InstanceSetting.lblBranch.Text = lblBranch;
                 SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
                 SettingsScreen.InstanceSetting.chkDiscordRpc.Text = chkDiscordRpc;
+                SettingsScreen.InstanceSetting.grbDefaults.Text = grbDefaults;
 
                 CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
                 CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
@@ -329,6 +339,7 @@ namespace MCLauncher
             public string lblBranch { get; set; }
             public string btnCheckUpdates { get; set; }
             public string chkDiscordRpc { get; set; }
+            public string grbDefaults { get; set; }
 
             public string lblLauncherBy { get; set; }
             public string lblDejvossIpsa { get; set; }
@@ -386,6 +397,7 @@ namespace MCLauncher
             public string lblWhatsNew { get; set; }
             public string lblDoDown { get; set; }
 
+            public string tabMods { get; set; }
             public string grbGame { get; set; }
             public string lblProfName { get; set; }
             public string lblGameDir { get; set; }
@@ -418,11 +430,13 @@ namespace MCLauncher
             public string rowType { get; set; }
             public string rowConfig { get; set; }
             public string rowReleased { get; set; }
+            public string rowUpdate { get; set; }
 
             public string btnDownload { get; set; }
             public string lblAlwaysUpdate { get; set; }
 
             public string lblNotReady { get; set; }
+            public string wrnRunning { get; set; }
         }
     }
 }

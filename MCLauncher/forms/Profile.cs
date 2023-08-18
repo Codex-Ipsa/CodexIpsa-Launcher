@@ -68,6 +68,9 @@ namespace MCLauncher.forms
             grbXboxGame.Text = Strings.grbGame;
             chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf("("));
 
+            tabControl1.TabPages[0].Text = Strings.cntHome;
+            tabControl1.TabPages[1].Text = Strings.tabMods;
+
             profileName = profile;
             profMode = mode;
 
@@ -189,6 +192,7 @@ namespace MCLauncher.forms
             modView.Columns[0].Text = Strings.rowName;
             modView.Columns[1].Text = Strings.rowType;
             modView.Columns[2].Text = Strings.rowConfig;
+            modView.Columns[3].Text = Strings.rowUpdate;
 
             if (profMode == "def")
             {

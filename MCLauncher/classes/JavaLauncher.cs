@@ -37,7 +37,7 @@ namespace MCLauncher.classes
             modName = "";
             if (Globals.running.ContainsValue(profileName))
             {
-                DialogResult result = MessageBox.Show($"Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result != DialogResult.Yes)
                 {

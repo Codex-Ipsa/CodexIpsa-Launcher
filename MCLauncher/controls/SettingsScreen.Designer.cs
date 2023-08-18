@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
-            this.grbJava = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.grbDefaults = new System.Windows.Forms.GroupBox();
+            this.lblJre17 = new System.Windows.Forms.Label();
             this.btnJre17 = new System.Windows.Forms.Button();
             this.cmbJre17 = new System.Windows.Forms.ComboBox();
             this.btnJre8 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblJre8 = new System.Windows.Forms.Label();
             this.cmbJre8 = new System.Windows.Forms.ComboBox();
             this.grbLauncher = new System.Windows.Forms.GroupBox();
             this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
@@ -46,7 +46,7 @@
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
             this.pnlCenter.SuspendLayout();
-            this.grbJava.SuspendLayout();
+            this.grbDefaults.SuspendLayout();
             this.grbLauncher.SuspendLayout();
             this.grbUpdates.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // pnlCenter
             // 
             this.pnlCenter.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCenter.Controls.Add(this.grbJava);
+            this.pnlCenter.Controls.Add(this.grbDefaults);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
             this.pnlCenter.Location = new System.Drawing.Point(169, 70);
@@ -62,31 +62,31 @@
             this.pnlCenter.Size = new System.Drawing.Size(446, 247);
             this.pnlCenter.TabIndex = 24;
             // 
-            // grbJava
+            // grbDefaults
             // 
-            this.grbJava.BackColor = System.Drawing.Color.Transparent;
-            this.grbJava.Controls.Add(this.label2);
-            this.grbJava.Controls.Add(this.btnJre17);
-            this.grbJava.Controls.Add(this.cmbJre17);
-            this.grbJava.Controls.Add(this.btnJre8);
-            this.grbJava.Controls.Add(this.label1);
-            this.grbJava.Controls.Add(this.cmbJre8);
-            this.grbJava.ForeColor = System.Drawing.Color.White;
-            this.grbJava.Location = new System.Drawing.Point(0, 172);
-            this.grbJava.Name = "grbJava";
-            this.grbJava.Size = new System.Drawing.Size(446, 75);
-            this.grbJava.TabIndex = 21;
-            this.grbJava.TabStop = false;
-            this.grbJava.Text = "grb.defaults";
+            this.grbDefaults.BackColor = System.Drawing.Color.Transparent;
+            this.grbDefaults.Controls.Add(this.lblJre17);
+            this.grbDefaults.Controls.Add(this.btnJre17);
+            this.grbDefaults.Controls.Add(this.cmbJre17);
+            this.grbDefaults.Controls.Add(this.btnJre8);
+            this.grbDefaults.Controls.Add(this.lblJre8);
+            this.grbDefaults.Controls.Add(this.cmbJre8);
+            this.grbDefaults.ForeColor = System.Drawing.Color.White;
+            this.grbDefaults.Location = new System.Drawing.Point(0, 172);
+            this.grbDefaults.Name = "grbDefaults";
+            this.grbDefaults.Size = new System.Drawing.Size(446, 75);
+            this.grbDefaults.TabIndex = 21;
+            this.grbDefaults.TabStop = false;
+            this.grbDefaults.Text = "grb.defaults";
             // 
-            // label2
+            // lblJre17
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "lbl.jre17";
+            this.lblJre17.AutoSize = true;
+            this.lblJre17.Location = new System.Drawing.Point(6, 49);
+            this.lblJre17.Name = "lblJre17";
+            this.lblJre17.Size = new System.Drawing.Size(43, 13);
+            this.lblJre17.TabIndex = 27;
+            this.lblJre17.Text = "lbl.jre17";
             // 
             // btnJre17
             // 
@@ -119,14 +119,14 @@
             this.btnJre8.UseVisualStyleBackColor = true;
             this.btnJre8.Click += new System.EventHandler(this.btnJre8_Click);
             // 
-            // label1
+            // lblJre8
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "lbl.jre8";
+            this.lblJre8.AutoSize = true;
+            this.lblJre8.Location = new System.Drawing.Point(6, 22);
+            this.lblJre8.Name = "lblJre8";
+            this.lblJre8.Size = new System.Drawing.Size(37, 13);
+            this.lblJre8.TabIndex = 1;
+            this.lblJre8.Text = "lbl.jre8";
             // 
             // cmbJre8
             // 
@@ -239,8 +239,8 @@
             this.Name = "SettingsScreen";
             this.Size = new System.Drawing.Size(784, 387);
             this.pnlCenter.ResumeLayout(false);
-            this.grbJava.ResumeLayout(false);
-            this.grbJava.PerformLayout();
+            this.grbDefaults.ResumeLayout(false);
+            this.grbDefaults.PerformLayout();
             this.grbLauncher.ResumeLayout(false);
             this.grbLauncher.PerformLayout();
             this.grbUpdates.ResumeLayout(false);
@@ -252,12 +252,12 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlCenter;
-        public System.Windows.Forms.GroupBox grbJava;
-        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.GroupBox grbDefaults;
+        public System.Windows.Forms.Label lblJre17;
         private System.Windows.Forms.Button btnJre17;
         private System.Windows.Forms.ComboBox cmbJre17;
         private System.Windows.Forms.Button btnJre8;
-        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label lblJre8;
         private System.Windows.Forms.ComboBox cmbJre8;
         public System.Windows.Forms.GroupBox grbLauncher;
         public System.Windows.Forms.CheckBox chkDiscordRpc;

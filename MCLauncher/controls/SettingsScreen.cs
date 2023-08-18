@@ -38,6 +38,10 @@ namespace MCLauncher.controls
             InstanceSetting = this;
             InitializeComponent();
 
+            //Lang
+            lblJre8.Text = "Java 8";
+            lblJre17.Text = "Java 17";
+
             //Seasonal background
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
