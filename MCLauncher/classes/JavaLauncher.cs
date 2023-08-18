@@ -132,7 +132,7 @@ namespace MCLauncher.classes
             else
                 jars += $"\"{Globals.dataPath}\\versions\\java\\{dj.version}.jar\";";
 
-            string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.AllDirectories);
+            string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.TopDirectoryOnly);
             foreach (string oldNative in oldNatives)
             {
                 string dir = oldNative.Replace($"{Globals.dataPath}\\libs\\", "");
@@ -141,7 +141,7 @@ namespace MCLauncher.classes
                     string timestamp = dir.Substring(dir.IndexOf("-") + 1);
                     if (!Globals.running.ContainsKey(timestamp))
                     {
-                        Directory.Delete($"{Globals.dataPath}\\libs\\{dir}", true);
+                        Directory.Delete($"{Globals.dataPath}\\libs\\natives-{timestamp}", true);
                     }
                 }
             }
@@ -244,6 +244,10 @@ namespace MCLauncher.classes
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
             if (dj.useJava)
                 proc.StartInfo.FileName = dj.javaPath;
+            else if (vi.java == 17)
+                proc.StartInfo.FileName = Properties.Settings.Default.jre17;
+            else if (vi.java == 8)
+                proc.StartInfo.FileName = Properties.Settings.Default.jre8;
             else
                 proc.StartInfo.FileName = "java.exe";
 
@@ -298,13 +302,14 @@ namespace MCLauncher.classes
             catch (System.ComponentModel.Win32Exception e)
             {
                 Logger.Error("[JavaLauncher]", "Could not find java!");
-                if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
+                //TODO
+                /*if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();
 
                 proc.StartInfo.FileName = $"{Globals.dataPath}\\data\\jre\\bin\\java.exe";
                 proc.StartInfo.WorkingDirectory = $"\"{workDir}\\.minecraft\"";
                 Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
-                proc.Start();
+                proc.Start();*/
             }
 
             proc.BeginErrorReadLine();
@@ -312,7 +317,6 @@ namespace MCLauncher.classes
 
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
-        //can git see this
 
         private void OnProcessExited(object sender, EventArgs e)
         {
