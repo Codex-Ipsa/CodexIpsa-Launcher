@@ -32,11 +32,11 @@
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbJava = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnJre17 = new System.Windows.Forms.Button();
+            this.cmbJre17 = new System.Windows.Forms.ComboBox();
+            this.btnJre8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbJre8 = new System.Windows.Forms.ComboBox();
             this.grbLauncher = new System.Windows.Forms.GroupBox();
             this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
             this.lblLang = new System.Windows.Forms.Label();
@@ -66,11 +66,11 @@
             // 
             this.grbJava.BackColor = System.Drawing.Color.Transparent;
             this.grbJava.Controls.Add(this.label2);
-            this.grbJava.Controls.Add(this.button2);
-            this.grbJava.Controls.Add(this.comboBox2);
-            this.grbJava.Controls.Add(this.button1);
+            this.grbJava.Controls.Add(this.btnJre17);
+            this.grbJava.Controls.Add(this.cmbJre17);
+            this.grbJava.Controls.Add(this.btnJre8);
             this.grbJava.Controls.Add(this.label1);
-            this.grbJava.Controls.Add(this.comboBox1);
+            this.grbJava.Controls.Add(this.cmbJre8);
             this.grbJava.ForeColor = System.Drawing.Color.White;
             this.grbJava.Location = new System.Drawing.Point(0, 172);
             this.grbJava.Name = "grbJava";
@@ -86,36 +86,38 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 27;
-            this.label2.Text = "lbl.jre16";
+            this.label2.Text = "lbl.jre17";
             // 
-            // button2
+            // btnJre17
             // 
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(403, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(36, 21);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnJre17.ForeColor = System.Drawing.Color.Black;
+            this.btnJre17.Location = new System.Drawing.Point(403, 45);
+            this.btnJre17.Name = "btnJre17";
+            this.btnJre17.Size = new System.Drawing.Size(36, 21);
+            this.btnJre17.TabIndex = 26;
+            this.btnJre17.Text = "...";
+            this.btnJre17.UseVisualStyleBackColor = true;
+            this.btnJre17.Click += new System.EventHandler(this.btnJre17_Click);
             // 
-            // comboBox2
+            // cmbJre17
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(67, 46);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(330, 21);
-            this.comboBox2.TabIndex = 25;
+            this.cmbJre17.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbJre17.FormattingEnabled = true;
+            this.cmbJre17.Location = new System.Drawing.Point(67, 46);
+            this.cmbJre17.Name = "cmbJre17";
+            this.cmbJre17.Size = new System.Drawing.Size(330, 21);
+            this.cmbJre17.TabIndex = 25;
             // 
-            // button1
+            // btnJre8
             // 
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(403, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 21);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnJre8.ForeColor = System.Drawing.Color.Black;
+            this.btnJre8.Location = new System.Drawing.Point(403, 19);
+            this.btnJre8.Name = "btnJre8";
+            this.btnJre8.Size = new System.Drawing.Size(36, 21);
+            this.btnJre8.TabIndex = 24;
+            this.btnJre8.Text = "...";
+            this.btnJre8.UseVisualStyleBackColor = true;
+            this.btnJre8.Click += new System.EventHandler(this.btnJre8_Click);
             // 
             // label1
             // 
@@ -126,14 +128,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "lbl.jre8";
             // 
-            // comboBox1
+            // cmbJre8
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(67, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(330, 21);
-            this.comboBox1.TabIndex = 0;
+            this.cmbJre8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbJre8.FormattingEnabled = true;
+            this.cmbJre8.Location = new System.Drawing.Point(67, 19);
+            this.cmbJre8.Name = "cmbJre8";
+            this.cmbJre8.Size = new System.Drawing.Size(330, 21);
+            this.cmbJre8.TabIndex = 0;
             // 
             // grbLauncher
             // 
@@ -252,11 +254,11 @@
         private System.Windows.Forms.Panel pnlCenter;
         public System.Windows.Forms.GroupBox grbJava;
         public System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnJre17;
+        private System.Windows.Forms.ComboBox cmbJre17;
+        private System.Windows.Forms.Button btnJre8;
         public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbJre8;
         public System.Windows.Forms.GroupBox grbLauncher;
         public System.Windows.Forms.CheckBox chkDiscordRpc;
         public System.Windows.Forms.Label lblLang;

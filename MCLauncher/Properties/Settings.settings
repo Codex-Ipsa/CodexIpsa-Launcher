@@ -20,5 +20,11 @@
     <Setting Name="discordRpc" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="jre8" Type="System.String" Scope="User">
+      <Value Profile="(Default)">java.exe</Value>
+    </Setting>
+    <Setting Name="jre17" Type="System.String" Scope="User">
+      <Value Profile="(Default)">java.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

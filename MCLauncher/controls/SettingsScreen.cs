@@ -62,6 +62,10 @@ namespace MCLauncher.controls
                 chkDiscordRpc.Checked = true;
             else
                 chkDiscordRpc.Checked = false;
+
+            //JREs
+            cmbJre8.Text = Properties.Settings.Default.jre8;
+            cmbJre17.Text = Properties.Settings.Default.jre17;
         }
 
         public static void loadData()
@@ -173,6 +177,30 @@ namespace MCLauncher.controls
             else
             {
                 Properties.Settings.Default.discordRpc = false;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void btnJre8_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre8.Text = ofd.FileName;
+                Properties.Settings.Default.jre8 = ofd.FileName;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void btnJre17_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre17.Text = ofd.FileName;
+                Properties.Settings.Default.jre17 = ofd.FileName;
                 Properties.Settings.Default.Save();
             }
         }
