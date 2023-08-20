@@ -202,7 +202,25 @@ namespace MCLauncher
             selectedInstance = Instance.cmbInstaces.Text;
             selectedVersion = pj.version;
             selectedEdition = pj.edition;
-            Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+
+            string tempName = "";
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json"));
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                if (tempName == "")
+                {
+                    tempName = ent.name + " " + ent.version;
+                }
+            }
+            if (tempName == "")
+            {
+                Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+            }
+            else
+            {
+                Instance.lblReady.Text = $"{Strings.lblReady} {tempName}";
+            }
+
             Profile.profileName = Instance.cmbInstaces.Text;
         }
 

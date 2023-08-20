@@ -89,8 +89,6 @@ namespace MCLauncher
                     }
                 }
 
-
-
                 if (ent.json != "")
                 {
                     jsonList.Add(ent.json);
