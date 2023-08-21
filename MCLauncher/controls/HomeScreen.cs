@@ -67,31 +67,7 @@ namespace MCLauncher
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";   
-            Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(selectedInstance);
-            reloadInstance(selectedInstance);
-
-            /*if (Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
-                selectedInstance = "Default";
-            else 
-                selectedInstance = Properties.Settings.Default.lastInstance;
-
-            Logger.Info("[TEST1]", selectedInstance);
-            if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
-            {
-                selectedInstance = "Default";
-            }
-            Logger.Info("[TEST3]", selectedInstance);
-            cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
-            Logger.Info("[TEST]", selectedInstance);
-            reloadInstance(selectedInstance);*/
-            cmbInstaces.SelectedIndex = cmbInstaces.FindString(Properties.Settings.Default.lastInstance);
-
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{Properties.Settings.Default.lastInstance}\\instance.json");
-            var pj = JsonConvert.DeserializeObject<profileJson>(json);
-            Profile.version = pj.version;
-            selectedVersion = pj.version;
-            selectedEdition = pj.edition;
-            Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+            Instance.cmbInstaces.SelectedIndex = Instance.cmbInstaces.FindString(selectedInstance);
 
             Discord.Init();
             Discord.ChangeMessage("Idling");
@@ -212,9 +188,9 @@ namespace MCLauncher
                     tempName = ent.name + " " + ent.version;
                 }
             }
-            if (tempName == "")
+            if (String.IsNullOrWhiteSpace(tempName))
             {
-                Instance.lblReady.Text = $"{Strings.lblReady} {pj.version}";
+                Instance.lblReady.Text = $"{Strings.lblReady} Minecraft {pj.version}";
             }
             else
             {

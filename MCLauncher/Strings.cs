@@ -35,7 +35,7 @@ namespace MCLauncher
         public static string btnEditInst = $"Edit profile";
         public static string btnNewInst = $"New profile";
         public static string lblWelcome = $"Welcome,";
-        public static string lblReady = $"Ready to play Minecraft";
+        public static string lblReady = $"Ready to play";
         public static string lblSelInst = $"Select profile:";
         public static string lblLogInWarn = $"You need to log in to use the launcher!";
         public static string lblLogInWarn_Debug = $"MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
@@ -298,7 +298,7 @@ namespace MCLauncher
                     HomeScreen.Instance.lblWelcome.Text = lblWelcome + " " + HomeScreen.msPlayerName;
                     HomeScreen.Instance.lblLogInWarn.Text = "";
                 }
-                HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
+                //HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
                 HomeScreen.Instance.lblSelInst.Text = lblSelInst;
 
                 SettingsScreen.InstanceSetting.grbLauncher.Text = grbLauncher;
