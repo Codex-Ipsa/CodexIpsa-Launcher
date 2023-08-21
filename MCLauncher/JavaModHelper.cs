@@ -35,11 +35,11 @@ namespace MCLauncher
 
             string json = File.ReadAllText(indexPath);
 
-            if (!json.Contains("\"version\":"))
-            {
-                json = MigrateToVersion(indexPath, instName);
-                File.WriteAllText(indexPath, json);
-            }
+            //if (!json.Contains("\"version\":"))
+            //{
+            //    json = MigrateToVersion(indexPath, instName);
+            //    File.WriteAllText(indexPath, json);
+            //}
 
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
 
@@ -221,6 +221,7 @@ namespace MCLauncher
         {
             string orig = File.ReadAllText(indexPath);
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(orig);
+
             string created = "{\n";
             created += "  \"data\": 1,\n";
             created += "  \"items\": [\n";
@@ -228,7 +229,7 @@ namespace MCLauncher
             {
                 created += $"    {{\n";
                 created += $"      \"name\": \"\",\n";
-                created += $"      \"version\": \"\",\n";
+                created += $"      \"version\": \"{item.version}\",\n";
                 created += $"      \"file\": \"{item.name}\",\n";
                 created += $"      \"type\": \"{item.type}\",\n";
                 created += $"      \"json\": \"{item.json}\",\n";
@@ -237,7 +238,6 @@ namespace MCLauncher
             }
             created = created.TrimEnd(',');
             created += "\n  ]\n}";
-
 
             return created;
         }

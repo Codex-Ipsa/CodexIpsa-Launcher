@@ -179,8 +179,15 @@ namespace MCLauncher
             selectedVersion = pj.version;
             selectedEdition = pj.edition;
 
+            string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
+            if (!modJson.Contains("\"version\":"))
+            {
+                modJson = JavaModHelper.MigrateToVersion($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", instName);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", modJson);
+            }
+
             string tempName = "";
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json"));
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
             foreach (ModJsonEntry ent in mj.items)
             {
                 if (tempName == "")
