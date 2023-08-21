@@ -41,7 +41,7 @@ namespace MCLauncher
         public static string lblLogInWarn_Debug = $"MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
 
         //CreditsScreen
-        public static string lblLauncherBy = $"Codex-Ipsa Launcher {Globals.verDisplay} by";
+        public static string lblLauncherBy = $"Codex-Ipsa Launcher v{Globals.verDisplay} by";
         public static string lblDejvossIpsa = $"DEJVOSS Productions";
         public static string lblCopyright = $"(c) 2022-2023";
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";
