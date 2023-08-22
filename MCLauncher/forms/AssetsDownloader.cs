@@ -100,7 +100,10 @@ namespace MCLauncher.forms
                         File.Delete(filePath);
                         string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                         Directory.CreateDirectory(path);
-                        Globals.client.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
+                        if (entry.Value.custom_url != null)
+                            Globals.client.DownloadFile($"{entry.Value.custom_url}", filePath);
+                        else
+                            Globals.client.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                         Logger.Info("[AssetIndex]", $"Redownloaded {entry.Key}");
                     }
                     i++;

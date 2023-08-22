@@ -69,6 +69,9 @@
             this.jsonBtn = new System.Windows.Forms.Button();
             this.chkMulti = new System.Windows.Forms.CheckBox();
             this.grbForExp = new System.Windows.Forms.GroupBox();
+            this.chkAssetIndex = new System.Windows.Forms.CheckBox();
+            this.assetIndexBtn = new System.Windows.Forms.Button();
+            this.assetIndexBox = new System.Windows.Forms.TextBox();
             this.chkCustJava = new System.Windows.Forms.CheckBox();
             this.chkCustJson = new System.Windows.Forms.CheckBox();
             this.classBox = new System.Windows.Forms.TextBox();
@@ -126,7 +129,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(711, 349);
+            this.saveBtn.Location = new System.Drawing.Point(711, 363);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 36;
@@ -189,9 +192,9 @@
             // 
             // javaBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(97, 19);
+            this.javaBox.Location = new System.Drawing.Point(120, 19);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(287, 20);
+            this.javaBox.Size = new System.Drawing.Size(264, 20);
             this.javaBox.TabIndex = 27;
             this.javaBox.TextChanged += new System.EventHandler(this.JavaBox_TextChanged);
             // 
@@ -478,7 +481,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(614, 349);
+            this.openBtn.Location = new System.Drawing.Point(614, 363);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(91, 23);
             this.openBtn.TabIndex = 35;
@@ -488,7 +491,7 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(528, 349);
+            this.deleteBtn.Location = new System.Drawing.Point(528, 363);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(80, 23);
             this.deleteBtn.TabIndex = 34;
@@ -510,11 +513,12 @@
             // 
             // jsonBox
             // 
-            this.jsonBox.Location = new System.Drawing.Point(97, 46);
+            this.jsonBox.Location = new System.Drawing.Point(120, 46);
             this.jsonBox.Name = "jsonBox";
-            this.jsonBox.Size = new System.Drawing.Size(287, 20);
+            this.jsonBox.Size = new System.Drawing.Size(264, 20);
             this.jsonBox.TabIndex = 30;
             this.jsonBox.TextChanged += new System.EventHandler(this.JsonBox_TextChanged);
+            this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
             // 
             // jsonBtn
             // 
@@ -538,6 +542,9 @@
             // 
             // grbForExp
             // 
+            this.grbForExp.Controls.Add(this.chkAssetIndex);
+            this.grbForExp.Controls.Add(this.assetIndexBtn);
+            this.grbForExp.Controls.Add(this.assetIndexBox);
             this.grbForExp.Controls.Add(this.chkCustJava);
             this.grbForExp.Controls.Add(this.chkCustJson);
             this.grbForExp.Controls.Add(this.classBox);
@@ -548,10 +555,40 @@
             this.grbForExp.Controls.Add(this.javaBtn);
             this.grbForExp.Location = new System.Drawing.Point(5, 227);
             this.grbForExp.Name = "grbForExp";
-            this.grbForExp.Size = new System.Drawing.Size(439, 100);
+            this.grbForExp.Size = new System.Drawing.Size(439, 124);
             this.grbForExp.TabIndex = 25;
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
+            // 
+            // chkAssetIndex
+            // 
+            this.chkAssetIndex.AutoSize = true;
+            this.chkAssetIndex.Location = new System.Drawing.Point(9, 100);
+            this.chkAssetIndex.Name = "chkAssetIndex";
+            this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
+            this.chkAssetIndex.TabIndex = 36;
+            this.chkAssetIndex.Text = "chk.AssetIndex";
+            this.chkAssetIndex.UseVisualStyleBackColor = true;
+            this.chkAssetIndex.CheckedChanged += new System.EventHandler(this.chkAssetIndex_CheckedChanged);
+            // 
+            // assetIndexBtn
+            // 
+            this.assetIndexBtn.Location = new System.Drawing.Point(390, 97);
+            this.assetIndexBtn.Name = "assetIndexBtn";
+            this.assetIndexBtn.Size = new System.Drawing.Size(43, 20);
+            this.assetIndexBtn.TabIndex = 35;
+            this.assetIndexBtn.Text = "...";
+            this.assetIndexBtn.UseVisualStyleBackColor = true;
+            this.assetIndexBtn.Click += new System.EventHandler(this.assetIndexBtn_Click);
+            // 
+            // assetIndexBox
+            // 
+            this.assetIndexBox.Location = new System.Drawing.Point(120, 98);
+            this.assetIndexBox.Name = "assetIndexBox";
+            this.assetIndexBox.Size = new System.Drawing.Size(264, 20);
+            this.assetIndexBox.TabIndex = 34;
+            this.assetIndexBox.TextChanged += new System.EventHandler(this.assetIndexBox_TextChanged);
+            this.assetIndexBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.assetIndexBox_MouseMove);
             // 
             // chkCustJava
             // 
@@ -577,9 +614,9 @@
             // 
             // classBox
             // 
-            this.classBox.Location = new System.Drawing.Point(97, 72);
+            this.classBox.Location = new System.Drawing.Point(120, 72);
             this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(335, 20);
+            this.classBox.Size = new System.Drawing.Size(312, 20);
             this.classBox.TabIndex = 33;
             // 
             // chkClasspath
@@ -632,7 +669,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 404);
+            this.tabControl1.Size = new System.Drawing.Size(800, 420);
             this.tabControl1.TabIndex = 45;
             // 
             // tabPage1
@@ -656,7 +693,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 378);
+            this.tabPage1.Size = new System.Drawing.Size(792, 394);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -667,7 +704,7 @@
             this.javaPanel.Controls.Add(this.grbGame);
             this.javaPanel.Location = new System.Drawing.Point(340, 6);
             this.javaPanel.Name = "javaPanel";
-            this.javaPanel.Size = new System.Drawing.Size(452, 328);
+            this.javaPanel.Size = new System.Drawing.Size(452, 351);
             this.javaPanel.TabIndex = 25;
             // 
             // editionBox
@@ -729,7 +766,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 378);
+            this.tabPage2.Size = new System.Drawing.Size(792, 394);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mods";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -871,7 +908,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 404);
+            this.ClientSize = new System.Drawing.Size(800, 420);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -965,5 +1002,8 @@
         private System.Windows.Forms.GroupBox grbXboxGame;
         private System.Windows.Forms.CheckBox chkXboxDemo;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.CheckBox chkAssetIndex;
+        private System.Windows.Forms.Button assetIndexBtn;
+        private System.Windows.Forms.TextBox assetIndexBox;
     }
 }

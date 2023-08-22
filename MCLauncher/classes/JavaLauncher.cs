@@ -96,7 +96,16 @@ namespace MCLauncher.classes
             }
 
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
+            {
                 manifestPath = dj.jsonPath;
+
+                if (manifestPath.Contains("http"))
+                {
+                    string fileName = manifestPath.Substring(manifestPath.LastIndexOf('/') + 1).Replace(".json", "");
+                    Globals.client.DownloadFile(manifestPath, $"{Globals.dataPath}\\data\\json\\{fileName}.json");
+                    manifestPath = $"{Globals.dataPath}\\data\\json\\{fileName}.json";
+                }
+            }
 
             string manifestJson = File.ReadAllText(manifestPath);
             var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
@@ -114,9 +123,21 @@ namespace MCLauncher.classes
             else
                 MSAuth.onGameStart(false);
 
-            if (vi.assets.url != "")
+            if (dj.useAssets == true && dj.assetsPath != null)
             {
-                //AssetIndex.Start(vi.assets.url, vi.assets.name);
+                vi.assets.url = dj.assetsPath;
+                vi.assets.name = dj.assetsPath.Substring(dj.assetsPath.LastIndexOf('/') + 1).Replace(".json", "");
+
+                if (!vi.assets.url.Contains("http"))
+                {
+                    vi.assets.url = "file:///" + vi.assets.url;
+                }
+
+                AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
+                ad.ShowDialog();
+            }
+            else if(!String.IsNullOrWhiteSpace(vi.assets.name))
+            {
                 AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
                 ad.ShowDialog();
             }

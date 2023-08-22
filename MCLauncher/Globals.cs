@@ -18,8 +18,8 @@ namespace MCLauncher
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix
         public static string branch = "dev"; //dev //omega13 //stable //dev-instances //experimental
         public static string discordClient = ""; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
-        public static string verCurrent = "0.2.0-rc2"; //Change this on release
-        public static string verDisplay = "0.2.0-rc2"; //Change this on release
+        public static string verCurrent = "0.2.0-rc3"; //Change this on release
+        public static string verDisplay = "0.2.0-rc3"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();

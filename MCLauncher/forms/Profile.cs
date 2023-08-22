@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -23,6 +24,9 @@ namespace MCLauncher.forms
         public static Profile Instance;
 
         public static bool isInitial;
+
+        System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
+
 
         public Profile(string profile, string mode)
         {
@@ -50,6 +54,7 @@ namespace MCLauncher.forms
             chkCustJava.Text = Strings.chkCustJava;
             chkCustJson.Text = Strings.chkCustJson;
             chkClasspath.Text = Strings.chkClasspath;
+            chkAssetIndex.Text = Strings.chkAssetIndex;
             saveBtn.Text = Strings.btnSaveInst;
             openBtn.Text = Strings.btnOpenDir;
             deleteBtn.Text = Strings.btnDeleteInst;
@@ -156,6 +161,18 @@ namespace MCLauncher.forms
                 chkProxy.Checked = dj.disProxy;
                 chkMulti.Checked = dj.multiplayer;
                 chkXboxDemo.Checked = dj.xboxDemo;
+                chkAssetIndex.Checked = dj.useAssets;
+                assetIndexBox.Text = dj.assetsPath;
+                if (chkAssetIndex.Checked)
+                {
+                    assetIndexBox.Enabled = true;
+                    assetIndexBtn.Enabled = true;
+                }
+                else
+                {
+                    assetIndexBox.Enabled = false;
+                    assetIndexBtn.Enabled = false;
+                }
 
                 if (dj.edition == "x360")
                 {
@@ -382,7 +399,7 @@ namespace MCLauncher.forms
 
             string saveData = "";
             saveData += $"{{\n";
-            saveData += $"  \"data\": 2,\n";
+            saveData += $"  \"data\": 3,\n";
             saveData += $"  \"edition\": \"{edition}\",\n";
             saveData += $"  \"version\": \"{version}\",\n";
             saveData += $"  \"directory\": \"{dirBox.Text}\",\n";
@@ -401,7 +418,9 @@ namespace MCLauncher.forms
             saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
             saveData += $"  \"disProxy\": {chkProxy.Checked.ToString().ToLower()},\n";
             saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"xboxDemo\": {chkXboxDemo.Checked.ToString().ToLower()}\n";
+            saveData += $"  \"xboxDemo\": {chkXboxDemo.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"useAssets\": {chkAssetIndex.Checked.ToString().ToLower()},\n";
+            saveData += $"  \"assetsPath\": \"{assetIndexBox.Text}\"\n";
             saveData += $"}}";
 
             if (profMode == "new")
@@ -823,6 +842,45 @@ namespace MCLauncher.forms
 
             Logger.Error("[Profile]", $"EDITION: {edition}");
         }
+
+        private void assetIndexBox_TextChanged(object sender, EventArgs e)
+        {
+            assetIndexBox.Text = assetIndexBox.Text.Replace("\\", "/");
+        }
+
+        private void assetIndexBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".JSON files|*.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                assetIndexBox.Text = ofd.FileName;
+            }
+        }
+
+        private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolTip.SetToolTip(assetIndexBox, "Can be either a local path or a URL");
+        }
+
+        private void jsonBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolTip.SetToolTip(jsonBox, "Can be either a local path or a URL");
+        }
+
+        private void chkAssetIndex_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAssetIndex.Checked)
+            {
+                assetIndexBtn.Enabled = true;
+                assetIndexBox.Enabled = true;
+            }
+            else
+            {
+                assetIndexBtn.Enabled = false;
+                assetIndexBox.Enabled = false;
+            }
+        }
     }
 
     public class VersionManifest
@@ -854,6 +912,8 @@ namespace MCLauncher.forms
         public bool disProxy { get; set; }
         public bool multiplayer { get; set; }
         public bool xboxDemo { get; set; }
+        public bool useAssets { get; set; }
+        public string assetsPath { get; set; }
     }
 
     class ModJson

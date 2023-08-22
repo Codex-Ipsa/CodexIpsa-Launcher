@@ -123,6 +123,7 @@ namespace MCLauncher
         public static string chkCustJava = "Custom Java";
         public static string chkCustJson = "Custom JSON";
         public static string chkClasspath = "Classpath";
+        public static string chkAssetIndex = "Asset index";
 
         //Mods
         public static string btnMoveUp = "Move up";
@@ -256,6 +257,7 @@ namespace MCLauncher
                 chkCustJava = str.chkCustJava;
                 chkCustJson = str.chkCustJson;
                 chkClasspath = str.chkClasspath;
+                chkAssetIndex = str.chkAssetIndex;
 
                 btnMoveUp = str.btnMoveUp;
                 btnMoveDown = str.btnMoveDown;
@@ -415,6 +417,7 @@ namespace MCLauncher
             public string chkCustJava { get; set; }
             public string chkCustJson { get; set; }
             public string chkClasspath { get; set; }
+            public string chkAssetIndex { get; set; }
 
             public string btnMoveUp { get; set; }
             public string btnMoveDown { get; set; }

@@ -341,7 +341,9 @@ namespace MCLauncher
                 saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
                 saveData += $"  \"disProxy\": false,\n";
                 saveData += $"  \"multiplayer\": false,\n";
-                saveData += $"  \"xboxDemo\": false\n";
+                saveData += $"  \"xboxDemo\": false,\n";
+                saveData += $"  \"useAssets\": false,\n";
+                saveData += $"  \"assetsPath\": \"\"\n";
                 saveData += $"}}";
                 Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
                 Console.WriteLine(saveData);
