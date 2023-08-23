@@ -789,6 +789,7 @@
             this.btnOpenDotMc.TabIndex = 20;
             this.btnOpenDotMc.Text = "btn.OpenDotMc";
             this.btnOpenDotMc.UseVisualStyleBackColor = true;
+            this.btnOpenDotMc.Click += new System.EventHandler(this.btnOpenDotMc_Click);
             // 
             // btnMLoader
             // 
