@@ -13,6 +13,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,8 +29,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +58,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiscordRPC, Version=1.1.3.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscordRichPresence.1.1.3.18\lib\net45\DiscordRPC.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -80,6 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetIndex.cs" />
+    <Compile Include="classes\Discord.cs" />
+    <Compile Include="classes\DownloadJava.cs" />
+    <Compile Include="classes\JavaLauncher.cs" />
+    <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,12 +104,6 @@
     </Compile>
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DebugTools.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebugTools.Designer.cs">
-      <DependentUpon>DebugTools.cs</DependentUpon>
     </Compile>
     <Compile Include="DeleteWarn.cs">
       <SubType>Form</SubType>
@@ -122,17 +123,29 @@
     <Compile Include="EnterIp.Designer.cs">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\AssetsDownloader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\AssetsDownloader.Designer.cs">
+      <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\ModLoaders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ModLoaders.Designer.cs">
       <DependentUpon>ModLoaders.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\ModWarn.cs">
+    <Compile Include="forms\Output.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\ModWarn.Designer.cs">
-      <DependentUpon>ModWarn.cs</DependentUpon>
+    <Compile Include="forms\Output.Designer.cs">
+      <DependentUpon>Output.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Profile.Designer.cs">
+      <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
     <Compile Include="JavaModHelper.cs" />
     <Compile Include="forms\ModsRepo.cs">
@@ -147,13 +160,7 @@
     <Compile Include="NoJava.Designer.cs">
       <DependentUpon>NoJava.cs</DependentUpon>
     </Compile>
-    <Compile Include="progressbars\DownloadProgressMulti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="progressbars\DownloadProgressMulti.Designer.cs">
-      <DependentUpon>DownloadProgressMulti.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SettingData.cs" />
+    <Compile Include="classes\SettingData.cs" />
     <Compile Include="Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
       <SubType>UserControl</SubType>
@@ -161,22 +168,13 @@
     <Compile Include="controls\HomeScreen.Designer.cs">
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstanceManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InstanceManager.Designer.cs">
-      <DependentUpon>InstanceManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="jsonObject.cs" />
-    <Compile Include="LaunchJava.cs" />
-    <Compile Include="LaunchXbox360.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="LibsCheck.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="MainWindow.cs">
+    <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MSAuth.cs">
@@ -199,12 +197,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Warning.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Warning.Designer.cs">
-      <DependentUpon>Warning.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,9 +205,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DebugTools.resx">
-      <DependentUpon>DebugTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteWarn.resx">
       <DependentUpon>DeleteWarn.cs</DependentUpon>
@@ -226,19 +215,22 @@
     <EmbeddedResource Include="EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\AssetsDownloader.resx">
+      <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ModLoaders.resx">
       <DependentUpon>ModLoaders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\HomeScreen.resx">
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\ModWarn.resx">
-      <DependentUpon>ModWarn.cs</DependentUpon>
+    <EmbeddedResource Include="forms\Output.resx">
+      <DependentUpon>Output.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InstanceManager.resx">
-      <DependentUpon>InstanceManager.cs</DependentUpon>
+    <EmbeddedResource Include="forms\Profile.resx">
+      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModsRepo.resx">
@@ -253,9 +245,6 @@
     <EmbeddedResource Include="OfflineMode.resx">
       <DependentUpon>OfflineMode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="progressbars\DownloadProgressMulti.resx">
-      <DependentUpon>DownloadProgressMulti.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -263,9 +252,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Warning.resx">
-      <DependentUpon>Warning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -296,7 +282,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 a x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

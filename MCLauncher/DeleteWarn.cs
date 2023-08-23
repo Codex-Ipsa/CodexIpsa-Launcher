@@ -36,7 +36,7 @@ namespace MCLauncher
             Directory.Delete($"{Globals.dataPath}\\instance\\{name}", true);
             HomeScreen.selectedInstance = "Default";
             HomeScreen.reloadInstance("Default");
-            InstanceManager.didClickDelete = true;
+            //InstanceManager.didClickDelete = true;
             this.Close();
         }
 

@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
+using MCLauncher.classes;
+using MCLauncher.forms;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,29 +26,19 @@ namespace MCLauncher
     public partial class HomeScreen : UserControl
     {
         public static HomeScreen Instance;
-        public static string selectedEdition;
-        public static string msPlayerName;
+        public static string selectedEdition; //for checking which edition to launch
+        public static string msPlayerName; //for "welcome" string
         public static string selectedInstance = "Default";
         public static string selectedVersion; //for the "ready to play X" string
 
+        public static string lastInstance;
+
         public HomeScreen()
         {
-              
             Instance = this;
             InitializeComponent();
-
-            /*if (!File.Exists($"{Globals.dataPath}\\settings.cfg"))
-            {
-                SettingData.saveData("null")
-            }
-            SettingData.saveData();*/
-
             Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
-
-            if(Properties.Settings.Default.lastInstance == String.Empty || Properties.Settings.Default.lastInstance == null)
-                selectedInstance = "Default";
-            else
-                selectedInstance = Properties.Settings.Default.lastInstance;
+            lastInstance = Properties.Settings.Default.lastInstance;
 
             pnlChangelog.AutoScroll = true;
 
@@ -53,7 +48,7 @@ namespace MCLauncher
             }
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
-                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+                pnlChangelog.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
             }
 
             //JSON changelog system
@@ -62,51 +57,20 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!Directory.Exists($"{Globals.dataPath}\\instance\\Default"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
             {
-                InstanceManager.Start("Default", "initial");
-            }       
+                Profile prof = new Profile("Default", "def");
+            }
 
-            //Load instance list
+            Logger.Info("[TEST0]", selectedInstance);
             loadInstanceList();
-            if(!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg"))
-            {
-                selectedInstance = "Default";
-            }
-            cmbInstaces.SelectedIndex = cmbInstaces.FindString(selectedInstance);
-            reloadInstance(selectedInstance);
+            selectedInstance = lastInstance;
+            if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
+                selectedInstance = "Default";   
+            Instance.cmbInstaces.SelectedIndex = Instance.cmbInstaces.FindString(selectedInstance);
 
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
-            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            Logger.Info("[HomeScreen]", $"Selected instance: {selectedInstance}");
-            //Logger.logError("[HomeScreen]", $"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.cfg");
-
-            //Set the LaunchJava stuff
-            foreach (var vers in data)
-            {
-                if(vers.edition == "Xbox 360 Edition")
-                {
-                    LaunchXbox360.ver = vers.version;
-                    LaunchXbox360.url = vers.url;
-                    LaunchXbox360.type = vers.type;
-                    selectedEdition = "x360";
-                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchXbox360.ver}";
-                }
-                else 
-                {
-                    LaunchJava.launchVerName = vers.version;
-                    LaunchJava.launchVerUrl = vers.url;
-                    LaunchJava.launchVerType = vers.type;
-                    selectedEdition = "java";
-                    Instance.lblReady.Text = $"{Strings.lblReady} {LaunchJava.launchVerName}";
-                }
-            }
-
-            //load pref language TODO: THIS THROWS
-            /*if(Properties.Settings.Default.prefLanguage.ToLower() != "english" || Properties.Settings.Default.prefLanguage.ToLower() != null || Properties.Settings.Default.prefLanguage.ToLower() != String.Empty)
-            {
-                Strings.reloadLangs(Properties.Settings.Default.prefLanguage);
-            }*/
+            Discord.Init();
+            Discord.ChangeMessage("Idling");
         }
 
         public static void checkAuth()
@@ -117,10 +81,12 @@ namespace MCLauncher
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
                 Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
-                LaunchJava.launchPlayerName = "Guest";
-                LaunchJava.launchPlayerUUID = "null";
-                LaunchJava.launchPlayerAccessToken = "null";
-                LaunchJava.launchMpPass = "null";
+
+                JavaLauncher.msPlayerName = "Guest";
+                JavaLauncher.msPlayerAccessToken = "-";
+                JavaLauncher.msPlayerUUID = "-";
+                JavaLauncher.msPlayerMPPass = "-";
+
                 if (Globals.requireAuth == true)
                 {
                     Instance.btnPlay.Enabled = false;
@@ -173,185 +139,222 @@ namespace MCLauncher
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
-                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
-                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg");
-                    if(text.Contains("instVer") && text.Contains("instType"))
+                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.json");
+                    if (text.Contains("instVer") && text.Contains("instType"))
                     {
-                        updateFromLegacyInst($"{Globals.dataPath}\\instance\\{dirName}");
-                        instanceList.Add(dirName);
+                        updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
                     }
-                    else
+                    if(text.Contains("\"proxy\": true"))
                     {
-                        instanceList.Add(dirName);
+                        text = text.Replace("\"proxy\": true", "\"disProxy\": false");
+                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
                     }
-                }
-                else
-                {
-                    //do nothing
-                }
+                    else if(text.Contains("\"proxy\": false"))
+                    {
+                        text = text.Replace("\"proxy\": false", "\"disProxy\": false");
+                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
+                    }
 
-                //Console.WriteLine(dir);
+                    instanceList.Add(dirName);
+                }
+                else if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
+                {
+                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
+                    instanceList.Add(dirName);
+                }
             }
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
-            LaunchJava.currentInstance = Instance.cmbInstaces.Text;
+            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void reloadInstance(string instName)
         {
-            Logger.Info("[HomeScreen/ReloadInstance]", $"ReloadInstance called: {instName}");
-            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.cfg");
-            List<instanceObjects> data = JsonConvert.DeserializeObject<List<instanceObjects>>(json);
-            foreach (var item in data)
+            Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
+            string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
+            var pj = JsonConvert.DeserializeObject<profileJson>(json);
+            selectedInstance = Instance.cmbInstaces.Text;
+            selectedVersion = "Minecraft " + pj.version;
+            selectedEdition = pj.edition;
+
+            string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
+            if (!modJson.Contains("\"version\":"))
             {
-                if(item.edition == "Java Edition" || item.edition == "MinecraftEdu")
+                modJson = JavaModHelper.MigrateToVersion($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", instName);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", modJson);
+            }
+
+            string tempName = "";
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                if (tempName == "")
                 {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load Java base");
-                    selectedEdition = "java";
-                    LaunchJava.currentInstance = instName;
-                    LaunchJava.launchDir = item.directory;
-                    LaunchJava.launchResX = item.resolutionX;
-                    LaunchJava.launchResY = item.resolutionY;
-                    LaunchJava.launchRamMax = item.ramMax;
-                    LaunchJava.launchRamMin = item.ramMin;
-                    LaunchJava.launchVerName = item.version;
-                    selectedVersion = item.version;
-                    LaunchJava.launchVerType = item.type;
-                    LaunchJava.launchVerUrl = item.url;
-                    LaunchJava.launchJavaLocation = item.customJava;
-                    LaunchJava.useCustJava = bool.Parse(item.useCustomJava);
-                    LaunchJava.launchJvmArgs = item.jvmArgs;
-                    LaunchJava.useCustJvm = bool.Parse(item.useJvmArgs);
-                    //LaunchJava.launchMethod = item.launchMethod;
-                    if (json.Contains("customJar"))
-                    {
-                        LaunchJava.useCustJar = bool.Parse(item.useCustomJar);
-                        LaunchJava.custJarLocation = item.customJar;
-                    }
-                    LaunchJava.useOfflineMode = bool.Parse(item.offlineMode);
-                    if(json.Contains("useProxy"))
-                    {
-                        LaunchJava.useProxy = bool.Parse(item.useProxy);
-                    }
-                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
-                }
-                else if (item.edition == "Xbox 360 Edition")
-                {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load X360 base");
-                    selectedEdition = "x360";
-                    LaunchXbox360.ver = item.version;
-                    selectedVersion = item.version;
-                    LaunchXbox360.url = item.url;
-                    LaunchXbox360.type = item.type;
-                    Instance.lblReady.Text = $"{Strings.lblReady} {item.version}";
-                }
-                else if (item.edition == "PlayStation3 Edition")
-                {
-                    Logger.Info("[HomeScreen/ReloadInstance]", "Load PS3 base");
-                }
-                else
-                {
-                    Logger.Error("[HomeScreen/ReloadInstance]", "How did this get called? Whaat!?");
+                    tempName = ent.name + " " + ent.version;
                 }
             }
+            if (!String.IsNullOrWhiteSpace(tempName))
+            {
+                selectedVersion = tempName;
+            }
+
+            Instance.lblReady.Text = $"{Strings.lblReady} {selectedVersion}";
+            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void loadChangelog()
         {
             using (WebClient client = new WebClient())
             {
-                int y = 5;
-                int x = 2;
-                string json = client.DownloadString(Globals.changelogJson);
-                List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
-
-                foreach (var vers in data)
+                double y = 5;
+                double x = 2;
+                try
                 {
-                    if (vers.type == "header")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 14 * 3;
-                    }
-                    else if (vers.type == "post")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 14, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 13 * 2;
+                    string json = client.DownloadString(Globals.changelogJson);
+                    List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
 
-                        Label labelDate = new Label();
-                        labelDate.Text = $"{vers.date}";
-                        labelDate.Location = new Point(x, y);
-                        labelDate.Font = new Font("Arial", 12, FontStyle.Italic);
-                        labelDate.AutoSize = true;
-                        labelDate.ForeColor = Color.White;
-                        Instance.pnlChangelog.Controls.Add(labelDate);
-                        y += 12 * 2;
-
-                        int strLog = 1;
-                        string[] result = vers.content.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
-                        foreach(string s in result)
+                    foreach (var vers in data)
+                    {
+                        if (vers.type == "header")
                         {
-                            Label labelText = new Label();
-                            labelText.Text = $"{s}";
-                            labelText.Location = new Point(x, y);
-                            labelText.Font = new Font("Arial", 12, FontStyle.Regular);
-                            labelText.AutoSize = true;
-                            labelText.ForeColor = Color.White;
-                            Instance.pnlChangelog.Controls.Add(labelText);
-                            if(strLog < result.Length)
-                            {
-                                y += 12 * 2;
-                            }
-                            else if(strLog >= result.Length)
-                            {
-                                y += 12 * 3;
-                            }
-                            strLog++;
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point((int)x, (int)y);
+                            labelHead.Font = new Font("Arial", 14, FontStyle.Bold);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 12 * 3;
                         }
-                        strLog = 1;
-                    }
-                    else if (vers.type == "announcement")
-                    {
-                        Label labelHead = new Label();
-                        labelHead.Text = $"{vers.title}";
-                        labelHead.Location = new Point(x, y);
-                        labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
-                        labelHead.AutoSize = true;
-                        labelHead.ForeColor = Color.Red;
-                        Instance.pnlChangelog.Controls.Add(labelHead);
-                        y += 12 * 3;
-                    }
-                }
+                        else if (vers.type == "post")
+                        {
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point((int)x, (int)y);
+                            labelHead.Font = new Font("Arial", 11, FontStyle.Bold);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 13 * 2;
 
-                y = y -= 12 * 2;
-                Label labelEmpty = new Label();
-                labelEmpty.Text = $"";
-                labelEmpty.Location = new Point(x, y);
-                labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
-                labelEmpty.AutoSize = true;
-                labelEmpty.ForeColor = Color.Red;
-                Instance.pnlChangelog.Controls.Add(labelEmpty);
+                            Label labelDate = new Label();
+                            labelDate.Text = $"{vers.date}";
+                            labelDate.Location = new Point((int)x, (int)y);
+                            labelDate.Font = new Font("Arial", 11, FontStyle.Italic);
+                            labelDate.AutoSize = true;
+                            labelDate.ForeColor = Color.White;
+                            Instance.pnlChangelog.Controls.Add(labelDate);
+                            y += 12 * 1.5;
+
+                            int strLog = 1;
+                            string[] result = vers.content.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (string s in result)
+                            {
+                                Label labelText = new Label();
+                                labelText.Text = $"{s}";
+                                labelText.Location = new Point((int)x, (int)y);
+                                labelText.Font = new Font("Arial", 11, FontStyle.Regular);
+                                labelText.AutoSize = true;
+                                labelText.ForeColor = Color.White;
+                                Instance.pnlChangelog.Controls.Add(labelText);
+                                if (strLog < result.Length)
+                                {
+                                    y += 12 * 1.5;
+                                }
+                                else if (strLog >= result.Length)
+                                {
+                                    y += 12 * 3;
+                                }
+                                strLog++;
+                            }
+                            strLog = 1;
+                        }
+                        else if (vers.type == "announcement")
+                        {
+                            Label labelHead = new Label();
+                            labelHead.Text = $"{vers.title}";
+                            labelHead.Location = new Point((int)x, (int)y);
+                            labelHead.Font = new Font("Arial", 14, FontStyle.Bold);
+                            labelHead.AutoSize = true;
+                            labelHead.ForeColor = Color.Red;
+                            Instance.pnlChangelog.Controls.Add(labelHead);
+                            y += 12 * 3;
+                        }
+                    }
+
+                    y = y -= 12 * 2;
+                    Label labelEmpty = new Label();
+                    labelEmpty.Text = $"";
+                    labelEmpty.Location = new Point((int)x, (int)y);
+                    labelEmpty.Font = new Font("Arial", 12, FontStyle.Regular);
+                    labelEmpty.AutoSize = true;
+                    labelEmpty.ForeColor = Color.Red;
+                    Instance.pnlChangelog.Controls.Add(labelEmpty);
+                }
+                catch (WebException e)
+                {
+                    Label labelHead = new Label();
+                    labelHead.Text = $"Failed to load changelog!";
+                    labelHead.Location = new Point((int)x, (int)y);
+                    labelHead.Font = new Font("Arial", 16, FontStyle.Regular);
+                    labelHead.AutoSize = true;
+                    labelHead.ForeColor = Color.Red;
+                    Instance.pnlChangelog.Controls.Add(labelHead);
+                    y += 12 * 3;
+                }
             }
         }
 
-        public static void updateFromLegacyInst(string path)
+        public static void updateFromSecondInst(string path)
+        {
+            string content = File.ReadAllText($"{path}\\instance.cfg");
+            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(content);
+
+            foreach (var oj in orig)
+            {
+                string saveData = "";
+                saveData += $"{{\n";
+                saveData += $"  \"data\": 2,\n";
+                if (oj.edition == "Java Edition")
+                    saveData += $"  \"edition\": \"java\",\n";
+                else if (oj.edition == "Xbox 360 Edition")
+                    saveData += $"  \"edition\": \"x360\",\n";
+                saveData += $"  \"version\": \"{oj.version}\",\n";
+                saveData += $"  \"directory\": \"{oj.directory}\",\n";
+                saveData += $"  \"resolution\": \"{oj.resolutionX} {oj.resolutionY}\",\n";
+                saveData += $"  \"memory\": \"{oj.ramMax} {oj.ramMin}\",\n";
+                saveData += $"  \"befCmd\": \"\",\n";
+                saveData += $"  \"aftCmd\": \"{oj.jvmArgs}\",\n";
+                saveData += $"  \"useJava\": {bool.Parse(oj.useCustomJava.ToString().ToLower()).ToString().ToLower()},\n";
+                saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
+                saveData += $"  \"useJson\": false,\n";
+                saveData += $"  \"jsonPath\": \"\",\n";
+                saveData += $"  \"useClass\": false,\n";
+                saveData += $"  \"classpath\": \"\",\n";
+                saveData += $"  \"demo\": false,\n";
+                saveData += $"  \"modded\": false,\n";
+                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
+                saveData += $"  \"disProxy\": false,\n";
+                saveData += $"  \"multiplayer\": false,\n";
+                saveData += $"  \"xboxDemo\": false,\n";
+                saveData += $"  \"useAssets\": false,\n";
+                saveData += $"  \"assetsPath\": \"\"\n";
+                saveData += $"}}";
+                Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
+                Console.WriteLine(saveData);
+                File.WriteAllText($"{path}\\instance.json", saveData);
+                File.Delete($"{path}\\instance.cfg");
+            }
+        }
+
+        public static void updateFromFirstInst(string path)
         {
             int index = path.LastIndexOf("\\") + 1;
             string name = path.Substring(index, path.Length - index);
 
-            string text = File.ReadAllText($"{path}\\instance.cfg");
+            string text = File.ReadAllText($"{path}\\instance.json");
             if (text.Contains("classroom"))
             {
                 text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");
@@ -384,26 +387,37 @@ namespace MCLauncher
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (selectedEdition == "java")
+            if (selectedEdition == "x360")
+                XboxLauncher.Launch(selectedInstance);
+            else
+            {
+                JavaLauncher jl = new JavaLauncher();
+                jl.Launch(selectedInstance);
+            }
+            /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
 
             else if (selectedEdition == "x360")
                 LaunchXbox360.LaunchGame();
 
             else if (selectedEdition == "edu")
-                LaunchJava.LaunchGame();
+                LaunchJava.LaunchGame();*/
         }
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            InstanceManager man = new InstanceManager("New profile", "new");
-            man.ShowDialog();
+            Profile pr = new Profile("New profile", "new");
+            pr.ShowDialog();
+            /*InstanceManager man = new InstanceManager("New profile", "new");
+            man.ShowDialog();*/
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
-            man.ShowDialog();
+            Profile pr = new Profile(cmbInstaces.Text, "edit");
+            pr.ShowDialog();
+            /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
+            man.ShowDialog();*/
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
@@ -430,10 +444,12 @@ namespace MCLauncher
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             Logger.Info($"[HomeScreen]", "Logging out");
-            LaunchJava.launchPlayerName = "Guest";
-            LaunchJava.launchPlayerUUID = "null";
-            LaunchJava.launchPlayerAccessToken = "null";
-            LaunchJava.launchMpPass = "null";
+
+            JavaLauncher.msPlayerName = "Guest";
+            JavaLauncher.msPlayerAccessToken = "-";
+            JavaLauncher.msPlayerUUID = "-";
+            JavaLauncher.msPlayerMPPass = "-";
+
             Properties.Settings.Default.msRefreshToken = String.Empty;
             Properties.Settings.Default.Save();
             checkAuth();
@@ -441,6 +457,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Logger.Info("[TEST2]", cmbInstaces.Text);
             reloadInstance(cmbInstaces.Text);
             Properties.Settings.Default.lastInstance = cmbInstaces.Text;
             Properties.Settings.Default.Save();
@@ -476,5 +493,29 @@ namespace MCLauncher
         public string date { get; set; }
         public string content { get; set; }
         public string brNote { get; set; }
+    }
+
+    public class profileJson
+    {
+        public int data { get; set; }
+        public string version { get; set; }
+        public string edition { get; set; }
+    }
+
+    public class instanceV2
+    {
+        public string name { get; set; }
+        public string edition { get; set; }
+        public string version { get; set; }
+        public string directory { get; set; }
+        public string resolutionX { get; set; }
+        public string resolutionY { get; set; }
+        public string ramMin { get; set; }
+        public string ramMax { get; set; }
+        public string useCustomJava { get; set; }
+        public string customJava { get; set; }
+        public string offlineMode { get; set; }
+        public string useProxy { get; set; }
+        public string jvmArgs { get; set; }
     }
 }

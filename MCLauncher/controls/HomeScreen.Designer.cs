@@ -88,9 +88,9 @@
             // 
             // btnEditInst
             // 
-            this.btnEditInst.Location = new System.Drawing.Point(80, 41);
+            this.btnEditInst.Location = new System.Drawing.Point(88, 41);
             this.btnEditInst.Name = "btnEditInst";
-            this.btnEditInst.Size = new System.Drawing.Size(68, 21);
+            this.btnEditInst.Size = new System.Drawing.Size(76, 21);
             this.btnEditInst.TabIndex = 19;
             this.btnEditInst.Text = "btn.editInst";
             this.btnEditInst.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // 
             this.btnNewInst.Location = new System.Drawing.Point(5, 41);
             this.btnNewInst.Name = "btnNewInst";
-            this.btnNewInst.Size = new System.Drawing.Size(68, 21);
+            this.btnNewInst.Size = new System.Drawing.Size(77, 21);
             this.btnNewInst.TabIndex = 18;
             this.btnNewInst.Text = "btn.newInst";
             this.btnNewInst.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.cmbInstaces.FormattingEnabled = true;
             this.cmbInstaces.Location = new System.Drawing.Point(6, 19);
             this.cmbInstaces.Name = "cmbInstaces";
-            this.cmbInstaces.Size = new System.Drawing.Size(142, 21);
+            this.cmbInstaces.Size = new System.Drawing.Size(158, 21);
             this.cmbInstaces.TabIndex = 17;
             this.cmbInstaces.SelectedIndexChanged += new System.EventHandler(this.cmbInstaces_SelectedIndexChanged);
             this.cmbInstaces.Click += new System.EventHandler(this.cmbInstaces_Click);
@@ -180,10 +180,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChangelog.BackColor = System.Drawing.Color.Transparent;
+            this.pnlChangelog.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlChangelog.BackgroundImage")));
             this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
             this.pnlChangelog.Margin = new System.Windows.Forms.Padding(2);
             this.pnlChangelog.Name = "pnlChangelog";
-            this.pnlChangelog.Size = new System.Drawing.Size(784, 325);
+            this.pnlChangelog.Size = new System.Drawing.Size(784, 327);
             this.pnlChangelog.TabIndex = 4;
             this.pnlChangelog.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChangelog_Scroll);
             // 
@@ -191,9 +192,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.Controls.Add(this.pnlChangelog);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlChangelog);
             this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "HomeScreen";
             this.Size = new System.Drawing.Size(784, 387);

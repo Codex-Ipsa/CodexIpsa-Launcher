@@ -16,8 +16,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using MCLauncher.classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher
 {
@@ -428,7 +430,7 @@ namespace MCLauncher
                 mojpassRequest.Accept = "application/json";
                 mojpassRequest.Method = "POST";
 
-                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}"));
+                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{JavaLauncher.srvIP}:{JavaLauncher.srvPort}"));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
@@ -459,7 +461,7 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
 
                     //Get the actual Mppass
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={LaunchJava.launchServerIP}:{LaunchJava.launchServerPort}");
+                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={JavaLauncher.srvIP}:{JavaLauncher.srvPort}");
 
                     mppassRequest.Method = "POST";
                     mppassRequest.ContentType = "application/x-www-form-urlencoded";
@@ -471,7 +473,6 @@ namespace MCLauncher
                     else
                         Logger.Info("[MSAuth]", "Got Mppass response");
                     mpPass = mppassResponseString;
-
                 }
                 else
                 {
@@ -556,10 +557,15 @@ namespace MCLauncher
             }
             else
             {
-                LaunchJava.launchPlayerName = playerName;
+                JavaLauncher.msPlayerName = playerName;
+                JavaLauncher.msPlayerUUID = playerUUID;
+                JavaLauncher.msPlayerAccessToken = mcAccessToken;
+                JavaLauncher.msPlayerMPPass = mpPass;
+
+                /*LaunchJava.launchPlayerName = playerName;
                 LaunchJava.launchPlayerUUID = playerUUID;
                 LaunchJava.launchPlayerAccessToken = mcAccessToken;
-                LaunchJava.launchMpPass = mpPass;
+                LaunchJava.launchMpPass = mpPass;*/
             }
         }
 
@@ -601,6 +607,17 @@ namespace MCLauncher
             Logger.Info("[MSAuth]", "Worker completed!");
             deviceFlow();
             this.Close();
+        }
+
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(textBox1.Text);
+        }
+
+        private void textBox1_MouseHover(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
+            toolTip.SetToolTip(textBox1, "Click to copy to clipboard");
         }
     }
 }
