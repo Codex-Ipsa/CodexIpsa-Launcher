@@ -38,6 +38,10 @@ namespace MCLauncher.controls
             InstanceSetting = this;
             InitializeComponent();
 
+            //Lang
+            lblJre8.Text = "Java 8";
+            lblJre17.Text = "Java 17";
+
             //Seasonal background
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
@@ -57,6 +61,15 @@ namespace MCLauncher.controls
             cmbUpdateSelect.SelectedIndex = index1;
             branchIndex = cmbUpdateSelect.SelectedIndex;
             cmbLangSelect.DataSource = langNameList;
+
+            if (Properties.Settings.Default.discordRpc)
+                chkDiscordRpc.Checked = true;
+            else
+                chkDiscordRpc.Checked = false;
+
+            //JREs
+            cmbJre8.Text = Properties.Settings.Default.jre8;
+            cmbJre17.Text = Properties.Settings.Default.jre17;
         }
 
         public static void loadData()
@@ -155,6 +168,44 @@ namespace MCLauncher.controls
                 Properties.Settings.Default.prefLanguage = languageList[index].ToLower();
                 Properties.Settings.Default.Save();
                 Strings.reloadLangs(languageList[index].ToLower());
+            }
+        }
+
+        private void chkDiscordRpc_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkDiscordRpc.Checked)
+            {
+                Properties.Settings.Default.discordRpc = true;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.discordRpc = false;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void btnJre8_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre8.Text = ofd.FileName;
+                Properties.Settings.Default.jre8 = ofd.FileName;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void btnJre17_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre17.Text = ofd.FileName;
+                Properties.Settings.Default.jre17 = ofd.FileName;
+                Properties.Settings.Default.Save();
             }
         }
     }

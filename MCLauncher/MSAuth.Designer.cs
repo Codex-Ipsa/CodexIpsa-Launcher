@@ -88,6 +88,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 4;
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
+            this.textBox1.MouseHover += new System.EventHandler(this.textBox1_MouseHover);
             // 
             // MSAuth
             // 

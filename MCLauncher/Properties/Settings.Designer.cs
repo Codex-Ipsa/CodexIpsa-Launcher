@@ -37,54 +37,6 @@ namespace MCLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool isDemo {
-            get {
-                return ((bool)(this["isDemo"]));
-            }
-            set {
-                this["isDemo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
-        public decimal ramXMX {
-            get {
-                return ((decimal)(this["ramXMX"]));
-            }
-            set {
-                this["ramXMX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("512")]
-        public decimal ramXMS {
-            get {
-                return ((decimal)(this["ramXMS"]));
-            }
-            set {
-                this["ramXMS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ownJava {
-            get {
-                return ((bool)(this["ownJava"]));
-            }
-            set {
-                this["ownJava"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string msRefreshToken {
             get {
@@ -126,6 +78,42 @@ namespace MCLauncher.Properties {
             }
             set {
                 this["lastInstance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool discordRpc {
+            get {
+                return ((bool)(this["discordRpc"]));
+            }
+            set {
+                this["discordRpc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("java.exe")]
+        public string jre8 {
+            get {
+                return ((string)(this["jre8"]));
+            }
+            set {
+                this["jre8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("java.exe")]
+        public string jre17 {
+            get {
+                return ((string)(this["jre17"]));
+            }
+            set {
+                this["jre17"] = value;
             }
         }
     }

@@ -1,174 +1,245 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.classes;
+using MCLauncher.forms;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 
 namespace MCLauncher
 {
     internal class JavaModHelper
     {
-        public static void Start(string instName, string clientPath)
+        public static string tempName = "";
+
+        public static void Start(string instName, string manifestPath)
         {
-            int modNum = 0;
-            string json = "";
-            List<string> jarModList = new List<string>();
-            List<string> typeList = new List<string>();
+            tempName = ""; //just in case lmaoo
+            //When I wrote this, only I and my beer bottle knew how it worked,
+            //now nobody does
 
-            string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg";
+            //Note 29.7.2023 - this needs to be rewritten lmao
+
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
+            string clientJson = File.ReadAllText(manifestPath);
+            string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
-            {
-                string n = LegacyUpdate(indexPath, json, instName);
-            }
+                File.WriteAllText(indexPath, $"{{\"data\": 1, \"items\": []}}");
 
-            json = File.ReadAllText(indexPath);
+            Logger.Info("[JavaModHelper]", "Start for " + indexPath);
 
-            if (!json.Contains("\"items\":[") || json.Contains("\"items\":[{\"name\": \"aa\"}]"))
-            {
-                json = LegacyUpdate(indexPath, json, instName);
-            }
+            string json = File.ReadAllText(indexPath);
+
+            //if (!json.Contains("\"version\":"))
+            //{
+            //    json = MigrateToVersion(indexPath, instName);
+            //    File.WriteAllText(indexPath, json);
+            //}
 
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
-            foreach (string str in mj.items)
+
+            List<string> jsonList = new List<string>();
+            jsonList.Clear();
+            List<string> cusJarList = new List<string>();
+            cusJarList.Clear();
+
+            foreach (ModJsonEntry ent in mj.items)
             {
-                string[] items = str.Split('?');
-                string name = items[0];
-                string type = items[1];
-                if(items.Count() > 2)
-                {
-                    Console.WriteLine("AAAAAAAAAAAAAAAA: " + items[2]);
-                    if (items[2] != "" && items[2] != null && items[2] != string.Empty)
-                        typeList.Add(items[2]);
-                }
+                Logger.Info("[JavaModHelper]", $"Found mod {ent.name}, type: {ent.type}, json: {ent.json}, update: {ent.update}");
 
-                if (type == "jarmod")
+                if (ent.update == true)
                 {
-                    jarModList.Add($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{name}");
-                    Logger.Info("[ModHelper]", $"Mod detected: {name}");
-                    modNum++;
-                }
-                else if(type == "cusjar")
-                {
-                    clientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{name}";
-                    modNum++;
-                }
-            }
-
-            if (modNum > 0)
-            {
-                string toHash = "";
-
-                //get patchhash first
-                using (var md5 = MD5.Create())
-                {
-                    using (var stream = File.OpenRead(clientPath))
+                    string modManifest = Globals.client.DownloadString(Globals.CIModsJson);
+                    List<RepoJson> repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(modManifest);
+                    foreach (var entry in repoJsons)
                     {
-                        var hash = md5.ComputeHash(stream);
-                        toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
-                    }
-                }
-                foreach (var mod in jarModList)
-                {
-                    using (var md5 = MD5.Create())
-                    {
-                        using (var stream = File.OpenRead(mod))
+                        if (ent.file.Contains(entry.id))
                         {
-                            var hash = md5.ComputeHash(stream);
-                            toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                            if (ent.file.EndsWith(entry.items[0].version + ".zip"))
+                            {
+                                Logger.Error("[JavaModHelper]", "MOD IS UP TO DATE");
+                            }
+                            else
+                            {
+                                if (!File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{entry.id}-{entry.items[0].version}.zip"))
+                                {
+                                    DownloadProgress.url = entry.items[0].url;
+                                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{entry.id}-{entry.items[0].version}.zip";
+                                    DownloadProgress dp = new DownloadProgress();
+                                    dp.ShowDialog();
+                                }
+
+                                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", entry.items[0].json), $"{Globals.dataPath}\\data\\json\\{entry.items[0].json}.json");
+                                Profile.modListWorker("add", entry.name, entry.items[0].version, $"{entry.id}-{entry.items[0].version}.zip", entry.items[0].type, entry.items[0].json, true);
+                                Profile.modListWorker("remove", "", "", ent.file, "", "", false);
+                                File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{ent.file}");
+                                //Profile.reloadModsList();
+
+                                json = File.ReadAllText(indexPath);
+                                mj = JsonConvert.DeserializeObject<ModJson>(json);
+
+                                Logger.Error("[JavaModHelper]", "MOD UPDATE AVAILABLE");
+                            }
                         }
                     }
                 }
-                toHash += "CodexIpsa";
-                Console.WriteLine(toHash);
-                string patchHash = "";
-                using (var md5 = MD5.Create())
-                {
-                    byte[] inputBytes = Encoding.ASCII.GetBytes(toHash);
-                    byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-                    patchHash = BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
-                    Console.WriteLine(patchHash);
+                if (ent.json != "")
+                {
+                    jsonList.Add(ent.json);
+                    Logger.Info("[JavaModHelper]", "ent.json: " + ent.json);
                 }
+                if (ent.type == "cusjar")
+                {
+                    cusJarList.Add($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.file}");
+                }
+            }
+
+            VersionInfo vi = new VersionInfo();
+            if (jsonList.Count > 0)
+            {
+                Console.WriteLine($"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", jsonList[0]), $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+                string newJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json");
+
+                JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{jsonList[0]}.json";
+                vi = JsonConvert.DeserializeObject<VersionInfo>(newJson);
+            }
+            else
+            {
+                vi = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+            }
+
+            if (mj.items.Count() > 0)
+            {
+                string clientPath = $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar";
+                if (cusJarList.Count() > 0)
+                {
+                    clientPath = cusJarList[0];
+                }
+                Logger.Info("[JavaModHelper]", "clientPath: " + clientPath);
+                Logger.Info("[JavaModHelper]", "count: " + mj.items.Count());
+
+                string toHash = "";
+                var md5 = MD5.Create();
+                if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar") && clientPath == $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar")
+                {
+                    Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
+                }
+                var stream = File.OpenRead(clientPath);
+
+                var hash = md5.ComputeHash(stream);
+                toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+
+                foreach (ModJsonEntry ent in mj.items)
+                {
+                    if (tempName == "")
+                    {
+                        tempName = ent.name + ent.version;
+                        JavaLauncher.modName = ent.name;
+                        JavaLauncher.modVersion = ent.version;
+                    }
+
+                    if (ent.type != "cusjar")
+                    {
+                        stream = File.OpenRead($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.file}");
+                        hash = md5.ComputeHash(stream);
+                        toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                    }
+                }
+
+                toHash += "CodexIpsa";
+                Logger.Info("[JavaModHelper]", $"ToHash: {toHash}");
+                string patchHash = "";
+
+
+                byte[] inputBytes = Encoding.ASCII.GetBytes(toHash);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                patchHash = BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
+                Logger.Info("[JavaModHelper]", $"PatchHash: {patchHash}");
 
                 if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
                 {
-                    //create patch TODO: THIS IS SHIT AND NEEDS TO BE IMPROVED
                     if (Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\"))
                         Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
 
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full");
-
-
+                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch");
                     ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\");
 
-                    int modCount = 0;
-                    foreach (var mod in jarModList)
+                    int count = 0;
+                    foreach (ModJsonEntry ent in mj.items)
                     {
-                        ZipFile.ExtractToDirectory(mod, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{modCount}\\");
-                        modCount++;
+                        if (ent.type != "cusjar")
+                        {
+                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.file}", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\");
+                            string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{count}\\";
+
+                            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                            {
+                                Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
+                            }
+
+                            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                            {
+                                File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
+                            }
+                            count++;
+                        }
                     }
 
-                    for (int i = 0; i < modCount; i++)
+                    if (cusJarList.Count() <= 0)
                     {
-                        string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\{i}\\";
-
-                        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                        {
-                            Directory.CreateDirectory(dirPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"));
-                        }
-
-                        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                        {
-                            File.Copy(newPath, newPath.Replace(sourcePath, $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\"), true);
-                        }
+                        Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
                     }
-
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\META-INF\\", true);
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
                     File.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\patch.jar");
                     ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\full\\", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar");
                     Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp\\", true);
-
-                    Logger.Info("[ModHelper]", "Created patched jar!");
                 }
+                Logger.Info("[JavaModHelper]", $"Created patched jar");
 
-                LaunchJava.launchClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
-                if (typeList.Count > 0)
+                //this is a shitty fix
+                if (cusJarList.Count == 1 && mj.items.Length == 1)
                 {
-                    LaunchJava.launchVerType = typeList[0];
-                    LaunchJava.launchJsonUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/{Globals.codebase}/ver-launch/{typeList[0]}.json";
+                    JavaLauncher.modClientPath = cusJarList[0];
                 }
-
-                string aa = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\index.cfg");
-                if (aa.Contains("\"forge\":true"))
+                else
                 {
-                    LaunchJava.launchProxy += "-Dhttp.nonProxyHosts=codex-ipsa.dejvoss.cz -Dminecraft.applet.TargetDirectory={gameDir} -Dfml.core.libraries.mirror=http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/forgelib/%s ";
-                    Logger.Info("[ModHelper]", "Forge tweaks on!");
+                    JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
                 }
             }
         }
 
-        public static string LegacyUpdate(string indexPath, string json, string instName)
+        public static string MigrateToVersion(string indexPath, string instName)
         {
-            DirectoryInfo d = new DirectoryInfo($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\");
+            string orig = File.ReadAllText(indexPath);
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(orig);
 
-            string toJson = "";
-            foreach (var file in d.GetFiles("*.jar"))
+            string created = "{\n";
+            created += "  \"data\": 1,\n";
+            created += "  \"items\": [\n";
+            foreach (var item in mj.items)
             {
-                toJson += $"\"{file.Name}?jarmod\",";
+                created += $"    {{\n";
+                created += $"      \"name\": \"\",\n";
+                created += $"      \"version\": \"{item.version}\",\n";
+                created += $"      \"file\": \"{item.name}\",\n";
+                created += $"      \"type\": \"{item.type}\",\n";
+                created += $"      \"json\": \"{item.json}\",\n";
+                created += $"      \"update\": \"{item.update.ToString().ToLower()}\"\n";
+                created += $"    }},";
             }
-            foreach (var file in d.GetFiles("*.zip"))
-            {
-                toJson += $"\"{file.Name}?jarmod\",";
-            }
-            if (toJson.Contains(","))
-                toJson = toJson.Remove(toJson.LastIndexOf(','));
-            File.WriteAllText(indexPath, $"{{\"forge\":false,\"items\":[{toJson}]}}");
-            json = $"{{\"forge\":false,\"items\":[{toJson}]}}";
-            return json;
+            created = created.TrimEnd(',');
+            created += "\n  ]\n}";
+
+            return created;
         }
     }
 }
