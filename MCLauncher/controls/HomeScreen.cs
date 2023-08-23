@@ -176,7 +176,7 @@ namespace MCLauncher
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
             var pj = JsonConvert.DeserializeObject<profileJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
-            selectedVersion = pj.version;
+            selectedVersion = "Minecraft " + pj.version;
             selectedEdition = pj.edition;
 
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
@@ -195,15 +195,12 @@ namespace MCLauncher
                     tempName = ent.name + " " + ent.version;
                 }
             }
-            if (String.IsNullOrWhiteSpace(tempName))
+            if (!String.IsNullOrWhiteSpace(tempName))
             {
-                Instance.lblReady.Text = $"{Strings.lblReady} Minecraft {pj.version}";
-            }
-            else
-            {
-                Instance.lblReady.Text = $"{Strings.lblReady} {tempName}";
+                selectedVersion = tempName;
             }
 
+            Instance.lblReady.Text = $"{Strings.lblReady} {selectedVersion}";
             Profile.profileName = Instance.cmbInstaces.Text;
         }
 

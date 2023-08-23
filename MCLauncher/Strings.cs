@@ -14,21 +14,12 @@ namespace MCLauncher
 {
     class Strings
     {
-        //Main window
+        //MainWindow
         public static string cntHome = "Home";
         public static string cntSettings = "Settings";
         public static string cntAbout = "About";
 
-        //Buttons
-        public static string btnCancel = "Cancel";
-        public static string btnOk = "OK";
-        public static string btnSaveInst = "Save profile";
-        public static string btnDeleteInst = "Delete profile";
-        public static string btnOpenDir = "Open directory";
-        public static string btnYes = "Yes";
-        public static string btnNo = "No";
-
-        //Home screen
+        //HomeScreen
         public static string btnPlay = $"Play";
         public static string btnLogIn = $"Log-in";
         public static string btnLogOut = $"Log-out";
@@ -40,6 +31,15 @@ namespace MCLauncher
         public static string lblLogInWarn = $"You need to log in to use the launcher!";
         public static string lblLogInWarn_Debug = $"MAKE SURE TO DISABLE THIS IN GLOBALS!!!";
 
+        //SettingsScreen
+        public static string grbLauncher = "Launcher";
+        public static string lblLang = "Language";
+        public static string chkDiscordRpc = "Discord RPC";
+        public static string grbUpdates = "Updates";
+        public static string lblBranch = "Branch";
+        public static string btnCheckUpdates = "Check for updates";
+        public static string grbDefaults = "Defaults";
+
         //CreditsScreen
         public static string lblLauncherBy = $"Codex-Ipsa Launcher v{Globals.verDisplay} by";
         public static string lblDejvossIpsa = $"DEJVOSS Productions";
@@ -47,36 +47,52 @@ namespace MCLauncher
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";
         public static string lblSpecialThanks = $"Special thanks:\nBetaCraft; LegacyFix, BCWrapper.\nOmniarchive; inspiration, version files.\nMisterSheeple; file hosting.\nAnd you; for using the launcher.";
 
-        //SettingsScreen
-        public static string grbLauncher = "Launcher";
-        public static string grbUpdates = "Updates";
-        public static string lblLang = "Language";
-        public static string lblBranch = "Branch";
-        public static string btnCheckUpdates = "Check for updates";
-        public static string chkDiscordRpc = "Discord rich presence";
-        public static string grbDefaults = "Defaults";
+        //Generic Buttons
+        public static string btnCancel = "Cancel";
+        public static string btnOk = "OK";
+        public static string btnSaveInst = "Save profile";
+        public static string btnDeleteInst = "Delete profile";
+        public static string btnOpenDir = "Open directory";
+        public static string btnYes = "Yes";
+        public static string btnNo = "No";
 
-        //InstanceManager
-        public static string grbInfo = "Profile info";
-        public static string lblName = "Profile name:";
-        public static string lblDir = "Directory (blank = default):";
-        public static string lblRes = "Resolution:";
-        public static string lblMin = "Min:";
-        public static string lblMax = "Max:";
-        public static string lblRam = "Memory:";
+        //Profile manager
+        public static string tabMods = "Mods";
+        public static string grbGame = "Game";
+        public static string lblProfName = "Profile name";
+        public static string lblGameDir = "Game directory";
+        public static string lblReso = "Resolution";
+        public static string lblMem = "Memory";
+        public static string lblMemMax = "Max";
+        public static string lblMemMin = "Min";
+        public static string lblBefCmd = "Before command";
+        public static string lblAftCmd = "After command";
+        public static string chkProxy = "Use skin and sound proxy (<=1.5.2)";
+        public static string chkUseDemo = "Launch demo (>=12w16a)";
+        public static string chkOffline = "Launch in offline mode";
+        public static string chkMulti = "Force multiplayer";
+        public static string grbForExp = "For experts";
+        public static string chkCustJava = "Custom Java";
+        public static string chkCustJson = "Custom JSON";
+        public static string chkClasspath = "Classpath";
+        public static string chkAssetIndex = "Asset index";
+        //Profile manager mods
+        public static string btnMoveUp = "Move up";
+        public static string btnMoveDown = "Move down";
+        public static string btnRemove = "Remove";
+        public static string btnForge = "Install Forge";
+        public static string btnFabric = "Install Fabric";
+        public static string btnMLoader = "Install ModLoader";
+        public static string btnRepos = "Mod repositories";
+        public static string btnAddToJar = "Add to minecraft.jar";
+        public static string btnReplaceJar = "Replace minecraft.jar";
+        public static string btnOpenDotMc = "Open.minecraft";
+        public static string rowName = "Name";
+        public static string rowType = "Type";
+        public static string rowConfig = "Config";
+        public static string rowReleased = "Released";
+        public static string rowUpdate = "Update";
 
-        public static string grbVersion = "Version selection";
-        public static string lblEdition = "Edition:";
-        public static string lblVersion = "Version:";
-
-        public static string grbExperts = "For experts";
-        public static string lblJavaInstall = "Java install:";
-        public static string lblJvmArgs = "JVM arguments:";
-        public static string lblCustJar = "Custom JAR:";
-        public static string lblOfflineLaunch = "Launch in offline mode";
-        public static string lblUseProxy = "Disable skin and sound fixes";
-        public static string titleProfileMan = "Profile manager";
-        public static string tabEditor = "Profile editor";
 
         //Login
         public static string titleLogin = "Log-in";
@@ -104,50 +120,13 @@ namespace MCLauncher
         public static string lblWhatsNew = "What's new:";
         public static string lblDoDown = "Do you wish to download it?";
 
-        //New Profile
-        public static string tabMods = "Mods";
-        public static string grbGame = "Game";
-        public static string lblProfName = "Profile name";
-        public static string lblGameDir = "Game directory";
-        public static string lblReso = "Resolution";
-        public static string lblMem = "Memory";
-        public static string lblMemMax = "Max";
-        public static string lblMemMin = "Min";
-        public static string lblBefCmd = "Before command";
-        public static string lblAftCmd = "After command";
-        public static string chkProxy = "Use skin and sound proxy (<=1.5.2)";
-        public static string chkUseDemo = "Launch demo (>=12w16a)";
-        public static string chkOffline = "Launch in offline mode";
-        public static string chkMulti = "Force multiplayer";
-        public static string grbForExp = "For experts";
-        public static string chkCustJava = "Custom Java";
-        public static string chkCustJson = "Custom JSON";
-        public static string chkClasspath = "Classpath";
-        public static string chkAssetIndex = "Asset index";
-
-        //Mods
-        public static string btnMoveUp = "Move up";
-        public static string btnMoveDown = "Move down";
-        public static string btnRemove = "Remove";
-        public static string btnForge = "Install Forge";
-        public static string btnFabric = "Install Fabric";
-        public static string btnMLoader = "Install ModLoader";
-        public static string btnRepos = "Mod repositories";
-        public static string btnAddToJar = "Add to minecraft.jar";
-        public static string btnReplaceJar = "Replace minecraft.jar";
-        public static string btnOpenDotMc = "Open.minecraft";
-        public static string rowName = "Name";
-        public static string rowType = "Type";
-        public static string rowConfig = "Config";
-        public static string rowReleased = "Released";
-        public static string rowUpdate = "Update";
-
         //Mod repo
         public static string btnDownload = "Download";
         public static string lblAlwaysUpdate = "Always update";
 
         public static string lblNotReady = "This feature is not ready yet.";
         public static string wrnRunning = "Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!";
+        public static string localOrUrl = "Can be either a local path or a URL";
 
         public static void reloadLangs(string selected)
         {
@@ -187,25 +166,6 @@ namespace MCLauncher
                 lblDejvossIpsa = str.lblDejvossIpsa;
                 lblTeam = str.lblTeam;
                 lblSpecialThanks = str.lblSpecialThanks;
-
-                grbInfo = str.grbInfo;
-                lblName = str.lblName;
-                lblDir = str.lblDir;
-                lblRes = str.lblRes;
-                lblMin = str.lblMin;
-                lblMax = str.lblMax;
-                lblRam = str.lblRam;
-                grbVersion = str.grbVersion;
-                lblEdition = str.lblEdition;
-                lblVersion = str.lblVersion;
-                grbExperts = str.grbExperts;
-                lblJavaInstall = str.lblJavaInstall;
-                lblJvmArgs = str.lblJvmArgs;
-                lblCustJar = str.lblCustJar;
-                lblOfflineLaunch = str.lblOfflineLaunch;
-                lblUseProxy = str.lblUseProxy;
-                titleProfileMan = str.titleProfileMan;
-                tabEditor = str.tabEditor;
 
                 btnCancel = str.btnCancel;
                 btnOk = str.btnOk;
@@ -280,6 +240,7 @@ namespace MCLauncher
 
                 lblNotReady = str.lblNotReady;
                 wrnRunning = str.wrnRunning;
+                localOrUrl = str.localOrUrl;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
@@ -300,7 +261,7 @@ namespace MCLauncher
                     HomeScreen.Instance.lblWelcome.Text = lblWelcome + " " + HomeScreen.msPlayerName;
                     HomeScreen.Instance.lblLogInWarn.Text = "";
                 }
-                //HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
+                HomeScreen.Instance.lblReady.Text = lblReady + " " + HomeScreen.selectedVersion;
                 HomeScreen.Instance.lblSelInst.Text = lblSelInst;
 
                 SettingsScreen.InstanceSetting.grbLauncher.Text = grbLauncher;
@@ -347,25 +308,6 @@ namespace MCLauncher
             public string lblDejvossIpsa { get; set; }
             public string lblTeam { get; set; }
             public string lblSpecialThanks { get; set; }
-
-            public string grbInfo { get; set; }
-            public string lblName { get; set; }
-            public string lblDir { get; set; }
-            public string lblRes { get; set; }
-            public string lblMin { get; set; }
-            public string lblMax { get; set; }
-            public string lblRam { get; set; }
-            public string grbVersion { get; set; }
-            public string lblEdition { get; set; }
-            public string lblVersion { get; set; }
-            public string grbExperts { get; set; }
-            public string lblJavaInstall { get; set; }
-            public string lblJvmArgs { get; set; }
-            public string lblCustJar { get; set; }
-            public string lblOfflineLaunch { get; set; }
-            public string lblUseProxy { get; set; }
-            public string titleProfileMan { get; set; }
-            public string tabEditor { get; set; }
 
             public string btnCancel { get; set; }
             public string btnOk { get; set; }
@@ -440,6 +382,7 @@ namespace MCLauncher
 
             public string lblNotReady { get; set; }
             public string wrnRunning { get; set; }
+            public string localOrUrl { get; set; }
         }
     }
 }

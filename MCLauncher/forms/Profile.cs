@@ -96,6 +96,8 @@ namespace MCLauncher.forms
                 jsonBtn.Enabled = false;
                 javaBox.Enabled = false;
                 javaBtn.Enabled = false;
+                assetIndexBox.Enabled = false;
+                assetIndexBtn.Enabled = false;
                 tabControl1.TabPages.Remove(tabControl1.TabPages[1]);
 
                 string manifest = Globals.client.DownloadString(Globals.javaManifest);
@@ -860,12 +862,12 @@ namespace MCLauncher.forms
 
         private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(assetIndexBox, "Can be either a local path or a URL");
+            toolTip.SetToolTip(assetIndexBox, Strings.localOrUrl);
         }
 
         private void jsonBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(jsonBox, "Can be either a local path or a URL");
+            toolTip.SetToolTip(jsonBox, Strings.localOrUrl);
         }
 
         private void chkAssetIndex_CheckedChanged(object sender, EventArgs e)

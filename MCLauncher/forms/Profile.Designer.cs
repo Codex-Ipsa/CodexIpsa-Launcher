@@ -192,9 +192,9 @@
             // 
             // javaBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(120, 19);
+            this.javaBox.Location = new System.Drawing.Point(106, 19);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(264, 20);
+            this.javaBox.Size = new System.Drawing.Size(278, 20);
             this.javaBox.TabIndex = 27;
             this.javaBox.TextChanged += new System.EventHandler(this.JavaBox_TextChanged);
             // 
@@ -513,9 +513,9 @@
             // 
             // jsonBox
             // 
-            this.jsonBox.Location = new System.Drawing.Point(120, 46);
+            this.jsonBox.Location = new System.Drawing.Point(106, 46);
             this.jsonBox.Name = "jsonBox";
-            this.jsonBox.Size = new System.Drawing.Size(264, 20);
+            this.jsonBox.Size = new System.Drawing.Size(278, 20);
             this.jsonBox.TabIndex = 30;
             this.jsonBox.TextChanged += new System.EventHandler(this.JsonBox_TextChanged);
             this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
@@ -583,9 +583,9 @@
             // 
             // assetIndexBox
             // 
-            this.assetIndexBox.Location = new System.Drawing.Point(120, 98);
+            this.assetIndexBox.Location = new System.Drawing.Point(106, 98);
             this.assetIndexBox.Name = "assetIndexBox";
-            this.assetIndexBox.Size = new System.Drawing.Size(264, 20);
+            this.assetIndexBox.Size = new System.Drawing.Size(278, 20);
             this.assetIndexBox.TabIndex = 34;
             this.assetIndexBox.TextChanged += new System.EventHandler(this.assetIndexBox_TextChanged);
             this.assetIndexBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.assetIndexBox_MouseMove);
@@ -614,9 +614,9 @@
             // 
             // classBox
             // 
-            this.classBox.Location = new System.Drawing.Point(120, 72);
+            this.classBox.Location = new System.Drawing.Point(106, 72);
             this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(312, 20);
+            this.classBox.Size = new System.Drawing.Size(326, 20);
             this.classBox.TabIndex = 33;
             // 
             // chkClasspath

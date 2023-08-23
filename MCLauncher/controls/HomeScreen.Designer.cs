@@ -88,9 +88,9 @@
             // 
             // btnEditInst
             // 
-            this.btnEditInst.Location = new System.Drawing.Point(80, 41);
+            this.btnEditInst.Location = new System.Drawing.Point(88, 41);
             this.btnEditInst.Name = "btnEditInst";
-            this.btnEditInst.Size = new System.Drawing.Size(68, 21);
+            this.btnEditInst.Size = new System.Drawing.Size(76, 21);
             this.btnEditInst.TabIndex = 19;
             this.btnEditInst.Text = "btn.editInst";
             this.btnEditInst.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // 
             this.btnNewInst.Location = new System.Drawing.Point(5, 41);
             this.btnNewInst.Name = "btnNewInst";
-            this.btnNewInst.Size = new System.Drawing.Size(68, 21);
+            this.btnNewInst.Size = new System.Drawing.Size(77, 21);
             this.btnNewInst.TabIndex = 18;
             this.btnNewInst.Text = "btn.newInst";
             this.btnNewInst.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.cmbInstaces.FormattingEnabled = true;
             this.cmbInstaces.Location = new System.Drawing.Point(6, 19);
             this.cmbInstaces.Name = "cmbInstaces";
-            this.cmbInstaces.Size = new System.Drawing.Size(142, 21);
+            this.cmbInstaces.Size = new System.Drawing.Size(158, 21);
             this.cmbInstaces.TabIndex = 17;
             this.cmbInstaces.SelectedIndexChanged += new System.EventHandler(this.cmbInstaces_SelectedIndexChanged);
             this.cmbInstaces.Click += new System.EventHandler(this.cmbInstaces_Click);
