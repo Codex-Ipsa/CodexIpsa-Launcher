@@ -273,29 +273,32 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
-            var item = listView1.FindItemWithText(version, true, 0, false);
+            if(listView1.Items.Count > 0)
+            {
+                var item = listView1.FindItemWithText(version, true, 0, false);
 
-            if (item != null)
-            {
-                listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
-                listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                saveBtn.Enabled = true;
-            }
-            else if (listView1.Items.Count == 0)
-                saveBtn.Enabled = false;
-            else
-            {
-                item = listView1.FindItemWithText(version, true, 0);
                 if (item != null)
                 {
-                    saveBtn.Enabled = true;
                     listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
                     listView1.EnsureVisible(listView1.Items.IndexOf(item));
+                    saveBtn.Enabled = true;
                 }
+                else if (listView1.Items.Count == 0)
+                    saveBtn.Enabled = false;
                 else
                 {
-                    listView1.Items[0].Selected = true;
-                    listView1.EnsureVisible(listView1.Items[0].Index);
+                    item = listView1.FindItemWithText(version, true, 0);
+                    if (item != null)
+                    {
+                        saveBtn.Enabled = true;
+                        listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
+                        listView1.EnsureVisible(listView1.Items.IndexOf(item));
+                    }
+                    else
+                    {
+                        listView1.Items[0].Selected = true;
+                        listView1.EnsureVisible(listView1.Items[0].Index);
+                    }
                 }
             }
         }
