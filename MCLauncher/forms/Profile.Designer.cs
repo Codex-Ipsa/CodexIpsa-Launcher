@@ -380,7 +380,7 @@
             this.checkClassic.AutoSize = true;
             this.checkClassic.Checked = true;
             this.checkClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkClassic.Location = new System.Drawing.Point(91, 340);
+            this.checkClassic.Location = new System.Drawing.Point(8, 358);
             this.checkClassic.Name = "checkClassic";
             this.checkClassic.Size = new System.Drawing.Size(59, 17);
             this.checkClassic.TabIndex = 3;
@@ -393,7 +393,7 @@
             this.checkIndev.AutoSize = true;
             this.checkIndev.Checked = true;
             this.checkIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkIndev.Location = new System.Drawing.Point(218, 340);
+            this.checkIndev.Location = new System.Drawing.Point(91, 340);
             this.checkIndev.Name = "checkIndev";
             this.checkIndev.Size = new System.Drawing.Size(53, 17);
             this.checkIndev.TabIndex = 5;
@@ -406,7 +406,7 @@
             this.checkInfdev.AutoSize = true;
             this.checkInfdev.Checked = true;
             this.checkInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkInfdev.Location = new System.Drawing.Point(156, 340);
+            this.checkInfdev.Location = new System.Drawing.Point(91, 358);
             this.checkInfdev.Name = "checkInfdev";
             this.checkInfdev.Size = new System.Drawing.Size(56, 17);
             this.checkInfdev.TabIndex = 4;
@@ -419,7 +419,7 @@
             this.checkAlpha.AutoSize = true;
             this.checkAlpha.Checked = true;
             this.checkAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlpha.Location = new System.Drawing.Point(277, 340);
+            this.checkAlpha.Location = new System.Drawing.Point(156, 340);
             this.checkAlpha.Name = "checkAlpha";
             this.checkAlpha.Size = new System.Drawing.Size(53, 17);
             this.checkAlpha.TabIndex = 6;
@@ -432,7 +432,7 @@
             this.checkBeta.AutoSize = true;
             this.checkBeta.Checked = true;
             this.checkBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBeta.Location = new System.Drawing.Point(8, 358);
+            this.checkBeta.Location = new System.Drawing.Point(156, 358);
             this.checkBeta.Name = "checkBeta";
             this.checkBeta.Size = new System.Drawing.Size(48, 17);
             this.checkBeta.TabIndex = 7;
@@ -445,7 +445,7 @@
             this.checkRelease.AutoSize = true;
             this.checkRelease.Checked = true;
             this.checkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkRelease.Location = new System.Drawing.Point(91, 358);
+            this.checkRelease.Location = new System.Drawing.Point(218, 340);
             this.checkRelease.Name = "checkRelease";
             this.checkRelease.Size = new System.Drawing.Size(65, 17);
             this.checkRelease.TabIndex = 8;
@@ -458,7 +458,7 @@
             this.checkSnapshot.AutoSize = true;
             this.checkSnapshot.Checked = true;
             this.checkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkSnapshot.Location = new System.Drawing.Point(156, 358);
+            this.checkSnapshot.Location = new System.Drawing.Point(218, 358);
             this.checkSnapshot.Name = "checkSnapshot";
             this.checkSnapshot.Size = new System.Drawing.Size(71, 17);
             this.checkSnapshot.TabIndex = 9;
@@ -471,7 +471,7 @@
             this.checkExperimental.AutoSize = true;
             this.checkExperimental.Checked = true;
             this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkExperimental.Location = new System.Drawing.Point(233, 358);
+            this.checkExperimental.Location = new System.Drawing.Point(289, 356);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
             this.checkExperimental.TabIndex = 10;
@@ -789,6 +789,7 @@
             this.btnOpenDotMc.TabIndex = 20;
             this.btnOpenDotMc.Text = "btn.OpenDotMc";
             this.btnOpenDotMc.UseVisualStyleBackColor = true;
+            this.btnOpenDotMc.Click += new System.EventHandler(this.btnOpenDotMc_Click);
             // 
             // btnMLoader
             // 

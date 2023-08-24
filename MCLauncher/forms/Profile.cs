@@ -883,6 +883,11 @@ namespace MCLauncher.forms
                 assetIndexBox.Enabled = false;
             }
         }
+
+        private void btnOpenDotMc_Click(object sender, EventArgs e)
+        {
+            Process.Start($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
+        }
     }
 
     public class VersionManifest
