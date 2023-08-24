@@ -265,7 +265,7 @@ namespace MCLauncher.classes
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
             if (dj.useJava)
                 proc.StartInfo.FileName = dj.javaPath;
-            else if (vi.java == 17)
+            else if (vi.java >= 16)
                 proc.StartInfo.FileName = Properties.Settings.Default.jre17;
             else if (vi.java == 8)
                 proc.StartInfo.FileName = Properties.Settings.Default.jre8;
