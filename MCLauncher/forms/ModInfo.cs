@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MCLauncher
+namespace MCLauncher.forms
 {
-    public partial class NoJava : Form
+    public partial class ModInfo : Form
     {
-        public NoJava()
+        public ModInfo()
         {
             InitializeComponent();
         }
