@@ -136,11 +136,13 @@ namespace MCLauncher.classes
                 AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
                 ad.ShowDialog();
             }
-            else if(!String.IsNullOrWhiteSpace(vi.assets.name))
+            else if(vi.assets != null && !String.IsNullOrWhiteSpace(vi.assets.name))
             {
                 AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
                 ad.ShowDialog();
             }
+
+
 
             string jars = "";
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar") && modClientPath == "")
@@ -198,6 +200,12 @@ namespace MCLauncher.classes
             jars = jars.Remove(jars.LastIndexOf(';'));
 
             string[] defRes = dj.resolution.Split(' ');
+
+            if(vi.assets == null)
+            {
+                vi.assets = new VersionInfoAssets();
+                vi.assets.name = "";
+            }
 
             string assetsDir = "";
             if (vi.assets.name == "legacy")
