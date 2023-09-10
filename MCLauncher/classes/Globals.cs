@@ -15,11 +15,11 @@ namespace MCLauncher
         public static WebClient client = new WebClient();
 
         //Manual
-        public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix
         public static string discordClient = "***REMOVED***"; //this is not here on purpose (note to self: MAKE SURE NOT TO SHIP IT IN GIT ELSE YOU'LL HAVE TO REVERT AGAIN!!!!)
+        public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //dev //omega13 //stable //dev-instances //experimental
         public static string verCurrent = "0.2.0_01"; //Change this on release
-        public static string verDisplay = "0.2.0_01"; //Change this on release
+        public static string verDisplay = "0.2.0_01-20230909lftesting"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -44,6 +44,7 @@ namespace MCLauncher
         public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/emulator/xenia_manifest.json";
 
         public static string CIModsJson = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/modrepo/manifest.json";
+        public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
 
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
         public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/version/list.json";

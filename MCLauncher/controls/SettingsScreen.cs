@@ -6,8 +6,10 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -208,6 +210,77 @@ namespace MCLauncher.controls
                 Properties.Settings.Default.Save();
             }
         }
+
+        private void btnGetJava8_Click(object sender, EventArgs e)
+        {
+            DownloadJava(8);
+        }
+
+        private void btnGetJava17_Click(object sender, EventArgs e)
+        {
+            DownloadJava(17);
+        }
+
+        public void DownloadJava(int targetMajor)
+        {
+            string jsonData = Globals.client.DownloadString(Globals.JavaInstalls);
+            List<javaInstallsManifest> data = JsonConvert.DeserializeObject<List<javaInstallsManifest>>(jsonData);
+            foreach (var vers in data)
+            {
+                if(vers.major == targetMajor)
+                {
+                    bool shouldDownload = false;
+
+                    //Download if not present
+                    if (!Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
+                    {
+                        shouldDownload = true;
+                    }
+                    //Download if update available
+                    else if (!File.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") || File.ReadAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") != vers.id)
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"Do you wish to update your Java {vers.major} installation?", "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            shouldDownload = true;
+                        }
+                    }
+                    //Redownload if latest exists
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"You already have the latest Java {vers.major} version installed. Do you wish to redownload?", "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            shouldDownload = true;
+                        }
+                    }
+
+                    if(shouldDownload)
+                    {
+                        if(Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
+                            Directory.Delete($"{Globals.dataPath}\\jre\\jre{vers.major}", true);
+                        
+                        Directory.CreateDirectory($"{Globals.dataPath}\\jre\\jre{vers.major}");
+                        DownloadProgress.url = vers.url;
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\jre\\temp.zip";
+                        DownloadProgress dp = new DownloadProgress();
+                        dp.ShowDialog();
+
+                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\jre\\temp.zip", $"{Globals.dataPath}\\jre\\jre{vers.major}");
+                        File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
+                        File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
+
+                        DialogResult dialogResult = MessageBox.Show($"Do you wish to set this Java install as the default one for Java {vers.major}?", "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                            Properties.Settings.Default.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                            Properties.Settings.Default.Save();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class settingsJson
@@ -220,5 +293,15 @@ namespace MCLauncher.controls
 
         public string title { get; set; }
         public string name { get; set; }
+    }
+
+    public class javaInstallsManifest
+    {
+        public int major { get; set; }
+        public string name { get; set; }
+        public string id { get; set; }
+        public string url { get; set; }
+        public int size { get; set; }
+        public string executable { get; set; }
     }
 }

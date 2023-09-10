@@ -45,6 +45,8 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
+            this.btnGetJava8 = new System.Windows.Forms.Button();
+            this.btnGetJava17 = new System.Windows.Forms.Button();
             this.pnlCenter.SuspendLayout();
             this.grbDefaults.SuspendLayout();
             this.grbLauncher.SuspendLayout();
@@ -57,14 +59,16 @@
             this.pnlCenter.Controls.Add(this.grbDefaults);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
-            this.pnlCenter.Location = new System.Drawing.Point(169, 70);
+            this.pnlCenter.Location = new System.Drawing.Point(171, 55);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(446, 247);
+            this.pnlCenter.Size = new System.Drawing.Size(446, 274);
             this.pnlCenter.TabIndex = 24;
             // 
             // grbDefaults
             // 
             this.grbDefaults.BackColor = System.Drawing.Color.Transparent;
+            this.grbDefaults.Controls.Add(this.btnGetJava17);
+            this.grbDefaults.Controls.Add(this.btnGetJava8);
             this.grbDefaults.Controls.Add(this.lblJre17);
             this.grbDefaults.Controls.Add(this.btnJre17);
             this.grbDefaults.Controls.Add(this.cmbJre17);
@@ -74,7 +78,7 @@
             this.grbDefaults.ForeColor = System.Drawing.Color.White;
             this.grbDefaults.Location = new System.Drawing.Point(0, 172);
             this.grbDefaults.Name = "grbDefaults";
-            this.grbDefaults.Size = new System.Drawing.Size(446, 75);
+            this.grbDefaults.Size = new System.Drawing.Size(446, 99);
             this.grbDefaults.TabIndex = 21;
             this.grbDefaults.TabStop = false;
             this.grbDefaults.Text = "grb.defaults";
@@ -228,6 +232,28 @@
             this.cmbUpdateSelect.TabIndex = 0;
             this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
             // 
+            // btnGetJava8
+            // 
+            this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 70);
+            this.btnGetJava8.Name = "btnGetJava8";
+            this.btnGetJava8.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava8.TabIndex = 28;
+            this.btnGetJava8.Text = "Install Java 8 ↓";
+            this.btnGetJava8.UseVisualStyleBackColor = true;
+            this.btnGetJava8.Click += new System.EventHandler(this.btnGetJava8_Click);
+            // 
+            // btnGetJava17
+            // 
+            this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava17.Location = new System.Drawing.Point(236, 70);
+            this.btnGetJava17.Name = "btnGetJava17";
+            this.btnGetJava17.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava17.TabIndex = 29;
+            this.btnGetJava17.Text = "Install Java 17 ↓";
+            this.btnGetJava17.UseVisualStyleBackColor = true;
+            this.btnGetJava17.Click += new System.EventHandler(this.btnGetJava17_Click);
+            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,5 +293,7 @@
         public System.Windows.Forms.Button btnCheckUpdates;
         public System.Windows.Forms.Label lblBranch;
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
+        private System.Windows.Forms.Button btnGetJava8;
+        private System.Windows.Forms.Button btnGetJava17;
     }
 }
