@@ -19,7 +19,7 @@ namespace MCLauncher
         public static string codebase = "omega13"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //dev //omega13 //stable //dev-instances //experimental
         public static string verCurrent = "0.2.0_01"; //Change this on release
-        public static string verDisplay = "0.2.0_01-20230909lftesting"; //Change this on release
+        public static string verDisplay = "0.2.0_01-20230910lftesting"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();

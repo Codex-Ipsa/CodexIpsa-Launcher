@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net;
 
 namespace MCLauncher.forms
 {
@@ -21,6 +22,9 @@ namespace MCLauncher.forms
         public string assetName = "";
         public bool isVirt = false;
         public Dictionary<string, AssetIndexObject> dict = new Dictionary<string, AssetIndexObject>();
+        public WebClient assetClient = new WebClient();
+
+        public bool doWork = true;
 
         public AssetsDownloader(string assetsUrl, string assetsName)
         {
@@ -36,7 +40,7 @@ namespace MCLauncher.forms
             Logger.Info("[AssetsDownloader]", $"Starting for {assetsName};{assetsUrl}");
 
             Directory.CreateDirectory($"{Globals.dataPath}\\assets\\indexes\\");
-            Globals.client.DownloadFile(assetUrl, $"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
+            assetClient.DownloadFile(assetUrl, $"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
             string manifest = File.ReadAllText($"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
 
             var data = (JObject)JsonConvert.DeserializeObject(manifest);
@@ -56,10 +60,11 @@ namespace MCLauncher.forms
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             //TODO cancel without crash lmao
+
             backgroundWorker1.CancelAsync();
             backgroundWorker1.Dispose();
-            Globals.client.Dispose();
-            Globals.client = new System.Net.WebClient();
+            assetClient.Dispose();
+            doWork = false;
             this.Close();
         }
 
@@ -68,6 +73,10 @@ namespace MCLauncher.forms
             int i = 0;
             foreach (KeyValuePair<string, AssetIndexObject> entry in dict)
             {
+                if(!doWork)
+                {
+                    break;
+                }
                 string filePath = "";
                 string firstTwo = entry.Value.hash.Substring(0, 2);
                 if (isVirt)
@@ -85,9 +94,9 @@ namespace MCLauncher.forms
                     string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                     Directory.CreateDirectory(path);
                     if (entry.Value.custom_url != null)
-                        Globals.client.DownloadFile($"{entry.Value.custom_url}", filePath);
+                        assetClient.DownloadFile($"{entry.Value.custom_url}", filePath);
                     else
-                        Globals.client.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
+                        assetClient.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                     i++;
                     backgroundWorker1.ReportProgress(i);
                 }
@@ -101,9 +110,9 @@ namespace MCLauncher.forms
                         string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                         Directory.CreateDirectory(path);
                         if (entry.Value.custom_url != null)
-                            Globals.client.DownloadFile($"{entry.Value.custom_url}", filePath);
+                            assetClient.DownloadFile($"{entry.Value.custom_url}", filePath);
                         else
-                            Globals.client.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
+                            assetClient.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                         Logger.Info("[AssetIndex]", $"Redownloaded {entry.Key}");
                     }
                     i++;
