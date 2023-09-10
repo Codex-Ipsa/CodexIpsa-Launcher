@@ -900,10 +900,8 @@ namespace MCLauncher.forms
                 Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}", true);
                 HomeScreen.loadInstanceList();
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = 0;
-                //HomeScreen.reloadInstance(HomeScreen.Instance.cmbInstaces.Items[0].ToString());
                 this.Close();
             }
-
         }
     }
 
