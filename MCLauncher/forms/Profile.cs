@@ -891,6 +891,20 @@ namespace MCLauncher.forms
         {
             Process.Start($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
         }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete this profile?\nYou can't take this back!", "Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}", true);
+                HomeScreen.loadInstanceList();
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = 0;
+                //HomeScreen.reloadInstance(HomeScreen.Instance.cmbInstaces.Items[0].ToString());
+                this.Close();
+            }
+
+        }
     }
 
     public class VersionManifest

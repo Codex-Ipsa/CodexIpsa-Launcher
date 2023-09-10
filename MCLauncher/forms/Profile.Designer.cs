@@ -497,6 +497,7 @@
             this.deleteBtn.TabIndex = 34;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // checkPreClassic
             // 

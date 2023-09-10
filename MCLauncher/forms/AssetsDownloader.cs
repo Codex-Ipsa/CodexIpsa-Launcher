@@ -31,6 +31,9 @@ namespace MCLauncher.forms
             assetUrl = assetsUrl;
             assetName = assetsName;
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
 
             //Load lang
             lblDlFiles.Text = Strings.lblDlAssets;
