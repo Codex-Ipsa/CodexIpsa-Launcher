@@ -24,6 +24,8 @@ namespace MCLauncher.forms
         public static Profile Instance;
 
         public static bool isInitial;
+        public string origName;
+
 
         System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
 
@@ -77,6 +79,7 @@ namespace MCLauncher.forms
             tabControl1.TabPages[1].Text = Strings.tabMods;
 
             profileName = profile;
+            origName = profileName;
             profMode = mode;
 
             listView1.Columns.Add(Strings.rowName);
@@ -445,20 +448,44 @@ namespace MCLauncher.forms
                 }
             }
 
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-            if (!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json"))
+            if (origName != profileName && profMode == "edit")
             {
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"data\":1,\"items\":[]}}");
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}\\"))
+                {
+                    MessageBox.Show($"A profile with this name already exists, please use a different name.", "Profile", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    Logger.Info("[Profile]", "Renaming the profile. This may take a while.");
+                    Directory.Move($"{Globals.dataPath}\\instance\\{origName}\\", $"{Globals.dataPath}\\instance\\{profileName}\\");
+                    File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
+
+                    string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
+                    HomeScreen.loadInstanceList();
+                    HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
+                    HomeScreen.reloadInstance(tempName);
+
+                    this.Close();
+                }
             }
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
+            else
+            {
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
+                if (!File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json"))
+                {
+                    File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"data\":1,\"items\":[]}}");
+                }
 
-            string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
-            HomeScreen.loadInstanceList();
-            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
-            HomeScreen.reloadInstance(tempName);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
-            this.Close();
+                string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
+                HomeScreen.loadInstanceList();
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
+                HomeScreen.reloadInstance(tempName);
+
+                this.Close();
+            }
         }
 
         public bool nameCheck()
