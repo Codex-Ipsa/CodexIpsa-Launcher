@@ -266,16 +266,32 @@ namespace MCLauncher.controls
                         DownloadProgress dp = new DownloadProgress();
                         dp.ShowDialog();
 
-                        ZipFile.ExtractToDirectory($"{Globals.dataPath}\\jre\\temp.zip", $"{Globals.dataPath}\\jre\\jre{vers.major}");
-                        File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
-                        File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
-
-                        DialogResult dialogResult = MessageBox.Show($"Do you wish to set this Java install as the default one for Java {vers.major}?", "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dialogResult == DialogResult.Yes)
+                        try
                         {
-                            cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                            Properties.Settings.Default.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                            Properties.Settings.Default.Save();
+                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\jre\\temp.zip", $"{Globals.dataPath}\\jre\\jre{vers.major}");
+                            File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
+                            File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
+
+                            DialogResult dialogResult = MessageBox.Show($"Do you wish to set this Java install as the default one for Java {vers.major}?", "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                if(vers.major == 8)
+                                {
+                                    cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Properties.Settings.Default.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Properties.Settings.Default.Save();
+                                }
+                                else if(vers.major == 17)
+                                {
+                                    cmbJre17.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Properties.Settings.Default.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Properties.Settings.Default.Save();
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error("[SettingsScreen]", $"Failed to download/install Java {vers.id}; {vers.url}; {ex.Message}");
                         }
                     }
                 }
