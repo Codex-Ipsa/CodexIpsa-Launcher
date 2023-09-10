@@ -124,6 +124,9 @@ namespace MCLauncher.controls
             }
             else
             {
+                if(!isFirstLangCheck)
+                    MessageBox.Show($"No new update is available.", "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Logger.Info("[Settings]", $"No new update is available.");
             }
         }
@@ -296,6 +299,18 @@ namespace MCLauncher.controls
                     }
                 }
             }
+        }
+
+        private void cmbJre8_TextUpdate(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.jre8 = cmbJre8.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void cmbJre17_TextUpdate(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.jre17 = cmbJre17.Text;
+            Properties.Settings.Default.Save();
         }
     }
 

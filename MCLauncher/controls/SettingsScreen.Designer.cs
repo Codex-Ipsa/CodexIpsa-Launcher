@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbDefaults = new System.Windows.Forms.GroupBox();
+            this.btnGetJava17 = new System.Windows.Forms.Button();
+            this.btnGetJava8 = new System.Windows.Forms.Button();
             this.lblJre17 = new System.Windows.Forms.Label();
             this.btnJre17 = new System.Windows.Forms.Button();
             this.cmbJre17 = new System.Windows.Forms.ComboBox();
@@ -45,8 +47,6 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
-            this.btnGetJava8 = new System.Windows.Forms.Button();
-            this.btnGetJava17 = new System.Windows.Forms.Button();
             this.pnlCenter.SuspendLayout();
             this.grbDefaults.SuspendLayout();
             this.grbLauncher.SuspendLayout();
@@ -83,6 +83,28 @@
             this.grbDefaults.TabStop = false;
             this.grbDefaults.Text = "grb.defaults";
             // 
+            // btnGetJava17
+            // 
+            this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava17.Location = new System.Drawing.Point(236, 70);
+            this.btnGetJava17.Name = "btnGetJava17";
+            this.btnGetJava17.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava17.TabIndex = 29;
+            this.btnGetJava17.Text = "Install Java 17 ↓";
+            this.btnGetJava17.UseVisualStyleBackColor = true;
+            this.btnGetJava17.Click += new System.EventHandler(this.btnGetJava17_Click);
+            // 
+            // btnGetJava8
+            // 
+            this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 70);
+            this.btnGetJava8.Name = "btnGetJava8";
+            this.btnGetJava8.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava8.TabIndex = 28;
+            this.btnGetJava8.Text = "Install Java 8 ↓";
+            this.btnGetJava8.UseVisualStyleBackColor = true;
+            this.btnGetJava8.Click += new System.EventHandler(this.btnGetJava8_Click);
+            // 
             // lblJre17
             // 
             this.lblJre17.AutoSize = true;
@@ -111,6 +133,7 @@
             this.cmbJre17.Name = "cmbJre17";
             this.cmbJre17.Size = new System.Drawing.Size(330, 21);
             this.cmbJre17.TabIndex = 25;
+            this.cmbJre17.TextUpdate += new System.EventHandler(this.cmbJre17_TextUpdate);
             // 
             // btnJre8
             // 
@@ -140,6 +163,7 @@
             this.cmbJre8.Name = "cmbJre8";
             this.cmbJre8.Size = new System.Drawing.Size(330, 21);
             this.cmbJre8.TabIndex = 0;
+            this.cmbJre8.TextUpdate += new System.EventHandler(this.cmbJre8_TextUpdate);
             // 
             // grbLauncher
             // 
@@ -231,28 +255,6 @@
             this.cmbUpdateSelect.Size = new System.Drawing.Size(330, 21);
             this.cmbUpdateSelect.TabIndex = 0;
             this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
-            // 
-            // btnGetJava8
-            // 
-            this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava8.Location = new System.Drawing.Point(67, 70);
-            this.btnGetJava8.Name = "btnGetJava8";
-            this.btnGetJava8.Size = new System.Drawing.Size(163, 23);
-            this.btnGetJava8.TabIndex = 28;
-            this.btnGetJava8.Text = "Install Java 8 ↓";
-            this.btnGetJava8.UseVisualStyleBackColor = true;
-            this.btnGetJava8.Click += new System.EventHandler(this.btnGetJava8_Click);
-            // 
-            // btnGetJava17
-            // 
-            this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava17.Location = new System.Drawing.Point(236, 70);
-            this.btnGetJava17.Name = "btnGetJava17";
-            this.btnGetJava17.Size = new System.Drawing.Size(163, 23);
-            this.btnGetJava17.TabIndex = 29;
-            this.btnGetJava17.Text = "Install Java 17 ↓";
-            this.btnGetJava17.UseVisualStyleBackColor = true;
-            this.btnGetJava17.Click += new System.EventHandler(this.btnGetJava17_Click);
             // 
             // SettingsScreen
             // 
