@@ -74,6 +74,7 @@ namespace MCLauncher.forms
 
             grbXboxGame.Text = Strings.grbGame;
             chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf("("));
+            lblXboxProfName.Text = Strings.lblProfName;
 
             tabControl1.TabPages[0].Text = Strings.cntHome;
             tabControl1.TabPages[1].Text = Strings.tabMods;
@@ -90,6 +91,7 @@ namespace MCLauncher.forms
             {
                 editionBox.SelectedIndex = editionBox.Items.IndexOf("Java Edition");
                 nameBox.Text = profileName;
+                xboxNameBox.Text = profileName;
                 resXBox.Text = "854";
                 resYBox.Text = "480";
                 ramMaxBox.Value = 512;
@@ -110,6 +112,7 @@ namespace MCLauncher.forms
             else if (profMode == "def")
             {
                 nameBox.Text = profileName;
+                xboxNameBox.Text = profileName;
                 resXBox.Text = "854";
                 resYBox.Text = "480";
                 ramMaxBox.Value = 512;
@@ -122,6 +125,7 @@ namespace MCLauncher.forms
 
                 version = dj.version;
                 nameBox.Text = profileName;
+                xboxNameBox.Text = profileName;
                 dirBox.Text = dj.directory;
                 string[] res = dj.resolution.Split(' ');
                 resXBox.Text = res[0];
@@ -198,9 +202,9 @@ namespace MCLauncher.forms
                 string manifest = "";
                 if (dj.edition == "java")
                     manifest = Globals.client.DownloadString(Globals.javaManifest);
-                else if(dj.edition == "x360")
+                else if (dj.edition == "x360")
                     manifest = Globals.client.DownloadString(Globals.x360Manifest);
-                else if(dj.edition == "javaedu")
+                else if (dj.edition == "javaedu")
                     manifest = Globals.client.DownloadString(Globals.javaEduManifest);
 
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -238,7 +242,7 @@ namespace MCLauncher.forms
             {
                 string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 
-                if(edition == "java")
+                if (edition == "java")
                 {
                     if (checkPreClassic.Checked && row[0] == "pre-classic")
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
@@ -276,7 +280,7 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
-            if(listView1.Items.Count > 0)
+            if (listView1.Items.Count > 0)
             {
                 var item = listView1.FindItemWithText(version, true, 0, false);
 
@@ -598,7 +602,7 @@ namespace MCLauncher.forms
             }
         }
 
-        public static void modListWorker(string mode, string name, string version, string file,  string type, string json, bool update)
+        public static void modListWorker(string mode, string name, string version, string file, string type, string json, bool update)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
@@ -864,7 +868,7 @@ namespace MCLauncher.forms
                 checkSnapshot.Visible = true;
                 checkExperimental.Visible = true;
 
-                if(!isInitial) //shitty fix but it doesn't crash anymore :troll:
+                if (!isInitial) //shitty fix but it doesn't crash anymore :troll:
                 {
                     string manifest = Globals.client.DownloadString(Globals.javaManifest);
                     vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -929,6 +933,16 @@ namespace MCLauncher.forms
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = 0;
                 this.Close();
             }
+        }
+
+        private void xboxNameBox_TextChanged(object sender, EventArgs e)
+        {
+            nameBox.Text = xboxNameBox.Text;
+        }
+
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+            xboxNameBox.Text = nameBox.Text;
         }
     }
 

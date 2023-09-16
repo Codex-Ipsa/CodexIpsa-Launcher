@@ -142,6 +142,12 @@ namespace MCLauncher.classes
                 ad.ShowDialog();
             }
 
+            if(vi.assetsVirt)
+            {
+                Logger.Error("[JavaLauncher]", "Assets fix for 1.6 snapshots");
+                
+            }
+
 
 
             string jars = "";
@@ -383,6 +389,7 @@ namespace MCLauncher.classes
         public string defRes { get; set; }
         public string logging { get; set; }
         public bool srvJoin { get; set; }
+        public bool assetsVirt { get; set; }
         public VersionInfoAssets assets { get; set; }
         public VersionInfoLibrary[] libraries { get; set; }
         public VersionInfoSupplement[] supplement { get; set; }
