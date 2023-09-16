@@ -108,6 +108,10 @@ namespace MCLauncher.forms
                 string manifest = Globals.client.DownloadString(Globals.javaManifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox("java");
+
+                deleteBtn.Visible = false;
+                openBtn.Visible = false;
+                saveBtn.Text = "Create profile";
             }
             else if (profMode == "def")
             {

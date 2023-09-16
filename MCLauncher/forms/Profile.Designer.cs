@@ -131,9 +131,9 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(711, 363);
+            this.saveBtn.Location = new System.Drawing.Point(693, 363);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.Size = new System.Drawing.Size(91, 23);
             this.saveBtn.TabIndex = 36;
             this.saveBtn.Text = "btn.Save";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -484,7 +484,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(614, 363);
+            this.openBtn.Location = new System.Drawing.Point(499, 363);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(91, 23);
             this.openBtn.TabIndex = 35;
@@ -494,9 +494,9 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(528, 363);
+            this.deleteBtn.Location = new System.Drawing.Point(596, 363);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(80, 23);
+            this.deleteBtn.Size = new System.Drawing.Size(91, 23);
             this.deleteBtn.TabIndex = 34;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
