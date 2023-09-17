@@ -12,7 +12,7 @@ namespace MCLauncher.forms
 {
     public partial class ModLoaders : Form
     {
-        public ModLoaders()
+        public ModLoaders(string url)
         {
             InitializeComponent();
         }

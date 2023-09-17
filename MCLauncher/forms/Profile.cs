@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
@@ -214,7 +217,6 @@ namespace MCLauncher.forms
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox(dj.edition);
 
-
                 reloadModsList();
                 isInitial = false;
             }
@@ -383,6 +385,22 @@ namespace MCLauncher.forms
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
                 Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
+
+                //load modloaders
+                try
+                {
+                    Console.WriteLine(Globals.Modloaders.Replace("{ver}", listView1.SelectedItems[0].Text));
+                    string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+                    temp = temp.Replace(" ", "");
+
+                    Console.WriteLine(Globals.Modloaders.Replace("{ver}", temp));
+                    Stream strm = Globals.client.OpenRead(Globals.Modloaders.Replace("{ver}", temp));
+                    btnForge.Enabled = true;
+                }
+                catch (WebException we)
+                {
+                    btnForge.Enabled= false;
+                }
             }
         }
 
@@ -947,6 +965,14 @@ namespace MCLauncher.forms
         private void nameBox_TextChanged(object sender, EventArgs e)
         {
             xboxNameBox.Text = nameBox.Text;
+        }
+
+        private void btnForge_Click(object sender, EventArgs e)
+        {
+            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            temp = temp.Replace(" ", "");
+            ModLoaders ml = new ModLoaders(Globals.Modloaders.Replace("{ver}", temp));
+            ml.ShowDialog();
         }
     }
 

@@ -873,6 +873,7 @@
             this.btnForge.TabIndex = 14;
             this.btnForge.Text = "btn.Forge";
             this.btnForge.UseVisualStyleBackColor = true;
+            this.btnForge.Click += new System.EventHandler(this.btnForge_Click);
             // 
             // btnReplaceJar
             // 
