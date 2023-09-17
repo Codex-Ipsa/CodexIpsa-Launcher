@@ -136,16 +136,32 @@ namespace MCLauncher.classes
                 AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
                 ad.ShowDialog();
             }
-            else if(vi.assets != null && !String.IsNullOrWhiteSpace(vi.assets.name))
+            else if (vi.assets != null && !String.IsNullOrWhiteSpace(vi.assets.name))
             {
                 AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
                 ad.ShowDialog();
             }
 
-            if(vi.assetsVirt)
+            //yes I know this is a shitty fix but nothing better I can do till lf releases
+            if (vi.assetsVirt)
             {
-                Logger.Error("[JavaLauncher]", "Assets fix for 1.6 snapshots");
-                
+                Logger.Error("[JavaLauncher]", "Copying assets... (fix for 1.6 snapshots)");
+
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\");
+
+                foreach (string dirPath in Directory.GetDirectories($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", "*", SearchOption.AllDirectories))
+                {
+                    Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"));
+                }
+
+                foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", "*.*", SearchOption.AllDirectories))
+                {
+                    File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"), true);
+                }
+
+                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\pack.mcmeta");
+                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\READ_ME_I_AM_VERY_IMPORTANT.txt");
+                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\sounds.json");
             }
 
 
@@ -207,7 +223,7 @@ namespace MCLauncher.classes
 
             string[] defRes = dj.resolution.Split(' ');
 
-            if(vi.assets == null)
+            if (vi.assets == null)
             {
                 vi.assets = new VersionInfoAssets();
                 vi.assets.name = "";
@@ -269,7 +285,7 @@ namespace MCLauncher.classes
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
-            proc.Exited += OnProcessExited;
+            proc.Exited += (sender, e) => OnProcessExited(sender, e, profileName, vi.assetsVirt);
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -353,10 +369,13 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
-        private void OnProcessExited(object sender, EventArgs e)
+        private void OnProcessExited(object sender, EventArgs e, string profileName, bool shouldDelete)
         {
             Discord.ChangeMessage($"Idling");
             Globals.running.Remove(runID);
+            if (shouldDelete)
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"))
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\", true);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
