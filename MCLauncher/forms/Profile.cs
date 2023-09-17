@@ -111,7 +111,7 @@ namespace MCLauncher.forms
 
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
-                saveBtn.Text = "Create profile";
+                saveBtn.Text = Strings.createProfile;
             }
             else if (profMode == "def")
             {

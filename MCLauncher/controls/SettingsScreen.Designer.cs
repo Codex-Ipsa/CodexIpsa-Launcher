@@ -295,7 +295,7 @@
         public System.Windows.Forms.Button btnCheckUpdates;
         public System.Windows.Forms.Label lblBranch;
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
-        private System.Windows.Forms.Button btnGetJava8;
-        private System.Windows.Forms.Button btnGetJava17;
+        public System.Windows.Forms.Button btnGetJava8;
+        public System.Windows.Forms.Button btnGetJava17;
     }
 }
