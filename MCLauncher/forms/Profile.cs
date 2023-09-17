@@ -387,19 +387,16 @@ namespace MCLauncher.forms
                 Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
 
                 //load modloaders
-                try
+                if(listView1.FocusedItem != null)
                 {
-                    Console.WriteLine(Globals.Modloaders.Replace("{ver}", listView1.SelectedItems[0].Text));
-                    string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
-                    temp = temp.Replace(" ", "");
-
-                    Console.WriteLine(Globals.Modloaders.Replace("{ver}", temp));
-                    Stream strm = Globals.client.OpenRead(Globals.Modloaders.Replace("{ver}", temp));
-                    btnForge.Enabled = true;
-                }
-                catch (WebException we)
-                {
-                    btnForge.Enabled= false;
+                    if (vj[listView1.FocusedItem.Index].forge)
+                    {
+                        btnForge.Enabled = true;
+                    }
+                    else
+                    {
+                        btnForge.Enabled = false;
+                    }
                 }
             }
         }
@@ -982,6 +979,7 @@ namespace MCLauncher.forms
         public string alt { get; set; }
         public string type { get; set; }
         public DateTime released { get; set; }
+        public bool forge { get; set; }
     }
 
     public class ProfileInfo
