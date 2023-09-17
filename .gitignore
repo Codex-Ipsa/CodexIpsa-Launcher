@@ -1,3 +1,4 @@
 /MCLauncher/bin
 /MCLauncher/obj
 /.vs
+/MCLauncher/classes/APIKeysLocal.cs
