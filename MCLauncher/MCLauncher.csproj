@@ -82,7 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssetIndex.cs" />
+    <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\DownloadJava.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
@@ -99,28 +99,28 @@
     <Compile Include="controls\InstanceScreen.Designer.cs">
       <DependentUpon>InstanceScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="controls\JavaScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\JavaScreen.Designer.cs">
+      <DependentUpon>JavaScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="controls\SettingsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteWarn.cs">
+    <Compile Include="forms\DownloadProgress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteWarn.Designer.cs">
-      <DependentUpon>DeleteWarn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DownloadProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DownloadProgress.Designer.cs">
+    <Compile Include="forms\DownloadProgress.Designer.cs">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="EnterIp.cs">
+    <Compile Include="forms\EnterIp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EnterIp.Designer.cs">
+    <Compile Include="forms\EnterIp.Designer.cs">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\AssetsDownloader.cs">
@@ -128,6 +128,12 @@
     </Compile>
     <Compile Include="forms\AssetsDownloader.Designer.cs">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ModInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ModInfo.Designer.cs">
+      <DependentUpon>ModInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\ModLoaders.cs">
       <SubType>Form</SubType>
@@ -147,52 +153,40 @@
     <Compile Include="forms\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
-    <Compile Include="JavaModHelper.cs" />
+    <Compile Include="classes\JavaModHelper.cs" />
     <Compile Include="forms\ModsRepo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ModsRepo.Designer.cs">
       <DependentUpon>ModsRepo.cs</DependentUpon>
     </Compile>
-    <Compile Include="NoJava.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NoJava.Designer.cs">
-      <DependentUpon>NoJava.cs</DependentUpon>
-    </Compile>
     <Compile Include="classes\SettingData.cs" />
-    <Compile Include="Strings.cs" />
+    <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\HomeScreen.Designer.cs">
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="jsonObject.cs" />
-    <Compile Include="Globals.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="classes\jsonObject.cs" />
+    <Compile Include="classes\Globals.cs" />
+    <Compile Include="classes\Logger.cs" />
     <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MSAuth.cs">
+    <Compile Include="forms\MSAuth.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MSAuth.Designer.cs">
+    <Compile Include="forms\MSAuth.Designer.cs">
       <DependentUpon>MSAuth.cs</DependentUpon>
     </Compile>
-    <Compile Include="OfflineMode.cs">
+    <Compile Include="forms\Update.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OfflineMode.Designer.cs">
-      <DependentUpon>OfflineMode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Update.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Update.Designer.cs">
+    <Compile Include="forms\Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -203,20 +197,23 @@
     <EmbeddedResource Include="controls\InstanceScreen.resx">
       <DependentUpon>InstanceScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="controls\JavaScreen.resx">
+      <DependentUpon>JavaScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteWarn.resx">
-      <DependentUpon>DeleteWarn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DownloadProgress.resx">
+    <EmbeddedResource Include="forms\DownloadProgress.resx">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EnterIp.resx">
+    <EmbeddedResource Include="forms\EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\AssetsDownloader.resx">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ModInfo.resx">
+      <DependentUpon>ModInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModLoaders.resx">
       <DependentUpon>ModLoaders.cs</DependentUpon>
@@ -236,21 +233,15 @@
     <EmbeddedResource Include="forms\ModsRepo.resx">
       <DependentUpon>ModsRepo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MSAuth.resx">
+    <EmbeddedResource Include="forms\MSAuth.resx">
       <DependentUpon>MSAuth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NoJava.resx">
-      <DependentUpon>NoJava.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineMode.resx">
-      <DependentUpon>OfflineMode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Update.resx">
+    <EmbeddedResource Include="forms\Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

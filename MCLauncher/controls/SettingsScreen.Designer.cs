@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbDefaults = new System.Windows.Forms.GroupBox();
+            this.btnGetJava17 = new System.Windows.Forms.Button();
+            this.btnGetJava8 = new System.Windows.Forms.Button();
             this.lblJre17 = new System.Windows.Forms.Label();
             this.btnJre17 = new System.Windows.Forms.Button();
             this.cmbJre17 = new System.Windows.Forms.ComboBox();
@@ -57,14 +59,16 @@
             this.pnlCenter.Controls.Add(this.grbDefaults);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
-            this.pnlCenter.Location = new System.Drawing.Point(169, 70);
+            this.pnlCenter.Location = new System.Drawing.Point(171, 55);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(446, 247);
+            this.pnlCenter.Size = new System.Drawing.Size(446, 274);
             this.pnlCenter.TabIndex = 24;
             // 
             // grbDefaults
             // 
             this.grbDefaults.BackColor = System.Drawing.Color.Transparent;
+            this.grbDefaults.Controls.Add(this.btnGetJava17);
+            this.grbDefaults.Controls.Add(this.btnGetJava8);
             this.grbDefaults.Controls.Add(this.lblJre17);
             this.grbDefaults.Controls.Add(this.btnJre17);
             this.grbDefaults.Controls.Add(this.cmbJre17);
@@ -74,10 +78,32 @@
             this.grbDefaults.ForeColor = System.Drawing.Color.White;
             this.grbDefaults.Location = new System.Drawing.Point(0, 172);
             this.grbDefaults.Name = "grbDefaults";
-            this.grbDefaults.Size = new System.Drawing.Size(446, 75);
+            this.grbDefaults.Size = new System.Drawing.Size(446, 99);
             this.grbDefaults.TabIndex = 21;
             this.grbDefaults.TabStop = false;
             this.grbDefaults.Text = "grb.defaults";
+            // 
+            // btnGetJava17
+            // 
+            this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava17.Location = new System.Drawing.Point(236, 70);
+            this.btnGetJava17.Name = "btnGetJava17";
+            this.btnGetJava17.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava17.TabIndex = 29;
+            this.btnGetJava17.Text = "Install Java 17 ↓";
+            this.btnGetJava17.UseVisualStyleBackColor = true;
+            this.btnGetJava17.Click += new System.EventHandler(this.btnGetJava17_Click);
+            // 
+            // btnGetJava8
+            // 
+            this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 70);
+            this.btnGetJava8.Name = "btnGetJava8";
+            this.btnGetJava8.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava8.TabIndex = 28;
+            this.btnGetJava8.Text = "Install Java 8 ↓";
+            this.btnGetJava8.UseVisualStyleBackColor = true;
+            this.btnGetJava8.Click += new System.EventHandler(this.btnGetJava8_Click);
             // 
             // lblJre17
             // 
@@ -107,6 +133,7 @@
             this.cmbJre17.Name = "cmbJre17";
             this.cmbJre17.Size = new System.Drawing.Size(330, 21);
             this.cmbJre17.TabIndex = 25;
+            this.cmbJre17.TextUpdate += new System.EventHandler(this.cmbJre17_TextUpdate);
             // 
             // btnJre8
             // 
@@ -136,6 +163,7 @@
             this.cmbJre8.Name = "cmbJre8";
             this.cmbJre8.Size = new System.Drawing.Size(330, 21);
             this.cmbJre8.TabIndex = 0;
+            this.cmbJre8.TextUpdate += new System.EventHandler(this.cmbJre8_TextUpdate);
             // 
             // grbLauncher
             // 
@@ -267,5 +295,7 @@
         public System.Windows.Forms.Button btnCheckUpdates;
         public System.Windows.Forms.Label lblBranch;
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
+        public System.Windows.Forms.Button btnGetJava8;
+        public System.Windows.Forms.Button btnGetJava17;
     }
 }

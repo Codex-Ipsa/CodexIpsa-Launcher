@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MCLauncher
+namespace MCLauncher.controls
 {
-    public partial class NoJava : Form
+    public partial class JavaScreen : UserControl
     {
-        public NoJava()
+        public JavaScreen()
         {
             InitializeComponent();
         }

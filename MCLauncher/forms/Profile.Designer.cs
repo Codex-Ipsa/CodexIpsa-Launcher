@@ -84,6 +84,8 @@
             this.xboxPanel = new System.Windows.Forms.Panel();
             this.grbXboxGame = new System.Windows.Forms.GroupBox();
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
+            this.xboxNameBox = new System.Windows.Forms.TextBox();
+            this.lblXboxProfName = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnRepos = new System.Windows.Forms.Button();
             this.btnOpenDotMc = new System.Windows.Forms.Button();
@@ -129,9 +131,9 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(711, 363);
+            this.saveBtn.Location = new System.Drawing.Point(693, 363);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.Size = new System.Drawing.Size(91, 23);
             this.saveBtn.TabIndex = 36;
             this.saveBtn.Text = "btn.Save";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -143,6 +145,7 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(333, 20);
             this.nameBox.TabIndex = 12;
+            this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // lblProfName
             // 
@@ -481,7 +484,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(614, 363);
+            this.openBtn.Location = new System.Drawing.Point(499, 363);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(91, 23);
             this.openBtn.TabIndex = 35;
@@ -491,12 +494,13 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(528, 363);
+            this.deleteBtn.Location = new System.Drawing.Point(596, 363);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(80, 23);
+            this.deleteBtn.Size = new System.Drawing.Size(91, 23);
             this.deleteBtn.TabIndex = 34;
             this.deleteBtn.Text = "btn.Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // checkPreClassic
             // 
@@ -733,9 +737,11 @@
             // grbXboxGame
             // 
             this.grbXboxGame.Controls.Add(this.chkXboxDemo);
+            this.grbXboxGame.Controls.Add(this.xboxNameBox);
+            this.grbXboxGame.Controls.Add(this.lblXboxProfName);
             this.grbXboxGame.Location = new System.Drawing.Point(5, 3);
             this.grbXboxGame.Name = "grbXboxGame";
-            this.grbXboxGame.Size = new System.Drawing.Size(439, 46);
+            this.grbXboxGame.Size = new System.Drawing.Size(439, 76);
             this.grbXboxGame.TabIndex = 11;
             this.grbXboxGame.TabStop = false;
             this.grbXboxGame.Text = "grb.Game";
@@ -743,12 +749,29 @@
             // chkXboxDemo
             // 
             this.chkXboxDemo.AutoSize = true;
-            this.chkXboxDemo.Location = new System.Drawing.Point(9, 19);
+            this.chkXboxDemo.Location = new System.Drawing.Point(9, 47);
             this.chkXboxDemo.Name = "chkXboxDemo";
             this.chkXboxDemo.Size = new System.Drawing.Size(75, 17);
             this.chkXboxDemo.TabIndex = 21;
             this.chkXboxDemo.Text = "chk.Demo";
             this.chkXboxDemo.UseVisualStyleBackColor = true;
+            // 
+            // xboxNameBox
+            // 
+            this.xboxNameBox.Location = new System.Drawing.Point(100, 19);
+            this.xboxNameBox.Name = "xboxNameBox";
+            this.xboxNameBox.Size = new System.Drawing.Size(333, 20);
+            this.xboxNameBox.TabIndex = 14;
+            this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
+            // 
+            // lblXboxProfName
+            // 
+            this.lblXboxProfName.AutoSize = true;
+            this.lblXboxProfName.Location = new System.Drawing.Point(6, 24);
+            this.lblXboxProfName.Name = "lblXboxProfName";
+            this.lblXboxProfName.Size = new System.Drawing.Size(67, 13);
+            this.lblXboxProfName.TabIndex = 13;
+            this.lblXboxProfName.Text = "lbl.ProfName";
             // 
             // tabPage2
             // 
@@ -1006,5 +1029,7 @@
         private System.Windows.Forms.CheckBox chkAssetIndex;
         private System.Windows.Forms.Button assetIndexBtn;
         private System.Windows.Forms.TextBox assetIndexBox;
+        private System.Windows.Forms.TextBox xboxNameBox;
+        private System.Windows.Forms.Label lblXboxProfName;
     }
 }

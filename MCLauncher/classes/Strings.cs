@@ -128,6 +128,13 @@ namespace MCLauncher
         public static string wrnRunning = "Profile [{profileName}] is already running.\nDo you wish to launch it again?\nThis may lead to unwanted behaviour!";
         public static string localOrUrl = "Can be either a local path or a URL";
 
+        public static string installJava = "Install Java {ver} ↓";
+        public static string createProfile = "Create profile";
+        public static string javaUpdate = "Do you wish to update your Java {vers} installation?";
+        public static string javaRedownload = "You already have the latest Java {ver} version installed. Do you wish to redownload?";
+        public static string javaSetDefault = "Do you wish to set this Java install as the default one for Java {vers.major}?";
+        public static string noUpdate = "No new update is available.";
+
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
@@ -242,6 +249,13 @@ namespace MCLauncher
                 wrnRunning = str.wrnRunning;
                 localOrUrl = str.localOrUrl;
 
+                installJava = str.installJava;
+                createProfile = str.createProfile;
+                javaUpdate = str.javaUpdate;
+                javaRedownload = str.javaRedownload;
+                javaSetDefault = str.javaSetDefault;
+                noUpdate = str.noUpdate;
+
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntAbout;
@@ -271,6 +285,8 @@ namespace MCLauncher
                 SettingsScreen.InstanceSetting.btnCheckUpdates.Text = btnCheckUpdates;
                 SettingsScreen.InstanceSetting.chkDiscordRpc.Text = chkDiscordRpc;
                 SettingsScreen.InstanceSetting.grbDefaults.Text = grbDefaults;
+                SettingsScreen.InstanceSetting.btnGetJava8.Text = installJava.Replace("{ver}", "8");
+                SettingsScreen.InstanceSetting.btnGetJava17.Text = installJava.Replace("{ver}", "17");
 
                 CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
                 CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
@@ -383,6 +399,13 @@ namespace MCLauncher
             public string lblNotReady { get; set; }
             public string wrnRunning { get; set; }
             public string localOrUrl { get; set; }
+
+            public string installJava { get; set; }
+            public string createProfile { get; set; }
+            public string javaUpdate { get; set; }
+            public string javaRedownload { get; set; }
+            public string javaSetDefault { get; set; }
+            public string noUpdate { get; set; }
         }
     }
 }
