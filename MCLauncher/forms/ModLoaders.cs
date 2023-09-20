@@ -36,18 +36,18 @@ namespace MCLauncher.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(mj[0].items[listView1.SelectedItems[0].Index].id);
+            ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
+            Console.WriteLine(item.id);
 
-            DownloadProgress.url = mj[0].items[listView1.SelectedItems[0].Index].url;
-            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mj[0].items[listView1.SelectedItems[0].Index].id}.zip";
+            DownloadProgress.url = item.url;
+            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}.zip";
             DownloadProgress dp = new DownloadProgress();
             dp.ShowDialog();
 
-            string version = mj[0].items[listView1.SelectedItems[0].Index].id.Substring(mj[0].items[listView1.SelectedItems[0].Index].id.IndexOf('-') + 1);
-            Profile.modListWorker("add", "Forge", version, $"{mj[0].items[listView1.SelectedItems[0].Index].id}.zip", mj[0].items[listView1.SelectedItems[0].Index].type, mj[0].items[listView1.SelectedItems[0].Index].json, false);
+            string version = item.id.Substring(item.id.IndexOf('-') + 1);
+            Profile.modListWorker("add", "Forge", version, $"{item.id}.zip", item.type, item.json, false);
             Profile.reloadModsList();
-            //mj[0].items[listView1.SelectedItems[0].Index].id
-            //TODO
+            //WIP
         }
     }
 
