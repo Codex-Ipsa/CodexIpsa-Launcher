@@ -19,6 +19,12 @@ namespace MCLauncher.forms
         public ModLoaders(string url)
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
+            listView1.Columns[0].Width = 100;
+            listView1.Columns[1].Width = -2;
 
             string jsonFile = Globals.client.DownloadString(url);
             mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
@@ -28,7 +34,7 @@ namespace MCLauncher.forms
                 {
                     foreach(ModLoaderItem item in m.items)
                     {
-                        listView1.Items.Add(new ListViewItem(new[] { item.id, item.released }));
+                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-1.5.2-", ""), item.released }));
                     }
                 }
             }

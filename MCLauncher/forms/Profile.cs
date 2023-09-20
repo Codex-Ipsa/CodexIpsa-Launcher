@@ -387,16 +387,13 @@ namespace MCLauncher.forms
                 Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
 
                 //load modloaders
-                if(listView1.FocusedItem != null)
+                if (vj[listView1.SelectedItems[0].Index].forge)
                 {
-                    if (vj[listView1.FocusedItem.Index].forge)
-                    {
-                        btnForge.Enabled = true;
-                    }
-                    else
-                    {
-                        btnForge.Enabled = false;
-                    }
+                    btnForge.Enabled = true;
+                }
+                else
+                {
+                    btnForge.Enabled = false;
                 }
             }
         }
