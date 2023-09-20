@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -286,31 +287,20 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
+            //select latest loaded version
             if (listView1.Items.Count > 0)
             {
-                var item = listView1.FindItemWithText(version, true, 0, false);
-
-                if (item != null)
+                //Console.WriteLine($"CHECKING FOR \"{version}\"");
+                for(int i = listView1.Items.Count - 1; i >= 0; i--)
                 {
-                    listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
-                    listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                    saveBtn.Enabled = true;
-                }
-                else if (listView1.Items.Count == 0)
-                    saveBtn.Enabled = false;
-                else
-                {
-                    item = listView1.FindItemWithText(version, true, 0);
-                    if (item != null)
+                    string ver = Regex.Replace(listView1.Items[i].Text, @"\(.*\)", "");
+                    ver = ver.Replace(" ", "");
+                    //Console.WriteLine($"\"{ver}\"");
+                    if (ver == version)
                     {
-                        saveBtn.Enabled = true;
-                        listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
-                        listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                    }
-                    else
-                    {
-                        listView1.Items[0].Selected = true;
-                        listView1.EnsureVisible(listView1.Items[0].Index);
+                        listView1.Items[i].Selected = true;
+                        listView1.TopItem = listView1.Items[i];
+                        break;
                     }
                 }
             }
