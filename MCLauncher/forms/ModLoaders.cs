@@ -34,7 +34,7 @@ namespace MCLauncher.forms
                 {
                     foreach(ModLoaderItem item in m.items)
                     {
-                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-1.5.2-", ""), item.released }));
+                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released }));
                     }
                 }
             }
@@ -53,7 +53,8 @@ namespace MCLauncher.forms
             string version = item.id.Substring(item.id.IndexOf('-') + 1);
             Profile.modListWorker("add", "Forge", version, $"{item.id}.zip", item.type, item.json, false);
             Profile.reloadModsList();
-            //WIP
+
+            this.Close();
         }
     }
 
