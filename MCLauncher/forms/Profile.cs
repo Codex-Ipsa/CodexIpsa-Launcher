@@ -955,7 +955,7 @@ namespace MCLauncher.forms
         {
             string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
             temp = temp.Replace(" ", "");
-            ModLoaders ml = new ModLoaders(Globals.Modloaders.Replace("{ver}", temp));
+            ModLoaders ml = new ModLoaders(temp, "forge");
             ml.ShowDialog();
         }
     }

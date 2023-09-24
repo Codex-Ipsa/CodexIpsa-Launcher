@@ -16,7 +16,7 @@ namespace MCLauncher.forms
     {
         public List<ModLoaderManifest> mj;
 
-        public ModLoaders(string url)
+        public ModLoaders(string version, string loader)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -26,15 +26,15 @@ namespace MCLauncher.forms
             listView1.Columns[0].Width = 100;
             listView1.Columns[1].Width = -2;
 
-            string jsonFile = Globals.client.DownloadString(url);
+            string jsonFile = Globals.client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
             mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
             foreach(ModLoaderManifest m in mj)
             {
-                if(m.name == "forge")
+                if(m.name == "forge" && loader == "forge")
                 {
                     foreach(ModLoaderItem item in m.items)
                     {
-                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released }));
+                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
                     }
                 }
             }
