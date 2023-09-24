@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
+using System.Web;
 
 namespace MCLauncher
 {
@@ -126,15 +127,13 @@ namespace MCLauncher
                 Logger.Info("[JavaModHelper]", "count: " + mj.items.Count());
 
                 string toHash = "";
-                var md5 = MD5.Create();
                 if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vi.version}.jar") && clientPath == $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar")
                 {
                     Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{vi.version}.jar");
                 }
-                var stream = File.OpenRead(clientPath);
 
-                var hash = md5.ComputeHash(stream);
-                toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+
+                toHash += MD5File(clientPath)  + ";";
 
                 foreach (ModJsonEntry ent in mj.items)
                 {
@@ -147,21 +146,13 @@ namespace MCLauncher
 
                     if (ent.type != "cusjar")
                     {
-                        stream = File.OpenRead($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.file}");
-                        hash = md5.ComputeHash(stream);
-                        toHash += BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant() + ";";
+                        toHash += MD5File($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{ent.file}") + ";";
                     }
                 }
 
                 toHash += "CodexIpsa";
                 Logger.Info("[JavaModHelper]", $"ToHash: {toHash}");
-                string patchHash = "";
-
-
-                byte[] inputBytes = Encoding.ASCII.GetBytes(toHash);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-                patchHash = BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
+                string patchHash = MD5String(toHash);
                 Logger.Info("[JavaModHelper]", $"PatchHash: {patchHash}");
 
                 if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
@@ -214,6 +205,29 @@ namespace MCLauncher
                 {
                     JavaLauncher.modClientPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar";
                 }
+            }
+        }
+
+        static string MD5File(string filename)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filename))
+                {
+                    var hash = md5.ComputeHash(stream);
+                    return BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                }
+            }
+        }
+
+        static string MD5String(string input)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
             }
         }
 
