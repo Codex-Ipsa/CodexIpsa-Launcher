@@ -20,10 +20,10 @@ namespace MCLauncher
         public static string GetPath(string instName, string manifestPath)
         {
             //Manifests
-            string clientJson = File.ReadAllText(manifestPath);
-            VersionInfo clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
             string modsJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
             ModJson modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
+            string clientJson = File.ReadAllText(manifestPath);
+            VersionInfo clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
 
             //Speeds up the time
             if (modsManifest.items.Count() < 1)
@@ -33,19 +33,24 @@ namespace MCLauncher
 
             foreach (ModJsonEntry entry in modsManifest.items)
             {
+                //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {
                     JavaLauncher.modName = entry.name;
                     JavaLauncher.modVersion = entry.version;
                     return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
                 }
+                //jarmods extract, then zip up and return that
                 else if (entry.type == "jarmod")
                 {
 
                 }
+                //for jsons just load the new json in JavaLauncher, used by modloaders
                 else if (entry.type == "json")
                 {
-
+                    clientJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}");
+                    clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+                    JavaLauncher.manifestPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
                 }
             }
 
