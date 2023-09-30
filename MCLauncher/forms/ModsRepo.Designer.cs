@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModsRepo));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ciPage = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -51,7 +50,6 @@
             // 
             // ciPage
             // 
-            this.ciPage.Controls.Add(this.checkBox1);
             this.ciPage.Controls.Add(this.listBox2);
             this.ciPage.Controls.Add(this.listBox1);
             this.ciPage.Controls.Add(this.button1);
@@ -62,17 +60,6 @@
             this.ciPage.TabIndex = 0;
             this.ciPage.Text = "Codex-Ipsa";
             this.ciPage.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(8, 259);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Always update";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // listBox2
             // 
@@ -114,7 +101,6 @@
             this.Text = "Mod repositories";
             this.tabControl1.ResumeLayout(false);
             this.ciPage.ResumeLayout(false);
-            this.ciPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -126,6 +112,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

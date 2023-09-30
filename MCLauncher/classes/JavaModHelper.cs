@@ -45,7 +45,7 @@ namespace MCLauncher
                 {
                     JavaLauncher.modName = entry.name;
                     JavaLauncher.modVersion = entry.version;
-                    return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
+                    return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}"; //this is temporary, because mods for mods that are cujars won't work
                 }
                 //jarmods extract, then zip up and return that
                 else if (entry.type == "jarmod")
@@ -65,7 +65,6 @@ namespace MCLauncher
                     ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}", tempDir);
 
                     toHash += MD5File($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}") + ";";
-                    //throw new NotImplementedException();
                 }
                 //for jsons just load the new json in JavaLauncher, used by modloaders
                 else if (entry.type == "json")
@@ -86,10 +85,6 @@ namespace MCLauncher
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();
                 }
-                Console.WriteLine(clientManifest.version);
-                Console.WriteLine(clientManifest.version);
-                Console.WriteLine(clientManifest.version);
-                Console.WriteLine(clientManifest.version);
                 toHash = MD5File($"{Globals.dataPath}\\versions\\java\\{clientManifest.version}.jar") + ";" + toHash;
                 toHash += "CodexIpsa";
                 Logger.Info("[JavaModHelper]", $"ToHash: {toHash}");
