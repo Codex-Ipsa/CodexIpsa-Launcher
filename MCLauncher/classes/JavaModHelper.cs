@@ -16,6 +16,43 @@ namespace MCLauncher
 {
     internal class JavaModHelper
     {
+
+        public static string GetPath(string instName, string manifestPath)
+        {
+            //Manifests
+            string clientJson = File.ReadAllText(manifestPath);
+            VersionInfo clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+            string modsJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
+            ModJson modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
+
+            //Speeds up the time
+            if (modsManifest.items.Count() < 1)
+            {
+                return "";
+            }
+
+            foreach (ModJsonEntry entry in modsManifest.items)
+            {
+                if (entry.type == "cusjar")
+                {
+                    JavaLauncher.modName = entry.name;
+                    JavaLauncher.modVersion = entry.version;
+                    return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
+                }
+                else if (entry.type == "jarmod")
+                {
+
+                }
+                else if (entry.type == "json")
+                {
+
+                }
+            }
+
+            //temp
+            return "";
+        }
+
         public static string tempName = "";
 
         public static void Start(string instName, string manifestPath)
@@ -25,9 +62,8 @@ namespace MCLauncher
             //now nobody does
 
             //Note 29.7.2023 - this needs to be rewritten lmao
-
-            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
             string clientJson = File.ReadAllText(manifestPath);
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java");
             string indexPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
                 File.WriteAllText(indexPath, $"{{\"data\": 1, \"items\": []}}");
@@ -48,6 +84,8 @@ namespace MCLauncher
             jsonList.Clear();
             List<string> cusJarList = new List<string>();
             cusJarList.Clear();
+            List<string> jsonUrlList = new List<string>();
+            jsonUrlList.Clear();
 
             foreach (ModJsonEntry ent in mj.items)
             {

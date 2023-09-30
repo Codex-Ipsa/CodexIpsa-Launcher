@@ -37,6 +37,20 @@ namespace MCLauncher.forms
                         listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
                     }
                 }
+                else if (m.name == "fabric" && loader == "fabric")
+                {
+                    //foreach (ModLoaderItem item in m.items)
+                    //{
+                    //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                    //}
+                }
+                else if (m.name == "modloader" && loader == "modloader")
+                {
+                    //foreach (ModLoaderItem item in m.items)
+                    //{
+                    //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                    //}
+                }
             }
         }
 
@@ -45,13 +59,18 @@ namespace MCLauncher.forms
             ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
             Console.WriteLine(item.id);
 
+            string ext = ".zip";
+            if (item.type == "json")
+                ext = ".json";
+
+
             DownloadProgress.url = item.url;
-            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}.zip";
+            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
             DownloadProgress dp = new DownloadProgress();
             dp.ShowDialog();
 
             string version = item.id.Substring(item.id.IndexOf('-') + 1);
-            Profile.modListWorker("add", "Forge", version, $"{item.id}.zip", item.type, item.json, false);
+            Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json, false);
             Profile.reloadModsList();
 
             this.Close();
