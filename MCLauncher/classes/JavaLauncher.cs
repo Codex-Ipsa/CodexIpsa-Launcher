@@ -163,8 +163,6 @@ namespace MCLauncher.classes
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\sounds.json");
             }
 
-
-
             string jars = "";
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar") && modClientPath == "")
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
