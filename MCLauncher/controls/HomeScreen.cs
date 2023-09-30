@@ -212,7 +212,7 @@ namespace MCLauncher
                 double x = 2;
                 try
                 {
-                    string json = client.DownloadString(Globals.changelogJson);
+                    string json = client.DownloadString(Globals.changelogManifest);
                     List<changelogJson> data = JsonConvert.DeserializeObject<List<changelogJson>>(json);
 
                     foreach (var vers in data)
