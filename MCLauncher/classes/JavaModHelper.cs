@@ -54,7 +54,7 @@ namespace MCLauncher
 
                 if (ent.update == true)
                 {
-                    string modManifest = Globals.client.DownloadString(Globals.CIModsJson);
+                    string modManifest = Globals.client.DownloadString(Globals.ModRepoManifest);
                     List<RepoJson> repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(modManifest);
                     foreach (var entry in repoJsons)
                     {

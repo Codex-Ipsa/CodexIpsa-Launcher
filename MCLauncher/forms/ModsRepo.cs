@@ -24,7 +24,7 @@ namespace MCLauncher
         {
             InitializeComponent();
 
-            string json = Globals.client.DownloadString(Globals.CIModsJson);
+            string json = Globals.client.DownloadString(Globals.ModRepoManifest);
             repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(json);
 
             int i = 0;
