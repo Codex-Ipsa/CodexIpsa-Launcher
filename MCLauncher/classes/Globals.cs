@@ -18,7 +18,7 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.3.0-dev"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //dev //omega13 //stable //dev-instances //experimental
-        public static string verCurrent = "0.2.1"; //Change this on release
+        public static string verCurrent = "0.2.2"; //Change this on release
         public static string verDisplay = "0.3.0-forgedev"; //Change this on release
 
         //Paths

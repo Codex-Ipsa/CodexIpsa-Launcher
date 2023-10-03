@@ -52,6 +52,9 @@ namespace MCLauncher.forms
                     //}
                 }
             }
+
+            listView1.Select();
+            listView1.Items[0].Selected = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
