@@ -385,6 +385,15 @@ namespace MCLauncher.forms
                 {
                     btnForge.Enabled = false;
                 }
+
+                if (vj[listView1.SelectedItems[0].Index].fabric)
+                {
+                    btnFabric.Enabled = true;
+                }
+                else
+                {
+                    btnFabric.Enabled = false;
+                }
             }
         }
 
@@ -975,6 +984,7 @@ namespace MCLauncher.forms
         public string type { get; set; }
         public DateTime released { get; set; }
         public bool forge { get; set; }
+        public bool fabric { get; set; }
     }
 
     public class ProfileInfo

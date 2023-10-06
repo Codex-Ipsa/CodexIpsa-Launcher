@@ -5,17 +5,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
     public partial class ModLoaders : Form
     {
         public List<ModLoaderManifest> mj;
+        public string loaderType = "";
+        public string gameVersion = "";
 
         public ModLoaders(string version, string loader)
         {
@@ -26,6 +30,9 @@ namespace MCLauncher.forms
 
             listView1.Columns[0].Width = 100;
             listView1.Columns[1].Width = -2;
+
+            loaderType = loader;
+            gameVersion = version;
 
             if (loader == "fabric")
             {
@@ -66,22 +73,33 @@ namespace MCLauncher.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
-            Console.WriteLine(item.id);
+            if(loaderType == "fabric")
+            {
+                string newJson = FabricParser.versionJson(gameVersion, listView1.SelectedItems[0].Text);
 
-            string ext = ".zip";
-            if (item.type == "json")
-                ext = ".json";
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", newJson);
 
+                Profile.modListWorker("add", "Fabric", $"{gameVersion}-{listView1.SelectedItems[0].Text}", $"fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", "json", "", false);
+                Profile.reloadModsList();
+            }
+            else if(loaderType == "forge")
+            {
+                ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
+                Console.WriteLine(item.id);
 
-            DownloadProgress.url = item.url;
-            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
-            DownloadProgress dp = new DownloadProgress();
-            dp.ShowDialog();
+                string ext = ".zip";
+                if (item.type == "json")
+                    ext = ".json";
 
-            string version = item.id.Substring(item.id.IndexOf('-') + 1);
-            Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json, false);
-            Profile.reloadModsList();
+                DownloadProgress.url = item.url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
+                DownloadProgress dp = new DownloadProgress();
+                dp.ShowDialog();
+
+                string version = item.id.Substring(item.id.IndexOf('-') + 1);
+                Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json, false);
+                Profile.reloadModsList();
+            }
 
             this.Close();
         }

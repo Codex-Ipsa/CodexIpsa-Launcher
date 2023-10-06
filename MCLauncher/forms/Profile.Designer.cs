@@ -826,6 +826,7 @@
             // 
             // btnFabric
             // 
+            this.btnFabric.Enabled = false;
             this.btnFabric.Location = new System.Drawing.Point(667, 142);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);

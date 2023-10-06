@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -30,11 +31,72 @@ namespace MCLauncher.classes.ipsajson
             return list;
         }
 
+        public static string versionJson(string gameVer, string loaderVer)
+        {
+            WebClient client = new WebClient();
+
+            string versionInfo = client.DownloadString($"https://meta.fabricmc.net/v2/versions/loader/{gameVer}/{loaderVer}/profile/json");
+            FabricManifest versionManifest = JsonConvert.DeserializeObject<FabricManifest>(versionInfo);
+
+            string ipsaJson = client.DownloadString($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/data/{versionManifest.inheritsFrom}.json");
+            IpsaJson ipsaManifest = JsonConvert.DeserializeObject<IpsaJson>(ipsaJson);
+
+            ipsaManifest.classpath = versionManifest.mainClass;
+            ipsaManifest.game = "Fabric";
+            ipsaManifest.version = $"{gameVer}-{loaderVer}";
+
+            List<IpsaJsonLibraries> list = ipsaManifest.libraries.ToList();
+            foreach (FabricManifestLibrary lib in versionManifest.libraries)
+            {
+                string[] names = lib.name.Split(':');
+                string[] paths = names[0].Split('.');
+
+                string fullUrl = lib.url;
+                foreach (string path in paths)
+                {
+                    fullUrl += path + "/";
+                }
+
+                fullUrl += $"{names[1]}/{names[2]}/{names[1]}-{names[2]}.jar";
+
+                string libname = $"{names[1]}-{names[2]}";
+
+                //Console.WriteLine(fullUrl);
+
+                IpsaJsonLibraries newOne = new IpsaJsonLibraries();
+                newOne.name = libname;
+                newOne.url = fullUrl;
+                newOne.size = 0;
+                newOne.extract = false;
+
+                list.Add(newOne);
+            }
+
+            ipsaManifest.libraries = list.ToArray();
+            string json = JsonConvert.SerializeObject(ipsaManifest);
+
+            return json;
+        }
+
     }
 
     public class FabricGame
     {
         public string version { get; set; }
         public bool stable { get; set; }
+    }
+
+    public class FabricManifest
+    {
+        public string id { get; set; }
+        public string inheritsFrom { get; set; }
+        public string releaseTime { get; set; }
+        public string mainClass { get; set; }
+        public FabricManifestLibrary[] libraries { get; set; }
+    }
+    public class FabricManifestLibrary
+    {
+        public string name { get; set; }
+        public string url { get; set; }
     }
 }
