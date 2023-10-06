@@ -87,6 +87,7 @@
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\DownloadJava.cs" />
+    <Compile Include="classes\ipsajson\FabricParser.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">

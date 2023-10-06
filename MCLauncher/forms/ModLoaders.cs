@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.classes.ipsajson;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,30 +27,36 @@ namespace MCLauncher.forms
             listView1.Columns[0].Width = 100;
             listView1.Columns[1].Width = -2;
 
-            string jsonFile = Globals.client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
-            mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
-            foreach(ModLoaderManifest m in mj)
+            if (loader == "fabric")
             {
-                if(m.name == "forge" && loader == "forge")
+                List<string> versions = FabricParser.GetList();
+                foreach (string ver in versions)
+                    listView1.Items.Add(ver);
+                //foreach (ModLoaderItem item in m.items)
+                //{
+                //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                //}
+            }
+            else
+            {
+                string jsonFile = Globals.client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
+                mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
+                foreach (ModLoaderManifest m in mj)
                 {
-                    foreach(ModLoaderItem item in m.items)
+                    if (m.name == "forge" && loader == "forge")
                     {
-                        listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                        foreach (ModLoaderItem item in m.items)
+                        {
+                            listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                        }
                     }
-                }
-                else if (m.name == "fabric" && loader == "fabric")
-                {
-                    //foreach (ModLoaderItem item in m.items)
-                    //{
-                    //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                    //}
-                }
-                else if (m.name == "modloader" && loader == "modloader")
-                {
-                    //foreach (ModLoaderItem item in m.items)
-                    //{
-                    //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                    //}
+                    else if (m.name == "modloader" && loader == "modloader")
+                    {
+                        //foreach (ModLoaderItem item in m.items)
+                        //{
+                        //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                        //}
+                    }
                 }
             }
 

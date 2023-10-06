@@ -826,13 +826,13 @@
             // 
             // btnFabric
             // 
-            this.btnFabric.Enabled = false;
             this.btnFabric.Location = new System.Drawing.Point(667, 142);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
             this.btnFabric.TabIndex = 18;
             this.btnFabric.Text = "btn.Fabric";
             this.btnFabric.UseVisualStyleBackColor = true;
+            this.btnFabric.Click += new System.EventHandler(this.btnFabric_Click);
             // 
             // btnMoveDown
             // 
