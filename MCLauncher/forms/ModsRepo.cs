@@ -18,6 +18,8 @@ namespace MCLauncher
 {
     public partial class ModsRepo : Form
     {
+        //TODO: make this use listviews instead you fucking goof
+        //current status: crashes LMFAO
         List<RepoJson> repoJsons = new List<RepoJson>();
 
         public ModsRepo()
@@ -30,7 +32,7 @@ namespace MCLauncher
             int i = 0;
             foreach (var r in repoJsons)
             {
-                listBox1.Items.Add(r.name);
+                listView1.Items.Add(r.name);
                 if (i == 0)
                 {
                     foreach (var t in r.items)
@@ -40,18 +42,19 @@ namespace MCLauncher
                 }
                 i++;
             }
-            listBox1.SelectedIndex = 0;
+            listView1.Items[0].Focused = true;
+            listView1.Items[0].Selected = true;
             listBox2.SelectedIndex = 0;
         }
 
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
             int i = 0;
             foreach (var r in repoJsons)
             {
-                if (i == listBox1.SelectedIndex)
+                if (i == listView1.SelectedIndices[0])
                 {
                     foreach (var t in r.items)
                     {
@@ -70,7 +73,7 @@ namespace MCLauncher
                 int i = 0;
                 foreach (var r in repoJsons)
                 {
-                    if (i == listBox1.SelectedIndex)
+                    if (i == listView1.SelectedIndices[0])
                     {
                         int y = 0;
                         foreach (var t in r.items)
