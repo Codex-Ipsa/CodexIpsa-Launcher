@@ -32,9 +32,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ciPage = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.ciPage.SuspendLayout();
             this.SuspendLayout();
@@ -51,8 +52,8 @@
             // 
             // ciPage
             // 
+            this.ciPage.Controls.Add(this.listView2);
             this.ciPage.Controls.Add(this.listView1);
-            this.ciPage.Controls.Add(this.listBox2);
             this.ciPage.Controls.Add(this.button1);
             this.ciPage.Location = new System.Drawing.Point(4, 22);
             this.ciPage.Name = "ciPage";
@@ -77,14 +78,6 @@
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(174, 0);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(149, 251);
-            this.listBox2.TabIndex = 4;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(245, 255);
@@ -98,6 +91,24 @@
             // columnHeader1
             // 
             this.columnHeader1.Width = 130;
+            // 
+            // listView2
+            // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2});
+            this.listView2.FullRowSelect = true;
+            this.listView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listView2.Location = new System.Drawing.Point(174, 0);
+            this.listView2.MultiSelect = false;
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(149, 251);
+            this.listView2.TabIndex = 6;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 130;
             // 
             // ModsRepo
             // 
@@ -121,8 +132,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage ciPage;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

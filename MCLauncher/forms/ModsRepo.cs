@@ -50,95 +50,50 @@ namespace MCLauncher
                 {
                     foreach (var t in r.items)
                     {
-                        listBox2.Items.Add(t.version);
+                        listView2.Items.Add(t.version);
                     }
                 }
                 i++;
             }
-            listView1.Items[0].Focused = true;
             listView1.Items[0].Selected = true;
-            listBox2.SelectedIndex = 0;
+            listView2.Items[0].Selected = true;
             listView1.Columns[0].Width = -1;
         }
 
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //CRASHES
-            //listBox2.Items.Clear();
-            //int i = 0;
-            //foreach (var r in repoJsons)
-            //{
-            //    if (i == listView1.SelectedIndices[0])
-            //    {
-            //        foreach (var t in r.items)
-            //        {
-            //            listBox2.Items.Add(t.version);
-            //        }
-            //    }
-            //    i++;
-            //}
-            //listBox2.SelectedIndex = 0;
+            if (listView1.SelectedIndices.Count > 0)
+            {
+                listView2.Items.Clear();
+                Console.WriteLine(repoJsons[listView1.SelectedIndices[0]].id);
+                foreach (RepoInfo item in repoJsons[listView1.SelectedIndices[0]].items)
+                {
+                    listView2.Items.Add(item.version);
+                }
+                listView2.Items[0].Selected = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listBox2.SelectedItems.Count > 0) //just in case
+            if (listView2.SelectedIndices.Count > 0) //just in case
             {
-                int i = 0;
-                foreach (var r in repoJsons)
-                {
-                    if (i == listView1.SelectedIndices[0])
-                    {
-                        int y = 0;
-                        foreach (var t in r.items)
-                        {
-                            if (y == listBox2.SelectedIndex)
-                            {
-                                Logger.Info("[ModsRepo]", $"{r.id}, {t.version}, {t.url}, {t.json}");
+                RepoJson r = repoJsons[listView1.SelectedIndices[0]];
+                RepoInfo t = r.items[listView2.SelectedIndices[0]];
+                Console.WriteLine(repoJsons[listView1.SelectedIndices[0]].items[listView2.SelectedIndices[0]].version);
+                Logger.Info("[ModsRepo]", $"{r.id}, {t.version}, {t.url}, {t.json}");
 
-                                DownloadProgress.url = t.url;
-                                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{r.id}-{t.version}.zip";
-                                DownloadProgress dp = new DownloadProgress();
-                                dp.ShowDialog();
-
-                                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", t.json), $"{Globals.dataPath}\\data\\json\\{t.json}.json");
-                                Profile.modListWorker("add", r.name, t.version, $"{r.id}-{t.version}.zip", t.type, t.json, false);
-
-                                Profile.reloadModsList();
-                                this.Close();
-                            }
-                            y++;
-                        }
-                    }
-                    i++;
-                }
-
-                /*int index = listBox1.FindString(listBox1.GetItemText(listBox1.SelectedItem));
-                DownloadProgress.url = modUrls[listBox2.SelectedIndex];
-                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar";
+                DownloadProgress.url = t.url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{r.id}-{t.version}.zip";
                 DownloadProgress dp = new DownloadProgress();
-                dp.ShowDialog();*/
-                //Profile.modListWorker("add", openFileDialog.SafeFileName, "jarmod", "");
-                //Profile.modListWorker($"{modIds[index]}-{listBox2.GetItemText(listBox2.SelectedItem)}.jar", modTypes[listBox2.SelectedIndex], baseTypes[index]);
-                /*Profile.reloadModsList();*/
+                dp.ShowDialog();
 
-                //Console.WriteLine(modUrls[listBox2.SelectedIndex]);
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", t.json), $"{Globals.dataPath}\\data\\json\\{t.json}.json");
+                Profile.modListWorker("add", r.name, t.version, $"{r.id}-{t.version}.zip", t.type, t.json, false);
 
-                /*if(baseTypes[index] != Profile.type)
-                {
-                    Logger.Info("[ModsRepo]", $"{baseTypes[index]} != {Profile.lastType}");
-                    ModWarn mw = new ModWarn();
-                    mw.ShowDialog();
-                    if(mw.isYes)
-                    {
-                        InstanceManager.This.verBox.SelectedIndex = InstanceManager.This.verBox.FindString(baseJars[index]);
-                        InstanceManager.url = baseUrls[index];
-                        InstanceManager.type = baseTypes[index];
-                    }
-
-                    this.Close();
-                }*/
+                Profile.reloadModsList();
+                this.Close();
             }
         }
 
