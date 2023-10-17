@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -22,9 +23,14 @@ namespace MCLauncher
         //current status: crashes LMFAO
         List<RepoJson> repoJsons = new List<RepoJson>();
 
+
         public ModsRepo()
         {
             InitializeComponent();
+
+            ImageList modThumbnails = new ImageList();
+            modThumbnails.ImageSize = new Size(16, 16);
+            listView1.SmallImageList = modThumbnails;
 
             string json = Globals.client.DownloadString(Globals.ModRepoManifest);
             repoJsons = JsonConvert.DeserializeObject<List<RepoJson>>(json);
@@ -32,7 +38,14 @@ namespace MCLauncher
             int i = 0;
             foreach (var r in repoJsons)
             {
-                listView1.Items.Add(r.name);
+                //load thumbnail if exists, if not use some default one
+                if (r.thumbnail != null)
+                    modThumbnails.Images.Add(Base64ToImage(r.thumbnail));
+                else
+                    modThumbnails.Images.Add(Base64ToImage("R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw=="));
+
+                listView1.Items.Add(r.name, i);
+
                 if (i == 0)
                 {
                     foreach (var t in r.items)
@@ -45,30 +58,32 @@ namespace MCLauncher
             listView1.Items[0].Focused = true;
             listView1.Items[0].Selected = true;
             listBox2.SelectedIndex = 0;
+            listView1.Columns[0].Width = -1;
         }
 
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBox2.Items.Clear();
-            int i = 0;
-            foreach (var r in repoJsons)
-            {
-                if (i == listView1.SelectedIndices[0])
-                {
-                    foreach (var t in r.items)
-                    {
-                        listBox2.Items.Add(t.version);
-                    }
-                }
-                i++;
-            }
-            listBox2.SelectedIndex = 0;
+            //CRASHES
+            //listBox2.Items.Clear();
+            //int i = 0;
+            //foreach (var r in repoJsons)
+            //{
+            //    if (i == listView1.SelectedIndices[0])
+            //    {
+            //        foreach (var t in r.items)
+            //        {
+            //            listBox2.Items.Add(t.version);
+            //        }
+            //    }
+            //    i++;
+            //}
+            //listBox2.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(listBox2.SelectedItems.Count > 0) //just in case
+            if (listBox2.SelectedItems.Count > 0) //just in case
             {
                 int i = 0;
                 foreach (var r in repoJsons)
@@ -78,7 +93,7 @@ namespace MCLauncher
                         int y = 0;
                         foreach (var t in r.items)
                         {
-                            if(y == listBox2.SelectedIndex)
+                            if (y == listBox2.SelectedIndex)
                             {
                                 Logger.Info("[ModsRepo]", $"{r.id}, {t.version}, {t.url}, {t.json}");
 
@@ -131,12 +146,27 @@ namespace MCLauncher
         {
 
         }
+
+        public Image Base64ToImage(string base64)
+        {
+            byte[] bytes = Convert.FromBase64String(base64);
+            bytes.Reverse();
+
+            Image image;
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                image = Image.FromStream(ms);
+            }
+
+            return image;
+        }
     }
 
     class RepoJson
     {
         public string name { get; set; }
         public string id { get; set; }
+        public string thumbnail { get; set; }
         public RepoInfo[] items { get; set; }
     }
 
