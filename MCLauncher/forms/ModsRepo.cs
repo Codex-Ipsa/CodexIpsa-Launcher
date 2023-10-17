@@ -22,7 +22,8 @@ namespace MCLauncher
         //TODO: make this use listviews instead you fucking goof
         //current status: crashes LMFAO
         List<RepoJson> repoJsons = new List<RepoJson>();
-
+        ListViewItem lastModSelect;
+        ListViewItem lastVerSelect;
 
         public ModsRepo()
         {
@@ -72,6 +73,7 @@ namespace MCLauncher
                     listView2.Items.Add(item.version);
                 }
                 listView2.Items[0].Selected = true;
+                lastModSelect = listView1.SelectedItems[0];
             }
         }
 
