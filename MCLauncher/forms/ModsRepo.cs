@@ -57,7 +57,9 @@ namespace MCLauncher
                 i++;
             }
             listView1.Items[0].Selected = true;
+            listView1.Select();
             listView2.Items[0].Selected = true;
+            listView2.Select();
             listView1.Columns[0].Width = -1;
         }
 
