@@ -102,21 +102,28 @@ namespace MCLauncher
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
 
             //Check for internet
-            //try
-            //{
-            //    string tets = Globals.client.DownloadString("codex-ipsa.dejvoss.cz");
-            //}
-            //catch
-            //{
-            //    Globals.offlineMode = true;
-            //}
+            try
+            {
+                string offlineJson = Globals.client.DownloadString(Globals.offlineManfest);
+                OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
+                if(test.offline)
+                {
+                    Logger.Error($"[MainWindow]", $"Servers are down! Reason: {test.message}");
+                    Globals.offlineMode = true;
+                }
+            }
+            catch
+            {
+                Logger.Error($"[MainWindow]", "Internet connection not available!");
+                Globals.offlineMode = true;
+            }
 
             //Check for updates
             Logger.Info($"[MainWindow]", "Checking for updates..");
             List<string> branchIds = new List<string>();
 
-            //if(!Globals.offlineMode)
-            //{
+            if (!Globals.offlineMode)
+            {
                 string jsonUpd = Globals.client.DownloadString(Globals.updateInfo);
                 List<jsonObject> dataUpd = JsonConvert.DeserializeObject<List<jsonObject>>(jsonUpd);
 
@@ -137,7 +144,7 @@ namespace MCLauncher
                 {
                     SettingsScreen.checkForUpdates(Globals.branch);
                 }
-            //}
+            }
 
             //Seasonal background
             try
@@ -219,5 +226,11 @@ namespace MCLauncher
             if(Discord.client != null)
                 Discord.client.Dispose();
         }
+    }
+
+    public class OfflineManifest
+    {
+        public bool offline { get; set; }
+        public string message { get; set; }
     }
 }

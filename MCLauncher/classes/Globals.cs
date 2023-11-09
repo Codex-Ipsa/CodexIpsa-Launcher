@@ -14,6 +14,7 @@ namespace MCLauncher
     {
         //System
         public static WebClient client = new WebClient();
+        public static bool offlineMode = false;
 
         //Manual
         public static string codebase = "0.3.0-dev"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
@@ -54,6 +55,8 @@ namespace MCLauncher
         public static string changelogManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/changelog.json";
         public static string seasonalDirt = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/dirt.png";
         public static string seasonalStone = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png";
+        public static string seasonalManfest = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
+        public static string offlineManfest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
         public static string languageManfest = $"http://codex-ipsa.dejvoss.cz/launcher/lang/index.json";
     }
 }
