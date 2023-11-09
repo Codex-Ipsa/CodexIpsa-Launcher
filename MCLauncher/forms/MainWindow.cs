@@ -80,9 +80,6 @@ namespace MCLauncher
 
         public void loadMainWindow()
         {
-            /*Output ou = new Output();
-            ou.Show();*/
-
             //Set the window name
             Logger.Info($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
             this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
