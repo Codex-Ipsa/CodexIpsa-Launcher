@@ -109,7 +109,12 @@ namespace MCLauncher.forms
                 assetIndexBtn.Enabled = false;
                 tabControl1.TabPages.Remove(tabControl1.TabPages[1]);
 
-                string manifest = Globals.client.DownloadString(Globals.javaManifest);
+                string manifest;
+                if (!Globals.offlineMode)
+                    manifest = Globals.client.DownloadString(Globals.javaManifest);
+                else
+                    manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
+
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox("java");
 
