@@ -208,12 +208,19 @@ namespace MCLauncher.forms
                 }
 
                 string manifest = "";
-                if (dj.edition == "java")
-                    manifest = Globals.client.DownloadString(Globals.javaManifest);
-                else if (dj.edition == "x360")
-                    manifest = Globals.client.DownloadString(Globals.x360Manifest);
-                else if (dj.edition == "javaedu")
-                    manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                if(!Globals.offlineMode)
+                {
+                    if (dj.edition == "java")
+                        manifest = Globals.client.DownloadString(Globals.javaManifest);
+                    else if (dj.edition == "x360")
+                        manifest = Globals.client.DownloadString(Globals.x360Manifest);
+                    else if (dj.edition == "javaedu")
+                        manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                }
+                else
+                {
+                    manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
+                }
 
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox(dj.edition);
