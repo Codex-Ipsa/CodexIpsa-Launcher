@@ -35,28 +35,28 @@ namespace MCLauncher
         public static bool requireAuth = true; //Change this on release
 
         //Java manifests
-        public static string javaManifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java_manifest.json";
-        public static string javaInfo = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/data/{{ver}}.json";
-        public static string javaEduManifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
+        public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java_manifest.json";
+        public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/data/{{ver}}.json";
+        public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
 
-        public static string ModRepoManifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/modrepo/manifest.json";
-        public static string JavaInstalls = "http://deleteme.codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
-        public static string Modloaders = "http://deleteme.codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
+        public static string ModRepoManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/manifest.json";
+        public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
+        public static string Modloaders = "http://codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
 
         //Xbox manifests
-        public static string x360Manifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_manifest.json";
-        public static string x360Url = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_url.txt";
-        public static string x360Base = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_base.txt";
-        public static string xeniaManifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/emulator/xenia_manifest.json";
+        public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_manifest.json";
+        public static string x360Url = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_url.txt";
+        public static string x360Base = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_base.txt";
+        public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/emulator/xenia_manifest.json";
 
         //System
-        public static string updaterUrl = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
-        public static string updateInfo = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/version/list.json";
-        public static string changelogManifest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/changelog.json";
-        public static string seasonalDirt = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/seasonal/dirt.png";
-        public static string seasonalStone = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png";
-        public static string seasonalManfest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
-        public static string offlineManfest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/offline.json";
-        public static string languageManfest = $"http://deleteme.codex-ipsa.dejvoss.cz/launcher/lang/index.json";
+        public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
+        public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/launcher/version/list.json";
+        public static string changelogManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/changelog.json";
+        public static string seasonalDirt = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/dirt.png";
+        public static string seasonalStone = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png";
+        public static string seasonalManfest = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
+        public static string offlineManfest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
+        public static string languageManfest = $"http://codex-ipsa.dejvoss.cz/launcher/lang/index.json";
     }
 }
