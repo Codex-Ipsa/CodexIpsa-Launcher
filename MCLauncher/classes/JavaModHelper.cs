@@ -53,11 +53,18 @@ namespace MCLauncher
                     Logger.Info("[JavaModHelper/Test1]", $"1   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
                 }
 
+                if (!string.IsNullOrWhiteSpace(entry.name))
+                {
+                    JavaLauncher.modName = entry.name;
+                }
+                if (!string.IsNullOrWhiteSpace(entry.version))
+                {
+                    JavaLauncher.modVersion = entry.version;
+                }
+
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {
-                    JavaLauncher.modName = entry.name;
-                    JavaLauncher.modVersion = entry.version;
                     return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}"; //this is temporary, because mods for mods that are cujars won't work
                 }
                 //jarmods extract, then zip up and return that
