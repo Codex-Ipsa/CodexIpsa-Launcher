@@ -34,7 +34,7 @@ namespace MCLauncher.forms
             foreach (PallasManifest mod in pallasMods)
             {
                 //set thumbnails
-                if (mod.thumbnail != null)
+                if (!string.IsNullOrWhiteSpace(mod.thumbnail))
                     modThumbnails.Images.Add(Base64ToImage(mod.thumbnail));
                 else
                     modThumbnails.Images.Add(Base64ToImage("R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw=="));
