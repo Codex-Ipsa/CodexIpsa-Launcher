@@ -40,6 +40,14 @@ namespace MCLauncher
             string toHash = "";
             foreach (ModJsonEntry entry in modsManifest.items)
             {
+                //check for updates
+                bool skip = PallasRepo.checkForUpdate(entry.name, entry.version);
+                if (skip)
+                {
+                    modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
+                    continue;
+                }
+
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {

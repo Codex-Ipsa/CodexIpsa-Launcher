@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace MCLauncher.forms
@@ -11,7 +12,7 @@ namespace MCLauncher.forms
     public partial class PallasRepo : Form
     {
         List<PallasManifest> pallasMods = new List<PallasManifest>();
-        List<PallasVersions> pallasVersions = new List<PallasVersions>();
+        List<PallasVersion> pallasVersions = new List<PallasVersion>();
 
         public PallasRepo()
         {
@@ -20,21 +21,25 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            //img list properties
             ImageList modThumbnails = new ImageList();
             modThumbnails.ImageSize = new Size(32, 32);
             modListView.SmallImageList = modThumbnails;
 
+            //get avvailable mods
             string pallasManifest = Globals.client.DownloadString(Globals.PallasManifest);
             pallasMods = JsonConvert.DeserializeObject<List<PallasManifest>>(pallasManifest);
 
             int i = 0;
             foreach (PallasManifest mod in pallasMods)
             {
+                //set thumbnails
                 if (mod.thumbnail != null)
                     modThumbnails.Images.Add(Base64ToImage(mod.thumbnail));
                 else
                     modThumbnails.Images.Add(Base64ToImage("R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw=="));
 
+                //add mods to listview
                 modListView.Items.Add(mod.name, i);
                 i++;
             }
@@ -44,16 +49,18 @@ namespace MCLauncher.forms
         {
             if (modListView.SelectedItems.Count > 0)
             {
+                //load browser stuff
                 comboBox1.Items.Clear();
                 string id = pallasMods[modListView.SelectedItems[0].Index].id;
                 Logger.Info("[PallasRepo]", pallasMods[modListView.SelectedItems[0].Index].id);
                 webBrowser1.Navigate(new Uri($"http://pallas.dejvoss.cz/{id}/info.html"));
 
+                //load versions
                 string pallasVersion = Globals.client.DownloadString($"http://pallas.dejvoss.cz/{id}/manifest.json");
-                pallasVersions = JsonConvert.DeserializeObject<List<PallasVersions>>(pallasVersion);
+                pallasVersions = JsonConvert.DeserializeObject<List<PallasVersion>>(pallasVersion);
                 int latestVer = 0;
                 int x = 0;
-                foreach (PallasVersions ver in pallasVersions)
+                foreach (PallasVersion ver in pallasVersions)
                 {
                     if (ver.latest)
                         latestVer = x;
@@ -61,6 +68,7 @@ namespace MCLauncher.forms
                     comboBox1.Items.Add(ver.version);
                     x++;
                 }
+                //set latest ver
                 comboBox1.SelectedIndex = latestVer;
             }
         }
@@ -69,6 +77,7 @@ namespace MCLauncher.forms
         {
             if (modListView.SelectedItems.Count > 0)
             {
+                //download mod
                 string id = pallasMods[modListView.SelectedItems[0].Index].id;
                 string name = pallasMods[modListView.SelectedItems[0].Index].name;
 
@@ -105,6 +114,53 @@ namespace MCLauncher.forms
 
             return image;
         }
+
+        public static bool checkForUpdate(string checkName, string checkVersion)
+        {
+            string pallasManifest = Globals.client.DownloadString(Globals.PallasManifest);
+            List<PallasManifest> pallasMods = JsonConvert.DeserializeObject<List<PallasManifest>>(pallasManifest);
+
+            foreach (PallasManifest mod in pallasMods)
+            {
+                if (mod.name == checkName)
+                {
+                    string pallasVersion = Globals.client.DownloadString($"http://pallas.dejvoss.cz/{mod.id}/manifest.json");
+                    List<PallasVersion> pallasVersions = JsonConvert.DeserializeObject<List<PallasVersion>>(pallasVersion);
+                    foreach(PallasVersion ver in pallasVersions)
+                    {
+                        if(ver.latest == true)
+                        {
+                            if(checkVersion != ver.version)
+                            {
+                                DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    Logger.Info("[PallasRepo/Update]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
+
+                                    DownloadProgress.url = ver.url;
+                                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
+                                    DownloadProgress dp = new DownloadProgress();
+                                    dp.ShowDialog();
+
+                                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
+                                    Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json, false);
+
+                                    File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
+                                    Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "", false);
+
+                                    return true;
+                                }
+                            }
+                            else
+                            {
+                                Logger.Info("[PallasRepo/Update]", $"{mod.id} is up to date");
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 
     class PallasManifest
@@ -115,7 +171,7 @@ namespace MCLauncher.forms
         public string author { get; set; }
     }
 
-    class PallasVersions
+    class PallasVersion
     {
         public string version { get; set; }
         public string type { get; set; }
