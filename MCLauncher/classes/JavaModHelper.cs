@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
@@ -41,11 +42,15 @@ namespace MCLauncher
             foreach (ModJsonEntry entry in modsManifest.items)
             {
                 //check for updates
-                bool skip = PallasRepo.checkForUpdate(entry.name, entry.version);
-                if (skip)
+                string[] skip = PallasRepo.checkForUpdate(entry.name, entry.version);
+                if (skip != null)
                 {
-                    modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
-                    continue;
+                    Logger.Info("[JavaModHelper/Test1]", $"0   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
+                    entry.version = skip[0];
+                    entry.json = skip[1];
+                    entry.file = skip[2];
+                    entry.type = skip[3];
+                    Logger.Info("[JavaModHelper/Test1]", $"1   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
                 }
 
                 //cusjars are simple, just return the path

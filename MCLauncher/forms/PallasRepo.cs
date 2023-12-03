@@ -115,7 +115,7 @@ namespace MCLauncher.forms
             return image;
         }
 
-        public static bool checkForUpdate(string checkName, string checkVersion)
+        public static string[] checkForUpdate(string checkName, string checkVersion)
         {
             string pallasManifest = Globals.client.DownloadString(Globals.PallasManifest);
             List<PallasManifest> pallasMods = JsonConvert.DeserializeObject<List<PallasManifest>>(pallasManifest);
@@ -147,8 +147,10 @@ namespace MCLauncher.forms
 
                                     File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
                                     Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "", false);
+                                    HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
+                                    HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
 
-                                    return true;
+                                    return new string[] { ver.version, ver.json , $"{mod.id}-{ver.version}.zip", ver.type};
                                 }
                             }
                             else
@@ -159,7 +161,7 @@ namespace MCLauncher.forms
                     }
                 }
             }
-            return false;
+            return null;
         }
     }
 
