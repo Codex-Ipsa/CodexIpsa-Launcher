@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PallasRepo));
             this.modListView = new System.Windows.Forms.ListView();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.downloadButton = new System.Windows.Forms.Button();
@@ -62,7 +63,7 @@
             // 
             // downloadButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(387, 221);
+            this.downloadButton.Location = new System.Drawing.Point(389, 221);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(75, 23);
             this.downloadButton.TabIndex = 2;
@@ -74,7 +75,7 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(275, 194);
+            this.comboBox1.Location = new System.Drawing.Point(277, 194);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(187, 21);
             this.comboBox1.TabIndex = 4;
@@ -102,8 +103,9 @@
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.modListView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PallasRepo";
-            this.Text = "PallasRepo";
+            this.Text = "Mod repository";
             this.ResumeLayout(false);
             this.PerformLayout();
 
