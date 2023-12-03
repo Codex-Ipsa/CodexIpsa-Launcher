@@ -65,6 +65,13 @@ namespace MCLauncher
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {
+                    DownloadProgress.url = Globals.javaInfo.Replace("{ver}", entry.json);
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
+
+                    JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
+
                     return $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}"; //this is temporary, because mods for mods that are cujars won't work
                 }
                 //jarmods extract, then zip up and return that

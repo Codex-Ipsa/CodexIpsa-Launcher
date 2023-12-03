@@ -35,6 +35,7 @@ namespace MCLauncher.classes
         {
             modVersion = "";
             modName = "";
+
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
