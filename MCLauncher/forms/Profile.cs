@@ -566,8 +566,10 @@ namespace MCLauncher.forms
 
         private void btnRepo_Click(object sender, EventArgs e)
         {
-            ModsRepo mr = new ModsRepo();
-            mr.ShowDialog();
+            PallasRepo pr = new PallasRepo();
+            pr.ShowDialog();
+            //ModsRepo mr = new ModsRepo();
+            //mr.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -18,9 +18,9 @@ namespace MCLauncher
 
         //Manual
         public static string codebase = "0.3.0-dev"; //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
-        public static string branch = "experimental"; //dev //omega13 //stable //dev-instances //experimental
-        public static string verCurrent = "0.3.0-dev2"; //Change this on release
-        public static string verDisplay = "0.3.0-dev2"; //Change this on release
+        public static string branch = "pallas-testing"; //dev //omega13 //stable //dev-instances //experimental
+        public static string verCurrent = "0.3.0-p1"; //Change this on release
+        public static string verDisplay = "0.3.0-p1"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -40,6 +40,7 @@ namespace MCLauncher
         public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
 
         public static string ModRepoManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/manifest.json";
+        public static string PallasManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/pallas.json";
         public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
         public static string Modloaders = "http://codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
 

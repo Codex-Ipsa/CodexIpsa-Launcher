@@ -151,6 +151,12 @@
     <Compile Include="forms\Output.Designer.cs">
       <DependentUpon>Output.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\PallasRepo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\PallasRepo.Designer.cs">
+      <DependentUpon>PallasRepo.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Output.resx">
       <DependentUpon>Output.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\PallasRepo.resx">
+      <DependentUpon>PallasRepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
