@@ -237,7 +237,6 @@ namespace MCLauncher.forms
             modView.Columns[0].Text = Strings.rowName;
             modView.Columns[1].Text = Strings.rowType;
             modView.Columns[2].Text = Strings.rowConfig;
-            modView.Columns[3].Text = Strings.rowUpdate;
 
             if (profMode == "def")
             {
@@ -761,10 +760,9 @@ namespace MCLauncher.forms
                 Instance.modView.Items.Add(item);
             }
 
-            Instance.modView.Columns[0].Width = Instance.modView.Width / 3;
+            Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
             Instance.modView.Columns[1].Width = Instance.modView.Width / 4;
-            Instance.modView.Columns[2].Width = Instance.modView.Width / 4;
-            Instance.modView.Columns[3].Width = -2;
+            Instance.modView.Columns[2].Width = -2;
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)

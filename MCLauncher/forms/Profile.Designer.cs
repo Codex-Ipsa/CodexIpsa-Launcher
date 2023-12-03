@@ -101,7 +101,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -901,8 +900,7 @@
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader5,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader2});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
             this.modView.Location = new System.Drawing.Point(6, 6);
@@ -925,10 +923,6 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Config";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Update";
             // 
             // Profile
             // 
@@ -1027,7 +1021,6 @@
         private System.Windows.Forms.Panel xboxPanel;
         private System.Windows.Forms.GroupBox grbXboxGame;
         private System.Windows.Forms.CheckBox chkXboxDemo;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.CheckBox chkAssetIndex;
         private System.Windows.Forms.Button assetIndexBtn;
         private System.Windows.Forms.TextBox assetIndexBox;
