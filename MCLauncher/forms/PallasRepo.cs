@@ -21,6 +21,8 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            modListView.Columns[0].Width = -1;
+
             //img list properties
             ImageList modThumbnails = new ImageList();
             modThumbnails.ImageSize = new Size(32, 32);

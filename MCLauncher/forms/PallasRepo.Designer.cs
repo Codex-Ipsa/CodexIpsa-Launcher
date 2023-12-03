@@ -33,11 +33,15 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // modListView
             // 
+            this.modListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
             this.modListView.FullRowSelect = true;
+            this.modListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.modListView.HideSelection = false;
             this.modListView.Location = new System.Drawing.Point(12, 12);
             this.modListView.MultiSelect = false;
@@ -45,7 +49,7 @@
             this.modListView.Size = new System.Drawing.Size(174, 203);
             this.modListView.TabIndex = 0;
             this.modListView.UseCompatibleStateImageBehavior = false;
-            this.modListView.View = System.Windows.Forms.View.List;
+            this.modListView.View = System.Windows.Forms.View.Details;
             this.modListView.SelectedIndexChanged += new System.EventHandler(this.modListView_SelectedIndexChanged);
             // 
             // webBrowser1
@@ -84,6 +88,10 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Select version:";
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 135;
+            // 
             // PallasRepo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,5 +116,6 @@
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
