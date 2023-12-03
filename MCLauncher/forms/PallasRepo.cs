@@ -70,11 +70,25 @@ namespace MCLauncher.forms
             if (modListView.SelectedItems.Count > 0)
             {
                 string id = pallasMods[modListView.SelectedItems[0].Index].id;
+                string name = pallasMods[modListView.SelectedItems[0].Index].name;
+
                 string version = pallasVersions[comboBox1.SelectedIndex].version;
                 string url = pallasVersions[comboBox1.SelectedIndex].url;
                 string json = pallasVersions[comboBox1.SelectedIndex].json;
+                string type = pallasVersions[comboBox1.SelectedIndex].type;
 
                 Logger.Info("[PallasRepo]", $"{id}, {version}, {url}, {json}");
+
+                DownloadProgress.url = url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip";
+                DownloadProgress dp = new DownloadProgress();
+                dp.ShowDialog();
+
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\data\\json\\{json}.json");
+                Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json, false);
+
+                Profile.reloadModsList();
+                this.Close();
             }
         }
 
