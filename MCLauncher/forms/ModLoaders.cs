@@ -79,7 +79,7 @@ namespace MCLauncher.forms
 
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", newJson);
 
-                Profile.modListWorker("add", "Fabric", $"{gameVersion}-{listView1.SelectedItems[0].Text}", $"fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", "json", "", false);
+                Profile.modListWorker("add", "Fabric", $"{gameVersion}-{listView1.SelectedItems[0].Text}", $"fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", "json", "");
                 Profile.reloadModsList();
             }
             else if(loaderType == "forge")
@@ -97,7 +97,7 @@ namespace MCLauncher.forms
                 dp.ShowDialog();
 
                 string version = item.id.Substring(item.id.IndexOf('-') + 1);
-                Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json, false);
+                Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json);
                 Profile.reloadModsList();
             }
 

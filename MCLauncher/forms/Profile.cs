@@ -582,7 +582,7 @@ namespace MCLauncher.forms
                 {
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", "", "", openFileDialog.SafeFileName, "jarmod", "", false);
+                    modListWorker("add", "", "", openFileDialog.SafeFileName, "jarmod", "");
                     reloadModsList();
                 }
             }
@@ -597,7 +597,7 @@ namespace MCLauncher.forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", "", "", openFileDialog.SafeFileName, "cusjar", "", false);
+                    modListWorker("add", "", "", openFileDialog.SafeFileName, "cusjar", "");
                     reloadModsList();
                 }
             }
@@ -608,7 +608,7 @@ namespace MCLauncher.forms
             if (modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{modView.SelectedItems[0].Text}");
-                modListWorker("remove", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("remove", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
@@ -617,7 +617,7 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mdown", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("mdown", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
@@ -626,12 +626,12 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mup", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("mup", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
 
-        public static void modListWorker(string mode, string name, string version, string file, string type, string json, bool update)
+        public static void modListWorker(string mode, string name, string version, string file, string type, string json)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
@@ -654,7 +654,6 @@ namespace MCLauncher.forms
                 newEntry.file = file;
                 newEntry.type = type;
                 newEntry.json = json;
-                newEntry.update = update;
                 entries.Add(newEntry);
             }
             else if (mode == "remove")
@@ -724,8 +723,7 @@ namespace MCLauncher.forms
                 toSave += $"      \"version\": \"{ent.version}\",\n";
                 toSave += $"      \"file\": \"{ent.file}\",\n";
                 toSave += $"      \"type\": \"{ent.type}\",\n";
-                toSave += $"      \"json\": \"{ent.json}\",\n";
-                toSave += $"      \"update\": {ent.update.ToString().ToLower()}\n";
+                toSave += $"      \"json\": \"{ent.json}\"\n";
                 toSave += $"    }},\n";
                 y++;
             }
@@ -759,7 +757,7 @@ namespace MCLauncher.forms
 
             foreach (ModJsonEntry mje in mj.items)
             {
-                ListViewItem item = new ListViewItem(new[] { mje.file, mje.type, mje.json, mje.update.ToString() });
+                ListViewItem item = new ListViewItem(new[] { mje.file, mje.type, mje.json });
                 Instance.modView.Items.Add(item);
             }
 
@@ -1039,6 +1037,5 @@ namespace MCLauncher.forms
         public string file { get; set; }
         public string type { get; set; }
         public string json { get; set; }
-        public bool update { get; set; }
     }
 }

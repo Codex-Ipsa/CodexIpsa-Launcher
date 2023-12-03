@@ -179,8 +179,7 @@ namespace MCLauncher
                 created += $"      \"version\": \"{item.version}\",\n";
                 created += $"      \"file\": \"{item.name}\",\n";
                 created += $"      \"type\": \"{item.type}\",\n";
-                created += $"      \"json\": \"{item.json}\",\n";
-                created += $"      \"update\": \"{item.update.ToString().ToLower()}\"\n";
+                created += $"      \"json\": \"{item.json}\"\n";
                 created += $"    }},";
             }
             created = created.TrimEnd(',');

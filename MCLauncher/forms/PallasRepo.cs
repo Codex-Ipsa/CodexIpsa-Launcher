@@ -94,7 +94,7 @@ namespace MCLauncher.forms
                 dp.ShowDialog();
 
                 Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\data\\json\\{json}.json");
-                Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json, false);
+                Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json);
 
                 Profile.reloadModsList();
                 this.Close();
@@ -143,10 +143,10 @@ namespace MCLauncher.forms
                                     dp.ShowDialog();
 
                                     Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
-                                    Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json, false);
+                                    Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
 
                                     File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
-                                    Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "", false);
+                                    Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
                                     HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
                                     HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
 

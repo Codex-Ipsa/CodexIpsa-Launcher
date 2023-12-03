@@ -94,7 +94,7 @@ namespace MCLauncher
                 dp.ShowDialog();
 
                 Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", t.json), $"{Globals.dataPath}\\data\\json\\{t.json}.json");
-                Profile.modListWorker("add", r.name, t.version, $"{r.id}-{t.version}.zip", t.type, t.json, false);
+                Profile.modListWorker("add", r.name, t.version, $"{r.id}-{t.version}.zip", t.type, t.json);
 
                 Profile.reloadModsList();
                 this.Close();
