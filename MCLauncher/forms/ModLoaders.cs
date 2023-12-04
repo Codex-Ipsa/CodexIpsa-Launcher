@@ -91,13 +91,26 @@ namespace MCLauncher.forms
                 if (item.type == "json")
                     ext = ".json";
 
-                DownloadProgress.url = item.url;
+                string forgeVersion = item.id.Substring(item.id.IndexOf('-') + 1);
+                string gameVersion = item.id.Replace("minecraftforge-", "").Replace($"-{forgeVersion}", "");
+
+                if (item.url.Contains("json"))
+                    DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/forge/minecraftforge-{gameVersion}.json";
+                else
+                    DownloadProgress.url = item.url;
+
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
                 DownloadProgress dp = new DownloadProgress();
                 dp.ShowDialog();
 
-                string version = item.id.Substring(item.id.IndexOf('-') + 1);
-                Profile.modListWorker("add", "Forge", version, $"{item.id}{ext}", item.type, item.json);
+                if(item.type == "json")
+                {
+                    string original = File.ReadAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}");
+                    string updated = original.Replace("{forgeVer}", forgeVersion);
+                    File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}", updated);
+                }
+
+                Profile.modListWorker("add", "Forge", forgeVersion, $"{item.id}{ext}", item.type, item.json);
                 Profile.reloadModsList();
             }
 

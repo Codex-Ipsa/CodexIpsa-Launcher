@@ -260,7 +260,8 @@ namespace MCLauncher.classes
                 .Replace("{uuid}", msPlayerUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{game}", $"\"{vi.game}\"")
-                .Replace("{version}", $"\"{vi.version}\"");
+                .Replace("{version}", $"\"{vi.version}\"")
+                .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
             if (vi.supplement != null)
             {
