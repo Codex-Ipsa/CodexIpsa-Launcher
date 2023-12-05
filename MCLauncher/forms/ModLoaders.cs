@@ -91,13 +91,24 @@ namespace MCLauncher.forms
                 if (item.type == "json")
                     ext = ".json";
 
-                string forgeVersion = item.id.Substring(item.id.IndexOf('-') + 1);
-                string gameVersion = item.id.Replace("minecraftforge-", "").Replace($"-{forgeVersion}", "");
+                string[] split = item.id.Replace("minecraftforge-", "").Split(new[] { '-' }, 2);
+                string forgeVersion = split[1];
+                string gameVersion = split[0];
+                Logger.Error("[ModLoaders]", $"item.id; {item.id} forgeVer; {forgeVersion} gameVer; {gameVersion}");
 
-                if (item.url.Contains("json"))
+
+
+                Logger.Error("[ModLoaders]", $"item url; {item.url} gmver; {gameVersion}");
+
+                if (item.type == "json")
+                {
+                    Logger.Error("[ModLoaders]", $"CALLED!!!");
                     DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/forge/minecraftforge-{gameVersion}.json";
+                }
                 else
                     DownloadProgress.url = item.url;
+
+                Logger.Error("[ModLoaders]", $"dp url; {DownloadProgress.url}");
 
                 DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
                 DownloadProgress dp = new DownloadProgress();
