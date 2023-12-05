@@ -82,19 +82,31 @@ namespace MCLauncher
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();
 
-                    if(!string.IsNullOrEmpty(entry.json))
+                    if (!string.IsNullOrEmpty(entry.json))
                     {
                         clientJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{entry.json}.json");
                         clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
                         JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                     }
-                    
+
                     string tempDir = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp";
                     Directory.CreateDirectory(tempDir);
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2");
 
+                    //extract jarmods AND overwrite file if exists
+                    ZipArchive archive = ZipFile.Open($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}", ZipArchiveMode.Read);
+                    foreach (ZipArchiveEntry file in archive.Entries)
+                    {
+                        string completeFileName = Path.GetFullPath(Path.Combine(tempDir, file.FullName));
+                        Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                        if (file.Name == "")
+                        {
+                            continue;
+                        }
+                        file.ExtractToFile(completeFileName, true);
+                    }
 
-                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}", tempDir);
+                    //ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}", tempDir);
 
                     toHash += MD5File($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}") + ";";
                 }
