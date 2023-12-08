@@ -37,6 +37,7 @@ namespace MCLauncher
 
             wc = new WebClient();
             startDownload();
+            wc.Dispose();
         }
 
         public void startDownload()

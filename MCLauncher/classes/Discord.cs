@@ -21,7 +21,7 @@ namespace MCLauncher.classes
             {
                 if(Properties.Settings.Default.discordRpc)
                 {
-                    client = new DiscordRpcClient(Globals.discordClient);
+                    client = new DiscordRpcClient(APIKeys.DiscordClientID);
                     client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
                     client.OnReady += (sender, e) =>
                     {

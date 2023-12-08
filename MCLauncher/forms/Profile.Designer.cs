@@ -101,7 +101,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checkForge = new System.Windows.Forms.CheckBox();
+            this.checkFabric = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -474,7 +475,7 @@
             this.checkExperimental.AutoSize = true;
             this.checkExperimental.Checked = true;
             this.checkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkExperimental.Location = new System.Drawing.Point(289, 356);
+            this.checkExperimental.Location = new System.Drawing.Point(8, 374);
             this.checkExperimental.Name = "checkExperimental";
             this.checkExperimental.Size = new System.Drawing.Size(86, 17);
             this.checkExperimental.TabIndex = 10;
@@ -678,6 +679,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkFabric);
+            this.tabPage1.Controls.Add(this.checkForge);
             this.tabPage1.Controls.Add(this.javaPanel);
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
@@ -833,6 +836,7 @@
             this.btnFabric.TabIndex = 18;
             this.btnFabric.Text = "btn.Fabric";
             this.btnFabric.UseVisualStyleBackColor = true;
+            this.btnFabric.Click += new System.EventHandler(this.btnFabric_Click);
             // 
             // btnMoveDown
             // 
@@ -873,6 +877,7 @@
             this.btnForge.TabIndex = 14;
             this.btnForge.Text = "btn.Forge";
             this.btnForge.UseVisualStyleBackColor = true;
+            this.btnForge.Click += new System.EventHandler(this.btnForge_Click);
             // 
             // btnReplaceJar
             // 
@@ -899,8 +904,7 @@
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader5,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader2});
             this.modView.FullRowSelect = true;
             this.modView.HideSelection = false;
             this.modView.Location = new System.Drawing.Point(6, 6);
@@ -924,9 +928,27 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
-            // columnHeader3
+            // checkForge
             // 
-            this.columnHeader3.Text = "Update";
+            this.checkForge.AutoSize = true;
+            this.checkForge.Location = new System.Drawing.Point(156, 374);
+            this.checkForge.Name = "checkForge";
+            this.checkForge.Size = new System.Drawing.Size(53, 17);
+            this.checkForge.TabIndex = 37;
+            this.checkForge.Text = "Forge";
+            this.checkForge.UseVisualStyleBackColor = true;
+            this.checkForge.CheckedChanged += new System.EventHandler(this.checkForge_CheckedChanged);
+            // 
+            // checkFabric
+            // 
+            this.checkFabric.AutoSize = true;
+            this.checkFabric.Location = new System.Drawing.Point(218, 374);
+            this.checkFabric.Name = "checkFabric";
+            this.checkFabric.Size = new System.Drawing.Size(55, 17);
+            this.checkFabric.TabIndex = 38;
+            this.checkFabric.Text = "Fabric";
+            this.checkFabric.UseVisualStyleBackColor = true;
+            this.checkFabric.CheckedChanged += new System.EventHandler(this.checkFabric_CheckedChanged);
             // 
             // Profile
             // 
@@ -1025,11 +1047,12 @@
         private System.Windows.Forms.Panel xboxPanel;
         private System.Windows.Forms.GroupBox grbXboxGame;
         private System.Windows.Forms.CheckBox chkXboxDemo;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.CheckBox chkAssetIndex;
         private System.Windows.Forms.Button assetIndexBtn;
         private System.Windows.Forms.TextBox assetIndexBox;
         private System.Windows.Forms.TextBox xboxNameBox;
         private System.Windows.Forms.Label lblXboxProfName;
+        private System.Windows.Forms.CheckBox checkFabric;
+        private System.Windows.Forms.CheckBox checkForge;
     }
 }

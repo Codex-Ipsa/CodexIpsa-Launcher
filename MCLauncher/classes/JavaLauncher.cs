@@ -35,6 +35,7 @@ namespace MCLauncher.classes
         {
             modVersion = "";
             modName = "";
+
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -62,8 +63,7 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
-            modClientPath = "";
-            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+            modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
 
             //todo move this after downloading jar
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
@@ -164,8 +164,6 @@ namespace MCLauncher.classes
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\sounds.json");
             }
 
-
-
             string jars = "";
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar") && modClientPath == "")
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
@@ -262,7 +260,8 @@ namespace MCLauncher.classes
                 .Replace("{uuid}", msPlayerUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{game}", $"\"{vi.game}\"")
-                .Replace("{version}", $"\"{vi.version}\"");
+                .Replace("{version}", $"\"{vi.version}\"")
+                .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
             if (vi.supplement != null)
             {
