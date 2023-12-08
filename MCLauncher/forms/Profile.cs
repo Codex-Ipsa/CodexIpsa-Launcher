@@ -295,7 +295,16 @@ namespace MCLauncher.forms
 
                     if (checkRelease.Checked && row[0] == "release")
                     {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        if (checkForge.Checked && ver.forge)
+                        {
+                            Console.WriteLine(ver.id);
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            Console.WriteLine("BAD! " + ver.id);
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
                     }
 
                     if (checkSnapshot.Checked && row[0] == "snapshot")
@@ -401,14 +410,23 @@ namespace MCLauncher.forms
 
         private void checkForge_CheckedChanged(object sender, EventArgs e)
         {
-            checkFabric.Checked = false;
-            //reloadVerBox("java");
+            if (checkForge.Checked)
+            {
+                checkFabric.Checked = false;
+            }
+            //checkFabric.Checked = false;
+            //checkForge.Checked = true;
+            reloadVerBox("java");
         }
 
         private void checkFabric_CheckedChanged(object sender, EventArgs e)
         {
-            checkForge.Checked = false;
-            //reloadVerBox("java");
+            if (checkFabric.Checked)
+            {
+                checkForge.Checked = false;
+            }
+            //checkForge.Checked = false;
+            reloadVerBox("java");
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
