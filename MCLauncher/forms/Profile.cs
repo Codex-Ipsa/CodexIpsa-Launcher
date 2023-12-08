@@ -213,7 +213,7 @@ namespace MCLauncher.forms
                 }
 
                 string manifest = "";
-                if(!Globals.offlineMode)
+                if (!Globals.offlineMode)
                 {
                     if (dj.edition == "java")
                         manifest = Globals.client.DownloadString(Globals.javaManifest);
@@ -262,32 +262,63 @@ namespace MCLauncher.forms
 
                 if (edition == "java")
                 {
+
                     if (checkPreClassic.Checked && row[0] == "pre-classic")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkClassic.Checked && row[0] == "classic")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkIndev.Checked && row[0] == "indev")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkInfdev.Checked && row[0] == "infdev")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkAlpha.Checked && row[0] == "alpha")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkBeta.Checked && row[0] == "beta")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkRelease.Checked && row[0] == "release")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkSnapshot.Checked && row[0] == "snapshot")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
+                        //if (checkForge.Checked && ver.forge)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (checkFabric.Checked && ver.fabric)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (!checkForge.Checked || !checkFabric.Checked)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
+
                     if (checkExperimental.Checked && row[0] == "experimental")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                        //if (checkForge.Checked && ver.forge)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (!checkForge.Checked)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
                 }
                 else
                 {
@@ -302,7 +333,7 @@ namespace MCLauncher.forms
             if (listView1.Items.Count > 0)
             {
                 //Console.WriteLine($"CHECKING FOR \"{version}\"");
-                for(int i = listView1.Items.Count - 1; i >= 0; i--)
+                for (int i = listView1.Items.Count - 1; i >= 0; i--)
                 {
                     string ver = Regex.Replace(listView1.Items[i].Text, @"\(.*\)", "");
                     ver = ver.Replace(" ", "");
@@ -366,6 +397,18 @@ namespace MCLauncher.forms
         private void checkExperimental_CheckedChanged(object sender, EventArgs e)
         {
             reloadVerBox("java");
+        }
+
+        private void checkForge_CheckedChanged(object sender, EventArgs e)
+        {
+            checkFabric.Checked = false;
+            //reloadVerBox("java");
+        }
+
+        private void checkFabric_CheckedChanged(object sender, EventArgs e)
+        {
+            checkForge.Checked = false;
+            //reloadVerBox("java");
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)

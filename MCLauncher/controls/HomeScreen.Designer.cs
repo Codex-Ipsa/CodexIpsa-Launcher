@@ -40,7 +40,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.pnlChangelog = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -174,19 +174,14 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // pnlChangelog
+            // webBrowser1
             // 
-            this.pnlChangelog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlChangelog.BackColor = System.Drawing.Color.Transparent;
-            this.pnlChangelog.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlChangelog.BackgroundImage")));
-            this.pnlChangelog.Location = new System.Drawing.Point(0, 0);
-            this.pnlChangelog.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlChangelog.Name = "pnlChangelog";
-            this.pnlChangelog.Size = new System.Drawing.Size(784, 327);
-            this.pnlChangelog.TabIndex = 4;
-            this.pnlChangelog.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlChangelog_Scroll);
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(784, 325);
+            this.webBrowser1.TabIndex = 0;
             // 
             // HomeScreen
             // 
@@ -194,8 +189,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlChangelog);
             this.MinimumSize = new System.Drawing.Size(784, 387);
             this.Name = "HomeScreen";
             this.Size = new System.Drawing.Size(784, 387);
@@ -217,6 +212,6 @@
         public System.Windows.Forms.Label lblWelcome;
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
-        private System.Windows.Forms.Panel pnlChangelog;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
