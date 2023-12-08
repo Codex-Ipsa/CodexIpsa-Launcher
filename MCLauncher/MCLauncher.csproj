@@ -82,9 +82,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\APIKeys.cs" />
+    <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\DownloadJava.cs" />
+    <Compile Include="classes\ipsajson\FabricParser.cs" />
+    <Compile Include="classes\ipsajson\IpsaJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
@@ -146,6 +150,12 @@
     </Compile>
     <Compile Include="forms\Output.Designer.cs">
       <DependentUpon>Output.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\PallasRepo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\PallasRepo.Designer.cs">
+      <DependentUpon>PallasRepo.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Profile.cs">
       <SubType>Form</SubType>
@@ -223,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Output.resx">
       <DependentUpon>Output.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\PallasRepo.resx">
+      <DependentUpon>PallasRepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>

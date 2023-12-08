@@ -4,7 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Security.AccessControl;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
@@ -105,7 +109,12 @@ namespace MCLauncher.forms
                 assetIndexBtn.Enabled = false;
                 tabControl1.TabPages.Remove(tabControl1.TabPages[1]);
 
-                string manifest = Globals.client.DownloadString(Globals.javaManifest);
+                string manifest;
+                if (!Globals.offlineMode)
+                    manifest = Globals.client.DownloadString(Globals.javaManifest);
+                else
+                    manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
+
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox("java");
 
@@ -204,16 +213,22 @@ namespace MCLauncher.forms
                 }
 
                 string manifest = "";
-                if (dj.edition == "java")
-                    manifest = Globals.client.DownloadString(Globals.javaManifest);
-                else if (dj.edition == "x360")
-                    manifest = Globals.client.DownloadString(Globals.x360Manifest);
-                else if (dj.edition == "javaedu")
-                    manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                if (!Globals.offlineMode)
+                {
+                    if (dj.edition == "java")
+                        manifest = Globals.client.DownloadString(Globals.javaManifest);
+                    else if (dj.edition == "x360")
+                        manifest = Globals.client.DownloadString(Globals.x360Manifest);
+                    else if (dj.edition == "javaedu")
+                        manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                }
+                else
+                {
+                    manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
+                }
 
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
                 reloadVerBox(dj.edition);
-
 
                 reloadModsList();
                 isInitial = false;
@@ -222,7 +237,6 @@ namespace MCLauncher.forms
             modView.Columns[0].Text = Strings.rowName;
             modView.Columns[1].Text = Strings.rowType;
             modView.Columns[2].Text = Strings.rowConfig;
-            modView.Columns[3].Text = Strings.rowUpdate;
 
             if (profMode == "def")
             {
@@ -248,32 +262,72 @@ namespace MCLauncher.forms
 
                 if (edition == "java")
                 {
+
                     if (checkPreClassic.Checked && row[0] == "pre-classic")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkClassic.Checked && row[0] == "classic")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkIndev.Checked && row[0] == "indev")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkInfdev.Checked && row[0] == "infdev")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkAlpha.Checked && row[0] == "alpha")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkBeta.Checked && row[0] == "beta")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
 
                     if (checkRelease.Checked && row[0] == "release")
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    {
+                        if (checkForge.Checked && ver.forge)
+                        {
+                            Console.WriteLine(ver.id);
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            Console.WriteLine("BAD! " + ver.id);
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
 
                     if (checkSnapshot.Checked && row[0] == "snapshot")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
+                        //if (checkForge.Checked && ver.forge)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (checkFabric.Checked && ver.fabric)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (!checkForge.Checked || !checkFabric.Checked)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
+
                     if (checkExperimental.Checked && row[0] == "experimental")
+                    {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                        //if (checkForge.Checked && ver.forge)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        //else if (!checkForge.Checked)
+                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
                 }
                 else
                 {
@@ -284,31 +338,20 @@ namespace MCLauncher.forms
             listView1.Columns[1].Width = -1;
             listView1.Columns[2].Width = -2;
 
+            //select latest loaded version
             if (listView1.Items.Count > 0)
             {
-                var item = listView1.FindItemWithText(version, true, 0, false);
-
-                if (item != null)
+                //Console.WriteLine($"CHECKING FOR \"{version}\"");
+                for (int i = listView1.Items.Count - 1; i >= 0; i--)
                 {
-                    listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
-                    listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                    saveBtn.Enabled = true;
-                }
-                else if (listView1.Items.Count == 0)
-                    saveBtn.Enabled = false;
-                else
-                {
-                    item = listView1.FindItemWithText(version, true, 0);
-                    if (item != null)
+                    string ver = Regex.Replace(listView1.Items[i].Text, @"\(.*\)", "");
+                    ver = ver.Replace(" ", "");
+                    //Console.WriteLine($"\"{ver}\"");
+                    if (ver == version)
                     {
-                        saveBtn.Enabled = true;
-                        listView1.Items[listView1.Items.IndexOf(item)].Selected = true;
-                        listView1.EnsureVisible(listView1.Items.IndexOf(item));
-                    }
-                    else
-                    {
-                        listView1.Items[0].Selected = true;
-                        listView1.EnsureVisible(listView1.Items[0].Index);
+                        listView1.Items[i].Selected = true;
+                        listView1.TopItem = listView1.Items[i];
+                        break;
                     }
                 }
             }
@@ -365,6 +408,27 @@ namespace MCLauncher.forms
             reloadVerBox("java");
         }
 
+        private void checkForge_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkForge.Checked)
+            {
+                checkFabric.Checked = false;
+            }
+            //checkFabric.Checked = false;
+            //checkForge.Checked = true;
+            reloadVerBox("java");
+        }
+
+        private void checkFabric_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkFabric.Checked)
+            {
+                checkForge.Checked = false;
+            }
+            //checkForge.Checked = false;
+            reloadVerBox("java");
+        }
+
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
@@ -383,6 +447,25 @@ namespace MCLauncher.forms
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
                 Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
+
+                //load modloaders
+                if (vj[listView1.SelectedItems[0].Index].forge)
+                {
+                    btnForge.Enabled = true;
+                }
+                else
+                {
+                    btnForge.Enabled = false;
+                }
+
+                if (vj[listView1.SelectedItems[0].Index].fabric)
+                {
+                    btnFabric.Enabled = true;
+                }
+                else
+                {
+                    btnFabric.Enabled = false;
+                }
             }
         }
 
@@ -543,8 +626,10 @@ namespace MCLauncher.forms
 
         private void btnRepo_Click(object sender, EventArgs e)
         {
-            ModsRepo mr = new ModsRepo();
-            mr.ShowDialog();
+            PallasRepo pr = new PallasRepo();
+            pr.ShowDialog();
+            //ModsRepo mr = new ModsRepo();
+            //mr.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -557,7 +642,7 @@ namespace MCLauncher.forms
                 {
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", "", "", openFileDialog.SafeFileName, "jarmod", "", false);
+                    modListWorker("add", "", "", openFileDialog.SafeFileName, "jarmod", "");
                     reloadModsList();
                 }
             }
@@ -572,7 +657,7 @@ namespace MCLauncher.forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", "", "", openFileDialog.SafeFileName, "cusjar", "", false);
+                    modListWorker("add", "", "", openFileDialog.SafeFileName, "cusjar", "");
                     reloadModsList();
                 }
             }
@@ -583,7 +668,7 @@ namespace MCLauncher.forms
             if (modView.SelectedItems.Count > 0)
             {
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{modView.SelectedItems[0].Text}");
-                modListWorker("remove", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("remove", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
@@ -592,7 +677,7 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mdown", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("mdown", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
@@ -601,12 +686,12 @@ namespace MCLauncher.forms
         {
             if (modView.SelectedItems.Count > 0)
             {
-                modListWorker("mup", "", "", modView.SelectedItems[0].Text, "", "", false);
+                modListWorker("mup", "", "", modView.SelectedItems[0].Text, "", "");
                 reloadModsList();
             }
         }
 
-        public static void modListWorker(string mode, string name, string version, string file, string type, string json, bool update)
+        public static void modListWorker(string mode, string name, string version, string file, string type, string json)
         {
             string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
             if (!File.Exists(indexPath))
@@ -629,7 +714,6 @@ namespace MCLauncher.forms
                 newEntry.file = file;
                 newEntry.type = type;
                 newEntry.json = json;
-                newEntry.update = update;
                 entries.Add(newEntry);
             }
             else if (mode == "remove")
@@ -699,8 +783,7 @@ namespace MCLauncher.forms
                 toSave += $"      \"version\": \"{ent.version}\",\n";
                 toSave += $"      \"file\": \"{ent.file}\",\n";
                 toSave += $"      \"type\": \"{ent.type}\",\n";
-                toSave += $"      \"json\": \"{ent.json}\",\n";
-                toSave += $"      \"update\": {ent.update.ToString().ToLower()}\n";
+                toSave += $"      \"json\": \"{ent.json}\"\n";
                 toSave += $"    }},\n";
                 y++;
             }
@@ -734,14 +817,13 @@ namespace MCLauncher.forms
 
             foreach (ModJsonEntry mje in mj.items)
             {
-                ListViewItem item = new ListViewItem(new[] { mje.file, mje.type, mje.json, mje.update.ToString() });
+                ListViewItem item = new ListViewItem(new[] { mje.file, mje.type, mje.json });
                 Instance.modView.Items.Add(item);
             }
 
-            Instance.modView.Columns[0].Width = Instance.modView.Width / 3;
+            Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
             Instance.modView.Columns[1].Width = Instance.modView.Width / 4;
-            Instance.modView.Columns[2].Width = Instance.modView.Width / 4;
-            Instance.modView.Columns[3].Width = -2;
+            Instance.modView.Columns[2].Width = -2;
         }
 
         private void javaCheck_CheckedChanged(object sender, EventArgs e)
@@ -948,6 +1030,22 @@ namespace MCLauncher.forms
         {
             xboxNameBox.Text = nameBox.Text;
         }
+
+        private void btnForge_Click(object sender, EventArgs e)
+        {
+            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            temp = temp.Replace(" ", "");
+            ModLoaders ml = new ModLoaders(temp, "forge");
+            ml.ShowDialog();
+        }
+
+        private void btnFabric_Click(object sender, EventArgs e)
+        {
+            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            temp = temp.Replace(" ", "");
+            ModLoaders ml = new ModLoaders(temp, "fabric");
+            ml.ShowDialog();
+        }
     }
 
     public class VersionManifest
@@ -956,6 +1054,8 @@ namespace MCLauncher.forms
         public string alt { get; set; }
         public string type { get; set; }
         public DateTime released { get; set; }
+        public bool forge { get; set; }
+        public bool fabric { get; set; }
     }
 
     public class ProfileInfo
@@ -996,6 +1096,5 @@ namespace MCLauncher.forms
         public string file { get; set; }
         public string type { get; set; }
         public string json { get; set; }
-        public bool update { get; set; }
     }
 }

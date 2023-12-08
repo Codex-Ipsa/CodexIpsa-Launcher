@@ -88,26 +88,36 @@ namespace MCLauncher.controls
             langNameList.Clear();
 
             //Get update info
-            WebClient client = new WebClient();
-            string jsonData = client.DownloadString(Globals.updateInfo);
-            List<settingsJson> data = JsonConvert.DeserializeObject<List<settingsJson>>(jsonData);
-            foreach (var vers in data)
+            if(!Globals.offlineMode)
             {
-                nameList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
-                idList.Add(vers.brId);
-                urlList.Add(vers.brUrl);
-                versionList.Add(vers.brVer);
-                noteList.Add(vers.brNote);
-            }
+                WebClient client = new WebClient();
+                string jsonData = client.DownloadString(Globals.updateInfo);
+                List<settingsJson> data = JsonConvert.DeserializeObject<List<settingsJson>>(jsonData);
+                foreach (var vers in data)
+                {
+                    nameList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
+                    idList.Add(vers.brId);
+                    urlList.Add(vers.brUrl);
+                    versionList.Add(vers.brVer);
+                    noteList.Add(vers.brNote);
+                }
 
-            string json = client.DownloadString(Globals.languageIndex);
-            byte[] jsonArr = Encoding.Default.GetBytes(json);
-            string langData = Encoding.UTF8.GetString(jsonArr);
-            List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
-            foreach (var vers in lang)
+                string json = client.DownloadString(Globals.languageManfest);
+                byte[] jsonArr = Encoding.Default.GetBytes(json);
+                string langData = Encoding.UTF8.GetString(jsonArr);
+                List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
+                foreach (var vers in lang)
+                {
+                    languageList.Add(vers.title);
+                    langNameList.Add(vers.name);
+                }
+            }
+            else
             {
-                languageList.Add(vers.title);
-                langNameList.Add(vers.name);
+                nameList.Add($"{Globals.branch} - {Globals.verCurrent} [{Globals.branch.ToLower()}]");
+
+                languageList.Add("english");
+                langNameList.Add("English");
             }
         }
 

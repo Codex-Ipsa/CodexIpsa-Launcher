@@ -138,7 +138,7 @@ namespace MCLauncher
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
-            string url = $"http://codex-ipsa.dejvoss.cz/MCL-Data/launcher/language/{selected}.json";
+            string url = $"http://codex-ipsa.dejvoss.cz/launcher/lang/{selected}.json";
             WebClient cl = new WebClient();
             string json = cl.DownloadString(url);
             byte[] jsonArr = Encoding.Default.GetBytes(json);
