@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Policy;
 using System.Windows.Forms;
 
@@ -128,11 +129,11 @@ namespace MCLauncher.forms
                 {
                     string pallasVersion = Globals.client.DownloadString($"http://pallas.dejvoss.cz/{mod.id}/manifest.json");
                     List<PallasVersion> pallasVersions = JsonConvert.DeserializeObject<List<PallasVersion>>(pallasVersion);
-                    foreach(PallasVersion ver in pallasVersions)
+                    foreach (PallasVersion ver in pallasVersions)
                     {
-                        if(ver.latest == true)
+                        if (ver.latest == true)
                         {
-                            if(checkVersion != ver.version)
+                            if (checkVersion != ver.version)
                             {
                                 DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (dialogResult == DialogResult.Yes)
@@ -152,11 +153,44 @@ namespace MCLauncher.forms
                                     HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
                                     HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
 
-                                    return new string[] { ver.version, ver.json , $"{mod.id}-{ver.version}.zip", ver.type};
+                                    return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
                                 }
                             }
                             else
                             {
+                                if (ver.version == "latest")
+                                {
+                                    WebClient client = new WebClient();
+                                    client.OpenRead(ver.url);
+                                    Int64 bytes_total = Convert.ToInt64(client.ResponseHeaders["Content-Length"]);
+                                    Int64 existFile = new FileInfo($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip").Length;
+
+                                    if(bytes_total != existFile)
+                                    {
+                                        DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                        if (dialogResult == DialogResult.Yes)
+                                        {
+                                            Logger.Info("[PallasRepo/Update]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
+
+                                            File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
+                                            Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
+
+                                            DownloadProgress.url = ver.url;
+                                            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
+                                            DownloadProgress dp = new DownloadProgress();
+                                            dp.ShowDialog();
+
+                                            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
+                                            Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
+
+                                            HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
+                                            HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
+
+                                            return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
+                                        }
+                                    }
+                                }
+
                                 Logger.Info("[PallasRepo/Update]", $"{mod.id} is up to date");
                             }
                         }
