@@ -522,6 +522,17 @@ namespace MCLauncher.forms
             saveData += $"  \"assetsPath\": \"{assetIndexBox.Text.Replace("\"", "\\\"")}\"\n";
             saveData += $"}}";
 
+            //remove illegal characters from name
+            profileName = profileName.Replace("\\", "")
+                .Replace("/", "")
+                .Replace(":", "")
+                .Replace("*", "")
+                .Replace("?", "")
+                .Replace("\"", "")
+                .Replace("<", "")
+                .Replace(">", "")
+                .Replace("|", "");
+
             if (profMode == "new")
             {
                 if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}"))
