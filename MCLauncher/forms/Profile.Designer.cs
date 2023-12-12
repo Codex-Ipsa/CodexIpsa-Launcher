@@ -714,6 +714,7 @@
             this.checkFabric.TabIndex = 38;
             this.checkFabric.Text = "Fabric";
             this.checkFabric.UseVisualStyleBackColor = true;
+            this.checkFabric.Visible = false;
             this.checkFabric.CheckedChanged += new System.EventHandler(this.checkFabric_CheckedChanged);
             // 
             // checkForge
@@ -725,6 +726,7 @@
             this.checkForge.TabIndex = 37;
             this.checkForge.Text = "Forge";
             this.checkForge.UseVisualStyleBackColor = true;
+            this.checkForge.Visible = false;
             this.checkForge.CheckedChanged += new System.EventHandler(this.checkForge_CheckedChanged);
             // 
             // javaPanel

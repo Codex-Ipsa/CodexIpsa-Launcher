@@ -253,7 +253,7 @@ namespace MCLauncher
                     if (Globals.isDebug)
                         Logger.Info($"[MSAuth]", $"xstsToken: {xstsToken}");
                     XError = vers.XErr;
-                    Logger.Error($"[MSAuth]", $"xError: {XError}");
+                    Logger.Info($"[MSAuth]", $"xError: {XError}");
                 }
 
             }

@@ -295,7 +295,9 @@ namespace MCLauncher.forms
 
                     if (checkRelease.Checked && row[0] == "release")
                     {
-                        if (checkForge.Checked && ver.forge)
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                        /*if (checkForge.Checked && ver.forge)
                         {
                             Console.WriteLine(ver.id);
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
@@ -304,29 +306,17 @@ namespace MCLauncher.forms
                         {
                             Console.WriteLine("BAD! " + ver.id);
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }
+                        }*/
                     }
 
                     if (checkSnapshot.Checked && row[0] == "snapshot")
                     {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        //if (checkForge.Checked && ver.forge)
-                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        //else if (checkFabric.Checked && ver.fabric)
-                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        //else if (!checkForge.Checked || !checkFabric.Checked)
-                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                     }
 
                     if (checkExperimental.Checked && row[0] == "experimental")
                     {
                         listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        //if (checkForge.Checked && ver.forge)
-                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        //else if (!checkForge.Checked)
-                        //    listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                     }
                 }
                 else
