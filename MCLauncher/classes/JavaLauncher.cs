@@ -36,6 +36,8 @@ namespace MCLauncher.classes
             modVersion = "";
             modName = "";
 
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
+
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
