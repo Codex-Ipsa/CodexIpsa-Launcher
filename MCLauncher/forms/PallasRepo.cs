@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Windows.Forms;
 
@@ -138,21 +139,7 @@ namespace MCLauncher.forms
                                 DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (dialogResult == DialogResult.Yes)
                                 {
-                                    Logger.Info("[PallasRepo/Update]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
-
-                                    DownloadProgress.url = ver.url;
-                                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
-                                    DownloadProgress dp = new DownloadProgress();
-                                    dp.ShowDialog();
-
-                                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
-                                    Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
-
-                                    File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
-                                    Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
-                                    HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
-                                    HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
-
+                                    DownloadMod(mod, ver, checkVersion);
                                     return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
                                 }
                             }
@@ -170,22 +157,7 @@ namespace MCLauncher.forms
                                         DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                         if (dialogResult == DialogResult.Yes)
                                         {
-                                            Logger.Info("[PallasRepo/Update]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
-
-                                            File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
-                                            Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
-
-                                            DownloadProgress.url = ver.url;
-                                            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
-                                            DownloadProgress dp = new DownloadProgress();
-                                            dp.ShowDialog();
-
-                                            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
-                                            Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
-
-                                            HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
-                                            HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
-
+                                            DownloadMod(mod, ver, checkVersion);
                                             return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
                                         }
                                     }
@@ -199,9 +171,28 @@ namespace MCLauncher.forms
             }
             return null;
         }
+
+        //update mod and remove old version
+        public static void DownloadMod(PallasManifest mod, PallasVersion ver, string checkVersion)
+        {
+            Logger.Info("[PallasRepo/DownloadMod]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
+
+            File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
+            Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
+
+            DownloadProgress.url = ver.url;
+            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
+            DownloadProgress dp = new DownloadProgress();
+            dp.ShowDialog();
+
+            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
+            Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
+            HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
+            HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
+        }
     }
 
-    class PallasManifest
+    public class PallasManifest
     {
         public string name { get; set; }
         public string id { get; set; }
@@ -209,7 +200,7 @@ namespace MCLauncher.forms
         public string author { get; set; }
     }
 
-    class PallasVersion
+    public class PallasVersion
     {
         public string version { get; set; }
         public string type { get; set; }
