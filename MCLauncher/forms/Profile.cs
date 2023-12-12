@@ -499,19 +499,19 @@ namespace MCLauncher.forms
             string saveData = "";
             saveData += $"{{\n";
             saveData += $"  \"data\": 3,\n";
-            saveData += $"  \"edition\": \"{edition}\",\n";
-            saveData += $"  \"version\": \"{version}\",\n";
-            saveData += $"  \"directory\": \"{dirBox.Text}\",\n";
-            saveData += $"  \"resolution\": \"{resXBox.Text} {resYBox.Text}\",\n";
+            saveData += $"  \"edition\": \"{edition.Replace("\"", "\\\"")}\",\n";
+            saveData += $"  \"version\": \"{version.Replace("\"", "\\\"")}\",\n";
+            saveData += $"  \"directory\": \"{dirBox.Text.Replace("\"", "\\\"")}\",\n";
+            saveData += $"  \"resolution\": \"{resXBox.Text.Replace("\"", "\\\"")} {resYBox.Text.Replace("\"", "\\\"")}\",\n";
             saveData += $"  \"memory\": \"{ramMaxBox.Value} {ramMinBox.Value}\",\n";
-            saveData += $"  \"befCmd\": \"{befBox.Text}\",\n";
-            saveData += $"  \"aftCmd\": \"{aftBox.Text}\",\n";
+            saveData += $"  \"befCmd\": \"{befBox.Text.Replace("\"", "\\\"")}\",\n";
+            saveData += $"  \"aftCmd\": \"{aftBox.Text.Replace("\"", "\\\"")}\",\n";
             saveData += $"  \"useJava\": {chkCustJava.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"javaPath\": \"{javaBox.Text}\",\n";
+            saveData += $"  \"javaPath\": \"{javaBox.Text.Replace("\"", "\\\"")}\",\n";
             saveData += $"  \"useJson\": {chkCustJson.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"jsonPath\": \"{jsonBox.Text}\",\n";
+            saveData += $"  \"jsonPath\": \"{jsonBox.Text.Replace("\"", "\\\"")}\",\n";
             saveData += $"  \"useClass\": {chkClasspath.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"classpath\": \"{classBox.Text}\",\n";
+            saveData += $"  \"classpath\": \"{classBox.Text.Replace("\"", "\\\"")}\",\n";
             saveData += $"  \"demo\": {chkUseDemo.Checked.ToString().ToLower()},\n";
             saveData += $"  \"modded\": false,\n";
             saveData += $"  \"offline\": {chkOffline.Checked.ToString().ToLower()},\n";
@@ -519,7 +519,7 @@ namespace MCLauncher.forms
             saveData += $"  \"multiplayer\": {chkMulti.Checked.ToString().ToLower()},\n";
             saveData += $"  \"xboxDemo\": {chkXboxDemo.Checked.ToString().ToLower()},\n";
             saveData += $"  \"useAssets\": {chkAssetIndex.Checked.ToString().ToLower()},\n";
-            saveData += $"  \"assetsPath\": \"{assetIndexBox.Text}\"\n";
+            saveData += $"  \"assetsPath\": \"{assetIndexBox.Text.Replace("\"", "\\\"")}\"\n";
             saveData += $"}}";
 
             if (profMode == "new")
