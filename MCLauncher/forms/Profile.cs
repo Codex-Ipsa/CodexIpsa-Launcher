@@ -265,58 +265,182 @@ namespace MCLauncher.forms
 
                     if (checkPreClassic.Checked && row[0] == "pre-classic")
                     {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkClassic.Checked && row[0] == "classic")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkIndev.Checked && row[0] == "indev")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkInfdev.Checked && row[0] == "infdev")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkAlpha.Checked && row[0] == "alpha")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkBeta.Checked && row[0] == "beta")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-
-                    if (checkRelease.Checked && row[0] == "release")
-                    {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        /*if (checkForge.Checked && ver.forge)
+                        if (checkForge.Checked && ver.forge == true)
                         {
-                            Console.WriteLine(ver.id);
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                         }
                         else if (!checkForge.Checked)
                         {
-                            Console.WriteLine("BAD! " + ver.id);
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }*/
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkClassic.Checked && row[0] == "classic")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkIndev.Checked && row[0] == "indev")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkInfdev.Checked && row[0] == "infdev")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkAlpha.Checked && row[0] == "alpha")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkBeta.Checked && row[0] == "beta")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                    }
+
+                    if (checkRelease.Checked && row[0] == "release")
+                    {
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
                     }
 
                     if (checkSnapshot.Checked && row[0] == "snapshot")
                     {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
                     }
 
                     if (checkExperimental.Checked && row[0] == "experimental")
                     {
-                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        if (checkForge.Checked && ver.forge == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkForge.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (checkFabric.Checked && ver.fabric == true)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        else if (!checkFabric.Checked)
+                        {
+                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
                     }
                 }
                 else
@@ -400,10 +524,10 @@ namespace MCLauncher.forms
 
         private void checkForge_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkForge.Checked)
-            {
-                checkFabric.Checked = false;
-            }
+            //if (checkForge.Checked)
+            //{
+            //    checkFabric.Checked = false;
+            //}
             //checkFabric.Checked = false;
             //checkForge.Checked = true;
             reloadVerBox("java");
@@ -411,10 +535,10 @@ namespace MCLauncher.forms
 
         private void checkFabric_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkFabric.Checked)
-            {
-                checkForge.Checked = false;
-            }
+            //if (checkFabric.Checked)
+            //{
+            //    checkForge.Checked = false;
+            //}
             //checkForge.Checked = false;
             reloadVerBox("java");
         }
