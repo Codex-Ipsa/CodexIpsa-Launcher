@@ -700,7 +700,7 @@ namespace MCLauncher.forms
                 newEntry.file = file;
                 newEntry.type = type;
                 newEntry.json = json;
-                newEntry.disabled = true;
+                newEntry.disabled = false;
                 entries.Add(newEntry);
             }
             else if (mode == "remove")
