@@ -923,6 +923,7 @@
             // 
             // modView
             // 
+            this.modView.CheckBoxes = true;
             this.modView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader5,
