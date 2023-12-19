@@ -183,9 +183,12 @@ namespace MCLauncher
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
             foreach (ModJsonEntry ent in mj.items)
             {
-                if (tempName == "")
+                if(ent.disabled == false)
                 {
-                    tempName = ent.name + " " + ent.version;
+                    if (tempName == "")
+                    {
+                        tempName = ent.name + " " + ent.version;
+                    }
                 }
             }
             if (!String.IsNullOrWhiteSpace(tempName))
