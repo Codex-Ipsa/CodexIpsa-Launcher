@@ -262,26 +262,7 @@ namespace MCLauncher.forms
 
                 if (edition == "java") //java
                 {
-                    if(checkForge.Checked)
-                    {
-                        if (checkClassic.Checked && row[0] == "beta" && checkForge.Checked && ver.forge)
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        if (checkClassic.Checked && row[0] == "release" && checkForge.Checked && ver.forge)
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        if (checkClassic.Checked && row[0] == "snapshot" && checkForge.Checked && ver.forge)
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-                    if(checkFabric.Checked)
-                    {
-                        if (checkClassic.Checked && row[0] == "release" && checkFabric.Checked && ver.fabric)
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                        if (checkClassic.Checked && row[0] == "snapshot" && checkFabric.Checked && ver.fabric)
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-                    if(!checkForge.Checked && !checkFabric.Checked)
+                    if (!checkForge.Checked && !checkFabric.Checked)
                     {
                         if (checkPreClassic.Checked && row[0] == "pre-classic")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
@@ -289,26 +270,48 @@ namespace MCLauncher.forms
                         if (checkClassic.Checked && row[0] == "classic")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "indev")
+                        if (checkIndev.Checked && row[0] == "indev")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "infdev")
+                        if (checkInfdev.Checked && row[0] == "infdev")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "alpha")
+                        if (checkAlpha.Checked && row[0] == "alpha")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "beta")
+                        if (checkBeta.Checked && row[0] == "beta")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "release")
+                        if (checkRelease.Checked && row[0] == "release")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "snapshot")
+                        if (checkSnapshot.Checked && row[0] == "snapshot")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "experimental")
+                        if (checkExperimental.Checked && row[0] == "experimental")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    }
+                    else
+                    {
+                        if (checkForge.Checked)
+                        {
+                            if (checkBeta.Checked && row[0] == "beta" && checkForge.Checked && ver.forge)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                            if (checkRelease.Checked && row[0] == "release" && checkForge.Checked && ver.forge)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                            if (checkSnapshot.Checked && row[0] == "snapshot" && checkForge.Checked && ver.forge)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        if (checkFabric.Checked)
+                        {
+                            if (checkRelease.Checked && row[0] == "release" && checkFabric.Checked && ver.fabric)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                            if (checkSnapshot.Checked && row[0] == "snapshot" && checkFabric.Checked && ver.fabric)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
                     }
                 }
                 else //xbox and edu
