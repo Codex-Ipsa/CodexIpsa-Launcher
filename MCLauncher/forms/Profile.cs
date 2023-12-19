@@ -755,7 +755,7 @@ namespace MCLauncher.forms
             }
 
             string toSave = $"{{\n";
-            toSave += "  \"data\": 1,";
+            toSave += "  \"data\": 2,";
             toSave += "  \"items\": [\n";
             int y = 0;
             foreach (ModJsonEntry ent in entries)
@@ -765,7 +765,8 @@ namespace MCLauncher.forms
                 toSave += $"      \"version\": \"{ent.version}\",\n";
                 toSave += $"      \"file\": \"{ent.file}\",\n";
                 toSave += $"      \"type\": \"{ent.type}\",\n";
-                toSave += $"      \"json\": \"{ent.json}\"\n";
+                toSave += $"      \"json\": \"{ent.json}\",\n";
+                toSave += $"      \"disabled\": {(!ent.disabled).ToString().ToLower()}\n";
                 toSave += $"    }},\n";
                 y++;
             }
@@ -800,6 +801,7 @@ namespace MCLauncher.forms
             foreach (ModJsonEntry mje in mj.items)
             {
                 ListViewItem item = new ListViewItem(new[] { mje.file, mje.type, mje.json });
+                item.Checked = !mje.disabled;
                 Instance.modView.Items.Add(item);
             }
 
@@ -1028,6 +1030,23 @@ namespace MCLauncher.forms
             ModLoaders ml = new ModLoaders(temp, "fabric");
             ml.ShowDialog();
         }
+
+        private void modView_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            for(int i = 0; i < modView.Items.Count; i++)
+            {
+                string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
+                string json = File.ReadAllText(indexPath);
+                ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+                List<ModJsonEntry> entries = new List<ModJsonEntry>();
+
+                mj.items[i].disabled = !modView.Items[i].Checked;
+
+                string outJson = JsonConvert.SerializeObject(mj);
+                File.WriteAllText(indexPath, outJson);
+
+            }
+        }
     }
 
     public class VersionManifest
@@ -1078,5 +1097,6 @@ namespace MCLauncher.forms
         public string file { get; set; }
         public string type { get; set; }
         public string json { get; set; }
+        public bool disabled { get; set; }
     }
 }

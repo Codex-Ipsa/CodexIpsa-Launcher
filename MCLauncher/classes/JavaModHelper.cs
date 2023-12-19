@@ -41,6 +41,9 @@ namespace MCLauncher
             string toHash = "";
             foreach (ModJsonEntry entry in modsManifest.items)
             {
+                if (entry.disabled)
+                    continue;
+
                 //check for updates
                 string[] skip = PallasRepo.checkForUpdate(entry.name, entry.version);
                 if (skip != null)

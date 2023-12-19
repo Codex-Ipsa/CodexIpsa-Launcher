@@ -937,6 +937,7 @@
             this.modView.TabIndex = 11;
             this.modView.UseCompatibleStateImageBehavior = false;
             this.modView.View = System.Windows.Forms.View.Details;
+            this.modView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.modView_ItemChecked);
             // 
             // columnHeader1
             // 
