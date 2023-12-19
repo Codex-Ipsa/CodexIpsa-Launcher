@@ -47,6 +47,8 @@ namespace MCLauncher.forms
                 modListView.Items.Add(mod.name, i);
                 i++;
             }
+
+            modListView.Items[0].Selected = true;
         }
 
         private void modListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,6 +154,11 @@ namespace MCLauncher.forms
             {
                 if (mod.name == checkName)
                 {
+                    if(mod.isntMod == true)
+                    {
+                        return null;
+                    }
+
                     string pallasVersion = Globals.client.DownloadString($"http://pallas.dejvoss.cz/{mod.id}/manifest.json");
                     List<PallasVersion> pallasVersions = JsonConvert.DeserializeObject<List<PallasVersion>>(pallasVersion);
                     foreach (PallasVersion ver in pallasVersions)
@@ -222,6 +229,7 @@ namespace MCLauncher.forms
         public string id { get; set; }
         public string thumbnail { get; set; }
         public string author { get; set; }
+        public bool isntMod { get; set; }
     }
 
     public class PallasVersion
