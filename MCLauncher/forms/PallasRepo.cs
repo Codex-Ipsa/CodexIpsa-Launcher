@@ -86,6 +86,7 @@ namespace MCLauncher.forms
                 //download mod
                 string id = pallasMods[modListView.SelectedItems[0].Index].id;
                 string name = pallasMods[modListView.SelectedItems[0].Index].name;
+                bool isntMod = pallasMods[modListView.SelectedItems[0].Index].isntMod;
 
                 string version = pallasVersions[comboBox1.SelectedIndex].version;
                 string url = pallasVersions[comboBox1.SelectedIndex].url;
@@ -94,6 +95,11 @@ namespace MCLauncher.forms
                 string[] supplement = pallasVersions[comboBox1.SelectedIndex].supplement;
 
                 Logger.Info("[PallasRepo]", $"{id}, {version}, {url}, {json}");
+
+                if(isntMod) //temp? this looks better since you can't fit in "Omniarchive April Fools 2023 c0.0.12a_03-asbestos" LMAO
+                {
+                    name = "Minecraft";
+                }
 
                 if (!string.IsNullOrWhiteSpace(url))
                 {
