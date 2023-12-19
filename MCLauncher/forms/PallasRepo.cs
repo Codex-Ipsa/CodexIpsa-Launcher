@@ -89,16 +89,40 @@ namespace MCLauncher.forms
                 string url = pallasVersions[comboBox1.SelectedIndex].url;
                 string json = pallasVersions[comboBox1.SelectedIndex].json;
                 string type = pallasVersions[comboBox1.SelectedIndex].type;
+                string[] supplement = pallasVersions[comboBox1.SelectedIndex].supplement;
 
                 Logger.Info("[PallasRepo]", $"{id}, {version}, {url}, {json}");
 
-                DownloadProgress.url = url;
-                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip";
-                DownloadProgress dp = new DownloadProgress();
-                dp.ShowDialog();
+                if (!string.IsNullOrWhiteSpace(url))
+                {
+                    DownloadProgress.url = url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
 
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\data\\json\\{json}.json");
-                Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json);
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\data\\json\\{json}.json");
+                    Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json);
+                }
+                else //assume it's a json type mod if there's no url
+                {
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
+                    Profile.modListWorker("add", name, version, $"{id}-{version}.json", type, json);
+                }
+
+                //get supplements
+                if (supplement != null)
+                {
+                    foreach (string sup in supplement)
+                    {
+                        string fileName = sup.Substring(sup.LastIndexOf('/') + 1);
+                        DownloadProgress.url = sup;
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{fileName}";
+                        DownloadProgress dp = new DownloadProgress();
+                        dp.ShowDialog();
+
+                        Profile.modListWorker("add", "", "", $"{fileName}", "jarmod", "");
+                    }
+                }
 
                 Profile.reloadModsList();
                 this.Close();
@@ -207,5 +231,6 @@ namespace MCLauncher.forms
         public string url { get; set; }
         public string json { get; set; }
         public bool latest { get; set; }
+        public string[] supplement { get; set; }
     }
 }
