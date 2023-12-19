@@ -688,6 +688,7 @@ namespace MCLauncher.forms
 
             foreach (ModJsonEntry ent in mj.items)
             {
+                //Logger.Info("[Profile/ModListWorker]", $"{ent.file} {!ent.disabled}");
                 entries.Add(ent);
             }
 
@@ -699,6 +700,7 @@ namespace MCLauncher.forms
                 newEntry.file = file;
                 newEntry.type = type;
                 newEntry.json = json;
+                newEntry.disabled = true;
                 entries.Add(newEntry);
             }
             else if (mode == "remove")
@@ -748,11 +750,11 @@ namespace MCLauncher.forms
                 }
                 if (i + 1 < entries.Count)
                 {
-                    Console.WriteLine(i);
-                    Console.WriteLine(entries.Count);
+                    //Console.WriteLine(i);
+                    //Console.WriteLine(entries.Count);
                     entries.RemoveAt(i);
-                    Console.WriteLine(i);
-                    Console.WriteLine(entries.Count);
+                    //Console.WriteLine(i);
+                    //Console.WriteLine(entries.Count);
                     entries.Insert(i + 1, item);
                 }
             }
@@ -769,7 +771,7 @@ namespace MCLauncher.forms
                 toSave += $"      \"file\": \"{ent.file}\",\n";
                 toSave += $"      \"type\": \"{ent.type}\",\n";
                 toSave += $"      \"json\": \"{ent.json}\",\n";
-                toSave += $"      \"disabled\": {(!ent.disabled).ToString().ToLower()}\n";
+                toSave += $"      \"disabled\": {(ent.disabled).ToString().ToLower()}\n";
                 toSave += $"    }},\n";
                 y++;
             }
@@ -781,7 +783,7 @@ namespace MCLauncher.forms
             toSave += $"}}";
 
             File.WriteAllText(indexPath, toSave);
-            Console.WriteLine(toSave);
+            //Console.WriteLine(toSave);
         }
 
         public static void reloadModsList()
