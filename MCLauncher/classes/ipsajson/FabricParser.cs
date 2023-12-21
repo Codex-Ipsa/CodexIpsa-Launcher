@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace MCLauncher.classes.ipsajson
             List<FabricGame> loaderManifest = JsonConvert.DeserializeObject<List<FabricGame>>(loaderJson);
 
             List<string> list = new List<string>();
-            foreach(FabricGame loader in loaderManifest)
+            foreach (FabricGame loader in loaderManifest)
             {
                 list.Add(loader.version);
             }
@@ -35,8 +36,26 @@ namespace MCLauncher.classes.ipsajson
         {
             WebClient client = new WebClient();
 
+            string reuploadsJson = client.DownloadString(Globals.reuploadsManifest);
+            List<ReuploadsManifest> reuploadsManifest = JsonConvert.DeserializeObject<List<ReuploadsManifest>>(reuploadsJson);
+
+            foreach (ReuploadsManifest reup in reuploadsManifest)
+            {
+                Logger.Error("[FabricParser]", $"{reup.ipsa} {gameVer}");
+                if (reup.ipsa == gameVer)
+                {
+                    gameVer = reup.mojang;
+                }
+            }
+
             string versionInfo = client.DownloadString($"https://meta.fabricmc.net/v2/versions/loader/{gameVer}/{loaderVer}/profile/json");
             FabricManifest versionManifest = JsonConvert.DeserializeObject<FabricManifest>(versionInfo);
+
+            foreach(ReuploadsManifest reup in reuploadsManifest)
+            {
+                if(reup.mojang == versionManifest.inheritsFrom)
+                    versionManifest.inheritsFrom = reup.ipsa;
+            }
 
             string ipsaJson = client.DownloadString($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/data/{versionManifest.inheritsFrom}.json");
             IpsaJson ipsaManifest = JsonConvert.DeserializeObject<IpsaJson>(ipsaJson);
@@ -98,5 +117,11 @@ namespace MCLauncher.classes.ipsajson
     {
         public string name { get; set; }
         public string url { get; set; }
+    }
+
+    public class ReuploadsManifest
+    {
+        public string mojang { get; set; }
+        public string ipsa { get; set; }
     }
 }

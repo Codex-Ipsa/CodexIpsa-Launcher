@@ -43,6 +43,7 @@ namespace MCLauncher
         public static string PallasManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/pallas.json";
         public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
         public static string Modloaders = "http://codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
+        public static string reuploadsManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modloader/reuploads.json";
 
         //Xbox manifests
         public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_manifest.json";
