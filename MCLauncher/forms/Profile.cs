@@ -624,8 +624,6 @@ namespace MCLauncher.forms
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-                    //FIX CRASH!!!!
-
                     string safeFileName = openFileDialog.SafeFileName;
                     string fileType = safeFileName.Substring(safeFileName.LastIndexOf('.') + 1);
                     safeFileName = safeFileName.Replace("." + fileType, "");
@@ -648,7 +646,7 @@ namespace MCLauncher.forms
                     }
 
                     File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{safeFileName}.{fileType}");
-                    modListWorker("add", "", "", safeFileName + "." + fileType, "jarmod", "");
+                    modListWorker("add", "", "", $"{safeFileName}.{fileType}", "jarmod", "");
                     reloadModsList();
                 }
             }
@@ -662,8 +660,29 @@ namespace MCLauncher.forms
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{openFileDialog.SafeFileName}");
-                    modListWorker("add", "", "", openFileDialog.SafeFileName, "cusjar", "");
+                    string safeFileName = openFileDialog.SafeFileName;
+                    string fileType = safeFileName.Substring(safeFileName.LastIndexOf('.') + 1);
+                    safeFileName = safeFileName.Replace("." + fileType, "");
+
+                    //checks if exists and adds a _<int> at the end
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{safeFileName}.{fileType}"))
+                    {
+                        int iter = 1;
+                        do
+                        {
+                            if (safeFileName.Contains("_"))
+                                safeFileName = safeFileName.Substring(0, safeFileName.LastIndexOf("_")) + "_" + iter;
+                            else
+                                safeFileName = safeFileName + "_" + iter;
+                            iter++;
+
+                            Console.WriteLine($"{safeFileName}.{fileType}   {iter}");
+                        }
+                        while (File.Exists($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{safeFileName}.{fileType}"));
+                    }
+
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\{safeFileName}.{fileType}");
+                    modListWorker("add", "", "", $"{safeFileName}.{fileType}", "cusjar", "");
                     reloadModsList();
                 }
             }
