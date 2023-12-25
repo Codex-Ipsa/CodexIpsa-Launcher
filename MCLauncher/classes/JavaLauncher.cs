@@ -354,6 +354,11 @@ namespace MCLauncher.classes
             catch (System.ComponentModel.Win32Exception e)
             {
                 Logger.Error("[JavaLauncher]", "Could not find java!");
+                Environment.SetEnvironmentVariable("Appdata", tempAppdata);
+
+                Discord.ChangeMessage($"Idling");
+                Globals.running.Remove(runID);
+                return;
                 //TODO
                 /*if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();
