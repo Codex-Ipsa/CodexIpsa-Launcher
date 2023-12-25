@@ -76,9 +76,9 @@ namespace MCLauncher
                 Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
 
                 JavaLauncher.msPlayerName = "Guest";
-                JavaLauncher.msPlayerAccessToken = "-";
-                JavaLauncher.msPlayerUUID = "-";
-                JavaLauncher.msPlayerMPPass = "-";
+                JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+                JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
                 if (Globals.requireAuth == true)
                 {
@@ -339,9 +339,9 @@ namespace MCLauncher
             Logger.Info($"[HomeScreen]", "Logging out");
 
             JavaLauncher.msPlayerName = "Guest";
-            JavaLauncher.msPlayerAccessToken = "-";
-            JavaLauncher.msPlayerUUID = "-";
-            JavaLauncher.msPlayerMPPass = "-";
+            JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+            JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+            JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
             Properties.Settings.Default.msRefreshToken = String.Empty;
             Properties.Settings.Default.Save();
