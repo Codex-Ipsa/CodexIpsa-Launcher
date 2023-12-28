@@ -96,8 +96,6 @@ namespace MCLauncher.forms
                 string gameVersion = split[0];
                 Logger.Error("[ModLoaders]", $"item.id; {item.id} forgeVer; {forgeVersion} gameVer; {gameVersion}");
 
-
-
                 Logger.Error("[ModLoaders]", $"item url; {item.url} gmver; {gameVersion}");
 
                 if (item.type == "json")
