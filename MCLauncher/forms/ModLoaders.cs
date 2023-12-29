@@ -115,7 +115,7 @@ namespace MCLauncher.forms
                 if(item.type == "json")
                 {
                     string original = File.ReadAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}");
-                    string updated = original.Replace("{forgeVer}", forgeVersion);
+                    string updated = original.Replace("{forgeVer}", forgeVersion).Replace("{forgeUrl}", item.url);
                     File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}", updated);
                 }
 
