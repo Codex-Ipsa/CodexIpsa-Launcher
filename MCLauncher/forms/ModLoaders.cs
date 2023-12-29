@@ -28,7 +28,7 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            listView1.Columns[0].Width = 100;
+            listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
             loaderType = loader;
