@@ -190,9 +190,6 @@ namespace MCLauncher.classes
                     }
                 }
             }
-            //if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
-            //    Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
-
             Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives-{runID}\\");
 
             foreach (var lib in vi.libraries)
@@ -200,6 +197,17 @@ namespace MCLauncher.classes
                 if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
                 {
                     Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                }
+                else
+                {
+                    //TODO check against actual filesizes, this will do for now:tm:
+                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    if(fi.Length == 0)
+                    {
+                        //delete and redownload
+                        File.Delete($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    }
                 }
 
                 if (lib.extract == true)
