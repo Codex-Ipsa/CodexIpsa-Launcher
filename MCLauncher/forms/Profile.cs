@@ -419,6 +419,12 @@ namespace MCLauncher.forms
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
                 Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
+                Console.WriteLine($"forge {vj[listView1.SelectedItems[0].Index].forge}");
+                Console.WriteLine($"fabric {vj[listView1.SelectedItems[0].Index].fabric}");
+
+
+
+                //TODO FIX THE BUG WHERE IT DOESN'T TURN OFF FORGE/FABRIC BUTTONSS
 
                 //load modloaders
                 if (vj[listView1.SelectedItems[0].Index].forge)
