@@ -109,6 +109,8 @@ namespace MCLauncher
                         }
                         file.ExtractToFile(completeFileName, true);
                     }
+                    archive.Dispose();
+
 
                     //ZipFile.ExtractToDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}", tempDir);
 
