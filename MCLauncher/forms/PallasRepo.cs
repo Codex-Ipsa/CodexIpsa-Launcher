@@ -103,6 +103,12 @@ namespace MCLauncher.forms
 
                 if (!string.IsNullOrWhiteSpace(url))
                 {
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip"))
+                    {
+                        File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip");
+                        Profile.modListWorker("remove", "", "", $"{id}-{version}.zip", "", "");
+                    }
+
                     DownloadProgress.url = url;
                     DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip";
                     DownloadProgress dp = new DownloadProgress();
@@ -113,6 +119,12 @@ namespace MCLauncher.forms
                 }
                 else //assume it's a json type mod if there's no url
                 {
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json"))
+                    {
+                        File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
+                        Profile.modListWorker("remove", "", "", $"{id}-{version}.json", "", "");
+                    }
+
                     Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
                     Profile.modListWorker("add", name, version, $"{id}-{version}.json", type, json);
                 }
