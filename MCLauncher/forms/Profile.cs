@@ -429,9 +429,7 @@ namespace MCLauncher.forms
                 lastType = listView1.SelectedItems[0].SubItems[1].Text;
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
-                Console.WriteLine($"{lastSelected};{lastType};{lastDate}");
-                Console.WriteLine($"forge {vj[listView1.SelectedItems[0].Index].forge}");
-                Console.WriteLine($"fabric {vj[listView1.SelectedItems[0].Index].fabric}");
+                Logger.Info("[Profile]", $"Selected {lastSelected};{lastType};{lastDate};forge {vj[res].forge};fabric {vj[res].fabric};risugami {vj[res].risugami}");
 
 
 
@@ -1119,6 +1117,7 @@ namespace MCLauncher.forms
         public DateTime released { get; set; }
         public bool forge { get; set; }
         public bool fabric { get; set; }
+        public bool risugami { get; set; }
     }
 
     public class ProfileInfo
