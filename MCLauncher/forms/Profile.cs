@@ -415,7 +415,7 @@ namespace MCLauncher.forms
                 else
                     lastAlt = "";
 
-
+                //get the position of the version in manifest for correct loader buttons
                 int res = 0;
                 for(int i = 0; i < vj.Count; i++)
                 {
@@ -426,14 +426,11 @@ namespace MCLauncher.forms
                     }
                 }
 
+                //debug prints
                 lastType = listView1.SelectedItems[0].SubItems[1].Text;
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
                 Logger.Info("[Profile]", $"Selected {lastSelected};{lastType};{lastDate};forge {vj[res].forge};fabric {vj[res].fabric};risugami {vj[res].risugami}");
-
-
-
-                //TODO FIX THE BUG WHERE IT DOESN'T TURN OFF FORGE/FABRIC BUTTONSS
 
                 //load modloaders
                 if (vj[res].forge)
