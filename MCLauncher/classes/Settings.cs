@@ -11,6 +11,7 @@ namespace MCLauncher
         {
             if(!File.Exists($"{Globals.dataPath}\\config.json"))
             {
+                sj.warning = "STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!";
                 sj.refreshToken = Properties.Settings.Default.msRefreshToken;
                 sj.language = Properties.Settings.Default.prefLanguage;
                 sj.instance = Properties.Settings.Default.lastInstance;
@@ -35,6 +36,7 @@ namespace MCLauncher
 
     public class SettingsJson
     {
+        public string warning { get; set; }
         public string refreshToken { get; set; }
         public string language { get; set; }
         public string instance { get; set; }

@@ -66,14 +66,14 @@ namespace MCLauncher.controls
             branchIndex = cmbUpdateSelect.SelectedIndex;
             cmbLangSelect.DataSource = langNameList;
 
-            if (Properties.Settings.Default.discordRpc)
+            if (Settings.sj.discordRPC)
                 chkDiscordRpc.Checked = true;
             else
                 chkDiscordRpc.Checked = false;
 
             //JREs
-            cmbJre8.Text = Properties.Settings.Default.jre8;
-            cmbJre17.Text = Properties.Settings.Default.jre17;
+            cmbJre8.Text = Settings.sj.jre8;
+            cmbJre17.Text = Settings.sj.jre17;
         }
 
         public static void loadData()
@@ -165,25 +165,25 @@ namespace MCLauncher.controls
         {
             if(isFirstLangCheck)
             {
-                Logger.Info("[Settings]", $"PrefLang: {Properties.Settings.Default.prefLanguage}");
+                Logger.Info("[Settings]", $"PrefLang: {Settings.sj.language}");
                 isFirstLangCheck = false;
 
-                if(Properties.Settings.Default.prefLanguage == "english" || Properties.Settings.Default.prefLanguage == String.Empty || Properties.Settings.Default.prefLanguage == null)
+                if(Settings.sj.language == "english" || Settings.sj.language == String.Empty || Settings.sj.language == null)
                 {
                     Strings.reloadLangs("english");
                 }
                 else
                 {
-                    int index = languageList.FindIndex(a => a.Contains(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Properties.Settings.Default.prefLanguage.ToLower())));
-                    Logger.Error("[Settings]", $"Lang {Properties.Settings.Default.prefLanguage} found on {index}");
+                    int index = languageList.FindIndex(a => a.Contains(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Settings.sj.language.ToLower())));
+                    Logger.Error("[Settings]", $"Lang {Settings.sj.language} found on {index}");
                     cmbLangSelect.SelectedIndex = cmbLangSelect.FindString(langNameList[index]);
                 }
             }
             else
             {
                 int index = langNameList.FindIndex(a => a.Contains(cmbLangSelect.Text));
-                Properties.Settings.Default.prefLanguage = languageList[index].ToLower();
-                Properties.Settings.Default.Save();
+                Settings.sj.language = languageList[index].ToLower();
+                Settings.Save();
                 Strings.reloadLangs(languageList[index].ToLower());
             }
         }
@@ -192,13 +192,13 @@ namespace MCLauncher.controls
         {
             if(chkDiscordRpc.Checked)
             {
-                Properties.Settings.Default.discordRpc = true;
-                Properties.Settings.Default.Save();
+                Settings.sj.discordRPC = true;
+                Settings.Save();
             }
             else
             {
-                Properties.Settings.Default.discordRpc = false;
-                Properties.Settings.Default.Save();
+                Settings.sj.discordRPC = false;
+                Settings.Save();
             }
         }
 
@@ -209,8 +209,8 @@ namespace MCLauncher.controls
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 cmbJre8.Text = ofd.FileName;
-                Properties.Settings.Default.jre8 = ofd.FileName;
-                Properties.Settings.Default.Save();
+                Settings.sj.jre8 = ofd.FileName;
+                Settings.Save();
             }
         }
 
@@ -221,8 +221,8 @@ namespace MCLauncher.controls
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 cmbJre17.Text = ofd.FileName;
-                Properties.Settings.Default.jre17 = ofd.FileName;
-                Properties.Settings.Default.Save();
+                Settings.sj.jre17 = ofd.FileName;
+                Settings.Save();
             }
         }
 
@@ -293,14 +293,14 @@ namespace MCLauncher.controls
                                 if(vers.major == 8)
                                 {
                                     cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Properties.Settings.Default.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Properties.Settings.Default.Save();
+                                    Settings.sj.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
                                 }
                                 else if(vers.major == 17)
                                 {
                                     cmbJre17.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Properties.Settings.Default.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Properties.Settings.Default.Save();
+                                    Settings.sj.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
                                 }
                             }
                         }
@@ -315,14 +315,14 @@ namespace MCLauncher.controls
 
         private void cmbJre8_TextUpdate(object sender, EventArgs e)
         {
-            Properties.Settings.Default.jre8 = cmbJre8.Text;
-            Properties.Settings.Default.Save();
+            Settings.sj.jre8 = cmbJre8.Text;
+            Settings.Save();
         }
 
         private void cmbJre17_TextUpdate(object sender, EventArgs e)
         {
-            Properties.Settings.Default.jre17 = cmbJre17.Text;
-            Properties.Settings.Default.Save();
+            Settings.sj.jre17 = cmbJre17.Text;
+            Settings.Save();
         }
     }
 

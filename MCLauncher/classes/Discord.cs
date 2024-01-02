@@ -19,7 +19,7 @@ namespace MCLauncher.classes
         {
             try
             {
-                if(Properties.Settings.Default.discordRpc)
+                if(Settings.sj.discordRPC)
                 {
                     client = new DiscordRpcClient(APIKeys.DiscordClientID);
                     client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
@@ -42,7 +42,7 @@ namespace MCLauncher.classes
         }
         public static void ChangeMessage(string message)
         {
-            if (client != null && Properties.Settings.Default.discordRpc)
+            if (client != null && Settings.sj.discordRPC)
             {
                 client.SetPresence(new RichPresence()
                 {

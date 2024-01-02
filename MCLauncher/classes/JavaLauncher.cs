@@ -305,9 +305,9 @@ namespace MCLauncher.classes
             if (dj.useJava)
                 proc.StartInfo.FileName = dj.javaPath;
             else if (vi.java >= 16)
-                proc.StartInfo.FileName = Properties.Settings.Default.jre17;
+                proc.StartInfo.FileName = Settings.sj.jre17;
             else if (vi.java == 8)
-                proc.StartInfo.FileName = Properties.Settings.Default.jre8;
+                proc.StartInfo.FileName = Settings.sj.jre8;
             else
                 proc.StartInfo.FileName = "java.exe";
 

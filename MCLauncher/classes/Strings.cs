@@ -265,7 +265,7 @@ namespace MCLauncher
                 HomeScreen.Instance.btnLogOut.Text = btnLogOut;
                 HomeScreen.Instance.btnEditInst.Text = btnEditInst;
                 HomeScreen.Instance.btnNewInst.Text = btnNewInst;
-                if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
+                if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
                 {
                     HomeScreen.Instance.lblWelcome.Text = lblWelcome + " Guest";
                     HomeScreen.Instance.lblLogInWarn.Text = lblLogInWarn;
