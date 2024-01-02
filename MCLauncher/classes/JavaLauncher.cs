@@ -35,6 +35,9 @@ namespace MCLauncher.classes
         {
             modVersion = "";
             modName = "";
+
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
+
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -62,8 +65,7 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
-            modClientPath = "";
-            JavaModHelper.Start(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+            modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
 
             //todo move this after downloading jar
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
@@ -164,8 +166,6 @@ namespace MCLauncher.classes
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\sounds.json");
             }
 
-
-
             string jars = "";
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar") && modClientPath == "")
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
@@ -190,9 +190,6 @@ namespace MCLauncher.classes
                     }
                 }
             }
-            //if (Directory.Exists($"{Globals.dataPath}\\libs\\natives"))
-            //    Directory.Delete($"{Globals.dataPath}\\libs\\natives", true);
-
             Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives-{runID}\\");
 
             foreach (var lib in vi.libraries)
@@ -200,6 +197,17 @@ namespace MCLauncher.classes
                 if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
                 {
                     Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                }
+                else
+                {
+                    //TODO check against actual filesizes, this will do for now:tm:
+                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    if(fi.Length == 0)
+                    {
+                        //delete and redownload
+                        File.Delete($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    }
                 }
 
                 if (lib.extract == true)
@@ -262,7 +270,8 @@ namespace MCLauncher.classes
                 .Replace("{uuid}", msPlayerUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{game}", $"\"{vi.game}\"")
-                .Replace("{version}", $"\"{vi.version}\"");
+                .Replace("{version}", $"\"{vi.version}\"")
+                .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
             if (vi.supplement != null)
             {
@@ -353,6 +362,11 @@ namespace MCLauncher.classes
             catch (System.ComponentModel.Win32Exception e)
             {
                 Logger.Error("[JavaLauncher]", "Could not find java!");
+                Environment.SetEnvironmentVariable("Appdata", tempAppdata);
+
+                Discord.ChangeMessage($"Idling");
+                Globals.running.Remove(runID);
+                return;
                 //TODO
                 /*if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();

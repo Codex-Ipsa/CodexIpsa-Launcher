@@ -43,7 +43,7 @@ namespace MCLauncher
         //CreditsScreen
         public static string lblLauncherBy = $"Codex-Ipsa Launcher v{Globals.verDisplay} by";
         public static string lblDejvossIpsa = $"DEJVOSS Productions";
-        public static string lblCopyright = $"(c) 2022-2023";
+        public static string lblCopyright = $"(c) 2022-2024";
         public static string lblTeam = $"The team:\nDEJVOSS; programming.";
         public static string lblSpecialThanks = $"Special thanks:\nBetaCraft; LegacyFix, BCWrapper.\nOmniarchive; inspiration, version files.\nMisterSheeple; file hosting.\nAnd you; for using the launcher.";
 
