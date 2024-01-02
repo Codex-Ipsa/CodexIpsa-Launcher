@@ -1047,6 +1047,7 @@ namespace MCLauncher.forms
 
         private void btnOpenDotMc_Click(object sender, EventArgs e)
         {
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             Process.Start($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
         }
 
