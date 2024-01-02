@@ -261,7 +261,7 @@ namespace MCLauncher.forms
 
                 if (edition == "java") //java
                 {
-                    if (!checkForge.Checked && !checkFabric.Checked)
+                    if (!checkForge.Checked && !checkFabric.Checked && !checkMLoader.Checked)
                     {
                         if (checkPreClassic.Checked && row[0] == "pre-classic")
                             listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
@@ -309,6 +309,17 @@ namespace MCLauncher.forms
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                             if (checkSnapshot.Checked && row[0] == "snapshot" && checkFabric.Checked && ver.fabric)
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                        }
+                        if (checkMLoader.Checked)
+                        {
+                            if (checkAlpha.Checked && row[0] == "alpha" && checkMLoader.Checked && ver.risugami.Contains("true"))
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                            if (checkBeta.Checked && row[0] == "beta" && checkMLoader.Checked && ver.risugami.Contains("true"))
+                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                            if (checkRelease.Checked && row[0] == "release" && checkMLoader.Checked && ver.risugami.Contains("true"))
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                         }
                     }
@@ -398,6 +409,11 @@ namespace MCLauncher.forms
         }
 
         private void checkFabric_CheckedChanged(object sender, EventArgs e)
+        {
+            reloadVerBox("java");
+        }
+
+        private void checkMLoader_CheckedChanged(object sender, EventArgs e)
         {
             reloadVerBox("java");
         }

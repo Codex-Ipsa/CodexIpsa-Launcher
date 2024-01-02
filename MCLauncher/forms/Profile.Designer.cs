@@ -103,6 +103,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checkMLoader = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -679,6 +680,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkMLoader);
             this.tabPage1.Controls.Add(this.checkFabric);
             this.tabPage1.Controls.Add(this.checkForge);
             this.tabPage1.Controls.Add(this.javaPanel);
@@ -953,6 +955,17 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
+            // checkMLoader
+            // 
+            this.checkMLoader.AutoSize = true;
+            this.checkMLoader.Location = new System.Drawing.Point(279, 374);
+            this.checkMLoader.Name = "checkMLoader";
+            this.checkMLoader.Size = new System.Drawing.Size(80, 17);
+            this.checkMLoader.TabIndex = 39;
+            this.checkMLoader.Text = "ModLoader";
+            this.checkMLoader.UseVisualStyleBackColor = true;
+            this.checkMLoader.CheckedChanged += new System.EventHandler(this.checkMLoader_CheckedChanged);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1057,5 +1070,6 @@
         private System.Windows.Forms.Label lblXboxProfName;
         private System.Windows.Forms.CheckBox checkFabric;
         private System.Windows.Forms.CheckBox checkForge;
+        private System.Windows.Forms.CheckBox checkMLoader;
     }
 }
