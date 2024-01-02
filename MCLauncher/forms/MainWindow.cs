@@ -26,7 +26,7 @@ namespace MCLauncher
         public MainWindow()
         {
             Instance = this;
-            Properties.Settings.Default.Reload();
+            Settings.Reload();
             InitializeComponent();
             loadMainWindow();
         }

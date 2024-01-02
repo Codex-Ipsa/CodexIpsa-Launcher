@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.IO;
 using Newtonsoft.Json;
 
 namespace MCLauncher
@@ -15,14 +9,27 @@ namespace MCLauncher
 
         public static void Reload()
         {
-            string json = File.ReadAllText($"{Globals.dataPath}\\config.json");
-            sj = JsonConvert.DeserializeObject<SettingsJson>(json);
+            if(!File.Exists($"{Globals.dataPath}\\config.json"))
+            {
+                sj.refreshToken = Properties.Settings.Default.msRefreshToken;
+                sj.language = Properties.Settings.Default.prefLanguage;
+                sj.instance = Properties.Settings.Default.lastInstance;
+                sj.discordRPC = Properties.Settings.Default.discordRpc;
+                sj.jre8 = Properties.Settings.Default.jre8;
+                sj.jre17 = Properties.Settings.Default.jre17;
+
+                string toSave = JsonConvert.SerializeObject(sj);
+                File.WriteAllText($"{Globals.dataPath}\\config.json", toSave);
+            }
+
+            string toLoad = File.ReadAllText($"{Globals.dataPath}\\config.json");
+            sj = JsonConvert.DeserializeObject<SettingsJson>(toLoad);
         }
 
         public static void Save()
         {
-            string json = JsonConvert.SerializeObject(sj);
-            File.WriteAllText($"{Globals.dataPath}\\config.json", json);
+            string toSave = JsonConvert.SerializeObject(sj);
+            File.WriteAllText($"{Globals.dataPath}\\config.json", toSave);
         }
     }
 
@@ -31,5 +38,8 @@ namespace MCLauncher
         public string refreshToken { get; set; }
         public string language { get; set; }
         public string instance { get; set; }
+        public bool discordRPC { get; set; }
+        public string jre8 { get; set; }
+        public string jre17 { get; set; }
     }
 }
