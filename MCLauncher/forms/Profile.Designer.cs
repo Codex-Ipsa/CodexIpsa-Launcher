@@ -848,6 +848,7 @@
             this.btnMLoader.TabIndex = 19;
             this.btnMLoader.Text = "btn.MLoader";
             this.btnMLoader.UseVisualStyleBackColor = true;
+            this.btnMLoader.Click += new System.EventHandler(this.btnMLoader_Click);
             // 
             // btnFabric
             // 

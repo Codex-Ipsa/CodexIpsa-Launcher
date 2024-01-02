@@ -8,6 +8,7 @@ using System.Net;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
@@ -449,6 +450,15 @@ namespace MCLauncher.forms
                 else
                 {
                     btnFabric.Enabled = false;
+                }
+
+                if (vj[res].risugami.Contains("true"))
+                {
+                    btnMLoader.Enabled = true;
+                }
+                else
+                {
+                    btnMLoader.Enabled = false;
                 }
             }
         }
@@ -1105,6 +1115,47 @@ namespace MCLauncher.forms
 
             }
         }
+
+        private void btnMLoader_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(listView1.SelectedItems[0].Text);
+            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            Console.WriteLine(temp);
+            temp = temp.Replace(" ", "");
+
+            foreach (var t in vj)
+            {
+                if(t.id == temp)
+                {
+                    if(t.risugami == "truemp")
+                    {
+                        DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloader-{temp}.zip";
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloader-{temp}.zip";
+                        DownloadProgress dp = new DownloadProgress();
+                        dp.ShowDialog();
+                        Profile.modListWorker("add", "ModLoader", $"{temp}", $"modloader-{temp}.zip", "jarmod", "");
+
+                        DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloadermp-{temp}.zip";
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloadermp-{temp}.zip";
+                        DownloadProgress dp2 = new DownloadProgress();
+                        dp2.ShowDialog();
+                        Profile.modListWorker("add", "", $"", $"modloadermp-{temp}.zip", "jarmod", "");
+
+                        Profile.reloadModsList();
+                    }
+                    else if(t.risugami == "true")
+                    {
+                        DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloader-{temp}.zip";
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloader-{temp}.zip";
+                        DownloadProgress dp = new DownloadProgress();
+                        dp.ShowDialog();
+                        Profile.modListWorker("add", "ModLoader", $"{temp}", $"modloader-{temp}.zip", "jarmod", "");
+
+                        Profile.reloadModsList();
+                    }
+                }
+            }
+        }
     }
 
     public class VersionManifest
@@ -1115,7 +1166,7 @@ namespace MCLauncher.forms
         public DateTime released { get; set; }
         public bool forge { get; set; }
         public bool fabric { get; set; }
-        public bool risugami { get; set; }
+        public string risugami { get; set; }
     }
 
     public class ProfileInfo
