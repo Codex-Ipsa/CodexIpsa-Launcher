@@ -569,13 +569,22 @@ namespace MCLauncher.forms
                 else
                 {
                     Logger.Info("[Profile]", "Renaming the profile. This may take a while.");
-                    Directory.Move($"{Globals.dataPath}\\instance\\{origName}\\", $"{Globals.dataPath}\\instance\\{profileName}\\");
-                    File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
+                    try
+                    {
+                        Directory.Move($"{Globals.dataPath}\\instance\\{origName}\\", $"{Globals.dataPath}\\instance\\{profileName}\\");
+                        File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", saveData);
 
-                    string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
-                    HomeScreen.loadInstanceList();
-                    HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
-                    HomeScreen.reloadInstance(tempName);
+                        string tempName = profileName; //loadInstanceList() overwrites profileName, so I had to do this shit lmao
+                        HomeScreen.loadInstanceList();
+                        HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
+                        HomeScreen.reloadInstance(tempName);
+                    }
+                    catch(System.IO.IOException e)
+                    {
+                        MessageBox.Show($"Could not rename the profile: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Logger.Error("[Profile]", $"Could not rename the profile: {e.Message}");
+
+                    }
 
                     this.Close();
                 }
