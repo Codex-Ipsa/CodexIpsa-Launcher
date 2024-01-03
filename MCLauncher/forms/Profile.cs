@@ -989,6 +989,9 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
+                checkForge.Visible = false;
+                checkFabric.Visible = false;
+                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.x360Manifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -1009,6 +1012,9 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
+                checkForge.Visible = false;
+                checkFabric.Visible = false;
+                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -1029,6 +1035,9 @@ namespace MCLauncher.forms
                 checkRelease.Visible = true;
                 checkSnapshot.Visible = true;
                 checkExperimental.Visible = true;
+                checkForge.Visible = true;
+                checkFabric.Visible = true;
+                checkMLoader.Visible = true;
 
                 if (!isInitial) //shitty fix but it doesn't crash anymore :troll:
                 {
