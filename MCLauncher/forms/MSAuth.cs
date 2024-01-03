@@ -497,10 +497,10 @@ namespace MCLauncher
             {
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"Refresh token to save: {refreshToken}");
-                Properties.Settings.Default.msRefreshToken = refreshToken;
-                Properties.Settings.Default.Save();
+                Settings.sj.refreshToken = refreshToken;
+                Settings.Save();
                 if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Saved refresh token: {Properties.Settings.Default.msRefreshToken}");
+                    Logger.Info("[MSAuth]", $"Saved refresh token: {Settings.sj.refreshToken}");
                 HomeScreen.msPlayerName = playerName;
                 HomeScreen.checkAuth();
             }
@@ -508,7 +508,7 @@ namespace MCLauncher
 
         public static void usernameFromRefreshToken()
         {
-            voidRefreshToken(Properties.Settings.Default.msRefreshToken);
+            voidRefreshToken(Settings.sj.refreshToken);
             xblAuth();
             xstsAuth();
             minecraftAuth();
@@ -530,7 +530,7 @@ namespace MCLauncher
 
         public static void onGameStart(bool getMppass)
         {
-            voidRefreshToken(Properties.Settings.Default.msRefreshToken);
+            voidRefreshToken(Settings.sj.refreshToken);
             xblAuth();
             xstsAuth();
             minecraftAuth();

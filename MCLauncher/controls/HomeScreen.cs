@@ -37,8 +37,8 @@ namespace MCLauncher
         {
             Instance = this;
             InitializeComponent();
-            Logger.Info("[HomeScreen]", $"Last instance: {Properties.Settings.Default.lastInstance}");
-            lastInstance = Properties.Settings.Default.lastInstance;
+            Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
+            lastInstance = Settings.sj.instance;
 
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
             {
@@ -68,7 +68,7 @@ namespace MCLauncher
 
         public static void checkAuth()
         {
-            if (Properties.Settings.Default.msRefreshToken == String.Empty || Properties.Settings.Default.msRefreshToken == null)
+            if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 Logger.Error($"[HomeScreen]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
@@ -105,8 +105,8 @@ namespace MCLauncher
                 {
                     Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
                     MSAuth.hasErrored = false;
-                    Properties.Settings.Default.msRefreshToken = String.Empty;
-                    Properties.Settings.Default.Save();
+                    Settings.sj.refreshToken = String.Empty;
+                    Settings.Save();
                     checkAuth();
                 }
                 else
@@ -179,13 +179,13 @@ namespace MCLauncher
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", modJson);
             }
 
-            string tempName = "";
+            string tempName = null;
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
             foreach (ModJsonEntry ent in mj.items)
             {
-                if(ent.disabled == false)
+                if (ent.disabled == false)
                 {
-                    if (tempName == "")
+                    if (tempName == null && !String.IsNullOrWhiteSpace(ent.name) && !String.IsNullOrWhiteSpace(ent.version))
                     {
                         tempName = ent.name + " " + ent.version;
                     }
@@ -343,8 +343,8 @@ namespace MCLauncher
             JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
             JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
-            Properties.Settings.Default.msRefreshToken = String.Empty;
-            Properties.Settings.Default.Save();
+            Settings.sj.refreshToken = String.Empty;
+            Settings.Save();
             checkAuth();
         }
 
@@ -352,8 +352,8 @@ namespace MCLauncher
         {
             Logger.Info("[TEST2]", cmbInstaces.Text);
             reloadInstance(cmbInstaces.Text);
-            Properties.Settings.Default.lastInstance = cmbInstaces.Text;
-            Properties.Settings.Default.Save();
+            Settings.sj.instance = cmbInstaces.Text;
+            Settings.Save();
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)

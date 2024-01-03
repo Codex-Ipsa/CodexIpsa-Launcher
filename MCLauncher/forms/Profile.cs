@@ -311,6 +311,7 @@ namespace MCLauncher.forms
                             if (checkSnapshot.Checked && row[0] == "snapshot" && checkFabric.Checked && ver.fabric)
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                         }
+
                         if (checkMLoader.Checked)
                         {
                             if (checkAlpha.Checked && row[0] == "alpha" && checkMLoader.Checked && ver.risugami.Contains("true"))
@@ -322,6 +323,7 @@ namespace MCLauncher.forms
                             if (checkRelease.Checked && row[0] == "release" && checkMLoader.Checked && ver.risugami.Contains("true"))
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                         }
+
                     }
                 }
                 else //xbox and edu
@@ -434,7 +436,7 @@ namespace MCLauncher.forms
 
                 //get the position of the version in manifest for correct loader buttons
                 int res = 0;
-                for(int i = 0; i < vj.Count; i++)
+                for (int i = 0; i < vj.Count; i++)
                 {
                     if (vj[i].id == lastSelected)
                     {
@@ -579,7 +581,7 @@ namespace MCLauncher.forms
                         HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(tempName);
                         HomeScreen.reloadInstance(tempName);
                     }
-                    catch(System.IO.IOException e)
+                    catch (System.IO.IOException e)
                     {
                         MessageBox.Show($"Could not rename the profile: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.Error("[Profile]", $"Could not rename the profile: {e.Message}");
@@ -989,6 +991,9 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
+                checkForge.Visible = false;
+                checkFabric.Visible = false;
+                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.x360Manifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -1009,10 +1014,13 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
+                checkForge.Visible = false;
+                checkFabric.Visible = false;
+                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
-                reloadVerBox("java");
+                reloadVerBox("javaedu");
             }
             else
             {
@@ -1029,6 +1037,9 @@ namespace MCLauncher.forms
                 checkRelease.Visible = true;
                 checkSnapshot.Visible = true;
                 checkExperimental.Visible = true;
+                checkForge.Visible = true;
+                checkFabric.Visible = true;
+                checkMLoader.Visible = true;
 
                 if (!isInitial) //shitty fix but it doesn't crash anymore :troll:
                 {
@@ -1126,7 +1137,7 @@ namespace MCLauncher.forms
 
         private void modView_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            for(int i = 0; i < modView.Items.Count; i++)
+            for (int i = 0; i < modView.Items.Count; i++)
             {
                 string indexPath = $"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json";
                 string json = File.ReadAllText(indexPath);
@@ -1150,9 +1161,9 @@ namespace MCLauncher.forms
 
             foreach (var t in vj)
             {
-                if(t.id == temp)
+                if (t.id == temp)
                 {
-                    if(t.risugami == "truemp")
+                    if (t.risugami == "truemp")
                     {
                         DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloader-{temp}.zip";
                         DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloader-{temp}.zip";
@@ -1168,7 +1179,7 @@ namespace MCLauncher.forms
 
                         Profile.reloadModsList();
                     }
-                    else if(t.risugami == "true")
+                    else if (t.risugami == "true")
                     {
                         DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloader-{temp}.zip";
                         DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloader-{temp}.zip";

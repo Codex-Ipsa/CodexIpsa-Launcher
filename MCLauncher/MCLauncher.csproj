@@ -170,7 +170,7 @@
     <Compile Include="forms\ModsRepo.Designer.cs">
       <DependentUpon>ModsRepo.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\SettingData.cs" />
+    <Compile Include="classes\Settings.cs" />
     <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
       <SubType>UserControl</SubType>

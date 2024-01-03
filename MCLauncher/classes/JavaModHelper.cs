@@ -142,7 +142,26 @@ namespace MCLauncher
 
                 if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar"))
                 {
-                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\java\\{clientManifest.version}.jar", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\");
+                    ZipArchive archive = ZipFile.Open($"{Globals.dataPath}\\versions\\java\\{clientManifest.version}.jar", ZipArchiveMode.Read);
+                    foreach (ZipArchiveEntry file in archive.Entries)
+                    {
+                        string completeFileName = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\{file.FullName}";
+                        Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                        if (file.Name == "")
+                            continue;
+
+                        try
+                        {
+                            file.ExtractToFile(completeFileName, true);
+                        }
+                        catch (System.NotSupportedException e)
+                        {
+                            Logger.Error("[JavaModHelper]", $"Couldn't extract {file.Name}");
+                        }
+                    }
+                    archive.Dispose();
+
+                    //ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\java\\{clientManifest.version}.jar", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2");
                     string sourcePath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp";
                     string targetPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2";
 
