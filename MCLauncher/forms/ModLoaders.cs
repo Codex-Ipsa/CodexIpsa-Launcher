@@ -87,6 +87,20 @@ namespace MCLauncher.forms
                 ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
                 Console.WriteLine(item.id);
 
+                if (item.supplement != null)
+                {
+                    foreach (string sup in item.supplement)
+                    {
+                        string file = sup.Substring(sup.LastIndexOf('/') + 1);
+                        DownloadProgress.url = sup;
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{file}";
+                        DownloadProgress dpsup = new DownloadProgress();
+                        dpsup.ShowDialog();
+
+                        Profile.modListWorker("add", "", "", $"{file}", "jarmod", "");
+                    }
+                }
+
                 string ext = ".zip";
                 if (item.type == "json")
                     ext = ".json";
@@ -141,5 +155,6 @@ namespace MCLauncher.forms
         public string url { get; set; }
         public string released { get; set; }
         public bool recommended { get; set; }
+        public string[] supplement { get; set; }
     }
 }
