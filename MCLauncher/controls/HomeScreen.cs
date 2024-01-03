@@ -179,13 +179,13 @@ namespace MCLauncher
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", modJson);
             }
 
-            string tempName = "";
+            string tempName = null;
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
             foreach (ModJsonEntry ent in mj.items)
             {
-                if(ent.disabled == false)
+                if (ent.disabled == false)
                 {
-                    if (tempName == "")
+                    if (tempName == null && !String.IsNullOrWhiteSpace(ent.name) && !String.IsNullOrWhiteSpace(ent.version))
                     {
                         tempName = ent.name + " " + ent.version;
                     }
