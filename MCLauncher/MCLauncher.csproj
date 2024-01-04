@@ -133,6 +133,12 @@
     <Compile Include="forms\AssetsDownloader.Designer.cs">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\ImportProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ImportProfile.Designer.cs">
+      <DependentUpon>ImportProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\ModInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\AssetsDownloader.resx">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ImportProfile.resx">
+      <DependentUpon>ImportProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModInfo.resx">
       <DependentUpon>ModInfo.cs</DependentUpon>

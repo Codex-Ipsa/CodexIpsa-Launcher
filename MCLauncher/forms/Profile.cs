@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -1190,6 +1192,20 @@ namespace MCLauncher.forms
                         Profile.reloadModsList();
                     }
                 }
+            }
+        }
+
+        private void exportBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Zip files (*.zip)|*.zip";
+            sfd.FilterIndex = 2;
+            sfd.RestoreDirectory = true;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{Profile.profileName}", sfd.FileName);
             }
         }
     }
