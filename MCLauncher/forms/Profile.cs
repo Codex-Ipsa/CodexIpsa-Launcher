@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
@@ -1205,7 +1206,26 @@ namespace MCLauncher.forms
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{Profile.profileName}", sfd.FileName);
+                Logger.Info("[Profile]", $"Exporting {Profile.profileName}, this may take a while...");
+                using (File.Create(sfd.FileName));
+
+                using (FileStream zipToOpen = new FileStream(sfd.FileName, FileMode.Open))
+                {
+                    using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update))
+                    {
+                        string[] files = Directory.GetFiles($"{Globals.dataPath}\\instance\\{Profile.profileName}", "*.*", SearchOption.AllDirectories);
+                        foreach(string source in files)
+                        {
+                            string name = source.Replace($"{Globals.dataPath}\\instance\\{Profile.profileName}\\", "");
+                            
+                            Console.WriteLine(name);
+                            ZipArchiveEntry dirEntry = archive.CreateEntryFromFile(source, name);
+                        }
+                    }
+                    zipToOpen.Dispose();
+                }
+
+                Logger.Info("[Profile]", $"Done!");
             }
         }
     }
