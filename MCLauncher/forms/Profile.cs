@@ -1207,7 +1207,7 @@ namespace MCLauncher.forms
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Logger.Info("[Profile]", $"Exporting {Profile.profileName}, this may take a while...");
-                using (File.Create(sfd.FileName));
+                using (File.Create(sfd.FileName)) { };
 
                 using (FileStream zipToOpen = new FileStream(sfd.FileName, FileMode.Open))
                 {
