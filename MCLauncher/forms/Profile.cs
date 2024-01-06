@@ -122,6 +122,7 @@ namespace MCLauncher.forms
 
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
+                exportBtn.Visible = false;
                 saveBtn.Text = Strings.createProfile;
             }
             else if (profMode == "def")
