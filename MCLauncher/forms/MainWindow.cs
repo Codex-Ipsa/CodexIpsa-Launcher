@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -222,6 +223,34 @@ namespace MCLauncher
         {
             if(Discord.client != null)
                 Discord.client.Dispose();
+        }
+
+        private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".zip archives|*.zip";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                using (ZipArchive archive = ZipFile.OpenRead(ofd.FileName))  //safer than accepted answer
+                {
+                    bool found = false;
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        if (entry.FullName == "instance.json")
+                        {
+                            ImportProfile ip = new ImportProfile(ofd.FileName);
+                            ip.ShowDialog();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(found == false)
+                    {
+                        MessageBox.Show("Invalid or corrupt profile zip!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 
