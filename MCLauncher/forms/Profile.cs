@@ -588,7 +588,6 @@ namespace MCLauncher.forms
                     {
                         MessageBox.Show($"Could not rename the profile: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.Error("[Profile]", $"Could not rename the profile: {e.Message}");
-
                     }
 
                     this.Close();
@@ -1207,22 +1206,34 @@ namespace MCLauncher.forms
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Logger.Info("[Profile]", $"Exporting {Profile.profileName}, this may take a while...");
-                using (File.Create(sfd.FileName)) { };
-
-                using (FileStream zipToOpen = new FileStream(sfd.FileName, FileMode.Open))
+                try
                 {
-                    using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update))
+                    using (File.Create(sfd.FileName)) { };
+
+                    using (FileStream zipToOpen = new FileStream(sfd.FileName, FileMode.Open))
                     {
-                        string[] files = Directory.GetFiles($"{Globals.dataPath}\\instance\\{Profile.profileName}", "*.*", SearchOption.AllDirectories);
-                        foreach(string source in files)
+                        using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update))
                         {
-                            string name = source.Replace($"{Globals.dataPath}\\instance\\{Profile.profileName}\\", "");
-                            
-                            Console.WriteLine(name);
-                            ZipArchiveEntry dirEntry = archive.CreateEntryFromFile(source, name);
+                            string[] files = Directory.GetFiles($"{Globals.dataPath}\\instance\\{Profile.profileName}", "*.*", SearchOption.AllDirectories);
+                            foreach (string source in files)
+                            {
+                                string name = source.Replace($"{Globals.dataPath}\\instance\\{Profile.profileName}\\", "");
+
+                                if (name.Contains("jarmods\\temp") || name.Contains("jarmods\\patch") || name.Contains(".minecraft\\resources") || name.Contains(".minecraft\\logs") || name.EndsWith(".log") || name.EndsWith(".log.gz"))
+                                {
+                                    continue;
+                                }
+                                ZipArchiveEntry dirEntry = archive.CreateEntryFromFile(source, name);
+                                Logger.Info("[Profile]", $"Loaded file {name}");
+                            }
                         }
+                        zipToOpen.Dispose();
                     }
-                    zipToOpen.Dispose();
+                }
+                catch (System.IO.IOException ex)
+                {
+                    MessageBox.Show($"Could not export the profile: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Error("[Profile]", $"Could not export the profile: {ex.Message}");
                 }
 
                 Logger.Info("[Profile]", $"Done!");

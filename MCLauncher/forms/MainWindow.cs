@@ -248,6 +248,7 @@ namespace MCLauncher
                     if(found == false)
                     {
                         MessageBox.Show("Invalid or corrupt profile zip!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Logger.Error("[Profile]", $"Invalid or corrupt profile zip!");
                     }
                 }
             }
