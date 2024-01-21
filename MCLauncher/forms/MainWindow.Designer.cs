@@ -33,10 +33,11 @@ namespace MCLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
-            this.importProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@ namespace MCLauncher
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
+            this.profilesToolStripMenuItem,
             this.importProfileToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -75,6 +77,22 @@ namespace MCLauncher
             this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
+            // 
+            // profilesToolStripMenuItem
+            // 
+            this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.profilesToolStripMenuItem.Text = "Profiles";
+            this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
+            // 
+            // importProfileToolStripMenuItem
+            // 
+            this.importProfileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.importProfileToolStripMenuItem.Name = "importProfileToolStripMenuItem";
+            this.importProfileToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.importProfileToolStripMenuItem.Text = "Import profile";
+            this.importProfileToolStripMenuItem.Click += new System.EventHandler(this.importProfileToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -105,14 +123,6 @@ namespace MCLauncher
             this.pnlBackground.TabIndex = 1;
             this.pnlBackground.Visible = false;
             // 
-            // importProfileToolStripMenuItem
-            // 
-            this.importProfileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.importProfileToolStripMenuItem.Name = "importProfileToolStripMenuItem";
-            this.importProfileToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.importProfileToolStripMenuItem.Text = "Import profile";
-            this.importProfileToolStripMenuItem.Click += new System.EventHandler(this.importProfileToolStripMenuItem_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,7 +131,6 @@ namespace MCLauncher
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "MainWindow";
             this.Text = "Launcher";
@@ -139,11 +148,12 @@ namespace MCLauncher
         #endregion
         private System.Windows.Forms.Panel pnlBackground;
         private System.Windows.Forms.Panel panel3;
-        public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        public System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem importProfileToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
+        public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem profilesToolStripMenuItem;
     }
 }
 

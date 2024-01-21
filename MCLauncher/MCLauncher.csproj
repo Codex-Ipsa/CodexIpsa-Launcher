@@ -97,17 +97,17 @@
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="controls\InstanceScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\InstanceScreen.Designer.cs">
-      <DependentUpon>InstanceScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="controls\JavaScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\JavaScreen.Designer.cs">
       <DependentUpon>JavaScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ProfileScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ProfileScreen.Designer.cs">
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="controls\SettingsScreen.cs">
       <SubType>UserControl</SubType>
@@ -210,11 +210,11 @@
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="controls\InstanceScreen.resx">
-      <DependentUpon>InstanceScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="controls\JavaScreen.resx">
       <DependentUpon>JavaScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ProfileScreen.resx">
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>

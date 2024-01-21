@@ -22,7 +22,7 @@ namespace MCLauncher
         HomeScreen homeScr;
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
-        InstanceScreen instanceScr;
+        ProfileScreen instanceScr;
 
         public MainWindow()
         {
@@ -70,7 +70,7 @@ namespace MCLauncher
         public void addInstance()
         {
             instanceScr.Location = new Point(0, 24);
-            instanceScr.Dock = DockStyle.Fill;
+            //instanceScr.Dock = DockStyle.Fill; //TODO
             instanceScr.Padding = new Padding(0, 24, 0, 0);
 
             this.Controls.Add(instanceScr);
@@ -104,7 +104,7 @@ namespace MCLauncher
             {
                 string offlineJson = Globals.client.DownloadString(Globals.offlineManfest);
                 OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
-                if(test.offline)
+                if (test.offline)
                 {
                     Logger.Error($"[MainWindow]", $"Servers are down! Reason: {test.message}");
                     Globals.offlineMode = true;
@@ -137,7 +137,7 @@ namespace MCLauncher
                 {
                     Logger.Error("[MainWindow]", $"Current branch is no longer supported!");
                     MessageBox.Show($"Your branch is no longer supported!\nPlease update your launcher.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                }
                 else
                 {
                     SettingsScreen.checkForUpdates(Globals.branch);
@@ -179,7 +179,7 @@ namespace MCLauncher
                 homeScr = new HomeScreen();
                 creditsScr = new CreditsScreen();
                 settingsScr = new SettingsScreen();
-                instanceScr = new InstanceScreen();
+                instanceScr = new ProfileScreen();
                 addHome();
             }
         }
@@ -194,14 +194,14 @@ namespace MCLauncher
             addCredits();
         }
 
-        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             addSettings();
+        }
+
+        private void profilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addInstance();
         }
 
         private void MainWindow_ResizeBegin(object sender, EventArgs e)
@@ -214,14 +214,9 @@ namespace MCLauncher
             ResumeLayout();
         }
 
-        private void instanceToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            addInstance();
-        }
-
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Discord.client != null)
+            if (Discord.client != null)
                 Discord.client.Dispose();
         }
 
@@ -245,7 +240,7 @@ namespace MCLauncher
                         }
                     }
 
-                    if(found == false)
+                    if (found == false)
                     {
                         MessageBox.Show("Invalid or corrupt profile zip!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.Error("[Profile]", $"Invalid or corrupt profile zip!");

@@ -411,16 +411,22 @@ namespace MCLauncher.forms
 
         private void checkForge_CheckedChanged(object sender, EventArgs e)
         {
+            //checkFabric.Checked = false;
+            //checkMLoader.Checked = false;
             reloadVerBox("java");
         }
 
         private void checkFabric_CheckedChanged(object sender, EventArgs e)
         {
+            //checkForge.Checked = false;
+            //checkMLoader.Checked = false;
             reloadVerBox("java");
         }
 
         private void checkMLoader_CheckedChanged(object sender, EventArgs e)
         {
+            //checkForge.Checked = false;
+            //checkFabric.Checked = false;
             reloadVerBox("java");
         }
 
