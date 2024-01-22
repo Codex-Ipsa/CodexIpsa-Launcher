@@ -1246,6 +1246,16 @@ namespace MCLauncher.forms
                 Logger.Info("[Profile]", $"Done!");
             }
         }
+
+        private void iconBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PNG files|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(ofd.FileName, $"{Globals.dataPath}\\instance\\{Profile.profileName}\\icon.png");
+            }
+        }
     }
 
     public class VersionManifest

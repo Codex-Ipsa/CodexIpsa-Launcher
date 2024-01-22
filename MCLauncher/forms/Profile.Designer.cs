@@ -79,6 +79,7 @@
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.checkMLoader = new System.Windows.Forms.CheckBox();
             this.checkFabric = new System.Windows.Forms.CheckBox();
             this.checkForge = new System.Windows.Forms.CheckBox();
@@ -104,7 +105,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.exportBtn = new System.Windows.Forms.Button();
+            this.iconBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -144,16 +145,16 @@
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(100, 19);
+            this.nameBox.Location = new System.Drawing.Point(154, 19);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(333, 20);
+            this.nameBox.Size = new System.Drawing.Size(279, 20);
             this.nameBox.TabIndex = 12;
             this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // lblProfName
             // 
             this.lblProfName.AutoSize = true;
-            this.lblProfName.Location = new System.Drawing.Point(6, 22);
+            this.lblProfName.Location = new System.Drawing.Point(62, 22);
             this.lblProfName.Name = "lblProfName";
             this.lblProfName.Size = new System.Drawing.Size(67, 13);
             this.lblProfName.TabIndex = 3;
@@ -161,16 +162,16 @@
             // 
             // dirBox
             // 
-            this.dirBox.Location = new System.Drawing.Point(100, 45);
+            this.dirBox.Location = new System.Drawing.Point(154, 45);
             this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(287, 20);
+            this.dirBox.Size = new System.Drawing.Size(233, 20);
             this.dirBox.TabIndex = 13;
             this.dirBox.TextChanged += new System.EventHandler(this.DirBox_TextChanged);
             // 
             // lblGameDir
             // 
             this.lblGameDir.AutoSize = true;
-            this.lblGameDir.Location = new System.Drawing.Point(6, 49);
+            this.lblGameDir.Location = new System.Drawing.Point(62, 49);
             this.lblGameDir.Name = "lblGameDir";
             this.lblGameDir.Size = new System.Drawing.Size(61, 13);
             this.lblGameDir.TabIndex = 5;
@@ -639,6 +640,7 @@
             // 
             // grbGame
             // 
+            this.grbGame.Controls.Add(this.iconBtn);
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
             this.grbGame.Controls.Add(this.chkProxy);
@@ -709,6 +711,16 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(402, 363);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(91, 23);
+            this.exportBtn.TabIndex = 40;
+            this.exportBtn.Text = "Export profile";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
+            // 
             // checkMLoader
             // 
             this.checkMLoader.AutoSize = true;
@@ -759,9 +771,9 @@
             "Java Edition",
             "MinecraftEdu",
             "Xbox 360 Edition"});
-            this.editionBox.Location = new System.Drawing.Point(8, 6);
+            this.editionBox.Location = new System.Drawing.Point(6, 6);
             this.editionBox.Name = "editionBox";
-            this.editionBox.Size = new System.Drawing.Size(326, 21);
+            this.editionBox.Size = new System.Drawing.Size(328, 21);
             this.editionBox.TabIndex = 0;
             this.editionBox.SelectedIndexChanged += new System.EventHandler(this.editionBox_SelectedIndexChanged);
             // 
@@ -968,15 +980,15 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
-            // exportBtn
+            // iconBtn
             // 
-            this.exportBtn.Location = new System.Drawing.Point(402, 363);
-            this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(91, 23);
-            this.exportBtn.TabIndex = 40;
-            this.exportBtn.Text = "Export profile";
-            this.exportBtn.UseVisualStyleBackColor = true;
-            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
+            this.iconBtn.Location = new System.Drawing.Point(6, 19);
+            this.iconBtn.Name = "iconBtn";
+            this.iconBtn.Size = new System.Drawing.Size(50, 50);
+            this.iconBtn.TabIndex = 25;
+            this.iconBtn.Text = "(icon)";
+            this.iconBtn.UseVisualStyleBackColor = true;
+            this.iconBtn.Click += new System.EventHandler(this.iconBtn_Click);
             // 
             // Profile
             // 
@@ -1084,5 +1096,6 @@
         private System.Windows.Forms.CheckBox checkForge;
         private System.Windows.Forms.CheckBox checkMLoader;
         private System.Windows.Forms.Button exportBtn;
+        private System.Windows.Forms.Button iconBtn;
     }
 }

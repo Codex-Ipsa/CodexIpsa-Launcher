@@ -68,5 +68,22 @@ namespace MCLauncher.controls
 
             }
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                if (File.Exists($"{Globals.dataPath}\\instance\\{listView1.SelectedItems[0].Text}\\icon.png"))
+                {
+                    iconPanel.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\instance\\{listView1.SelectedItems[0].Text}\\icon.png");
+                }
+                else
+                {
+                    iconPanel.BackgroundImage = Resources.icon;
+                }
+
+                label1.Text = "Ready to play " + listView1.SelectedItems[0].Text;
+            }
+        }
     }
 }
