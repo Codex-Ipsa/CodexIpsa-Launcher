@@ -41,6 +41,7 @@
             this.listView1.Size = new System.Drawing.Size(630, 381);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // ProfileScreen
             // 
