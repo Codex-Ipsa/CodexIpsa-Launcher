@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace MCLauncher.controls
             iList.ColorDepth = ColorDepth.Depth32Bit;
             listView1.LargeImageList = iList;
 
-            iList.Images.Add(Image.FromFile("D:\\Source Code\\MineC-raft-Launcher\\MCLauncher\\image\\icon.png"));
+            iList.Images.Add(Resources.icon);
 
             string[] dirs = Directory.GetDirectories($"{Globals.dataPath}\\instance\\", "*");
 
