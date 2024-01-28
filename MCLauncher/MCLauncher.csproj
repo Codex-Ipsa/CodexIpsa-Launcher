@@ -151,6 +151,12 @@
     <Compile Include="forms\ModLoaders.Designer.cs">
       <DependentUpon>ModLoaders.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\NewInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\NewInstance.Designer.cs">
+      <DependentUpon>NewInstance.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\Output.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\HomeScreen.resx">
       <DependentUpon>HomeScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\NewInstance.resx">
+      <DependentUpon>NewInstance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Output.resx">
       <DependentUpon>Output.cs</DependentUpon>

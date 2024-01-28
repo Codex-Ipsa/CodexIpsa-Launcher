@@ -299,8 +299,10 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile("New profile", "new");
-            pr.ShowDialog();
+            //Profile pr = new Profile("New profile", "new");
+            //pr.ShowDialog();
+            NewInstance ni = new NewInstance();
+            ni.ShowDialog();
             /*InstanceManager man = new InstanceManager("New profile", "new");
             man.ShowDialog();*/
         }
