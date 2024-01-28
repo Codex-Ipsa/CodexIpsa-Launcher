@@ -8,7 +8,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace MCLauncher.classes
@@ -30,6 +32,8 @@ namespace MCLauncher.classes
         public static string manifestPath = "";
 
         public string runID = "";
+        public static double runTime = 0;
+        public static System.Threading.Timer timer;
 
         public void Launch(string profileName)
         {
@@ -358,6 +362,9 @@ namespace MCLauncher.classes
             {
                 Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
                 proc.Start();
+
+                TimerCallback tmCallback = TimerTick;
+                timer = new System.Threading.Timer(tmCallback, "test", 1000, 1000);
             }
             catch (System.ComponentModel.Win32Exception e)
             {
@@ -383,6 +390,12 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
+        static void TimerTick(object objectInfo)
+        {
+            Console.WriteLine("oppa!", objectInfo);
+            runTime++;
+        }
+
         private void OnProcessExited(object sender, EventArgs e, string profileName, bool shouldDelete)
         {
             Discord.ChangeMessage($"Idling");
@@ -390,6 +403,9 @@ namespace MCLauncher.classes
             if (shouldDelete)
                 if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"))
                     Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\", true);
+
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+            Console.WriteLine("Total runtime for this session: " + runTime);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)

@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace MCLauncher.controls
@@ -29,6 +30,7 @@ namespace MCLauncher.controls
             }
 
             listView1.Items[found].Selected = true;
+            listView1.EnsureVisible(found);
         }
 
         public void reloadProfileList()
@@ -92,7 +94,8 @@ namespace MCLauncher.controls
                     iconPanel.BackgroundImage = Resources.icon;
                 }
 
-                label1.Text = "Ready to play\n" + listView1.SelectedItems[0].Text;
+                instanceLbl.Text = listView1.SelectedItems[0].Text;
+                versionLbl.Text = "Ready to play\nVERSION";
 
                 Settings.sj.instance = listView1.SelectedItems[0].Text;
                 Settings.Save();

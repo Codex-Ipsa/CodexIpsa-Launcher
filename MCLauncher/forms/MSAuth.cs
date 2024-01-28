@@ -53,7 +53,7 @@ namespace MCLauncher
             label1.Text = Strings.labelCode;
             cancelBtn.Text = Strings.btnCancel;
 
-            //This uses the test azure app, change that!!!
+            //This NO LONGER uses the test azure app, DONT change that!!!
             deviceCurrent = 0;
             var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"); //THIS NEEDS TO HAVE OFFLINE ACCESS TO RETURN REFRESH CODE!!!!!
             deviceRequest.Method = "GET";
