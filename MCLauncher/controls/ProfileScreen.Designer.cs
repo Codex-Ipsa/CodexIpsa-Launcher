@@ -32,9 +32,10 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.iconPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.playBtn = new System.Windows.Forms.Button();
+            this.editBtn = new System.Windows.Forms.Button();
+            this.newBtn = new System.Windows.Forms.Button();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -62,46 +63,58 @@
             // 
             this.label1.Location = new System.Drawing.Point(639, 101);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 14);
+            this.label1.Size = new System.Drawing.Size(142, 27);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Ready to play INSTANCE";
+            this.label1.Text = "Ready to play\r\nINSTANCE";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button1
+            // playBtn
             // 
-            this.button1.Location = new System.Drawing.Point(667, 118);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Play";
-            this.button1.UseVisualStyleBackColor = true;
+            this.playBtn.Location = new System.Drawing.Point(667, 131);
+            this.playBtn.Name = "playBtn";
+            this.playBtn.Size = new System.Drawing.Size(85, 23);
+            this.playBtn.TabIndex = 3;
+            this.playBtn.Text = "Play";
+            this.playBtn.UseVisualStyleBackColor = true;
+            this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
             // 
-            // button2
+            // editBtn
             // 
-            this.button2.Location = new System.Drawing.Point(667, 147);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(85, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Edit profile";
-            this.button2.UseVisualStyleBackColor = true;
+            this.editBtn.Location = new System.Drawing.Point(667, 160);
+            this.editBtn.Name = "editBtn";
+            this.editBtn.Size = new System.Drawing.Size(85, 23);
+            this.editBtn.TabIndex = 4;
+            this.editBtn.Text = "Edit profile";
+            this.editBtn.UseVisualStyleBackColor = true;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
-            // button3
+            // newBtn
             // 
-            this.button3.Location = new System.Drawing.Point(667, 361);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(85, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "New profile";
-            this.button3.UseVisualStyleBackColor = true;
+            this.newBtn.Location = new System.Drawing.Point(667, 361);
+            this.newBtn.Name = "newBtn";
+            this.newBtn.Size = new System.Drawing.Size(85, 23);
+            this.newBtn.TabIndex = 5;
+            this.newBtn.Text = "New profile";
+            this.newBtn.UseVisualStyleBackColor = true;
+            // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(667, 189);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(85, 23);
+            this.exportBtn.TabIndex = 6;
+            this.exportBtn.Text = "Export profile";
+            this.exportBtn.UseVisualStyleBackColor = true;
             // 
             // ProfileScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.exportBtn);
+            this.Controls.Add(this.newBtn);
+            this.Controls.Add(this.editBtn);
+            this.Controls.Add(this.playBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.iconPanel);
             this.Controls.Add(this.listView1);
@@ -116,8 +129,9 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Panel iconPanel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button playBtn;
+        private System.Windows.Forms.Button editBtn;
+        private System.Windows.Forms.Button newBtn;
+        private System.Windows.Forms.Button exportBtn;
     }
 }

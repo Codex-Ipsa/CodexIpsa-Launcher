@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.forms;
 using MCLauncher.Properties;
 using System;
 using System.Drawing;
@@ -59,7 +60,6 @@ namespace MCLauncher.controls
             {
                 JavaLauncher jl = new JavaLauncher();
                 jl.Launch(listView1.SelectedItems[0].Text);
-
             }
         }
 
@@ -76,7 +76,28 @@ namespace MCLauncher.controls
                     iconPanel.BackgroundImage = Resources.icon;
                 }
 
-                label1.Text = "Ready to play " + listView1.SelectedItems[0].Text;
+                label1.Text = "Ready to play\n" + listView1.SelectedItems[0].Text;
+
+                Settings.sj.instance = listView1.SelectedItems[0].Text;
+                Settings.Save();
+            }
+        }
+
+        private void playBtn_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                JavaLauncher jl = new JavaLauncher();
+                jl.Launch(listView1.SelectedItems[0].Text);
+            }
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                Profile pr = new Profile(listView1.SelectedItems[0].Text, "edit");
+                pr.ShowDialog();
             }
         }
     }
