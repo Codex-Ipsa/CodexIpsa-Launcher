@@ -4,6 +4,7 @@ using MCLauncher.Properties;
 using System;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -33,6 +34,8 @@ namespace MCLauncher.controls
 
         public void reloadProfileList()
         {
+            listView1.Items.Clear();
+
             ImageList iList = new ImageList();
             iList.ImageSize = new Size(32, 32);
             iList.ColorDepth = ColorDepth.Depth32Bit;
@@ -114,6 +117,47 @@ namespace MCLauncher.controls
             {
                 Profile pr = new Profile(listView1.SelectedItems[0].Text, "edit");
                 pr.ShowDialog();
+            }
+        }
+
+        private void newBtn_Click(object sender, EventArgs e)
+        {
+            Profile pr = new Profile("New profile", "new");
+            pr.ShowDialog();
+
+            reloadProfileList();
+            Settings.sj.instance = Profile.profileName;
+            Settings.Save();
+
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(Profile.profileName);
+        }
+
+        private void importBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".zip archives|*.zip";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                using (ZipArchive archive = ZipFile.OpenRead(ofd.FileName))
+                {
+                    bool found = false;
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        if (entry.FullName == "instance.json")
+                        {
+                            ImportProfile ip = new ImportProfile(ofd.FileName);
+                            ip.ShowDialog();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found == false)
+                    {
+                        MessageBox.Show("Invalid or corrupt profile zip!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Logger.Error("[Profile]", $"Invalid or corrupt profile zip!");
+                    }
+                }
             }
         }
     }

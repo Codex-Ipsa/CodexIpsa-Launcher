@@ -222,31 +222,7 @@ namespace MCLauncher
 
         private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = ".zip archives|*.zip";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                using (ZipArchive archive = ZipFile.OpenRead(ofd.FileName))  //safer than accepted answer
-                {
-                    bool found = false;
-                    foreach (ZipArchiveEntry entry in archive.Entries)
-                    {
-                        if (entry.FullName == "instance.json")
-                        {
-                            ImportProfile ip = new ImportProfile(ofd.FileName);
-                            ip.ShowDialog();
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (found == false)
-                    {
-                        MessageBox.Show("Invalid or corrupt profile zip!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Logger.Error("[Profile]", $"Invalid or corrupt profile zip!");
-                    }
-                }
-            }
+            
         }
     }
 

@@ -65,6 +65,8 @@ namespace MCLauncher
                     JavaLauncher.modVersion = entry.version;
                 }
 
+
+
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {

@@ -36,6 +36,7 @@
             this.editBtn = new System.Windows.Forms.Button();
             this.newBtn = new System.Windows.Forms.Button();
             this.exportBtn = new System.Windows.Forms.Button();
+            this.importBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -96,6 +97,7 @@
             this.newBtn.TabIndex = 5;
             this.newBtn.Text = "New profile";
             this.newBtn.UseVisualStyleBackColor = true;
+            this.newBtn.Click += new System.EventHandler(this.newBtn_Click);
             // 
             // exportBtn
             // 
@@ -106,11 +108,22 @@
             this.exportBtn.Text = "Export profile";
             this.exportBtn.UseVisualStyleBackColor = true;
             // 
+            // importBtn
+            // 
+            this.importBtn.Location = new System.Drawing.Point(667, 332);
+            this.importBtn.Name = "importBtn";
+            this.importBtn.Size = new System.Drawing.Size(85, 23);
+            this.importBtn.TabIndex = 7;
+            this.importBtn.Text = "Import profile";
+            this.importBtn.UseVisualStyleBackColor = true;
+            this.importBtn.Click += new System.EventHandler(this.importBtn_Click);
+            // 
             // ProfileScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.importBtn);
             this.Controls.Add(this.exportBtn);
             this.Controls.Add(this.newBtn);
             this.Controls.Add(this.editBtn);
@@ -133,5 +146,6 @@
         private System.Windows.Forms.Button editBtn;
         private System.Windows.Forms.Button newBtn;
         private System.Windows.Forms.Button exportBtn;
+        private System.Windows.Forms.Button importBtn;
     }
 }

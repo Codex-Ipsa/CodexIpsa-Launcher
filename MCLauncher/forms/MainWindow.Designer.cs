@@ -34,7 +34,6 @@ namespace MCLauncher
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
@@ -60,7 +59,6 @@ namespace MCLauncher
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
             this.profilesToolStripMenuItem,
-            this.importProfileToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -85,14 +83,6 @@ namespace MCLauncher
             this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.profilesToolStripMenuItem.Text = "Profiles";
             this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
-            // 
-            // importProfileToolStripMenuItem
-            // 
-            this.importProfileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.importProfileToolStripMenuItem.Name = "importProfileToolStripMenuItem";
-            this.importProfileToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.importProfileToolStripMenuItem.Text = "Import profile";
-            this.importProfileToolStripMenuItem.Click += new System.EventHandler(this.importProfileToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -150,7 +140,6 @@ namespace MCLauncher
         private System.Windows.Forms.Panel panel3;
         public System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importProfileToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
         public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profilesToolStripMenuItem;
