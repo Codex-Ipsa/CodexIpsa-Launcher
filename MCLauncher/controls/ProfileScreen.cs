@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.controls
 {
@@ -93,6 +94,8 @@ namespace MCLauncher.controls
 
                 Settings.sj.instance = listView1.SelectedItems[0].Text;
                 Settings.Save();
+
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(listView1.SelectedItems[0].Text);
             }
         }
 
