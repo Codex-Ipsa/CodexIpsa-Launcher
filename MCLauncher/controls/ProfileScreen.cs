@@ -15,6 +15,19 @@ namespace MCLauncher.controls
             InitializeComponent();
 
             reloadProfileList();
+
+            int found = 0;
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                if (listView1.Items[i].Text == Settings.sj.instance)
+                {
+                    Logger.Info("[ProfileScreen]", "Latest found: " + listView1.Items[i].Text);
+                    found = i;
+                    break;
+                }
+            }
+
+            listView1.Items[found].Selected = true;
         }
 
         public void reloadProfileList()
