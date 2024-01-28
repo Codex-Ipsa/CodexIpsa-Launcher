@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.controls
 {
