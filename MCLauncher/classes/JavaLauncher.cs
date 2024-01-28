@@ -17,6 +17,8 @@ namespace MCLauncher.classes
 {
     internal class JavaLauncher
     {
+        //TODO
+        //Possibly rewrite all of this shit before you're going to make the MMC like selection
         public static string msPlayerName;
         public static string msPlayerUUID;
         public static string msPlayerAccessToken;
@@ -206,7 +208,7 @@ namespace MCLauncher.classes
                 {
                     //TODO check against actual filesizes, this will do for now:tm:
                     FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{lib.name}.jar");
-                    if(fi.Length == 0)
+                    if (fi.Length == 0)
                     {
                         //delete and redownload
                         File.Delete($"{Globals.dataPath}\\libs\\{lib.name}.jar");
@@ -392,7 +394,7 @@ namespace MCLauncher.classes
 
         static void TimerTick(object objectInfo)
         {
-            Console.WriteLine("oppa!", objectInfo);
+            //Console.WriteLine("oppa!", objectInfo);
             runTime++;
         }
 
@@ -405,7 +407,7 @@ namespace MCLauncher.classes
                     Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\", true);
 
             timer.Change(Timeout.Infinite, Timeout.Infinite);
-            Console.WriteLine("Total runtime for this session: " + runTime);
+            Logger.Info("[JavaLauncher]", "Total runtime for this session: " + runTime);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
