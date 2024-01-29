@@ -51,7 +51,7 @@
             this.quiltPage = new System.Windows.Forms.TabPage();
             this.neoforgePage = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
             this.chkAssetIndex = new System.Windows.Forms.CheckBox();
             this.assetIndexBtn = new System.Windows.Forms.Button();
@@ -113,7 +113,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(362, 375);
+            this.tabControl1.Size = new System.Drawing.Size(362, 383);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -132,7 +132,7 @@
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 40);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(354, 331);
+            this.vanillaPage.Size = new System.Drawing.Size(354, 339);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             this.vanillaExperimental.AutoSize = true;
             this.vanillaExperimental.Checked = true;
             this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(210, 309);
+            this.vanillaExperimental.Location = new System.Drawing.Point(208, 319);
             this.vanillaExperimental.Name = "vanillaExperimental";
             this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
             this.vanillaExperimental.TabIndex = 9;
@@ -155,7 +155,7 @@
             this.vanillaSnapshot.AutoSize = true;
             this.vanillaSnapshot.Checked = true;
             this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(133, 309);
+            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 319);
             this.vanillaSnapshot.Name = "vanillaSnapshot";
             this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
             this.vanillaSnapshot.TabIndex = 8;
@@ -168,7 +168,7 @@
             this.vanillaRelease.AutoSize = true;
             this.vanillaRelease.Checked = true;
             this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(62, 309);
+            this.vanillaRelease.Location = new System.Drawing.Point(60, 319);
             this.vanillaRelease.Name = "vanillaRelease";
             this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
             this.vanillaRelease.TabIndex = 7;
@@ -181,7 +181,7 @@
             this.vanillaBeta.AutoSize = true;
             this.vanillaBeta.Checked = true;
             this.vanillaBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaBeta.Location = new System.Drawing.Point(8, 309);
+            this.vanillaBeta.Location = new System.Drawing.Point(6, 319);
             this.vanillaBeta.Name = "vanillaBeta";
             this.vanillaBeta.Size = new System.Drawing.Size(48, 17);
             this.vanillaBeta.TabIndex = 6;
@@ -194,7 +194,7 @@
             this.vanillaAlpha.AutoSize = true;
             this.vanillaAlpha.Checked = true;
             this.vanillaAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaAlpha.Location = new System.Drawing.Point(277, 286);
+            this.vanillaAlpha.Location = new System.Drawing.Point(275, 296);
             this.vanillaAlpha.Name = "vanillaAlpha";
             this.vanillaAlpha.Size = new System.Drawing.Size(53, 17);
             this.vanillaAlpha.TabIndex = 5;
@@ -207,7 +207,7 @@
             this.vanillaInfdev.AutoSize = true;
             this.vanillaInfdev.Checked = true;
             this.vanillaInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaInfdev.Location = new System.Drawing.Point(215, 286);
+            this.vanillaInfdev.Location = new System.Drawing.Point(213, 296);
             this.vanillaInfdev.Name = "vanillaInfdev";
             this.vanillaInfdev.Size = new System.Drawing.Size(56, 17);
             this.vanillaInfdev.TabIndex = 4;
@@ -220,7 +220,7 @@
             this.vanillaIndev.AutoSize = true;
             this.vanillaIndev.Checked = true;
             this.vanillaIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaIndev.Location = new System.Drawing.Point(156, 286);
+            this.vanillaIndev.Location = new System.Drawing.Point(154, 296);
             this.vanillaIndev.Name = "vanillaIndev";
             this.vanillaIndev.Size = new System.Drawing.Size(53, 17);
             this.vanillaIndev.TabIndex = 3;
@@ -233,7 +233,7 @@
             this.vanillaClassic.AutoSize = true;
             this.vanillaClassic.Checked = true;
             this.vanillaClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaClassic.Location = new System.Drawing.Point(91, 286);
+            this.vanillaClassic.Location = new System.Drawing.Point(89, 296);
             this.vanillaClassic.Name = "vanillaClassic";
             this.vanillaClassic.Size = new System.Drawing.Size(59, 17);
             this.vanillaClassic.TabIndex = 2;
@@ -246,7 +246,7 @@
             this.vanillaPreclassic.AutoSize = true;
             this.vanillaPreclassic.Checked = true;
             this.vanillaPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaPreclassic.Location = new System.Drawing.Point(8, 286);
+            this.vanillaPreclassic.Location = new System.Drawing.Point(6, 296);
             this.vanillaPreclassic.Name = "vanillaPreclassic";
             this.vanillaPreclassic.Size = new System.Drawing.Size(77, 17);
             this.vanillaPreclassic.TabIndex = 1;
@@ -262,7 +262,7 @@
             this.vanillaList.Location = new System.Drawing.Point(3, 3);
             this.vanillaList.MultiSelect = false;
             this.vanillaList.Name = "vanillaList";
-            this.vanillaList.Size = new System.Drawing.Size(348, 277);
+            this.vanillaList.Size = new System.Drawing.Size(348, 287);
             this.vanillaList.TabIndex = 0;
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
@@ -359,15 +359,15 @@
             this.imageList1.Images.SetKeyName(4, "quilt.png");
             this.imageList1.Images.SetKeyName(5, "neoforge.png");
             // 
-            // button1
+            // saveBtn
             // 
-            this.button1.Location = new System.Drawing.Point(708, 344);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Create";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.saveBtn.Location = new System.Drawing.Point(708, 356);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 1;
+            this.saveBtn.Text = "Create";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // grbForExp
             // 
@@ -382,7 +382,7 @@
             this.grbForExp.Controls.Add(this.jsonBox);
             this.grbForExp.Controls.Add(this.javaBox);
             this.grbForExp.Controls.Add(this.javaBtn);
-            this.grbForExp.Location = new System.Drawing.Point(366, 210);
+            this.grbForExp.Location = new System.Drawing.Point(366, 228);
             this.grbForExp.Name = "grbForExp";
             this.grbForExp.Size = new System.Drawing.Size(425, 124);
             this.grbForExp.TabIndex = 29;
@@ -511,7 +511,7 @@
             this.grbGame.Controls.Add(this.dirBox);
             this.grbGame.Location = new System.Drawing.Point(366, 2);
             this.grbGame.Name = "grbGame";
-            this.grbGame.Size = new System.Drawing.Size(425, 202);
+            this.grbGame.Size = new System.Drawing.Size(425, 220);
             this.grbGame.TabIndex = 28;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
@@ -528,7 +528,7 @@
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(188, 175);
+            this.chkOffline.Location = new System.Drawing.Point(9, 200);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(77, 17);
             this.chkOffline.TabIndex = 23;
@@ -538,7 +538,7 @@
             // chkUseDemo
             // 
             this.chkUseDemo.AutoSize = true;
-            this.chkUseDemo.Location = new System.Drawing.Point(88, 175);
+            this.chkUseDemo.Location = new System.Drawing.Point(237, 177);
             this.chkUseDemo.Name = "chkUseDemo";
             this.chkUseDemo.Size = new System.Drawing.Size(94, 17);
             this.chkUseDemo.TabIndex = 22;
@@ -558,7 +558,7 @@
             // chkMulti
             // 
             this.chkMulti.AutoSize = true;
-            this.chkMulti.Location = new System.Drawing.Point(271, 175);
+            this.chkMulti.Location = new System.Drawing.Point(237, 200);
             this.chkMulti.Name = "chkMulti";
             this.chkMulti.Size = new System.Drawing.Size(69, 17);
             this.chkMulti.TabIndex = 24;
@@ -616,7 +616,7 @@
             0,
             0});
             this.ramMaxBox.Name = "ramMaxBox";
-            this.ramMaxBox.Size = new System.Drawing.Size(150, 20);
+            this.ramMaxBox.Size = new System.Drawing.Size(140, 20);
             this.ramMaxBox.TabIndex = 17;
             this.ramMaxBox.Value = new decimal(new int[] {
             128,
@@ -631,7 +631,7 @@
             0,
             0,
             0});
-            this.ramMinBox.Location = new System.Drawing.Point(282, 97);
+            this.ramMinBox.Location = new System.Drawing.Point(277, 97);
             this.ramMinBox.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -643,7 +643,7 @@
             0,
             0});
             this.ramMinBox.Name = "ramMinBox";
-            this.ramMinBox.Size = new System.Drawing.Size(150, 20);
+            this.ramMinBox.Size = new System.Drawing.Size(140, 20);
             this.ramMinBox.TabIndex = 18;
             this.ramMinBox.Value = new decimal(new int[] {
             128,
@@ -654,7 +654,7 @@
             // lblMemMin
             // 
             this.lblMemMin.AutoSize = true;
-            this.lblMemMin.Location = new System.Drawing.Point(257, 99);
+            this.lblMemMin.Location = new System.Drawing.Point(246, 99);
             this.lblMemMin.Name = "lblMemMin";
             this.lblMemMin.Size = new System.Drawing.Size(60, 13);
             this.lblMemMin.TabIndex = 17;
@@ -680,22 +680,22 @@
             // 
             // resXBox
             // 
-            this.resXBox.Location = new System.Drawing.Point(101, 71);
+            this.resXBox.Location = new System.Drawing.Point(100, 71);
             this.resXBox.Name = "resXBox";
-            this.resXBox.Size = new System.Drawing.Size(150, 20);
+            this.resXBox.Size = new System.Drawing.Size(140, 20);
             this.resXBox.TabIndex = 15;
             // 
             // resYBox
             // 
-            this.resYBox.Location = new System.Drawing.Point(283, 71);
+            this.resYBox.Location = new System.Drawing.Point(277, 71);
             this.resYBox.Name = "resYBox";
-            this.resYBox.Size = new System.Drawing.Size(150, 20);
+            this.resYBox.Size = new System.Drawing.Size(140, 20);
             this.resYBox.TabIndex = 16;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(261, 74);
+            this.label5.Location = new System.Drawing.Point(254, 74);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 13);
             this.label5.TabIndex = 13;
@@ -755,10 +755,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 379);
+            this.ClientSize = new System.Drawing.Size(795, 385);
             this.Controls.Add(this.grbForExp);
             this.Controls.Add(this.grbGame);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NewInstance";
@@ -779,7 +779,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.TabPage vanillaPage;
         private System.Windows.Forms.TabPage ipsaPage;
         private System.Windows.Forms.TabPage forgePage;

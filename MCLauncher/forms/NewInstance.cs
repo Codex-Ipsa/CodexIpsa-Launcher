@@ -2,14 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -19,7 +12,31 @@ namespace MCLauncher.forms
         {
             InitializeComponent();
 
-            //TODO load lang
+            //disable resize
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
+            //load lang
+            grbGame.Text = Strings.grbGame;
+            lblProfName.Text = Strings.lblProfName;
+            lblGameDir.Text = Strings.lblGameDir;
+            lblReso.Text = Strings.lblReso;
+            lblMem.Text = Strings.lblMem;
+            lblMemMax.Text = Strings.lblMemMax;
+            lblMemMin.Text = Strings.lblMemMin;
+            lblBefCmd.Text = Strings.lblBefCmd;
+            lblAftCmd.Text = Strings.lblAftCmd;
+            chkProxy.Text = Strings.chkProxy;
+            chkUseDemo.Text = Strings.chkUseDemo;
+            chkOffline.Text = Strings.chkOffline;
+            chkMulti.Text = Strings.chkMulti;
+            grbForExp.Text = Strings.grbForExp;
+            chkCustJava.Text = Strings.chkCustJava;
+            chkCustJson.Text = Strings.chkCustJson;
+            chkClasspath.Text = Strings.chkClasspath;
+            chkAssetIndex.Text = Strings.chkAssetIndex;
+            saveBtn.Text = Strings.createProfile;
 
             //fill in stuff
             populateLists();
