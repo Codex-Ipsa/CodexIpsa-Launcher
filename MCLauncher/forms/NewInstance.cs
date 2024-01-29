@@ -39,16 +39,31 @@ namespace MCLauncher.forms
             saveBtn.Text = Strings.createProfile;
 
             //disable tabs that don't work yet
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
 
-            //fill in stuff
+            //fill in shared stuff
+            nameBox.Text = "New profile";
+            ramMinBox.Value = 512;
+            ramMaxBox.Value = 512;
+            resXBox.Text = "854";
+            resYBox.Text = "480";
+            javaBox.Enabled = false;
+            javaBtn.Enabled = false;
+            jsonBox.Enabled = false;
+            jsonBtn.Enabled = false;
+            classBox.Enabled = false;
+            assetIndexBox.Enabled = false;
+            assetIndexBtn.Enabled = false;
+
+
+            //fill in edition specific stuff
             populateLists();
         }
 
@@ -131,6 +146,60 @@ namespace MCLauncher.forms
         {
             e.Cancel = true;
             e.NewWidth = vanillaList.Columns[e.ColumnIndex].Width;
+        }
+
+        private void chkCustJava_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCustJava.Checked)
+            {
+                javaBox.Enabled = true;
+                javaBtn.Enabled = true;
+            }
+            else
+            {
+                javaBox.Enabled = false;
+                javaBtn.Enabled = false;
+            }
+        }
+
+        private void chkCustJson_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCustJson.Checked)
+            {
+                jsonBox.Enabled = true;
+                jsonBtn.Enabled = true;
+            }
+            else
+            {
+                jsonBox.Enabled = false;
+                jsonBtn.Enabled = false;
+            }
+        }
+
+        private void chkClasspath_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkClasspath.Checked)
+            {
+                classBox.Enabled = true;
+            }
+            else
+            {
+                classBox.Enabled = false;
+            }
+        }
+
+        private void chkAssetIndex_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkAssetIndex.Checked)
+            {
+                assetIndexBox.Enabled = true;
+                assetIndexBtn.Enabled = true;
+            }
+            else
+            {
+                assetIndexBox.Enabled = false;
+                assetIndexBtn.Enabled = false;
+            }
         }
     }
 }

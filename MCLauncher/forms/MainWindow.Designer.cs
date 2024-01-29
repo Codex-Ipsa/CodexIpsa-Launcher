@@ -78,10 +78,12 @@ namespace MCLauncher
             // 
             // profilesToolStripMenuItem
             // 
+            this.profilesToolStripMenuItem.Enabled = false;
             this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
             this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.profilesToolStripMenuItem.Text = "Profiles";
+            this.profilesToolStripMenuItem.Visible = false;
             this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem

@@ -65,7 +65,6 @@
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.grbGame = new System.Windows.Forms.GroupBox();
-            this.iconBtn = new System.Windows.Forms.Button();
             this.chkOffline = new System.Windows.Forms.CheckBox();
             this.chkUseDemo = new System.Windows.Forms.CheckBox();
             this.chkProxy = new System.Windows.Forms.CheckBox();
@@ -398,6 +397,7 @@
             this.chkAssetIndex.TabIndex = 36;
             this.chkAssetIndex.Text = "chk.AssetIndex";
             this.chkAssetIndex.UseVisualStyleBackColor = true;
+            this.chkAssetIndex.CheckedChanged += new System.EventHandler(this.chkAssetIndex_CheckedChanged);
             // 
             // assetIndexBtn
             // 
@@ -424,6 +424,7 @@
             this.chkCustJava.TabIndex = 26;
             this.chkCustJava.Text = "chk.CustJava";
             this.chkCustJava.UseVisualStyleBackColor = true;
+            this.chkCustJava.CheckedChanged += new System.EventHandler(this.chkCustJava_CheckedChanged);
             // 
             // chkCustJson
             // 
@@ -434,6 +435,7 @@
             this.chkCustJson.TabIndex = 29;
             this.chkCustJson.Text = "chk.CustJson";
             this.chkCustJson.UseVisualStyleBackColor = true;
+            this.chkCustJson.CheckedChanged += new System.EventHandler(this.chkCustJson_CheckedChanged);
             // 
             // classBox
             // 
@@ -451,6 +453,7 @@
             this.chkClasspath.TabIndex = 32;
             this.chkClasspath.Text = "chk.Classpath";
             this.chkClasspath.UseVisualStyleBackColor = true;
+            this.chkClasspath.CheckedChanged += new System.EventHandler(this.chkClasspath_CheckedChanged);
             // 
             // jsonBtn
             // 
@@ -486,7 +489,6 @@
             // 
             // grbGame
             // 
-            this.grbGame.Controls.Add(this.iconBtn);
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
             this.grbGame.Controls.Add(this.chkProxy);
@@ -515,15 +517,6 @@
             this.grbGame.TabIndex = 28;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
-            // 
-            // iconBtn
-            // 
-            this.iconBtn.Location = new System.Drawing.Point(6, 19);
-            this.iconBtn.Name = "iconBtn";
-            this.iconBtn.Size = new System.Drawing.Size(50, 50);
-            this.iconBtn.TabIndex = 25;
-            this.iconBtn.Text = "(icon)";
-            this.iconBtn.UseVisualStyleBackColor = true;
             // 
             // chkOffline
             // 
@@ -704,7 +697,7 @@
             // lblProfName
             // 
             this.lblProfName.AutoSize = true;
-            this.lblProfName.Location = new System.Drawing.Point(62, 22);
+            this.lblProfName.Location = new System.Drawing.Point(6, 22);
             this.lblProfName.Name = "lblProfName";
             this.lblProfName.Size = new System.Drawing.Size(67, 13);
             this.lblProfName.TabIndex = 3;
@@ -713,7 +706,7 @@
             // lblGameDir
             // 
             this.lblGameDir.AutoSize = true;
-            this.lblGameDir.Location = new System.Drawing.Point(62, 49);
+            this.lblGameDir.Location = new System.Drawing.Point(6, 48);
             this.lblGameDir.Name = "lblGameDir";
             this.lblGameDir.Size = new System.Drawing.Size(61, 13);
             this.lblGameDir.TabIndex = 5;
@@ -739,16 +732,16 @@
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(154, 19);
+            this.nameBox.Location = new System.Drawing.Point(99, 19);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(263, 20);
+            this.nameBox.Size = new System.Drawing.Size(318, 20);
             this.nameBox.TabIndex = 12;
             // 
             // dirBox
             // 
-            this.dirBox.Location = new System.Drawing.Point(154, 45);
+            this.dirBox.Location = new System.Drawing.Point(99, 45);
             this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(218, 20);
+            this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
             // NewInstance
@@ -808,7 +801,6 @@
         private System.Windows.Forms.TextBox javaBox;
         private System.Windows.Forms.Button javaBtn;
         private System.Windows.Forms.GroupBox grbGame;
-        private System.Windows.Forms.Button iconBtn;
         private System.Windows.Forms.CheckBox chkOffline;
         private System.Windows.Forms.CheckBox chkUseDemo;
         private System.Windows.Forms.CheckBox chkProxy;
