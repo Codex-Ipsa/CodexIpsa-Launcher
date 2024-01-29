@@ -32,20 +32,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewInstance));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.vanillaPage = new System.Windows.Forms.TabPage();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.vanillaExperimental = new System.Windows.Forms.CheckBox();
+            this.vanillaSnapshot = new System.Windows.Forms.CheckBox();
+            this.vanillaRelease = new System.Windows.Forms.CheckBox();
+            this.vanillaBeta = new System.Windows.Forms.CheckBox();
+            this.vanillaAlpha = new System.Windows.Forms.CheckBox();
+            this.vanillaInfdev = new System.Windows.Forms.CheckBox();
+            this.vanillaIndev = new System.Windows.Forms.CheckBox();
+            this.vanillaClassic = new System.Windows.Forms.CheckBox();
+            this.vanillaPreclassic = new System.Windows.Forms.CheckBox();
             this.vanillaList = new System.Windows.Forms.ListView();
             this.ipsaPage = new System.Windows.Forms.TabPage();
+            this.eduPage = new System.Windows.Forms.TabPage();
+            this.xboxPage = new System.Windows.Forms.TabPage();
             this.forgePage = new System.Windows.Forms.TabPage();
             this.fabricPage = new System.Windows.Forms.TabPage();
-            this.xboxPage = new System.Windows.Forms.TabPage();
+            this.risugamiPage = new System.Windows.Forms.TabPage();
+            this.quiltPage = new System.Windows.Forms.TabPage();
+            this.neoforgePage = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
             this.chkAssetIndex = new System.Windows.Forms.CheckBox();
@@ -83,11 +88,6 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.eduPage = new System.Windows.Forms.TabPage();
-            this.risugamiPage = new System.Windows.Forms.TabPage();
-            this.quiltPage = new System.Windows.Forms.TabPage();
-            this.neoforgePage = new System.Windows.Forms.TabPage();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.grbForExp.SuspendLayout();
@@ -115,18 +115,19 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(362, 375);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // vanillaPage
             // 
-            this.vanillaPage.Controls.Add(this.checkBox9);
-            this.vanillaPage.Controls.Add(this.checkBox8);
-            this.vanillaPage.Controls.Add(this.checkBox7);
-            this.vanillaPage.Controls.Add(this.checkBox6);
-            this.vanillaPage.Controls.Add(this.checkBox5);
-            this.vanillaPage.Controls.Add(this.checkBox4);
-            this.vanillaPage.Controls.Add(this.checkBox3);
-            this.vanillaPage.Controls.Add(this.checkBox2);
-            this.vanillaPage.Controls.Add(this.checkBox1);
+            this.vanillaPage.Controls.Add(this.vanillaExperimental);
+            this.vanillaPage.Controls.Add(this.vanillaSnapshot);
+            this.vanillaPage.Controls.Add(this.vanillaRelease);
+            this.vanillaPage.Controls.Add(this.vanillaBeta);
+            this.vanillaPage.Controls.Add(this.vanillaAlpha);
+            this.vanillaPage.Controls.Add(this.vanillaInfdev);
+            this.vanillaPage.Controls.Add(this.vanillaIndev);
+            this.vanillaPage.Controls.Add(this.vanillaClassic);
+            this.vanillaPage.Controls.Add(this.vanillaPreclassic);
             this.vanillaPage.Controls.Add(this.vanillaList);
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 40);
@@ -136,122 +137,173 @@
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
             // 
-            // checkBox9
+            // vanillaExperimental
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(210, 309);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(86, 17);
-            this.checkBox9.TabIndex = 9;
-            this.checkBox9.Text = "Experimental";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.vanillaExperimental.AutoSize = true;
+            this.vanillaExperimental.Checked = true;
+            this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaExperimental.Location = new System.Drawing.Point(210, 309);
+            this.vanillaExperimental.Name = "vanillaExperimental";
+            this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
+            this.vanillaExperimental.TabIndex = 9;
+            this.vanillaExperimental.Text = "Experimental";
+            this.vanillaExperimental.UseVisualStyleBackColor = true;
+            this.vanillaExperimental.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox8
+            // vanillaSnapshot
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(133, 309);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(71, 17);
-            this.checkBox8.TabIndex = 8;
-            this.checkBox8.Text = "Snapshot";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.vanillaSnapshot.AutoSize = true;
+            this.vanillaSnapshot.Checked = true;
+            this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaSnapshot.Location = new System.Drawing.Point(133, 309);
+            this.vanillaSnapshot.Name = "vanillaSnapshot";
+            this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
+            this.vanillaSnapshot.TabIndex = 8;
+            this.vanillaSnapshot.Text = "Snapshot";
+            this.vanillaSnapshot.UseVisualStyleBackColor = true;
+            this.vanillaSnapshot.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox7
+            // vanillaRelease
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(62, 309);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(65, 17);
-            this.checkBox7.TabIndex = 7;
-            this.checkBox7.Text = "Release";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.vanillaRelease.AutoSize = true;
+            this.vanillaRelease.Checked = true;
+            this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaRelease.Location = new System.Drawing.Point(62, 309);
+            this.vanillaRelease.Name = "vanillaRelease";
+            this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
+            this.vanillaRelease.TabIndex = 7;
+            this.vanillaRelease.Text = "Release";
+            this.vanillaRelease.UseVisualStyleBackColor = true;
+            this.vanillaRelease.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox6
+            // vanillaBeta
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(8, 309);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(48, 17);
-            this.checkBox6.TabIndex = 6;
-            this.checkBox6.Text = "Beta";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.vanillaBeta.AutoSize = true;
+            this.vanillaBeta.Checked = true;
+            this.vanillaBeta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaBeta.Location = new System.Drawing.Point(8, 309);
+            this.vanillaBeta.Name = "vanillaBeta";
+            this.vanillaBeta.Size = new System.Drawing.Size(48, 17);
+            this.vanillaBeta.TabIndex = 6;
+            this.vanillaBeta.Text = "Beta";
+            this.vanillaBeta.UseVisualStyleBackColor = true;
+            this.vanillaBeta.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox5
+            // vanillaAlpha
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(277, 286);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(53, 17);
-            this.checkBox5.TabIndex = 5;
-            this.checkBox5.Text = "Alpha";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.vanillaAlpha.AutoSize = true;
+            this.vanillaAlpha.Checked = true;
+            this.vanillaAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaAlpha.Location = new System.Drawing.Point(277, 286);
+            this.vanillaAlpha.Name = "vanillaAlpha";
+            this.vanillaAlpha.Size = new System.Drawing.Size(53, 17);
+            this.vanillaAlpha.TabIndex = 5;
+            this.vanillaAlpha.Text = "Alpha";
+            this.vanillaAlpha.UseVisualStyleBackColor = true;
+            this.vanillaAlpha.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox4
+            // vanillaInfdev
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(215, 286);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(56, 17);
-            this.checkBox4.TabIndex = 4;
-            this.checkBox4.Text = "Infdev";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.vanillaInfdev.AutoSize = true;
+            this.vanillaInfdev.Checked = true;
+            this.vanillaInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaInfdev.Location = new System.Drawing.Point(215, 286);
+            this.vanillaInfdev.Name = "vanillaInfdev";
+            this.vanillaInfdev.Size = new System.Drawing.Size(56, 17);
+            this.vanillaInfdev.TabIndex = 4;
+            this.vanillaInfdev.Text = "Infdev";
+            this.vanillaInfdev.UseVisualStyleBackColor = true;
+            this.vanillaInfdev.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox3
+            // vanillaIndev
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(156, 286);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(53, 17);
-            this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "Indev";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.vanillaIndev.AutoSize = true;
+            this.vanillaIndev.Checked = true;
+            this.vanillaIndev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaIndev.Location = new System.Drawing.Point(156, 286);
+            this.vanillaIndev.Name = "vanillaIndev";
+            this.vanillaIndev.Size = new System.Drawing.Size(53, 17);
+            this.vanillaIndev.TabIndex = 3;
+            this.vanillaIndev.Text = "Indev";
+            this.vanillaIndev.UseVisualStyleBackColor = true;
+            this.vanillaIndev.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox2
+            // vanillaClassic
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(91, 286);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(59, 17);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "Classic";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.vanillaClassic.AutoSize = true;
+            this.vanillaClassic.Checked = true;
+            this.vanillaClassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaClassic.Location = new System.Drawing.Point(91, 286);
+            this.vanillaClassic.Name = "vanillaClassic";
+            this.vanillaClassic.Size = new System.Drawing.Size(59, 17);
+            this.vanillaClassic.TabIndex = 2;
+            this.vanillaClassic.Text = "Classic";
+            this.vanillaClassic.UseVisualStyleBackColor = true;
+            this.vanillaClassic.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
-            // checkBox1
+            // vanillaPreclassic
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(8, 286);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(77, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Pre-classic";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.vanillaPreclassic.AutoSize = true;
+            this.vanillaPreclassic.Checked = true;
+            this.vanillaPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.vanillaPreclassic.Location = new System.Drawing.Point(8, 286);
+            this.vanillaPreclassic.Name = "vanillaPreclassic";
+            this.vanillaPreclassic.Size = new System.Drawing.Size(77, 17);
+            this.vanillaPreclassic.TabIndex = 1;
+            this.vanillaPreclassic.Text = "Pre-classic";
+            this.vanillaPreclassic.UseVisualStyleBackColor = true;
+            this.vanillaPreclassic.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaList
             // 
+            this.vanillaList.FullRowSelect = true;
+            this.vanillaList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.vanillaList.HideSelection = false;
             this.vanillaList.Location = new System.Drawing.Point(3, 3);
+            this.vanillaList.MultiSelect = false;
             this.vanillaList.Name = "vanillaList";
             this.vanillaList.Size = new System.Drawing.Size(348, 277);
             this.vanillaList.TabIndex = 0;
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
+            this.vanillaList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.vanillaList_ColumnWidthChanging);
             // 
             // ipsaPage
             // 
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(369, 349);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 331);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
+            // 
+            // eduPage
+            // 
+            this.eduPage.ImageIndex = 0;
+            this.eduPage.Location = new System.Drawing.Point(4, 40);
+            this.eduPage.Name = "eduPage";
+            this.eduPage.Size = new System.Drawing.Size(354, 331);
+            this.eduPage.TabIndex = 5;
+            this.eduPage.Text = "MinecraftEdu";
+            this.eduPage.UseVisualStyleBackColor = true;
+            // 
+            // xboxPage
+            // 
+            this.xboxPage.ImageIndex = 0;
+            this.xboxPage.Location = new System.Drawing.Point(4, 40);
+            this.xboxPage.Name = "xboxPage";
+            this.xboxPage.Size = new System.Drawing.Size(354, 331);
+            this.xboxPage.TabIndex = 4;
+            this.xboxPage.Text = "Xbox 360";
+            this.xboxPage.UseVisualStyleBackColor = true;
             // 
             // forgePage
             // 
             this.forgePage.ImageIndex = 2;
             this.forgePage.Location = new System.Drawing.Point(4, 40);
             this.forgePage.Name = "forgePage";
-            this.forgePage.Size = new System.Drawing.Size(369, 331);
+            this.forgePage.Size = new System.Drawing.Size(354, 331);
             this.forgePage.TabIndex = 2;
             this.forgePage.Text = "Forge";
             this.forgePage.UseVisualStyleBackColor = true;
@@ -261,20 +313,51 @@
             this.fabricPage.ImageIndex = 3;
             this.fabricPage.Location = new System.Drawing.Point(4, 40);
             this.fabricPage.Name = "fabricPage";
-            this.fabricPage.Size = new System.Drawing.Size(369, 331);
+            this.fabricPage.Size = new System.Drawing.Size(354, 331);
             this.fabricPage.TabIndex = 3;
             this.fabricPage.Text = "Fabric";
             this.fabricPage.UseVisualStyleBackColor = true;
             // 
-            // xboxPage
+            // risugamiPage
             // 
-            this.xboxPage.ImageIndex = 0;
-            this.xboxPage.Location = new System.Drawing.Point(4, 22);
-            this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(369, 349);
-            this.xboxPage.TabIndex = 4;
-            this.xboxPage.Text = "Xbox 360";
-            this.xboxPage.UseVisualStyleBackColor = true;
+            this.risugamiPage.ImageIndex = 0;
+            this.risugamiPage.Location = new System.Drawing.Point(4, 40);
+            this.risugamiPage.Name = "risugamiPage";
+            this.risugamiPage.Size = new System.Drawing.Size(354, 331);
+            this.risugamiPage.TabIndex = 6;
+            this.risugamiPage.Text = "ModLoader";
+            this.risugamiPage.UseVisualStyleBackColor = true;
+            // 
+            // quiltPage
+            // 
+            this.quiltPage.ImageIndex = 4;
+            this.quiltPage.Location = new System.Drawing.Point(4, 40);
+            this.quiltPage.Name = "quiltPage";
+            this.quiltPage.Size = new System.Drawing.Size(354, 331);
+            this.quiltPage.TabIndex = 7;
+            this.quiltPage.Text = "Quilt";
+            this.quiltPage.UseVisualStyleBackColor = true;
+            // 
+            // neoforgePage
+            // 
+            this.neoforgePage.ImageIndex = 5;
+            this.neoforgePage.Location = new System.Drawing.Point(4, 40);
+            this.neoforgePage.Name = "neoforgePage";
+            this.neoforgePage.Size = new System.Drawing.Size(354, 331);
+            this.neoforgePage.TabIndex = 8;
+            this.neoforgePage.Text = "NeoForge";
+            this.neoforgePage.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "grass.png");
+            this.imageList1.Images.SetKeyName(1, "ipsa.png");
+            this.imageList1.Images.SetKeyName(2, "forge.png");
+            this.imageList1.Images.SetKeyName(3, "fabric.png");
+            this.imageList1.Images.SetKeyName(4, "quilt.png");
+            this.imageList1.Images.SetKeyName(5, "neoforge.png");
             // 
             // button1
             // 
@@ -668,57 +751,6 @@
             this.dirBox.Size = new System.Drawing.Size(218, 20);
             this.dirBox.TabIndex = 13;
             // 
-            // eduPage
-            // 
-            this.eduPage.ImageIndex = 0;
-            this.eduPage.Location = new System.Drawing.Point(4, 22);
-            this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(369, 349);
-            this.eduPage.TabIndex = 5;
-            this.eduPage.Text = "MinecraftEdu";
-            this.eduPage.UseVisualStyleBackColor = true;
-            // 
-            // risugamiPage
-            // 
-            this.risugamiPage.ImageIndex = 0;
-            this.risugamiPage.Location = new System.Drawing.Point(4, 40);
-            this.risugamiPage.Name = "risugamiPage";
-            this.risugamiPage.Size = new System.Drawing.Size(369, 331);
-            this.risugamiPage.TabIndex = 6;
-            this.risugamiPage.Text = "ModLoader";
-            this.risugamiPage.UseVisualStyleBackColor = true;
-            // 
-            // quiltPage
-            // 
-            this.quiltPage.ImageIndex = 4;
-            this.quiltPage.Location = new System.Drawing.Point(4, 40);
-            this.quiltPage.Name = "quiltPage";
-            this.quiltPage.Size = new System.Drawing.Size(369, 331);
-            this.quiltPage.TabIndex = 7;
-            this.quiltPage.Text = "Quilt";
-            this.quiltPage.UseVisualStyleBackColor = true;
-            // 
-            // neoforgePage
-            // 
-            this.neoforgePage.ImageIndex = 5;
-            this.neoforgePage.Location = new System.Drawing.Point(4, 40);
-            this.neoforgePage.Name = "neoforgePage";
-            this.neoforgePage.Size = new System.Drawing.Size(369, 331);
-            this.neoforgePage.TabIndex = 8;
-            this.neoforgePage.Text = "NeoForge";
-            this.neoforgePage.UseVisualStyleBackColor = true;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "grass.png");
-            this.imageList1.Images.SetKeyName(1, "ipsa.png");
-            this.imageList1.Images.SetKeyName(2, "forge.png");
-            this.imageList1.Images.SetKeyName(3, "fabric.png");
-            this.imageList1.Images.SetKeyName(4, "quilt.png");
-            this.imageList1.Images.SetKeyName(5, "neoforge.png");
-            // 
             // NewInstance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -754,15 +786,15 @@
         private System.Windows.Forms.TabPage fabricPage;
         private System.Windows.Forms.TabPage xboxPage;
         private System.Windows.Forms.ListView vanillaList;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox vanillaExperimental;
+        private System.Windows.Forms.CheckBox vanillaSnapshot;
+        private System.Windows.Forms.CheckBox vanillaRelease;
+        private System.Windows.Forms.CheckBox vanillaBeta;
+        private System.Windows.Forms.CheckBox vanillaAlpha;
+        private System.Windows.Forms.CheckBox vanillaInfdev;
+        private System.Windows.Forms.CheckBox vanillaIndev;
+        private System.Windows.Forms.CheckBox vanillaClassic;
+        private System.Windows.Forms.CheckBox vanillaPreclassic;
         private System.Windows.Forms.GroupBox grbForExp;
         private System.Windows.Forms.CheckBox chkAssetIndex;
         private System.Windows.Forms.Button assetIndexBtn;
