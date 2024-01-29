@@ -27,6 +27,8 @@ namespace MCLauncher
         public MainWindow()
         {
             Instance = this;
+            Directory.CreateDirectory(".codexipsa");
+
             Settings.Reload();
             InitializeComponent();
             loadMainWindow();
