@@ -137,6 +137,7 @@ namespace MCLauncher.forms
             //TODO (hell)
             if(tabControl1.SelectedTab.Text == "Vanilla")
             {
+                //create Instance json
                 InstanceJson ij = new InstanceJson();
                 ij.data = 3;
                 ij.edition = "java";
@@ -164,9 +165,24 @@ namespace MCLauncher.forms
 
                 ij.xboxDemo = false;
 
-
                 string json = JsonConvert.SerializeObject(ij);
                 Console.WriteLine(json);
+
+
+                //remove illegal characters from name
+                string profileName = nameBox.Text.Replace("\\", "")
+                    .Replace("/", "")
+                    .Replace(":", "")
+                    .Replace("*", "")
+                    .Replace("?", "")
+                    .Replace("\"", "")
+                    .Replace("<", "")
+                    .Replace(">", "")
+                    .Replace("|", "");
+
+                //TODO CHECK IF PROFILE ALREADY EXISTS => add _X
+
+                //TODO WRITE INSTANCE INFO AND STUFF
             }
         }
 
