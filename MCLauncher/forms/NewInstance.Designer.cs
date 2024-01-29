@@ -41,7 +41,7 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.vanillaList = new System.Windows.Forms.ListView();
             this.ipsaPage = new System.Windows.Forms.TabPage();
             this.forgePage = new System.Windows.Forms.TabPage();
             this.fabricPage = new System.Windows.Forms.TabPage();
@@ -127,7 +127,7 @@
             this.vanillaPage.Controls.Add(this.checkBox3);
             this.vanillaPage.Controls.Add(this.checkBox2);
             this.vanillaPage.Controls.Add(this.checkBox1);
-            this.vanillaPage.Controls.Add(this.listView1);
+            this.vanillaPage.Controls.Add(this.vanillaList);
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 40);
             this.vanillaPage.Name = "vanillaPage";
@@ -226,14 +226,15 @@
             this.checkBox1.Text = "Pre-classic";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // vanillaList
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(348, 277);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.vanillaList.HideSelection = false;
+            this.vanillaList.Location = new System.Drawing.Point(3, 3);
+            this.vanillaList.Name = "vanillaList";
+            this.vanillaList.Size = new System.Drawing.Size(348, 277);
+            this.vanillaList.TabIndex = 0;
+            this.vanillaList.UseCompatibleStateImageBehavior = false;
+            this.vanillaList.View = System.Windows.Forms.View.Details;
             // 
             // ipsaPage
             // 
@@ -727,8 +728,9 @@
             this.Controls.Add(this.grbGame);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NewInstance";
-            this.Text = "NewInstance";
+            this.Text = "Profile editor";
             this.tabControl1.ResumeLayout(false);
             this.vanillaPage.ResumeLayout(false);
             this.vanillaPage.PerformLayout();
@@ -751,7 +753,7 @@
         private System.Windows.Forms.TabPage forgePage;
         private System.Windows.Forms.TabPage fabricPage;
         private System.Windows.Forms.TabPage xboxPage;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView vanillaList;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox7;
