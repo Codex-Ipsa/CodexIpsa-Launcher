@@ -266,13 +266,14 @@
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
             this.vanillaList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.vanillaList_ColumnWidthChanging);
+            this.vanillaList.SelectedIndexChanged += new System.EventHandler(this.vanillaList_SelectedIndexChanged);
             // 
             // ipsaPage
             // 
             this.ipsaPage.ImageIndex = 1;
             this.ipsaPage.Location = new System.Drawing.Point(4, 40);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 331);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
@@ -282,7 +283,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 40);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(354, 331);
+            this.eduPage.Size = new System.Drawing.Size(354, 339);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -292,7 +293,7 @@
             this.xboxPage.ImageIndex = 0;
             this.xboxPage.Location = new System.Drawing.Point(4, 40);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 331);
+            this.xboxPage.Size = new System.Drawing.Size(354, 339);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -302,7 +303,7 @@
             this.forgePage.ImageIndex = 2;
             this.forgePage.Location = new System.Drawing.Point(4, 40);
             this.forgePage.Name = "forgePage";
-            this.forgePage.Size = new System.Drawing.Size(354, 331);
+            this.forgePage.Size = new System.Drawing.Size(354, 339);
             this.forgePage.TabIndex = 2;
             this.forgePage.Text = "Forge";
             this.forgePage.UseVisualStyleBackColor = true;
@@ -312,7 +313,7 @@
             this.fabricPage.ImageIndex = 3;
             this.fabricPage.Location = new System.Drawing.Point(4, 40);
             this.fabricPage.Name = "fabricPage";
-            this.fabricPage.Size = new System.Drawing.Size(354, 331);
+            this.fabricPage.Size = new System.Drawing.Size(354, 339);
             this.fabricPage.TabIndex = 3;
             this.fabricPage.Text = "Fabric";
             this.fabricPage.UseVisualStyleBackColor = true;
@@ -322,7 +323,7 @@
             this.risugamiPage.ImageIndex = 0;
             this.risugamiPage.Location = new System.Drawing.Point(4, 40);
             this.risugamiPage.Name = "risugamiPage";
-            this.risugamiPage.Size = new System.Drawing.Size(354, 331);
+            this.risugamiPage.Size = new System.Drawing.Size(354, 339);
             this.risugamiPage.TabIndex = 6;
             this.risugamiPage.Text = "ModLoader";
             this.risugamiPage.UseVisualStyleBackColor = true;
@@ -332,7 +333,7 @@
             this.quiltPage.ImageIndex = 4;
             this.quiltPage.Location = new System.Drawing.Point(4, 40);
             this.quiltPage.Name = "quiltPage";
-            this.quiltPage.Size = new System.Drawing.Size(354, 331);
+            this.quiltPage.Size = new System.Drawing.Size(354, 339);
             this.quiltPage.TabIndex = 7;
             this.quiltPage.Text = "Quilt";
             this.quiltPage.UseVisualStyleBackColor = true;
@@ -342,7 +343,7 @@
             this.neoforgePage.ImageIndex = 5;
             this.neoforgePage.Location = new System.Drawing.Point(4, 40);
             this.neoforgePage.Name = "neoforgePage";
-            this.neoforgePage.Size = new System.Drawing.Size(354, 331);
+            this.neoforgePage.Size = new System.Drawing.Size(354, 339);
             this.neoforgePage.TabIndex = 8;
             this.neoforgePage.Text = "NeoForge";
             this.neoforgePage.UseVisualStyleBackColor = true;

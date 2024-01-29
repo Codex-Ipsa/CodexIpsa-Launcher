@@ -3,11 +3,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
     public partial class NewInstance : Form
     {
+        public string lastSelected = "";
+
         public NewInstance()
         {
             InitializeComponent();
@@ -120,6 +123,12 @@ namespace MCLauncher.forms
                 vanillaList.Columns[0].Width = -1;
                 vanillaList.Columns[1].Width = -1;
                 vanillaList.Columns[2].Width = -2;
+
+                //scroll to default version (b1.7.3)
+                ListViewItem item = vanillaList.FindItemWithText("b1.7.3");
+                int indexOf = vanillaList.Items.IndexOf(item);
+                vanillaList.Items[indexOf].Selected = true;
+                vanillaList.TopItem = vanillaList.Items[indexOf];
             }
         }
 
@@ -128,7 +137,36 @@ namespace MCLauncher.forms
             //TODO (hell)
             if(tabControl1.SelectedTab.Text == "Vanilla")
             {
+                InstanceJson ij = new InstanceJson();
+                ij.data = 3;
+                ij.edition = "java";
+                ij.version = lastSelected;
 
+                ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
+                ij.resolution = $"{resXBox.Text} {resYBox.Text}";
+                ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
+                ij.befCmd = befBox.Text;
+                ij.aftCmd = aftBox.Text;
+
+                ij.disProxy = chkProxy.Checked;
+                ij.demo = chkUseDemo.Checked;
+                ij.offline = chkOffline.Checked;
+                ij.multiplayer = chkMulti.Checked;
+
+                ij.useJava = chkCustJava.Checked;
+                ij.javaPath = javaBox.Text;
+                ij.useJson = chkCustJson.Checked;
+                ij.jsonPath = jsonBox.Text;
+                ij.useClass = chkClasspath.Checked;
+                ij.classpath = classBox.Text;
+                ij.useAssets = chkAssetIndex.Checked;
+                ij.assetsPath = assetIndexBox.Text;
+
+                ij.xboxDemo = false;
+
+
+                string json = JsonConvert.SerializeObject(ij);
+                Console.WriteLine(json);
             }
         }
 
@@ -199,6 +237,17 @@ namespace MCLauncher.forms
             {
                 assetIndexBox.Enabled = false;
                 assetIndexBtn.Enabled = false;
+            }
+        }
+
+        private void vanillaList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(vanillaList.SelectedItems.Count > 0)
+            {
+                lastSelected = vanillaList.SelectedItems[0].Text;
+
+                if (lastSelected.Contains(" ("))
+                    lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
             }
         }
     }
