@@ -72,8 +72,6 @@ namespace MCLauncher.forms
 
                     if (vanillaExperimental.Checked && row[0] == "experimental")
                         vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
                 }
 
                 //set width after adding items
