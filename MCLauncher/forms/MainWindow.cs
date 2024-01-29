@@ -27,9 +27,6 @@ namespace MCLauncher
         public MainWindow()
         {
             Instance = this;
-            Directory.CreateDirectory(".codexipsa");
-
-            Settings.Reload();
             InitializeComponent();
             loadMainWindow();
         }
@@ -96,6 +93,9 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.dataPath}\\libs");
             Directory.CreateDirectory($"{Globals.dataPath}\\assets");
             Directory.CreateDirectory($"{Globals.dataPath}\\data\\json");
+
+            //load settings
+            Settings.Reload();
 
             //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
@@ -173,7 +173,6 @@ namespace MCLauncher
                     File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
                 }
             }
-
 
             if (SettingsScreen.isUpdating == false)
             {

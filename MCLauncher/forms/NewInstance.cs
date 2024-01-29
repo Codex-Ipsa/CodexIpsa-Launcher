@@ -38,6 +38,16 @@ namespace MCLauncher.forms
             chkAssetIndex.Text = Strings.chkAssetIndex;
             saveBtn.Text = Strings.createProfile;
 
+            //disable tabs that don't work yet
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+
             //fill in stuff
             populateLists();
         }
