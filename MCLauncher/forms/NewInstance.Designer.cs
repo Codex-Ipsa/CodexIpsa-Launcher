@@ -87,8 +87,12 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
+            this.quiltPage.SuspendLayout();
+            this.neoforgePage.SuspendLayout();
             this.grbForExp.SuspendLayout();
             this.grbGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
@@ -330,6 +334,7 @@
             // 
             // quiltPage
             // 
+            this.quiltPage.Controls.Add(this.label2);
             this.quiltPage.ImageIndex = 4;
             this.quiltPage.Location = new System.Drawing.Point(4, 40);
             this.quiltPage.Name = "quiltPage";
@@ -340,6 +345,7 @@
             // 
             // neoforgePage
             // 
+            this.neoforgePage.Controls.Add(this.label1);
             this.neoforgePage.ImageIndex = 5;
             this.neoforgePage.Location = new System.Drawing.Point(4, 40);
             this.neoforgePage.Name = "neoforgePage";
@@ -753,6 +759,24 @@
             this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "NeoForge support is coming in v0.5.0!";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Quilt support is coming in v0.5.0!";
+            // 
             // NewInstance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -768,6 +792,10 @@
             this.tabControl1.ResumeLayout(false);
             this.vanillaPage.ResumeLayout(false);
             this.vanillaPage.PerformLayout();
+            this.quiltPage.ResumeLayout(false);
+            this.quiltPage.PerformLayout();
+            this.neoforgePage.ResumeLayout(false);
+            this.neoforgePage.PerformLayout();
             this.grbForExp.ResumeLayout(false);
             this.grbForExp.PerformLayout();
             this.grbGame.ResumeLayout(false);
@@ -837,5 +865,7 @@
         private System.Windows.Forms.TabPage quiltPage;
         private System.Windows.Forms.TabPage neoforgePage;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
