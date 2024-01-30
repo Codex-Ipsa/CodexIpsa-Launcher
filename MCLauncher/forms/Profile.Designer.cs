@@ -77,6 +77,7 @@
             this.classBox = new System.Windows.Forms.TextBox();
             this.chkClasspath = new System.Windows.Forms.CheckBox();
             this.grbGame = new System.Windows.Forms.GroupBox();
+            this.iconBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.exportBtn = new System.Windows.Forms.Button();
@@ -105,7 +106,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.iconBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
             this.grbForExp.SuspendLayout();
@@ -670,6 +670,16 @@
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
             // 
+            // iconBtn
+            // 
+            this.iconBtn.Location = new System.Drawing.Point(6, 19);
+            this.iconBtn.Name = "iconBtn";
+            this.iconBtn.Size = new System.Drawing.Size(50, 50);
+            this.iconBtn.TabIndex = 25;
+            this.iconBtn.Text = "(icon)";
+            this.iconBtn.UseVisualStyleBackColor = true;
+            this.iconBtn.Click += new System.EventHandler(this.iconBtn_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -979,16 +989,6 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Config";
-            // 
-            // iconBtn
-            // 
-            this.iconBtn.Location = new System.Drawing.Point(6, 19);
-            this.iconBtn.Name = "iconBtn";
-            this.iconBtn.Size = new System.Drawing.Size(50, 50);
-            this.iconBtn.TabIndex = 25;
-            this.iconBtn.Text = "(icon)";
-            this.iconBtn.UseVisualStyleBackColor = true;
-            this.iconBtn.Click += new System.EventHandler(this.iconBtn_Click);
             // 
             // Profile
             // 

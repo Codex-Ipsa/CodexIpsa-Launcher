@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -180,9 +181,29 @@ namespace MCLauncher.forms
                     .Replace(">", "")
                     .Replace("|", "");
 
-                //TODO CHECK IF PROFILE ALREADY EXISTS => add _X
+                //check if profile already exists => add _X
+                string newName = profileName;
+                int iter = 1;
+                while (Directory.Exists($"{Globals.dataPath}\\instance\\{newName}"))
+                {
+                    newName = profileName + "_" + iter;
+                    iter++;
+                }
+                profileName = newName;
 
-                //TODO WRITE INSTANCE INFO AND STUFF
+                //create directories
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
+
+                //write files //TODO mods json object
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"data\":1,\"items\":[]}}");
+
+                HomeScreen.loadInstanceList();
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
+                HomeScreen.reloadInstance(profileName);
+
+                this.Close();
             }
         }
 
@@ -264,6 +285,66 @@ namespace MCLauncher.forms
 
                 if (lastSelected.Contains(" ("))
                     lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
+            }
+        }
+
+        private void ramMaxBox_ValueChanged(object sender, EventArgs e)
+        {
+            if (ramMaxBox.Value < ramMinBox.Value)
+            {
+                ramMinBox.Value = ramMaxBox.Value;
+            }
+        }
+
+        private void ramMinBox_ValueChanged(object sender, EventArgs e)
+        {
+            if (ramMinBox.Value > ramMaxBox.Value)
+            {
+                ramMaxBox.Value = ramMinBox.Value;
+            }
+        }
+
+        private void dirBtn_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                fbd.SelectedPath = $"{Globals.dataPath}\\instance\\";
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    dirBox.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void javaBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                javaBox.Text = ofd.FileName;
+            }
+        }
+
+        private void jsonBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".JSON files|*.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                jsonBox.Text = ofd.FileName;
+            }
+        }
+
+        private void assetIndexBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ".JSON files|*.json";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                assetIndexBox.Text = ofd.FileName;
             }
         }
     }

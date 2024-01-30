@@ -83,7 +83,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblProfName = new System.Windows.Forms.Label();
             this.lblGameDir = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dirBtn = new System.Windows.Forms.Button();
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
@@ -361,7 +361,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(708, 356);
+            this.saveBtn.Location = new System.Drawing.Point(716, 357);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 1;
@@ -408,6 +408,7 @@
             this.assetIndexBtn.TabIndex = 35;
             this.assetIndexBtn.Text = "...";
             this.assetIndexBtn.UseVisualStyleBackColor = true;
+            this.assetIndexBtn.Click += new System.EventHandler(this.assetIndexBtn_Click);
             // 
             // assetIndexBox
             // 
@@ -419,7 +420,7 @@
             // chkCustJava
             // 
             this.chkCustJava.AutoSize = true;
-            this.chkCustJava.Location = new System.Drawing.Point(9, 19);
+            this.chkCustJava.Location = new System.Drawing.Point(9, 74);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
             this.chkCustJava.TabIndex = 26;
@@ -440,7 +441,7 @@
             // 
             // classBox
             // 
-            this.classBox.Location = new System.Drawing.Point(106, 72);
+            this.classBox.Location = new System.Drawing.Point(106, 20);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(315, 20);
             this.classBox.TabIndex = 33;
@@ -448,7 +449,7 @@
             // chkClasspath
             // 
             this.chkClasspath.AutoSize = true;
-            this.chkClasspath.Location = new System.Drawing.Point(9, 74);
+            this.chkClasspath.Location = new System.Drawing.Point(9, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
             this.chkClasspath.TabIndex = 32;
@@ -464,6 +465,7 @@
             this.jsonBtn.TabIndex = 31;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
+            this.jsonBtn.Click += new System.EventHandler(this.jsonBtn_Click);
             // 
             // jsonBox
             // 
@@ -474,19 +476,20 @@
             // 
             // javaBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(106, 19);
+            this.javaBox.Location = new System.Drawing.Point(106, 72);
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(266, 20);
             this.javaBox.TabIndex = 27;
             // 
             // javaBtn
             // 
-            this.javaBtn.Location = new System.Drawing.Point(378, 18);
+            this.javaBtn.Location = new System.Drawing.Point(378, 71);
             this.javaBtn.Name = "javaBtn";
             this.javaBtn.Size = new System.Drawing.Size(43, 20);
             this.javaBtn.TabIndex = 28;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
+            this.javaBtn.Click += new System.EventHandler(this.javaBtn_Click);
             // 
             // grbGame
             // 
@@ -508,7 +511,7 @@
             this.grbGame.Controls.Add(this.label5);
             this.grbGame.Controls.Add(this.lblProfName);
             this.grbGame.Controls.Add(this.lblGameDir);
-            this.grbGame.Controls.Add(this.button2);
+            this.grbGame.Controls.Add(this.dirBtn);
             this.grbGame.Controls.Add(this.lblReso);
             this.grbGame.Controls.Add(this.nameBox);
             this.grbGame.Controls.Add(this.dirBox);
@@ -617,6 +620,7 @@
             0,
             0,
             0});
+            this.ramMaxBox.ValueChanged += new System.EventHandler(this.ramMaxBox_ValueChanged);
             // 
             // ramMinBox
             // 
@@ -644,6 +648,7 @@
             0,
             0,
             0});
+            this.ramMinBox.ValueChanged += new System.EventHandler(this.ramMinBox_ValueChanged);
             // 
             // lblMemMin
             // 
@@ -713,14 +718,15 @@
             this.lblGameDir.TabIndex = 5;
             this.lblGameDir.Text = "lbl.GameDir";
             // 
-            // button2
+            // dirBtn
             // 
-            this.button2.Location = new System.Drawing.Point(378, 44);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(39, 20);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.dirBtn.Location = new System.Drawing.Point(378, 44);
+            this.dirBtn.Name = "dirBtn";
+            this.dirBtn.Size = new System.Drawing.Size(39, 20);
+            this.dirBtn.TabIndex = 14;
+            this.dirBtn.Text = "...";
+            this.dirBtn.UseVisualStyleBackColor = true;
+            this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
             // 
             // lblReso
             // 
@@ -820,7 +826,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblProfName;
         private System.Windows.Forms.Label lblGameDir;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button dirBtn;
         private System.Windows.Forms.Label lblReso;
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.TextBox dirBox;
