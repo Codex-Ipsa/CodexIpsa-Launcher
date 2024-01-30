@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
     public partial class NewInstance : Form
     {
         public string lastSelected = "";
+        ToolTip toolTip = new ToolTip();
 
         public NewInstance()
         {
@@ -350,6 +350,16 @@ namespace MCLauncher.forms
             {
                 assetIndexBox.Text = ofd.FileName;
             }
+        }
+
+        private void jsonBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolTip.SetToolTip(jsonBox, Strings.localOrUrl);
+        }
+
+        private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolTip.SetToolTip(assetIndexBox, Strings.localOrUrl);
         }
     }
 }

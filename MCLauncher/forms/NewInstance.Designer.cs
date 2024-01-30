@@ -416,6 +416,7 @@
             this.assetIndexBox.Name = "assetIndexBox";
             this.assetIndexBox.Size = new System.Drawing.Size(266, 20);
             this.assetIndexBox.TabIndex = 34;
+            this.assetIndexBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.assetIndexBox_MouseMove);
             // 
             // chkCustJava
             // 
@@ -473,6 +474,7 @@
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(266, 20);
             this.jsonBox.TabIndex = 30;
+            this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
             // 
             // javaBox
             // 

@@ -22,7 +22,7 @@ namespace MCLauncher
         HomeScreen homeScr;
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
-        ProfileScreen instanceScr;
+        //ProfileScreen instanceScr;
 
         public MainWindow()
         {
@@ -40,7 +40,7 @@ namespace MCLauncher
             this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
 
         public void addCredits()
@@ -52,7 +52,7 @@ namespace MCLauncher
             this.Controls.Add(creditsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
 
         public void addSettings()
@@ -64,9 +64,9 @@ namespace MCLauncher
             this.Controls.Add(settingsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
-        public void addInstance()
+        /*public void addInstance()
         {
             instanceScr.Location = new Point(0, 24);
             //instanceScr.Dock = DockStyle.Fill; //TODO
@@ -76,7 +76,7 @@ namespace MCLauncher
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-        }
+        }*/
 
         public void loadMainWindow()
         {
@@ -180,7 +180,7 @@ namespace MCLauncher
                 homeScr = new HomeScreen();
                 creditsScr = new CreditsScreen();
                 settingsScr = new SettingsScreen();
-                instanceScr = new ProfileScreen();
+                //instanceScr = new ProfileScreen();
                 addHome();
             }
         }
@@ -202,7 +202,7 @@ namespace MCLauncher
 
         private void profilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addInstance();
+            //addInstance();
         }
 
         private void MainWindow_ResizeBegin(object sender, EventArgs e)
