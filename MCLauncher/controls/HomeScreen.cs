@@ -1,6 +1,7 @@
 ﻿using DiscordRPC;
 using DiscordRPC.Logging;
 using MCLauncher.classes;
+using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
@@ -57,7 +58,7 @@ namespace MCLauncher
             loadInstanceList();
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
-                selectedInstance = "Default";   
+                selectedInstance = "Default";
             Instance.cmbInstaces.SelectedIndex = Instance.cmbInstaces.FindString(selectedInstance);
 
             webBrowser1.Url = new Uri(Globals.changelogUrl);
@@ -139,12 +140,12 @@ namespace MCLauncher
                     {
                         updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
                     }
-                    if(text.Contains("\"proxy\": true"))
+                    if (text.Contains("\"proxy\": true"))
                     {
                         text = text.Replace("\"proxy\": true", "\"disProxy\": false");
                         File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
                     }
-                    else if(text.Contains("\"proxy\": false"))
+                    else if (text.Contains("\"proxy\": false"))
                     {
                         text = text.Replace("\"proxy\": false", "\"disProxy\": false");
                         File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
@@ -173,11 +174,11 @@ namespace MCLauncher
             selectedEdition = pj.edition;
 
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
-            if (!modJson.Contains("\"version\":"))
+            /*if (!modJson.Contains("\"version\":"))
             {
                 modJson = JavaModHelper.MigrateToVersion($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", instName);
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", modJson);
-            }
+            }*/
 
             string tempName = null;
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);

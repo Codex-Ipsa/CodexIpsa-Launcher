@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;

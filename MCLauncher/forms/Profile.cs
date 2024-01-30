@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.classes.jsons;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -1292,21 +1293,5 @@ namespace MCLauncher.forms
         public bool xboxDemo { get; set; }
         public bool useAssets { get; set; }
         public string assetsPath { get; set; }
-    }
-
-    class ModJson
-    {
-        public int data { get; set; }
-        public ModJsonEntry[] items { get; set; }
-    }
-
-    class ModJsonEntry
-    {
-        public string name { get; set; }
-        public string version { get; set; }
-        public string file { get; set; }
-        public string type { get; set; }
-        public string json { get; set; }
-        public bool disabled { get; set; }
     }
 }

@@ -138,7 +138,7 @@ namespace MCLauncher.forms
             //TODO (hell)
             if(tabControl1.SelectedTab.Text == "Vanilla")
             {
-                //create Instance json
+                //create instance json
                 InstanceJson ij = new InstanceJson();
                 ij.data = 3;
                 ij.edition = "java";
@@ -165,10 +165,14 @@ namespace MCLauncher.forms
                 ij.assetsPath = assetIndexBox.Text;
 
                 ij.xboxDemo = false;
-
                 string json = JsonConvert.SerializeObject(ij);
-                Console.WriteLine(json);
 
+                //create mod json
+                ModJson mj = new ModJson();
+                mj.data = 1;
+                mj.items = new ModJsonEntry[0];
+                string modJson = JsonConvert.SerializeObject(mj);
+                Console.WriteLine(modJson);
 
                 //remove illegal characters from name
                 string profileName = nameBox.Text.Replace("\\", "")
@@ -197,7 +201,7 @@ namespace MCLauncher.forms
 
                 //write files //TODO mods json object
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", $"{{\"data\":1,\"items\":[]}}");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
 
                 HomeScreen.loadInstanceList();
                 HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
