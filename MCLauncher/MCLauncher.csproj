@@ -179,12 +179,6 @@
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\JavaModHelper.cs" />
-    <Compile Include="forms\ModsRepo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ModsRepo.Designer.cs">
-      <DependentUpon>ModsRepo.cs</DependentUpon>
-    </Compile>
     <Compile Include="classes\Settings.cs" />
     <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
@@ -263,9 +257,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ModsRepo.resx">
-      <DependentUpon>ModsRepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MSAuth.resx">
       <DependentUpon>MSAuth.cs</DependentUpon>
