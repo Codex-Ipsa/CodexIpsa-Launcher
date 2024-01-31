@@ -88,7 +88,7 @@ namespace MCLauncher.forms
                 //add items
                 string manifest = Globals.client.DownloadString(Globals.javaManifest);
                 List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-                foreach(JavaManifest ver in jm)
+                foreach (JavaManifest ver in jm)
                 {
                     string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 
@@ -131,84 +131,118 @@ namespace MCLauncher.forms
                 vanillaList.Items[indexOf].Selected = true;
                 vanillaList.TopItem = vanillaList.Items[indexOf];
             }
+
+            //edu list
+            if (tabControl1.SelectedTab.Text == "MinecraftEdu")
+            {
+                //clear list
+                eduList.Items.Clear();
+                eduList.Columns.Clear();
+
+                //add columns
+                eduList.Columns.Add(Strings.rowName);
+                eduList.Columns.Add(Strings.rowType);
+                eduList.Columns.Add(Strings.rowReleased);
+
+                //add items
+                string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+                List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
+                foreach (JavaManifest ver in jm)
+                {
+                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
+
+                    eduList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                }
+
+                //set width after adding items
+                eduList.Columns[0].Width = -1;
+                eduList.Columns[1].Width = -1;
+                eduList.Columns[2].Width = -2;
+
+                //select first version
+                vanillaList.Items[0].Selected = true;
+                vanillaList.TopItem = vanillaList.Items[0];
+            }
         }
 
+        //TODO (hell)
         private void button1_Click(object sender, EventArgs e)
         {
-            //TODO (hell)
-            if(tabControl1.SelectedTab.Text == "Vanilla")
+            //create instance json
+            InstanceJson ij = new InstanceJson();
+            ij.data = 3;
+            ij.edition = "java";
+
+            if (tabControl1.SelectedTab.Text == "Xbox 360")
             {
-                //create instance json
-                InstanceJson ij = new InstanceJson();
-                ij.data = 3;
-                ij.edition = "java";
-                ij.version = lastSelected;
-
-                ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
-                ij.resolution = $"{resXBox.Text} {resYBox.Text}";
-                ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
-                ij.befCmd = befBox.Text;
-                ij.aftCmd = aftBox.Text;
-
-                ij.disProxy = chkProxy.Checked;
-                ij.demo = chkUseDemo.Checked;
-                ij.offline = chkOffline.Checked;
-                ij.multiplayer = chkMulti.Checked;
-
-                ij.useJava = chkCustJava.Checked;
-                ij.javaPath = javaBox.Text;
-                ij.useJson = chkCustJson.Checked;
-                ij.jsonPath = jsonBox.Text;
-                ij.useClass = chkClasspath.Checked;
-                ij.classpath = classBox.Text;
-                ij.useAssets = chkAssetIndex.Checked;
-                ij.assetsPath = assetIndexBox.Text;
-
-                ij.xboxDemo = false;
-                string json = JsonConvert.SerializeObject(ij);
-
-                //create mod json
-                ModJson mj = new ModJson();
-                mj.data = 1;
-                mj.items = new ModJsonEntry[0];
-                string modJson = JsonConvert.SerializeObject(mj);
-                Console.WriteLine(modJson);
-
-                //remove illegal characters from name
-                string profileName = nameBox.Text.Replace("\\", "")
-                    .Replace("/", "")
-                    .Replace(":", "")
-                    .Replace("*", "")
-                    .Replace("?", "")
-                    .Replace("\"", "")
-                    .Replace("<", "")
-                    .Replace(">", "")
-                    .Replace("|", "");
-
-                //check if profile already exists => add _X
-                string newName = profileName;
-                int iter = 1;
-                while (Directory.Exists($"{Globals.dataPath}\\instance\\{newName}"))
-                {
-                    newName = profileName + "_" + iter;
-                    iter++;
-                }
-                profileName = newName;
-
-                //create directories
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-
-                //write files //TODO mods json object
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
-
-                HomeScreen.loadInstanceList();
-                HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
-                HomeScreen.reloadInstance(profileName);
-
-                this.Close();
+                ij.edition = "x360";
             }
+
+            ij.version = lastSelected;
+
+            ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
+            ij.resolution = $"{resXBox.Text} {resYBox.Text}";
+            ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
+            ij.befCmd = befBox.Text;
+            ij.aftCmd = aftBox.Text;
+
+            ij.disProxy = chkProxy.Checked;
+            ij.demo = chkUseDemo.Checked;
+            ij.offline = chkOffline.Checked;
+            ij.multiplayer = chkMulti.Checked;
+
+            ij.useJava = chkCustJava.Checked;
+            ij.javaPath = javaBox.Text;
+            ij.useJson = chkCustJson.Checked;
+            ij.jsonPath = jsonBox.Text;
+            ij.useClass = chkClasspath.Checked;
+            ij.classpath = classBox.Text;
+            ij.useAssets = chkAssetIndex.Checked;
+            ij.assetsPath = assetIndexBox.Text;
+
+            ij.xboxDemo = false; //TODO FOR XBOX SETTINGS
+            string json = JsonConvert.SerializeObject(ij);
+
+            //create mod json
+            ModJson mj = new ModJson();
+            mj.data = 1;
+            mj.items = new ModJsonEntry[0];
+            string modJson = JsonConvert.SerializeObject(mj);
+
+            //remove illegal characters from name
+            string profileName = nameBox.Text.Replace("\\", "")
+                .Replace("/", "")
+                .Replace(":", "")
+                .Replace("*", "")
+                .Replace("?", "")
+                .Replace("\"", "")
+                .Replace("<", "")
+                .Replace(">", "")
+                .Replace("|", "");
+
+            //check if profile already exists => add _X
+            string newName = profileName;
+            int iter = 1;
+            while (Directory.Exists($"{Globals.dataPath}\\instance\\{newName}"))
+            {
+                newName = profileName + "_" + iter;
+                iter++;
+            }
+            profileName = newName;
+
+            //create directories
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
+
+            //write files
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
+
+            HomeScreen.loadInstanceList();
+            HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
+            HomeScreen.reloadInstance(profileName);
+
+            this.Close();
         }
 
         private void vanillaBoxes_CheckedChanged(object sender, EventArgs e)
@@ -360,6 +394,17 @@ namespace MCLauncher.forms
         private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
         {
             toolTip.SetToolTip(assetIndexBox, Strings.localOrUrl);
+        }
+
+        private void eduList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (eduList.SelectedItems.Count > 0)
+            {
+                lastSelected = eduList.SelectedItems[0].Text;
+
+                if (lastSelected.Contains(" ("))
+                    lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
+            }
         }
     }
 }

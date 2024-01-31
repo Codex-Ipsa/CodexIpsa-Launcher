@@ -49,7 +49,9 @@
             this.fabricPage = new System.Windows.Forms.TabPage();
             this.risugamiPage = new System.Windows.Forms.TabPage();
             this.quiltPage = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.neoforgePage = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveBtn = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
@@ -87,10 +89,10 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.eduList = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
+            this.eduPage.SuspendLayout();
             this.quiltPage.SuspendLayout();
             this.neoforgePage.SuspendLayout();
             this.grbForExp.SuspendLayout();
@@ -275,15 +277,16 @@
             // ipsaPage
             // 
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 357);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
             // 
             // eduPage
             // 
+            this.eduPage.Controls.Add(this.eduList);
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 40);
             this.eduPage.Name = "eduPage";
@@ -295,9 +298,9 @@
             // xboxPage
             // 
             this.xboxPage.ImageIndex = 0;
-            this.xboxPage.Location = new System.Drawing.Point(4, 40);
+            this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 339);
+            this.xboxPage.Size = new System.Drawing.Size(354, 357);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -343,6 +346,15 @@
             this.quiltPage.Text = "Quilt";
             this.quiltPage.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Quilt support is coming in v0.5.0!";
+            // 
             // neoforgePage
             // 
             this.neoforgePage.Controls.Add(this.label1);
@@ -353,6 +365,15 @@
             this.neoforgePage.TabIndex = 8;
             this.neoforgePage.Text = "NeoForge";
             this.neoforgePage.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "NeoForge support is coming in v0.5.0!";
             // 
             // imageList1
             // 
@@ -759,23 +780,19 @@
             this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
-            // label1
+            // eduList
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "NeoForge support is coming in v0.5.0!";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Quilt support is coming in v0.5.0!";
+            this.eduList.FullRowSelect = true;
+            this.eduList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.eduList.HideSelection = false;
+            this.eduList.Location = new System.Drawing.Point(3, 3);
+            this.eduList.MultiSelect = false;
+            this.eduList.Name = "eduList";
+            this.eduList.Size = new System.Drawing.Size(348, 333);
+            this.eduList.TabIndex = 1;
+            this.eduList.UseCompatibleStateImageBehavior = false;
+            this.eduList.View = System.Windows.Forms.View.Details;
+            this.eduList.SelectedIndexChanged += new System.EventHandler(this.eduList_SelectedIndexChanged);
             // 
             // NewInstance
             // 
@@ -792,6 +809,7 @@
             this.tabControl1.ResumeLayout(false);
             this.vanillaPage.ResumeLayout(false);
             this.vanillaPage.PerformLayout();
+            this.eduPage.ResumeLayout(false);
             this.quiltPage.ResumeLayout(false);
             this.quiltPage.PerformLayout();
             this.neoforgePage.ResumeLayout(false);
@@ -867,5 +885,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView eduList;
     }
 }
