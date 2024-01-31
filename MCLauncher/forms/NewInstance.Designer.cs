@@ -44,6 +44,7 @@
             this.vanillaList = new System.Windows.Forms.ListView();
             this.ipsaPage = new System.Windows.Forms.TabPage();
             this.eduPage = new System.Windows.Forms.TabPage();
+            this.eduList = new System.Windows.Forms.ListView();
             this.xboxPage = new System.Windows.Forms.TabPage();
             this.forgePage = new System.Windows.Forms.TabPage();
             this.fabricPage = new System.Windows.Forms.TabPage();
@@ -89,10 +90,17 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.eduList = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
+            this.ipsaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
+            this.forgePage.SuspendLayout();
+            this.fabricPage.SuspendLayout();
+            this.risugamiPage.SuspendLayout();
             this.quiltPage.SuspendLayout();
             this.neoforgePage.SuspendLayout();
             this.grbForExp.SuspendLayout();
@@ -104,9 +112,9 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.vanillaPage);
-            this.tabControl1.Controls.Add(this.ipsaPage);
             this.tabControl1.Controls.Add(this.eduPage);
             this.tabControl1.Controls.Add(this.xboxPage);
+            this.tabControl1.Controls.Add(this.ipsaPage);
             this.tabControl1.Controls.Add(this.forgePage);
             this.tabControl1.Controls.Add(this.fabricPage);
             this.tabControl1.Controls.Add(this.risugamiPage);
@@ -276,10 +284,11 @@
             // 
             // ipsaPage
             // 
+            this.ipsaPage.Controls.Add(this.label7);
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 357);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
@@ -295,18 +304,33 @@
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
             // 
+            // eduList
+            // 
+            this.eduList.FullRowSelect = true;
+            this.eduList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.eduList.HideSelection = false;
+            this.eduList.Location = new System.Drawing.Point(3, 3);
+            this.eduList.MultiSelect = false;
+            this.eduList.Name = "eduList";
+            this.eduList.Size = new System.Drawing.Size(348, 333);
+            this.eduList.TabIndex = 1;
+            this.eduList.UseCompatibleStateImageBehavior = false;
+            this.eduList.View = System.Windows.Forms.View.Details;
+            this.eduList.SelectedIndexChanged += new System.EventHandler(this.eduList_SelectedIndexChanged);
+            // 
             // xboxPage
             // 
             this.xboxPage.ImageIndex = 0;
-            this.xboxPage.Location = new System.Drawing.Point(4, 22);
+            this.xboxPage.Location = new System.Drawing.Point(4, 40);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 357);
+            this.xboxPage.Size = new System.Drawing.Size(354, 339);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
             // 
             // forgePage
             // 
+            this.forgePage.Controls.Add(this.label6);
             this.forgePage.ImageIndex = 2;
             this.forgePage.Location = new System.Drawing.Point(4, 40);
             this.forgePage.Name = "forgePage";
@@ -317,6 +341,7 @@
             // 
             // fabricPage
             // 
+            this.fabricPage.Controls.Add(this.label4);
             this.fabricPage.ImageIndex = 3;
             this.fabricPage.Location = new System.Drawing.Point(4, 40);
             this.fabricPage.Name = "fabricPage";
@@ -327,6 +352,7 @@
             // 
             // risugamiPage
             // 
+            this.risugamiPage.Controls.Add(this.label3);
             this.risugamiPage.ImageIndex = 0;
             this.risugamiPage.Location = new System.Drawing.Point(4, 40);
             this.risugamiPage.Name = "risugamiPage";
@@ -780,19 +806,41 @@
             this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
-            // eduList
+            // label3
             // 
-            this.eduList.FullRowSelect = true;
-            this.eduList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.eduList.HideSelection = false;
-            this.eduList.Location = new System.Drawing.Point(3, 3);
-            this.eduList.MultiSelect = false;
-            this.eduList.Name = "eduList";
-            this.eduList.Size = new System.Drawing.Size(348, 333);
-            this.eduList.TabIndex = 1;
-            this.eduList.UseCompatibleStateImageBehavior = false;
-            this.eduList.View = System.Windows.Forms.View.Details;
-            this.eduList.SelectedIndexChanged += new System.EventHandler(this.eduList_SelectedIndexChanged);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(281, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Creating a ModLoader profile is coming in the next update!";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(256, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Creating a Fabric profile is coming in the next update!";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(254, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Creating a Forge profile is coming in the next update!";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(265, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Creating a modded profile is coming in the next update!";
             // 
             // NewInstance
             // 
@@ -809,7 +857,15 @@
             this.tabControl1.ResumeLayout(false);
             this.vanillaPage.ResumeLayout(false);
             this.vanillaPage.PerformLayout();
+            this.ipsaPage.ResumeLayout(false);
+            this.ipsaPage.PerformLayout();
             this.eduPage.ResumeLayout(false);
+            this.forgePage.ResumeLayout(false);
+            this.forgePage.PerformLayout();
+            this.fabricPage.ResumeLayout(false);
+            this.fabricPage.PerformLayout();
+            this.risugamiPage.ResumeLayout(false);
+            this.risugamiPage.PerformLayout();
             this.quiltPage.ResumeLayout(false);
             this.quiltPage.PerformLayout();
             this.neoforgePage.ResumeLayout(false);
@@ -886,5 +942,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView eduList;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
