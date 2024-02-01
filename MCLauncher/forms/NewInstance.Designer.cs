@@ -42,13 +42,17 @@
             this.vanillaClassic = new System.Windows.Forms.CheckBox();
             this.vanillaPreclassic = new System.Windows.Forms.CheckBox();
             this.vanillaList = new System.Windows.Forms.ListView();
-            this.ipsaPage = new System.Windows.Forms.TabPage();
             this.eduPage = new System.Windows.Forms.TabPage();
             this.eduList = new System.Windows.Forms.ListView();
             this.xboxPage = new System.Windows.Forms.TabPage();
+            this.ipsaPage = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.forgePage = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
             this.fabricPage = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.risugamiPage = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.quiltPage = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.neoforgePage = new System.Windows.Forms.TabPage();
@@ -90,14 +94,12 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.xboxList = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
-            this.ipsaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
+            this.xboxPage.SuspendLayout();
+            this.ipsaPage.SuspendLayout();
             this.forgePage.SuspendLayout();
             this.fabricPage.SuspendLayout();
             this.risugamiPage.SuspendLayout();
@@ -282,17 +284,6 @@
             this.vanillaList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.vanillaList_ColumnWidthChanging);
             this.vanillaList.SelectedIndexChanged += new System.EventHandler(this.vanillaList_SelectedIndexChanged);
             // 
-            // ipsaPage
-            // 
-            this.ipsaPage.Controls.Add(this.label7);
-            this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
-            this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
-            this.ipsaPage.TabIndex = 1;
-            this.ipsaPage.Text = "Codex-Ipsa Mods";
-            this.ipsaPage.UseVisualStyleBackColor = true;
-            // 
             // eduPage
             // 
             this.eduPage.Controls.Add(this.eduList);
@@ -320,6 +311,7 @@
             // 
             // xboxPage
             // 
+            this.xboxPage.Controls.Add(this.xboxList);
             this.xboxPage.ImageIndex = 0;
             this.xboxPage.Location = new System.Drawing.Point(4, 40);
             this.xboxPage.Name = "xboxPage";
@@ -327,6 +319,26 @@
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
+            // 
+            // ipsaPage
+            // 
+            this.ipsaPage.Controls.Add(this.label7);
+            this.ipsaPage.ImageIndex = 1;
+            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
+            this.ipsaPage.Name = "ipsaPage";
+            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
+            this.ipsaPage.TabIndex = 1;
+            this.ipsaPage.Text = "Codex-Ipsa Mods";
+            this.ipsaPage.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(265, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Creating a modded profile is coming in the next update!";
             // 
             // forgePage
             // 
@@ -339,6 +351,15 @@
             this.forgePage.Text = "Forge";
             this.forgePage.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(254, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Creating a Forge profile is coming in the next update!";
+            // 
             // fabricPage
             // 
             this.fabricPage.Controls.Add(this.label4);
@@ -350,6 +371,15 @@
             this.fabricPage.Text = "Fabric";
             this.fabricPage.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(256, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Creating a Fabric profile is coming in the next update!";
+            // 
             // risugamiPage
             // 
             this.risugamiPage.Controls.Add(this.label3);
@@ -360,6 +390,15 @@
             this.risugamiPage.TabIndex = 6;
             this.risugamiPage.Text = "ModLoader";
             this.risugamiPage.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(281, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Creating a ModLoader profile is coming in the next update!";
             // 
             // quiltPage
             // 
@@ -806,41 +845,19 @@
             this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
-            // label3
+            // xboxList
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(281, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Creating a ModLoader profile is coming in the next update!";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Creating a Fabric profile is coming in the next update!";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(254, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Creating a Forge profile is coming in the next update!";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(265, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Creating a modded profile is coming in the next update!";
+            this.xboxList.FullRowSelect = true;
+            this.xboxList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.xboxList.HideSelection = false;
+            this.xboxList.Location = new System.Drawing.Point(3, 3);
+            this.xboxList.MultiSelect = false;
+            this.xboxList.Name = "xboxList";
+            this.xboxList.Size = new System.Drawing.Size(348, 333);
+            this.xboxList.TabIndex = 2;
+            this.xboxList.UseCompatibleStateImageBehavior = false;
+            this.xboxList.View = System.Windows.Forms.View.Details;
+            this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
             // 
             // NewInstance
             // 
@@ -857,9 +874,10 @@
             this.tabControl1.ResumeLayout(false);
             this.vanillaPage.ResumeLayout(false);
             this.vanillaPage.PerformLayout();
+            this.eduPage.ResumeLayout(false);
+            this.xboxPage.ResumeLayout(false);
             this.ipsaPage.ResumeLayout(false);
             this.ipsaPage.PerformLayout();
-            this.eduPage.ResumeLayout(false);
             this.forgePage.ResumeLayout(false);
             this.forgePage.PerformLayout();
             this.fabricPage.ResumeLayout(false);
@@ -946,5 +964,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView xboxList;
     }
 }

@@ -133,7 +133,7 @@ namespace MCLauncher.forms
             }
 
             //edu list
-            if (tabControl1.SelectedTab.Text == "MinecraftEdu")
+            else if (tabControl1.SelectedTab.Text == "MinecraftEdu")
             {
                 //clear list
                 eduList.Items.Clear();
@@ -160,8 +160,40 @@ namespace MCLauncher.forms
                 eduList.Columns[2].Width = -2;
 
                 //select first version
-                vanillaList.Items[0].Selected = true;
-                vanillaList.TopItem = vanillaList.Items[0];
+                eduList.Items[0].Selected = true;
+                eduList.TopItem = eduList.Items[0];
+            }
+
+            //xbox list
+            else if (tabControl1.SelectedTab.Text == "Xbox 360")
+            {
+                //clear list
+                xboxList.Items.Clear();
+                xboxList.Columns.Clear();
+
+                //add columns
+                xboxList.Columns.Add(Strings.rowName);
+                xboxList.Columns.Add(Strings.rowType);
+                xboxList.Columns.Add(Strings.rowReleased);
+
+                //add items
+                string manifest = Globals.client.DownloadString(Globals.x360Manifest);
+                List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
+                foreach (JavaManifest ver in jm)
+                {
+                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
+
+                    xboxList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                }
+
+                //set width after adding items
+                xboxList.Columns[0].Width = -1;
+                xboxList.Columns[1].Width = -1;
+                xboxList.Columns[2].Width = -2;
+
+                //select first version
+                xboxList.Items[0].Selected = true;
+                xboxList.TopItem = xboxList.Items[0];
             }
         }
 
@@ -401,6 +433,17 @@ namespace MCLauncher.forms
             if (eduList.SelectedItems.Count > 0)
             {
                 lastSelected = eduList.SelectedItems[0].Text;
+
+                if (lastSelected.Contains(" ("))
+                    lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
+            }
+        }
+
+        private void xboxList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (xboxList.SelectedItems.Count > 0)
+            {
+                lastSelected = xboxList.SelectedItems[0].Text;
 
                 if (lastSelected.Contains(" ("))
                     lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
