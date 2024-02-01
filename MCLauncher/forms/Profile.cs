@@ -480,10 +480,16 @@ namespace MCLauncher.forms
                 {
                     btnFabric.Enabled = false;
                 }
-
-                if (vj[res].risugami.Contains("true"))
+                if(vj[res].risugami != null)
                 {
-                    btnMLoader.Enabled = true;
+                    if (vj[res].risugami.Contains("true"))
+                    {
+                        btnMLoader.Enabled = true;
+                    }
+                    else
+                    {
+                        btnMLoader.Enabled = false;
+                    }
                 }
                 else
                 {
