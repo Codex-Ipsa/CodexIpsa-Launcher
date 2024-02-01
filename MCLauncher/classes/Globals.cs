@@ -18,9 +18,9 @@ namespace MCLauncher
 
         //Manual
         public static string codebase = "0.3.2"; //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
-        public static string branch = "dev"; //dev //omega13 //stable //dev-instances //experimental //pallas-testing
-        public static string verCurrent = "0.3.2-pre1"; //Change this on release
-        public static string verDisplay = "0.3.2-pre1"; //Change this on release
+        public static string branch = "stable"; //dev //omega13 //stable //dev-instances //experimental //pallas-testing
+        public static string verCurrent = "0.3.2"; //Change this on release
+        public static string verDisplay = "0.3.2"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
