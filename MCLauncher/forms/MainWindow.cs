@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -21,12 +22,11 @@ namespace MCLauncher
         HomeScreen homeScr;
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
-        InstanceScreen instanceScr;
+        //ProfileScreen instanceScr;
 
         public MainWindow()
         {
             Instance = this;
-            Settings.Reload();
             InitializeComponent();
             loadMainWindow();
         }
@@ -40,7 +40,7 @@ namespace MCLauncher
             this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
 
         public void addCredits()
@@ -52,7 +52,7 @@ namespace MCLauncher
             this.Controls.Add(creditsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
 
         public void addSettings()
@@ -64,19 +64,19 @@ namespace MCLauncher
             this.Controls.Add(settingsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
-            this.Controls.Remove(instanceScr);
+            //this.Controls.Remove(instanceScr);
         }
-        public void addInstance()
+        /*public void addInstance()
         {
             instanceScr.Location = new Point(0, 24);
-            instanceScr.Dock = DockStyle.Fill;
+            //instanceScr.Dock = DockStyle.Fill; //TODO
             instanceScr.Padding = new Padding(0, 24, 0, 0);
 
             this.Controls.Add(instanceScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-        }
+        }*/
 
         public void loadMainWindow()
         {
@@ -94,6 +94,9 @@ namespace MCLauncher
             Directory.CreateDirectory($"{Globals.dataPath}\\assets");
             Directory.CreateDirectory($"{Globals.dataPath}\\data\\json");
 
+            //load settings
+            Settings.Reload();
+
             //Delete updater if it exists
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
@@ -103,7 +106,7 @@ namespace MCLauncher
             {
                 string offlineJson = Globals.client.DownloadString(Globals.offlineManfest);
                 OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
-                if(test.offline)
+                if (test.offline)
                 {
                     Logger.Error($"[MainWindow]", $"Servers are down! Reason: {test.message}");
                     Globals.offlineMode = true;
@@ -136,7 +139,7 @@ namespace MCLauncher
                 {
                     Logger.Error("[MainWindow]", $"Current branch is no longer supported!");
                     MessageBox.Show($"Your branch is no longer supported!\nPlease update your launcher.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                }
                 else
                 {
                     SettingsScreen.checkForUpdates(Globals.branch);
@@ -171,14 +174,13 @@ namespace MCLauncher
                 }
             }
 
-
             if (SettingsScreen.isUpdating == false)
             {
                 //this is done here so it initializes first
                 homeScr = new HomeScreen();
                 creditsScr = new CreditsScreen();
                 settingsScr = new SettingsScreen();
-                instanceScr = new InstanceScreen();
+                //instanceScr = new ProfileScreen();
                 addHome();
             }
         }
@@ -193,14 +195,14 @@ namespace MCLauncher
             addCredits();
         }
 
-        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             addSettings();
+        }
+
+        private void profilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //addInstance();
         }
 
         private void MainWindow_ResizeBegin(object sender, EventArgs e)
@@ -213,15 +215,15 @@ namespace MCLauncher
             ResumeLayout();
         }
 
-        private void instanceToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            addInstance();
-        }
-
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Discord.client != null)
+            if (Discord.client != null)
                 Discord.client.Dispose();
+        }
+
+        private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 

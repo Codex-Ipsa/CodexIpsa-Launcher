@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
@@ -64,6 +65,8 @@ namespace MCLauncher
                 {
                     JavaLauncher.modVersion = entry.version;
                 }
+
+
 
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
@@ -206,30 +209,6 @@ namespace MCLauncher
 
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
             }
-        }
-
-        public static string MigrateToVersion(string indexPath, string instName)
-        {
-            string orig = File.ReadAllText(indexPath);
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(orig);
-
-            string created = "{\n";
-            created += "  \"data\": 1,\n";
-            created += "  \"items\": [\n";
-            foreach (var item in mj.items)
-            {
-                created += $"    {{\n";
-                created += $"      \"name\": \"\",\n";
-                created += $"      \"version\": \"{item.version}\",\n";
-                created += $"      \"file\": \"{item.name}\",\n";
-                created += $"      \"type\": \"{item.type}\",\n";
-                created += $"      \"json\": \"{item.json}\"\n";
-                created += $"    }},";
-            }
-            created = created.TrimEnd(',');
-            created += "\n  ]\n}";
-
-            return created;
         }
     }
 }

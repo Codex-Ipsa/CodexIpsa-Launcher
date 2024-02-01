@@ -90,6 +90,9 @@
     <Compile Include="classes\ipsajson\FabricParser.cs" />
     <Compile Include="classes\ipsajson\IpsaJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
+    <Compile Include="classes\jsons\InstanceJson.cs" />
+    <Compile Include="classes\jsons\JavaManifest.cs" />
+    <Compile Include="classes\jsons\ModJson.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
@@ -97,17 +100,17 @@
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="controls\InstanceScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\InstanceScreen.Designer.cs">
-      <DependentUpon>InstanceScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="controls\JavaScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controls\JavaScreen.Designer.cs">
       <DependentUpon>JavaScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ProfileScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ProfileScreen.Designer.cs">
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="controls\SettingsScreen.cs">
       <SubType>UserControl</SubType>
@@ -133,6 +136,12 @@
     <Compile Include="forms\AssetsDownloader.Designer.cs">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\ImportProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ImportProfile.Designer.cs">
+      <DependentUpon>ImportProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\ModInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +153,12 @@
     </Compile>
     <Compile Include="forms\ModLoaders.Designer.cs">
       <DependentUpon>ModLoaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\NewInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\NewInstance.Designer.cs">
+      <DependentUpon>NewInstance.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Output.cs">
       <SubType>Form</SubType>
@@ -164,12 +179,6 @@
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\JavaModHelper.cs" />
-    <Compile Include="forms\ModsRepo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ModsRepo.Designer.cs">
-      <DependentUpon>ModsRepo.cs</DependentUpon>
-    </Compile>
     <Compile Include="classes\Settings.cs" />
     <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
@@ -204,11 +213,11 @@
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="controls\InstanceScreen.resx">
-      <DependentUpon>InstanceScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="controls\JavaScreen.resx">
       <DependentUpon>JavaScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ProfileScreen.resx">
+      <DependentUpon>ProfileScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
@@ -222,6 +231,9 @@
     <EmbeddedResource Include="forms\AssetsDownloader.resx">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\ImportProfile.resx">
+      <DependentUpon>ImportProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ModInfo.resx">
       <DependentUpon>ModInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\HomeScreen.resx">
       <DependentUpon>HomeScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\NewInstance.resx">
+      <DependentUpon>NewInstance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Output.resx">
       <DependentUpon>Output.cs</DependentUpon>
@@ -242,9 +257,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ModsRepo.resx">
-      <DependentUpon>ModsRepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MSAuth.resx">
       <DependentUpon>MSAuth.cs</DependentUpon>

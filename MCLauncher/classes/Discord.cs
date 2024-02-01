@@ -19,25 +19,25 @@ namespace MCLauncher.classes
         {
             try
             {
-                if(Settings.sj.discordRPC)
+                if (Settings.sj.discordRPC)
                 {
                     client = new DiscordRpcClient(APIKeys.DiscordClientID);
                     client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
                     client.OnReady += (sender, e) =>
                     {
-                        Console.WriteLine("Received Ready from user {0}", e.User.Username);
+                        Logger.Discord("[Discord]", $"Received Ready from user {e.User.Username}");
                     };
 
                     client.OnPresenceUpdate += (sender, e) =>
                     {
-                        Console.WriteLine("Received Update! {0}", e.Presence);
+                        Logger.Discord("[Discord]", $"Received Update! {e.Presence}");
                     };
                     client.Initialize();
                 }
             }
             catch
             {
-                Logger.Error("[Discord]", "Could not initialize DiscordClient! Connect to the internet!");
+                Logger.Discord("[Discord]", "Could not initialize DiscordClient! Connect to the internet!");
             }
         }
         public static void ChangeMessage(string message)

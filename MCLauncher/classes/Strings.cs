@@ -16,6 +16,8 @@ namespace MCLauncher
     {
         //MainWindow
         public static string cntHome = "Home";
+        public static string cntProfiles = "Profiles";
+        public static string cntImportProfile = "Import profile";
         public static string cntSettings = "Settings";
         public static string cntAbout = "About";
 
@@ -257,6 +259,7 @@ namespace MCLauncher
                 noUpdate = str.noUpdate;
 
                 MainWindow.Instance.menuStrip1.Items[0].Text = cntHome;
+                MainWindow.Instance.menuStrip1.Items[1].Text = cntProfiles;
                 MainWindow.Instance.menuStrip1.Items[2].Text = cntSettings;
                 MainWindow.Instance.menuStrip1.Items[3].Text = cntAbout;
 

@@ -1,10 +1,14 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.classes.jsons;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
+using System.Net.Mail;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -119,6 +123,7 @@ namespace MCLauncher.forms
 
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
+                exportBtn.Visible = false;
                 saveBtn.Text = Strings.createProfile;
             }
             else if (profMode == "def")
@@ -407,16 +412,22 @@ namespace MCLauncher.forms
 
         private void checkForge_CheckedChanged(object sender, EventArgs e)
         {
+            //checkFabric.Checked = false;
+            //checkMLoader.Checked = false;
             reloadVerBox("java");
         }
 
         private void checkFabric_CheckedChanged(object sender, EventArgs e)
         {
+            //checkForge.Checked = false;
+            //checkMLoader.Checked = false;
             reloadVerBox("java");
         }
 
         private void checkMLoader_CheckedChanged(object sender, EventArgs e)
         {
+            //checkForge.Checked = false;
+            //checkFabric.Checked = false;
             reloadVerBox("java");
         }
 
@@ -469,10 +480,16 @@ namespace MCLauncher.forms
                 {
                     btnFabric.Enabled = false;
                 }
-
-                if (vj[res].risugami.Contains("true"))
+                if(vj[res].risugami != null)
                 {
-                    btnMLoader.Enabled = true;
+                    if (vj[res].risugami.Contains("true"))
+                    {
+                        btnMLoader.Enabled = true;
+                    }
+                    else
+                    {
+                        btnMLoader.Enabled = false;
+                    }
                 }
                 else
                 {
@@ -585,7 +602,6 @@ namespace MCLauncher.forms
                     {
                         MessageBox.Show($"Could not rename the profile: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.Error("[Profile]", $"Could not rename the profile: {e.Message}");
-
                     }
 
                     this.Close();
@@ -660,8 +676,6 @@ namespace MCLauncher.forms
         {
             PallasRepo pr = new PallasRepo();
             pr.ShowDialog();
-            //ModsRepo mr = new ModsRepo();
-            //mr.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -1192,6 +1206,61 @@ namespace MCLauncher.forms
                 }
             }
         }
+
+        private void exportBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Zip files (*.zip)|*.zip";
+            sfd.FilterIndex = 2;
+            sfd.RestoreDirectory = true;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Logger.Info("[Profile]", $"Exporting {Profile.profileName}, this may take a while...");
+                try
+                {
+                    using (File.Create(sfd.FileName)) { };
+
+                    using (FileStream zipToOpen = new FileStream(sfd.FileName, FileMode.Open))
+                    {
+                        using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update))
+                        {
+                            string[] files = Directory.GetFiles($"{Globals.dataPath}\\instance\\{Profile.profileName}", "*.*", SearchOption.AllDirectories);
+                            foreach (string source in files)
+                            {
+                                string name = source.Replace($"{Globals.dataPath}\\instance\\{Profile.profileName}\\", "");
+
+                                if (name.Contains("jarmods\\temp") || name.Contains("jarmods\\patch") || name.Contains(".minecraft\\resources") || name.Contains(".minecraft\\logs") || name.EndsWith(".log") || name.EndsWith(".log.gz"))
+                                {
+                                    continue;
+                                }
+                                ZipArchiveEntry dirEntry = archive.CreateEntryFromFile(source, name);
+                                Logger.Info("[Profile]", $"Loaded file {name}");
+                            }
+                        }
+                        zipToOpen.Dispose();
+                    }
+                }
+                catch (System.IO.IOException ex)
+                {
+                    MessageBox.Show($"Could not export the profile: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.Error("[Profile]", $"Could not export the profile: {ex.Message}");
+                }
+
+                Logger.Info("[Profile]", $"Done!");
+            }
+        }
+
+        private void iconBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PNG files|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(ofd.FileName, $"{Globals.dataPath}\\instance\\{Profile.profileName}\\icon.png");
+            }
+        }
     }
 
     public class VersionManifest
@@ -1228,21 +1297,5 @@ namespace MCLauncher.forms
         public bool xboxDemo { get; set; }
         public bool useAssets { get; set; }
         public string assetsPath { get; set; }
-    }
-
-    class ModJson
-    {
-        public int data { get; set; }
-        public ModJsonEntry[] items { get; set; }
-    }
-
-    class ModJsonEntry
-    {
-        public string name { get; set; }
-        public string version { get; set; }
-        public string file { get; set; }
-        public string type { get; set; }
-        public string json { get; set; }
-        public bool disabled { get; set; }
     }
 }
