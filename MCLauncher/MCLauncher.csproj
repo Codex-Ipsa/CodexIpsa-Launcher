@@ -124,6 +124,12 @@
     <Compile Include="forms\DownloadProgress.Designer.cs">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\EditInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\EditInstance.Designer.cs">
+      <DependentUpon>EditInstance.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\EnterIp.cs">
       <SubType>Form</SubType>
     </Compile>
