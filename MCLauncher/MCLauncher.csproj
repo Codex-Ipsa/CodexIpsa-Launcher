@@ -231,6 +231,9 @@
     <EmbeddedResource Include="forms\DownloadProgress.resx">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\EditInstance.resx">
+      <DependentUpon>EditInstance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\EnterIp.resx">
       <DependentUpon>EnterIp.cs</DependentUpon>
     </EmbeddedResource>
