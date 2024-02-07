@@ -49,6 +49,8 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
+            Logger.Info("[TEST]", $"DATA PATH: {Globals.dataPath}");
+
             if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
             {
                 Profile prof = new Profile("Default", "def");
