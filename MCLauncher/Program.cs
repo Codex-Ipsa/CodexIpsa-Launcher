@@ -21,7 +21,7 @@ namespace MCLauncher
 
             //pfc.AddFontFile(Path.Combine(Application.StartupPath, "micross.ttf"));
 
-            //Application.SetDefaultFont(8f);
+            Application.SetDefaultFont(new Font(new FontFamily("Microsoft Sans Serif"), 8f));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
