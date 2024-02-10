@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,8 @@ namespace MCLauncher
         [STAThread]
         static void Main(string[] args)
         {
+            Application.SetDefaultFont(new Font(new FontFamily("Microsoft Sans Serif"), 8f));
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Logger.logMessage("[Startup]", "Launch args: " + args.Length);
