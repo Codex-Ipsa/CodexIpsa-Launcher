@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +17,17 @@ namespace MCLauncher
         [STAThread]
         static void Main(string[] args)
         {
-            Application.SetDefaultFont(new Font(new FontFamily("Microsoft Sans Serif"), 8f));
+            //PrivateFontCollection pfc = new PrivateFontCollection();
+
+            //pfc.AddFontFile(Path.Combine(Application.StartupPath, "micross.ttf"));
+
+            //Application.SetDefaultFont(8f);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Logger.logMessage("[Startup]", "Launch args: " + args.Length);
+            
+            Console.WriteLine(SystemFonts.DefaultFont.FontFamily.ToString());
             if (args.Length > 0)
             {
                 foreach(string arg in args)
