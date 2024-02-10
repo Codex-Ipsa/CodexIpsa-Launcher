@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -563,7 +564,7 @@ namespace MCLauncher
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://microsoft.com/link");
+            Process.Start(new ProcessStartInfo("https://microsoft.com/link") { UseShellExecute = true });
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

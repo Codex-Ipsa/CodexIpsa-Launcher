@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace MCLauncher.controls
 {
@@ -35,7 +36,7 @@ namespace MCLauncher.controls
 
         private void lblDejvossIpsa_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://dejvoss.cz");
+            Process.Start(new ProcessStartInfo("https://dejvoss.cz") { UseShellExecute = true });
         }
     }
 }
