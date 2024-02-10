@@ -33,6 +33,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="image\micross.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -54,7 +57,7 @@
     <Content Include="image\grass.png" />
     <Content Include="image\icon.ico" />
     <Content Include="image\icon.png" />
-    <Content Include="image\stone-large-dark.png" />
+    <Compile Include="image\stone-large-dark.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
