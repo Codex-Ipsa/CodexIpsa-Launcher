@@ -45,6 +45,7 @@
             this.eduPage = new System.Windows.Forms.TabPage();
             this.eduList = new System.Windows.Forms.ListView();
             this.xboxPage = new System.Windows.Forms.TabPage();
+            this.xboxList = new System.Windows.Forms.ListView();
             this.ipsaPage = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.forgePage = new System.Windows.Forms.TabPage();
@@ -94,7 +95,10 @@
             this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
-            this.xboxList = new System.Windows.Forms.ListView();
+            this.grbXbox = new System.Windows.Forms.GroupBox();
+            this.chkXboxDemo = new System.Windows.Forms.CheckBox();
+            this.lblXboxProfName = new System.Windows.Forms.Label();
+            this.xboxNameBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
@@ -109,6 +113,7 @@
             this.grbGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
+            this.grbXbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -157,7 +162,7 @@
             this.vanillaExperimental.AutoSize = true;
             this.vanillaExperimental.Checked = true;
             this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(208, 319);
+            this.vanillaExperimental.Location = new System.Drawing.Point(222, 319);
             this.vanillaExperimental.Name = "vanillaExperimental";
             this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
             this.vanillaExperimental.TabIndex = 9;
@@ -170,7 +175,7 @@
             this.vanillaSnapshot.AutoSize = true;
             this.vanillaSnapshot.Checked = true;
             this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 319);
+            this.vanillaSnapshot.Location = new System.Drawing.Point(154, 319);
             this.vanillaSnapshot.Name = "vanillaSnapshot";
             this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
             this.vanillaSnapshot.TabIndex = 8;
@@ -183,7 +188,7 @@
             this.vanillaRelease.AutoSize = true;
             this.vanillaRelease.Checked = true;
             this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(60, 319);
+            this.vanillaRelease.Location = new System.Drawing.Point(89, 319);
             this.vanillaRelease.Name = "vanillaRelease";
             this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
             this.vanillaRelease.TabIndex = 7;
@@ -319,6 +324,20 @@
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
+            // 
+            // xboxList
+            // 
+            this.xboxList.FullRowSelect = true;
+            this.xboxList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.xboxList.HideSelection = false;
+            this.xboxList.Location = new System.Drawing.Point(3, 3);
+            this.xboxList.MultiSelect = false;
+            this.xboxList.Name = "xboxList";
+            this.xboxList.Size = new System.Drawing.Size(348, 333);
+            this.xboxList.TabIndex = 2;
+            this.xboxList.UseCompatibleStateImageBehavior = false;
+            this.xboxList.View = System.Windows.Forms.View.Details;
+            this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
             // 
             // ipsaPage
             // 
@@ -587,6 +606,7 @@
             // 
             // grbGame
             // 
+            this.grbGame.BackColor = System.Drawing.SystemColors.Control;
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
             this.grbGame.Controls.Add(this.chkProxy);
@@ -837,6 +857,7 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(318, 20);
             this.nameBox.TabIndex = 12;
+            this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // dirBox
             // 
@@ -845,19 +866,46 @@
             this.dirBox.Size = new System.Drawing.Size(273, 20);
             this.dirBox.TabIndex = 13;
             // 
-            // xboxList
+            // grbXbox
             // 
-            this.xboxList.FullRowSelect = true;
-            this.xboxList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.xboxList.HideSelection = false;
-            this.xboxList.Location = new System.Drawing.Point(3, 3);
-            this.xboxList.MultiSelect = false;
-            this.xboxList.Name = "xboxList";
-            this.xboxList.Size = new System.Drawing.Size(348, 333);
-            this.xboxList.TabIndex = 2;
-            this.xboxList.UseCompatibleStateImageBehavior = false;
-            this.xboxList.View = System.Windows.Forms.View.Details;
-            this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
+            this.grbXbox.BackColor = System.Drawing.SystemColors.Control;
+            this.grbXbox.Controls.Add(this.chkXboxDemo);
+            this.grbXbox.Controls.Add(this.lblXboxProfName);
+            this.grbXbox.Controls.Add(this.xboxNameBox);
+            this.grbXbox.Location = new System.Drawing.Point(366, 2);
+            this.grbXbox.Name = "grbXbox";
+            this.grbXbox.Size = new System.Drawing.Size(425, 71);
+            this.grbXbox.TabIndex = 29;
+            this.grbXbox.TabStop = false;
+            this.grbXbox.Text = "grb.Xbox";
+            this.grbXbox.Visible = false;
+            // 
+            // chkXboxDemo
+            // 
+            this.chkXboxDemo.AutoSize = true;
+            this.chkXboxDemo.Location = new System.Drawing.Point(9, 47);
+            this.chkXboxDemo.Name = "chkXboxDemo";
+            this.chkXboxDemo.Size = new System.Drawing.Size(99, 17);
+            this.chkXboxDemo.TabIndex = 23;
+            this.chkXboxDemo.Text = "chk.XboxDemo";
+            this.chkXboxDemo.UseVisualStyleBackColor = true;
+            // 
+            // lblXboxProfName
+            // 
+            this.lblXboxProfName.AutoSize = true;
+            this.lblXboxProfName.Location = new System.Drawing.Point(6, 22);
+            this.lblXboxProfName.Name = "lblXboxProfName";
+            this.lblXboxProfName.Size = new System.Drawing.Size(91, 13);
+            this.lblXboxProfName.TabIndex = 3;
+            this.lblXboxProfName.Text = "lbl.XboxProfName";
+            // 
+            // xboxNameBox
+            // 
+            this.xboxNameBox.Location = new System.Drawing.Point(99, 19);
+            this.xboxNameBox.Name = "xboxNameBox";
+            this.xboxNameBox.Size = new System.Drawing.Size(318, 20);
+            this.xboxNameBox.TabIndex = 12;
+            this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
             // 
             // NewInstance
             // 
@@ -865,9 +913,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 385);
             this.Controls.Add(this.grbForExp);
-            this.Controls.Add(this.grbGame);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.grbGame);
+            this.Controls.Add(this.grbXbox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NewInstance";
             this.Text = "Profile editor";
@@ -894,6 +943,8 @@
             this.grbGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).EndInit();
+            this.grbXbox.ResumeLayout(false);
+            this.grbXbox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -965,5 +1016,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView xboxList;
+        private System.Windows.Forms.GroupBox grbXbox;
+        private System.Windows.Forms.CheckBox chkXboxDemo;
+        private System.Windows.Forms.Label lblXboxProfName;
+        private System.Windows.Forms.TextBox xboxNameBox;
     }
 }

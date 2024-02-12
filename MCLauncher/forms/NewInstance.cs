@@ -42,15 +42,9 @@ namespace MCLauncher.forms
             chkAssetIndex.Text = Strings.chkAssetIndex;
             saveBtn.Text = Strings.createProfile;
 
-            //disable tabs that don't work yet
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
-            //tabControl1.Controls.Remove(tabControl1.TabPages[1]);
+            grbXbox.Text = Strings.grbGame;
+            chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf(" ("));
+            lblXboxProfName.Text = Strings.lblProfName;
 
             //fill in shared stuff
             nameBox.Text = "New profile";
@@ -65,7 +59,6 @@ namespace MCLauncher.forms
             classBox.Enabled = false;
             assetIndexBox.Enabled = false;
             assetIndexBtn.Enabled = false;
-
 
             //fill in edition specific stuff
             populateLists();
@@ -232,7 +225,7 @@ namespace MCLauncher.forms
             ij.useAssets = chkAssetIndex.Checked;
             ij.assetsPath = assetIndexBox.Text;
 
-            ij.xboxDemo = false; //TODO FOR XBOX SETTINGS
+            ij.xboxDemo = chkXboxDemo.Checked;
             string json = JsonConvert.SerializeObject(ij);
 
             //create mod json
@@ -285,6 +278,19 @@ namespace MCLauncher.forms
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             populateLists();
+
+            if (tabControl1.SelectedTab.Text == "Xbox 360")
+            {
+                grbGame.Visible = false;
+                grbForExp.Visible = false;
+                grbXbox.Visible = true;
+            }
+            else
+            {
+                grbGame.Visible = true;
+                grbForExp.Visible = true;
+                grbXbox.Visible = false;
+            }
         }
 
         private void vanillaList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -335,7 +341,7 @@ namespace MCLauncher.forms
 
         private void chkAssetIndex_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkAssetIndex.Checked)
+            if (chkAssetIndex.Checked)
             {
                 assetIndexBox.Enabled = true;
                 assetIndexBtn.Enabled = true;
@@ -349,7 +355,7 @@ namespace MCLauncher.forms
 
         private void vanillaList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(vanillaList.SelectedItems.Count > 0)
+            if (vanillaList.SelectedItems.Count > 0)
             {
                 lastSelected = vanillaList.SelectedItems[0].Text;
 
@@ -448,6 +454,16 @@ namespace MCLauncher.forms
                 if (lastSelected.Contains(" ("))
                     lastSelected = lastSelected.Substring(0, lastSelected.IndexOf(" ("));
             }
+        }
+
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+            xboxNameBox.Text = nameBox.Text;
+        }
+
+        private void xboxNameBox_TextChanged(object sender, EventArgs e)
+        {
+            nameBox.Text = xboxNameBox.Text;
         }
     }
 }
