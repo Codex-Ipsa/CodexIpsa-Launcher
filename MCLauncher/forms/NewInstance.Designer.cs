@@ -318,9 +318,9 @@
             // 
             this.xboxPage.Controls.Add(this.xboxList);
             this.xboxPage.ImageIndex = 6;
-            this.xboxPage.Location = new System.Drawing.Point(4, 40);
+            this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 339);
+            this.xboxPage.Size = new System.Drawing.Size(354, 357);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
