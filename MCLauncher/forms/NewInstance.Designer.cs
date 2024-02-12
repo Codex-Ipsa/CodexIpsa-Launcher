@@ -355,9 +355,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 8);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(265, 13);
+            this.label7.Size = new System.Drawing.Size(263, 13);
             this.label7.TabIndex = 2;
-            this.label7.Text = "Creating a modded profile is coming in the next update!";
+            this.label7.Text = "Creating a modded profile is coming in a future update!";
             // 
             // forgePage
             // 
@@ -375,9 +375,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(6, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(254, 13);
+            this.label6.Size = new System.Drawing.Size(252, 13);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Creating a Forge profile is coming in the next update!";
+            this.label6.Text = "Creating a Forge profile is coming in a future update!";
             // 
             // fabricPage
             // 
@@ -395,9 +395,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 13);
+            this.label4.Size = new System.Drawing.Size(254, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Creating a Fabric profile is coming in the next update!";
+            this.label4.Text = "Creating a Fabric profile is coming in a future update!";
             // 
             // risugamiPage
             // 
@@ -415,9 +415,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(281, 13);
+            this.label3.Size = new System.Drawing.Size(279, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Creating a ModLoader profile is coming in the next update!";
+            this.label3.Text = "Creating a ModLoader profile is coming in a future update!";
             // 
             // quiltPage
             // 
@@ -435,9 +435,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.Size = new System.Drawing.Size(202, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Quilt support is coming in v0.5.0!";
+            this.label2.Text = "Quilt support is coming in a future update!";
             // 
             // neoforgePage
             // 
@@ -455,9 +455,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.Size = new System.Drawing.Size(228, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NeoForge support is coming in v0.5.0!";
+            this.label1.Text = "NeoForge support is coming in a future update!";
             // 
             // imageList1
             // 
