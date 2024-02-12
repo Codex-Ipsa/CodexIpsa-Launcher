@@ -293,9 +293,9 @@
             // 
             this.eduPage.Controls.Add(this.eduList);
             this.eduPage.ImageIndex = 0;
-            this.eduPage.Location = new System.Drawing.Point(4, 40);
+            this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(354, 339);
+            this.eduPage.Size = new System.Drawing.Size(354, 357);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             // xboxPage
             // 
             this.xboxPage.Controls.Add(this.xboxList);
-            this.xboxPage.ImageIndex = 0;
+            this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 40);
             this.xboxPage.Name = "xboxPage";
             this.xboxPage.Size = new System.Drawing.Size(354, 339);
@@ -343,9 +343,9 @@
             // 
             this.ipsaPage.Controls.Add(this.label7);
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 357);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
@@ -469,6 +469,7 @@
             this.imageList1.Images.SetKeyName(3, "fabric.png");
             this.imageList1.Images.SetKeyName(4, "quilt.png");
             this.imageList1.Images.SetKeyName(5, "neoforge.png");
+            this.imageList1.Images.SetKeyName(6, "xbox360.png");
             // 
             // saveBtn
             // 
