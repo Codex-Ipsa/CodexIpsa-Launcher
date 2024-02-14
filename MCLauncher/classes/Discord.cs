@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Threading;
 using MCLauncher.Properties;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace MCLauncher.classes
 {
@@ -17,6 +19,10 @@ namespace MCLauncher.classes
 
         public static async void Init()
         {
+            Process[] pname = Process.GetProcessesByName("discord");
+            if (pname.Length == 0)
+                return;
+
             try
             {
                 if (Settings.sj.discordRPC)
