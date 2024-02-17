@@ -21,7 +21,10 @@ namespace MCLauncher.classes
         {
             Process[] pname = Process.GetProcessesByName("discord");
             if (pname.Length == 0)
+            {
+                Logger.Discord("[Discord]", "Could not locate Discord! Skipping...");
                 return;
+            }
 
             try
             {
