@@ -199,9 +199,9 @@ namespace MCLauncher.forms
             ij.edition = "java";
 
             if (tabControl1.SelectedTab.Text == "Xbox 360")
-            {
                 ij.edition = "x360";
-            }
+            else if (tabControl1.SelectedTab.Text == "MinecraftEdu")
+                ij.edition = "javaedu";
 
             ij.version = lastSelected;
 
