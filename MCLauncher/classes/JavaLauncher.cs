@@ -61,11 +61,11 @@ namespace MCLauncher.classes
 
             try
             {
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{ver}", dj.version));
+                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", dj.version));
                 if (!File.Exists($"{Globals.dataPath}\\data\\json\\{dj.version}.json"))
                     return;
             }
