@@ -29,8 +29,8 @@ namespace MCLauncher.forms
             lblMem.Text = Strings.lblMem;
             lblMemMax.Text = Strings.lblMemMax;
             lblMemMin.Text = Strings.lblMemMin;
-            lblBefCmd.Text = Strings.lblBefCmd;
-            lblAftCmd.Text = Strings.lblAftCmd;
+            //lblBefCmd.Text = Strings.lblBefCmd;
+            //lblAftCmd.Text = Strings.lblAftCmd;
             chkProxy.Text = Strings.chkProxy;
             chkUseDemo.Text = Strings.chkUseDemo;
             chkOffline.Text = Strings.chkOffline;
@@ -208,8 +208,9 @@ namespace MCLauncher.forms
             ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
             ij.resolution = $"{resXBox.Text} {resYBox.Text}";
             ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
-            ij.befCmd = befBox.Text;
-            ij.aftCmd = aftBox.Text;
+            ij.jvm = jvmBox.Text;
+            //ij.befCmd = befBox.Text;
+            //ij.aftCmd = aftBox.Text;
 
             ij.disProxy = chkProxy.Checked;
             ij.demo = chkUseDemo.Checked;
