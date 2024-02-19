@@ -61,6 +61,8 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveBtn = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.chkAssetIndex = new System.Windows.Forms.CheckBox();
             this.assetIndexBtn = new System.Windows.Forms.Button();
             this.assetIndexBox = new System.Windows.Forms.TextBox();
@@ -73,6 +75,8 @@
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.grbGame = new System.Windows.Forms.GroupBox();
+            this.lblJvm = new System.Windows.Forms.Label();
+            this.jvmBox = new System.Windows.Forms.TextBox();
             this.chkOffline = new System.Windows.Forms.CheckBox();
             this.chkUseDemo = new System.Windows.Forms.CheckBox();
             this.chkProxy = new System.Windows.Forms.CheckBox();
@@ -95,10 +99,6 @@
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.lblXboxProfName = new System.Windows.Forms.Label();
             this.xboxNameBox = new System.Windows.Forms.TextBox();
-            this.jvmBox = new System.Windows.Forms.TextBox();
-            this.lblJvm = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
@@ -503,6 +503,23 @@
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 126);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(88, 17);
+            this.checkBox1.TabIndex = 38;
+            this.checkBox1.Text = "chk.ServerIP";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(106, 124);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(311, 20);
+            this.textBox1.TabIndex = 37;
+            // 
             // chkAssetIndex
             // 
             this.chkAssetIndex.AutoSize = true;
@@ -636,6 +653,22 @@
             this.grbGame.TabIndex = 28;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
+            // 
+            // lblJvm
+            // 
+            this.lblJvm.AutoSize = true;
+            this.lblJvm.Location = new System.Drawing.Point(6, 126);
+            this.lblJvm.Name = "lblJvm";
+            this.lblJvm.Size = new System.Drawing.Size(36, 13);
+            this.lblJvm.TabIndex = 26;
+            this.lblJvm.Text = "lbl.jvm";
+            // 
+            // jvmBox
+            // 
+            this.jvmBox.Location = new System.Drawing.Point(100, 123);
+            this.jvmBox.Name = "jvmBox";
+            this.jvmBox.Size = new System.Drawing.Size(318, 20);
+            this.jvmBox.TabIndex = 25;
             // 
             // chkOffline
             // 
@@ -875,39 +908,6 @@
             this.xboxNameBox.Size = new System.Drawing.Size(318, 20);
             this.xboxNameBox.TabIndex = 12;
             this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
-            // 
-            // jvmBox
-            // 
-            this.jvmBox.Location = new System.Drawing.Point(100, 123);
-            this.jvmBox.Name = "jvmBox";
-            this.jvmBox.Size = new System.Drawing.Size(318, 20);
-            this.jvmBox.TabIndex = 25;
-            // 
-            // lblJvm
-            // 
-            this.lblJvm.AutoSize = true;
-            this.lblJvm.Location = new System.Drawing.Point(6, 126);
-            this.lblJvm.Name = "lblJvm";
-            this.lblJvm.Size = new System.Drawing.Size(36, 13);
-            this.lblJvm.TabIndex = 26;
-            this.lblJvm.Text = "lbl.jvm";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(106, 124);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(311, 20);
-            this.textBox1.TabIndex = 37;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 126);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 17);
-            this.checkBox1.TabIndex = 38;
-            this.checkBox1.Text = "chk.ServerIP";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // NewInstance
             // 
