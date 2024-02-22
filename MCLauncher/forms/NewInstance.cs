@@ -121,8 +121,11 @@ namespace MCLauncher.forms
                 //scroll to default version (b1.7.3)
                 ListViewItem item = vanillaList.FindItemWithText("b1.7.3");
                 int indexOf = vanillaList.Items.IndexOf(item);
-                vanillaList.Items[indexOf].Selected = true;
-                vanillaList.TopItem = vanillaList.Items[indexOf];
+                if (indexOf > 0)
+                {
+                    vanillaList.Items[indexOf].Selected = true;
+                    vanillaList.TopItem = vanillaList.Items[indexOf];
+                }
             }
 
             //edu list
