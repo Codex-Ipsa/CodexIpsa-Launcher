@@ -77,7 +77,6 @@
             this.classBox = new System.Windows.Forms.TextBox();
             this.chkClasspath = new System.Windows.Forms.CheckBox();
             this.grbGame = new System.Windows.Forms.GroupBox();
-            this.iconBtn = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.exportBtn = new System.Windows.Forms.Button();
@@ -145,16 +144,16 @@
             // 
             // nameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(154, 19);
+            this.nameBox.Location = new System.Drawing.Point(101, 19);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(279, 20);
+            this.nameBox.Size = new System.Drawing.Size(332, 20);
             this.nameBox.TabIndex = 12;
             this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // lblProfName
             // 
             this.lblProfName.AutoSize = true;
-            this.lblProfName.Location = new System.Drawing.Point(62, 22);
+            this.lblProfName.Location = new System.Drawing.Point(6, 22);
             this.lblProfName.Name = "lblProfName";
             this.lblProfName.Size = new System.Drawing.Size(67, 13);
             this.lblProfName.TabIndex = 3;
@@ -162,16 +161,16 @@
             // 
             // dirBox
             // 
-            this.dirBox.Location = new System.Drawing.Point(154, 45);
+            this.dirBox.Location = new System.Drawing.Point(101, 45);
             this.dirBox.Name = "dirBox";
-            this.dirBox.Size = new System.Drawing.Size(233, 20);
+            this.dirBox.Size = new System.Drawing.Size(286, 20);
             this.dirBox.TabIndex = 13;
             this.dirBox.TextChanged += new System.EventHandler(this.DirBox_TextChanged);
             // 
             // lblGameDir
             // 
             this.lblGameDir.AutoSize = true;
-            this.lblGameDir.Location = new System.Drawing.Point(62, 49);
+            this.lblGameDir.Location = new System.Drawing.Point(6, 49);
             this.lblGameDir.Name = "lblGameDir";
             this.lblGameDir.Size = new System.Drawing.Size(61, 13);
             this.lblGameDir.TabIndex = 5;
@@ -640,7 +639,6 @@
             // 
             // grbGame
             // 
-            this.grbGame.Controls.Add(this.iconBtn);
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
             this.grbGame.Controls.Add(this.chkProxy);
@@ -669,16 +667,6 @@
             this.grbGame.TabIndex = 11;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
-            // 
-            // iconBtn
-            // 
-            this.iconBtn.Location = new System.Drawing.Point(6, 19);
-            this.iconBtn.Name = "iconBtn";
-            this.iconBtn.Size = new System.Drawing.Size(50, 50);
-            this.iconBtn.TabIndex = 25;
-            this.iconBtn.Text = "(icon)";
-            this.iconBtn.UseVisualStyleBackColor = true;
-            this.iconBtn.Click += new System.EventHandler(this.iconBtn_Click);
             // 
             // tabControl1
             // 
@@ -1096,6 +1084,5 @@
         private System.Windows.Forms.CheckBox checkForge;
         private System.Windows.Forms.CheckBox checkMLoader;
         private System.Windows.Forms.Button exportBtn;
-        private System.Windows.Forms.Button iconBtn;
     }
 }
