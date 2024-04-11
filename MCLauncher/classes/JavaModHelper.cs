@@ -178,7 +178,9 @@ namespace MCLauncher
                         File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
                     }
 
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\", true);
+                    if(Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\"))
+                        Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\", true);
+                    
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
                     ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar");
                 }
