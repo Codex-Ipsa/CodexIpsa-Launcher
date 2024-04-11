@@ -297,7 +297,7 @@ namespace MCLauncher.forms
                     }
                     else
                     {
-                        if (checkForge.Checked)
+                        /*if (checkForge.Checked)
                         {
                             if (checkBeta.Checked && row[0] == "beta" && checkForge.Checked && ver.forge)
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
@@ -327,7 +327,7 @@ namespace MCLauncher.forms
 
                             if (checkRelease.Checked && row[0] == "release" && checkMLoader.Checked && ver.risugami.Contains("true"))
                                 listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }
+                        }*/
 
                     }
                 }
@@ -460,10 +460,10 @@ namespace MCLauncher.forms
                 lastType = listView1.SelectedItems[0].SubItems[1].Text;
                 lastDate = listView1.SelectedItems[0].SubItems[2].Text;
                 lastDate = DateTime.ParseExact(lastDate, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-ddTHH:mm:ss+00:00");
-                Logger.Info("[Profile]", $"Selected {lastSelected};{lastType};{lastDate};forge {vj[res].forge};fabric {vj[res].fabric};risugami {vj[res].risugami}");
+                Logger.Info("[Profile]", $"Selected {lastSelected};{lastType};{lastDate};forge false;fabric false;risugami false");
 
                 //load modloaders
-                if (vj[res].forge)
+                /*if (vj[res].forge)
                 {
                     btnForge.Enabled = true;
                 }
@@ -494,7 +494,7 @@ namespace MCLauncher.forms
                 else
                 {
                     btnMLoader.Enabled = false;
-                }
+                }*/
             }
         }
 
@@ -1177,7 +1177,7 @@ namespace MCLauncher.forms
             {
                 if (t.id == temp)
                 {
-                    if (t.risugami == "truemp")
+                    /*if (t.risugami == "truemp")
                     {
                         DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/risugami/modloader-{temp}.zip";
                         DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\modloader-{temp}.zip";
@@ -1202,7 +1202,7 @@ namespace MCLauncher.forms
                         Profile.modListWorker("add", "ModLoader", $"{temp}", $"modloader-{temp}.zip", "jarmod", "");
 
                         Profile.reloadModsList();
-                    }
+                    }*/
                 }
             }
         }
@@ -1269,9 +1269,9 @@ namespace MCLauncher.forms
         public string alt { get; set; }
         public string type { get; set; }
         public DateTime released { get; set; }
-        public bool forge { get; set; }
+        /*public bool forge { get; set; }
         public bool fabric { get; set; }
-        public string risugami { get; set; }
+        public string risugami { get; set; }*/
     }
 
     public class ProfileInfo

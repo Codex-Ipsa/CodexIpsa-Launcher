@@ -35,7 +35,7 @@ namespace MCLauncher
         public static bool requireAuth = true; //Change this on release
 
         //Java manifests
-        public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java_manifest.json";
+        public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-manifest.json";
         public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
 
