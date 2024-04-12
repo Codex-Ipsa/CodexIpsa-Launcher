@@ -83,7 +83,7 @@ namespace MCLauncher.forms
                 List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
                 foreach (JavaManifest ver in jm)
                 {
-                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
+                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") }; //dd.MM.yyyy HH:mm:ss
 
                     if (vanillaPreclassic.Checked && row[0] == "pre-classic")
                         vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);

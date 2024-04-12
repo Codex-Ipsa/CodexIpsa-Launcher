@@ -162,7 +162,7 @@
             this.vanillaExperimental.AutoSize = true;
             this.vanillaExperimental.Checked = true;
             this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(222, 319);
+            this.vanillaExperimental.Location = new System.Drawing.Point(208, 319);
             this.vanillaExperimental.Name = "vanillaExperimental";
             this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
             this.vanillaExperimental.TabIndex = 9;
@@ -175,7 +175,7 @@
             this.vanillaSnapshot.AutoSize = true;
             this.vanillaSnapshot.Checked = true;
             this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(154, 319);
+            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 319);
             this.vanillaSnapshot.Name = "vanillaSnapshot";
             this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
             this.vanillaSnapshot.TabIndex = 8;
@@ -188,7 +188,7 @@
             this.vanillaRelease.AutoSize = true;
             this.vanillaRelease.Checked = true;
             this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(89, 319);
+            this.vanillaRelease.Location = new System.Drawing.Point(60, 319);
             this.vanillaRelease.Name = "vanillaRelease";
             this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
             this.vanillaRelease.TabIndex = 7;
@@ -293,9 +293,9 @@
             // 
             this.eduPage.Controls.Add(this.eduList);
             this.eduPage.ImageIndex = 0;
-            this.eduPage.Location = new System.Drawing.Point(4, 40);
+            this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(354, 339);
+            this.eduPage.Size = new System.Drawing.Size(356, 357);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -318,9 +318,9 @@
             // 
             this.xboxPage.Controls.Add(this.xboxList);
             this.xboxPage.ImageIndex = 6;
-            this.xboxPage.Location = new System.Drawing.Point(4, 40);
+            this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 339);
+            this.xboxPage.Size = new System.Drawing.Size(356, 357);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -343,9 +343,9 @@
             // 
             this.ipsaPage.Controls.Add(this.label7);
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
+            this.ipsaPage.Size = new System.Drawing.Size(356, 357);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
@@ -365,7 +365,7 @@
             this.forgePage.ImageIndex = 2;
             this.forgePage.Location = new System.Drawing.Point(4, 40);
             this.forgePage.Name = "forgePage";
-            this.forgePage.Size = new System.Drawing.Size(354, 339);
+            this.forgePage.Size = new System.Drawing.Size(356, 339);
             this.forgePage.TabIndex = 2;
             this.forgePage.Text = "Forge";
             this.forgePage.UseVisualStyleBackColor = true;
@@ -385,7 +385,7 @@
             this.fabricPage.ImageIndex = 3;
             this.fabricPage.Location = new System.Drawing.Point(4, 40);
             this.fabricPage.Name = "fabricPage";
-            this.fabricPage.Size = new System.Drawing.Size(354, 339);
+            this.fabricPage.Size = new System.Drawing.Size(356, 339);
             this.fabricPage.TabIndex = 3;
             this.fabricPage.Text = "Fabric";
             this.fabricPage.UseVisualStyleBackColor = true;
@@ -405,7 +405,7 @@
             this.risugamiPage.ImageIndex = 0;
             this.risugamiPage.Location = new System.Drawing.Point(4, 40);
             this.risugamiPage.Name = "risugamiPage";
-            this.risugamiPage.Size = new System.Drawing.Size(354, 339);
+            this.risugamiPage.Size = new System.Drawing.Size(356, 339);
             this.risugamiPage.TabIndex = 6;
             this.risugamiPage.Text = "ModLoader";
             this.risugamiPage.UseVisualStyleBackColor = true;
@@ -425,7 +425,7 @@
             this.quiltPage.ImageIndex = 4;
             this.quiltPage.Location = new System.Drawing.Point(4, 40);
             this.quiltPage.Name = "quiltPage";
-            this.quiltPage.Size = new System.Drawing.Size(354, 339);
+            this.quiltPage.Size = new System.Drawing.Size(356, 339);
             this.quiltPage.TabIndex = 7;
             this.quiltPage.Text = "Quilt";
             this.quiltPage.UseVisualStyleBackColor = true;
@@ -445,7 +445,7 @@
             this.neoforgePage.ImageIndex = 5;
             this.neoforgePage.Location = new System.Drawing.Point(4, 40);
             this.neoforgePage.Name = "neoforgePage";
-            this.neoforgePage.Size = new System.Drawing.Size(354, 339);
+            this.neoforgePage.Size = new System.Drawing.Size(356, 339);
             this.neoforgePage.TabIndex = 8;
             this.neoforgePage.Text = "NeoForge";
             this.neoforgePage.UseVisualStyleBackColor = true;

@@ -913,8 +913,8 @@ namespace MCLauncher.forms
                 Instance.modView.Items.Add(item);
             }
 
-            Instance.modView.Columns[0].Width = Instance.modView.Width / 2;
-            Instance.modView.Columns[1].Width = Instance.modView.Width / 4;
+            Instance.modView.Columns[0].Width = -1;
+            Instance.modView.Columns[1].Width = -1;
             Instance.modView.Columns[2].Width = -2;
         }
 
