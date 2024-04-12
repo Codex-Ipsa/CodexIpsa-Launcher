@@ -33,7 +33,7 @@
             this.grbDefaults = new System.Windows.Forms.GroupBox();
             this.btnJre21 = new System.Windows.Forms.Button();
             this.btnGetJava21 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblJre21 = new System.Windows.Forms.Label();
             this.cmbJre21 = new System.Windows.Forms.ComboBox();
             this.btnGetJava17 = new System.Windows.Forms.Button();
             this.btnGetJava8 = new System.Windows.Forms.Button();
@@ -73,7 +73,7 @@
             this.grbDefaults.BackColor = System.Drawing.Color.Transparent;
             this.grbDefaults.Controls.Add(this.btnJre21);
             this.grbDefaults.Controls.Add(this.btnGetJava21);
-            this.grbDefaults.Controls.Add(this.label1);
+            this.grbDefaults.Controls.Add(this.lblJre21);
             this.grbDefaults.Controls.Add(this.cmbJre21);
             this.grbDefaults.Controls.Add(this.btnGetJava17);
             this.grbDefaults.Controls.Add(this.btnGetJava8);
@@ -113,14 +113,14 @@
             this.btnGetJava21.UseVisualStyleBackColor = true;
             this.btnGetJava21.Click += new System.EventHandler(this.btnGetJava21_Click);
             // 
-            // label1
+            // lblJre21
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "lbl.jre21";
+            this.lblJre21.AutoSize = true;
+            this.lblJre21.Location = new System.Drawing.Point(6, 76);
+            this.lblJre21.Name = "lblJre21";
+            this.lblJre21.Size = new System.Drawing.Size(43, 13);
+            this.lblJre21.TabIndex = 31;
+            this.lblJre21.Text = "lbl.jre21";
             // 
             // cmbJre21
             // 
@@ -346,7 +346,7 @@
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
         public System.Windows.Forms.Button btnGetJava8;
         public System.Windows.Forms.Button btnGetJava17;
-        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label lblJre21;
         private System.Windows.Forms.ComboBox cmbJre21;
         public System.Windows.Forms.Button btnGetJava21;
         private System.Windows.Forms.Button btnJre21;

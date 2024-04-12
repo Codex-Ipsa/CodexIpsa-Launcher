@@ -43,8 +43,10 @@ namespace MCLauncher.controls
             //Lang
             lblJre8.Text = "Java 8";
             lblJre17.Text = "Java 17";
+            lblJre21.Text = "Java 21";
             btnGetJava8.Text = Strings.installJava.Replace("{ver}", "8");
             btnGetJava17.Text = Strings.installJava.Replace("{ver}", "17");
+            btnGetJava21.Text = Strings.installJava.Replace("{ver}", "21");
 
             //Seasonal background
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
@@ -233,7 +235,7 @@ namespace MCLauncher.controls
             ofd.Filter = "Executables|*.exe";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                cmbJre17.Text = ofd.FileName;
+                cmbJre21.Text = ofd.FileName;
                 Settings.sj.jre21 = ofd.FileName;
                 Settings.Save();
             }
