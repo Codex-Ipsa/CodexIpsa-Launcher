@@ -86,7 +86,6 @@
     <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
-    <Compile Include="classes\DownloadJava.cs" />
     <Compile Include="classes\ipsajson\FabricParser.cs" />
     <Compile Include="classes\ipsajson\IpsaJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
