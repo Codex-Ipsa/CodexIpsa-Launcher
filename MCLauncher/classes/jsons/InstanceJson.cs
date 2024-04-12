@@ -16,9 +16,8 @@ namespace MCLauncher.classes.jsons
         public string directory { get; set; }
         public string resolution { get; set; }
         public string memory { get; set; }
-        public string befCmd { get; set; } //DEPRECATED
-        public string aftCmd { get; set; } //DEPRECATED
-        public string jvm { get; set; }
+        public string befCmd { get; set; }
+        public string aftCmd { get; set; }
 
         public bool disProxy { get; set; }
         public bool demo { get; set; }

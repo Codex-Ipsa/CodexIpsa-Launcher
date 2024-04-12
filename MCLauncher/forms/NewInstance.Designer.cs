@@ -61,8 +61,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveBtn = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.chkAssetIndex = new System.Windows.Forms.CheckBox();
             this.assetIndexBtn = new System.Windows.Forms.Button();
             this.assetIndexBox = new System.Windows.Forms.TextBox();
@@ -75,8 +73,8 @@
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.grbGame = new System.Windows.Forms.GroupBox();
-            this.lblJvm = new System.Windows.Forms.Label();
-            this.jvmBox = new System.Windows.Forms.TextBox();
+            this.lblJvmArgs = new System.Windows.Forms.Label();
+            this.jvmArgsBox = new System.Windows.Forms.TextBox();
             this.chkOffline = new System.Windows.Forms.CheckBox();
             this.chkUseDemo = new System.Windows.Forms.CheckBox();
             this.chkProxy = new System.Windows.Forms.CheckBox();
@@ -99,6 +97,8 @@
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.lblXboxProfName = new System.Windows.Forms.Label();
             this.xboxNameBox = new System.Windows.Forms.TextBox();
+            this.gameArgsBox = new System.Windows.Forms.TextBox();
+            this.lblGameArgs = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
@@ -293,9 +293,9 @@
             // 
             this.eduPage.Controls.Add(this.eduList);
             this.eduPage.ImageIndex = 0;
-            this.eduPage.Location = new System.Drawing.Point(4, 22);
+            this.eduPage.Location = new System.Drawing.Point(4, 40);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(356, 357);
+            this.eduPage.Size = new System.Drawing.Size(354, 339);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -318,9 +318,9 @@
             // 
             this.xboxPage.Controls.Add(this.xboxList);
             this.xboxPage.ImageIndex = 6;
-            this.xboxPage.Location = new System.Drawing.Point(4, 22);
+            this.xboxPage.Location = new System.Drawing.Point(4, 40);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(356, 357);
+            this.xboxPage.Size = new System.Drawing.Size(354, 339);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -343,9 +343,9 @@
             // 
             this.ipsaPage.Controls.Add(this.label7);
             this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 22);
+            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
             this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(356, 357);
+            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
             this.ipsaPage.TabIndex = 1;
             this.ipsaPage.Text = "Codex-Ipsa Mods";
             this.ipsaPage.UseVisualStyleBackColor = true;
@@ -365,7 +365,7 @@
             this.forgePage.ImageIndex = 2;
             this.forgePage.Location = new System.Drawing.Point(4, 40);
             this.forgePage.Name = "forgePage";
-            this.forgePage.Size = new System.Drawing.Size(356, 339);
+            this.forgePage.Size = new System.Drawing.Size(354, 339);
             this.forgePage.TabIndex = 2;
             this.forgePage.Text = "Forge";
             this.forgePage.UseVisualStyleBackColor = true;
@@ -385,7 +385,7 @@
             this.fabricPage.ImageIndex = 3;
             this.fabricPage.Location = new System.Drawing.Point(4, 40);
             this.fabricPage.Name = "fabricPage";
-            this.fabricPage.Size = new System.Drawing.Size(356, 339);
+            this.fabricPage.Size = new System.Drawing.Size(354, 339);
             this.fabricPage.TabIndex = 3;
             this.fabricPage.Text = "Fabric";
             this.fabricPage.UseVisualStyleBackColor = true;
@@ -405,7 +405,7 @@
             this.risugamiPage.ImageIndex = 0;
             this.risugamiPage.Location = new System.Drawing.Point(4, 40);
             this.risugamiPage.Name = "risugamiPage";
-            this.risugamiPage.Size = new System.Drawing.Size(356, 339);
+            this.risugamiPage.Size = new System.Drawing.Size(354, 339);
             this.risugamiPage.TabIndex = 6;
             this.risugamiPage.Text = "ModLoader";
             this.risugamiPage.UseVisualStyleBackColor = true;
@@ -425,7 +425,7 @@
             this.quiltPage.ImageIndex = 4;
             this.quiltPage.Location = new System.Drawing.Point(4, 40);
             this.quiltPage.Name = "quiltPage";
-            this.quiltPage.Size = new System.Drawing.Size(356, 339);
+            this.quiltPage.Size = new System.Drawing.Size(354, 339);
             this.quiltPage.TabIndex = 7;
             this.quiltPage.Text = "Quilt";
             this.quiltPage.UseVisualStyleBackColor = true;
@@ -445,7 +445,7 @@
             this.neoforgePage.ImageIndex = 5;
             this.neoforgePage.Location = new System.Drawing.Point(4, 40);
             this.neoforgePage.Name = "neoforgePage";
-            this.neoforgePage.Size = new System.Drawing.Size(356, 339);
+            this.neoforgePage.Size = new System.Drawing.Size(354, 339);
             this.neoforgePage.TabIndex = 8;
             this.neoforgePage.Text = "NeoForge";
             this.neoforgePage.UseVisualStyleBackColor = true;
@@ -483,8 +483,6 @@
             // 
             // grbForExp
             // 
-            this.grbForExp.Controls.Add(this.checkBox1);
-            this.grbForExp.Controls.Add(this.textBox1);
             this.grbForExp.Controls.Add(this.chkAssetIndex);
             this.grbForExp.Controls.Add(this.assetIndexBtn);
             this.grbForExp.Controls.Add(this.assetIndexBox);
@@ -496,29 +494,12 @@
             this.grbForExp.Controls.Add(this.jsonBox);
             this.grbForExp.Controls.Add(this.javaBox);
             this.grbForExp.Controls.Add(this.javaBtn);
-            this.grbForExp.Location = new System.Drawing.Point(366, 202);
+            this.grbForExp.Location = new System.Drawing.Point(366, 226);
             this.grbForExp.Name = "grbForExp";
-            this.grbForExp.Size = new System.Drawing.Size(425, 149);
+            this.grbForExp.Size = new System.Drawing.Size(425, 125);
             this.grbForExp.TabIndex = 29;
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 126);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 17);
-            this.checkBox1.TabIndex = 38;
-            this.checkBox1.Text = "chk.ServerIP";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(106, 124);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(311, 20);
-            this.textBox1.TabIndex = 37;
             // 
             // chkAssetIndex
             // 
@@ -627,8 +608,10 @@
             // grbGame
             // 
             this.grbGame.BackColor = System.Drawing.SystemColors.Control;
-            this.grbGame.Controls.Add(this.lblJvm);
-            this.grbGame.Controls.Add(this.jvmBox);
+            this.grbGame.Controls.Add(this.lblGameArgs);
+            this.grbGame.Controls.Add(this.gameArgsBox);
+            this.grbGame.Controls.Add(this.lblJvmArgs);
+            this.grbGame.Controls.Add(this.jvmArgsBox);
             this.grbGame.Controls.Add(this.chkOffline);
             this.grbGame.Controls.Add(this.chkUseDemo);
             this.grbGame.Controls.Add(this.chkProxy);
@@ -649,31 +632,31 @@
             this.grbGame.Controls.Add(this.dirBox);
             this.grbGame.Location = new System.Drawing.Point(366, 2);
             this.grbGame.Name = "grbGame";
-            this.grbGame.Size = new System.Drawing.Size(425, 198);
+            this.grbGame.Size = new System.Drawing.Size(425, 218);
             this.grbGame.TabIndex = 28;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
             // 
-            // lblJvm
+            // lblJvmArgs
             // 
-            this.lblJvm.AutoSize = true;
-            this.lblJvm.Location = new System.Drawing.Point(6, 126);
-            this.lblJvm.Name = "lblJvm";
-            this.lblJvm.Size = new System.Drawing.Size(36, 13);
-            this.lblJvm.TabIndex = 26;
-            this.lblJvm.Text = "lbl.jvm";
+            this.lblJvmArgs.AutoSize = true;
+            this.lblJvmArgs.Location = new System.Drawing.Point(6, 126);
+            this.lblJvmArgs.Name = "lblJvmArgs";
+            this.lblJvmArgs.Size = new System.Drawing.Size(57, 13);
+            this.lblJvmArgs.TabIndex = 26;
+            this.lblJvmArgs.Text = "lbl.jvmArgs";
             // 
-            // jvmBox
+            // jvmArgsBox
             // 
-            this.jvmBox.Location = new System.Drawing.Point(100, 123);
-            this.jvmBox.Name = "jvmBox";
-            this.jvmBox.Size = new System.Drawing.Size(318, 20);
-            this.jvmBox.TabIndex = 25;
+            this.jvmArgsBox.Location = new System.Drawing.Point(100, 123);
+            this.jvmArgsBox.Name = "jvmArgsBox";
+            this.jvmArgsBox.Size = new System.Drawing.Size(318, 20);
+            this.jvmArgsBox.TabIndex = 25;
             // 
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(9, 177);
+            this.chkOffline.Location = new System.Drawing.Point(6, 195);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(77, 17);
             this.chkOffline.TabIndex = 23;
@@ -683,7 +666,7 @@
             // chkUseDemo
             // 
             this.chkUseDemo.AutoSize = true;
-            this.chkUseDemo.Location = new System.Drawing.Point(237, 151);
+            this.chkUseDemo.Location = new System.Drawing.Point(237, 172);
             this.chkUseDemo.Name = "chkUseDemo";
             this.chkUseDemo.Size = new System.Drawing.Size(94, 17);
             this.chkUseDemo.TabIndex = 22;
@@ -693,7 +676,7 @@
             // chkProxy
             // 
             this.chkProxy.AutoSize = true;
-            this.chkProxy.Location = new System.Drawing.Point(9, 151);
+            this.chkProxy.Location = new System.Drawing.Point(6, 172);
             this.chkProxy.Name = "chkProxy";
             this.chkProxy.Size = new System.Drawing.Size(73, 17);
             this.chkProxy.TabIndex = 21;
@@ -703,7 +686,7 @@
             // chkMulti
             // 
             this.chkMulti.AutoSize = true;
-            this.chkMulti.Location = new System.Drawing.Point(237, 177);
+            this.chkMulti.Location = new System.Drawing.Point(237, 195);
             this.chkMulti.Name = "chkMulti";
             this.chkMulti.Size = new System.Drawing.Size(69, 17);
             this.chkMulti.TabIndex = 24;
@@ -909,6 +892,22 @@
             this.xboxNameBox.TabIndex = 12;
             this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
             // 
+            // gameArgsBox
+            // 
+            this.gameArgsBox.Location = new System.Drawing.Point(99, 149);
+            this.gameArgsBox.Name = "gameArgsBox";
+            this.gameArgsBox.Size = new System.Drawing.Size(318, 20);
+            this.gameArgsBox.TabIndex = 27;
+            // 
+            // lblGameArgs
+            // 
+            this.lblGameArgs.AutoSize = true;
+            this.lblGameArgs.Location = new System.Drawing.Point(6, 152);
+            this.lblGameArgs.Name = "lblGameArgs";
+            this.lblGameArgs.Size = new System.Drawing.Size(67, 13);
+            this.lblGameArgs.TabIndex = 28;
+            this.lblGameArgs.Text = "lbl.gameArgs";
+            // 
             // NewInstance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1018,9 +1017,9 @@
         private System.Windows.Forms.CheckBox chkXboxDemo;
         private System.Windows.Forms.Label lblXboxProfName;
         private System.Windows.Forms.TextBox xboxNameBox;
-        private System.Windows.Forms.Label lblJvm;
-        private System.Windows.Forms.TextBox jvmBox;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblJvmArgs;
+        private System.Windows.Forms.TextBox jvmArgsBox;
+        private System.Windows.Forms.Label lblGameArgs;
+        private System.Windows.Forms.TextBox gameArgsBox;
     }
 }
