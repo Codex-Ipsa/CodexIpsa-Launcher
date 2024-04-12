@@ -67,8 +67,8 @@ namespace MCLauncher
         public static string lblMem = "Memory";
         public static string lblMemMax = "Max";
         public static string lblMemMin = "Min";
-        public static string lblBefCmd = "Before command";
-        public static string lblAftCmd = "After command";
+        public static string lblBefCmd = "JVM arguments";
+        public static string lblAftCmd = "Game arguments";
         public static string chkProxy = "Use skin and sound proxy (<=1.5.2)";
         public static string chkUseDemo = "Launch demo (>=12w16a)";
         public static string chkOffline = "Launch in offline mode";
