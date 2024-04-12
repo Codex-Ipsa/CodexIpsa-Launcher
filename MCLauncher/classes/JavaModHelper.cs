@@ -71,7 +71,7 @@ namespace MCLauncher
                 //cusjars are simple, just return the path
                 if (entry.type == "cusjar")
                 {
-                    DownloadProgress.url = Globals.javaInfo.Replace("{ver}", entry.json);
+                    DownloadProgress.url = Globals.javaInfo.Replace("{ver}", entry.json).Replace("{type}", "java");
                     DownloadProgress.savePath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();
@@ -84,7 +84,7 @@ namespace MCLauncher
                 //jarmods extract, then zip up and return that
                 else if (entry.type == "jarmod")
                 {
-                    DownloadProgress.url = Globals.javaInfo.Replace("{ver}", entry.json);
+                    DownloadProgress.url = Globals.javaInfo.Replace("{ver}", entry.json).Replace("{type}", "java");
                     DownloadProgress.savePath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();

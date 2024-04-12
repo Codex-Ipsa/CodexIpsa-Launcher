@@ -114,7 +114,7 @@ namespace MCLauncher.forms
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();
 
-                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\data\\json\\{json}.json");
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
                     Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json);
                 }
                 else //assume it's a json type mod if there's no url
@@ -125,7 +125,7 @@ namespace MCLauncher.forms
                         Profile.modListWorker("remove", "", "", $"{id}-{version}.json", "", "");
                     }
 
-                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json), $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
                     Profile.modListWorker("add", name, version, $"{id}-{version}.json", type, json);
                 }
 
@@ -234,7 +234,7 @@ namespace MCLauncher.forms
             DownloadProgress dp = new DownloadProgress();
             dp.ShowDialog();
 
-            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
+            Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
             Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
             HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
             HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
