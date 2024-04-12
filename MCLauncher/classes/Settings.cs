@@ -11,14 +11,6 @@ namespace MCLauncher
         {
             if(!File.Exists($"{Globals.dataPath}\\config.json"))
             {
-                sj.warning = "STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!";
-                sj.refreshToken = Properties.Settings.Default.msRefreshToken;
-                sj.language = Properties.Settings.Default.prefLanguage;
-                sj.instance = Properties.Settings.Default.lastInstance;
-                sj.discordRPC = Properties.Settings.Default.discordRpc;
-                sj.jre8 = Properties.Settings.Default.jre8;
-                sj.jre17 = Properties.Settings.Default.jre17;
-
                 string toSave = JsonConvert.SerializeObject(sj);
                 File.WriteAllText($"{Globals.dataPath}\\config.json", toSave);
             }
@@ -43,5 +35,18 @@ namespace MCLauncher
         public bool discordRPC { get; set; }
         public string jre8 { get; set; }
         public string jre17 { get; set; }
+        public string jre21 { get; set; }
+
+        public SettingsJson()
+        {
+            warning = "STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!";
+            refreshToken = string.Empty;
+            language = "english";
+            instance = "Default";
+            discordRPC = true;
+            jre8 = "java.exe";
+            jre17 = "java.exe";
+            jre21 = "java.exe";
+        }
     }
 }

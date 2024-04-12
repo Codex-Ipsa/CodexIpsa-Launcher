@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
             this.grbDefaults = new System.Windows.Forms.GroupBox();
+            this.btnJre21 = new System.Windows.Forms.Button();
+            this.btnGetJava21 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbJre21 = new System.Windows.Forms.ComboBox();
             this.btnGetJava17 = new System.Windows.Forms.Button();
             this.btnGetJava8 = new System.Windows.Forms.Button();
             this.lblJre17 = new System.Windows.Forms.Label();
@@ -59,14 +63,18 @@
             this.pnlCenter.Controls.Add(this.grbDefaults);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
-            this.pnlCenter.Location = new System.Drawing.Point(171, 55);
+            this.pnlCenter.Location = new System.Drawing.Point(66, 27);
             this.pnlCenter.Name = "pnlCenter";
-            this.pnlCenter.Size = new System.Drawing.Size(446, 274);
+            this.pnlCenter.Size = new System.Drawing.Size(446, 311);
             this.pnlCenter.TabIndex = 24;
             // 
             // grbDefaults
             // 
             this.grbDefaults.BackColor = System.Drawing.Color.Transparent;
+            this.grbDefaults.Controls.Add(this.btnJre21);
+            this.grbDefaults.Controls.Add(this.btnGetJava21);
+            this.grbDefaults.Controls.Add(this.label1);
+            this.grbDefaults.Controls.Add(this.cmbJre21);
             this.grbDefaults.Controls.Add(this.btnGetJava17);
             this.grbDefaults.Controls.Add(this.btnGetJava8);
             this.grbDefaults.Controls.Add(this.lblJre17);
@@ -78,30 +86,71 @@
             this.grbDefaults.ForeColor = System.Drawing.Color.White;
             this.grbDefaults.Location = new System.Drawing.Point(0, 172);
             this.grbDefaults.Name = "grbDefaults";
-            this.grbDefaults.Size = new System.Drawing.Size(446, 99);
+            this.grbDefaults.Size = new System.Drawing.Size(446, 136);
             this.grbDefaults.TabIndex = 21;
             this.grbDefaults.TabStop = false;
             this.grbDefaults.Text = "grb.defaults";
             // 
+            // btnJre21
+            // 
+            this.btnJre21.ForeColor = System.Drawing.Color.Black;
+            this.btnJre21.Location = new System.Drawing.Point(403, 73);
+            this.btnJre21.Name = "btnJre21";
+            this.btnJre21.Size = new System.Drawing.Size(36, 21);
+            this.btnJre21.TabIndex = 33;
+            this.btnJre21.Text = "...";
+            this.btnJre21.UseVisualStyleBackColor = true;
+            this.btnJre21.Click += new System.EventHandler(this.btnJre21_Click);
+            // 
+            // btnGetJava21
+            // 
+            this.btnGetJava21.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava21.Location = new System.Drawing.Point(291, 100);
+            this.btnGetJava21.Name = "btnGetJava21";
+            this.btnGetJava21.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava21.TabIndex = 32;
+            this.btnGetJava21.Text = "btn.getJava21";
+            this.btnGetJava21.UseVisualStyleBackColor = true;
+            this.btnGetJava21.Click += new System.EventHandler(this.btnGetJava21_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "lbl.jre21";
+            // 
+            // cmbJre21
+            // 
+            this.cmbJre21.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbJre21.FormattingEnabled = true;
+            this.cmbJre21.Location = new System.Drawing.Point(67, 73);
+            this.cmbJre21.Name = "cmbJre21";
+            this.cmbJre21.Size = new System.Drawing.Size(330, 21);
+            this.cmbJre21.TabIndex = 30;
+            this.cmbJre21.TextUpdate += new System.EventHandler(this.cmbJre21_TextUpdate);
+            // 
             // btnGetJava17
             // 
             this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava17.Location = new System.Drawing.Point(236, 70);
+            this.btnGetJava17.Location = new System.Drawing.Point(179, 100);
             this.btnGetJava17.Name = "btnGetJava17";
-            this.btnGetJava17.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava17.Size = new System.Drawing.Size(106, 23);
             this.btnGetJava17.TabIndex = 29;
-            this.btnGetJava17.Text = "Install Java 17 ↓";
+            this.btnGetJava17.Text = "btn.getJava17";
             this.btnGetJava17.UseVisualStyleBackColor = true;
             this.btnGetJava17.Click += new System.EventHandler(this.btnGetJava17_Click);
             // 
             // btnGetJava8
             // 
             this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava8.Location = new System.Drawing.Point(67, 70);
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 100);
             this.btnGetJava8.Name = "btnGetJava8";
-            this.btnGetJava8.Size = new System.Drawing.Size(163, 23);
+            this.btnGetJava8.Size = new System.Drawing.Size(106, 23);
             this.btnGetJava8.TabIndex = 28;
-            this.btnGetJava8.Text = "Install Java 8 ↓";
+            this.btnGetJava8.Text = "btn.getJava8";
             this.btnGetJava8.UseVisualStyleBackColor = true;
             this.btnGetJava8.Click += new System.EventHandler(this.btnGetJava8_Click);
             // 
@@ -297,5 +346,9 @@
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
         public System.Windows.Forms.Button btnGetJava8;
         public System.Windows.Forms.Button btnGetJava17;
+        public System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbJre21;
+        public System.Windows.Forms.Button btnGetJava21;
+        private System.Windows.Forms.Button btnJre21;
     }
 }

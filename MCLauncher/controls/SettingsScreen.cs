@@ -74,6 +74,7 @@ namespace MCLauncher.controls
             //JREs
             cmbJre8.Text = Settings.sj.jre8;
             cmbJre17.Text = Settings.sj.jre17;
+            cmbJre21.Text = Settings.sj.jre21;
         }
 
         public static void loadData()
@@ -226,6 +227,18 @@ namespace MCLauncher.controls
             }
         }
 
+        private void btnJre21_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre17.Text = ofd.FileName;
+                Settings.sj.jre21 = ofd.FileName;
+                Settings.Save();
+            }
+        }
+
         private void btnGetJava8_Click(object sender, EventArgs e)
         {
             DownloadJava(8);
@@ -236,13 +249,36 @@ namespace MCLauncher.controls
             DownloadJava(17);
         }
 
+        private void btnGetJava21_Click(object sender, EventArgs e)
+        {
+            DownloadJava(21);
+        }
+
+        private void cmbJre8_TextUpdate(object sender, EventArgs e)
+        {
+            Settings.sj.jre8 = cmbJre8.Text;
+            Settings.Save();
+        }
+
+        private void cmbJre17_TextUpdate(object sender, EventArgs e)
+        {
+            Settings.sj.jre17 = cmbJre17.Text;
+            Settings.Save();
+        }
+
+        private void cmbJre21_TextUpdate(object sender, EventArgs e)
+        {
+            Settings.sj.jre21 = cmbJre21.Text;
+            Settings.Save();
+        }
+
         public void DownloadJava(int targetMajor)
         {
             string jsonData = Globals.client.DownloadString(Globals.JavaInstalls);
             List<javaInstallsManifest> data = JsonConvert.DeserializeObject<List<javaInstallsManifest>>(jsonData);
             foreach (var vers in data)
             {
-                if(vers.major == targetMajor)
+                if (vers.major == targetMajor)
                 {
                     bool shouldDownload = false;
 
@@ -270,11 +306,11 @@ namespace MCLauncher.controls
                         }
                     }
 
-                    if(shouldDownload)
+                    if (shouldDownload)
                     {
-                        if(Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
+                        if (Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
                             Directory.Delete($"{Globals.dataPath}\\jre\\jre{vers.major}", true);
-                        
+
                         Directory.CreateDirectory($"{Globals.dataPath}\\jre\\jre{vers.major}");
                         DownloadProgress.url = vers.url;
                         DownloadProgress.savePath = $"{Globals.dataPath}\\jre\\temp.zip";
@@ -290,16 +326,22 @@ namespace MCLauncher.controls
                             DialogResult dialogResult = MessageBox.Show(Strings.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                if(vers.major == 8)
+                                if (vers.major == 8)
                                 {
                                     cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.sj.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.Save();
                                 }
-                                else if(vers.major == 17)
+                                else if (vers.major == 17)
                                 {
                                     cmbJre17.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.sj.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
+                                }
+                                else if (vers.major == 21)
+                                {
+                                    cmbJre21.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.sj.jre21 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.Save();
                                 }
                             }
@@ -311,18 +353,6 @@ namespace MCLauncher.controls
                     }
                 }
             }
-        }
-
-        private void cmbJre8_TextUpdate(object sender, EventArgs e)
-        {
-            Settings.sj.jre8 = cmbJre8.Text;
-            Settings.Save();
-        }
-
-        private void cmbJre17_TextUpdate(object sender, EventArgs e)
-        {
-            Settings.sj.jre17 = cmbJre17.Text;
-            Settings.Save();
         }
     }
 
