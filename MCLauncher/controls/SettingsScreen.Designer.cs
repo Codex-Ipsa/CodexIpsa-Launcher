@@ -63,7 +63,7 @@
             this.pnlCenter.Controls.Add(this.grbDefaults);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
-            this.pnlCenter.Location = new System.Drawing.Point(66, 27);
+            this.pnlCenter.Location = new System.Drawing.Point(163, 39);
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(446, 311);
             this.pnlCenter.TabIndex = 24;

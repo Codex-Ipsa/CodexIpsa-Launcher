@@ -290,6 +290,7 @@ namespace MCLauncher
                 SettingsScreen.InstanceSetting.grbDefaults.Text = grbDefaults;
                 SettingsScreen.InstanceSetting.btnGetJava8.Text = installJava.Replace("{ver}", "8");
                 SettingsScreen.InstanceSetting.btnGetJava17.Text = installJava.Replace("{ver}", "17");
+                SettingsScreen.InstanceSetting.btnGetJava21.Text = installJava.Replace("{ver}", "21");
 
                 CreditsScreen.Instance.lblLauncherBy.Text = lblLauncherBy;
                 CreditsScreen.Instance.lblDejvossIpsa.Text = lblDejvossIpsa;
