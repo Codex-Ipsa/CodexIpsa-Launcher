@@ -36,7 +36,7 @@ namespace MCLauncher
         {
             //Output.AddHeader("#E74856", header, text);
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
+            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
             if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
                 text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
