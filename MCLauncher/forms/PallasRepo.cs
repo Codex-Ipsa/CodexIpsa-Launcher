@@ -8,6 +8,7 @@ using System.Net;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -29,6 +30,7 @@ namespace MCLauncher.forms
             ImageList modThumbnails = new ImageList();
             modThumbnails.ImageSize = new Size(32, 32);
             modListView.SmallImageList = modThumbnails;
+            modListView.SmallImageList.ColorDepth = ColorDepth.Depth16Bit;
 
             //get avvailable mods
             string pallasManifest = Globals.client.DownloadString(Globals.PallasManifest);

@@ -73,6 +73,8 @@
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.grbGame = new System.Windows.Forms.GroupBox();
+            this.lblGameArgs = new System.Windows.Forms.Label();
+            this.gameArgsBox = new System.Windows.Forms.TextBox();
             this.lblJvmArgs = new System.Windows.Forms.Label();
             this.jvmArgsBox = new System.Windows.Forms.TextBox();
             this.chkOffline = new System.Windows.Forms.CheckBox();
@@ -97,8 +99,6 @@
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.lblXboxProfName = new System.Windows.Forms.Label();
             this.xboxNameBox = new System.Windows.Forms.TextBox();
-            this.gameArgsBox = new System.Windows.Forms.TextBox();
-            this.lblGameArgs = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
@@ -637,6 +637,22 @@
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
             // 
+            // lblGameArgs
+            // 
+            this.lblGameArgs.AutoSize = true;
+            this.lblGameArgs.Location = new System.Drawing.Point(6, 152);
+            this.lblGameArgs.Name = "lblGameArgs";
+            this.lblGameArgs.Size = new System.Drawing.Size(67, 13);
+            this.lblGameArgs.TabIndex = 28;
+            this.lblGameArgs.Text = "lbl.gameArgs";
+            // 
+            // gameArgsBox
+            // 
+            this.gameArgsBox.Location = new System.Drawing.Point(99, 149);
+            this.gameArgsBox.Name = "gameArgsBox";
+            this.gameArgsBox.Size = new System.Drawing.Size(318, 20);
+            this.gameArgsBox.TabIndex = 27;
+            // 
             // lblJvmArgs
             // 
             this.lblJvmArgs.AutoSize = true;
@@ -891,22 +907,6 @@
             this.xboxNameBox.Size = new System.Drawing.Size(318, 20);
             this.xboxNameBox.TabIndex = 12;
             this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
-            // 
-            // gameArgsBox
-            // 
-            this.gameArgsBox.Location = new System.Drawing.Point(99, 149);
-            this.gameArgsBox.Name = "gameArgsBox";
-            this.gameArgsBox.Size = new System.Drawing.Size(318, 20);
-            this.gameArgsBox.TabIndex = 27;
-            // 
-            // lblGameArgs
-            // 
-            this.lblGameArgs.AutoSize = true;
-            this.lblGameArgs.Location = new System.Drawing.Point(6, 152);
-            this.lblGameArgs.Name = "lblGameArgs";
-            this.lblGameArgs.Size = new System.Drawing.Size(67, 13);
-            this.lblGameArgs.TabIndex = 28;
-            this.lblGameArgs.Text = "lbl.gameArgs";
             // 
             // NewInstance
             // 
