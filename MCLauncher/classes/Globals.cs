@@ -56,8 +56,10 @@ namespace MCLauncher
         public static string changelogUrl = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/changelog.php";
         public static string seasonalDirt = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/dirt.png";
         public static string seasonalStone = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png";
-        public static string seasonalManfest = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
-        public static string offlineManfest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
-        public static string languageManfest = $"http://codex-ipsa.dejvoss.cz/launcher/lang/index.json";
+        public static string seasonalManifest = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
+        public static string offlineManifest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
+
+        public static string languageList = $"http://codex-ipsa.dejvoss.cz/launcher/language/index.json";
+        public static string languageJson = $"http://codex-ipsa.dejvoss.cz/launcher/language/{{selected}}.json";
     }
 }

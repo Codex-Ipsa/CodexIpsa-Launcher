@@ -104,7 +104,7 @@ namespace MCLauncher
             //Check for internet
             try
             {
-                string offlineJson = Globals.client.DownloadString(Globals.offlineManfest);
+                string offlineJson = Globals.client.DownloadString(Globals.offlineManifest);
                 OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
                 if (test.offline)
                 {

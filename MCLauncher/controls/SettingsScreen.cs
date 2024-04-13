@@ -105,7 +105,7 @@ namespace MCLauncher.controls
                     noteList.Add(vers.brNote);
                 }
 
-                string json = client.DownloadString(Globals.languageManfest);
+                string json = client.DownloadString(Globals.languageList);
                 byte[] jsonArr = Encoding.Default.GetBytes(json);
                 string langData = Encoding.UTF8.GetString(jsonArr);
                 List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);

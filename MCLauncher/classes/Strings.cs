@@ -137,14 +137,30 @@ namespace MCLauncher
         public static string javaSetDefault = "Do you wish to set this Java install as the default one for Java {vers.major}?";
         public static string noUpdate = "No new update is available.";
 
+        public static stringJson sj = new stringJson();
+
         public static void reloadLangs(string selected)
         {
             Logger.Info("[Strings]", $"Setting language {selected}");
-            string url = $"http://codex-ipsa.dejvoss.cz/launcher/lang/{selected}.json";
+            if (selected == "english")
+            {
+                sj = new stringJson();
+            }
+            else
+            {
+                string url = $"http://codex-ipsa.dejvoss.cz/launcher/language/{selected}.json";
+                WebClient cl = new WebClient();
+                string json = cl.DownloadString(url);
+                byte[] jsonArr = Encoding.Default.GetBytes(json);
+                string newJson = Encoding.UTF8.GetString(jsonArr);
+
+                sj = new stringJson();
+            }
+            /*string url = $"http://codex-ipsa.dejvoss.cz/launcher/language/{selected}.json";
             WebClient cl = new WebClient();
             string json = cl.DownloadString(url);
             byte[] jsonArr = Encoding.Default.GetBytes(json);
-            string newJson = Encoding.UTF8.GetString(jsonArr);
+            string newJson = Encoding.UTF8.GetString(jsonArr);*/
 
             List<stringJson> data = JsonConvert.DeserializeObject<List<stringJson>>(newJson);
             foreach (var str in data)
@@ -302,7 +318,7 @@ namespace MCLauncher
 
         public class stringJson
         {
-            public string cntHome { get; set; }
+            public string cntHome = "Homes";
             public string cntSettings { get; set; }
             public string cntAbout { get; set; }
 
