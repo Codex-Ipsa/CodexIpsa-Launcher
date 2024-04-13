@@ -22,29 +22,29 @@ namespace MCLauncher.forms
             this.MinimizeBox = false;
 
             //load lang
-            grbGame.Text = Strings.grbGame;
-            lblProfName.Text = Strings.lblProfName;
-            lblGameDir.Text = Strings.lblGameDir;
-            lblReso.Text = Strings.lblReso;
-            lblMem.Text = Strings.lblMem;
-            lblMemMax.Text = Strings.lblMemMax;
-            lblMemMin.Text = Strings.lblMemMin;
-            lblJvmArgs.Text = Strings.lblBefCmd;
-            lblGameArgs.Text = Strings.lblAftCmd;
-            chkProxy.Text = Strings.chkProxy;
-            chkUseDemo.Text = Strings.chkUseDemo;
-            chkOffline.Text = Strings.chkOffline;
-            chkMulti.Text = Strings.chkMulti;
-            grbForExp.Text = Strings.grbForExp;
-            chkCustJava.Text = Strings.chkCustJava;
-            chkCustJson.Text = Strings.chkCustJson;
-            chkClasspath.Text = Strings.chkClasspath;
-            chkAssetIndex.Text = Strings.chkAssetIndex;
-            saveBtn.Text = Strings.createProfile;
+            grbGame.Text = Strings.sj.grbGame;
+            lblProfName.Text = Strings.sj.lblProfName;
+            lblGameDir.Text = Strings.sj.lblGameDir;
+            lblReso.Text = Strings.sj.lblReso;
+            lblMem.Text = Strings.sj.lblMem;
+            lblMemMax.Text = Strings.sj.lblMemMax;
+            lblMemMin.Text = Strings.sj.lblMemMin;
+            lblJvmArgs.Text = Strings.sj.lblBefCmd;
+            lblGameArgs.Text = Strings.sj.lblAftCmd;
+            chkProxy.Text = Strings.sj.chkProxy;
+            chkUseDemo.Text = Strings.sj.chkUseDemo;
+            chkOffline.Text = Strings.sj.chkOffline;
+            chkMulti.Text = Strings.sj.chkMulti;
+            grbForExp.Text = Strings.sj.grbForExp;
+            chkCustJava.Text = Strings.sj.chkCustJava;
+            chkCustJson.Text = Strings.sj.chkCustJson;
+            chkClasspath.Text = Strings.sj.chkClasspath;
+            chkAssetIndex.Text = Strings.sj.chkAssetIndex;
+            saveBtn.Text = Strings.sj.createProfile;
 
-            grbXbox.Text = Strings.grbGame;
-            chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf(" ("));
-            lblXboxProfName.Text = Strings.lblProfName;
+            grbXbox.Text = Strings.sj.grbGame;
+            chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
+            lblXboxProfName.Text = Strings.sj.lblProfName;
 
             //fill in shared stuff
             nameBox.Text = "New profile";
@@ -74,9 +74,9 @@ namespace MCLauncher.forms
                 vanillaList.Columns.Clear();
 
                 //add columns
-                vanillaList.Columns.Add(Strings.rowName);
-                vanillaList.Columns.Add(Strings.rowType);
-                vanillaList.Columns.Add(Strings.rowReleased);
+                vanillaList.Columns.Add(Strings.sj.rowName);
+                vanillaList.Columns.Add(Strings.sj.rowType);
+                vanillaList.Columns.Add(Strings.sj.rowReleased);
 
                 //add items
                 string manifest = Globals.client.DownloadString(Globals.javaManifest);
@@ -136,9 +136,9 @@ namespace MCLauncher.forms
                 eduList.Columns.Clear();
 
                 //add columns
-                eduList.Columns.Add(Strings.rowName);
-                eduList.Columns.Add(Strings.rowType);
-                eduList.Columns.Add(Strings.rowReleased);
+                eduList.Columns.Add(Strings.sj.rowName);
+                eduList.Columns.Add(Strings.sj.rowType);
+                eduList.Columns.Add(Strings.sj.rowReleased);
 
                 //add items
                 string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
@@ -168,9 +168,9 @@ namespace MCLauncher.forms
                 xboxList.Columns.Clear();
 
                 //add columns
-                xboxList.Columns.Add(Strings.rowName);
-                xboxList.Columns.Add(Strings.rowType);
-                xboxList.Columns.Add(Strings.rowReleased);
+                xboxList.Columns.Add(Strings.sj.rowName);
+                xboxList.Columns.Add(Strings.sj.rowType);
+                xboxList.Columns.Add(Strings.sj.rowReleased);
 
                 //add items
                 string manifest = Globals.client.DownloadString(Globals.x360Manifest);
@@ -429,12 +429,12 @@ namespace MCLauncher.forms
 
         private void jsonBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(jsonBox, Strings.localOrUrl);
+            toolTip.SetToolTip(jsonBox, Strings.sj.localOrUrl);
         }
 
         private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(assetIndexBox, Strings.localOrUrl);
+            toolTip.SetToolTip(assetIndexBox, Strings.sj.localOrUrl);
         }
 
         private void eduList_SelectedIndexChanged(object sender, EventArgs e)

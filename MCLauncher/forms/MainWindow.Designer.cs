@@ -72,8 +72,8 @@ namespace MCLauncher
             // 
             this.homeToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.homeToolStripMenuItem.Text = "Home";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.homeToolStripMenuItem.Text = "cnt.home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // profilesToolStripMenuItem
@@ -81,8 +81,8 @@ namespace MCLauncher
             this.profilesToolStripMenuItem.Enabled = false;
             this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
-            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.profilesToolStripMenuItem.Text = "Profiles";
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.profilesToolStripMenuItem.Text = "cnt.profiles";
             this.profilesToolStripMenuItem.Visible = false;
             this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
             // 
@@ -90,16 +90,16 @@ namespace MCLauncher
             // 
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.settingsToolStripMenuItem.Text = "cnt.settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.aboutToolStripMenuItem.Text = "cnt.about";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // pnlBackground

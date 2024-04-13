@@ -46,53 +46,53 @@ namespace MCLauncher.forms
             isInitial = true;
 
             //Load lang
-            grbGame.Text = Strings.grbGame;
-            lblProfName.Text = Strings.lblProfName;
-            lblGameDir.Text = Strings.lblGameDir;
-            lblReso.Text = Strings.lblReso;
-            lblMem.Text = Strings.lblMem;
-            lblMemMax.Text = Strings.lblMemMax;
-            lblMemMin.Text = Strings.lblMemMin;
-            lblBefCmd.Text = Strings.lblBefCmd;
-            lblAftCmd.Text = Strings.lblAftCmd;
-            chkProxy.Text = Strings.chkProxy;
-            chkUseDemo.Text = Strings.chkUseDemo;
-            chkOffline.Text = Strings.chkOffline;
-            chkMulti.Text = Strings.chkMulti;
-            grbForExp.Text = Strings.grbForExp;
-            chkCustJava.Text = Strings.chkCustJava;
-            chkCustJson.Text = Strings.chkCustJson;
-            chkClasspath.Text = Strings.chkClasspath;
-            chkAssetIndex.Text = Strings.chkAssetIndex;
-            saveBtn.Text = Strings.btnSaveInst;
-            openBtn.Text = Strings.btnOpenDir;
-            deleteBtn.Text = Strings.btnDeleteInst;
+            grbGame.Text = Strings.sj.grbGame;
+            lblProfName.Text = Strings.sj.lblProfName;
+            lblGameDir.Text = Strings.sj.lblGameDir;
+            lblReso.Text = Strings.sj.lblReso;
+            lblMem.Text = Strings.sj.lblMem;
+            lblMemMax.Text = Strings.sj.lblMemMax;
+            lblMemMin.Text = Strings.sj.lblMemMin;
+            lblBefCmd.Text = Strings.sj.lblBefCmd;
+            lblAftCmd.Text = Strings.sj.lblAftCmd;
+            chkProxy.Text = Strings.sj.chkProxy;
+            chkUseDemo.Text = Strings.sj.chkUseDemo;
+            chkOffline.Text = Strings.sj.chkOffline;
+            chkMulti.Text = Strings.sj.chkMulti;
+            grbForExp.Text = Strings.sj.grbForExp;
+            chkCustJava.Text = Strings.sj.chkCustJava;
+            chkCustJson.Text = Strings.sj.chkCustJson;
+            chkClasspath.Text = Strings.sj.chkClasspath;
+            chkAssetIndex.Text = Strings.sj.chkAssetIndex;
+            saveBtn.Text = Strings.sj.btnSaveInst;
+            openBtn.Text = Strings.sj.btnOpenDir;
+            deleteBtn.Text = Strings.sj.btnDeleteInst;
 
-            btnMoveUp.Text = Strings.btnMoveUp;
-            btnMoveDown.Text = Strings.btnMoveDown;
-            btnRemove.Text = Strings.btnRemove;
-            btnForge.Text = Strings.btnForge;
-            btnFabric.Text = Strings.btnFabric;
-            btnMLoader.Text = Strings.btnMLoader;
-            btnRepos.Text = Strings.btnRepos;
-            btnAddToJar.Text = Strings.btnAddToJar;
-            btnReplaceJar.Text = Strings.btnReplaceJar;
-            btnOpenDotMc.Text = Strings.btnOpenDotMc;
+            btnMoveUp.Text = Strings.sj.btnMoveUp;
+            btnMoveDown.Text = Strings.sj.btnMoveDown;
+            btnRemove.Text = Strings.sj.btnRemove;
+            btnForge.Text = Strings.sj.btnForge;
+            btnFabric.Text = Strings.sj.btnFabric;
+            btnMLoader.Text = Strings.sj.btnMLoader;
+            btnRepos.Text = Strings.sj.btnRepos;
+            btnAddToJar.Text = Strings.sj.btnAddToJar;
+            btnReplaceJar.Text = Strings.sj.btnReplaceJar;
+            btnOpenDotMc.Text = Strings.sj.btnOpenDotMc;
 
-            grbXboxGame.Text = Strings.grbGame;
-            chkXboxDemo.Text = Strings.chkUseDemo.Substring(0, Strings.chkUseDemo.IndexOf("("));
-            lblXboxProfName.Text = Strings.lblProfName;
+            grbXboxGame.Text = Strings.sj.grbGame;
+            chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf("("));
+            lblXboxProfName.Text = Strings.sj.lblProfName;
 
-            tabControl1.TabPages[0].Text = Strings.cntHome;
-            tabControl1.TabPages[1].Text = Strings.tabMods;
+            tabControl1.TabPages[0].Text = Strings.sj.cntHome;
+            tabControl1.TabPages[1].Text = Strings.sj.tabMods;
 
             profileName = profile;
             origName = profileName;
             profMode = mode;
 
-            listView1.Columns.Add(Strings.rowName);
-            listView1.Columns.Add(Strings.rowType);
-            listView1.Columns.Add(Strings.rowReleased);
+            listView1.Columns.Add(Strings.sj.rowName);
+            listView1.Columns.Add(Strings.sj.rowType);
+            listView1.Columns.Add(Strings.sj.rowReleased);
 
             if (profMode == "new")
             {
@@ -124,7 +124,7 @@ namespace MCLauncher.forms
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
                 exportBtn.Visible = false;
-                saveBtn.Text = Strings.createProfile;
+                saveBtn.Text = Strings.sj.createProfile;
             }
             else if (profMode == "def")
             {
@@ -238,9 +238,9 @@ namespace MCLauncher.forms
                 isInitial = false;
             }
 
-            modView.Columns[0].Text = Strings.rowName;
-            modView.Columns[1].Text = Strings.rowType;
-            modView.Columns[2].Text = Strings.rowConfig;
+            modView.Columns[0].Text = Strings.sj.rowName;
+            modView.Columns[1].Text = Strings.sj.rowType;
+            modView.Columns[2].Text = Strings.sj.rowConfig;
 
             if (profMode == "def")
             {
@@ -1083,12 +1083,12 @@ namespace MCLauncher.forms
 
         private void assetIndexBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(assetIndexBox, Strings.localOrUrl);
+            toolTip.SetToolTip(assetIndexBox, Strings.sj.localOrUrl);
         }
 
         private void jsonBox_MouseMove(object sender, MouseEventArgs e)
         {
-            toolTip.SetToolTip(jsonBox, Strings.localOrUrl);
+            toolTip.SetToolTip(jsonBox, Strings.sj.localOrUrl);
         }
 
         private void chkAssetIndex_CheckedChanged(object sender, EventArgs e)

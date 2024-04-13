@@ -48,10 +48,10 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Load lang
-            this.Text = Strings.titleLogin;
-            label2.Text = Strings.labelPleaseLog;
-            label1.Text = Strings.labelCode;
-            cancelBtn.Text = Strings.btnCancel;
+            this.Text = Strings.sj.titleLogin;
+            label2.Text = Strings.sj.labelPleaseLog;
+            label1.Text = Strings.sj.labelCode;
+            cancelBtn.Text = Strings.sj.btnCancel;
 
             //This NO LONGER uses the test azure app, DONT change that!!!
             deviceCurrent = 0;

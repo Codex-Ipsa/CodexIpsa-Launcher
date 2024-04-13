@@ -26,10 +26,10 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Lang
-            this.Text = Strings.joinServer;
-            label1.Text = Strings.lblServer1;
-            label2.Text = Strings.lblServer2;
-            button1.Text = Strings.btnStartGame;
+            this.Text = Strings.sj.joinServer;
+            label1.Text = Strings.sj.lblServer1;
+            label2.Text = Strings.sj.lblServer2;
+            button1.Text = Strings.sj.btnStartGame;
         }
 
         private void button1_Click(object sender, EventArgs e)

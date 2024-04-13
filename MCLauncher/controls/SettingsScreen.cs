@@ -40,14 +40,6 @@ namespace MCLauncher.controls
             InstanceSetting = this;
             InitializeComponent();
 
-            //Lang
-            lblJre8.Text = "Java 8";
-            lblJre17.Text = "Java 17";
-            lblJre21.Text = "Java 21";
-            btnGetJava8.Text = Strings.installJava.Replace("{ver}", "8");
-            btnGetJava17.Text = Strings.installJava.Replace("{ver}", "17");
-            btnGetJava21.Text = Strings.installJava.Replace("{ver}", "21");
-
             //Seasonal background
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
             {
@@ -140,7 +132,7 @@ namespace MCLauncher.controls
             else
             {
                 if(!isFirstLangCheck)
-                    MessageBox.Show(Strings.noUpdate, "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Strings.sj.noUpdate, "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Logger.Info("[Settings]", $"No new update is available.");
             }
@@ -292,7 +284,7 @@ namespace MCLauncher.controls
                     //Download if update available
                     else if (!File.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") || File.ReadAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") != vers.id)
                     {
-                        DialogResult dialogResult = MessageBox.Show(Strings.javaUpdate.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult dialogResult = MessageBox.Show(Strings.sj.javaUpdate.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dialogResult == DialogResult.Yes)
                         {
                             shouldDownload = true;
@@ -301,7 +293,7 @@ namespace MCLauncher.controls
                     //Redownload if latest exists
                     else
                     {
-                        DialogResult dialogResult = MessageBox.Show(Strings.javaRedownload.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult dialogResult = MessageBox.Show(Strings.sj.javaRedownload.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dialogResult == DialogResult.Yes)
                         {
                             shouldDownload = true;
@@ -325,7 +317,7 @@ namespace MCLauncher.controls
                             File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
                             File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
 
-                            DialogResult dialogResult = MessageBox.Show(Strings.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            DialogResult dialogResult = MessageBox.Show(Strings.sj.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dialogResult == DialogResult.Yes)
                             {
                                 if (vers.major == 8)

@@ -46,7 +46,7 @@ namespace MCLauncher.classes
 
             if (Globals.running.ContainsValue(profileName))
             {
-                DialogResult result = MessageBox.Show(Strings.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result != DialogResult.Yes)
                 {

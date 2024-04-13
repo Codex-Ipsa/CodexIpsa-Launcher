@@ -239,7 +239,7 @@ namespace MCLauncher.forms
             Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
             Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
             HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
-            HomeScreen.Instance.lblReady.Text = $"{Strings.lblReady} {HomeScreen.selectedVersion}";
+            HomeScreen.Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
         }
     }
 

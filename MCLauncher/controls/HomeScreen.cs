@@ -74,7 +74,7 @@ namespace MCLauncher
                 Logger.Error($"[HomeScreen]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
-                Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
+                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", "Guest");
 
                 JavaLauncher.msPlayerName = "Guest";
                 JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
@@ -87,7 +87,7 @@ namespace MCLauncher
                     Instance.cmbInstaces.Enabled = false;
                     Instance.btnEditInst.Enabled = false;
                     Instance.btnNewInst.Enabled = false;
-                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn;
+                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace MCLauncher
                     Instance.cmbInstaces.Enabled = true;
                     Instance.btnEditInst.Enabled = true;
                     Instance.btnNewInst.Enabled = true;
-                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn_Debug;
+                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn_Debug;
                 }
             }
             else
@@ -114,7 +114,7 @@ namespace MCLauncher
                 {
                     Instance.btnLogOut.Visible = true;
                     Instance.btnLogIn.Visible = false;
-                    Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
+                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
                     Instance.btnPlay.Enabled = true;
                     Instance.lblLogInWarn.Text = "";
                     Instance.cmbInstaces.Enabled = true;
@@ -192,7 +192,7 @@ namespace MCLauncher
                 selectedVersion = tempName;
             }
 
-            Instance.lblReady.Text = $"{Strings.lblReady} {selectedVersion}";
+            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
             Profile.profileName = Instance.cmbInstaces.Text;
         }
 
@@ -327,7 +327,7 @@ namespace MCLauncher
             {
                 Instance.btnLogOut.Visible = true;
                 Instance.btnLogIn.Visible = false;
-                Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
+                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
                 this.Refresh();
             }
         }
