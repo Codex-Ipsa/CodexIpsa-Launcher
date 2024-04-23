@@ -111,6 +111,22 @@ namespace MCLauncher.forms
 
             chkXboxDemo.Checked = ij.xboxDemo;
 
+            //latest and latestsnapshot stuff
+            if (lastSelected.Contains("latest"))
+            {
+                if (lastSelected == "latest")
+                {
+                    chkLatest.Checked = true;
+                }
+                else if (lastSelected == "latestsnapshot")
+                {
+                    chkLatestSnapshot.Checked = true;
+                }
+
+                lastSelected = HomeScreen.getLatestVersion(lastSelected);
+                vanillaList.Enabled = false;
+            }
+
             //TODO LOAD MOD JSON
 
             //fill in edition specific stuff
@@ -174,6 +190,7 @@ namespace MCLauncher.forms
                 //select latest loaded version
                 if (vanillaList.Items.Count > 0)
                 {
+                    Console.WriteLine("AAAAAAAA " + lastSelected);
                     for (int i = vanillaList.Items.Count - 1; i >= 0; i--)
                     {
                         string ver = Regex.Replace(vanillaList.Items[i].Text, @"\(.*\)", "");
