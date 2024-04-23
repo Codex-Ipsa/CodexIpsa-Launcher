@@ -778,9 +778,9 @@
             this.chkLatest.AutoSize = true;
             this.chkLatest.Location = new System.Drawing.Point(6, 335);
             this.chkLatest.Name = "chkLatest";
-            this.chkLatest.Size = new System.Drawing.Size(197, 17);
+            this.chkLatest.Size = new System.Drawing.Size(203, 17);
             this.chkLatest.TabIndex = 10;
-            this.chkLatest.Text = "Always chose latest \'release\' version";
+            this.chkLatest.Text = "Always choose latest \'release\' version";
             this.chkLatest.UseVisualStyleBackColor = true;
             this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
             // 
@@ -806,9 +806,9 @@
             this.chkLatestSnapshot.AutoSize = true;
             this.chkLatestSnapshot.Location = new System.Drawing.Point(6, 355);
             this.chkLatestSnapshot.Name = "chkLatestSnapshot";
-            this.chkLatestSnapshot.Size = new System.Drawing.Size(206, 17);
+            this.chkLatestSnapshot.Size = new System.Drawing.Size(212, 17);
             this.chkLatestSnapshot.TabIndex = 11;
-            this.chkLatestSnapshot.Text = "Always chose latest \'snapshot\' version";
+            this.chkLatestSnapshot.Text = "Always choose latest \'snapshot\' version";
             this.chkLatestSnapshot.UseVisualStyleBackColor = true;
             this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
             // 
