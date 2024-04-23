@@ -266,70 +266,33 @@ namespace MCLauncher.forms
 
                 if (edition == "java") //java
                 {
-                    if (!checkForge.Checked && !checkFabric.Checked && !checkMLoader.Checked)
-                    {
-                        if (checkPreClassic.Checked && row[0] == "pre-classic")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkPreClassic.Checked && row[0] == "pre-classic")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkClassic.Checked && row[0] == "classic")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkClassic.Checked && row[0] == "classic")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkIndev.Checked && row[0] == "indev")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkIndev.Checked && row[0] == "indev")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkInfdev.Checked && row[0] == "infdev")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkInfdev.Checked && row[0] == "infdev")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkAlpha.Checked && row[0] == "alpha")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkAlpha.Checked && row[0] == "alpha")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkBeta.Checked && row[0] == "beta")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkBeta.Checked && row[0] == "beta")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkRelease.Checked && row[0] == "release")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkRelease.Checked && row[0] == "release")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkSnapshot.Checked && row[0] == "snapshot")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkSnapshot.Checked && row[0] == "snapshot")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                        if (checkExperimental.Checked && row[0] == "experimental")
-                            listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                    }
-                    else
-                    {
-                        /*if (checkForge.Checked)
-                        {
-                            if (checkBeta.Checked && row[0] == "beta" && checkForge.Checked && ver.forge)
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+                    if (checkExperimental.Checked && row[0] == "experimental")
+                        listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                            if (checkRelease.Checked && row[0] == "release" && checkForge.Checked && ver.forge)
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                            if (checkSnapshot.Checked && row[0] == "snapshot" && checkForge.Checked && ver.forge)
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }
-                        if (checkFabric.Checked)
-                        {
-                            if (checkRelease.Checked && row[0] == "release" && checkFabric.Checked && ver.fabric)
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                            if (checkSnapshot.Checked && row[0] == "snapshot" && checkFabric.Checked && ver.fabric)
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }
-
-                        if (checkMLoader.Checked)
-                        {
-                            if (checkAlpha.Checked && row[0] == "alpha" && checkMLoader.Checked && ver.risugami.Contains("true"))
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                            if (checkBeta.Checked && row[0] == "beta" && checkMLoader.Checked && ver.risugami.Contains("true"))
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                            if (checkRelease.Checked && row[0] == "release" && checkMLoader.Checked && ver.risugami.Contains("true"))
-                                listView1.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                        }*/
-
-                    }
                 }
                 else //xbox and edu
                 {
@@ -984,9 +947,6 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
-                checkForge.Visible = false;
-                checkFabric.Visible = false;
-                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.x360Manifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -1007,9 +967,6 @@ namespace MCLauncher.forms
                 checkRelease.Visible = false;
                 checkSnapshot.Visible = false;
                 checkExperimental.Visible = false;
-                checkForge.Visible = false;
-                checkFabric.Visible = false;
-                checkMLoader.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
                 vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
@@ -1030,9 +987,6 @@ namespace MCLauncher.forms
                 checkRelease.Visible = true;
                 checkSnapshot.Visible = true;
                 checkExperimental.Visible = true;
-                checkForge.Visible = true;
-                checkFabric.Visible = true;
-                checkMLoader.Visible = true;
 
                 if (!isInitial) //shitty fix but it doesn't crash anymore :troll:
                 {
