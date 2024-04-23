@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -170,13 +171,21 @@ namespace MCLauncher.forms
                 vanillaList.Columns[1].Width = -1;
                 vanillaList.Columns[2].Width = -2;
 
-                //scroll to default version (b1.7.3)
-                ListViewItem item = vanillaList.FindItemWithText("b1.7.3");
-                int indexOf = vanillaList.Items.IndexOf(item);
-                if (indexOf > 0)
+                //select latest loaded version
+                if (vanillaList.Items.Count > 0)
                 {
-                    vanillaList.Items[indexOf].Selected = true;
-                    vanillaList.TopItem = vanillaList.Items[indexOf];
+                    for (int i = vanillaList.Items.Count - 1; i >= 0; i--)
+                    {
+                        string ver = Regex.Replace(vanillaList.Items[i].Text, @"\(.*\)", "");
+                        ver = ver.Replace(" ", "");
+
+                        if (ver == lastSelected)
+                        {
+                            vanillaList.Items[i].Selected = true;
+                            vanillaList.TopItem = vanillaList.Items[i];
+                            break;
+                        }
+                    }
                 }
             }
 
