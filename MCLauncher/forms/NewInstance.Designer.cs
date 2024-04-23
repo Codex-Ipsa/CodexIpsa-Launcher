@@ -745,7 +745,7 @@
             // chkXboxDemo
             // 
             this.chkXboxDemo.AutoSize = true;
-            this.chkXboxDemo.Location = new System.Drawing.Point(9, 47);
+            this.chkXboxDemo.Location = new System.Drawing.Point(6, 47);
             this.chkXboxDemo.Name = "chkXboxDemo";
             this.chkXboxDemo.Size = new System.Drawing.Size(99, 17);
             this.chkXboxDemo.TabIndex = 23;
