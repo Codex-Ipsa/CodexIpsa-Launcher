@@ -46,18 +46,6 @@
             this.eduList = new System.Windows.Forms.ListView();
             this.xboxPage = new System.Windows.Forms.TabPage();
             this.xboxList = new System.Windows.Forms.ListView();
-            this.ipsaPage = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.forgePage = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.fabricPage = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.risugamiPage = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.quiltPage = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.neoforgePage = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.saveBtn = new System.Windows.Forms.Button();
             this.grbForExp = new System.Windows.Forms.GroupBox();
@@ -103,12 +91,6 @@
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
             this.xboxPage.SuspendLayout();
-            this.ipsaPage.SuspendLayout();
-            this.forgePage.SuspendLayout();
-            this.fabricPage.SuspendLayout();
-            this.risugamiPage.SuspendLayout();
-            this.quiltPage.SuspendLayout();
-            this.neoforgePage.SuspendLayout();
             this.grbForExp.SuspendLayout();
             this.grbGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
@@ -121,12 +103,6 @@
             this.tabControl1.Controls.Add(this.vanillaPage);
             this.tabControl1.Controls.Add(this.eduPage);
             this.tabControl1.Controls.Add(this.xboxPage);
-            this.tabControl1.Controls.Add(this.ipsaPage);
-            this.tabControl1.Controls.Add(this.forgePage);
-            this.tabControl1.Controls.Add(this.fabricPage);
-            this.tabControl1.Controls.Add(this.risugamiPage);
-            this.tabControl1.Controls.Add(this.quiltPage);
-            this.tabControl1.Controls.Add(this.neoforgePage);
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.ItemSize = new System.Drawing.Size(58, 18);
             this.tabControl1.Location = new System.Drawing.Point(2, 2);
@@ -150,9 +126,9 @@
             this.vanillaPage.Controls.Add(this.vanillaPreclassic);
             this.vanillaPage.Controls.Add(this.vanillaList);
             this.vanillaPage.ImageIndex = 0;
-            this.vanillaPage.Location = new System.Drawing.Point(4, 40);
+            this.vanillaPage.Location = new System.Drawing.Point(4, 22);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(354, 339);
+            this.vanillaPage.Size = new System.Drawing.Size(354, 357);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -293,9 +269,9 @@
             // 
             this.eduPage.Controls.Add(this.eduList);
             this.eduPage.ImageIndex = 0;
-            this.eduPage.Location = new System.Drawing.Point(4, 40);
+            this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(354, 339);
+            this.eduPage.Size = new System.Drawing.Size(354, 357);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -318,9 +294,9 @@
             // 
             this.xboxPage.Controls.Add(this.xboxList);
             this.xboxPage.ImageIndex = 6;
-            this.xboxPage.Location = new System.Drawing.Point(4, 40);
+            this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 339);
+            this.xboxPage.Size = new System.Drawing.Size(354, 357);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -338,126 +314,6 @@
             this.xboxList.UseCompatibleStateImageBehavior = false;
             this.xboxList.View = System.Windows.Forms.View.Details;
             this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
-            // 
-            // ipsaPage
-            // 
-            this.ipsaPage.Controls.Add(this.label7);
-            this.ipsaPage.ImageIndex = 1;
-            this.ipsaPage.Location = new System.Drawing.Point(4, 40);
-            this.ipsaPage.Name = "ipsaPage";
-            this.ipsaPage.Size = new System.Drawing.Size(354, 339);
-            this.ipsaPage.TabIndex = 1;
-            this.ipsaPage.Text = "Codex-Ipsa Mods";
-            this.ipsaPage.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(263, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Creating a modded profile is coming in a future update!";
-            // 
-            // forgePage
-            // 
-            this.forgePage.Controls.Add(this.label6);
-            this.forgePage.ImageIndex = 2;
-            this.forgePage.Location = new System.Drawing.Point(4, 40);
-            this.forgePage.Name = "forgePage";
-            this.forgePage.Size = new System.Drawing.Size(354, 339);
-            this.forgePage.TabIndex = 2;
-            this.forgePage.Text = "Forge";
-            this.forgePage.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(252, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Creating a Forge profile is coming in a future update!";
-            // 
-            // fabricPage
-            // 
-            this.fabricPage.Controls.Add(this.label4);
-            this.fabricPage.ImageIndex = 3;
-            this.fabricPage.Location = new System.Drawing.Point(4, 40);
-            this.fabricPage.Name = "fabricPage";
-            this.fabricPage.Size = new System.Drawing.Size(354, 339);
-            this.fabricPage.TabIndex = 3;
-            this.fabricPage.Text = "Fabric";
-            this.fabricPage.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(254, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Creating a Fabric profile is coming in a future update!";
-            // 
-            // risugamiPage
-            // 
-            this.risugamiPage.Controls.Add(this.label3);
-            this.risugamiPage.ImageIndex = 0;
-            this.risugamiPage.Location = new System.Drawing.Point(4, 40);
-            this.risugamiPage.Name = "risugamiPage";
-            this.risugamiPage.Size = new System.Drawing.Size(354, 339);
-            this.risugamiPage.TabIndex = 6;
-            this.risugamiPage.Text = "ModLoader";
-            this.risugamiPage.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(279, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Creating a ModLoader profile is coming in a future update!";
-            // 
-            // quiltPage
-            // 
-            this.quiltPage.Controls.Add(this.label2);
-            this.quiltPage.ImageIndex = 4;
-            this.quiltPage.Location = new System.Drawing.Point(4, 40);
-            this.quiltPage.Name = "quiltPage";
-            this.quiltPage.Size = new System.Drawing.Size(354, 339);
-            this.quiltPage.TabIndex = 7;
-            this.quiltPage.Text = "Quilt";
-            this.quiltPage.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Quilt support is coming in a future update!";
-            // 
-            // neoforgePage
-            // 
-            this.neoforgePage.Controls.Add(this.label1);
-            this.neoforgePage.ImageIndex = 5;
-            this.neoforgePage.Location = new System.Drawing.Point(4, 40);
-            this.neoforgePage.Name = "neoforgePage";
-            this.neoforgePage.Size = new System.Drawing.Size(354, 339);
-            this.neoforgePage.TabIndex = 8;
-            this.neoforgePage.Text = "NeoForge";
-            this.neoforgePage.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(228, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "NeoForge support is coming in a future update!";
             // 
             // imageList1
             // 
@@ -926,18 +782,6 @@
             this.vanillaPage.PerformLayout();
             this.eduPage.ResumeLayout(false);
             this.xboxPage.ResumeLayout(false);
-            this.ipsaPage.ResumeLayout(false);
-            this.ipsaPage.PerformLayout();
-            this.forgePage.ResumeLayout(false);
-            this.forgePage.PerformLayout();
-            this.fabricPage.ResumeLayout(false);
-            this.fabricPage.PerformLayout();
-            this.risugamiPage.ResumeLayout(false);
-            this.risugamiPage.PerformLayout();
-            this.quiltPage.ResumeLayout(false);
-            this.quiltPage.PerformLayout();
-            this.neoforgePage.ResumeLayout(false);
-            this.neoforgePage.PerformLayout();
             this.grbForExp.ResumeLayout(false);
             this.grbForExp.PerformLayout();
             this.grbGame.ResumeLayout(false);
@@ -955,9 +799,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.TabPage vanillaPage;
-        private System.Windows.Forms.TabPage ipsaPage;
-        private System.Windows.Forms.TabPage forgePage;
-        private System.Windows.Forms.TabPage fabricPage;
         private System.Windows.Forms.TabPage xboxPage;
         private System.Windows.Forms.ListView vanillaList;
         private System.Windows.Forms.CheckBox vanillaExperimental;
@@ -1001,17 +842,8 @@
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.TextBox dirBox;
         private System.Windows.Forms.TabPage eduPage;
-        private System.Windows.Forms.TabPage risugamiPage;
-        private System.Windows.Forms.TabPage quiltPage;
-        private System.Windows.Forms.TabPage neoforgePage;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView eduList;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListView xboxList;
         private System.Windows.Forms.GroupBox grbXbox;
         private System.Windows.Forms.CheckBox chkXboxDemo;

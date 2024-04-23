@@ -116,7 +116,7 @@ namespace MCLauncher
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
             public string grbDefaults = "Defaults";
-            public string installJava = "Install Java {ver}";
+            public string installJava = "Install Java {ver} ↓";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";
