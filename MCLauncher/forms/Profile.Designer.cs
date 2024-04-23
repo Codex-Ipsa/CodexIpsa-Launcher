@@ -80,9 +80,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.exportBtn = new System.Windows.Forms.Button();
-            this.checkMLoader = new System.Windows.Forms.CheckBox();
-            this.checkFabric = new System.Windows.Forms.CheckBox();
-            this.checkForge = new System.Windows.Forms.CheckBox();
             this.javaPanel = new System.Windows.Forms.Panel();
             this.editionBox = new System.Windows.Forms.ComboBox();
             this.xboxPanel = new System.Windows.Forms.Panel();
@@ -682,9 +679,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.exportBtn);
-            this.tabPage1.Controls.Add(this.checkMLoader);
-            this.tabPage1.Controls.Add(this.checkFabric);
-            this.tabPage1.Controls.Add(this.checkForge);
             this.tabPage1.Controls.Add(this.javaPanel);
             this.tabPage1.Controls.Add(this.editionBox);
             this.tabPage1.Controls.Add(this.listView1);
@@ -718,39 +712,6 @@
             this.exportBtn.Text = "Export profile";
             this.exportBtn.UseVisualStyleBackColor = true;
             this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
-            // 
-            // checkMLoader
-            // 
-            this.checkMLoader.AutoSize = true;
-            this.checkMLoader.Location = new System.Drawing.Point(279, 374);
-            this.checkMLoader.Name = "checkMLoader";
-            this.checkMLoader.Size = new System.Drawing.Size(80, 17);
-            this.checkMLoader.TabIndex = 39;
-            this.checkMLoader.Text = "ModLoader";
-            this.checkMLoader.UseVisualStyleBackColor = true;
-            this.checkMLoader.CheckedChanged += new System.EventHandler(this.checkMLoader_CheckedChanged);
-            // 
-            // checkFabric
-            // 
-            this.checkFabric.AutoSize = true;
-            this.checkFabric.Location = new System.Drawing.Point(218, 374);
-            this.checkFabric.Name = "checkFabric";
-            this.checkFabric.Size = new System.Drawing.Size(55, 17);
-            this.checkFabric.TabIndex = 38;
-            this.checkFabric.Text = "Fabric";
-            this.checkFabric.UseVisualStyleBackColor = true;
-            this.checkFabric.CheckedChanged += new System.EventHandler(this.checkFabric_CheckedChanged);
-            // 
-            // checkForge
-            // 
-            this.checkForge.AutoSize = true;
-            this.checkForge.Location = new System.Drawing.Point(156, 374);
-            this.checkForge.Name = "checkForge";
-            this.checkForge.Size = new System.Drawing.Size(53, 17);
-            this.checkForge.TabIndex = 37;
-            this.checkForge.Text = "Forge";
-            this.checkForge.UseVisualStyleBackColor = true;
-            this.checkForge.CheckedChanged += new System.EventHandler(this.checkForge_CheckedChanged);
             // 
             // javaPanel
             // 
@@ -1080,9 +1041,6 @@
         private System.Windows.Forms.TextBox assetIndexBox;
         private System.Windows.Forms.TextBox xboxNameBox;
         private System.Windows.Forms.Label lblXboxProfName;
-        private System.Windows.Forms.CheckBox checkFabric;
-        private System.Windows.Forms.CheckBox checkForge;
-        private System.Windows.Forms.CheckBox checkMLoader;
         private System.Windows.Forms.Button exportBtn;
     }
 }
