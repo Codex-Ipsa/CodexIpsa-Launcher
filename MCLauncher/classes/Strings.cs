@@ -171,7 +171,7 @@ namespace MCLauncher
             public string lblMemMin = "Min";
             public string lblBefCmd = "JVM arguments";
             public string lblAftCmd = "Game arguments";
-            public string chkProxy = "Use skin and sound proxy (<=1.5.2)";
+            public string chkProxy = "Disable skin and sound fixes (<=1.5.2)";
             public string chkUseDemo = "Launch demo (>=12w16a)";
             public string chkOffline = "Launch in offline mode";
             public string chkMulti = "Force multiplayer";
@@ -180,6 +180,7 @@ namespace MCLauncher
             public string chkCustJson = "Custom JSON";
             public string chkClasspath = "Classpath";
             public string chkAssetIndex = "Asset index";
+
             //Profile manager mods
             public string btnMoveUp = "Move up";
             public string btnMoveDown = "Move down";
@@ -210,6 +211,9 @@ namespace MCLauncher
             public string javaRedownload = "You already have the latest Java {ver} version installed. Do you wish to redownload?";
             public string javaSetDefault = "Do you wish to set this Java install as the default one for Java {vers.major}?";
             public string noUpdate = "No new update is available.";
+
+            public string chooseLatestRelease = "Choose latest 'release' version";
+            public string chooseLatestSnapshot = "Choose latest 'snapshot' version";
         }
     }
 }

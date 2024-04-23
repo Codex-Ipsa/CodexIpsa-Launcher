@@ -306,20 +306,14 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            //Profile pr = new Profile("New profile", "new");
-            //pr.ShowDialog();
             NewInstance ni = new NewInstance();
             ni.ShowDialog();
-            /*InstanceManager man = new InstanceManager("New profile", "new");
-            man.ShowDialog();*/
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile(cmbInstaces.Text, "edit");
-            pr.ShowDialog();
-            /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
-            man.ShowDialog();*/
+            EditInstance ei = new EditInstance(selectedInstance);
+            ei.ShowDialog();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)

@@ -93,6 +93,8 @@
             this.lblGameArgs = new System.Windows.Forms.Label();
             this.gameArgsBox = new System.Windows.Forms.TextBox();
             this.lblJvmArgs = new System.Windows.Forms.Label();
+            this.deleteBtn = new System.Windows.Forms.Button();
+            this.openBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
@@ -120,6 +122,8 @@
             // tabHome
             // 
             this.tabHome.BackColor = System.Drawing.SystemColors.Control;
+            this.tabHome.Controls.Add(this.openBtn);
+            this.tabHome.Controls.Add(this.deleteBtn);
             this.tabHome.Controls.Add(this.tabControl2);
             this.tabHome.Controls.Add(this.grbForExp);
             this.tabHome.Controls.Add(this.saveBtn);
@@ -133,12 +137,12 @@
             // 
             // tabMods
             // 
+            this.tabMods.BackColor = System.Drawing.SystemColors.Control;
             this.tabMods.Location = new System.Drawing.Point(4, 22);
             this.tabMods.Name = "tabMods";
             this.tabMods.Size = new System.Drawing.Size(787, 384);
             this.tabMods.TabIndex = 1;
             this.tabMods.Text = "tab.mods";
-            this.tabMods.UseVisualStyleBackColor = true;
             // 
             // imageList1
             // 
@@ -188,6 +192,7 @@
             0,
             0,
             0});
+            this.ramMaxBox.ValueChanged += new System.EventHandler(this.ramMaxBox_ValueChanged);
             // 
             // chkAssetIndex
             // 
@@ -195,9 +200,10 @@
             this.chkAssetIndex.Location = new System.Drawing.Point(6, 100);
             this.chkAssetIndex.Name = "chkAssetIndex";
             this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
-            this.chkAssetIndex.TabIndex = 36;
+            this.chkAssetIndex.TabIndex = 33;
             this.chkAssetIndex.Text = "chk.AssetIndex";
             this.chkAssetIndex.UseVisualStyleBackColor = true;
+            this.chkAssetIndex.CheckedChanged += new System.EventHandler(this.chkAssetIndex_CheckedChanged);
             // 
             // assetIndexBtn
             // 
@@ -207,6 +213,7 @@
             this.assetIndexBtn.TabIndex = 35;
             this.assetIndexBtn.Text = "...";
             this.assetIndexBtn.UseVisualStyleBackColor = true;
+            this.assetIndexBtn.Click += new System.EventHandler(this.assetIndexBtn_Click);
             // 
             // assetIndexBox
             // 
@@ -214,6 +221,7 @@
             this.assetIndexBox.Name = "assetIndexBox";
             this.assetIndexBox.Size = new System.Drawing.Size(269, 20);
             this.assetIndexBox.TabIndex = 34;
+            this.assetIndexBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.assetIndexBox_MouseMove);
             // 
             // chkCustJava
             // 
@@ -221,9 +229,10 @@
             this.chkCustJava.Location = new System.Drawing.Point(6, 74);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
-            this.chkCustJava.TabIndex = 26;
+            this.chkCustJava.TabIndex = 30;
             this.chkCustJava.Text = "chk.CustJava";
             this.chkCustJava.UseVisualStyleBackColor = true;
+            this.chkCustJava.CheckedChanged += new System.EventHandler(this.chkCustJava_CheckedChanged);
             // 
             // chkCustJson
             // 
@@ -231,9 +240,10 @@
             this.chkCustJson.Location = new System.Drawing.Point(6, 48);
             this.chkCustJson.Name = "chkCustJson";
             this.chkCustJson.Size = new System.Drawing.Size(90, 17);
-            this.chkCustJson.TabIndex = 29;
+            this.chkCustJson.TabIndex = 27;
             this.chkCustJson.Text = "chk.CustJson";
             this.chkCustJson.UseVisualStyleBackColor = true;
+            this.chkCustJson.CheckedChanged += new System.EventHandler(this.chkCustJson_CheckedChanged);
             // 
             // ramMinBox
             // 
@@ -261,36 +271,39 @@
             0,
             0,
             0});
+            this.ramMinBox.ValueChanged += new System.EventHandler(this.ramMinBox_ValueChanged);
             // 
             // classBox
             // 
             this.classBox.Location = new System.Drawing.Point(99, 20);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(314, 20);
-            this.classBox.TabIndex = 33;
+            this.classBox.TabIndex = 26;
             // 
             // jsonBtn
             // 
             this.jsonBtn.Location = new System.Drawing.Point(374, 46);
             this.jsonBtn.Name = "jsonBtn";
             this.jsonBtn.Size = new System.Drawing.Size(39, 20);
-            this.jsonBtn.TabIndex = 31;
+            this.jsonBtn.TabIndex = 29;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
+            this.jsonBtn.Click += new System.EventHandler(this.jsonBtn_Click);
             // 
             // jsonBox
             // 
             this.jsonBox.Location = new System.Drawing.Point(99, 46);
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(269, 20);
-            this.jsonBox.TabIndex = 30;
+            this.jsonBox.TabIndex = 28;
+            this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
             // 
             // javaBox
             // 
             this.javaBox.Location = new System.Drawing.Point(99, 72);
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(269, 20);
-            this.javaBox.TabIndex = 27;
+            this.javaBox.TabIndex = 31;
             // 
             // chkUseDemo
             // 
@@ -328,16 +341,17 @@
             this.chkClasspath.Location = new System.Drawing.Point(6, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
-            this.chkClasspath.TabIndex = 32;
+            this.chkClasspath.TabIndex = 25;
             this.chkClasspath.Text = "chk.Classpath";
             this.chkClasspath.UseVisualStyleBackColor = true;
+            this.chkClasspath.CheckedChanged += new System.EventHandler(this.chkClasspath_CheckedChanged);
             // 
             // jvmArgsBox
             // 
             this.jvmArgsBox.Location = new System.Drawing.Point(99, 123);
             this.jvmArgsBox.Name = "jvmArgsBox";
             this.jvmArgsBox.Size = new System.Drawing.Size(313, 20);
-            this.jvmArgsBox.TabIndex = 25;
+            this.jvmArgsBox.TabIndex = 19;
             // 
             // lblMemMin
             // 
@@ -406,6 +420,7 @@
             this.dirBtn.TabIndex = 14;
             this.dirBtn.Text = "...";
             this.dirBtn.UseVisualStyleBackColor = true;
+            this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
             // 
             // lblReso
             // 
@@ -422,6 +437,7 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(313, 20);
             this.nameBox.TabIndex = 12;
+            this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // dirBox
             // 
@@ -469,6 +485,7 @@
             this.xboxNameBox.Name = "xboxNameBox";
             this.xboxNameBox.Size = new System.Drawing.Size(318, 20);
             this.xboxNameBox.TabIndex = 12;
+            this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
             // 
             // lblMemMax
             // 
@@ -488,15 +505,17 @@
             this.chkLatestSnapshot.TabIndex = 11;
             this.chkLatestSnapshot.Text = "Choose latest \'snapshot\' version";
             this.chkLatestSnapshot.UseVisualStyleBackColor = true;
+            this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
             // 
             // javaBtn
             // 
             this.javaBtn.Location = new System.Drawing.Point(373, 72);
             this.javaBtn.Name = "javaBtn";
             this.javaBtn.Size = new System.Drawing.Size(39, 20);
-            this.javaBtn.TabIndex = 28;
+            this.javaBtn.TabIndex = 32;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
+            this.javaBtn.Click += new System.EventHandler(this.javaBtn_Click);
             // 
             // tabControl2
             // 
@@ -511,7 +530,8 @@
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(366, 384);
-            this.tabControl2.TabIndex = 30;
+            this.tabControl2.TabIndex = 0;
+            this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
             // 
             // vanillaPage
             // 
@@ -544,6 +564,7 @@
             this.chkLatest.TabIndex = 10;
             this.chkLatest.Text = "Choose latest \'release\' version";
             this.chkLatest.UseVisualStyleBackColor = true;
+            this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
             // 
             // vanillaExperimental
             // 
@@ -556,6 +577,7 @@
             this.vanillaExperimental.TabIndex = 9;
             this.vanillaExperimental.Text = "Experimental";
             this.vanillaExperimental.UseVisualStyleBackColor = true;
+            this.vanillaExperimental.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaSnapshot
             // 
@@ -568,6 +590,7 @@
             this.vanillaSnapshot.TabIndex = 8;
             this.vanillaSnapshot.Text = "Snapshot";
             this.vanillaSnapshot.UseVisualStyleBackColor = true;
+            this.vanillaSnapshot.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaRelease
             // 
@@ -580,6 +603,7 @@
             this.vanillaRelease.TabIndex = 7;
             this.vanillaRelease.Text = "Release";
             this.vanillaRelease.UseVisualStyleBackColor = true;
+            this.vanillaRelease.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaBeta
             // 
@@ -592,6 +616,7 @@
             this.vanillaBeta.TabIndex = 6;
             this.vanillaBeta.Text = "Beta";
             this.vanillaBeta.UseVisualStyleBackColor = true;
+            this.vanillaBeta.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaAlpha
             // 
@@ -604,6 +629,7 @@
             this.vanillaAlpha.TabIndex = 5;
             this.vanillaAlpha.Text = "Alpha";
             this.vanillaAlpha.UseVisualStyleBackColor = true;
+            this.vanillaAlpha.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaInfdev
             // 
@@ -616,6 +642,7 @@
             this.vanillaInfdev.TabIndex = 4;
             this.vanillaInfdev.Text = "Infdev";
             this.vanillaInfdev.UseVisualStyleBackColor = true;
+            this.vanillaInfdev.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaIndev
             // 
@@ -628,6 +655,7 @@
             this.vanillaIndev.TabIndex = 3;
             this.vanillaIndev.Text = "Indev";
             this.vanillaIndev.UseVisualStyleBackColor = true;
+            this.vanillaIndev.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaClassic
             // 
@@ -640,6 +668,7 @@
             this.vanillaClassic.TabIndex = 2;
             this.vanillaClassic.Text = "Classic";
             this.vanillaClassic.UseVisualStyleBackColor = true;
+            this.vanillaClassic.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaPreclassic
             // 
@@ -652,6 +681,7 @@
             this.vanillaPreclassic.TabIndex = 1;
             this.vanillaPreclassic.Text = "Pre-classic";
             this.vanillaPreclassic.UseVisualStyleBackColor = true;
+            this.vanillaPreclassic.CheckedChanged += new System.EventHandler(this.vanillaBoxes_CheckedChanged);
             // 
             // vanillaList
             // 
@@ -665,6 +695,8 @@
             this.vanillaList.TabIndex = 0;
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
+            this.vanillaList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.vanillaList_ColumnWidthChanging);
+            this.vanillaList.SelectedIndexChanged += new System.EventHandler(this.vanillaList_SelectedIndexChanged);
             // 
             // eduPage
             // 
@@ -672,7 +704,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(350, 390);
+            this.eduPage.Size = new System.Drawing.Size(358, 358);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -689,6 +721,8 @@
             this.eduList.TabIndex = 1;
             this.eduList.UseCompatibleStateImageBehavior = false;
             this.eduList.View = System.Windows.Forms.View.Details;
+            this.eduList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.eduList_ColumnWidthChanging);
+            this.eduList.SelectedIndexChanged += new System.EventHandler(this.eduList_SelectedIndexChanged);
             // 
             // xboxPage
             // 
@@ -696,7 +730,7 @@
             this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(350, 390);
+            this.xboxPage.Size = new System.Drawing.Size(358, 358);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -713,6 +747,8 @@
             this.xboxList.TabIndex = 2;
             this.xboxList.UseCompatibleStateImageBehavior = false;
             this.xboxList.View = System.Windows.Forms.View.Details;
+            this.xboxList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.xboxList_ColumnWidthChanging);
+            this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
             // 
             // imageList2
             // 
@@ -751,9 +787,10 @@
             this.saveBtn.Location = new System.Drawing.Point(709, 357);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 31;
-            this.saveBtn.Text = "Create";
+            this.saveBtn.TabIndex = 36;
+            this.saveBtn.Text = "btn.save";
             this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // grbGame
             // 
@@ -801,7 +838,7 @@
             this.gameArgsBox.Location = new System.Drawing.Point(99, 149);
             this.gameArgsBox.Name = "gameArgsBox";
             this.gameArgsBox.Size = new System.Drawing.Size(313, 20);
-            this.gameArgsBox.TabIndex = 27;
+            this.gameArgsBox.TabIndex = 20;
             // 
             // lblJvmArgs
             // 
@@ -811,6 +848,26 @@
             this.lblJvmArgs.Size = new System.Drawing.Size(57, 13);
             this.lblJvmArgs.TabIndex = 26;
             this.lblJvmArgs.Text = "lbl.jvmArgs";
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(622, 357);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(81, 23);
+            this.deleteBtn.TabIndex = 37;
+            this.deleteBtn.Text = "btn.delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // openBtn
+            // 
+            this.openBtn.Location = new System.Drawing.Point(528, 357);
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(88, 23);
+            this.openBtn.TabIndex = 38;
+            this.openBtn.Text = "btn.open";
+            this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
             // 
             // EditInstance
             // 
@@ -905,5 +962,7 @@
         private System.Windows.Forms.Label lblReso;
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.TextBox dirBox;
+        private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button openBtn;
     }
 }

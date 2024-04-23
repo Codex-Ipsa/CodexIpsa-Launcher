@@ -46,6 +46,9 @@ namespace MCLauncher.forms
             chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
             lblXboxProfName.Text = Strings.sj.lblProfName;
 
+            chkLatest.Text = Strings.sj.chooseLatestRelease;
+            chkLatestSnapshot.Text = Strings.sj.chooseLatestSnapshot;
+
             //fill in shared stuff
             nameBox.Text = "New profile";
             ramMinBox.Value = 512;
@@ -193,7 +196,7 @@ namespace MCLauncher.forms
             }
         }
 
-        //TODO (hell)
+        //save instance
         private void button1_Click(object sender, EventArgs e)
         {
             //create instance json

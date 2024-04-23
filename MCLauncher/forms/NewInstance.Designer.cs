@@ -334,11 +334,11 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(716, 357);
+            this.saveBtn.Location = new System.Drawing.Point(713, 357);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveBtn.TabIndex = 1;
-            this.saveBtn.Text = "Create";
+            this.saveBtn.Size = new System.Drawing.Size(78, 23);
+            this.saveBtn.TabIndex = 36;
+            this.saveBtn.Text = "btn.create";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -368,7 +368,7 @@
             this.chkAssetIndex.Location = new System.Drawing.Point(6, 100);
             this.chkAssetIndex.Name = "chkAssetIndex";
             this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
-            this.chkAssetIndex.TabIndex = 36;
+            this.chkAssetIndex.TabIndex = 33;
             this.chkAssetIndex.Text = "chk.AssetIndex";
             this.chkAssetIndex.UseVisualStyleBackColor = true;
             this.chkAssetIndex.CheckedChanged += new System.EventHandler(this.chkAssetIndex_CheckedChanged);
@@ -397,7 +397,7 @@
             this.chkCustJava.Location = new System.Drawing.Point(6, 74);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
-            this.chkCustJava.TabIndex = 26;
+            this.chkCustJava.TabIndex = 30;
             this.chkCustJava.Text = "chk.CustJava";
             this.chkCustJava.UseVisualStyleBackColor = true;
             this.chkCustJava.CheckedChanged += new System.EventHandler(this.chkCustJava_CheckedChanged);
@@ -408,7 +408,7 @@
             this.chkCustJson.Location = new System.Drawing.Point(6, 48);
             this.chkCustJson.Name = "chkCustJson";
             this.chkCustJson.Size = new System.Drawing.Size(90, 17);
-            this.chkCustJson.TabIndex = 29;
+            this.chkCustJson.TabIndex = 27;
             this.chkCustJson.Text = "chk.CustJson";
             this.chkCustJson.UseVisualStyleBackColor = true;
             this.chkCustJson.CheckedChanged += new System.EventHandler(this.chkCustJson_CheckedChanged);
@@ -418,7 +418,7 @@
             this.classBox.Location = new System.Drawing.Point(99, 20);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(318, 20);
-            this.classBox.TabIndex = 33;
+            this.classBox.TabIndex = 26;
             // 
             // chkClasspath
             // 
@@ -426,7 +426,7 @@
             this.chkClasspath.Location = new System.Drawing.Point(6, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
-            this.chkClasspath.TabIndex = 32;
+            this.chkClasspath.TabIndex = 25;
             this.chkClasspath.Text = "chk.Classpath";
             this.chkClasspath.UseVisualStyleBackColor = true;
             this.chkClasspath.CheckedChanged += new System.EventHandler(this.chkClasspath_CheckedChanged);
@@ -436,7 +436,7 @@
             this.jsonBtn.Location = new System.Drawing.Point(378, 46);
             this.jsonBtn.Name = "jsonBtn";
             this.jsonBtn.Size = new System.Drawing.Size(39, 20);
-            this.jsonBtn.TabIndex = 31;
+            this.jsonBtn.TabIndex = 29;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
             this.jsonBtn.Click += new System.EventHandler(this.jsonBtn_Click);
@@ -446,7 +446,7 @@
             this.jsonBox.Location = new System.Drawing.Point(99, 46);
             this.jsonBox.Name = "jsonBox";
             this.jsonBox.Size = new System.Drawing.Size(273, 20);
-            this.jsonBox.TabIndex = 30;
+            this.jsonBox.TabIndex = 28;
             this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
             // 
             // javaBox
@@ -454,14 +454,14 @@
             this.javaBox.Location = new System.Drawing.Point(99, 72);
             this.javaBox.Name = "javaBox";
             this.javaBox.Size = new System.Drawing.Size(273, 20);
-            this.javaBox.TabIndex = 27;
+            this.javaBox.TabIndex = 31;
             // 
             // javaBtn
             // 
             this.javaBtn.Location = new System.Drawing.Point(378, 72);
             this.javaBtn.Name = "javaBtn";
             this.javaBtn.Size = new System.Drawing.Size(39, 20);
-            this.javaBtn.TabIndex = 28;
+            this.javaBtn.TabIndex = 32;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
             this.javaBtn.Click += new System.EventHandler(this.javaBtn_Click);
@@ -512,7 +512,7 @@
             this.gameArgsBox.Location = new System.Drawing.Point(99, 149);
             this.gameArgsBox.Name = "gameArgsBox";
             this.gameArgsBox.Size = new System.Drawing.Size(318, 20);
-            this.gameArgsBox.TabIndex = 27;
+            this.gameArgsBox.TabIndex = 20;
             // 
             // lblJvmArgs
             // 
@@ -528,7 +528,7 @@
             this.jvmArgsBox.Location = new System.Drawing.Point(99, 123);
             this.jvmArgsBox.Name = "jvmArgsBox";
             this.jvmArgsBox.Size = new System.Drawing.Size(318, 20);
-            this.jvmArgsBox.TabIndex = 25;
+            this.jvmArgsBox.TabIndex = 19;
             // 
             // chkOffline
             // 
@@ -774,9 +774,9 @@
             this.chkLatest.AutoSize = true;
             this.chkLatest.Location = new System.Drawing.Point(6, 335);
             this.chkLatest.Name = "chkLatest";
-            this.chkLatest.Size = new System.Drawing.Size(168, 17);
+            this.chkLatest.Size = new System.Drawing.Size(72, 17);
             this.chkLatest.TabIndex = 10;
-            this.chkLatest.Text = "Choose latest \'release\' version";
+            this.chkLatest.Text = "chk.latest";
             this.chkLatest.UseVisualStyleBackColor = true;
             this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
             // 
@@ -785,9 +785,9 @@
             this.chkLatestSnapshot.AutoSize = true;
             this.chkLatestSnapshot.Location = new System.Drawing.Point(178, 335);
             this.chkLatestSnapshot.Name = "chkLatestSnapshot";
-            this.chkLatestSnapshot.Size = new System.Drawing.Size(177, 17);
+            this.chkLatestSnapshot.Size = new System.Drawing.Size(117, 17);
             this.chkLatestSnapshot.TabIndex = 11;
-            this.chkLatestSnapshot.Text = "Choose latest \'snapshot\' version";
+            this.chkLatestSnapshot.Text = "chk.latestSnapshot";
             this.chkLatestSnapshot.UseVisualStyleBackColor = true;
             this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
             // 
