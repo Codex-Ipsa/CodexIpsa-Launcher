@@ -88,8 +88,6 @@
             this.lblXboxProfName = new System.Windows.Forms.Label();
             this.xboxNameBox = new System.Windows.Forms.TextBox();
             this.chkLatest = new System.Windows.Forms.CheckBox();
-            this.serverIpBox = new System.Windows.Forms.TextBox();
-            this.chkServerIp = new System.Windows.Forms.CheckBox();
             this.chkLatestSnapshot = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
@@ -114,7 +112,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(366, 415);
+            this.tabControl1.Size = new System.Drawing.Size(366, 386);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -135,7 +133,7 @@
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 22);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(358, 389);
+            this.vanillaPage.Size = new System.Drawing.Size(358, 360);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -336,7 +334,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(716, 387);
+            this.saveBtn.Location = new System.Drawing.Point(716, 357);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 1;
@@ -346,8 +344,6 @@
             // 
             // grbForExp
             // 
-            this.grbForExp.Controls.Add(this.chkServerIp);
-            this.grbForExp.Controls.Add(this.serverIpBox);
             this.grbForExp.Controls.Add(this.chkAssetIndex);
             this.grbForExp.Controls.Add(this.assetIndexBtn);
             this.grbForExp.Controls.Add(this.assetIndexBox);
@@ -361,7 +357,7 @@
             this.grbForExp.Controls.Add(this.javaBtn);
             this.grbForExp.Location = new System.Drawing.Point(366, 226);
             this.grbForExp.Name = "grbForExp";
-            this.grbForExp.Size = new System.Drawing.Size(425, 155);
+            this.grbForExp.Size = new System.Drawing.Size(425, 125);
             this.grbForExp.TabIndex = 29;
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
@@ -369,7 +365,7 @@
             // chkAssetIndex
             // 
             this.chkAssetIndex.AutoSize = true;
-            this.chkAssetIndex.Location = new System.Drawing.Point(9, 100);
+            this.chkAssetIndex.Location = new System.Drawing.Point(6, 100);
             this.chkAssetIndex.Name = "chkAssetIndex";
             this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
             this.chkAssetIndex.TabIndex = 36;
@@ -379,9 +375,9 @@
             // 
             // assetIndexBtn
             // 
-            this.assetIndexBtn.Location = new System.Drawing.Point(378, 97);
+            this.assetIndexBtn.Location = new System.Drawing.Point(378, 98);
             this.assetIndexBtn.Name = "assetIndexBtn";
-            this.assetIndexBtn.Size = new System.Drawing.Size(43, 20);
+            this.assetIndexBtn.Size = new System.Drawing.Size(39, 20);
             this.assetIndexBtn.TabIndex = 35;
             this.assetIndexBtn.Text = "...";
             this.assetIndexBtn.UseVisualStyleBackColor = true;
@@ -389,16 +385,16 @@
             // 
             // assetIndexBox
             // 
-            this.assetIndexBox.Location = new System.Drawing.Point(106, 98);
+            this.assetIndexBox.Location = new System.Drawing.Point(99, 98);
             this.assetIndexBox.Name = "assetIndexBox";
-            this.assetIndexBox.Size = new System.Drawing.Size(266, 20);
+            this.assetIndexBox.Size = new System.Drawing.Size(273, 20);
             this.assetIndexBox.TabIndex = 34;
             this.assetIndexBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.assetIndexBox_MouseMove);
             // 
             // chkCustJava
             // 
             this.chkCustJava.AutoSize = true;
-            this.chkCustJava.Location = new System.Drawing.Point(9, 74);
+            this.chkCustJava.Location = new System.Drawing.Point(6, 74);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
             this.chkCustJava.TabIndex = 26;
@@ -409,7 +405,7 @@
             // chkCustJson
             // 
             this.chkCustJson.AutoSize = true;
-            this.chkCustJson.Location = new System.Drawing.Point(9, 48);
+            this.chkCustJson.Location = new System.Drawing.Point(6, 48);
             this.chkCustJson.Name = "chkCustJson";
             this.chkCustJson.Size = new System.Drawing.Size(90, 17);
             this.chkCustJson.TabIndex = 29;
@@ -419,15 +415,15 @@
             // 
             // classBox
             // 
-            this.classBox.Location = new System.Drawing.Point(106, 20);
+            this.classBox.Location = new System.Drawing.Point(99, 20);
             this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(315, 20);
+            this.classBox.Size = new System.Drawing.Size(318, 20);
             this.classBox.TabIndex = 33;
             // 
             // chkClasspath
             // 
             this.chkClasspath.AutoSize = true;
-            this.chkClasspath.Location = new System.Drawing.Point(9, 22);
+            this.chkClasspath.Location = new System.Drawing.Point(6, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
             this.chkClasspath.TabIndex = 32;
@@ -439,7 +435,7 @@
             // 
             this.jsonBtn.Location = new System.Drawing.Point(378, 46);
             this.jsonBtn.Name = "jsonBtn";
-            this.jsonBtn.Size = new System.Drawing.Size(43, 20);
+            this.jsonBtn.Size = new System.Drawing.Size(39, 20);
             this.jsonBtn.TabIndex = 31;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
@@ -447,24 +443,24 @@
             // 
             // jsonBox
             // 
-            this.jsonBox.Location = new System.Drawing.Point(106, 46);
+            this.jsonBox.Location = new System.Drawing.Point(99, 46);
             this.jsonBox.Name = "jsonBox";
-            this.jsonBox.Size = new System.Drawing.Size(266, 20);
+            this.jsonBox.Size = new System.Drawing.Size(273, 20);
             this.jsonBox.TabIndex = 30;
             this.jsonBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.jsonBox_MouseMove);
             // 
             // javaBox
             // 
-            this.javaBox.Location = new System.Drawing.Point(106, 72);
+            this.javaBox.Location = new System.Drawing.Point(99, 72);
             this.javaBox.Name = "javaBox";
-            this.javaBox.Size = new System.Drawing.Size(266, 20);
+            this.javaBox.Size = new System.Drawing.Size(273, 20);
             this.javaBox.TabIndex = 27;
             // 
             // javaBtn
             // 
-            this.javaBtn.Location = new System.Drawing.Point(378, 71);
+            this.javaBtn.Location = new System.Drawing.Point(378, 72);
             this.javaBtn.Name = "javaBtn";
-            this.javaBtn.Size = new System.Drawing.Size(43, 20);
+            this.javaBtn.Size = new System.Drawing.Size(39, 20);
             this.javaBtn.TabIndex = 28;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
@@ -529,7 +525,7 @@
             // 
             // jvmArgsBox
             // 
-            this.jvmArgsBox.Location = new System.Drawing.Point(100, 123);
+            this.jvmArgsBox.Location = new System.Drawing.Point(99, 123);
             this.jvmArgsBox.Name = "jvmArgsBox";
             this.jvmArgsBox.Size = new System.Drawing.Size(318, 20);
             this.jvmArgsBox.TabIndex = 25;
@@ -581,7 +577,7 @@
             0,
             0,
             0});
-            this.ramMaxBox.Location = new System.Drawing.Point(100, 97);
+            this.ramMaxBox.Location = new System.Drawing.Point(99, 97);
             this.ramMaxBox.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -659,7 +655,7 @@
             // 
             // resXBox
             // 
-            this.resXBox.Location = new System.Drawing.Point(100, 71);
+            this.resXBox.Location = new System.Drawing.Point(99, 71);
             this.resXBox.Name = "resXBox";
             this.resXBox.Size = new System.Drawing.Size(140, 20);
             this.resXBox.TabIndex = 15;
@@ -674,7 +670,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(254, 74);
+            this.label5.Location = new System.Drawing.Point(253, 74);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(12, 13);
             this.label5.TabIndex = 13;
@@ -700,7 +696,7 @@
             // 
             // dirBtn
             // 
-            this.dirBtn.Location = new System.Drawing.Point(378, 44);
+            this.dirBtn.Location = new System.Drawing.Point(378, 45);
             this.dirBtn.Name = "dirBtn";
             this.dirBtn.Size = new System.Drawing.Size(39, 20);
             this.dirBtn.TabIndex = 14;
@@ -778,37 +774,20 @@
             this.chkLatest.AutoSize = true;
             this.chkLatest.Location = new System.Drawing.Point(6, 335);
             this.chkLatest.Name = "chkLatest";
-            this.chkLatest.Size = new System.Drawing.Size(203, 17);
+            this.chkLatest.Size = new System.Drawing.Size(168, 17);
             this.chkLatest.TabIndex = 10;
-            this.chkLatest.Text = "Always choose latest \'release\' version";
+            this.chkLatest.Text = "Choose latest \'release\' version";
             this.chkLatest.UseVisualStyleBackColor = true;
             this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
-            // 
-            // serverIpBox
-            // 
-            this.serverIpBox.Location = new System.Drawing.Point(106, 124);
-            this.serverIpBox.Name = "serverIpBox";
-            this.serverIpBox.Size = new System.Drawing.Size(315, 20);
-            this.serverIpBox.TabIndex = 37;
-            // 
-            // chkServerIp
-            // 
-            this.chkServerIp.AutoSize = true;
-            this.chkServerIp.Location = new System.Drawing.Point(9, 126);
-            this.chkServerIp.Name = "chkServerIp";
-            this.chkServerIp.Size = new System.Drawing.Size(87, 17);
-            this.chkServerIp.TabIndex = 38;
-            this.chkServerIp.Text = "chk.ServerIp";
-            this.chkServerIp.UseVisualStyleBackColor = true;
             // 
             // chkLatestSnapshot
             // 
             this.chkLatestSnapshot.AutoSize = true;
-            this.chkLatestSnapshot.Location = new System.Drawing.Point(6, 355);
+            this.chkLatestSnapshot.Location = new System.Drawing.Point(178, 335);
             this.chkLatestSnapshot.Name = "chkLatestSnapshot";
-            this.chkLatestSnapshot.Size = new System.Drawing.Size(212, 17);
+            this.chkLatestSnapshot.Size = new System.Drawing.Size(177, 17);
             this.chkLatestSnapshot.TabIndex = 11;
-            this.chkLatestSnapshot.Text = "Always choose latest \'snapshot\' version";
+            this.chkLatestSnapshot.Text = "Choose latest \'snapshot\' version";
             this.chkLatestSnapshot.UseVisualStyleBackColor = true;
             this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
             // 
@@ -816,7 +795,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 415);
+            this.ClientSize = new System.Drawing.Size(795, 386);
             this.Controls.Add(this.grbForExp);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.tabControl1);
@@ -903,7 +882,5 @@
         private System.Windows.Forms.TextBox gameArgsBox;
         private System.Windows.Forms.CheckBox chkLatest;
         private System.Windows.Forms.CheckBox chkLatestSnapshot;
-        private System.Windows.Forms.CheckBox chkServerIp;
-        private System.Windows.Forms.TextBox serverIpBox;
     }
 }
