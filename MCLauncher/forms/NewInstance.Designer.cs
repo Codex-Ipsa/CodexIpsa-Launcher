@@ -87,6 +87,10 @@
             this.chkXboxDemo = new System.Windows.Forms.CheckBox();
             this.lblXboxProfName = new System.Windows.Forms.Label();
             this.xboxNameBox = new System.Windows.Forms.TextBox();
+            this.chkLatest = new System.Windows.Forms.CheckBox();
+            this.serverIpBox = new System.Windows.Forms.TextBox();
+            this.chkServerIp = new System.Windows.Forms.CheckBox();
+            this.chkLatestSnapshot = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.vanillaPage.SuspendLayout();
             this.eduPage.SuspendLayout();
@@ -103,18 +107,21 @@
             this.tabControl1.Controls.Add(this.vanillaPage);
             this.tabControl1.Controls.Add(this.eduPage);
             this.tabControl1.Controls.Add(this.xboxPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.ItemSize = new System.Drawing.Size(58, 18);
-            this.tabControl1.Location = new System.Drawing.Point(2, 2);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(362, 383);
+            this.tabControl1.Size = new System.Drawing.Size(366, 415);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // vanillaPage
             // 
+            this.vanillaPage.Controls.Add(this.chkLatestSnapshot);
+            this.vanillaPage.Controls.Add(this.chkLatest);
             this.vanillaPage.Controls.Add(this.vanillaExperimental);
             this.vanillaPage.Controls.Add(this.vanillaSnapshot);
             this.vanillaPage.Controls.Add(this.vanillaRelease);
@@ -128,7 +135,7 @@
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 22);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(354, 357);
+            this.vanillaPage.Size = new System.Drawing.Size(358, 389);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -138,7 +145,7 @@
             this.vanillaExperimental.AutoSize = true;
             this.vanillaExperimental.Checked = true;
             this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(208, 319);
+            this.vanillaExperimental.Location = new System.Drawing.Point(208, 315);
             this.vanillaExperimental.Name = "vanillaExperimental";
             this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
             this.vanillaExperimental.TabIndex = 9;
@@ -151,7 +158,7 @@
             this.vanillaSnapshot.AutoSize = true;
             this.vanillaSnapshot.Checked = true;
             this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 319);
+            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 315);
             this.vanillaSnapshot.Name = "vanillaSnapshot";
             this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
             this.vanillaSnapshot.TabIndex = 8;
@@ -164,7 +171,7 @@
             this.vanillaRelease.AutoSize = true;
             this.vanillaRelease.Checked = true;
             this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(60, 319);
+            this.vanillaRelease.Location = new System.Drawing.Point(60, 315);
             this.vanillaRelease.Name = "vanillaRelease";
             this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
             this.vanillaRelease.TabIndex = 7;
@@ -177,7 +184,7 @@
             this.vanillaBeta.AutoSize = true;
             this.vanillaBeta.Checked = true;
             this.vanillaBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaBeta.Location = new System.Drawing.Point(6, 319);
+            this.vanillaBeta.Location = new System.Drawing.Point(6, 315);
             this.vanillaBeta.Name = "vanillaBeta";
             this.vanillaBeta.Size = new System.Drawing.Size(48, 17);
             this.vanillaBeta.TabIndex = 6;
@@ -190,7 +197,7 @@
             this.vanillaAlpha.AutoSize = true;
             this.vanillaAlpha.Checked = true;
             this.vanillaAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaAlpha.Location = new System.Drawing.Point(275, 296);
+            this.vanillaAlpha.Location = new System.Drawing.Point(275, 295);
             this.vanillaAlpha.Name = "vanillaAlpha";
             this.vanillaAlpha.Size = new System.Drawing.Size(53, 17);
             this.vanillaAlpha.TabIndex = 5;
@@ -203,7 +210,7 @@
             this.vanillaInfdev.AutoSize = true;
             this.vanillaInfdev.Checked = true;
             this.vanillaInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaInfdev.Location = new System.Drawing.Point(213, 296);
+            this.vanillaInfdev.Location = new System.Drawing.Point(213, 295);
             this.vanillaInfdev.Name = "vanillaInfdev";
             this.vanillaInfdev.Size = new System.Drawing.Size(56, 17);
             this.vanillaInfdev.TabIndex = 4;
@@ -216,7 +223,7 @@
             this.vanillaIndev.AutoSize = true;
             this.vanillaIndev.Checked = true;
             this.vanillaIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaIndev.Location = new System.Drawing.Point(154, 296);
+            this.vanillaIndev.Location = new System.Drawing.Point(154, 295);
             this.vanillaIndev.Name = "vanillaIndev";
             this.vanillaIndev.Size = new System.Drawing.Size(53, 17);
             this.vanillaIndev.TabIndex = 3;
@@ -229,7 +236,7 @@
             this.vanillaClassic.AutoSize = true;
             this.vanillaClassic.Checked = true;
             this.vanillaClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaClassic.Location = new System.Drawing.Point(89, 296);
+            this.vanillaClassic.Location = new System.Drawing.Point(89, 295);
             this.vanillaClassic.Name = "vanillaClassic";
             this.vanillaClassic.Size = new System.Drawing.Size(59, 17);
             this.vanillaClassic.TabIndex = 2;
@@ -242,7 +249,7 @@
             this.vanillaPreclassic.AutoSize = true;
             this.vanillaPreclassic.Checked = true;
             this.vanillaPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaPreclassic.Location = new System.Drawing.Point(6, 296);
+            this.vanillaPreclassic.Location = new System.Drawing.Point(6, 295);
             this.vanillaPreclassic.Name = "vanillaPreclassic";
             this.vanillaPreclassic.Size = new System.Drawing.Size(77, 17);
             this.vanillaPreclassic.TabIndex = 1;
@@ -271,7 +278,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(354, 357);
+            this.eduPage.Size = new System.Drawing.Size(358, 389);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -296,7 +303,7 @@
             this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(354, 357);
+            this.xboxPage.Size = new System.Drawing.Size(358, 389);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -329,7 +336,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(716, 357);
+            this.saveBtn.Location = new System.Drawing.Point(716, 387);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 1;
@@ -339,6 +346,8 @@
             // 
             // grbForExp
             // 
+            this.grbForExp.Controls.Add(this.chkServerIp);
+            this.grbForExp.Controls.Add(this.serverIpBox);
             this.grbForExp.Controls.Add(this.chkAssetIndex);
             this.grbForExp.Controls.Add(this.assetIndexBtn);
             this.grbForExp.Controls.Add(this.assetIndexBox);
@@ -352,7 +361,7 @@
             this.grbForExp.Controls.Add(this.javaBtn);
             this.grbForExp.Location = new System.Drawing.Point(366, 226);
             this.grbForExp.Name = "grbForExp";
-            this.grbForExp.Size = new System.Drawing.Size(425, 125);
+            this.grbForExp.Size = new System.Drawing.Size(425, 155);
             this.grbForExp.TabIndex = 29;
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
@@ -764,11 +773,50 @@
             this.xboxNameBox.TabIndex = 12;
             this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
             // 
+            // chkLatest
+            // 
+            this.chkLatest.AutoSize = true;
+            this.chkLatest.Location = new System.Drawing.Point(6, 335);
+            this.chkLatest.Name = "chkLatest";
+            this.chkLatest.Size = new System.Drawing.Size(197, 17);
+            this.chkLatest.TabIndex = 10;
+            this.chkLatest.Text = "Always chose latest \'release\' version";
+            this.chkLatest.UseVisualStyleBackColor = true;
+            this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
+            // 
+            // serverIpBox
+            // 
+            this.serverIpBox.Location = new System.Drawing.Point(106, 124);
+            this.serverIpBox.Name = "serverIpBox";
+            this.serverIpBox.Size = new System.Drawing.Size(315, 20);
+            this.serverIpBox.TabIndex = 37;
+            // 
+            // chkServerIp
+            // 
+            this.chkServerIp.AutoSize = true;
+            this.chkServerIp.Location = new System.Drawing.Point(9, 126);
+            this.chkServerIp.Name = "chkServerIp";
+            this.chkServerIp.Size = new System.Drawing.Size(87, 17);
+            this.chkServerIp.TabIndex = 38;
+            this.chkServerIp.Text = "chk.ServerIp";
+            this.chkServerIp.UseVisualStyleBackColor = true;
+            // 
+            // chkLatestSnapshot
+            // 
+            this.chkLatestSnapshot.AutoSize = true;
+            this.chkLatestSnapshot.Location = new System.Drawing.Point(6, 355);
+            this.chkLatestSnapshot.Name = "chkLatestSnapshot";
+            this.chkLatestSnapshot.Size = new System.Drawing.Size(206, 17);
+            this.chkLatestSnapshot.TabIndex = 11;
+            this.chkLatestSnapshot.Text = "Always chose latest \'snapshot\' version";
+            this.chkLatestSnapshot.UseVisualStyleBackColor = true;
+            this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
+            // 
             // NewInstance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 385);
+            this.ClientSize = new System.Drawing.Size(795, 415);
             this.Controls.Add(this.grbForExp);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.tabControl1);
@@ -853,5 +901,9 @@
         private System.Windows.Forms.TextBox jvmArgsBox;
         private System.Windows.Forms.Label lblGameArgs;
         private System.Windows.Forms.TextBox gameArgsBox;
+        private System.Windows.Forms.CheckBox chkLatest;
+        private System.Windows.Forms.CheckBox chkLatestSnapshot;
+        private System.Windows.Forms.CheckBox chkServerIp;
+        private System.Windows.Forms.TextBox serverIpBox;
     }
 }

@@ -36,6 +36,7 @@ namespace MCLauncher
 
         //Java manifests
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-manifest.json";
+        public static string javaLatest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-latest.json";
         public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
 

@@ -88,6 +88,7 @@
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\ipsajson\FabricParser.cs" />
     <Compile Include="classes\ipsajson\IpsaJson.cs" />
+    <Compile Include="classes\ipsajson\LatestJavaVersion.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="classes\jsons\InstanceJson.cs" />
     <Compile Include="classes\jsons\JavaManifest.cs" />

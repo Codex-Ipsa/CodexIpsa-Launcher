@@ -468,5 +468,65 @@ namespace MCLauncher.forms
         {
             nameBox.Text = xboxNameBox.Text;
         }
+
+        private void chkLatest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLatest.Checked)
+            {
+                vanillaRelease.Checked = true;
+
+                for (int i = 0; i < vanillaList.Items.Count; i++)
+                {
+                    if (vanillaList.Items[i].SubItems[1].Text == "release")
+                    {
+                        vanillaList.Items[i].Selected = true;
+                        vanillaList.Items[i].EnsureVisible();
+                        break;
+                    }
+                }
+
+                vanillaList.Enabled = false;
+                chkLatestSnapshot.Checked = false;
+
+                lastSelected = "latest";
+            }
+            else
+            {
+                if (chkLatestSnapshot.Checked)
+                    vanillaList.Enabled = false;
+                else
+                    vanillaList.Enabled = true;
+            }
+        }
+
+        private void chkLatestSnapshot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLatestSnapshot.Checked)
+            {
+                vanillaSnapshot.Checked = true;
+
+                for (int i = 0; i < vanillaList.Items.Count; i++)
+                {
+                    if (vanillaList.Items[i].SubItems[1].Text == "snapshot")
+                    {
+                        vanillaList.Items[i].Selected = true;
+                        vanillaList.Items[i].EnsureVisible();
+                        break;
+                    }
+                }
+
+                vanillaList.Enabled = false;
+                chkLatest.Checked = false;
+
+                lastSelected = "latestsnapshot";
+            }
+            else
+            {
+                if (chkLatest.Checked)
+                    vanillaList.Enabled = false;
+                else
+                    vanillaList.Enabled = true;
+            }
+        }
     }
 }

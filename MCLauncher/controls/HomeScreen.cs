@@ -1,6 +1,7 @@
 ﻿using DiscordRPC;
 using DiscordRPC.Logging;
 using MCLauncher.classes;
+using MCLauncher.classes.ipsajson;
 using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Newtonsoft.Json;
@@ -166,12 +167,22 @@ namespace MCLauncher
 
         public static void reloadInstance(string instName)
         {
+            //TODO this needs some rewrite so i don't need to do "Minecraft " + versionName lmaoo
+
             Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
             var pj = JsonConvert.DeserializeObject<profileJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
             selectedVersion = "Minecraft " + pj.version;
+            //selectedVersion = pj.version;
             selectedEdition = pj.edition;
+
+            Logger.Info("[HomeScreen/reloadInstance]", $"ver: {selectedVersion}, ed: {selectedEdition}");
+
+            if (selectedVersion.Contains("latest"))
+            {
+                selectedVersion = "Minecraft " + getLatestVersion(pj.version);
+            }
 
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
 
@@ -359,17 +370,31 @@ namespace MCLauncher
             //loadInstanceList();
         }
 
-        /*public static void playBtnDis(string label)
+        //gets latest snapshot or release version
+        public static String getLatestVersion(String whichOne)
         {
-            Instance.btnPlay.Enabled = false;
-            Instance.lblLogInWarn.Text = label;
-        }
+            String latestJson = "";
+            using (WebClient cl = new WebClient())
+            {
+                latestJson = cl.DownloadString(Globals.javaLatest);
+            }
 
-        public static void playBtnEn(string label)
-        {
-            Instance.btnPlay.Enabled = true;
-            Instance.lblLogInWarn.Text = label;
-        }*/
+            LatestJavaVersion lj = JsonConvert.DeserializeObject<LatestJavaVersion>(latestJson);
+
+            if (whichOne == "latest")
+            {
+                Logger.Info("[HomeScreen/reloadInstance]", $"Translate 'latest' to {lj.release}");
+                return lj.release;
+            }
+            else if (whichOne == "latestsnapshot")
+            {
+                Logger.Info("[HomeScreen/reloadInstance]", $"Translate 'latestsnapshot' to {lj.snapshot}");
+                return lj.snapshot;
+            }
+
+            //this shouldn't happen but it wont compile
+            return null;
+        }
     }
 
     public class changelogJson

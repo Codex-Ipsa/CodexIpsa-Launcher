@@ -59,19 +59,26 @@ namespace MCLauncher.classes
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
             var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
 
+            String version = dj.version;
+
+            if(version.Contains("latest"))
+            {
+                version = HomeScreen.getLatestVersion(version);
+            }
+
             try
             {
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", dj.version), $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", dj.version));
-                if (!File.Exists($"{Globals.dataPath}\\data\\json\\{dj.version}.json"))
+                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", version));
+                if (!File.Exists($"{Globals.dataPath}\\data\\json\\{version}.json"))
                     return;
             }
 
-            manifestPath = $"{Globals.dataPath}\\data\\json\\{dj.version}.json";
-            modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{dj.version}.json");
+            manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
+            modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{version}.json");
 
             //todo move this after downloading jar
             if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
@@ -173,15 +180,15 @@ namespace MCLauncher.classes
             }
 
             string jars = "";
-            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{dj.version}.jar") && modClientPath == "")
-                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{dj.version}.jar");
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar") && modClientPath == "")
+                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
 
             Logger.Info("[Javalauncher]", $"Mod path: {modClientPath}");
 
             if (modClientPath != "")
                 jars += $"\"{modClientPath}\";";
             else
-                jars += $"\"{Globals.dataPath}\\versions\\java\\{dj.version}.jar\";";
+                jars += $"\"{Globals.dataPath}\\versions\\java\\{version}.jar\";";
 
             string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.TopDirectoryOnly);
             foreach (string oldNative in oldNatives)
