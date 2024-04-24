@@ -350,7 +350,7 @@ namespace MCLauncher.forms
 
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            populateLists();
+            //populateLists();
 
             if (tabControl1.SelectedTab.Text == "Xbox 360")
             {
@@ -589,7 +589,7 @@ namespace MCLauncher.forms
 
                 for (int i = 0; i < vanillaList.Items.Count; i++)
                 {
-                    if (vanillaList.Items[i].SubItems[1].Text == "snapshot")
+                    if (vanillaList.Items[i].SubItems[1].Text == "snapshot" || vanillaList.Items[i].SubItems[1].Text == "release")
                     {
                         vanillaList.Items[i].Selected = true;
                         vanillaList.Items[i].EnsureVisible();
