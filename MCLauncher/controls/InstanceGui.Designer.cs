@@ -134,6 +134,7 @@
             this.chkAssetIndex.TabIndex = 33;
             this.chkAssetIndex.Text = "chk.AssetIndex";
             this.chkAssetIndex.UseVisualStyleBackColor = true;
+            this.chkAssetIndex.CheckedChanged += new System.EventHandler(this.chkAssetIndex_CheckedChanged);
             // 
             // assetIndexBtn
             // 
@@ -143,6 +144,7 @@
             this.assetIndexBtn.TabIndex = 35;
             this.assetIndexBtn.Text = "...";
             this.assetIndexBtn.UseVisualStyleBackColor = true;
+            this.assetIndexBtn.Click += new System.EventHandler(this.assetIndexBtn_Click);
             // 
             // assetIndexBox
             // 
@@ -160,6 +162,7 @@
             this.chkCustJava.TabIndex = 30;
             this.chkCustJava.Text = "chk.CustJava";
             this.chkCustJava.UseVisualStyleBackColor = true;
+            this.chkCustJava.CheckedChanged += new System.EventHandler(this.chkCustJava_CheckedChanged);
             // 
             // chkCustJson
             // 
@@ -170,6 +173,7 @@
             this.chkCustJson.TabIndex = 27;
             this.chkCustJson.Text = "chk.CustJson";
             this.chkCustJson.UseVisualStyleBackColor = true;
+            this.chkCustJson.CheckedChanged += new System.EventHandler(this.chkCustJson_CheckedChanged);
             // 
             // classBox
             // 
@@ -187,6 +191,7 @@
             this.chkClasspath.TabIndex = 25;
             this.chkClasspath.Text = "chk.Classpath";
             this.chkClasspath.UseVisualStyleBackColor = true;
+            this.chkClasspath.CheckedChanged += new System.EventHandler(this.chkClasspath_CheckedChanged);
             // 
             // jsonBtn
             // 
@@ -196,6 +201,7 @@
             this.jsonBtn.TabIndex = 29;
             this.jsonBtn.Text = "...";
             this.jsonBtn.UseVisualStyleBackColor = true;
+            this.jsonBtn.Click += new System.EventHandler(this.jsonBtn_Click);
             // 
             // gameArgsBox
             // 
@@ -270,6 +276,7 @@
             0,
             0,
             0});
+            this.ramMaxBox.ValueChanged += new System.EventHandler(this.ramMaxBox_ValueChanged);
             // 
             // lblMemMin
             // 
@@ -347,6 +354,7 @@
             this.dirBtn.TabIndex = 14;
             this.dirBtn.Text = "...";
             this.dirBtn.UseVisualStyleBackColor = true;
+            this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
             // 
             // lblReso
             // 
@@ -363,6 +371,7 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(318, 20);
             this.nameBox.TabIndex = 12;
+            this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // dirBox
             // 
@@ -410,6 +419,7 @@
             this.xboxNameBox.Name = "xboxNameBox";
             this.xboxNameBox.Size = new System.Drawing.Size(318, 20);
             this.xboxNameBox.TabIndex = 12;
+            this.xboxNameBox.TextChanged += new System.EventHandler(this.xboxNameBox_TextChanged);
             // 
             // ramMinBox
             // 
@@ -437,6 +447,7 @@
             0,
             0,
             0});
+            this.ramMinBox.ValueChanged += new System.EventHandler(this.ramMinBox_ValueChanged);
             // 
             // jsonBox
             // 
@@ -457,7 +468,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(366, 384);
+            this.tabControl1.Size = new System.Drawing.Size(366, 382);
             this.tabControl1.TabIndex = 37;
             // 
             // vanillaPage
@@ -477,7 +488,7 @@
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 22);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(358, 358);
+            this.vanillaPage.Size = new System.Drawing.Size(358, 356);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -491,6 +502,7 @@
             this.chkLatestSnapshot.TabIndex = 11;
             this.chkLatestSnapshot.Text = "chk.latestSnapshot";
             this.chkLatestSnapshot.UseVisualStyleBackColor = true;
+            this.chkLatestSnapshot.CheckedChanged += new System.EventHandler(this.chkLatestSnapshot_CheckedChanged);
             // 
             // chkLatest
             // 
@@ -501,6 +513,7 @@
             this.chkLatest.TabIndex = 10;
             this.chkLatest.Text = "chk.latest";
             this.chkLatest.UseVisualStyleBackColor = true;
+            this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
             // 
             // vanillaExperimental
             // 
@@ -513,6 +526,7 @@
             this.vanillaExperimental.TabIndex = 9;
             this.vanillaExperimental.Text = "Experimental";
             this.vanillaExperimental.UseVisualStyleBackColor = true;
+            this.vanillaExperimental.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaSnapshot
             // 
@@ -525,6 +539,7 @@
             this.vanillaSnapshot.TabIndex = 8;
             this.vanillaSnapshot.Text = "Snapshot";
             this.vanillaSnapshot.UseVisualStyleBackColor = true;
+            this.vanillaSnapshot.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaRelease
             // 
@@ -537,6 +552,7 @@
             this.vanillaRelease.TabIndex = 7;
             this.vanillaRelease.Text = "Release";
             this.vanillaRelease.UseVisualStyleBackColor = true;
+            this.vanillaRelease.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaBeta
             // 
@@ -549,6 +565,7 @@
             this.vanillaBeta.TabIndex = 6;
             this.vanillaBeta.Text = "Beta";
             this.vanillaBeta.UseVisualStyleBackColor = true;
+            this.vanillaBeta.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaAlpha
             // 
@@ -561,6 +578,7 @@
             this.vanillaAlpha.TabIndex = 5;
             this.vanillaAlpha.Text = "Alpha";
             this.vanillaAlpha.UseVisualStyleBackColor = true;
+            this.vanillaAlpha.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaInfdev
             // 
@@ -573,6 +591,7 @@
             this.vanillaInfdev.TabIndex = 4;
             this.vanillaInfdev.Text = "Infdev";
             this.vanillaInfdev.UseVisualStyleBackColor = true;
+            this.vanillaInfdev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaIndev
             // 
@@ -585,6 +604,7 @@
             this.vanillaIndev.TabIndex = 3;
             this.vanillaIndev.Text = "Indev";
             this.vanillaIndev.UseVisualStyleBackColor = true;
+            this.vanillaIndev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaClassic
             // 
@@ -597,6 +617,7 @@
             this.vanillaClassic.TabIndex = 2;
             this.vanillaClassic.Text = "Classic";
             this.vanillaClassic.UseVisualStyleBackColor = true;
+            this.vanillaClassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaPreclassic
             // 
@@ -609,6 +630,7 @@
             this.vanillaPreclassic.TabIndex = 1;
             this.vanillaPreclassic.Text = "Pre-classic";
             this.vanillaPreclassic.UseVisualStyleBackColor = true;
+            this.vanillaPreclassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaList
             // 
@@ -622,6 +644,8 @@
             this.vanillaList.TabIndex = 0;
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
+            this.vanillaList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.vanillaList_ColumnWidthChanging);
+            this.vanillaList.SelectedIndexChanged += new System.EventHandler(this.vanillaList_SelectedIndexChanged);
             // 
             // eduPage
             // 
@@ -629,7 +653,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(358, 360);
+            this.eduPage.Size = new System.Drawing.Size(358, 356);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -646,6 +670,8 @@
             this.eduList.TabIndex = 1;
             this.eduList.UseCompatibleStateImageBehavior = false;
             this.eduList.View = System.Windows.Forms.View.Details;
+            this.eduList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.eduList_ColumnWidthChanging);
+            this.eduList.SelectedIndexChanged += new System.EventHandler(this.eduList_SelectedIndexChanged);
             // 
             // xboxPage
             // 
@@ -653,7 +679,7 @@
             this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(358, 360);
+            this.xboxPage.Size = new System.Drawing.Size(358, 356);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -670,6 +696,8 @@
             this.xboxList.TabIndex = 2;
             this.xboxList.UseCompatibleStateImageBehavior = false;
             this.xboxList.View = System.Windows.Forms.View.Details;
+            this.xboxList.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.xboxList_ColumnWidthChanging);
+            this.xboxList.SelectedIndexChanged += new System.EventHandler(this.xboxList_SelectedIndexChanged);
             // 
             // imageList1
             // 
@@ -750,15 +778,17 @@
             this.javaBtn.TabIndex = 32;
             this.javaBtn.Text = "...";
             this.javaBtn.UseVisualStyleBackColor = true;
+            this.javaBtn.Click += new System.EventHandler(this.javaBtn_Click);
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(715, 357);
+            this.saveBtn.Location = new System.Drawing.Point(715, 355);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(78, 23);
             this.saveBtn.TabIndex = 41;
             this.saveBtn.Text = "btn.create";
             this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // InstanceGui
             // 
@@ -770,7 +800,7 @@
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.grbXbox);
             this.Name = "InstanceGui";
-            this.Size = new System.Drawing.Size(800, 384);
+            this.Size = new System.Drawing.Size(800, 382);
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             this.grbXbox.ResumeLayout(false);
             this.grbXbox.PerformLayout();
@@ -790,64 +820,64 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblGameArgs;
-        private System.Windows.Forms.Label lblJvmArgs;
-        private System.Windows.Forms.TextBox jvmArgsBox;
-        private System.Windows.Forms.CheckBox chkAssetIndex;
-        private System.Windows.Forms.Button assetIndexBtn;
-        private System.Windows.Forms.TextBox assetIndexBox;
-        private System.Windows.Forms.CheckBox chkCustJava;
-        private System.Windows.Forms.CheckBox chkCustJson;
-        private System.Windows.Forms.TextBox classBox;
-        private System.Windows.Forms.CheckBox chkClasspath;
-        private System.Windows.Forms.Button jsonBtn;
-        private System.Windows.Forms.TextBox gameArgsBox;
-        private System.Windows.Forms.CheckBox chkOffline;
-        private System.Windows.Forms.CheckBox chkUseDemo;
-        private System.Windows.Forms.CheckBox chkProxy;
-        private System.Windows.Forms.CheckBox chkMulti;
-        private System.Windows.Forms.NumericUpDown ramMaxBox;
-        private System.Windows.Forms.Label lblMemMin;
-        private System.Windows.Forms.Label lblMemMax;
-        private System.Windows.Forms.Label lblMem;
-        private System.Windows.Forms.TextBox resXBox;
-        private System.Windows.Forms.TextBox resYBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblProfName;
-        private System.Windows.Forms.Label lblGameDir;
-        private System.Windows.Forms.Button dirBtn;
-        private System.Windows.Forms.Label lblReso;
-        private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.TextBox dirBox;
-        private System.Windows.Forms.GroupBox grbXbox;
-        private System.Windows.Forms.CheckBox chkXboxDemo;
-        private System.Windows.Forms.Label lblXboxProfName;
-        private System.Windows.Forms.TextBox xboxNameBox;
-        private System.Windows.Forms.NumericUpDown ramMinBox;
-        private System.Windows.Forms.TextBox jsonBox;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage vanillaPage;
-        private System.Windows.Forms.CheckBox chkLatestSnapshot;
-        private System.Windows.Forms.CheckBox chkLatest;
-        private System.Windows.Forms.CheckBox vanillaExperimental;
-        private System.Windows.Forms.CheckBox vanillaSnapshot;
-        private System.Windows.Forms.CheckBox vanillaRelease;
-        private System.Windows.Forms.CheckBox vanillaBeta;
-        private System.Windows.Forms.CheckBox vanillaAlpha;
-        private System.Windows.Forms.CheckBox vanillaInfdev;
-        private System.Windows.Forms.CheckBox vanillaIndev;
-        private System.Windows.Forms.CheckBox vanillaClassic;
-        private System.Windows.Forms.CheckBox vanillaPreclassic;
-        private System.Windows.Forms.ListView vanillaList;
-        private System.Windows.Forms.TabPage eduPage;
-        private System.Windows.Forms.ListView eduList;
-        private System.Windows.Forms.TabPage xboxPage;
-        private System.Windows.Forms.ListView xboxList;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.GroupBox grbGame;
-        private System.Windows.Forms.GroupBox grbForExp;
-        private System.Windows.Forms.TextBox javaBox;
-        private System.Windows.Forms.Button javaBtn;
-        private System.Windows.Forms.Button saveBtn;
+        public System.Windows.Forms.Label lblGameArgs;
+        public System.Windows.Forms.Label lblJvmArgs;
+        public System.Windows.Forms.TextBox jvmArgsBox;
+        public System.Windows.Forms.CheckBox chkAssetIndex;
+        public System.Windows.Forms.Button assetIndexBtn;
+        public System.Windows.Forms.TextBox assetIndexBox;
+        public System.Windows.Forms.CheckBox chkCustJava;
+        public System.Windows.Forms.CheckBox chkCustJson;
+        public System.Windows.Forms.TextBox classBox;
+        public System.Windows.Forms.CheckBox chkClasspath;
+        public System.Windows.Forms.Button jsonBtn;
+        public System.Windows.Forms.TextBox gameArgsBox;
+        public System.Windows.Forms.CheckBox chkOffline;
+        public System.Windows.Forms.CheckBox chkUseDemo;
+        public System.Windows.Forms.CheckBox chkProxy;
+        public System.Windows.Forms.CheckBox chkMulti;
+        public System.Windows.Forms.NumericUpDown ramMaxBox;
+        public System.Windows.Forms.Label lblMemMin;
+        public System.Windows.Forms.Label lblMemMax;
+        public System.Windows.Forms.Label lblMem;
+        public System.Windows.Forms.TextBox resXBox;
+        public System.Windows.Forms.TextBox resYBox;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label lblProfName;
+        public System.Windows.Forms.Label lblGameDir;
+        public System.Windows.Forms.Button dirBtn;
+        public System.Windows.Forms.Label lblReso;
+        public System.Windows.Forms.TextBox nameBox;
+        public System.Windows.Forms.TextBox dirBox;
+        public System.Windows.Forms.GroupBox grbXbox;
+        public System.Windows.Forms.CheckBox chkXboxDemo;
+        public System.Windows.Forms.Label lblXboxProfName;
+        public System.Windows.Forms.TextBox xboxNameBox;
+        public System.Windows.Forms.NumericUpDown ramMinBox;
+        public System.Windows.Forms.TextBox jsonBox;
+        public System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.TabPage vanillaPage;
+        public System.Windows.Forms.CheckBox chkLatestSnapshot;
+        public System.Windows.Forms.CheckBox chkLatest;
+        public System.Windows.Forms.CheckBox vanillaExperimental;
+        public System.Windows.Forms.CheckBox vanillaSnapshot;
+        public System.Windows.Forms.CheckBox vanillaRelease;
+        public System.Windows.Forms.CheckBox vanillaBeta;
+        public System.Windows.Forms.CheckBox vanillaAlpha;
+        public System.Windows.Forms.CheckBox vanillaInfdev;
+        public System.Windows.Forms.CheckBox vanillaIndev;
+        public System.Windows.Forms.CheckBox vanillaClassic;
+        public System.Windows.Forms.CheckBox vanillaPreclassic;
+        public System.Windows.Forms.ListView vanillaList;
+        public System.Windows.Forms.TabPage eduPage;
+        public System.Windows.Forms.ListView eduList;
+        public System.Windows.Forms.TabPage xboxPage;
+        public System.Windows.Forms.ListView xboxList;
+        public System.Windows.Forms.ImageList imageList1;
+        public System.Windows.Forms.GroupBox grbGame;
+        public System.Windows.Forms.GroupBox grbForExp;
+        public System.Windows.Forms.TextBox javaBox;
+        public System.Windows.Forms.Button javaBtn;
+        public System.Windows.Forms.Button saveBtn;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes.jsons;
+using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,53 +22,29 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            //load lang
-            grbGame.Text = Strings.sj.grbGame;
-            lblProfName.Text = Strings.sj.lblProfName;
-            lblGameDir.Text = Strings.sj.lblGameDir;
-            lblReso.Text = Strings.sj.lblReso;
-            lblMem.Text = Strings.sj.lblMem;
-            lblMemMax.Text = Strings.sj.lblMemMax;
-            lblMemMin.Text = Strings.sj.lblMemMin;
-            lblJvmArgs.Text = Strings.sj.lblBefCmd;
-            lblGameArgs.Text = Strings.sj.lblAftCmd;
-            chkProxy.Text = Strings.sj.chkProxy;
-            chkUseDemo.Text = Strings.sj.chkUseDemo;
-            chkOffline.Text = Strings.sj.chkOffline;
-            chkMulti.Text = Strings.sj.chkMulti;
-            grbForExp.Text = Strings.sj.grbForExp;
-            chkCustJava.Text = Strings.sj.chkCustJava;
-            chkCustJson.Text = Strings.sj.chkCustJson;
-            chkClasspath.Text = Strings.sj.chkClasspath;
-            chkAssetIndex.Text = Strings.sj.chkAssetIndex;
-            saveBtn.Text = Strings.sj.createProfile;
+            InstanceGui instanceGui1 = new InstanceGui(this);
+            this.Controls.Add(instanceGui1);
 
-            grbXbox.Text = Strings.sj.grbGame;
-            chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
-            lblXboxProfName.Text = Strings.sj.lblProfName;
-
-            chkLatest.Text = Strings.sj.chooseLatestRelease;
-            chkLatestSnapshot.Text = Strings.sj.chooseLatestSnapshot;
-
-            //fill in shared stuff
-            nameBox.Text = "New profile";
-            ramMinBox.Value = 512;
-            ramMaxBox.Value = 512;
-            resXBox.Text = "854";
-            resYBox.Text = "480";
-            javaBox.Enabled = false;
-            javaBtn.Enabled = false;
-            jsonBox.Enabled = false;
-            jsonBtn.Enabled = false;
-            classBox.Enabled = false;
-            assetIndexBox.Enabled = false;
-            assetIndexBtn.Enabled = false;
+            //fill in default stuff
+            instanceGui1.nameBox.Text = "New profile";
+            instanceGui1.ramMinBox.Value = 512;
+            instanceGui1.ramMaxBox.Value = 512;
+            instanceGui1.resXBox.Text = "854";
+            instanceGui1.resYBox.Text = "480";
+            instanceGui1.javaBox.Enabled = false;
+            instanceGui1.javaBtn.Enabled = false;
+            instanceGui1.jsonBox.Enabled = false;
+            instanceGui1.jsonBtn.Enabled = false;
+            instanceGui1.classBox.Enabled = false;
+            instanceGui1.assetIndexBox.Enabled = false;
+            instanceGui1.assetIndexBtn.Enabled = false;
+            instanceGui1.selectInList(instanceGui1.vanillaList, "b1.7.3");
 
             //fill in edition specific stuff
-            populateLists();
+            //populateLists();
         }
 
-        private void populateLists()
+        /*private void populateLists()
         {
             //vanilla list
             if (tabControl1.SelectedTab.Text == "Vanilla")
@@ -530,6 +507,6 @@ namespace MCLauncher.forms
                 else
                     vanillaList.Enabled = true;
             }
-        }
+        }*/
     }
 }

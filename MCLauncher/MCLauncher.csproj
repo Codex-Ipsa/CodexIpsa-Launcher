@@ -100,6 +100,12 @@
     <Compile Include="controls\CreditsScreen.Designer.cs">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="controls\InstanceGui.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\InstanceGui.Designer.cs">
+      <DependentUpon>InstanceGui.cs</DependentUpon>
+    </Compile>
     <Compile Include="controls\JavaScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -218,6 +224,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="controls\CreditsScreen.resx">
       <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\InstanceGui.resx">
+      <DependentUpon>InstanceGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\JavaScreen.resx">
       <DependentUpon>JavaScreen.cs</DependentUpon>
