@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes.jsons;
+using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,49 +18,22 @@ namespace MCLauncher.forms
 {
     public partial class EditInstance : Form
     {
-        public string lastSelected = "";
-        ToolTip toolTip = new ToolTip();
-        public string instanceName = "";
-
         public EditInstance(String instanceName)
         {
             InitializeComponent();
-
-            this.instanceName = instanceName;
 
             //disable resize
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            InstanceGui instanceGui = new InstanceGui(this, true);
+            this.tabHome.Controls.Add(instanceGui);
+
+            ModsGui modsGui = new ModsGui(instanceName);
+            this.tabMods.Controls.Add(modsGui);
+
             //load lang
-            grbGame.Text = Strings.sj.grbGame;
-            lblProfName.Text = Strings.sj.lblProfName;
-            lblGameDir.Text = Strings.sj.lblGameDir;
-            lblReso.Text = Strings.sj.lblReso;
-            lblMem.Text = Strings.sj.lblMem;
-            lblMemMax.Text = Strings.sj.lblMemMax;
-            lblMemMin.Text = Strings.sj.lblMemMin;
-            lblJvmArgs.Text = Strings.sj.lblBefCmd;
-            lblGameArgs.Text = Strings.sj.lblAftCmd;
-            chkProxy.Text = Strings.sj.chkProxy;
-            chkUseDemo.Text = Strings.sj.chkUseDemo;
-            chkOffline.Text = Strings.sj.chkOffline;
-            chkMulti.Text = Strings.sj.chkMulti;
-            grbForExp.Text = Strings.sj.grbForExp;
-            chkCustJava.Text = Strings.sj.chkCustJava;
-            chkCustJson.Text = Strings.sj.chkCustJson;
-            chkClasspath.Text = Strings.sj.chkClasspath;
-            chkAssetIndex.Text = Strings.sj.chkAssetIndex;
-            saveBtn.Text = Strings.sj.btnSaveInst;
-
-            grbXbox.Text = Strings.sj.grbGame;
-            chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
-            lblXboxProfName.Text = Strings.sj.lblProfName;
-
-            chkLatest.Text = Strings.sj.chooseLatestRelease;
-            chkLatestSnapshot.Text = Strings.sj.chooseLatestSnapshot;
-
             tabHome.Text = Strings.sj.cntHome;
             tabMods.Text = Strings.sj.tabMods;
 
@@ -69,210 +43,76 @@ namespace MCLauncher.forms
 
             //fill in stuff
             if (ij.edition == "x360")
-                tabControl2.SelectedIndex = 2;
+                instanceGui.tabControl1.SelectedIndex = 2;
             else if (ij.edition == "javaedu")
-                tabControl2.SelectedIndex = 1;
+                instanceGui.tabControl1.SelectedIndex = 1;
             else
-                tabControl2.SelectedIndex = 0;
+                instanceGui.tabControl1.SelectedIndex = 0;
 
-            lastSelected = ij.version;
+            instanceGui.selectedVersion = ij.version;
 
-            nameBox.Text = instanceName;
-            dirBox.Text = ij.directory; //TODO CHECK FOR INVALID
+            instanceGui.nameBox.Text = instanceName;
+            instanceGui.dirBox.Text = ij.directory; //TODO CHECK FOR INVALID
             String[] res = ij.resolution.Split(new char[] { ' ' });
-            resXBox.Text = res[0];
-            resYBox.Text = res[1];
+            instanceGui.resXBox.Text = res[0];
+            instanceGui.resYBox.Text = res[1];
             String[] mem = ij.memory.Split(new char[] { ' ' });
-            ramMaxBox.Value = int.Parse(mem[0]);
-            ramMinBox.Value = int.Parse(mem[1]);
-            jvmArgsBox.Text = ij.befCmd;
-            gameArgsBox.Text = ij.aftCmd;
+            instanceGui.ramMaxBox.Value = int.Parse(mem[0]);
+            instanceGui.ramMinBox.Value = int.Parse(mem[1]);
+            instanceGui.jvmArgsBox.Text = ij.befCmd;
+            instanceGui.gameArgsBox.Text = ij.aftCmd;
 
-            chkProxy.Checked = ij.disProxy;
-            chkUseDemo.Checked = ij.demo;
-            chkOffline.Checked = ij.offline;
-            chkMulti.Checked = ij.multiplayer;
+            instanceGui.chkProxy.Checked = ij.disProxy;
+            instanceGui.chkUseDemo.Checked = ij.demo;
+            instanceGui.chkOffline.Checked = ij.offline;
+            instanceGui.chkMulti.Checked = ij.multiplayer;
 
-            chkCustJava.Checked = ij.useJava;
-            javaBox.Enabled = ij.useJava;
-            javaBox.Text = ij.javaPath;
+            instanceGui.chkCustJava.Checked = ij.useJava;
+            instanceGui.javaBox.Enabled = ij.useJava;
+            instanceGui.javaBox.Text = ij.javaPath;
 
-            chkCustJson.Checked = ij.useJson;
-            jsonBox.Enabled = ij.useJson;
-            jsonBox.Text = ij.jsonPath;
+            instanceGui.chkCustJson.Checked = ij.useJson;
+            instanceGui.jsonBox.Enabled = ij.useJson;
+            instanceGui.jsonBox.Text = ij.jsonPath;
 
-            chkClasspath.Checked = ij.useClass;
-            classBox.Enabled = ij.useClass;
-            classBox.Text = ij.classpath;
+            instanceGui.chkClasspath.Checked = ij.useClass;
+            instanceGui.classBox.Enabled = ij.useClass;
+            instanceGui.classBox.Text = ij.classpath;
 
-            chkAssetIndex.Checked = ij.useAssets;
-            assetIndexBox.Enabled = ij.useAssets;
-            assetIndexBox.Text = ij.assetsPath;
+            instanceGui.chkAssetIndex.Checked = ij.useAssets;
+            instanceGui.assetIndexBox.Enabled = ij.useAssets;
+            instanceGui.assetIndexBox.Text = ij.assetsPath;
 
-            chkXboxDemo.Checked = ij.xboxDemo;
+            instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 
             //latest and latestsnapshot stuff
-            if (lastSelected.Contains("latest"))
+            if (instanceGui.selectedVersion.Contains("latest"))
             {
-                if (lastSelected == "latest")
+                if (instanceGui.selectedVersion == "latest")
                 {
-                    chkLatest.Checked = true;
+                    instanceGui.chkLatest.Checked = true;
                 }
-                else if (lastSelected == "latestsnapshot")
+                else if (instanceGui.selectedVersion == "latestsnapshot")
                 {
-                    chkLatestSnapshot.Checked = true;
+                    instanceGui.chkLatestSnapshot.Checked = true;
                 }
 
-                lastSelected = HomeScreen.getLatestVersion(lastSelected);
-                vanillaList.Enabled = false;
+                instanceGui.selectedVersion = HomeScreen.getLatestVersion(instanceGui.selectedVersion);
+                instanceGui.vanillaList.Enabled = false;
             }
+
+            instanceGui.selectInList(instanceGui.vanillaList, ij.version);
 
             //TODO LOAD MOD JSON
 
             //fill in edition specific stuff
-            populateLists();
+            //populateLists();
         }
 
-        private void populateLists()
-        {
-            //vanilla list
-            if (tabControl2.SelectedTab.Text == "Vanilla")
-            {
-                //clear list
-                vanillaList.Items.Clear();
-                vanillaList.Columns.Clear();
-
-                //add columns
-                vanillaList.Columns.Add(Strings.sj.rowName);
-                vanillaList.Columns.Add(Strings.sj.rowType);
-                vanillaList.Columns.Add(Strings.sj.rowReleased);
-
-                //add items
-                string manifest = Globals.client.DownloadString(Globals.javaManifest);
-                List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-                foreach (JavaManifest ver in jm)
-                {
-                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") }; //dd.MM.yyyy HH:mm:ss
-
-                    if (vanillaPreclassic.Checked && row[0] == "pre-classic")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaClassic.Checked && row[0] == "classic")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaIndev.Checked && row[0] == "indev")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaInfdev.Checked && row[0] == "infdev")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaAlpha.Checked && row[0] == "alpha")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaBeta.Checked && row[0] == "beta")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaRelease.Checked && row[0] == "release")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaSnapshot.Checked && row[0] == "snapshot")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-
-                    if (vanillaExperimental.Checked && row[0] == "experimental")
-                        vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                }
-
-                //set width after adding items
-                vanillaList.Columns[0].Width = -1;
-                vanillaList.Columns[1].Width = -1;
-                vanillaList.Columns[2].Width = -2;
-
-                //select latest loaded version
-                if (vanillaList.Items.Count > 0)
-                {
-                    Console.WriteLine("AAAAAAAA " + lastSelected);
-                    for (int i = vanillaList.Items.Count - 1; i >= 0; i--)
-                    {
-                        string ver = Regex.Replace(vanillaList.Items[i].Text, @"\(.*\)", "");
-                        ver = ver.Replace(" ", "");
-
-                        if (ver == lastSelected)
-                        {
-                            vanillaList.Items[i].Selected = true;
-                            vanillaList.TopItem = vanillaList.Items[i];
-                            break;
-                        }
-                    }
-                }
-            }
-
-            //edu list
-            else if (tabControl2.SelectedTab.Text == "MinecraftEdu")
-            {
-                //clear list
-                eduList.Items.Clear();
-                eduList.Columns.Clear();
-
-                //add columns
-                eduList.Columns.Add(Strings.sj.rowName);
-                eduList.Columns.Add(Strings.sj.rowType);
-                eduList.Columns.Add(Strings.sj.rowReleased);
-
-                //add items
-                string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
-                List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-                foreach (JavaManifest ver in jm)
-                {
-                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
-
-                    eduList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                }
-
-                //set width after adding items
-                eduList.Columns[0].Width = -1;
-                eduList.Columns[1].Width = -1;
-                eduList.Columns[2].Width = -2;
-
-                //select first version
-                eduList.Items[0].Selected = true;
-                eduList.TopItem = eduList.Items[0];
-            }
-
-            //xbox list
-            else if (tabControl2.SelectedTab.Text == "Xbox 360")
-            {
-                //clear list
-                xboxList.Items.Clear();
-                xboxList.Columns.Clear();
-
-                //add columns
-                xboxList.Columns.Add(Strings.sj.rowName);
-                xboxList.Columns.Add(Strings.sj.rowType);
-                xboxList.Columns.Add(Strings.sj.rowReleased);
-
-                //add items
-                string manifest = Globals.client.DownloadString(Globals.x360Manifest);
-                List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-                foreach (JavaManifest ver in jm)
-                {
-                    string[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
-
-                    xboxList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
-                }
-
-                //set width after adding items
-                xboxList.Columns[0].Width = -1;
-                xboxList.Columns[1].Width = -1;
-                xboxList.Columns[2].Width = -2;
-
-                //select first version
-                xboxList.Items[0].Selected = true;
-                xboxList.TopItem = xboxList.Items[0];
-            }
-        }
+     
 
         //save instance
-        private void saveBtn_Click(object sender, EventArgs e)
+        /*private void saveBtn_Click(object sender, EventArgs e)
         {
             //create instance json
             InstanceJson ij = new InstanceJson();
@@ -626,6 +466,6 @@ namespace MCLauncher.forms
         private void openBtn_Click(object sender, EventArgs e)
         {
             Process.Start($"{Globals.dataPath}\\instance\\{instanceName}\\");
-        }
+        }*/
     }
 }

@@ -112,6 +112,12 @@
     <Compile Include="controls\JavaScreen.Designer.cs">
       <DependentUpon>JavaScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="controls\ModsGui.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controls\ModsGui.Designer.cs">
+      <DependentUpon>ModsGui.cs</DependentUpon>
+    </Compile>
     <Compile Include="controls\ProfileScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -230,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\JavaScreen.resx">
       <DependentUpon>JavaScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controls\ModsGui.resx">
+      <DependentUpon>ModsGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controls\ProfileScreen.resx">
       <DependentUpon>ProfileScreen.cs</DependentUpon>

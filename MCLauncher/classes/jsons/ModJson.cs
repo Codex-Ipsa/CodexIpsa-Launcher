@@ -9,7 +9,6 @@ namespace MCLauncher.classes.jsons
 {
     public class ModJson
     {
-        public int data { get; set; }
         public ModJsonEntry[] items { get; set; }
     }
 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -11,12 +12,14 @@ namespace MCLauncher.controls
     {
         public Form parentForm;
         public String selectedVersion;
+        public bool isEdit1 = false;
 
-        public InstanceGui(Form form)
+        public InstanceGui(Form form, bool isEdit)
         {
             InitializeComponent();
 
             parentForm = form;
+            isEdit1 = isEdit;
 
             //load lang
             grbGame.Text = Strings.sj.grbGame;
@@ -37,7 +40,7 @@ namespace MCLauncher.controls
             chkCustJson.Text = Strings.sj.chkCustJson;
             chkClasspath.Text = Strings.sj.chkClasspath;
             chkAssetIndex.Text = Strings.sj.chkAssetIndex;
-            saveBtn.Text = Strings.sj.createProfile;
+            saveBtn.Text = Strings.sj.btnSaveInst;
 
             grbXbox.Text = Strings.sj.grbGame;
             chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
@@ -45,6 +48,14 @@ namespace MCLauncher.controls
 
             chkLatest.Text = Strings.sj.chooseLatestRelease;
             chkLatestSnapshot.Text = Strings.sj.chooseLatestSnapshot;
+
+            if (!isEdit)
+            {
+                saveBtn.Text = Strings.sj.createProfile;
+
+                deleteBtn.Visible = false;
+                openBtn.Visible = false;
+            }
 
             loadJavaList();
             loadEduList();
@@ -103,7 +114,7 @@ namespace MCLauncher.controls
             vanillaList.Columns[2].Width = -2;
 
             //select first item
-            if(vanillaList.Items.Count > 0)
+            if (vanillaList.Items.Count > 0)
             {
                 vanillaList.Items[0].Selected = true;
                 vanillaList.TopItem = vanillaList.Items[0];
@@ -220,12 +231,6 @@ namespace MCLauncher.controls
             ij.xboxDemo = chkXboxDemo.Checked;
             string json = JsonConvert.SerializeObject(ij);
 
-            //create mod json
-            ModJson mj = new ModJson();
-            mj.data = 1;
-            mj.items = new ModJsonEntry[0];
-            string modJson = JsonConvert.SerializeObject(mj);
-
             //remove illegal characters from name
             string profileName = nameBox.Text.Replace("\\", "")
                 .Replace("/", "")
@@ -238,22 +243,41 @@ namespace MCLauncher.controls
                 .Replace("|", "");
 
             //check if profile already exists => add _X
-            string newName = profileName;
-            int iter = 1;
-            while (Directory.Exists($"{Globals.dataPath}\\instance\\{newName}"))
+            if (!isEdit1)
             {
-                newName = profileName + "_" + iter;
-                iter++;
+                string newName = profileName;
+                int iter = 1;
+                while (Directory.Exists($"{Globals.dataPath}\\instance\\{newName}"))
+                {
+                    newName = profileName + "_" + iter;
+                    iter++;
+                }
+                profileName = newName;
             }
-            profileName = newName;
+
+            //TODO RENAMING
 
             //create directories
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
 
-            //write files
+            //write profile json
             File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
+
+            //create mod json
+            string modJson = "";
+            if (!isEdit1)
+            {
+                ModJson mj = new ModJson();
+                mj.items = new ModJsonEntry[0];
+
+                modJson = JsonConvert.SerializeObject(mj);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
+            }
+            else
+            {
+                
+            }
 
             HomeScreen.loadInstanceList();
             HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
@@ -500,6 +524,23 @@ namespace MCLauncher.controls
                 if (selectedVersion.Contains(" ("))
                     selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
             }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete this profile?\nYou can't take this back!", "Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Directory.Delete($"{Globals.dataPath}\\instance\\{nameBox.Text}", true);
+                HomeScreen.loadInstanceList();
+                HomeScreen.Instance.cmbInstaces.SelectedIndex = 0;
+                parentForm.Close();
+            }
+        }
+
+        private void openBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start($"{Globals.dataPath}\\instance\\{nameBox.Text}\\");
         }
     }
 }

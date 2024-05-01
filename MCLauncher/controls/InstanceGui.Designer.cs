@@ -89,6 +89,8 @@
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
+            this.openBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -790,10 +792,32 @@
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
+            // openBtn
+            // 
+            this.openBtn.Location = new System.Drawing.Point(521, 355);
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(91, 23);
+            this.openBtn.TabIndex = 43;
+            this.openBtn.Text = "btn.openDir";
+            this.openBtn.UseVisualStyleBackColor = true;
+            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(618, 355);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(91, 23);
+            this.deleteBtn.TabIndex = 42;
+            this.deleteBtn.Text = "btn.delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
             // InstanceGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.openBtn);
+            this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.grbGame);
             this.Controls.Add(this.grbForExp);
@@ -879,5 +903,7 @@
         public System.Windows.Forms.TextBox javaBox;
         public System.Windows.Forms.Button javaBtn;
         public System.Windows.Forms.Button saveBtn;
+        public System.Windows.Forms.Button openBtn;
+        public System.Windows.Forms.Button deleteBtn;
     }
 }
