@@ -274,10 +274,6 @@ namespace MCLauncher.controls
                 modJson = JsonConvert.SerializeObject(mj);
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
             }
-            else
-            {
-                
-            }
 
             HomeScreen.loadInstanceList();
             HomeScreen.Instance.cmbInstaces.SelectedIndex = HomeScreen.Instance.cmbInstaces.FindString(profileName);
