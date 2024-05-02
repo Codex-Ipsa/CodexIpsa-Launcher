@@ -1,35 +1,49 @@
 ﻿using MCLauncher.classes.jsons;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MCLauncher.controls
 {
     public partial class ModsGui : UserControl
     {
         String instanceName = "";
+        public ModJson mj;
+        public List<ModJsonEntry> entries;
 
         public ModsGui(String instName)
         {
             InitializeComponent();
             instanceName = instName;
-            loadModList();
+
+            btnMoveUp.Enabled = false;
+            btnMoveDown.Enabled = false;
+            btnRemove.Enabled = false;
+
+            btnForge.Enabled = false;
+            btnFabric.Enabled = false;
+            btnMLoader.Enabled = false;
+
+            reloadModList();
         }
 
-        public void loadModList()
+        public void reloadModList()
         {
             modView.Items.Clear();
 
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\mods.json");
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(json);
+            mj = JsonConvert.DeserializeObject<ModJson>(json);
 
             foreach (ModJsonEntry mje in mj.items)
             {
@@ -38,9 +52,217 @@ namespace MCLauncher.controls
                 modView.Items.Add(item);
             }
 
+            entries = new List<ModJsonEntry>();
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                entries.Add(ent);
+            }
+
             modView.Columns[0].Width = -1;
             modView.Columns[1].Width = -1;
             modView.Columns[2].Width = -2;
+        }
+
+        public void saveModList()
+        {
+            mj = new ModJson();
+            mj.items = entries.ToArray();
+
+            String toSave = JsonConvert.SerializeObject(mj);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\mods.json", toSave);
+        }
+
+        public void moveUpModList(int selectedIndex)
+        {
+            ModJsonEntry item = mj.items[selectedIndex];
+
+            if (selectedIndex > 0)
+            {
+                entries.RemoveAt(selectedIndex);
+                entries.Insert(selectedIndex - 1, item);
+            }
+
+            saveModList();
+            reloadModList();
+        }
+
+        public void moveDownModList(int selectedIndex)
+        {
+            ModJsonEntry item = mj.items[selectedIndex];
+
+            if (selectedIndex + 1 < entries.Count)
+            {
+                entries.RemoveAt(selectedIndex);
+                entries.Insert(selectedIndex + 1, item);
+            }
+
+            saveModList();
+            reloadModList();
+        }
+
+        public void removeModList(int selectedIndex)
+        {
+            entries.RemoveAt(selectedIndex);
+
+            saveModList();
+            reloadModList();
+        }
+
+        public void addModList(String name, String version, String fileName, String type, String json)
+        {
+            ModJsonEntry newEntry = new ModJsonEntry();
+            newEntry.name = name;
+            newEntry.version = version;
+            newEntry.file = fileName;
+            newEntry.type = type;
+            newEntry.json = json;
+            newEntry.disabled = false;
+            entries.Add(newEntry);
+
+            saveModList();
+            reloadModList();
+        }
+
+        private void btnMoveUp_Click(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+                moveUpModList(modView.SelectedItems[0].Index);
+        }
+
+        private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+                moveDownModList(modView.SelectedItems[0].Index);
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+            {
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{modView.SelectedItems[0].Text}");
+                removeModList(modView.SelectedItems[0].Index);
+            }
+        }
+
+        private void btnForge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFabric_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMLoader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRepos_Click(object sender, EventArgs e)
+        {
+            PallasRepo pr = new PallasRepo();
+            pr.ShowDialog();
+        }
+
+        private void btnAddToJar_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.zip, *.jar)|*.zip;*.jar";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string safeFileName = openFileDialog.SafeFileName;
+                    string fileType = safeFileName.Substring(safeFileName.LastIndexOf('.') + 1);
+                    safeFileName = safeFileName.Replace("." + fileType, "");
+
+                    //checks if exists and adds a _<int> at the end
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}"))
+                    {
+                        int iter = 1;
+                        do
+                        {
+                            if (safeFileName.Contains("_"))
+                                safeFileName = safeFileName.Substring(0, safeFileName.LastIndexOf("_")) + "_" + iter;
+                            else
+                                safeFileName = safeFileName + "_" + iter;
+                            iter++;
+
+                            Console.WriteLine($"{safeFileName}.{fileType}   {iter}");
+                        }
+                        while (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}"));
+                    }
+
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}");
+                    addModList("", "", $"{safeFileName}.{fileType}", "jarmod", "");
+                }
+            }
+        }
+
+        private void btnReplaceJar_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "(*.zip, *.jar)|*.zip;*.jar";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string safeFileName = openFileDialog.SafeFileName;
+                    string fileType = safeFileName.Substring(safeFileName.LastIndexOf('.') + 1);
+                    safeFileName = safeFileName.Replace("." + fileType, "");
+
+                    //checks if exists and adds a _<int> at the end
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}"))
+                    {
+                        int iter = 1;
+                        do
+                        {
+                            if (safeFileName.Contains("_"))
+                                safeFileName = safeFileName.Substring(0, safeFileName.LastIndexOf("_")) + "_" + iter;
+                            else
+                                safeFileName = safeFileName + "_" + iter;
+                            iter++;
+
+                            Console.WriteLine($"{safeFileName}.{fileType}   {iter}");
+                        }
+                        while (File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}"));
+                    }
+
+                    File.Copy(openFileDialog.FileName, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{safeFileName}.{fileType}");
+                    addModList("", "", $"{safeFileName}.{fileType}", "cusjar", "");
+                }
+            }
+        }
+
+        private void btnOpenDotMc_Click(object sender, EventArgs e)
+        {
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\");
+            Process.Start($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\");
+        }
+
+        private void modView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (modView.SelectedItems.Count > 0)
+            {
+                btnMoveUp.Enabled = true;
+                btnMoveDown.Enabled = true;
+                btnRemove.Enabled = true;
+            }
+            else
+            {
+                btnMoveUp.Enabled = false;
+                btnMoveDown.Enabled = false;
+                btnRemove.Enabled = false;
+            }
+        }
+
+        private void modView_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            for (int i = 0; i < modView.Items.Count; i++)
+            {
+                mj.items[i].disabled = !modView.Items[i].Checked;
+
+                saveModList();
+            }
         }
     }
 }

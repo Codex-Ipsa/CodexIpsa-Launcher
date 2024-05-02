@@ -52,6 +52,7 @@
             this.btnRepos.TabIndex = 32;
             this.btnRepos.Text = "btn.Repos";
             this.btnRepos.UseVisualStyleBackColor = true;
+            this.btnRepos.Click += new System.EventHandler(this.btnRepos_Click);
             // 
             // btnOpenDotMc
             // 
@@ -61,6 +62,7 @@
             this.btnOpenDotMc.TabIndex = 31;
             this.btnOpenDotMc.Text = "btn.OpenDotMc";
             this.btnOpenDotMc.UseVisualStyleBackColor = true;
+            this.btnOpenDotMc.Click += new System.EventHandler(this.btnOpenDotMc_Click);
             // 
             // btnMLoader
             // 
@@ -88,6 +90,7 @@
             this.btnMoveDown.TabIndex = 28;
             this.btnMoveDown.Text = "btn.MoveDown";
             this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
             // btnRemove
             // 
@@ -97,6 +100,7 @@
             this.btnRemove.TabIndex = 27;
             this.btnRemove.Text = "btn.Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnMoveUp
             // 
@@ -106,6 +110,7 @@
             this.btnMoveUp.TabIndex = 26;
             this.btnMoveUp.Text = "btn.MoveUp";
             this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
             // btnForge
             // 
@@ -124,6 +129,7 @@
             this.btnReplaceJar.TabIndex = 24;
             this.btnReplaceJar.Text = "btn.ReplaceJar";
             this.btnReplaceJar.UseVisualStyleBackColor = true;
+            this.btnReplaceJar.Click += new System.EventHandler(this.btnReplaceJar_Click);
             // 
             // btnAddToJar
             // 
@@ -133,6 +139,7 @@
             this.btnAddToJar.TabIndex = 23;
             this.btnAddToJar.Text = "btn.AddToJar";
             this.btnAddToJar.UseVisualStyleBackColor = true;
+            this.btnAddToJar.Click += new System.EventHandler(this.btnAddToJar_Click);
             // 
             // modView
             // 
@@ -150,6 +157,8 @@
             this.modView.TabIndex = 22;
             this.modView.UseCompatibleStateImageBehavior = false;
             this.modView.View = System.Windows.Forms.View.Details;
+            this.modView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.modView_ItemChecked);
+            this.modView.SelectedIndexChanged += new System.EventHandler(this.modView_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
