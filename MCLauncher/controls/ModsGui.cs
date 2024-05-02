@@ -72,32 +72,53 @@ namespace MCLauncher.controls
             File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\mods.json", toSave);
         }
 
+        public void selectInModList(int index)
+        {
+            modView.Items[index].Selected = true;
+        }
+
         public void moveUpModList(int selectedIndex)
         {
             ModJsonEntry item = mj.items[selectedIndex];
 
+            bool worked = false;
             if (selectedIndex > 0)
             {
                 entries.RemoveAt(selectedIndex);
                 entries.Insert(selectedIndex - 1, item);
+
+                worked = true;
             }
 
             saveModList();
             reloadModList();
+
+            if (worked)
+                selectInModList(selectedIndex - 1);
+            else 
+                selectInModList(selectedIndex);
         }
 
         public void moveDownModList(int selectedIndex)
         {
             ModJsonEntry item = mj.items[selectedIndex];
 
+            bool worked = false;
             if (selectedIndex + 1 < entries.Count)
             {
                 entries.RemoveAt(selectedIndex);
                 entries.Insert(selectedIndex + 1, item);
+
+                worked = true;
             }
 
             saveModList();
             reloadModList();
+
+            if (worked)
+                selectInModList(selectedIndex + 1);
+            else
+                selectInModList(selectedIndex);
         }
 
         public void removeModList(int selectedIndex)
@@ -106,6 +127,9 @@ namespace MCLauncher.controls
 
             saveModList();
             reloadModList();
+
+            if(modView.Items.Count > 0)
+                selectInModList(0);
         }
 
         public void addModList(String name, String version, String fileName, String type, String json)
