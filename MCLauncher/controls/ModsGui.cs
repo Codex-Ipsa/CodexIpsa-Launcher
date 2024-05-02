@@ -18,7 +18,8 @@ namespace MCLauncher.controls
 {
     public partial class ModsGui : UserControl
     {
-        String instanceName = "";
+        public String instanceName = "";
+
         public ModJson mj;
         public List<ModJsonEntry> entries;
 
@@ -140,7 +141,27 @@ namespace MCLauncher.controls
             saveModList();
             reloadModList();
 
-            if(modView.Items.Count > 0)
+            if (modView.Items.Count > 0)
+                selectInModList(0);
+        }
+
+        public void removeModList(String fileName)
+        {
+            int i = 0;
+            foreach (ModJsonEntry ent in mj.items)
+            {
+                if (ent.file == fileName)
+                {
+                    break;
+                }
+                i++;
+            }
+            entries.RemoveAt(i);
+
+            saveModList();
+            reloadModList();
+
+            if (modView.Items.Count > 0)
                 selectInModList(0);
         }
 
@@ -197,7 +218,7 @@ namespace MCLauncher.controls
 
         private void btnRepos_Click(object sender, EventArgs e)
         {
-            PallasRepo pr = new PallasRepo();
+            PallasRepo pr = new PallasRepo(this);
             pr.ShowDialog();
         }
 

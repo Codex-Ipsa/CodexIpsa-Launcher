@@ -616,8 +616,8 @@ namespace MCLauncher.forms
 
         private void btnRepo_Click(object sender, EventArgs e)
         {
-            PallasRepo pr = new PallasRepo();
-            pr.ShowDialog();
+            //PallasRepo pr = new PallasRepo();
+            //pr.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

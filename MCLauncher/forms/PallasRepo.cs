@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.controls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
@@ -17,7 +19,9 @@ namespace MCLauncher.forms
         List<PallasManifest> pallasMods = new List<PallasManifest>();
         List<PallasVersion> pallasVersions = new List<PallasVersion>();
 
-        public PallasRepo()
+        public static ModsGui theModsGui;
+
+        public PallasRepo(ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -25,6 +29,8 @@ namespace MCLauncher.forms
             this.MinimizeBox = false;
 
             modListView.Columns[0].Width = -1;
+
+            theModsGui = modsGui;
 
             //img list properties
             ImageList modThumbnails = new ImageList();
@@ -105,30 +111,30 @@ namespace MCLauncher.forms
 
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                    if (File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip"))
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.zip"))
                     {
-                        File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip");
-                        Profile.modListWorker("remove", "", "", $"{id}-{version}.zip", "", "");
+                        File.Delete($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.zip");
+                        theModsGui.removeModList($"{id}-{version}.zip");
                     }
 
                     DownloadProgress.url = url;
-                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.zip";
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.zip";
                     DownloadProgress dp = new DownloadProgress();
                     dp.ShowDialog();
 
                     Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
-                    Profile.modListWorker("add", name, version, $"{id}-{version}.zip", type, json);
+                    theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
                 }
                 else //assume it's a json type mod if there's no url
                 {
-                    if (File.Exists($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json"))
+                    if (File.Exists($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.json"))
                     {
-                        File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
-                        Profile.modListWorker("remove", "", "", $"{id}-{version}.json", "", "");
+                        File.Delete($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.json");
+                        theModsGui.removeModList($"{id}-{version}.zip");
                     }
 
-                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{id}-{version}.json");
-                    Profile.modListWorker("add", name, version, $"{id}-{version}.json", type, json);
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{id}-{version}.json");
+                    theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
                 }
 
                 //get supplements
@@ -138,15 +144,17 @@ namespace MCLauncher.forms
                     {
                         string fileName = sup.Substring(sup.LastIndexOf('/') + 1);
                         DownloadProgress.url = sup;
-                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{fileName}";
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{fileName}";
                         DownloadProgress dp = new DownloadProgress();
                         dp.ShowDialog();
 
-                        Profile.modListWorker("add", "", "", $"{fileName}", "jarmod", "");
+                        theModsGui.addModList("", "", fileName, "jarmod", "");
                     }
                 }
 
-                Profile.reloadModsList();
+                theModsGui.saveModList();
+                theModsGui.reloadModList();
+
                 this.Close();
             }
         }
@@ -201,7 +209,7 @@ namespace MCLauncher.forms
                                     WebClient client = new WebClient();
                                     client.OpenRead(ver.url);
                                     Int64 bytes_total = Convert.ToInt64(client.ResponseHeaders["Content-Length"]);
-                                    Int64 existFile = new FileInfo($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip").Length;
+                                    Int64 existFile = new FileInfo($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{checkVersion}.zip").Length;
 
                                     if(bytes_total != existFile)
                                     {
@@ -228,16 +236,16 @@ namespace MCLauncher.forms
         {
             Logger.Info("[PallasRepo/DownloadMod]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
 
-            File.Delete($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{checkVersion}.zip");
-            Profile.modListWorker("remove", "", "", $"{mod.id}-{checkVersion}.zip", "", "");
+            File.Delete($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{checkVersion}.zip");
+            theModsGui.removeModList($"{mod.id}-{checkVersion}.zip");
 
             DownloadProgress.url = ver.url;
-            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{mod.id}-{ver.version}.zip";
+            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{ver.version}.zip";
             DownloadProgress dp = new DownloadProgress();
             dp.ShowDialog();
 
             Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", ver.json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{ver.json}.json");
-            Profile.modListWorker("add", mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
+            theModsGui.addModList(mod.name, ver.version, $"{mod.id}-{ver.version}.zip", ver.type, ver.json);
             HomeScreen.selectedVersion = $"{mod.name} {ver.version}";
             HomeScreen.Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
         }
