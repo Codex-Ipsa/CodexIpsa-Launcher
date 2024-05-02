@@ -27,6 +27,18 @@ namespace MCLauncher.controls
             InitializeComponent();
             instanceName = instName;
 
+            //load lang
+            btnMoveUp.Text = Strings.sj.btnMoveUp;
+            btnMoveDown.Text = Strings.sj.btnMoveDown;
+            btnRemove.Text = Strings.sj.btnRemove;
+            btnForge.Text = Strings.sj.btnForge;
+            btnFabric.Text = Strings.sj.btnFabric;
+            btnMLoader.Text = Strings.sj.btnMLoader;
+            btnRepos.Text = Strings.sj.btnRepos;
+            btnAddToJar.Text = Strings.sj.btnAddToJar;
+            btnReplaceJar.Text = Strings.sj.btnReplaceJar;
+            btnOpenDotMc.Text = Strings.sj.btnOpenDotMc;
+
             btnMoveUp.Enabled = false;
             btnMoveDown.Enabled = false;
             btnRemove.Enabled = false;
