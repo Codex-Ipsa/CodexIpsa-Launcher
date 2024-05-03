@@ -43,6 +43,8 @@ namespace MCLauncher.controls
             chkClasspath.Text = Strings.sj.chkClasspath;
             chkAssetIndex.Text = Strings.sj.chkAssetIndex;
             saveBtn.Text = Strings.sj.btnSaveInst;
+            deleteBtn.Text = Strings.sj.btnDeleteInst;
+            openBtn.Text = Strings.sj.btnOpenDir;
 
             grbXbox.Text = Strings.sj.grbGame;
             chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));

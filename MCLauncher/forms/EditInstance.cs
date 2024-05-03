@@ -86,6 +86,8 @@ namespace MCLauncher.forms
 
             instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 
+            instanceGui.selectInList(instanceGui.vanillaList, ij.version);
+
             //latest and latestsnapshot stuff
             if (instanceGui.selectedVersion.Contains("latest"))
             {
@@ -101,8 +103,6 @@ namespace MCLauncher.forms
                 instanceGui.selectedVersion = HomeScreen.getLatestVersion(instanceGui.selectedVersion);
                 instanceGui.vanillaList.Enabled = false;
             }
-
-            instanceGui.selectInList(instanceGui.vanillaList, ij.version);
         }
     }
 }
