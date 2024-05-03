@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes.jsons;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace MCLauncher.controls
         public Form parentForm;
         public String selectedVersion;
         public bool isEdit1 = false;
+        public String originalName;
 
         public InstanceGui(Form form, bool isEdit)
         {
@@ -255,24 +257,31 @@ namespace MCLauncher.controls
                 profileName = newName;
             }
 
-            //TODO RENAMING
-
-            //create directories
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
-
             //write profile json
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{originalName}\\instance.json", json);
 
-            //create mod json
-            string modJson = "";
+            //if isnt edit stuff
             if (!isEdit1)
             {
+                //create directories
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{originalName}");
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{originalName}\\jarmods\\");
+
+                //save modjson
                 ModJson mj = new ModJson();
                 mj.items = new ModJsonEntry[0];
 
-                modJson = JsonConvert.SerializeObject(mj);
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
+                String modJson = JsonConvert.SerializeObject(mj);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{originalName}\\jarmods\\mods.json", modJson);
+            }
+            else
+            {
+                //rename
+                if (profileName != originalName)
+                {
+                    Logger.Info("[InstanceGui]", $"Renaming instance {originalName} -> {profileName}...");
+                    Directory.Move($"{Globals.dataPath}\\instance\\{originalName}", $"{Globals.dataPath}\\instance\\{profileName}");
+                }
             }
 
             HomeScreen.loadInstanceList();

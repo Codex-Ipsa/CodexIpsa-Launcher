@@ -52,6 +52,7 @@ namespace MCLauncher.forms
             instanceGui.selectedVersion = ij.version;
 
             instanceGui.nameBox.Text = instanceName;
+            instanceGui.originalName = instanceName;
             instanceGui.dirBox.Text = ij.directory; //TODO CHECK FOR INVALID
             String[] res = ij.resolution.Split(new char[] { ' ' });
             instanceGui.resXBox.Text = res[0];

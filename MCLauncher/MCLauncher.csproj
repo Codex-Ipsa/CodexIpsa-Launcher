@@ -148,12 +148,6 @@
     <Compile Include="forms\ImportProfile.Designer.cs">
       <DependentUpon>ImportProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\ModInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ModInfo.Designer.cs">
-      <DependentUpon>ModInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms\ModLoaders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,9 +230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ImportProfile.resx">
       <DependentUpon>ImportProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ModInfo.resx">
-      <DependentUpon>ModInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ModLoaders.resx">
       <DependentUpon>ModLoaders.cs</DependentUpon>
