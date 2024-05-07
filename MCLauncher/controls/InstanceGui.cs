@@ -235,8 +235,11 @@ namespace MCLauncher.controls
             ij.xboxDemo = chkXboxDemo.Checked;
             string json = JsonConvert.SerializeObject(ij);
 
+            //get profile name
+            string profileName = nameBox.Text;
+
             //remove illegal characters from name
-            string profileName = nameBox.Text.Replace("\\", "")
+            profileName = profileName.Replace("\\", "")
                 .Replace("/", "")
                 .Replace(":", "")
                 .Replace("*", "")
@@ -247,7 +250,7 @@ namespace MCLauncher.controls
                 .Replace("|", "");
 
             //check if profile already exists => add _X
-            if (!isEdit1)
+            if (!isEdit1 || originalName != profileName)
             {
                 string newName = profileName;
                 int iter = 1;
@@ -259,31 +262,35 @@ namespace MCLauncher.controls
                 profileName = newName;
             }
 
+            //move old profile if renaming
+            if(isEdit1)
+            {
+                if (!String.IsNullOrEmpty(originalName))
+                {
+                    if (profileName != originalName)
+                    {
+                        Logger.Info("[InstanceGui]", $"Renaming instance {originalName} -> {profileName}...");
+                        Directory.Move($"{Globals.dataPath}\\instance\\{originalName}", $"{Globals.dataPath}\\instance\\{profileName}");
+                    }
+                }
+            }
+
+            //create directories
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\");
+
             //write profile json
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{originalName}\\instance.json", json);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", json);
 
             //if isnt edit stuff
             if (!isEdit1)
             {
-                //create directories
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{originalName}");
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{originalName}\\jarmods\\");
-
-                //save modjson
+                //create modjson
                 ModJson mj = new ModJson();
                 mj.items = new ModJsonEntry[0];
 
                 String modJson = JsonConvert.SerializeObject(mj);
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{originalName}\\jarmods\\mods.json", modJson);
-            }
-            else
-            {
-                //rename
-                if (profileName != originalName)
-                {
-                    Logger.Info("[InstanceGui]", $"Renaming instance {originalName} -> {profileName}...");
-                    Directory.Move($"{Globals.dataPath}\\instance\\{originalName}", $"{Globals.dataPath}\\instance\\{profileName}");
-                }
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\jarmods\\mods.json", modJson);
             }
 
             HomeScreen.loadInstanceList();
