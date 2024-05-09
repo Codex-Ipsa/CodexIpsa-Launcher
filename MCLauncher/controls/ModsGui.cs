@@ -1,4 +1,5 @@
-﻿using MCLauncher.classes.jsons;
+﻿using MCLauncher.classes.ipsajson;
+using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
@@ -93,7 +94,38 @@ namespace MCLauncher.controls
 
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");
 
+                ModloadersManifest mm = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
 
+                //enable/disable buttons
+                if (mm.risugami != null)
+                    btnMLoader.Enabled = true;
+                else
+                    btnMLoader.Enabled = false;
+
+                if (mm.forge != null)
+                    btnForge.Enabled = true;
+                else
+                    btnForge.Enabled = false;
+
+                if (mm.fabric != null)
+                    btnFabric.Enabled = true;
+                else
+                    btnFabric.Enabled = false;
+
+                if (mm.neoforge != null)
+                    btnNeoforge.Enabled = true;
+                else
+                    btnNeoforge.Enabled = false;
+
+                if (mm.quilt != null)
+                    btnQuilt.Enabled = true;
+                else
+                    btnQuilt.Enabled = false;
+
+                if (mm.liteloader != null)
+                    btnLiteloader.Enabled = true;
+                else 
+                    btnLiteloader.Enabled = false;
 
             }
             catch (WebException ex)

@@ -8,12 +8,12 @@ namespace MCLauncher.classes.ipsajson
 {
     internal class ModloadersManifest
     {
-        public Risugami risugami { get; set; }
-        public Forge forge { get; set; }
-        public Fabric fabric { get; set; }
-        public Neoforge neoforge { get; set; }
-        public Quilt quilt { get; set; }
-        public Liteloader liteloader { get; set; }
+        public Risugami[] risugami { get; set; }
+        public Forge[] forge { get; set; }
+        public Fabric[] fabric { get; set; }
+        public Neoforge[] neoforge { get; set; }
+        public Quilt[] quilt { get; set; }
+        public Liteloader[] liteloader { get; set; }
     }
 
     internal class Risugami

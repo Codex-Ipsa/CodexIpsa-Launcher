@@ -72,6 +72,7 @@
             // 
             // btnMLoader
             // 
+            this.btnMLoader.Enabled = false;
             this.btnMLoader.Location = new System.Drawing.Point(672, 149);
             this.btnMLoader.Name = "btnMLoader";
             this.btnMLoader.Size = new System.Drawing.Size(117, 23);
@@ -81,6 +82,7 @@
             // 
             // btnFabric
             // 
+            this.btnFabric.Enabled = false;
             this.btnFabric.Location = new System.Drawing.Point(672, 120);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
@@ -120,6 +122,7 @@
             // 
             // btnForge
             // 
+            this.btnForge.Enabled = false;
             this.btnForge.Location = new System.Drawing.Point(672, 91);
             this.btnForge.Name = "btnForge";
             this.btnForge.Size = new System.Drawing.Size(117, 23);
@@ -181,6 +184,7 @@
             // 
             // btnNeoforge
             // 
+            this.btnNeoforge.Enabled = false;
             this.btnNeoforge.Location = new System.Drawing.Point(672, 178);
             this.btnNeoforge.Name = "btnNeoforge";
             this.btnNeoforge.Size = new System.Drawing.Size(117, 23);
@@ -206,6 +210,7 @@
             // 
             // btnQuilt
             // 
+            this.btnQuilt.Enabled = false;
             this.btnQuilt.Location = new System.Drawing.Point(672, 207);
             this.btnQuilt.Name = "btnQuilt";
             this.btnQuilt.Size = new System.Drawing.Size(117, 23);
@@ -215,6 +220,7 @@
             // 
             // btnLiteloader
             // 
+            this.btnLiteloader.Enabled = false;
             this.btnLiteloader.Location = new System.Drawing.Point(672, 236);
             this.btnLiteloader.Name = "btnLiteloader";
             this.btnLiteloader.Size = new System.Drawing.Size(117, 23);
@@ -261,23 +267,23 @@
 
         private System.Windows.Forms.Button btnRepos;
         private System.Windows.Forms.Button btnOpenDotMc;
-        private System.Windows.Forms.Button btnMLoader;
-        private System.Windows.Forms.Button btnFabric;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnMoveUp;
-        private System.Windows.Forms.Button btnForge;
         private System.Windows.Forms.Button btnReplaceJar;
         private System.Windows.Forms.Button btnAddToJar;
         private System.Windows.Forms.ListView modView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button btnNeoforge;
         private System.Windows.Forms.Label separator1;
         private System.Windows.Forms.Label separator2;
-        private System.Windows.Forms.Button btnQuilt;
-        private System.Windows.Forms.Button btnLiteloader;
         private System.Windows.Forms.Label separator3;
+        public System.Windows.Forms.Button btnMLoader;
+        public System.Windows.Forms.Button btnFabric;
+        public System.Windows.Forms.Button btnForge;
+        public System.Windows.Forms.Button btnNeoforge;
+        public System.Windows.Forms.Button btnQuilt;
+        public System.Windows.Forms.Button btnLiteloader;
     }
 }
