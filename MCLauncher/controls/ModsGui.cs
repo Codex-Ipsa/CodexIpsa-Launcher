@@ -81,19 +81,16 @@ namespace MCLauncher.controls
 
         public void loadModloaderButtons(String version)
         {
-            Console.WriteLine(version);
-
-            //check if manifest exists
-
-            String loaderManifest = null;
             try
             {
+                //download manifest
                 WebClient client = new WebClient();
-                loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
+                String loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
                 client.Dispose();
 
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");
 
+                //deserialize
                 ModloadersManifest mm = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
 
                 //enable/disable buttons
@@ -126,10 +123,10 @@ namespace MCLauncher.controls
                     btnLiteloader.Enabled = true;
                 else 
                     btnLiteloader.Enabled = false;
-
             }
             catch (WebException ex)
             {
+                //if manifest no existo
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"no modloader manifest at {version}");
             }
         }
