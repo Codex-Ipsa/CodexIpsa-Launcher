@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -76,6 +78,30 @@ namespace MCLauncher.controls
             modView.Columns[2].Width = -2;
         }
 
+        public void loadModloaderButtons(String version)
+        {
+            Console.WriteLine(version);
+
+            //check if manifest exists
+
+            String loaderManifest = null;
+            try
+            {
+                WebClient client = new WebClient();
+                loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
+                client.Dispose();
+
+                Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");
+
+
+
+            }
+            catch (WebException ex)
+            {
+                Logger.Info("[ModsGui/loadModloaderButtons]", $"no modloader manifest at {version}");
+            }
+        }
+
         public void saveModList()
         {
             mj = new ModJson();
@@ -108,7 +134,7 @@ namespace MCLauncher.controls
 
             if (worked)
                 selectInModList(selectedIndex - 1);
-            else 
+            else
                 selectInModList(selectedIndex);
         }
 

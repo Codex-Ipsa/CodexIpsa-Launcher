@@ -48,6 +48,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(804, 410);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabHome
             // 
@@ -63,7 +64,7 @@
             this.tabMods.BackColor = System.Drawing.SystemColors.Control;
             this.tabMods.Location = new System.Drawing.Point(4, 22);
             this.tabMods.Name = "tabMods";
-            this.tabMods.Size = new System.Drawing.Size(787, 384);
+            this.tabMods.Size = new System.Drawing.Size(796, 384);
             this.tabMods.TabIndex = 1;
             this.tabMods.Text = "tab.mods";
             // 

@@ -18,6 +18,9 @@ namespace MCLauncher.forms
 {
     public partial class EditInstance : Form
     {
+        public InstanceGui instanceGui;
+        public ModsGui modsGui;
+
         public EditInstance(String instanceName)
         {
             InitializeComponent();
@@ -27,10 +30,10 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            InstanceGui instanceGui = new InstanceGui(this, true);
+            instanceGui = new InstanceGui(this, true);
             this.tabHome.Controls.Add(instanceGui);
 
-            ModsGui modsGui = new ModsGui(instanceName);
+            modsGui = new ModsGui(instanceName);
             this.tabMods.Controls.Add(modsGui);
 
             //load lang
@@ -102,6 +105,14 @@ namespace MCLauncher.forms
 
                 instanceGui.selectedVersion = HomeScreen.getLatestVersion(instanceGui.selectedVersion);
                 instanceGui.vanillaList.Enabled = false;
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                modsGui.loadModloaderButtons(instanceGui.selectedVersion);
             }
         }
     }
