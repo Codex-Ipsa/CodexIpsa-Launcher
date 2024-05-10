@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MCLauncher.classes.ipsajson
 {
-    internal class ModloadersManifest
+    public class ModloadersManifest
     {
         public Risugami[] risugami { get; set; }
         public Forge[] forge { get; set; }
@@ -16,32 +16,42 @@ namespace MCLauncher.classes.ipsajson
         public Liteloader[] liteloader { get; set; }
     }
 
-    internal class Risugami
+    public class Risugami
     {
 
     }
 
-    internal class Forge
+    public class Forge
+    {
+        public String id { get; set; }
+        public String type { get; set; }
+        public String json { get; set; }
+        public String url { get; set; }
+        public String released { get; set; }
+        public bool recommended { get; set; }
+        public ForgeSupplement supplement { get; set; }
+    }
+    public class ForgeSupplement
     {
 
     }
 
-    internal class Fabric
+    public class Fabric
     {
 
     }
 
-    internal class Neoforge
+    public class Neoforge
     {
 
     }
 
-    internal class Quilt
+    public class Quilt
     {
 
     }
 
-    internal class Liteloader
+    public class Liteloader
     {
 
     }

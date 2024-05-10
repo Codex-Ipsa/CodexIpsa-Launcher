@@ -79,6 +79,7 @@
             this.btnMLoader.TabIndex = 30;
             this.btnMLoader.Text = "btn.MLoader";
             this.btnMLoader.UseVisualStyleBackColor = true;
+            this.btnMLoader.Click += new System.EventHandler(this.btnMLoader_Click);
             // 
             // btnFabric
             // 
@@ -89,6 +90,7 @@
             this.btnFabric.TabIndex = 29;
             this.btnFabric.Text = "btn.Fabric";
             this.btnFabric.UseVisualStyleBackColor = true;
+            this.btnFabric.Click += new System.EventHandler(this.btnFabric_Click);
             // 
             // btnMoveDown
             // 
@@ -129,6 +131,7 @@
             this.btnForge.TabIndex = 25;
             this.btnForge.Text = "btn.Forge";
             this.btnForge.UseVisualStyleBackColor = true;
+            this.btnForge.Click += new System.EventHandler(this.btnForge_Click);
             // 
             // btnReplaceJar
             // 
@@ -191,6 +194,7 @@
             this.btnNeoforge.TabIndex = 33;
             this.btnNeoforge.Text = "btn.Neoforge";
             this.btnNeoforge.UseVisualStyleBackColor = true;
+            this.btnNeoforge.Click += new System.EventHandler(this.btnNeoforge_Click);
             // 
             // separator1
             // 
@@ -217,6 +221,7 @@
             this.btnQuilt.TabIndex = 36;
             this.btnQuilt.Text = "btn.Quilt";
             this.btnQuilt.UseVisualStyleBackColor = true;
+            this.btnQuilt.Click += new System.EventHandler(this.btnQuilt_Click);
             // 
             // btnLiteloader
             // 
@@ -227,6 +232,7 @@
             this.btnLiteloader.TabIndex = 37;
             this.btnLiteloader.Text = "btn.Liteloader";
             this.btnLiteloader.UseVisualStyleBackColor = true;
+            this.btnLiteloader.Click += new System.EventHandler(this.btnLiteloader_Click);
             // 
             // separator3
             // 

@@ -23,6 +23,8 @@ namespace MCLauncher.controls
     {
         public String instanceName = "";
 
+        public String version;
+
         public ModJson mj;
         public List<ModJsonEntry> entries;
 
@@ -81,6 +83,8 @@ namespace MCLauncher.controls
 
         public void loadModloaderButtons(String version)
         {
+            this.version = version;
+
             try
             {
                 //download manifest
@@ -258,7 +262,8 @@ namespace MCLauncher.controls
 
         private void btnForge_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "forge", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
@@ -267,6 +272,21 @@ namespace MCLauncher.controls
         }
 
         private void btnMLoader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNeoforge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnQuilt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLiteloader_Click(object sender, EventArgs e)
         {
 
         }

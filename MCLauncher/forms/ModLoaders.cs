@@ -7,21 +7,25 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
     public partial class ModLoaders : Form
     {
-        public List<ModLoaderManifest> mj;
-        public string loaderType = "";
-        public string gameVersion = "";
+        public ModloadersManifest manifest;
+        public String version;
+        public String loader;
+        public String instanceName;
 
-        public ModLoaders(string version, string loader)
+        public ModLoaders(String version, String loader, String instanceName)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -31,41 +35,26 @@ namespace MCLauncher.forms
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
-            loaderType = loader;
-            gameVersion = version;
+            this.version = version;
+            this.loader = loader;
+            this.instanceName = instanceName;
 
-            if (loader == "fabric")
+            //download manifest
+            WebClient client = new WebClient();
+            String loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
+            client.Dispose();
+
+            manifest = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
+
+            if (loader == "forge")
             {
-                List<string> versions = FabricParser.GetList();
-                foreach (string ver in versions)
-                    listView1.Items.Add(ver);
-                //foreach (ModLoaderItem item in m.items)
-                //{
-                //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                //}
-            }
-            else
-            {
-                string jsonFile = Globals.client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
-                mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
-                foreach (ModLoaderManifest m in mj)
+                foreach (var t in manifest.forge)
                 {
-                    if (m.name == "forge" && loader == "forge")
-                    {
-                        foreach (ModLoaderItem item in m.items)
-                        {
-                            listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                        }
-                    }
-                    else if (m.name == "modloader" && loader == "modloader")
-                    {
-                        //foreach (ModLoaderItem item in m.items)
-                        //{
-                        //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                        //}
-                    }
+                    String[] item = new String[] { t.released };
+                    listView1.Items.Add(t.id).SubItems.AddRange(item);
                 }
             }
+
 
             listView1.Select();
             listView1.Items[0].Selected = true;
@@ -73,88 +62,31 @@ namespace MCLauncher.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(loaderType == "fabric")
+            //download forge
+            if (loader == "forge")
             {
-                string newJson = FabricParser.versionJson(gameVersion, listView1.SelectedItems[0].Text);
+                if (manifest.forge[listView1.SelectedItems[0].Index].type == "json")
+                {
+                    List<DownloadObject> list = new List<DownloadObject>();
+                    list.Add(new DownloadObject(manifest.forge[listView1.SelectedItems[0].Index].url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecrafforge-{manifest.forge[listView1.SelectedItems[0].Index].id}.zip"));
+                    list.Add(new DownloadObject(manifest.forge[listView1.SelectedItems[0].Index].url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecrafforge-{manifest.forge[listView1.SelectedItems[0].Index].id}.zip"));
+                    DownloaderGui dg = new DownloaderGui(list);
+                    dg.ShowDialog();
 
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", newJson);
+                    //TODO
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
+                    theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
+                }
+                else //type == jarmod
+                {
+                    DownloadProgress.url = manifest.forge[listView1.SelectedItems[0].Index].url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{id}-{version}.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
 
-                Profile.modListWorker("add", "Fabric", $"{gameVersion}-{listView1.SelectedItems[0].Text}", $"fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", "json", "");
-                Profile.reloadModsList();
+                }
             }
-            else if(loaderType == "forge")
-            {
-                ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
-                Console.WriteLine(item.id);
-
-                if (item.supplement != null)
-                {
-                    foreach (string sup in item.supplement)
-                    {
-                        string file = sup.Substring(sup.LastIndexOf('/') + 1);
-                        DownloadProgress.url = sup;
-                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{file}";
-                        DownloadProgress dpsup = new DownloadProgress();
-                        dpsup.ShowDialog();
-
-                        Profile.modListWorker("add", "", "", $"{file}", "jarmod", "");
-                    }
-                }
-
-                string ext = ".zip";
-                if (item.type == "json")
-                    ext = ".json";
-
-                string[] split = item.id.Replace("minecraftforge-", "").Split(new[] { '-' }, 2);
-                string forgeVersion = split[1];
-                string gameVersion = split[0];
-                Logger.Error("[ModLoaders]", $"item.id; {item.id} forgeVer; {forgeVersion} gameVer; {gameVersion}");
-
-                Logger.Error("[ModLoaders]", $"item url; {item.url} gmver; {gameVersion}");
-
-                if (item.type == "json")
-                {
-                    Logger.Error("[ModLoaders]", $"CALLED!!!");
-                    DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/forge/minecraftforge-{gameVersion}.json";
-                }
-                else
-                    DownloadProgress.url = item.url;
-
-                Logger.Error("[ModLoaders]", $"dp url; {DownloadProgress.url}");
-
-                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
-                DownloadProgress dp = new DownloadProgress();
-                dp.ShowDialog();
-
-                if(item.type == "json")
-                {
-                    string original = File.ReadAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}");
-                    string updated = original.Replace("{forgeVer}", forgeVersion).Replace("{forgeUrl}", item.url);
-                    File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}", updated);
-                }
-
-                Profile.modListWorker("add", "Forge", forgeVersion, $"{item.id}{ext}", item.type, item.json);
-                Profile.reloadModsList();
-            }
-
             this.Close();
         }
-    }
-
-    public class ModLoaderManifest
-    {
-        public string name { get; set; }
-        public ModLoaderItem[] items { get; set; }
-    }
-
-    public class ModLoaderItem
-    {
-        public string id { get; set; }
-        public string json { get; set; }
-        public string type { get; set; }
-        public string url { get; set; }
-        public string released { get; set; }
-        public bool recommended { get; set; }
-        public string[] supplement { get; set; }
     }
 }
