@@ -119,6 +119,12 @@
     <Compile Include="controls\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\DownloaderGui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\DownloaderGui.Designer.cs">
+      <DependentUpon>DownloaderGui.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\DownloadProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controls\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\DownloaderGui.resx">
+      <DependentUpon>DownloaderGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\DownloadProgress.resx">
       <DependentUpon>DownloadProgress.cs</DependentUpon>
