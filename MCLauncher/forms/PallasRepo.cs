@@ -173,7 +173,7 @@ namespace MCLauncher.forms
             return image;
         }
 
-        public static string[] checkForUpdate(string checkName, string checkVersion)
+        public static string[] checkForUpdate(String instanceName, string checkName, string checkVersion)
         {
             string pallasManifest = Globals.client.DownloadString(Globals.PallasManifest);
             List<PallasManifest> pallasMods = JsonConvert.DeserializeObject<List<PallasManifest>>(pallasManifest);
@@ -198,7 +198,7 @@ namespace MCLauncher.forms
                                 DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (dialogResult == DialogResult.Yes)
                                 {
-                                    DownloadMod(mod, ver, checkVersion);
+                                    DownloadMod(instanceName, mod, ver, checkVersion);
                                     return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
                                 }
                             }
@@ -216,7 +216,7 @@ namespace MCLauncher.forms
                                         DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                         if (dialogResult == DialogResult.Yes)
                                         {
-                                            DownloadMod(mod, ver, checkVersion);
+                                            DownloadMod(instanceName, mod, ver, checkVersion);
                                             return new string[] { ver.version, ver.json, $"{mod.id}-{ver.version}.zip", ver.type };
                                         }
                                     }
@@ -232,15 +232,17 @@ namespace MCLauncher.forms
         }
 
         //update mod and remove old version
-        public static void DownloadMod(PallasManifest mod, PallasVersion ver, string checkVersion)
+        public static void DownloadMod(String instanceName, PallasManifest mod, PallasVersion ver, string checkVersion)
         {
+            theModsGui = new ModsGui(instanceName);
+
             Logger.Info("[PallasRepo/DownloadMod]", $"{mod.id}, {ver.version}, {ver.url}, {ver.json}");
 
-            File.Delete($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{checkVersion}.zip");
+            File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{mod.id}-{checkVersion}.zip");
             theModsGui.removeModList($"{mod.id}-{checkVersion}.zip");
 
             DownloadProgress.url = ver.url;
-            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{ver.version}.zip";
+            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{mod.id}-{ver.version}.zip";
             DownloadProgress dp = new DownloadProgress();
             dp.ShowDialog();
 

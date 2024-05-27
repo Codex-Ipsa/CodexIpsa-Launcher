@@ -46,7 +46,7 @@ namespace MCLauncher
                     continue;
 
                 //check for updates
-                string[] skip = PallasRepo.checkForUpdate(entry.name, entry.version);
+                string[] skip = PallasRepo.checkForUpdate(instName, entry.name, entry.version);
                 if (skip != null)
                 {
                     Logger.Info("[JavaModHelper/Test1]", $"0   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
