@@ -1068,18 +1068,18 @@ namespace MCLauncher.forms
 
         private void btnForge_Click(object sender, EventArgs e)
         {
-            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
-            temp = temp.Replace(" ", "");
-            ModLoaders ml = new ModLoaders(temp, "forge");
-            ml.ShowDialog();
+            //string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            //temp = temp.Replace(" ", "");
+            //ModLoaders ml = new ModLoaders(temp, "forge");
+            //ml.ShowDialog();
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
         {
-            string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
-            temp = temp.Replace(" ", "");
-            ModLoaders ml = new ModLoaders(temp, "fabric");
-            ml.ShowDialog();
+            //string temp = Regex.Replace(listView1.SelectedItems[0].Text, @"\(.*\)", "");
+            //temp = temp.Replace(" ", "");
+            //ModLoaders ml = new ModLoaders(temp, "fabric");
+            //ml.ShowDialog();
         }
 
         private void modView_ItemChecked(object sender, ItemCheckedEventArgs e)

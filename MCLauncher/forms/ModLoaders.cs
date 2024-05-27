@@ -74,15 +74,15 @@ namespace MCLauncher.forms
                     dg.ShowDialog();
 
                     //TODO
-                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
-                    theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
+                    //Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
+                    //theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
                 }
                 else //type == jarmod
                 {
-                    DownloadProgress.url = manifest.forge[listView1.SelectedItems[0].Index].url;
-                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{id}-{version}.zip";
-                    DownloadProgress dp = new DownloadProgress();
-                    dp.ShowDialog();
+                    //DownloadProgress.url = manifest.forge[listView1.SelectedItems[0].Index].url;
+                    //DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{id}-{version}.zip";
+                    //DownloadProgress dp = new DownloadProgress();
+                    //dp.ShowDialog();
 
                 }
             }
