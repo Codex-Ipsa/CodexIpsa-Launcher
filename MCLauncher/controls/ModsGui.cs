@@ -132,6 +132,13 @@ namespace MCLauncher.controls
             {
                 //if manifest no existo
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"no modloader manifest at {version}");
+                
+                btnMLoader.Enabled = false;
+                btnForge.Enabled = false;
+                btnFabric.Enabled = false;
+                btnNeoforge.Enabled = false;
+                btnQuilt.Enabled = false;
+                btnLiteloader.Enabled = false;
             }
         }
 
@@ -268,27 +275,32 @@ namespace MCLauncher.controls
 
         private void btnFabric_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "fabric", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnMLoader_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "risugami", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnNeoforge_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnQuilt_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "quilt", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnLiteloader_Click(object sender, EventArgs e)
         {
-
+            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName);
+            ml.ShowDialog();
         }
 
         private void btnRepos_Click(object sender, EventArgs e)
