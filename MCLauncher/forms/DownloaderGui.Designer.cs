@@ -32,7 +32,8 @@
             this.cancelBtn = new System.Windows.Forms.Button();
             this.ProgressLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBarDownload = new System.Windows.Forms.ProgressBar();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cancelBtn
@@ -66,25 +67,35 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "lbl.DlFiles";
             // 
-            // progressBarDownload
+            // progressBar
             // 
-            this.progressBarDownload.Location = new System.Drawing.Point(12, 27);
-            this.progressBarDownload.Name = "progressBarDownload";
-            this.progressBarDownload.Size = new System.Drawing.Size(213, 23);
-            this.progressBarDownload.TabIndex = 5;
+            this.progressBar.Location = new System.Drawing.Point(12, 27);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(213, 23);
+            this.progressBar.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(191, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "(WIP)";
             // 
             // DownloaderGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 102);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBarDownload);
+            this.Controls.Add(this.progressBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DownloaderGui";
-            this.Text = "DownloaderGui";
+            this.Text = "Downloading...";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,6 +106,7 @@
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBarDownload;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label2;
     }
 }
