@@ -27,6 +27,7 @@ namespace MCLauncher.controls
 
         public ModJson mj;
         public List<ModJsonEntry> entries;
+        public ModloadersManifest mm;
 
         public ModsGui(String instName)
         {
@@ -95,7 +96,7 @@ namespace MCLauncher.controls
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");
 
                 //deserialize
-                ModloadersManifest mm = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
+                mm = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
 
                 //enable/disable buttons
                 if (mm.risugami != null)
@@ -269,37 +270,37 @@ namespace MCLauncher.controls
 
         private void btnForge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "forge", instanceName);
+            ModLoaders ml = new ModLoaders(version, "forge", instanceName, mm);
             ml.ShowDialog();
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "fabric", instanceName);
+            ModLoaders ml = new ModLoaders(version, "fabric", instanceName, mm);
             ml.ShowDialog();
         }
 
         private void btnMLoader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "risugami", instanceName);
+            ModLoaders ml = new ModLoaders(version, "risugami", instanceName, mm);
             ml.ShowDialog();
         }
 
         private void btnNeoforge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName);
+            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName, mm);
             ml.ShowDialog();
         }
 
         private void btnQuilt_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "quilt", instanceName);
+            ModLoaders ml = new ModLoaders(version, "quilt", instanceName, mm);
             ml.ShowDialog();
         }
 
         private void btnLiteloader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName);
+            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName, mm);
             ml.ShowDialog();
         }
 

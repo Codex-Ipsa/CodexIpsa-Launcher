@@ -25,7 +25,7 @@ namespace MCLauncher.forms
         public String loader;
         public String instanceName;
 
-        public ModLoaders(String version, String loader, String instanceName)
+        public ModLoaders(String version, String loader, String instanceName, ModloadersManifest mm)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -38,13 +38,7 @@ namespace MCLauncher.forms
             this.version = version;
             this.loader = loader;
             this.instanceName = instanceName;
-
-            //download manifest
-            WebClient client = new WebClient();
-            String loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
-            client.Dispose();
-
-            manifest = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
+            this.manifest = mm;
 
             if (loader == "forge")
             {
@@ -60,7 +54,7 @@ namespace MCLauncher.forms
             listView1.Items[0].Selected = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnInstall_Click(object sender, EventArgs e)
         {
             //download forge
             if (loader == "forge")
