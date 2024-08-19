@@ -43,22 +43,31 @@ namespace MCLauncher.forms
             this.instanceName = instanceName;
             this.manifest = mm;
 
+            //load forge versions
+            int recommendedVer = 0;
             if (loader == "forge")
             {
-                foreach (var t in manifest.forge)
+                for (int i = 0; i < manifest.forge.Count(); i++)
                 {
+                    Forge f = manifest.forge[i];
+                    
+                    //get recommended version
                     int icon = -1;
-                    if(t.recommended)
+                    if(f.recommended)
+                    {
                         icon = 0;
+                        recommendedVer = i;
+                    }
 
-                    String[] item = new String[] { t.released };
-                    listView1.Items.Add(t.id, icon).SubItems.AddRange(item);
+                    //add to list
+                    String[] item = new String[] { f.released };
+                    listView1.Items.Add(f.id, icon).SubItems.AddRange(item);
                 }
             }
 
-
+            //select recommended version
             listView1.Select();
-            listView1.Items[0].Selected = true;
+            listView1.Items[recommendedVer].Selected = true;
         }
 
         private void btnInstall_Click(object sender, EventArgs e)
