@@ -44,8 +44,12 @@ namespace MCLauncher.forms
             {
                 foreach (var t in manifest.forge)
                 {
+                    int icon = -1;
+                    if(t.recommended)
+                        icon = 0;
+
                     String[] item = new String[] { t.released };
-                    listView1.Items.Add(t.id).SubItems.AddRange(item);
+                    listView1.Items.Add(t.id, icon).SubItems.AddRange(item);
                 }
             }
 
