@@ -270,37 +270,37 @@ namespace MCLauncher.controls
 
         private void btnForge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "forge", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "forge", instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "fabric", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "fabric", instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnMLoader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "risugami", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "risugami", instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnNeoforge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnQuilt_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "quilt", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "quilt", instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnLiteloader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName, mm);
+            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName, mm, this);
             ml.ShowDialog();
         }
 

@@ -27,6 +27,7 @@ namespace MCLauncher.classes.ipsajson
         public String type { get; set; }
         public String json { get; set; }
         public String url { get; set; }
+        public double size { get; set; }
         public String released { get; set; }
         public bool recommended { get; set; }
         public ForgeSupplement supplement { get; set; }

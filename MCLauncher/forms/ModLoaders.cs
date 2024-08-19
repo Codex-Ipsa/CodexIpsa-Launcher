@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes.ipsajson;
+using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,13 @@ namespace MCLauncher.forms
 {
     public partial class ModLoaders : Form
     {
+        public ModsGui theModsGui;
         public ModloadersManifest manifest;
         public String version;
         public String loader;
         public String instanceName;
 
-        public ModLoaders(String version, String loader, String instanceName, ModloadersManifest mm)
+        public ModLoaders(String version, String loader, String instanceName, ModloadersManifest mm, ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -35,6 +37,7 @@ namespace MCLauncher.forms
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
+            this.theModsGui = modsGui;
             this.version = version;
             this.loader = loader;
             this.instanceName = instanceName;
@@ -63,17 +66,24 @@ namespace MCLauncher.forms
             //download forge
             if (loader == "forge")
             {
+                Forge forge = manifest.forge[listView1.SelectedItems[0].Index];
+                
+                //json based
                 if (manifest.forge[listView1.SelectedItems[0].Index].type == "json")
                 {
-                    List<DownloadObject> list = new List<DownloadObject>();
-                    list.Add(new DownloadObject(manifest.forge[listView1.SelectedItems[0].Index].url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecrafforge-{manifest.forge[listView1.SelectedItems[0].Index].id}.zip"));
-                    list.Add(new DownloadObject(manifest.forge[listView1.SelectedItems[0].Index].url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecrafforge-{manifest.forge[listView1.SelectedItems[0].Index].id}.zip"));
-                    DownloaderGui dg = new DownloaderGui(list);
-                    dg.ShowDialog();
+                    //dl jar and json
+                    //List<DownloadObject> list = new List<DownloadObject>();
+                    //list.Add(new DownloadObject(forge.url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.jar"));
+                    //list.Add(new DownloadObject(forge.json, $"{Globals.dataPath}\\data\\json\\minecraftforge-{forge.id}.json"));
+                    //DownloaderGui dg = new DownloaderGui(list);
+                    //dg.ShowDialog();
 
-                    //TODO
-                    //Globals.client.DownloadFile(Globals.javaInfo.Replace("{ver}", json).Replace("{type}", "java"), $"{Globals.dataPath}\\data\\json\\{json}.json");
-                    //theModsGui.addModList(name, version, $"{id}-{version}.zip", type, json);
+                    String forgeManifest = Globals.client.DownloadString(forge.json);
+                    forgeManifest = forgeManifest.Replace("{forgeVer}", forge.id).Replace("{forgeUrl}", forge.url).Replace("{forgeSize}", forge.size.ToString());
+                    File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.json", forgeManifest);
+
+                    //add to modlist
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.json", "json", "");
                 }
                 else //type == jarmod
                 {
@@ -81,7 +91,6 @@ namespace MCLauncher.forms
                     //DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{id}-{version}.zip";
                     //DownloadProgress dp = new DownloadProgress();
                     //dp.ShowDialog();
-
                 }
             }
             this.Close();
