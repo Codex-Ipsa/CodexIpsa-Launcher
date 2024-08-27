@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.classes.ipsajson;
 using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Microsoft.SqlServer.Server;
@@ -24,7 +25,7 @@ namespace MCLauncher
             string modsJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
             ModJson modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
             string clientJson = File.ReadAllText(manifestPath);
-            VersionInfo clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+            IpsaJson clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
 
             //Speeds up the time
             if (modsManifest.items.Count() < 1)
@@ -92,7 +93,7 @@ namespace MCLauncher
                     if (!string.IsNullOrEmpty(entry.json))
                     {
                         clientJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{entry.json}.json");
-                        clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+                        clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
                         JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                     }
 
@@ -123,7 +124,7 @@ namespace MCLauncher
                 else if (entry.type == "json")
                 {
                     clientJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}");
-                    clientManifest = JsonConvert.DeserializeObject<VersionInfo>(clientJson);
+                    clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
                     JavaLauncher.manifestPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
                 }
             }
