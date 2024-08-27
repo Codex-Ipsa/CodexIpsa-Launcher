@@ -33,7 +33,11 @@ namespace MCLauncher.classes.jsons
         public string classpath { get; set; }
         public bool useAssets { get; set; }
         public string assetsPath { get; set; }
+        public bool useServerIP;
+        public String serverIP;
 
         public bool xboxDemo { get; set; }
+
+        public long playTime { get; set; }
     }
 }

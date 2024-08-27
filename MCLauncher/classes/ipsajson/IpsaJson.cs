@@ -11,10 +11,11 @@
         public string cmdAft { get; set; }
         public string defRes { get; set; }
         public bool srvJoin { get; set; }
+        public bool assetsVirt { get; set; }
         public IpsaJsonAssets assets { get; set; }
         public string logging { get; set; }
         public string classpath { get; set; }
-        public string supplement { get; set; } //TODO
+        public IpsaJsonSupplement[] supplement { get; set; }
         public IpsaJsonLibraries[] libraries { get; set; }
     }
 
@@ -32,5 +33,13 @@
         public string url { get; set; }
         public int size { get; set; }
         public bool extract { get; set; }
+    }
+
+    public class IpsaJsonSupplement
+    {
+        public string url { get; set; }
+        public string path { get; set; }
+        public string name { get; set; }
+        public bool renew { get; set; }
     }
 }

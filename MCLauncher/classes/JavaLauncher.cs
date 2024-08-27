@@ -1,4 +1,5 @@
-﻿using MCLauncher.forms;
+﻿using MCLauncher.classes.ipsajson;
+using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -123,7 +124,7 @@ namespace MCLauncher.classes
             }
 
             string manifestJson = File.ReadAllText(manifestPath);
-            var vi = JsonConvert.DeserializeObject<VersionInfo>(manifestJson);
+            var vi = JsonConvert.DeserializeObject<IpsaJson>(manifestJson);
 
             if (vi.srvJoin == true || dj.multiplayer == true)
             {
@@ -246,7 +247,7 @@ namespace MCLauncher.classes
 
             if (vi.assets == null)
             {
-                vi.assets = new VersionInfoAssets();
+                vi.assets = new IpsaJsonAssets();
                 vi.assets.name = "";
             }
 
@@ -417,6 +418,8 @@ namespace MCLauncher.classes
 
             timer.Change(Timeout.Infinite, Timeout.Infinite);
             Logger.Info("[JavaLauncher]", "Total runtime for this session: " + runTime);
+
+
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -434,46 +437,5 @@ namespace MCLauncher.classes
                 Logger.GameError(e.Data);
             }
         }
-    }
-
-    public class VersionInfo
-    {
-        public string game { get; set; }
-        public string version { get; set; }
-        public string url { get; set; }
-        public int size { get; set; }
-        public int java { get; set; }
-        public string classpath { get; set; }
-        public string cmdBef { get; set; }
-        public string cmdAft { get; set; }
-        public string defRes { get; set; }
-        public string logging { get; set; }
-        public bool srvJoin { get; set; }
-        public bool assetsVirt { get; set; }
-        public VersionInfoAssets assets { get; set; }
-        public VersionInfoLibrary[] libraries { get; set; }
-        public VersionInfoSupplement[] supplement { get; set; }
-    }
-
-    public class VersionInfoLibrary
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-        public int size { get; set; }
-        public bool extract { get; set; }
-    }
-
-    public class VersionInfoAssets
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
-    public class VersionInfoSupplement
-    {
-        public string url { get; set; }
-        public string path { get; set; }
-        public string name { get; set; }
-        public bool renew { get; set; }
     }
 }
