@@ -1,5 +1,5 @@
-﻿using MCLauncher.json.api;
-using MCLauncher.controls;
+﻿using MCLauncher.controls;
+using MCLauncher.json.api;
 using System;
 using System.IO;
 using System.Linq;

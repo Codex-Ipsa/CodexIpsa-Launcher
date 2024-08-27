@@ -1,5 +1,5 @@
-﻿using MCLauncher.json.launcher;
-using MCLauncher.controls;
+﻿using MCLauncher.controls;
+using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.IO;
