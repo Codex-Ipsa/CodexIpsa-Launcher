@@ -1,4 +1,4 @@
-﻿using MCLauncher.classes.ipsajson;
+﻿using MCLauncher.json.api;
 using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Newtonsoft.Json;
@@ -19,7 +19,7 @@ namespace MCLauncher.controls
 
         public ModJson mj;
         public List<ModJsonEntry> entries;
-        public ModloadersManifest mm;
+        public ModloadersJson mm;
 
         public ModsGui(String instName)
         {
@@ -88,7 +88,7 @@ namespace MCLauncher.controls
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");
 
                 //deserialize
-                mm = JsonConvert.DeserializeObject<ModloadersManifest>(loaderManifest);
+                mm = JsonConvert.DeserializeObject<ModloadersJson>(loaderManifest);
 
                 //enable/disable buttons
                 if (mm.risugami != null)

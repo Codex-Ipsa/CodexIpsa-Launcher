@@ -1,4 +1,4 @@
-﻿using MCLauncher.classes.ipsajson;
+﻿using MCLauncher.json.api;
 using MCLauncher.controls;
 using System;
 using System.IO;
@@ -10,12 +10,12 @@ namespace MCLauncher.forms
     public partial class ModLoaders : Form
     {
         public ModsGui theModsGui;
-        public ModloadersManifest manifest;
+        public ModloadersJson manifest;
         public String version;
         public String loader;
         public String instanceName;
 
-        public ModLoaders(String version, String loader, String instanceName, ModloadersManifest mm, ModsGui modsGui)
+        public ModLoaders(String version, String loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

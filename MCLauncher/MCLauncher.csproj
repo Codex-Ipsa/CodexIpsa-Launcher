@@ -89,7 +89,7 @@
     <Compile Include="classes\ipsajson\FabricParser.cs" />
     <Compile Include="json\api\VersionJson.cs" />
     <Compile Include="json\api\LatestVersionJson.cs" />
-    <Compile Include="classes\ipsajson\ModloadersManifest.cs" />
+    <Compile Include="json\api\ModloadersJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />

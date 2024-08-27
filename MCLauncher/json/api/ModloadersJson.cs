@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MCLauncher.classes.ipsajson
+namespace MCLauncher.json.api
 {
-    public class ModloadersManifest
+    public class ModloadersJson
     {
         public Risugami[] risugami { get; set; }
         public Forge[] forge { get; set; }
@@ -14,7 +14,7 @@ namespace MCLauncher.classes.ipsajson
 
     public class Risugami
     {
-
+        //TODO
     }
 
     public class Forge
@@ -30,26 +30,26 @@ namespace MCLauncher.classes.ipsajson
     }
     public class ForgeSupplement
     {
-
+        //TODO
     }
 
     public class Fabric
     {
-
+        //TODO
     }
 
     public class Neoforge
     {
-
+        //TODO
     }
 
     public class Quilt
     {
-
+        //TODO
     }
 
     public class Liteloader
     {
-
+        //TODO
     }
 }
