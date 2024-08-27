@@ -30,8 +30,6 @@ namespace MCLauncher.classes
         public static string manifestPath = "";
 
         public string runID = "";
-        public static double runTime = 0;
-        public static System.Threading.Timer timer;
 
         public void Launch(string profileName)
         {
@@ -303,7 +301,7 @@ namespace MCLauncher.classes
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
-            proc.Exited += (sender, e) => OnProcessExited(sender, e, profileName, vi.assetsVirt);
+            proc.Exited += (sender, e) => OnProcessExited(sender, e, profileName, vi.assetsVirt, proc);
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -369,9 +367,6 @@ namespace MCLauncher.classes
             {
                 Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
                 proc.Start();
-
-                TimerCallback tmCallback = TimerTick;
-                timer = new System.Threading.Timer(tmCallback, "test", 1000, 1000);
             }
             catch (System.ComponentModel.Win32Exception e)
             {
@@ -381,7 +376,8 @@ namespace MCLauncher.classes
                 Discord.ChangeMessage($"Idling");
                 Globals.running.Remove(runID);
                 return;
-                //TODO
+                //TODO = ASK TO DOWNLOAD JAVA
+
                 /*if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
                     DownloadJava.Start();
 
@@ -397,25 +393,30 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
-        static void TimerTick(object objectInfo)
+        private void OnProcessExited(object sender, EventArgs e, string profileName, bool shouldDelete, Process proc)
         {
-            //Console.WriteLine("oppa!", objectInfo);
-            runTime++;
-        }
+            //get runtime
+            TimeSpan runtime = DateTime.Now - proc.StartTime;
+            long saveRuntime = (long)Math.Round(runtime.TotalMilliseconds, 0);
+            Logger.Info("[JavaLauncher]", $"Total runtime for this session: {saveRuntime}");
 
-        private void OnProcessExited(object sender, EventArgs e, string profileName, bool shouldDelete)
-        {
+            //change discord rpc
             Discord.ChangeMessage($"Idling");
+            
+            //remove running ID
             Globals.running.Remove(runID);
+            
+            //delete assets if wanted
             if (shouldDelete)
                 if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"))
                     Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\", true);
 
-            timer.Change(Timeout.Infinite, Timeout.Infinite);
-            Logger.Info("[JavaLauncher]", "Total runtime for this session: " + runTime);
-
-            //TODO: UPDATE PLAYTIME IN INSTANCEJSON
-            //InstanceJson thisInstance = 
+            //save the runtime
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
+            ij.playTime = ij.playTime + (long)saveRuntime;
+            String toSave = JsonConvert.SerializeObject(ij);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", toSave);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
