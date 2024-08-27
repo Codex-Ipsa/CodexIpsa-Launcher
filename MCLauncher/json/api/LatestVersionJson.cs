@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MCLauncher.classes.ipsajson
 {
-    internal class LatestJavaVersion
+    internal class LatestVersionJson
     {
         public String release;
         public String snapshot;

@@ -373,7 +373,7 @@ namespace MCLauncher
                 latestJson = cl.DownloadString(Globals.javaLatest);
             }
 
-            LatestJavaVersion lj = JsonConvert.DeserializeObject<LatestJavaVersion>(latestJson);
+            LatestVersionJson lj = JsonConvert.DeserializeObject<LatestVersionJson>(latestJson);
 
             if (whichOne == "latest")
             {
