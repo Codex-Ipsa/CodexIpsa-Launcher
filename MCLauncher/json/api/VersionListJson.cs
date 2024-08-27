@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCLauncher.classes.jsons
+namespace MCLauncher.json.api
 {
     public class VersionListJson
     {

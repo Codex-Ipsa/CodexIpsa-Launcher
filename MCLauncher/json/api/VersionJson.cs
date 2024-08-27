@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MCLauncher.classes.ipsajson
+namespace MCLauncher.json.api
 {
     public class VersionJson
     {

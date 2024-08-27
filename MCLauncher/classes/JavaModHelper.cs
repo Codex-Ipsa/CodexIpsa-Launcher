@@ -1,5 +1,5 @@
 ﻿using MCLauncher.classes;
-using MCLauncher.classes.ipsajson;
+using MCLauncher.json.api;
 using MCLauncher.classes.jsons;
 using MCLauncher.forms;
 using Microsoft.SqlServer.Server;
