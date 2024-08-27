@@ -94,13 +94,16 @@ namespace MCLauncher
             public string lblReady = "Ready to play {verInfo}";
             public string lblLogInWarn = "You need to log in to use the launcher!";
             public string lblLogInWarn_Debug = "MAKE SURE TO DISABLE THIS IN GLOBALS!";
-            /*public string lblPlayedFor = "Played for";
+            public string lblPlayedFor = "Played for";
+            public string lblPlayedForDay = "day";
+            public string lblPlayedForDays = "days";
             public string lblPlayedForHour = "hour";
             public string lblPlayedForHours = "hours";
             public string lblPlayedForMinute = "minute";
             public string lblPlayedForMinutes = "minutes";
             public string lblPlayedForSecond = "second";
-            public string lblPlayedForSeconds = "seconds";*/
+            public string lblPlayedForSeconds = "seconds";
+            public string lblHaventPlayed = "Haven't played yet";
 
             //SettingsScreen
             public string grbLauncher = "Launcher";

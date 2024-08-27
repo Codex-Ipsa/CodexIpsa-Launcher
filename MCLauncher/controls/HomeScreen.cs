@@ -137,17 +137,16 @@ namespace MCLauncher
 
             Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
-            var pj = JsonConvert.DeserializeObject<profileJson>(json);
+            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
-            selectedVersion = "Minecraft " + pj.version;
-            //selectedVersion = pj.version;
-            selectedEdition = pj.edition;
+            selectedVersion = "Minecraft " + ij.version;
+            selectedEdition = ij.edition;
 
             Logger.Info("[HomeScreen/reloadInstance]", $"ver: {selectedVersion}, ed: {selectedEdition}");
 
             if (selectedVersion.Contains("latest"))
             {
-                selectedVersion = "Minecraft " + getLatestVersion(pj.version);
+                selectedVersion = "Minecraft " + getLatestVersion(ij.version);
             }
 
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
@@ -169,9 +168,37 @@ namespace MCLauncher
                 selectedVersion = tempName;
             }
 
-            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
-            Instance.lblPlayedFor.Text = $"Played for {pj.pla}ms";
+            //Ready to play text
+            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);            
             Profile.profileName = Instance.cmbInstaces.Text;
+
+            //Played for text
+            TimeSpan t = TimeSpan.FromMilliseconds(ij.playTime);
+            String playedForText = "Played for ";
+            if (t.Days == 1)
+                playedForText += $"{t.Days} {Strings.sj.lblPlayedForDay} ";
+            else if (t.Days > 1)
+                playedForText += $"{t.Days} {Strings.sj.lblPlayedForDays} ";
+
+            if (t.Hours == 1)
+                playedForText += $"{t.Hours} {Strings.sj.lblPlayedForHour} ";
+            else if (t.Hours > 1)
+                playedForText += $"{t.Hours} {Strings.sj.lblPlayedForHours} ";
+
+            if (t.Minutes == 1)
+                playedForText += $"{t.Minutes} {Strings.sj.lblPlayedForMinute} ";
+            else if (t.Minutes > 1)
+                playedForText += $"{t.Minutes} {Strings.sj.lblPlayedForMinutes} ";
+
+            if (t.Seconds == 1)
+                playedForText += $"{t.Seconds} {Strings.sj.lblPlayedForSecond}";
+            else if (t.Seconds > 1)
+                playedForText += $"{t.Seconds} {Strings.sj.lblPlayedForSeconds}";
+
+            if (t.TotalMilliseconds == 0)
+                playedForText = Strings.sj.lblHaventPlayed;
+
+            Instance.lblPlayedFor.Text = playedForText;
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
