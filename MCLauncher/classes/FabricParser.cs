@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace MCLauncher.classes.ipsajson
+namespace MCLauncher.classes
 {
     internal class FabricParser
     {

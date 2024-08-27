@@ -86,7 +86,7 @@
     <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
-    <Compile Include="classes\ipsajson\FabricParser.cs" />
+    <Compile Include="classes\FabricParser.cs" />
     <Compile Include="json\api\VersionJson.cs" />
     <Compile Include="json\api\LatestVersionJson.cs" />
     <Compile Include="json\api\ModloadersJson.cs" />
@@ -309,6 +309,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="classes\ipsajson\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
