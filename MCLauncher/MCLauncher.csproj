@@ -91,7 +91,7 @@
     <Compile Include="json\api\LatestVersionJson.cs" />
     <Compile Include="classes\ipsajson\ModloadersManifest.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
-    <Compile Include="classes\jsons\InstanceJson.cs" />
+    <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />
     <Compile Include="classes\jsons\ModJson.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
@@ -309,8 +309,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="json\launcher\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

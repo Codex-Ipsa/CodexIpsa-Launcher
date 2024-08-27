@@ -1,4 +1,4 @@
-﻿using MCLauncher.classes.jsons;
+﻿using MCLauncher.json.launcher;
 using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;

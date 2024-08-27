@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MCLauncher.classes.jsons
+namespace MCLauncher.json.launcher
 {
     public class InstanceJson
     {
@@ -19,7 +19,6 @@ namespace MCLauncher.classes.jsons
         public bool demo { get; set; }
         public bool offline { get; set; }
         public bool multiplayer { get; set; }
-
 
         public bool useJava { get; set; }
         public string javaPath { get; set; }
