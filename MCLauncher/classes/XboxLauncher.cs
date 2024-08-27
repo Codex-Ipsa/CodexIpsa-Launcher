@@ -1,4 +1,5 @@
 ﻿using MCLauncher.forms;
+using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -38,7 +39,7 @@ namespace MCLauncher.classes
 
             //downloading game
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-            var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
+            var dj = JsonConvert.DeserializeObject<InstanceJson>(data);
 
             string url = Globals.client.DownloadString(Globals.x360Url) + dj.version + ".zip";
 

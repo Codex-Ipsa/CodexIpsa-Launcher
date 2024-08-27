@@ -1,4 +1,5 @@
-﻿using MCLauncher.json.launcher;
+﻿using MCLauncher.json.api;
+using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace MCLauncher.forms
         public static string edition = "java";
         public static string profMode = "";
 
-        public List<VersionManifest> vj = new List<VersionManifest>();
+        public List<VersionListJson> vj = new List<VersionListJson>();
         public static string lastSelected;
         public static string lastAlt;
         public static string lastDate;
@@ -112,7 +113,7 @@ namespace MCLauncher.forms
                 else
                     manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
 
-                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                vj = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
                 reloadVerBox("java");
 
                 deleteBtn.Visible = false;
@@ -132,7 +133,7 @@ namespace MCLauncher.forms
             else if (profMode == "edit")
             {
                 string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-                var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
+                var dj = JsonConvert.DeserializeObject<InstanceJson>(data);
 
                 version = dj.version;
                 nameBox.Text = profileName;
@@ -225,7 +226,7 @@ namespace MCLauncher.forms
                     manifest = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
                 }
 
-                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                vj = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
                 reloadVerBox(dj.edition);
 
                 reloadModsList();
@@ -943,7 +944,7 @@ namespace MCLauncher.forms
                 checkExperimental.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.x360Manifest);
-                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                vj = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
                 reloadVerBox("x360");
             }
             else if (editionBox.Text.Contains("MinecraftEdu"))
@@ -963,7 +964,7 @@ namespace MCLauncher.forms
                 checkExperimental.Visible = false;
 
                 string manifest = Globals.client.DownloadString(Globals.javaEduManifest);
-                vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                vj = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
                 reloadVerBox("javaedu");
             }
             else
@@ -985,7 +986,7 @@ namespace MCLauncher.forms
                 if (!isInitial) //shitty fix but it doesn't crash anymore :troll:
                 {
                     string manifest = Globals.client.DownloadString(Globals.javaManifest);
-                    vj = JsonConvert.DeserializeObject<List<VersionManifest>>(manifest);
+                    vj = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
                     reloadVerBox("java");
                 }
             }
@@ -1188,41 +1189,5 @@ namespace MCLauncher.forms
                 File.Copy(ofd.FileName, $"{Globals.dataPath}\\instance\\{Profile.profileName}\\icon.png");
             }
         }
-    }
-
-    public class VersionManifest
-    {
-        public string id { get; set; }
-        public string alt { get; set; }
-        public string type { get; set; }
-        public DateTime released { get; set; }
-        /*public bool forge { get; set; }
-        public bool fabric { get; set; }
-        public string risugami { get; set; }*/
-    }
-
-    public class ProfileInfo
-    {
-        public int data { get; set; }
-        public string edition { get; set; }
-        public string version { get; set; }
-        public string directory { get; set; }
-        public string resolution { get; set; }
-        public string memory { get; set; }
-        public string befCmd { get; set; }
-        public string aftCmd { get; set; }
-        public bool useJava { get; set; }
-        public string javaPath { get; set; }
-        public bool useJson { get; set; }
-        public string jsonPath { get; set; }
-        public bool useClass { get; set; }
-        public string classpath { get; set; }
-        public bool demo { get; set; }
-        public bool offline { get; set; }
-        public bool disProxy { get; set; }
-        public bool multiplayer { get; set; }
-        public bool xboxDemo { get; set; }
-        public bool useAssets { get; set; }
-        public string assetsPath { get; set; }
     }
 }
