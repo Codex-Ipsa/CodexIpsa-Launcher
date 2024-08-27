@@ -187,15 +187,26 @@ namespace MCLauncher.controls
             xboxList.TopItem = xboxList.Items[0];
         }
 
+        //Finds and selects a version in the ver list
         public void selectInList(ListView list, String name)
         {
-            ListViewItem item = list.FindItemWithText(name);
-            int indexOf = list.Items.IndexOf(item);
-            if (indexOf > 0)
+            Logger.Info("[InstanceGui/selectInList]", $"Searching for {name}...");
+
+            int pos = 0;
+            for(int i = list.Items.Count -1; i > 0; i--)
             {
-                list.Items[indexOf].Selected = true;
-                list.TopItem = list.Items[indexOf];
+                String thisVer = list.Items[i].Text.Split()[0]; //removes (alt) text
+                if(thisVer == name)
+                {
+                    pos = i;
+                    break;
+                }
             }
+
+            //selects the version
+            Logger.Info("[InstanceGui/selectInList]", $"Found {name} at pos: {pos}");
+            list.Items[pos].Selected = true;
+            list.TopItem = list.Items[pos];
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
