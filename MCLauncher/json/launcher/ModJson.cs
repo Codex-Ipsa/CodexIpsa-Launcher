@@ -1,4 +1,4 @@
-﻿namespace MCLauncher.classes.jsons
+﻿namespace MCLauncher.json.launcher
 {
     public class ModJson
     {

@@ -93,7 +93,7 @@
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />
-    <Compile Include="classes\jsons\ModJson.cs" />
+    <Compile Include="json\launcher\ModJson.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
       <SubType>UserControl</SubType>

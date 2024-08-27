@@ -1,5 +1,5 @@
 ﻿using MCLauncher.json.api;
-using MCLauncher.classes.jsons;
+using MCLauncher.json.launcher;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
