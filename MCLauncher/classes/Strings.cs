@@ -180,6 +180,7 @@ namespace MCLauncher
             public string chkCustJson = "Custom JSON";
             public string chkClasspath = "Classpath";
             public string chkAssetIndex = "Asset index";
+            public string chkServerIP = "Server IP";
 
             //Profile manager mods
             public string btnMoveUp = "Move up";

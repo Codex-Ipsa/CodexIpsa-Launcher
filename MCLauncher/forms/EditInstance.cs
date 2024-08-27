@@ -53,6 +53,7 @@ namespace MCLauncher.forms
                 instanceGui.tabControl1.SelectedIndex = 0;
 
             instanceGui.selectedVersion = ij.version;
+            instanceGui.playTime = ij.playTime;
 
             instanceGui.nameBox.Text = instanceName;
             instanceGui.originalName = instanceName;
@@ -74,10 +75,12 @@ namespace MCLauncher.forms
             instanceGui.chkCustJava.Checked = ij.useJava;
             instanceGui.javaBox.Enabled = ij.useJava;
             instanceGui.javaBox.Text = ij.javaPath;
+            instanceGui.javaBtn.Enabled = ij.useJava;
 
             instanceGui.chkCustJson.Checked = ij.useJson;
             instanceGui.jsonBox.Enabled = ij.useJson;
             instanceGui.jsonBox.Text = ij.jsonPath;
+            instanceGui.jsonBtn.Enabled = ij.useJava;
 
             instanceGui.chkClasspath.Checked = ij.useClass;
             instanceGui.classBox.Enabled = ij.useClass;
@@ -86,6 +89,11 @@ namespace MCLauncher.forms
             instanceGui.chkAssetIndex.Checked = ij.useAssets;
             instanceGui.assetIndexBox.Enabled = ij.useAssets;
             instanceGui.assetIndexBox.Text = ij.assetsPath;
+            instanceGui.assetIndexBtn.Enabled = ij.useAssets;
+
+            instanceGui.chkServerIP.Checked = ij.useServerIP;
+            instanceGui.serverIPBox.Enabled = ij.useServerIP;
+            instanceGui.serverIPBox.Text = ij.serverIP;
 
             instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 

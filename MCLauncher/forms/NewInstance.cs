@@ -23,6 +23,8 @@ namespace MCLauncher.forms
             this.Controls.Add(instanceGui);
 
             //fill in default stuff
+            instanceGui.playTime = 0;
+
             instanceGui.nameBox.Text = "New profile";
             instanceGui.ramMinBox.Value = 512;
             instanceGui.ramMaxBox.Value = 512;
@@ -35,6 +37,7 @@ namespace MCLauncher.forms
             instanceGui.classBox.Enabled = false;
             instanceGui.assetIndexBox.Enabled = false;
             instanceGui.assetIndexBtn.Enabled = false;
+            instanceGui.serverIPBox.Enabled = false;
             instanceGui.selectInList(instanceGui.vanillaList, "b1.7.3");
         }
     }

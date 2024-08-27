@@ -91,6 +91,8 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
+            this.serverIPBox = new System.Windows.Forms.TextBox();
+            this.chkServerIP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -470,7 +472,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(366, 382);
+            this.tabControl1.Size = new System.Drawing.Size(366, 402);
             this.tabControl1.TabIndex = 37;
             // 
             // vanillaPage
@@ -490,7 +492,7 @@
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 22);
             this.vanillaPage.Name = "vanillaPage";
-            this.vanillaPage.Size = new System.Drawing.Size(358, 356);
+            this.vanillaPage.Size = new System.Drawing.Size(358, 376);
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
@@ -498,7 +500,7 @@
             // chkLatestSnapshot
             // 
             this.chkLatestSnapshot.AutoSize = true;
-            this.chkLatestSnapshot.Location = new System.Drawing.Point(178, 335);
+            this.chkLatestSnapshot.Location = new System.Drawing.Point(177, 355);
             this.chkLatestSnapshot.Name = "chkLatestSnapshot";
             this.chkLatestSnapshot.Size = new System.Drawing.Size(117, 17);
             this.chkLatestSnapshot.TabIndex = 11;
@@ -509,7 +511,7 @@
             // chkLatest
             // 
             this.chkLatest.AutoSize = true;
-            this.chkLatest.Location = new System.Drawing.Point(6, 335);
+            this.chkLatest.Location = new System.Drawing.Point(5, 355);
             this.chkLatest.Name = "chkLatest";
             this.chkLatest.Size = new System.Drawing.Size(72, 17);
             this.chkLatest.TabIndex = 10;
@@ -522,7 +524,7 @@
             this.vanillaExperimental.AutoSize = true;
             this.vanillaExperimental.Checked = true;
             this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(208, 315);
+            this.vanillaExperimental.Location = new System.Drawing.Point(207, 335);
             this.vanillaExperimental.Name = "vanillaExperimental";
             this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
             this.vanillaExperimental.TabIndex = 9;
@@ -535,7 +537,7 @@
             this.vanillaSnapshot.AutoSize = true;
             this.vanillaSnapshot.Checked = true;
             this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(131, 315);
+            this.vanillaSnapshot.Location = new System.Drawing.Point(130, 335);
             this.vanillaSnapshot.Name = "vanillaSnapshot";
             this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
             this.vanillaSnapshot.TabIndex = 8;
@@ -548,7 +550,7 @@
             this.vanillaRelease.AutoSize = true;
             this.vanillaRelease.Checked = true;
             this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(60, 315);
+            this.vanillaRelease.Location = new System.Drawing.Point(59, 335);
             this.vanillaRelease.Name = "vanillaRelease";
             this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
             this.vanillaRelease.TabIndex = 7;
@@ -561,7 +563,7 @@
             this.vanillaBeta.AutoSize = true;
             this.vanillaBeta.Checked = true;
             this.vanillaBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaBeta.Location = new System.Drawing.Point(6, 315);
+            this.vanillaBeta.Location = new System.Drawing.Point(5, 335);
             this.vanillaBeta.Name = "vanillaBeta";
             this.vanillaBeta.Size = new System.Drawing.Size(48, 17);
             this.vanillaBeta.TabIndex = 6;
@@ -574,7 +576,7 @@
             this.vanillaAlpha.AutoSize = true;
             this.vanillaAlpha.Checked = true;
             this.vanillaAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaAlpha.Location = new System.Drawing.Point(275, 295);
+            this.vanillaAlpha.Location = new System.Drawing.Point(274, 315);
             this.vanillaAlpha.Name = "vanillaAlpha";
             this.vanillaAlpha.Size = new System.Drawing.Size(53, 17);
             this.vanillaAlpha.TabIndex = 5;
@@ -587,7 +589,7 @@
             this.vanillaInfdev.AutoSize = true;
             this.vanillaInfdev.Checked = true;
             this.vanillaInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaInfdev.Location = new System.Drawing.Point(213, 295);
+            this.vanillaInfdev.Location = new System.Drawing.Point(212, 315);
             this.vanillaInfdev.Name = "vanillaInfdev";
             this.vanillaInfdev.Size = new System.Drawing.Size(56, 17);
             this.vanillaInfdev.TabIndex = 4;
@@ -600,7 +602,7 @@
             this.vanillaIndev.AutoSize = true;
             this.vanillaIndev.Checked = true;
             this.vanillaIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaIndev.Location = new System.Drawing.Point(154, 295);
+            this.vanillaIndev.Location = new System.Drawing.Point(153, 315);
             this.vanillaIndev.Name = "vanillaIndev";
             this.vanillaIndev.Size = new System.Drawing.Size(53, 17);
             this.vanillaIndev.TabIndex = 3;
@@ -613,7 +615,7 @@
             this.vanillaClassic.AutoSize = true;
             this.vanillaClassic.Checked = true;
             this.vanillaClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaClassic.Location = new System.Drawing.Point(89, 295);
+            this.vanillaClassic.Location = new System.Drawing.Point(88, 315);
             this.vanillaClassic.Name = "vanillaClassic";
             this.vanillaClassic.Size = new System.Drawing.Size(59, 17);
             this.vanillaClassic.TabIndex = 2;
@@ -626,7 +628,7 @@
             this.vanillaPreclassic.AutoSize = true;
             this.vanillaPreclassic.Checked = true;
             this.vanillaPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaPreclassic.Location = new System.Drawing.Point(6, 295);
+            this.vanillaPreclassic.Location = new System.Drawing.Point(5, 315);
             this.vanillaPreclassic.Name = "vanillaPreclassic";
             this.vanillaPreclassic.Size = new System.Drawing.Size(77, 17);
             this.vanillaPreclassic.TabIndex = 1;
@@ -642,7 +644,7 @@
             this.vanillaList.Location = new System.Drawing.Point(3, 3);
             this.vanillaList.MultiSelect = false;
             this.vanillaList.Name = "vanillaList";
-            this.vanillaList.Size = new System.Drawing.Size(348, 287);
+            this.vanillaList.Size = new System.Drawing.Size(348, 306);
             this.vanillaList.TabIndex = 0;
             this.vanillaList.UseCompatibleStateImageBehavior = false;
             this.vanillaList.View = System.Windows.Forms.View.Details;
@@ -655,7 +657,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(358, 356);
+            this.eduPage.Size = new System.Drawing.Size(358, 382);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -681,7 +683,7 @@
             this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(358, 356);
+            this.xboxPage.Size = new System.Drawing.Size(358, 382);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -747,6 +749,8 @@
             // 
             // grbForExp
             // 
+            this.grbForExp.Controls.Add(this.chkServerIP);
+            this.grbForExp.Controls.Add(this.serverIPBox);
             this.grbForExp.Controls.Add(this.chkAssetIndex);
             this.grbForExp.Controls.Add(this.assetIndexBtn);
             this.grbForExp.Controls.Add(this.assetIndexBox);
@@ -760,7 +764,7 @@
             this.grbForExp.Controls.Add(this.javaBtn);
             this.grbForExp.Location = new System.Drawing.Point(368, 226);
             this.grbForExp.Name = "grbForExp";
-            this.grbForExp.Size = new System.Drawing.Size(425, 125);
+            this.grbForExp.Size = new System.Drawing.Size(425, 148);
             this.grbForExp.TabIndex = 40;
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
@@ -784,7 +788,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(715, 355);
+            this.saveBtn.Location = new System.Drawing.Point(715, 376);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(78, 23);
             this.saveBtn.TabIndex = 41;
@@ -794,7 +798,7 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(521, 355);
+            this.openBtn.Location = new System.Drawing.Point(521, 376);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(91, 23);
             this.openBtn.TabIndex = 43;
@@ -804,13 +808,31 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(618, 355);
+            this.deleteBtn.Location = new System.Drawing.Point(618, 376);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(91, 23);
             this.deleteBtn.TabIndex = 42;
             this.deleteBtn.Text = "btn.delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // serverIPBox
+            // 
+            this.serverIPBox.Location = new System.Drawing.Point(99, 124);
+            this.serverIPBox.Name = "serverIPBox";
+            this.serverIPBox.Size = new System.Drawing.Size(318, 20);
+            this.serverIPBox.TabIndex = 36;
+            // 
+            // chkServerIP
+            // 
+            this.chkServerIP.AutoSize = true;
+            this.chkServerIP.Location = new System.Drawing.Point(6, 126);
+            this.chkServerIP.Name = "chkServerIP";
+            this.chkServerIP.Size = new System.Drawing.Size(88, 17);
+            this.chkServerIP.TabIndex = 37;
+            this.chkServerIP.Text = "chk.ServerIP";
+            this.chkServerIP.UseVisualStyleBackColor = true;
+            this.chkServerIP.CheckedChanged += new System.EventHandler(this.chkServerIP_CheckedChanged);
             // 
             // InstanceGui
             // 
@@ -824,7 +846,7 @@
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.grbXbox);
             this.Name = "InstanceGui";
-            this.Size = new System.Drawing.Size(800, 382);
+            this.Size = new System.Drawing.Size(800, 402);
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).EndInit();
             this.grbXbox.ResumeLayout(false);
             this.grbXbox.PerformLayout();
@@ -905,5 +927,7 @@
         public System.Windows.Forms.Button saveBtn;
         public System.Windows.Forms.Button openBtn;
         public System.Windows.Forms.Button deleteBtn;
+        public System.Windows.Forms.CheckBox chkServerIP;
+        public System.Windows.Forms.TextBox serverIPBox;
     }
 }

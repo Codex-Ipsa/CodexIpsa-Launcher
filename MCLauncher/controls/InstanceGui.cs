@@ -16,6 +16,8 @@ namespace MCLauncher.controls
         public bool isEdit1 = false;
         public String originalName;
 
+        public long playTime;
+
         public InstanceGui(Form form, bool isEdit)
         {
             InitializeComponent();
@@ -42,6 +44,7 @@ namespace MCLauncher.controls
             chkCustJson.Text = Strings.sj.chkCustJson;
             chkClasspath.Text = Strings.sj.chkClasspath;
             chkAssetIndex.Text = Strings.sj.chkAssetIndex;
+            chkServerIP.Text = Strings.sj.chkServerIP;
             saveBtn.Text = Strings.sj.btnSaveInst;
             deleteBtn.Text = Strings.sj.btnDeleteInst;
             openBtn.Text = Strings.sj.btnOpenDir;
@@ -193,10 +196,10 @@ namespace MCLauncher.controls
             Logger.Info("[InstanceGui/selectInList]", $"Searching for {name}...");
 
             int pos = 0;
-            for(int i = list.Items.Count -1; i > 0; i--)
+            for (int i = list.Items.Count - 1; i > 0; i--)
             {
                 String thisVer = list.Items[i].Text.Split()[0]; //removes (alt) text
-                if(thisVer == name)
+                if (thisVer == name)
                 {
                     pos = i;
                     break;
@@ -242,8 +245,13 @@ namespace MCLauncher.controls
             ij.classpath = classBox.Text;
             ij.useAssets = chkAssetIndex.Checked;
             ij.assetsPath = assetIndexBox.Text;
+            ij.useServerIP = chkServerIP.Checked;
+            ij.serverIP = serverIPBox.Text;
 
             ij.xboxDemo = chkXboxDemo.Checked;
+
+            ij.playTime = this.playTime;
+
             string json = JsonConvert.SerializeObject(ij);
 
             //get profile name
@@ -274,7 +282,7 @@ namespace MCLauncher.controls
             }
 
             //move old profile if renaming
-            if(isEdit1)
+            if (isEdit1)
             {
                 if (!String.IsNullOrEmpty(originalName))
                 {
@@ -388,6 +396,18 @@ namespace MCLauncher.controls
             {
                 assetIndexBox.Enabled = false;
                 assetIndexBtn.Enabled = false;
+            }
+        }
+
+        private void chkServerIP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkServerIP.Checked)
+            {
+                serverIPBox.Enabled = true;
+            }
+            else
+            {
+                serverIPBox.Enabled = false;
             }
         }
 
