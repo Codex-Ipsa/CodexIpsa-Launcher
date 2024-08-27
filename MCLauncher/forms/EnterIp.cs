@@ -1,14 +1,7 @@
 ﻿using MCLauncher.classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -35,7 +28,7 @@ namespace MCLauncher
         private void button1_Click(object sender, EventArgs e)
         {
             inputedText = comboBox1.Text;
-            if(inputedText == String.Empty || inputedText == null)
+            if (inputedText == String.Empty || inputedText == null)
             {
                 this.Close();
             }
@@ -56,7 +49,7 @@ namespace MCLauncher
                     else if (Regex.IsMatch(split[0], ValidHostnameRegex))
                     {
                         IPAddress[] arr = Dns.GetHostAddresses(split[0]);
-                        foreach(IPAddress ip in arr)
+                        foreach (IPAddress ip in arr)
                             JavaLauncher.srvIP = ip.ToString();
                     }
                     JavaLauncher.srvPort = split[1];

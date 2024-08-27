@@ -1,17 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MCLauncher.controls
@@ -83,7 +79,7 @@ namespace MCLauncher.controls
             langNameList.Clear();
 
             //Get update info
-            if(!Globals.offlineMode)
+            if (!Globals.offlineMode)
             {
                 WebClient client = new WebClient();
                 string jsonData = client.DownloadString(Globals.updateInfo);
@@ -131,7 +127,7 @@ namespace MCLauncher.controls
             }
             else
             {
-                if(!isFirstLangCheck)
+                if (!isFirstLangCheck)
                     MessageBox.Show(Strings.sj.noUpdate, "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Logger.Info("[Settings]", $"No new update is available.");
@@ -158,12 +154,12 @@ namespace MCLauncher.controls
 
         private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(isFirstLangCheck)
+            if (isFirstLangCheck)
             {
                 Logger.Info("[Settings]", $"PrefLang: {Settings.sj.language}");
                 isFirstLangCheck = false;
 
-                if(Settings.sj.language == "english" || Settings.sj.language == String.Empty || Settings.sj.language == null)
+                if (Settings.sj.language == "english" || Settings.sj.language == String.Empty || Settings.sj.language == null)
                 {
                     Strings.reloadLangs("english");
                 }
@@ -185,7 +181,7 @@ namespace MCLauncher.controls
 
         private void chkDiscordRpc_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkDiscordRpc.Checked)
+            if (chkDiscordRpc.Checked)
             {
                 Settings.sj.discordRPC = true;
                 Settings.Save();

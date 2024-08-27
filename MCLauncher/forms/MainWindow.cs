@@ -1,17 +1,11 @@
 ﻿using MCLauncher.classes;
 using MCLauncher.controls;
-using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -223,7 +217,7 @@ namespace MCLauncher
 
         private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 

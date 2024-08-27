@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MCLauncher.classes;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,8 +12,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
-using MCLauncher.classes;
-using Newtonsoft.Json;
 
 namespace MCLauncher
 {
@@ -71,7 +71,7 @@ namespace MCLauncher
                 userCode = vers.user_code;
                 deviceCode = vers.device_code;
                 deviceUrl = vers.verification_uri;
-                if(Globals.isDebug)
+                if (Globals.isDebug)
                 {
                     Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
                     Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
@@ -120,7 +120,7 @@ namespace MCLauncher
                 {
                     accessToken = vers.access_token;
                     refreshToken = vers.refresh_token;
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                     {
                         Logger.Info("[MSAuth]", $"AccessToken: {accessToken}");
                         Logger.Info("[MSAuth]", $"RefreshToken: {refreshToken}");
@@ -161,7 +161,7 @@ namespace MCLauncher
                     string json = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={accessToken}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
 
                     streamWriter.Write(json);
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                         Logger.Info("[MSAuth]", $"XBL Request: {json}");
                 }
 
@@ -170,7 +170,7 @@ namespace MCLauncher
                 using (var streamReader = new StreamReader(xblResponse.GetResponseStream()))
                 {
                     xblResponseString = streamReader.ReadToEnd();
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                         Logger.Info("[MSAuth]", $"XBL Response: {xblResponseString}");
                     else
                         Logger.Info("[MSAuth]", $"Got XBL response");
@@ -221,7 +221,7 @@ namespace MCLauncher
                 string json = $"{{\"Properties\": {{\"SandboxId\": \"RETAIL\",\"UserTokens\": [\"{xblToken}\"]}},\"RelyingParty\": \"rp://api.minecraftservices.com/\",\"TokenType\": \"JWT\"}}";
 
                 streamWriter.Write(json);
-                if(Globals.isDebug)
+                if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"XSTS Request: {json}");
             }
 
@@ -535,7 +535,7 @@ namespace MCLauncher
             xstsAuth();
             minecraftAuth();
             verifyOwnership();
-            if(getMppass == true)
+            if (getMppass == true)
             {
                 getMpPass();
             }

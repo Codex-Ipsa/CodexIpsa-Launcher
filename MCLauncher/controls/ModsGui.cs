@@ -4,18 +4,10 @@ using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace MCLauncher.controls
 {
@@ -126,14 +118,14 @@ namespace MCLauncher.controls
 
                 if (mm.liteloader != null)
                     btnLiteloader.Enabled = true;
-                else 
+                else
                     btnLiteloader.Enabled = false;
             }
             catch (WebException ex)
             {
                 //if manifest no existo
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"no modloader manifest at {version}");
-                
+
                 btnMLoader.Enabled = false;
                 btnForge.Enabled = false;
                 btnFabric.Enabled = false;

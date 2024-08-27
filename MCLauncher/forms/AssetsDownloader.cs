@@ -1,18 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
+using System.Windows.Forms;
 
 namespace MCLauncher.forms
 {
@@ -76,7 +69,7 @@ namespace MCLauncher.forms
             int i = 0;
             foreach (KeyValuePair<string, AssetIndexObject> entry in dict)
             {
-                if(!doWork)
+                if (!doWork)
                 {
                     break;
                 }

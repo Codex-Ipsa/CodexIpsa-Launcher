@@ -1,21 +1,9 @@
 ﻿using MCLauncher.classes.ipsajson;
 using MCLauncher.controls;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Security;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
@@ -50,10 +38,10 @@ namespace MCLauncher.forms
                 for (int i = 0; i < manifest.forge.Count(); i++)
                 {
                     Forge f = manifest.forge[i];
-                    
+
                     //get recommended version
                     int icon = -1;
-                    if(f.recommended)
+                    if (f.recommended)
                     {
                         icon = 0;
                         recommendedVer = i;
@@ -76,7 +64,7 @@ namespace MCLauncher.forms
             if (loader == "forge")
             {
                 Forge forge = manifest.forge[listView1.SelectedItems[0].Index];
-                
+
                 //json based
                 if (manifest.forge[listView1.SelectedItems[0].Index].type == "json")
                 {

@@ -1,18 +1,12 @@
-﻿using MCLauncher.classes;
-using MCLauncher.classes.jsons;
+﻿using MCLauncher.classes.jsons;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Net;
-using System.Net.Mail;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {

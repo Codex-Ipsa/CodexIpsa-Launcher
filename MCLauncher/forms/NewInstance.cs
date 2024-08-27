@@ -1,9 +1,4 @@
-﻿using MCLauncher.classes.jsons;
-using MCLauncher.controls;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using MCLauncher.controls;
 using System.Windows.Forms;
 
 namespace MCLauncher.forms

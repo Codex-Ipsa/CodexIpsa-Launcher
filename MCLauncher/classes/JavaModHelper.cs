@@ -1,19 +1,14 @@
 ﻿using MCLauncher.classes;
-using MCLauncher.json.api;
 using MCLauncher.classes.jsons;
 using MCLauncher.forms;
-using Microsoft.SqlServer.Server;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
-using System.Security.Policy;
 using System.Text;
-using System.Web;
 
 namespace MCLauncher
 {
@@ -179,9 +174,9 @@ namespace MCLauncher
                         File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
                     }
 
-                    if(Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\"))
+                    if (Directory.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\"))
                         Directory.Delete($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2\\META-INF\\", true);
-                    
+
                     Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\");
                     ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\temp2", $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\patch\\{patchHash}.jar");
                 }

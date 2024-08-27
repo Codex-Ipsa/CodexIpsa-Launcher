@@ -1,11 +1,4 @@
-﻿using MCLauncher.forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MCLauncher.classes.jsons
+﻿namespace MCLauncher.classes.jsons
 {
     public class ModJson
     {

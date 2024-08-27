@@ -1,14 +1,8 @@
-﻿using MCLauncher.forms;
-using MCLauncher.json.api;
+﻿using MCLauncher.json.api;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MCLauncher.classes.ipsajson
 {
@@ -52,9 +46,9 @@ namespace MCLauncher.classes.ipsajson
             string versionInfo = client.DownloadString($"https://meta.fabricmc.net/v2/versions/loader/{gameVer}/{loaderVer}/profile/json");
             FabricManifest versionManifest = JsonConvert.DeserializeObject<FabricManifest>(versionInfo);
 
-            foreach(ReuploadsManifest reup in reuploadsManifest)
+            foreach (ReuploadsManifest reup in reuploadsManifest)
             {
-                if(reup.mojang == versionManifest.inheritsFrom)
+                if (reup.mojang == versionManifest.inheritsFrom)
                     versionManifest.inheritsFrom = reup.ipsa;
             }
 

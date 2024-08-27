@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MCLauncher.classes.jsons
 {
     public class InstanceJson
     {
         public int data { get; set; }
-        
+
         public string edition { get; set; }
         public string version { get; set; }
-        
+
         public string directory { get; set; }
         public string resolution { get; set; }
         public string memory { get; set; }

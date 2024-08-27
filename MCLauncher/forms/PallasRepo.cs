@@ -6,11 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Policy;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.forms
 {
@@ -104,7 +100,7 @@ namespace MCLauncher.forms
 
                 Logger.Info("[PallasRepo]", $"{id}, {version}, {url}, {json}");
 
-                if(isntMod) //temp? this looks better since you can't fit in "Omniarchive April Fools 2023 c0.0.12a_03-asbestos" LMAO
+                if (isntMod) //temp? this looks better since you can't fit in "Omniarchive April Fools 2023 c0.0.12a_03-asbestos" LMAO
                 {
                     name = "Minecraft";
                 }
@@ -182,7 +178,7 @@ namespace MCLauncher.forms
             {
                 if (mod.name == checkName)
                 {
-                    if(mod.isntMod == true)
+                    if (mod.isntMod == true)
                     {
                         return null;
                     }
@@ -211,7 +207,7 @@ namespace MCLauncher.forms
                                     Int64 bytes_total = Convert.ToInt64(client.ResponseHeaders["Content-Length"]);
                                     Int64 existFile = new FileInfo($"{Globals.dataPath}\\instance\\{theModsGui.instanceName}\\jarmods\\{mod.id}-{checkVersion}.zip").Length;
 
-                                    if(bytes_total != existFile)
+                                    if (bytes_total != existFile)
                                     {
                                         DialogResult dialogResult = MessageBox.Show($"Update {ver.version} of {mod.name} is available!\nWould you like to download it?", "Mod update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                         if (dialogResult == DialogResult.Yes)

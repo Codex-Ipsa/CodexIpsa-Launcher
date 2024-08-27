@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.IO;
 
 namespace MCLauncher
 {
@@ -9,7 +9,7 @@ namespace MCLauncher
 
         public static void Reload()
         {
-            if(!File.Exists($"{Globals.dataPath}\\config.json"))
+            if (!File.Exists($"{Globals.dataPath}\\config.json"))
             {
                 string toSave = JsonConvert.SerializeObject(sj);
                 File.WriteAllText($"{Globals.dataPath}\\config.json", toSave);

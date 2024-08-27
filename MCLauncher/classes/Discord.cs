@@ -1,15 +1,7 @@
-﻿using DiscordRPC.Logging;
-using DiscordRPC;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Threading;
-using MCLauncher.Properties;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace MCLauncher.classes
 {

@@ -1,17 +1,11 @@
-﻿using MCLauncher.json.api;
-using MCLauncher.forms;
+﻿using MCLauncher.forms;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace MCLauncher.classes
@@ -62,7 +56,7 @@ namespace MCLauncher.classes
 
             String version = dj.version;
 
-            if(version.Contains("latest"))
+            if (version.Contains("latest"))
             {
                 version = HomeScreen.getLatestVersion(version);
             }

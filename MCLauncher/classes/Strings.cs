@@ -1,14 +1,8 @@
 ﻿using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
-using System.Threading;
-using System.Web;
 
 namespace MCLauncher
 {
