@@ -123,27 +123,6 @@ namespace MCLauncher
                 var dirName = dirN.Name;
                 if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
-                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.json");
-                    if (text.Contains("instVer") && text.Contains("instType"))
-                    {
-                        updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
-                    }
-                    if (text.Contains("\"proxy\": true"))
-                    {
-                        text = text.Replace("\"proxy\": true", "\"disProxy\": false");
-                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
-                    }
-                    else if (text.Contains("\"proxy\": false"))
-                    {
-                        text = text.Replace("\"proxy\": false", "\"disProxy\": false");
-                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
-                    }
-
-                    instanceList.Add(dirName);
-                }
-                else if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
-                {
-                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
                     instanceList.Add(dirName);
                 }
             }
@@ -191,85 +170,8 @@ namespace MCLauncher
             }
 
             Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
+            Instance.lblPlayedFor.Text = $"Played for {pj.pla}ms";
             Profile.profileName = Instance.cmbInstaces.Text;
-        }
-
-        public static void updateFromSecondInst(string path)
-        {
-            string content = File.ReadAllText($"{path}\\instance.cfg");
-            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(content);
-
-            foreach (var oj in orig)
-            {
-                string saveData = "";
-                saveData += $"{{\n";
-                saveData += $"  \"data\": 2,\n";
-                if (oj.edition == "Java Edition")
-                    saveData += $"  \"edition\": \"java\",\n";
-                else if (oj.edition == "Xbox 360 Edition")
-                    saveData += $"  \"edition\": \"x360\",\n";
-                saveData += $"  \"version\": \"{oj.version}\",\n";
-                saveData += $"  \"directory\": \"{oj.directory}\",\n";
-                saveData += $"  \"resolution\": \"{oj.resolutionX} {oj.resolutionY}\",\n";
-                saveData += $"  \"memory\": \"{oj.ramMax} {oj.ramMin}\",\n";
-                saveData += $"  \"befCmd\": \"\",\n";
-                saveData += $"  \"aftCmd\": \"{oj.jvmArgs}\",\n";
-                saveData += $"  \"useJava\": {bool.Parse(oj.useCustomJava.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
-                saveData += $"  \"useJson\": false,\n";
-                saveData += $"  \"jsonPath\": \"\",\n";
-                saveData += $"  \"useClass\": false,\n";
-                saveData += $"  \"classpath\": \"\",\n";
-                saveData += $"  \"demo\": false,\n";
-                saveData += $"  \"modded\": false,\n";
-                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"disProxy\": false,\n";
-                saveData += $"  \"multiplayer\": false,\n";
-                saveData += $"  \"xboxDemo\": false,\n";
-                saveData += $"  \"useAssets\": false,\n";
-                saveData += $"  \"assetsPath\": \"\"\n";
-                saveData += $"}}";
-                Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
-                Console.WriteLine(saveData);
-                File.WriteAllText($"{path}\\instance.json", saveData);
-                File.Delete($"{path}\\instance.cfg");
-            }
-        }
-
-        public static void updateFromFirstInst(string path)
-        {
-            int index = path.LastIndexOf("\\") + 1;
-            string name = path.Substring(index, path.Length - index);
-
-            string text = File.ReadAllText($"{path}\\instance.json");
-            if (text.Contains("classroom"))
-            {
-                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");
-            }
-            else
-            {
-                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"Java Edition\",");
-            }
-            text = text.Replace("instVer", "version");
-            text = text.Replace("instType", "type");
-            text = text.Replace("instUrl", "url");
-            text = text.Replace("instDir", "directory");
-            text = text.Replace("instResWidth", "resolutionX");
-            text = text.Replace("instResHeight", "resolutionY");
-            text = text.Replace("instRamMin", "ramMin");
-            text = text.Replace("instRamMax", "ramMax");
-            text = text.Replace("useCustJava", "useCustomJava");
-            text = text.Replace("instCustJava", "customJava");
-            text = text.Replace("useCustJvm", "useJvmArgs");
-            text = text.Replace("instCustJvm", "jvmArgs");
-            text = text.Replace("useCustMethod", "useLaunchMethod");
-            text = text.Replace("instCustMethod", "launchMethod");
-            text = text.Replace("\"useCustJar\":\"False\",", String.Empty);
-            text = text.Replace("\"instCustJar\":\"\",", String.Empty);
-            text = text.Replace("useOfflineMode", "offlineMode");
-            Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
-            Console.WriteLine(text);
-            File.WriteAllText($"{path}\\instance.cfg", text);
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -385,29 +287,5 @@ namespace MCLauncher
         public string date { get; set; }
         public string content { get; set; }
         public string brNote { get; set; }
-    }
-
-    public class profileJson
-    {
-        public int data { get; set; }
-        public string version { get; set; }
-        public string edition { get; set; }
-    }
-
-    public class instanceV2
-    {
-        public string name { get; set; }
-        public string edition { get; set; }
-        public string version { get; set; }
-        public string directory { get; set; }
-        public string resolutionX { get; set; }
-        public string resolutionY { get; set; }
-        public string ramMin { get; set; }
-        public string ramMax { get; set; }
-        public string useCustomJava { get; set; }
-        public string customJava { get; set; }
-        public string offlineMode { get; set; }
-        public string useProxy { get; set; }
-        public string jvmArgs { get; set; }
     }
 }

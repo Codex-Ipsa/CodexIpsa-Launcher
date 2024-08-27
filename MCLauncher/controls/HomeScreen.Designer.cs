@@ -41,12 +41,14 @@
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.lblPlayedFor = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.lblPlayedFor);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.lblLogInWarn);
             this.panel1.Controls.Add(this.btnEditInst);
@@ -184,6 +186,18 @@
             this.webBrowser1.Size = new System.Drawing.Size(784, 325);
             this.webBrowser1.TabIndex = 0;
             // 
+            // lblPlayedFor
+            // 
+            this.lblPlayedFor.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblPlayedFor.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayedFor.ForeColor = System.Drawing.Color.White;
+            this.lblPlayedFor.Location = new System.Drawing.Point(214, 42);
+            this.lblPlayedFor.Name = "lblPlayedFor";
+            this.lblPlayedFor.Size = new System.Drawing.Size(353, 13);
+            this.lblPlayedFor.TabIndex = 22;
+            this.lblPlayedFor.Text = "lbl.playedFor";
+            this.lblPlayedFor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,5 +228,6 @@
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        public System.Windows.Forms.Label lblPlayedFor;
     }
 }
