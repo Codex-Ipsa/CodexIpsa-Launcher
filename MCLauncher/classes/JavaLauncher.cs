@@ -125,7 +125,7 @@ namespace MCLauncher.classes
             }
 
             string manifestJson = File.ReadAllText(manifestPath);
-            var vi = JsonConvert.DeserializeObject<IpsaJson>(manifestJson);
+            var vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 
             if (vi.srvJoin == true || dj.multiplayer == true)
             {
@@ -248,7 +248,7 @@ namespace MCLauncher.classes
 
             if (vi.assets == null)
             {
-                vi.assets = new IpsaJsonAssets();
+                vi.assets = new VersionJsonAssets();
                 vi.assets.name = "";
             }
 
@@ -420,7 +420,8 @@ namespace MCLauncher.classes
             timer.Change(Timeout.Infinite, Timeout.Infinite);
             Logger.Info("[JavaLauncher]", "Total runtime for this session: " + runTime);
 
-
+            //TODO: UPDATE PLAYTIME IN INSTANCEJSON
+            //InstanceJson thisInstance = 
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)

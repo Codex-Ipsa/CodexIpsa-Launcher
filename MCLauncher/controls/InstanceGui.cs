@@ -82,8 +82,8 @@ namespace MCLauncher.controls
 
             //add items
             String manifest = Globals.client.DownloadString(Globals.javaManifest);
-            List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-            foreach (JavaManifest ver in jm)
+            List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
+            foreach (VersionListJson ver in jm)
             {
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") }; //dd.MM.yyyy HH:mm:ss
 
@@ -141,8 +141,8 @@ namespace MCLauncher.controls
 
             //add items
             String manifest = Globals.client.DownloadString(Globals.javaEduManifest);
-            List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-            foreach (JavaManifest ver in jm)
+            List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
+            foreach (VersionListJson ver in jm)
             {
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 
@@ -172,8 +172,8 @@ namespace MCLauncher.controls
 
             //add items
             String manifest = Globals.client.DownloadString(Globals.x360Manifest);
-            List<JavaManifest> jm = JsonConvert.DeserializeObject<List<JavaManifest>>(manifest);
-            foreach (JavaManifest ver in jm)
+            List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
+            foreach (VersionListJson ver in jm)
             {
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
 

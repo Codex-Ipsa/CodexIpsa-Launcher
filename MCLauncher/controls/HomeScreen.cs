@@ -2,7 +2,7 @@
 using DiscordRPC.Logging;
 using MCLauncher.classes;
 using MCLauncher.classes.ipsajson;
-using MCLauncher.classes.jsons;
+using MCLauncher.json.api;
 using MCLauncher.forms;
 using Newtonsoft.Json;
 using System;
@@ -17,11 +17,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Xml;
-using System.Xml.Linq;
-using Color = System.Drawing.Color;
+using MCLauncher.classes.jsons;
 
 namespace MCLauncher
 {

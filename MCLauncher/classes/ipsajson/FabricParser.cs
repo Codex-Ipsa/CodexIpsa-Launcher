@@ -58,13 +58,13 @@ namespace MCLauncher.classes.ipsajson
             }
 
             string ipsaJson = client.DownloadString($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/data/{versionManifest.inheritsFrom}.json");
-            IpsaJson ipsaManifest = JsonConvert.DeserializeObject<IpsaJson>(ipsaJson);
+            VersionJson ipsaManifest = JsonConvert.DeserializeObject<VersionJson>(ipsaJson);
 
             ipsaManifest.classpath = versionManifest.mainClass;
             ipsaManifest.game = "Fabric";
             ipsaManifest.version = $"{gameVer}-{loaderVer}";
 
-            List<IpsaJsonLibraries> list = ipsaManifest.libraries.ToList();
+            List<VersionJsonLibraries> list = ipsaManifest.libraries.ToList();
             foreach (FabricManifestLibrary lib in versionManifest.libraries)
             {
                 string[] names = lib.name.Split(':');
@@ -82,7 +82,7 @@ namespace MCLauncher.classes.ipsajson
 
                 //Console.WriteLine(fullUrl);
 
-                IpsaJsonLibraries newOne = new IpsaJsonLibraries();
+                VersionJsonLibraries newOne = new VersionJsonLibraries();
                 newOne.name = libname;
                 newOne.url = fullUrl;
                 newOne.size = 0;

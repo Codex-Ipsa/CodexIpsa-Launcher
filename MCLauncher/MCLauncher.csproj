@@ -87,12 +87,12 @@
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\ipsajson\FabricParser.cs" />
-    <Compile Include="classes\ipsajson\IpsaJson.cs" />
-    <Compile Include="classes\ipsajson\LatestJavaVersion.cs" />
+    <Compile Include="json\api\VersionJson.cs" />
+    <Compile Include="json\api\LatestVersionJson.cs" />
     <Compile Include="classes\ipsajson\ModloadersManifest.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="classes\jsons\InstanceJson.cs" />
-    <Compile Include="classes\jsons\JavaManifest.cs" />
+    <Compile Include="json\api\VersionListJson.cs" />
     <Compile Include="classes\jsons\ModJson.cs" />
     <Compile Include="classes\XboxLauncher.cs" />
     <Compile Include="controls\CreditsScreen.cs">
@@ -309,6 +309,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="json\launcher\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

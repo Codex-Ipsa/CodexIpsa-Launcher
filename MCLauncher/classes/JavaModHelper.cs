@@ -25,7 +25,7 @@ namespace MCLauncher
             string modsJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
             ModJson modsManifest = JsonConvert.DeserializeObject<ModJson>(modsJson);
             string clientJson = File.ReadAllText(manifestPath);
-            IpsaJson clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
+            VersionJson clientManifest = JsonConvert.DeserializeObject<VersionJson>(clientJson);
 
             //Speeds up the time
             if (modsManifest.items.Count() < 1)
@@ -93,7 +93,7 @@ namespace MCLauncher
                     if (!string.IsNullOrEmpty(entry.json))
                     {
                         clientJson = File.ReadAllText($"{Globals.dataPath}\\data\\json\\{entry.json}.json");
-                        clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
+                        clientManifest = JsonConvert.DeserializeObject<VersionJson>(clientJson);
                         JavaLauncher.manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                     }
 
@@ -124,7 +124,7 @@ namespace MCLauncher
                 else if (entry.type == "json")
                 {
                     clientJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}");
-                    clientManifest = JsonConvert.DeserializeObject<IpsaJson>(clientJson);
+                    clientManifest = JsonConvert.DeserializeObject<VersionJson>(clientJson);
                     JavaLauncher.manifestPath = $"{Globals.dataPath}\\instance\\{instName}\\jarmods\\{entry.file}";
                 }
             }
