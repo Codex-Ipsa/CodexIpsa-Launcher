@@ -225,6 +225,10 @@ namespace MCLauncher.controls
                 ij.edition = "javaedu";
 
             ij.version = selectedVersion;
+            if (chkLatest.Checked)
+                ij.version = "latest";
+            else if (chkLatestSnapshot.Checked)
+                ij.version = "latestsnapshot";
 
             ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
             ij.resolution = $"{resXBox.Text} {resYBox.Text}";

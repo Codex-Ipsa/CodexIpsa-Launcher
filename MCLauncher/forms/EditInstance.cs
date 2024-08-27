@@ -91,18 +91,18 @@ namespace MCLauncher.forms
             instanceGui.selectInList(instanceGui.vanillaList, ij.version);
 
             //latest and latestsnapshot stuff
-            if (instanceGui.selectedVersion.Contains("latest"))
+            if (ij.version.Contains("latest"))
             {
-                if (instanceGui.selectedVersion == "latest")
+                if (ij.version == "latest")
                 {
                     instanceGui.chkLatest.Checked = true;
                 }
-                else if (instanceGui.selectedVersion == "latestsnapshot")
+                else if (ij.version == "latestsnapshot")
                 {
                     instanceGui.chkLatestSnapshot.Checked = true;
                 }
 
-                instanceGui.selectedVersion = HomeScreen.getLatestVersion(instanceGui.selectedVersion);
+                instanceGui.selectedVersion = HomeScreen.getLatestVersion(ij.version);
                 instanceGui.vanillaList.Enabled = false;
             }
         }
