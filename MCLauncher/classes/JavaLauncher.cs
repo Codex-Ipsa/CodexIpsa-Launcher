@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace MCLauncher.classes
@@ -402,10 +401,10 @@ namespace MCLauncher.classes
 
             //change discord rpc
             Discord.ChangeMessage($"Idling");
-            
+
             //remove running ID
             Globals.running.Remove(runID);
-            
+
             //delete assets if wanted
             if (shouldDelete)
                 if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\"))

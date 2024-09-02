@@ -170,7 +170,7 @@ namespace MCLauncher
             }
 
             //Ready to play text
-            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);            
+            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
             Profile.profileName = Instance.cmbInstaces.Text;
 
             Instance.loadPlayTime(instName, ij);

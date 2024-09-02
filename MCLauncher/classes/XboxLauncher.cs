@@ -1,5 +1,4 @@
-﻿using MCLauncher.forms;
-using MCLauncher.json.launcher;
+﻿using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
