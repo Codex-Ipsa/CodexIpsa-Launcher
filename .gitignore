@@ -1,5 +1,6 @@
 /MCLauncher/bin
 /MCLauncher/obj
 /.vs
+/MCLauncher/.vs
 /MCLauncher/classes/APIKeysLocal.cs
 TODO.txt
