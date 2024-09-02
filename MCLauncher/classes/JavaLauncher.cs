@@ -1,6 +1,7 @@
 ﻿using MCLauncher.forms;
 using MCLauncher.json.api;
 using MCLauncher.json.launcher;
+using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -22,9 +23,6 @@ namespace MCLauncher.classes
         public static string modClientPath = "";
         public static string modVersion = "";
         public static string modName = "";
-
-        public static string srvIP = "";
-        public static string srvPort = "";
 
         public static string manifestPath = "";
 
@@ -118,18 +116,32 @@ namespace MCLauncher.classes
             string manifestJson = File.ReadAllText(manifestPath);
             var vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 
-            if (vi.srvJoin == true || dj.multiplayer == true)
+            //get ip and port for mppass (if wanted)
+            String[] ipPort = null;
+            if (dj.useServerIP)
+            {
+                ipPort = LaunchJava.splitIpPort(dj.serverIP);
+            }
+            else if (vi.srvJoin == true || dj.multiplayer == true)
             {
                 EnterIp ei = new EnterIp();
                 ei.ShowDialog();
 
-                if (EnterIp.inputedText != String.Empty || EnterIp.inputedText != null)
+                if (EnterIp.inputText != null && EnterIp.inputText != String.Empty)
                 {
-                    MSAuth.onGameStart(true);
+                    ipPort = LaunchJava.splitIpPort(dj.serverIP);
                 }
             }
+
+            //authenticate on game launch
+            if (ipPort == null)
+            {
+                MSAuth.onGameStart(false, null, null);
+            }
             else
-                MSAuth.onGameStart(false);
+            {
+                MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
+            }
 
             if (dj.useAssets == true && dj.assetsPath != null)
             {
@@ -339,11 +351,12 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
-            if (srvIP != "")
+            if (ipPort != null)
             {
                 if (dj.offline)
                     msPlayerMPPass = "-";
-                proc.StartInfo.Arguments += $"-Dserver=\"{srvIP}\" -Dport=\"{srvPort}\" -Dmppass=\"{msPlayerMPPass}\" ";
+
+                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{msPlayerMPPass}\" ";
                 Logger.Info("[JavaLauncher]", $"Server active!");
             }
 

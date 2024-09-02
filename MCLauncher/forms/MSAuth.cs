@@ -413,7 +413,7 @@ namespace MCLauncher
             }
         }
 
-        public static void getMpPass()
+        public static void getMpPass(String ip, String port)
         {
             try
             {
@@ -423,7 +423,7 @@ namespace MCLauncher
                 mojpassRequest.Accept = "application/json";
                 mojpassRequest.Method = "POST";
 
-                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{JavaLauncher.srvIP}:{JavaLauncher.srvPort}"));
+                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{ip}:{port}"));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
@@ -454,7 +454,7 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
 
                     //Get the actual Mppass
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={JavaLauncher.srvIP}:{JavaLauncher.srvPort}");
+                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={ip}:{port}");
 
                     mppassRequest.Method = "POST";
                     mppassRequest.ContentType = "application/x-www-form-urlencoded";
@@ -529,7 +529,7 @@ namespace MCLauncher
             }
         }
 
-        public static void onGameStart(bool getMppass)
+        public static void onGameStart(bool getMppass, String ip, String port)
         {
             voidRefreshToken(Settings.sj.refreshToken);
             xblAuth();
@@ -538,7 +538,7 @@ namespace MCLauncher
             verifyOwnership();
             if (getMppass == true)
             {
-                getMpPass();
+                getMpPass(ip, port);
             }
             //todo: only do if player owns the game
             getProfileInfo();
