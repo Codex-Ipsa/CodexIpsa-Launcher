@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.json.api;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -83,7 +84,7 @@ namespace MCLauncher.controls
             {
                 WebClient client = new WebClient();
                 string jsonData = client.DownloadString(Globals.updateInfo);
-                List<settingsJson> data = JsonConvert.DeserializeObject<List<settingsJson>>(jsonData);
+                List<UpdateJson> data = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonData);
                 foreach (var vers in data)
                 {
                     nameList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
@@ -96,7 +97,7 @@ namespace MCLauncher.controls
                 string json = client.DownloadString(Globals.languageList);
                 byte[] jsonArr = Encoding.Default.GetBytes(json);
                 string langData = Encoding.UTF8.GetString(jsonArr);
-                List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
+                List<LanguagesJson> lang = JsonConvert.DeserializeObject<List<LanguagesJson>>(langData);
                 foreach (var vers in lang)
                 {
                     languageList.Add(vers.title);
@@ -344,18 +345,6 @@ namespace MCLauncher.controls
                 }
             }
         }
-    }
-
-    public class settingsJson
-    {
-        public string brName { get; set; }
-        public string brVer { get; set; }
-        public string brId { get; set; }
-        public string brUrl { get; set; }
-        public string brNote { get; set; }
-
-        public string title { get; set; }
-        public string name { get; set; }
     }
 
     public class javaInstallsManifest

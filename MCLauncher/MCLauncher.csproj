@@ -87,6 +87,8 @@
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\FabricParser.cs" />
+    <Compile Include="json\api\LanguagesJson.cs" />
+    <Compile Include="json\api\UpdateJson.cs" />
     <Compile Include="json\api\VersionJson.cs" />
     <Compile Include="json\api\LatestVersionJson.cs" />
     <Compile Include="json\api\ModloadersJson.cs" />

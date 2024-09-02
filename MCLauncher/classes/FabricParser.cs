@@ -91,7 +91,6 @@ namespace MCLauncher.classes
 
             return json;
         }
-
     }
 
     public class FabricGame

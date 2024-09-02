@@ -1,5 +1,6 @@
 ﻿using MCLauncher.classes;
 using MCLauncher.controls;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -119,7 +120,7 @@ namespace MCLauncher
             if (!Globals.offlineMode)
             {
                 string jsonUpd = Globals.client.DownloadString(Globals.updateInfo);
-                List<jsonObject> dataUpd = JsonConvert.DeserializeObject<List<jsonObject>>(jsonUpd);
+                List<UpdateJson> dataUpd = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonUpd);
 
                 foreach (var vers in dataUpd)
                 {
