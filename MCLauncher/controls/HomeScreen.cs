@@ -38,9 +38,24 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json"))
             {
-                Profile prof = new Profile("Default", "def");
+                InstanceJson ij = new InstanceJson();
+                ij.data = 3;
+                ij.edition = "java";
+                ij.version = "b1.7.3";
+                ij.resolution = "854 480";
+                ij.memory = "512 512";
+                String serialized = JsonConvert.SerializeObject(ij);
+
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\Default\\jarmods");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", serialized);
+
+                ModJson mj = new ModJson();
+                mj.items = new ModJsonEntry[0];
+
+                String modJson = JsonConvert.SerializeObject(mj);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\jarmods\\mods.json", modJson);
             }
 
             Logger.Info("[TEST0]", selectedInstance);
