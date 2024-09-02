@@ -93,6 +93,7 @@
     <Compile Include="json\api\LatestVersionJson.cs" />
     <Compile Include="json\api\ModloadersJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
+    <Compile Include="json\launcher\AuthJson.cs" />
     <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />
     <Compile Include="json\launcher\ModJson.cs" />
@@ -190,7 +191,6 @@
     <Compile Include="controls\HomeScreen.Designer.cs">
       <DependentUpon>HomeScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\jsonObject.cs" />
     <Compile Include="classes\Globals.cs" />
     <Compile Include="classes\Logger.cs" />
     <Compile Include="forms\MainWindow.cs">

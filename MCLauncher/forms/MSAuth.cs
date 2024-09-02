@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -65,7 +66,7 @@ namespace MCLauncher
 
             string deviceJson = $"[{deviceResponseString}]";
 
-            List<jsonObject> deviceData = JsonConvert.DeserializeObject<List<jsonObject>>(deviceJson);
+            List<AuthJson> deviceData = JsonConvert.DeserializeObject<List<AuthJson>>(deviceJson);
             foreach (var vers in deviceData)
             {
                 userCode = vers.user_code;
@@ -115,7 +116,7 @@ namespace MCLauncher
                 else
                     Logger.Info("[MSAuth]", "Got Token response!");
                 string tokenJson = $"[{tokenResponseString}]";
-                List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
+                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
                 foreach (var vers in authTokenData)
                 {
                     accessToken = vers.access_token;
@@ -177,7 +178,7 @@ namespace MCLauncher
                 }
 
                 string xblJson = $"[{xblResponseString}]";
-                List<jsonObject> xblTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(xblJson);
+                List<AuthJson> xblTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(xblJson);
                 foreach (var vers in xblTokenData)
                 {
                     xblToken = vers.Token;
@@ -191,7 +192,7 @@ namespace MCLauncher
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"Array of xui: {s3}");
 
-                List<jsonObject> uhsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(s3);
+                List<AuthJson> uhsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(s3);
                 foreach (var vers in uhsTokenData)
                 {
                     userHash = vers.uhs;
@@ -238,7 +239,7 @@ namespace MCLauncher
                         Logger.Info($"[MSAuth]", $"Got XSTS response");
                 }
 
-                List<jsonObject> xstsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{xstsResponseString}]");
+                List<AuthJson> xstsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{xstsResponseString}]");
                 foreach (var vers in xstsTokenData)
                 {
                     xstsToken = vers.Token;
@@ -285,7 +286,7 @@ namespace MCLauncher
                         Logger.Info($"[MSAuth]", $"Got MC response");
                 }
 
-                List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
+                List<AuthJson> mcTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{mcResponseString}]");
                 foreach (var vers in mcTokenData)
                 {
                     mcAccessToken = vers.access_token;
@@ -356,7 +357,7 @@ namespace MCLauncher
                     Logger.Info($"[MSAuth]", $"Got RefreshToken response");
 
                 string tokenJson = $"[{tokenResponseString}]";
-                List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
+                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
                 foreach (var vers in authTokenData)
                 {
                     accessToken = vers.access_token;
@@ -394,7 +395,7 @@ namespace MCLauncher
                         Logger.Info("[MSAuth]", "Got profile response");
                 }
 
-                List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
+                List<AuthJson> mcProfileData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{profileResponseString}]");
                 foreach (var vers in mcProfileData)
                 {
                     playerName = vers.name;
