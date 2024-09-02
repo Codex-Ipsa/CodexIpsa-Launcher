@@ -26,6 +26,7 @@ namespace MCLauncher
         {
             Instance = this;
             InitializeComponent();
+
             Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
             lastInstance = Settings.sj.instance;
 
@@ -172,6 +173,14 @@ namespace MCLauncher
             Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);            
             Profile.profileName = Instance.cmbInstaces.Text;
 
+            Instance.loadPlayTime(instName, ij);
+        }
+
+        public void loadPlayTime(String instanceName, InstanceJson ij)
+        {
+            if (instanceName != cmbInstaces.Text)
+                return;
+
             //Played for text
             TimeSpan t = TimeSpan.FromMilliseconds(ij.playTime);
             String playedForText = "Played for ";
@@ -198,17 +207,18 @@ namespace MCLauncher
             if (t.TotalMilliseconds == 0)
                 playedForText = Strings.sj.lblHaventPlayed;
 
-            Instance.lblPlayedFor.Text = playedForText;
+            lblPlayedFor.Text = playedForText;
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (selectedEdition == "x360")
+            {
                 XboxLauncher.Launch(selectedInstance);
+            }
             else
             {
-                JavaLauncher jl = new JavaLauncher();
-                jl.Launch(selectedInstance);
+                JavaLauncher.Launch(selectedInstance);
             }
             /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();

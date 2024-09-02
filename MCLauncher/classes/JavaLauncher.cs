@@ -29,9 +29,9 @@ namespace MCLauncher.classes
 
         public static string manifestPath = "";
 
-        public string runID = "";
+        public static string runID = "";
 
-        public void Launch(string profileName)
+        public static void Launch(string profileName)
         {
             modVersion = "";
             modName = "";
@@ -301,7 +301,7 @@ namespace MCLauncher.classes
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
-            proc.Exited += (sender, e) => OnProcessExited(sender, e, profileName, vi.assetsVirt, proc);
+            proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, vi.assetsVirt, proc))); //lmao this is dumb shit (but it works)
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -393,7 +393,7 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
-        private void OnProcessExited(object sender, EventArgs e, string profileName, bool shouldDelete, Process proc)
+        private static void OnProcessExited(object sender, EventArgs e, string instanceName, bool shouldDelete, Process proc)
         {
             //get runtime
             TimeSpan runtime = DateTime.Now - proc.StartTime;
@@ -408,15 +408,19 @@ namespace MCLauncher.classes
             
             //delete assets if wanted
             if (shouldDelete)
-                if (Directory.Exists($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"))
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\", true);
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\"))
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\", true);
 
             //save the runtime
-            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
             InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
             ij.playTime = ij.playTime + (long)saveRuntime;
             String toSave = JsonConvert.SerializeObject(ij);
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json", toSave);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json", toSave);
+
+
+            //reload played for text
+            HomeScreen.Instance.loadPlayTime(instanceName, ij);
         }
 
         static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
