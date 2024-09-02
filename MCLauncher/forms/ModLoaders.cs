@@ -68,13 +68,6 @@ namespace MCLauncher.forms
                 //json based
                 if (manifest.forge[listView1.SelectedItems[0].Index].type == "json")
                 {
-                    //dl jar and json
-                    //List<DownloadObject> list = new List<DownloadObject>();
-                    //list.Add(new DownloadObject(forge.url, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.jar"));
-                    //list.Add(new DownloadObject(forge.json, $"{Globals.dataPath}\\data\\json\\minecraftforge-{forge.id}.json"));
-                    //DownloaderGui dg = new DownloaderGui(list);
-                    //dg.ShowDialog();
-
                     String forgeManifest = Globals.client.DownloadString(forge.json);
                     forgeManifest = forgeManifest.Replace("{forgeVer}", forge.id).Replace("{forgeUrl}", forge.url).Replace("{forgeSize}", forge.size.ToString());
                     File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.json", forgeManifest);
