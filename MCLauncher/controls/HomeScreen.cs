@@ -120,7 +120,7 @@ namespace MCLauncher
                     Instance.btnLogIn.Visible = false;
                     Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
                     Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Text = "";
+                    Instance.lblLogInWarn.Visible = false;
                     Instance.cmbInstaces.Enabled = true;
                     Instance.btnEditInst.Enabled = true;
                     Instance.btnNewInst.Enabled = true;

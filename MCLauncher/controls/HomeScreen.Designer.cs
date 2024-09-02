@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeScreen));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblPlayedFor = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblLogInWarn = new System.Windows.Forms.Label();
             this.btnEditInst = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.lblPlayedFor = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,18 +64,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 62);
             this.panel1.TabIndex = 3;
-            // 
-            // lblPlayedFor
-            // 
-            this.lblPlayedFor.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lblPlayedFor.BackColor = System.Drawing.Color.Transparent;
-            this.lblPlayedFor.ForeColor = System.Drawing.Color.White;
-            this.lblPlayedFor.Location = new System.Drawing.Point(216, 45);
-            this.lblPlayedFor.Name = "lblPlayedFor";
-            this.lblPlayedFor.Size = new System.Drawing.Size(353, 13);
-            this.lblPlayedFor.TabIndex = 22;
-            this.lblPlayedFor.Text = "lbl.playedFor";
-            this.lblPlayedFor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnLogOut
             // 
@@ -187,6 +175,18 @@
             this.btnPlay.Text = "btn.play";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // lblPlayedFor
+            // 
+            this.lblPlayedFor.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblPlayedFor.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayedFor.ForeColor = System.Drawing.Color.White;
+            this.lblPlayedFor.Location = new System.Drawing.Point(216, 45);
+            this.lblPlayedFor.Name = "lblPlayedFor";
+            this.lblPlayedFor.Size = new System.Drawing.Size(353, 13);
+            this.lblPlayedFor.TabIndex = 22;
+            this.lblPlayedFor.Text = "lbl.playedFor";
+            this.lblPlayedFor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // webBrowser1
             // 
