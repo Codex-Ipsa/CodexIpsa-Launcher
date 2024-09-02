@@ -48,7 +48,6 @@
             // panel1
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.Controls.Add(this.lblPlayedFor);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.lblLogInWarn);
             this.panel1.Controls.Add(this.btnEditInst);
@@ -59,6 +58,7 @@
             this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.btnLogIn);
             this.panel1.Controls.Add(this.btnPlay);
+            this.panel1.Controls.Add(this.lblPlayedFor);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 325);
             this.panel1.Name = "panel1";
@@ -93,7 +93,7 @@
             this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
             this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
-            this.lblLogInWarn.Location = new System.Drawing.Point(214, 42);
+            this.lblLogInWarn.Location = new System.Drawing.Point(216, 45);
             this.lblLogInWarn.Name = "lblLogInWarn";
             this.lblLogInWarn.Size = new System.Drawing.Size(353, 13);
             this.lblLogInWarn.TabIndex = 20;
