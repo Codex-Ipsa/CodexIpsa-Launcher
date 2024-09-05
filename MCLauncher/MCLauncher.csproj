@@ -212,6 +212,7 @@
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
     <Compile Include="launchers\LaunchJava.cs" />
+    <Compile Include="launchers\ModWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="controls\CreditsScreen.resx">

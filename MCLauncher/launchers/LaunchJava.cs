@@ -1,16 +1,28 @@
-﻿using MCLauncher.classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace MCLauncher.launchers
 {
     internal class LaunchJava
     {
+        //launches java edition
+        //TODO
+        public static (string, string, string) launch(String instanceName)
+        {
+            //create directories
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
+
+            return ("", "", "");
+        }
+
+
+
+
+
+
+
         //Splits IP and port, if no port specified -> :25565
         //also translates domains into IPs
         public static String[] splitIpPort(String input)
@@ -40,10 +52,11 @@ namespace MCLauncher.launchers
                 return null;
             }
 
+            //set port
             if (split.Length == 2)
             {
                 ipPort[1] = split[1];
-            } 
+            }
             else
             {
                 ipPort[1] = "25565";

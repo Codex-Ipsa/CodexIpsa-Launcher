@@ -71,36 +71,6 @@ namespace MCLauncher.classes
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
             modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{version}.json");
 
-            //todo move this after downloading jar
-            if (!File.Exists($"{Globals.dataPath}\\data\\downloaded.json") && Profile.lastSelected != "")
-            {
-                string toAdd = $"[\n";
-                toAdd += $"  {{\n";
-                toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
-                toAdd += $"    \"alt\": \"{Profile.lastAlt}\",\n";
-                toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
-                toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
-                toAdd += $"  }}\n";
-                toAdd += $"]";
-                File.WriteAllText($"{Globals.dataPath}\\data\\downloaded.json", toAdd);
-            }
-            else if (Profile.lastSelected != "")
-            {
-                string toAdd = $"  {{\n";
-                toAdd += $"    \"id\": \"{Profile.lastSelected}\",\n";
-                toAdd += $"    \"alt\": \"{Profile.lastAlt}\",\n";
-                toAdd += $"    \"type\": \"{Profile.lastType}\",\n";
-                toAdd += $"    \"released\": \"{Profile.lastDate}\"\n";
-                toAdd += $"  }},";
-                string existing = File.ReadAllText($"{Globals.dataPath}\\data\\downloaded.json");
-                if (!existing.Contains(toAdd))
-                {
-                    string newStr = toAdd;
-                    newStr += existing.Replace("[", "").Replace("]", "");
-                    File.WriteAllText($"{Globals.dataPath}\\data\\downloaded.json", $"[\n{newStr}]");
-                }
-            }
-
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
             {
                 manifestPath = dj.jsonPath;

@@ -1,7 +1,4 @@
-﻿using MCLauncher.classes;
-using System;
-using System.Net;
-using System.Text.RegularExpressions;
+﻿using System;
 using System.Windows.Forms;
 
 namespace MCLauncher
