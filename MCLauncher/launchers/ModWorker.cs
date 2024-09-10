@@ -10,44 +10,12 @@ namespace MCLauncher.launchers
 {
     internal class ModWorker
     {
-        //AFTER the download of the client, this compiles mods and returns the path of the patched jar (or custom jar)
+        //this compiles mods and returns the path of the patched jar (or custom jar)
         //returns null if no mods used, launcher should just use default jar path
 
-        //TODO 
-        public static String getJarPath(String instanceName)
-        {
-            //get mod manifest
-            String modManifest = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\mods.json");
-            ModJson mj = JsonConvert.DeserializeObject<ModJson>(modManifest);
+        //TODO MAKE THIS RETURN GAME AND VERSION IF SET
 
-            //return if no mods
-            if (mj.items.Length == 0)
-                return null;
-
-            //loop through all entries
-            String jarToPatch = null;
-            for (int i = 0; i < mj.items.Length; i++)
-            {
-                ModJsonEntry entry = mj.items[i];
-
-                //skip disabled entries
-                if (entry.disabled)
-                    continue;
-
-                //if cusjar = set path
-                if (entry.type == "cusjar" && jarToPatch == null)
-                {
-                    jarToPatch = entry.file;
-                }
-
-
-                Console.WriteLine($"({entry.type}) {entry.file}: {entry.json}");
-            }
-
-            return null; //temp
-        }
-
-        public static String createJarPatch(String instanceName)
+        public static (String, String, String) createJarPatch(String instanceName)
         {
             //cleanup
             if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\"))
@@ -65,7 +33,7 @@ namespace MCLauncher.launchers
             if (mj.items.Length == 0)
             {
                 Logger.Info("[ModWorker/createJarPatch]", $"No mods found!");
-                return null;
+                return (null, null, null);
             }
 
             //extract base game
@@ -121,9 +89,10 @@ namespace MCLauncher.launchers
                     Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
             }
 
-            return $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar";
+            return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", null, null);
         }
 
+        //gets MD5 of the game patch
         public static String getPatchMD5(String instanceName)
         {
             //get mod manifest
@@ -155,6 +124,7 @@ namespace MCLauncher.launchers
             return MD5String(toMD5);
         }
 
+        //String to MD5
         public static String MD5String(string input)
         {
             using (MD5 md5 = MD5.Create())
