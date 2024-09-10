@@ -48,7 +48,7 @@ namespace MCLauncher.classes
             Globals.running.Add(runID, profileName);
 
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-            var dj = JsonConvert.DeserializeObject<InstanceJson>(data);
+            InstanceJson dj = JsonConvert.DeserializeObject<InstanceJson>(data);
 
             String version = dj.version;
 
@@ -69,7 +69,22 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
-            modClientPath = JavaModHelper.GetPath(profileName, $"{Globals.dataPath}\\data\\json\\{version}.json");
+
+            /* TEMP START */
+
+
+
+            //if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
+            //    Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
+
+            //Console.WriteLine("jarpath: " + ModWorker.getJarPath(profileName));
+            //ModWorker.createJarPatch(profileName);
+
+            //return; //TEMP
+
+            /* TEMP END */
+
+            modClientPath = ModWorker.createJarPatch(profileName);
 
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
             {
@@ -84,7 +99,8 @@ namespace MCLauncher.classes
             }
 
             string manifestJson = File.ReadAllText(manifestPath);
-            var vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
+            VersionJson vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
+
 
             //get ip and port for mppass (if wanted)
             String[] ipPort = null;
@@ -155,12 +171,12 @@ namespace MCLauncher.classes
             }
 
             string jars = "";
-            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar") && modClientPath == "")
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar") && modClientPath == null)
                 Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
 
             Logger.Info("[Javalauncher]", $"Mod path: {modClientPath}");
 
-            if (modClientPath != "")
+            if (modClientPath != null)
                 jars += $"\"{modClientPath}\";";
             else
                 jars += $"\"{Globals.dataPath}\\versions\\java\\{version}.jar\";";
