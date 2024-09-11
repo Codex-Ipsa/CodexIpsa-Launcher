@@ -54,20 +54,21 @@ namespace MCLauncher.launchers
             String md5Patch = getPatchMD5(instanceName);
             var gameInfo = getPatchName(mj);
 
-            //if patch already exists
-            if (!File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar"))
+
+            //loop through all mods and extract
+            for (int i = 0; i < mj.items.Length; i++)
             {
-                //loop through all mods and extract
-                for (int i = 0; i < mj.items.Length; i++)
+                ModJsonEntry entry = mj.items[i];
+
+                //skip disabled entries
+                if (entry.disabled)
+                    continue;
+
+                //work only with jarmods
+                if (entry.type == "jarmod")
                 {
-                    ModJsonEntry entry = mj.items[i];
-
-                    //skip disabled entries
-                    if (entry.disabled)
-                        continue;
-
-                    //work only with jarmods
-                    if (entry.type == "jarmod")
+                    //if patch doesn't exist
+                    if (!File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar"))
                     {
                         Logger.Info("[ModWorker/createJarPatch]", $"Jarmod: {entry.file} {entry.type}");
 
@@ -94,28 +95,30 @@ namespace MCLauncher.launchers
                         }
                         archive.Dispose();
                     }
-                }
-
-                if (hasJarMods)
-                {
-                    //delete META-INF
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\META-INF\\", true);
-
-                    //zip up the patch dir
-                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\");
-                    ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar");
-
-                    //cleanup
-                    if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\"))
-                        Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
+                    hasJarMods = true;
                 }
             }
 
             if (hasJarMods) //jarmods
             {
+                //delete META-INF
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\META-INF\\"))
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\META-INF\\", true);
+
+                //zip up the patch dir
+                if (!File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar"))
+                {
+                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\");
+                    ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar");
+                }
+
+                //cleanup
+                if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\"))
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
+
                 return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", gameInfo.Item1, gameInfo.Item2);
             }
-            else //should ALWAYS custom JARs
+            else //should ALWAYS be custom JAR only
             {
                 return (clientPath, gameInfo.Item1, gameInfo.Item2);
             }
