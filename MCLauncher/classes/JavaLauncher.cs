@@ -86,6 +86,7 @@ namespace MCLauncher.classes
             }
 
             //deserialize VersionJson
+            Logger.Info("[JavaLauncher]", $"manifestPath: {manifestPath}");
             string manifestJson = File.ReadAllText(manifestPath);
             VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 

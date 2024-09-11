@@ -13,9 +13,6 @@ namespace MCLauncher.launchers
     {
         //this compiles mods and returns the path of the patched jar (or custom jar)
         //returns null if no mods used, launcher should just use default jar path
-
-        //TODO MAKE THIS RETURN GAME AND VERSION IF SET
-
         public static (String, String, String) createJarPatch(String instanceName)
         {
             //cleanup
@@ -37,10 +34,21 @@ namespace MCLauncher.launchers
                 return (null, null, null);
             }
 
-            //extract base game
-            //TODO IF BASEGAME IS REPLACED WITH A CUSJAR
-            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\versions\\java\\{ij.version}.jar", $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\");
-            Logger.Info("[ModWorker/createJarPatch]", $"Base game jar: {ij.version}.jar");
+            //variables
+            bool hasJarMods = false;
+            String clientPath = $"{Globals.dataPath}\\versions\\java\\{ij.version}.jar"; //TODO IF BASEGAME IS REPLACED WITH A CUSJAR
+
+            //get cusJar path (if exists)
+            for (int i = 0; i < mj.items.Length; i++)
+            {
+                ModJsonEntry entry = mj.items[i];
+
+                if (entry.type == "cusjar")
+                {
+                    clientPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
+                    break;
+                }
+            }
 
             //get patch MD5
             String md5Patch = getPatchMD5(instanceName);
@@ -63,6 +71,15 @@ namespace MCLauncher.launchers
                     {
                         Logger.Info("[ModWorker/createJarPatch]", $"Jarmod: {entry.file} {entry.type}");
 
+                        if (!hasJarMods)
+                        {
+                            //ONLY extract the base game when jarmods exist
+                            ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\");
+                            Logger.Info("[ModWorker/createJarPatch]", $"Base game jar: {ij.version}.jar");
+
+                            hasJarMods = true;
+                        }
+
                         //extract jar to temp dir
                         ZipArchive archive = ZipFile.Open($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}", ZipArchiveMode.Read);
                         foreach (ZipArchiveEntry file in archive.Entries)
@@ -79,19 +96,29 @@ namespace MCLauncher.launchers
                     }
                 }
 
-                //delete META-INF
-                Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\META-INF\\", true);
+                if (hasJarMods)
+                {
+                    //delete META-INF
+                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\META-INF\\", true);
 
-                //zip up the patch dir
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\");
-                ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar");
+                    //zip up the patch dir
+                    Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\");
+                    ZipFile.CreateFromDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar");
 
-                //cleanup
-                if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\"))
-                    Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
+                    //cleanup
+                    if (Directory.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\"))
+                        Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
+                }
             }
 
-            return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", gameInfo.Item1, gameInfo.Item2);
+            if (hasJarMods) //jarmods
+            {
+                return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", gameInfo.Item1, gameInfo.Item2);
+            }
+            else //should ALWAYS custom JARs
+            {
+                return (clientPath, gameInfo.Item1, gameInfo.Item2);
+            }
         }
 
         //gets MD5 of the game patch
@@ -170,16 +197,10 @@ namespace MCLauncher.launchers
                 if (entry.disabled)
                     continue;
 
-                if (manifestPath == null && entry.json != "")
+                if (manifestPath == null && entry.type == "json")
                 {
-                    if (entry.type == "json")
-                    {
-                        manifestPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
-                    }
-                    else
-                    {
-                        manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
-                    }
+                    manifestPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
+                    break;
                 }
             }
 
