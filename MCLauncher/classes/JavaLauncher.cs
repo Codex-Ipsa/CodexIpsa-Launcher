@@ -71,6 +71,9 @@ namespace MCLauncher.classes
             String modName = modInfo.Item2;
             String modVersion = modInfo.Item3;
 
+            if (modManifest != null)
+                manifestPath = modManifest;
+
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
             {
                 manifestPath = dj.jsonPath;
@@ -85,7 +88,6 @@ namespace MCLauncher.classes
 
             string manifestJson = File.ReadAllText(manifestPath);
             VersionJson vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
-
 
             //get ip and port for mppass (if wanted)
             String[] ipPort = null;

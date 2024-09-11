@@ -1,6 +1,7 @@
 ﻿using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
@@ -118,7 +119,6 @@ namespace MCLauncher.launchers
                     toMD5 += $"{entry.file}:{length};";
                 }
 
-
                 Console.WriteLine($"({entry.type}) {entry.file}: {entry.json}");
             }
 
@@ -154,33 +154,37 @@ namespace MCLauncher.launchers
         }
 
         //TODO get and download the mod manifest
-        public static String getModManifest(ModJson mj)
+        public static String getModManifest(String instanceName)
         {
-            //Globals.client.DownloadFile(manifestPath, $"{Globals.dataPath}\\data\\json\\{ij.version}.json");
-            //ij.version
-            //String game = null;
-            //String version = null;
+            //get mod manifest
+            String modManifest = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\mods.json");
+            ModJson mj = JsonConvert.DeserializeObject<ModJson>(modManifest);
 
-            ////loop through items
-            //for (int i = 0; i < mj.items.Length; i++)
-            //{
-            //    ModJsonEntry entry = mj.items[i];
+            String manifestPath = null;
 
-            //    //skip disabled entries
-            //    if (entry.disabled)
-            //        continue;
+            //loop through items
+            for (int i = 0; i < mj.items.Length; i++)
+            {
+                ModJsonEntry entry = mj.items[i];
 
-            //    //set game name
-            //    if ((game == null && entry.name != "") && (version == null && entry.version != ""))
-            //    {
-            //        game = entry.name;
-            //        version = entry.version;
-            //        break;
-            //    }
-            //}
+                if (entry.disabled)
+                    continue;
 
-            //Logger.Info("[ModWorker/getPatchName]", $"{game}, {version}");
-            return null;
+                if (manifestPath == null && entry.json != "")
+                {
+                    if (entry.type == "json")
+                    {
+                        manifestPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
+                    }
+                    else
+                    {
+                        manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
+                    }
+                }
+            }
+
+            Logger.Info("[ModWorker/getModManifest]", $"{manifestPath}");
+            return manifestPath;
         }
 
         //String to MD5

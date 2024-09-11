@@ -59,7 +59,7 @@ namespace MCLauncher
                 File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\jarmods\\mods.json", modJson);
             }
 
-            Logger.Info("[TEST0]", selectedInstance);
+            //Logger.Info("[TEST0]", selectedInstance);
             loadInstanceList();
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
@@ -286,7 +286,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Logger.Info("[TEST2]", cmbInstaces.Text);
+            //Logger.Info("[TEST2]", cmbInstaces.Text);
             reloadInstance(cmbInstaces.Text);
             Settings.sj.instance = cmbInstaces.Text;
             Settings.Save();
