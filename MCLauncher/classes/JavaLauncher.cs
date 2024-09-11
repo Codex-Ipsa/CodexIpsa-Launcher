@@ -26,8 +26,10 @@ namespace MCLauncher.classes
 
         public static void Launch(string profileName)
         {
+            //create dir
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
 
+            //check if profile is already running
             if (Globals.running.ContainsValue(profileName))
             {
                 DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -40,43 +42,40 @@ namespace MCLauncher.classes
             runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
             Globals.running.Add(runID, profileName);
 
+            //get InstanceJson
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-            InstanceJson dj = JsonConvert.DeserializeObject<InstanceJson>(data);
+            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
 
-            String version = dj.version;
-
+            //get latest versions if asked for
+            String version = ij.version;
             if (version.Contains("latest"))
             {
                 version = HomeScreen.getLatestVersion(version);
             }
 
+            //get VersionJson
             try
             {
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
+                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
             }
             catch (System.Net.WebException)
             {
-                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", dj.edition).Replace("{ver}", version));
+                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version));
                 if (!File.Exists($"{Globals.dataPath}\\data\\json\\{version}.json"))
                     return;
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
 
+            //set manifestPath to modmanifest if mods use it
             String modManifest = ModWorker.getModManifest(profileName);
-
-            //create mod patch and info
-            var modInfo = ModWorker.createJarPatch(profileName);
-            String modClientPath = modInfo.Item1;
-            String modName = modInfo.Item2;
-            String modVersion = modInfo.Item3;
-
             if (modManifest != null)
                 manifestPath = modManifest;
 
-            if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
+            //set manifestPath to a custom JSON if user wants it
+            if (ij.useJson && !String.IsNullOrWhiteSpace(ij.jsonPath))
             {
-                manifestPath = dj.jsonPath;
+                manifestPath = ij.jsonPath;
 
                 if (manifestPath.Contains("http"))
                 {
@@ -86,23 +85,24 @@ namespace MCLauncher.classes
                 }
             }
 
+            //deserialize VersionJson
             string manifestJson = File.ReadAllText(manifestPath);
-            VersionJson vi = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
+            VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 
             //get ip and port for mppass (if wanted)
             String[] ipPort = null;
-            if (dj.useServerIP)
+            if (ij.useServerIP)
             {
-                ipPort = LaunchJava.splitIpPort(dj.serverIP);
+                ipPort = LaunchJava.splitIpPort(ij.serverIP);
             }
-            else if (vi.srvJoin == true || dj.multiplayer == true)
+            else if (vj.srvJoin == true || ij.multiplayer == true)
             {
                 EnterIp ei = new EnterIp();
                 ei.ShowDialog();
 
                 if (EnterIp.inputText != null && EnterIp.inputText != String.Empty)
                 {
-                    ipPort = LaunchJava.splitIpPort(dj.serverIP);
+                    ipPort = LaunchJava.splitIpPort(ij.serverIP);
                 }
             }
 
@@ -116,40 +116,55 @@ namespace MCLauncher.classes
                 MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
             }
 
-            if (dj.useAssets == true && dj.assetsPath != null)
-            {
-                vi.assets.url = dj.assetsPath;
-                vi.assets.name = dj.assetsPath.Substring(dj.assetsPath.LastIndexOf('/') + 1).Replace(".json", "");
+            //download game jar
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
+                Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
 
-                if (!vi.assets.url.Contains("http"))
+            //create mod patch and info
+            var modInfo = ModWorker.createJarPatch(profileName);
+            String modClientPath = modInfo.Item1;
+            String modName = modInfo.Item2;
+            String modVersion = modInfo.Item3;
+
+
+
+
+
+
+            if (ij.useAssets == true && ij.assetsPath != null)
+            {
+                vj.assets.url = ij.assetsPath;
+                vj.assets.name = ij.assetsPath.Substring(ij.assetsPath.LastIndexOf('/') + 1).Replace(".json", "");
+
+                if (!vj.assets.url.Contains("http"))
                 {
-                    vi.assets.url = "file:///" + vi.assets.url;
+                    vj.assets.url = "file:///" + vj.assets.url;
                 }
 
-                AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
+                AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
                 ad.ShowDialog();
             }
-            else if (vi.assets != null && !String.IsNullOrWhiteSpace(vi.assets.name))
+            else if (vj.assets != null && !String.IsNullOrWhiteSpace(vj.assets.name))
             {
-                AssetsDownloader ad = new AssetsDownloader(vi.assets.url, vi.assets.name);
+                AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
                 ad.ShowDialog();
             }
 
             //yes I know this is a shitty fix but nothing better I can do till lf releases
-            if (vi.assetsVirt)
+            if (vj.assetsVirt)
             {
                 Logger.Error("[JavaLauncher]", "Copying assets... (fix for 1.6 snapshots)");
 
                 Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\");
 
-                foreach (string dirPath in Directory.GetDirectories($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", "*", SearchOption.AllDirectories))
+                foreach (string dirPath in Directory.GetDirectories($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", "*", SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"));
+                    Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"));
                 }
 
-                foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", "*.*", SearchOption.AllDirectories))
+                foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", "*.*", SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"), true);
+                    File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"), true);
                 }
 
                 File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\pack.mcmeta");
@@ -158,8 +173,6 @@ namespace MCLauncher.classes
             }
 
             string jars = "";
-            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar") && modClientPath == null)
-                Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
 
             Logger.Info("[Javalauncher]", $"Mod path: {modClientPath}");
 
@@ -183,7 +196,7 @@ namespace MCLauncher.classes
             }
             Directory.CreateDirectory($"{Globals.dataPath}\\libs\\natives-{runID}\\");
 
-            foreach (var lib in vi.libraries)
+            foreach (var lib in vj.libraries)
             {
                 if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
                 {
@@ -220,32 +233,32 @@ namespace MCLauncher.classes
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 
-            string[] defRes = dj.resolution.Split(' ');
+            string[] defRes = ij.resolution.Split(' ');
 
-            if (vi.assets == null)
+            if (vj.assets == null)
             {
-                vi.assets = new VersionJsonAssets();
-                vi.assets.name = "";
+                vj.assets = new VersionJsonAssets();
+                vj.assets.name = "";
             }
 
             string assetsDir = "";
-            if (vi.assets.name == "legacy")
-                assetsDir = $"{Globals.dataPath}\\assets\\virtual\\{vi.assets.name}";
+            if (vj.assets.name == "legacy")
+                assetsDir = $"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}";
             else
                 assetsDir = $"{Globals.dataPath}\\assets";
 
             string workDir = $"{Globals.dataPath}\\instance\\{profileName}";
-            if (!string.IsNullOrWhiteSpace(dj.directory) && !string.IsNullOrEmpty(dj.directory))
-                workDir = dj.directory;
+            if (!string.IsNullOrWhiteSpace(ij.directory) && !string.IsNullOrEmpty(ij.directory))
+                workDir = ij.directory;
 
             if (modVersion != null)
             {
-                vi.game = modName;
-                vi.version = modVersion;
+                vj.game = modName;
+                vj.version = modVersion;
             }
 
-            vi.cmdAft = vi.cmdAft.Replace("{game}", vi.game)
-                .Replace("{version}", vi.version)
+            vj.cmdAft = vj.cmdAft.Replace("{game}", vj.game)
+                .Replace("{version}", vj.version)
                 .Replace("{playerName}", msPlayerName)
                 .Replace("{accessToken}", msPlayerAccessToken)
                 .Replace("{uuid}", msPlayerUUID)
@@ -254,19 +267,19 @@ namespace MCLauncher.classes
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{gameDir}", $"\"{workDir}\\.minecraft\"")
                 .Replace("{assetDir}", $"\"{assetsDir}\"")
-                .Replace("{assetName}", $"\"{vi.assets.name}\"");
+                .Replace("{assetName}", $"\"{vj.assets.name}\"");
 
-            vi.cmdBef = vi.cmdBef.Replace("{assetDir}", $"\"{assetsDir}/\"").Replace("\\", "/")
-                .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vi.assets.name}.json\"").Replace("\\", "/")
+            vj.cmdBef = vj.cmdBef.Replace("{assetDir}", $"\"{assetsDir}/\"").Replace("\\", "/")
+                .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vj.assets.name}.json\"").Replace("\\", "/")
                 .Replace("{uuid}", msPlayerUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
-                .Replace("{game}", $"\"{vi.game}\"")
-                .Replace("{version}", $"\"{vi.version}\"")
+                .Replace("{game}", $"\"{vj.game}\"")
+                .Replace("{version}", $"\"{vj.version}\"")
                 .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
-            if (vi.supplement != null)
+            if (vj.supplement != null)
             {
-                foreach (var sup in vi.supplement)
+                foreach (var sup in vj.supplement)
                 {
                     string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft");
                     if (!File.Exists(supPath + sup.name) || sup.renew)
@@ -278,14 +291,14 @@ namespace MCLauncher.classes
                 }
             }
 
-            if (dj.offline)
-                vi.cmdAft = vi.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
+            if (ij.offline)
+                vj.cmdAft = vj.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
 
             Process proc = new Process();
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
-            proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, vi.assetsVirt, proc))); //lmao this is dumb shit (but it works)
+            proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, vj.assetsVirt, proc))); //lmao this is dumb shit (but it works)
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
@@ -293,55 +306,55 @@ namespace MCLauncher.classes
 
             Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
             proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
-            if (dj.useJava)
-                proc.StartInfo.FileName = dj.javaPath;
-            else if (vi.java <= 8)
+            if (ij.useJava)
+                proc.StartInfo.FileName = ij.javaPath;
+            else if (vj.java <= 8)
                 proc.StartInfo.FileName = Settings.sj.jre8;
-            else if (vi.java <= 17)
+            else if (vj.java <= 17)
                 proc.StartInfo.FileName = Settings.sj.jre17;
-            else if (vi.java <= 21)
+            else if (vj.java <= 21)
                 proc.StartInfo.FileName = Settings.sj.jre21;
             else
                 proc.StartInfo.FileName = "java.exe";
 
-            string[] ram = dj.memory.Split(' ');
+            string[] ram = ij.memory.Split(' ');
 
             proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
 
-            if (vi.cmdBef != "" && dj.disProxy == false)
-                proc.StartInfo.Arguments += $"{vi.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs")} ";
-            if (dj.befCmd != "")
-                proc.StartInfo.Arguments += $"{dj.befCmd} ";
+            if (vj.cmdBef != "" && ij.disProxy == false)
+                proc.StartInfo.Arguments += $"{vj.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs")} ";
+            if (ij.befCmd != "")
+                proc.StartInfo.Arguments += $"{ij.befCmd} ";
 
 
-            if (vi.logging != "")
+            if (vj.logging != "")
             {
                 Directory.CreateDirectory($"{Globals.dataPath}\\libs\\logging\\");
-                string fileName = vi.logging.Substring(vi.logging.LastIndexOf('/') + 1);
-                string hash = vi.logging.Substring(0, vi.logging.LastIndexOf('/') - 1);
+                string fileName = vj.logging.Substring(vj.logging.LastIndexOf('/') + 1);
+                string hash = vj.logging.Substring(0, vj.logging.LastIndexOf('/') - 1);
                 hash = hash.Substring(hash.LastIndexOf('/') + 1);
-                Globals.client.DownloadFile(vi.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
+                Globals.client.DownloadFile(vj.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
             if (ipPort != null)
             {
-                if (dj.offline)
+                if (ij.offline)
                     msPlayerMPPass = "-";
 
                 proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{msPlayerMPPass}\" ";
                 Logger.Info("[JavaLauncher]", $"Server active!");
             }
 
-            string classpath = vi.classpath;
-            if (dj.useClass)
-                classpath = dj.classpath;
+            string classpath = vj.classpath;
+            if (ij.useClass)
+                classpath = ij.classpath;
 
-            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives-{runID}\" -cp {jars} {classpath} {vi.cmdAft}";
+            proc.StartInfo.Arguments += $"-Djava.library.path=\"{Globals.dataPath}\\libs\\natives-{runID}\" -cp {jars} {classpath} {vj.cmdAft}";
 
-            if (dj.aftCmd != "")
-                proc.StartInfo.Arguments += $" {dj.aftCmd}";
-            if (dj.demo)
+            if (ij.aftCmd != "")
+                proc.StartInfo.Arguments += $" {ij.aftCmd}";
+            if (ij.demo)
                 proc.StartInfo.Arguments += " --demo";
 
             Logger.Info("[JavaLauncher]", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
@@ -350,7 +363,7 @@ namespace MCLauncher.classes
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
             try
             {
-                Discord.ChangeMessage($"Playing {vi.game} ({vi.version})");
+                Discord.ChangeMessage($"Playing {vj.game} ({vj.version})");
                 proc.Start();
             }
             catch (System.ComponentModel.Win32Exception e)
