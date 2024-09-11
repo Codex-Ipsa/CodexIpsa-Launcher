@@ -2,19 +2,43 @@
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MCLauncher.launchers
 {
     internal class LaunchJava
     {
+        public static string runID = "";
+
         //launches java edition
-        //TODO
-        public static (string, string, string) launchGame(String instanceName)
+        public static void launchGame(String instanceName)
         {
             //create directories
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
 
-            return ("", "", "");
+            //check if instance is already running, ask user if they want to launch
+            if (Globals.running.ContainsValue(instanceName))
+            {
+                DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", instanceName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+            Globals.running.Add(runID, instanceName);
+
+
+            //TODO get all required JSONs and create objects
+
+            //TODO ask for multiplayer if wanted
+
+            //TODO authenticate
+
+            //TODO start building command itself
+
+            //TODO launch game
         }
 
 

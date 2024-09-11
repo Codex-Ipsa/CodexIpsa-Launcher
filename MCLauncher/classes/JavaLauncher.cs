@@ -14,7 +14,7 @@ namespace MCLauncher.classes
     internal class JavaLauncher
     {
         //TODO
-        //Possibly rewrite all of this shit before you're going to make the MMC like selection
+        //Possibly rewrite all of this shit
         public static string msPlayerName;
         public static string msPlayerUUID;
         public static string msPlayerAccessToken;
@@ -62,6 +62,8 @@ namespace MCLauncher.classes
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
+
+            String modManifest = ModWorker.getModManifest(profileName);
 
             //create mod patch and info
             var modInfo = ModWorker.createJarPatch(profileName);

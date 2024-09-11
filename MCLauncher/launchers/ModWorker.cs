@@ -153,6 +153,36 @@ namespace MCLauncher.launchers
             return (game, version);
         }
 
+        //TODO get and download the mod manifest
+        public static String getModManifest(ModJson mj)
+        {
+            //Globals.client.DownloadFile(manifestPath, $"{Globals.dataPath}\\data\\json\\{ij.version}.json");
+            //ij.version
+            //String game = null;
+            //String version = null;
+
+            ////loop through items
+            //for (int i = 0; i < mj.items.Length; i++)
+            //{
+            //    ModJsonEntry entry = mj.items[i];
+
+            //    //skip disabled entries
+            //    if (entry.disabled)
+            //        continue;
+
+            //    //set game name
+            //    if ((game == null && entry.name != "") && (version == null && entry.version != ""))
+            //    {
+            //        game = entry.name;
+            //        version = entry.version;
+            //        break;
+            //    }
+            //}
+
+            //Logger.Info("[ModWorker/getPatchName]", $"{game}, {version}");
+            return null;
+        }
+
         //String to MD5
         public static String MD5String(string input)
         {
