@@ -43,6 +43,7 @@ namespace MCLauncher.launchers
 
             //get patch MD5
             String md5Patch = getPatchMD5(instanceName);
+            var gameInfo = getPatchName(mj);
 
             //if patch already exists
             if (!File.Exists($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar"))
@@ -89,7 +90,7 @@ namespace MCLauncher.launchers
                     Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\", true);
             }
 
-            return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", null, null);
+            return ($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\patch\\minecraft-{md5Patch}.jar", gameInfo.Item1, gameInfo.Item2);
         }
 
         //gets MD5 of the game patch
@@ -122,6 +123,34 @@ namespace MCLauncher.launchers
             }
 
             return MD5String(toMD5);
+        }
+
+        //gets game and version variables of patch
+        public static (String, String) getPatchName(ModJson mj)
+        {
+            String game = null;
+            String version = null;
+
+            //loop through items
+            for (int i = 0; i < mj.items.Length; i++)
+            {
+                ModJsonEntry entry = mj.items[i];
+
+                //skip disabled entries
+                if (entry.disabled)
+                    continue;
+
+                //if cusjar = set path
+                if (game == null && version == null)
+                {
+                    game = entry.name;
+                    version = entry.version;
+                    break;
+                }
+            }
+
+            Logger.Info("[ModWorker/getPatchName]", $"{game}, {version}");
+            return (game, version);
         }
 
         //String to MD5

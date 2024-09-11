@@ -20,19 +20,12 @@ namespace MCLauncher.classes
         public static string msPlayerAccessToken;
         public static string msPlayerMPPass;
 
-        public static string modClientPath = "";
-        public static string modVersion = "";
-        public static string modName = "";
-
         public static string manifestPath = "";
 
         public static string runID = "";
 
         public static void Launch(string profileName)
         {
-            modVersion = "";
-            modName = "";
-
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
 
             if (Globals.running.ContainsValue(profileName))
@@ -84,7 +77,11 @@ namespace MCLauncher.classes
 
             /* TEMP END */
 
-            modClientPath = ModWorker.createJarPatch(profileName);
+            //create mod patch and info
+            var hh = ModWorker.createJarPatch(profileName);
+            String modClientPath = hh.Item1;
+            String modName = hh.Item2;
+            String modVersion = hh.Item3;
 
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
             {
@@ -251,7 +248,7 @@ namespace MCLauncher.classes
             if (!string.IsNullOrWhiteSpace(dj.directory) && !string.IsNullOrEmpty(dj.directory))
                 workDir = dj.directory;
 
-            if (modVersion != "")
+            if (modVersion != null)
             {
                 vi.game = modName;
                 vi.version = modVersion;

@@ -55,11 +55,11 @@ namespace MCLauncher
 
                 if (!string.IsNullOrWhiteSpace(entry.name))
                 {
-                    JavaLauncher.modName = entry.name;
+                    //JavaLauncher.modName = entry.name;
                 }
                 if (!string.IsNullOrWhiteSpace(entry.version))
                 {
-                    JavaLauncher.modVersion = entry.version;
+                    //JavaLauncher.modVersion = entry.version;
                 }
 
 
