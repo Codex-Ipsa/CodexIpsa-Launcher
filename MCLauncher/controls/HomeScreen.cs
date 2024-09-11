@@ -2,6 +2,7 @@
 using MCLauncher.forms;
 using MCLauncher.json.api;
 using MCLauncher.json.launcher;
+using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -165,23 +166,14 @@ namespace MCLauncher
                 selectedVersion = "Minecraft " + getLatestVersion(ij.version);
             }
 
+            //get mod name
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
-
-            string tempName = null;
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
-            foreach (ModJsonEntry ent in mj.items)
+
+            var modInfo = ModWorker.getPatchName(mj);
+            if(modInfo.Item2 != null)
             {
-                if (ent.disabled == false)
-                {
-                    if (tempName == null && !String.IsNullOrWhiteSpace(ent.name) && !String.IsNullOrWhiteSpace(ent.version))
-                    {
-                        tempName = ent.name + " " + ent.version;
-                    }
-                }
-            }
-            if (!String.IsNullOrWhiteSpace(tempName))
-            {
-                selectedVersion = tempName;
+                selectedVersion = $"{modInfo.Item1} {modInfo.Item2}";
             }
 
             //Ready to play text

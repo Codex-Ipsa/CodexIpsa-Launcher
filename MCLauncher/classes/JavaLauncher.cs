@@ -63,25 +63,11 @@ namespace MCLauncher.classes
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
 
-            /* TEMP START */
-
-
-
-            //if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
-            //    Globals.client.DownloadFile(vi.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
-
-            //Console.WriteLine("jarpath: " + ModWorker.getJarPath(profileName));
-            //ModWorker.createJarPatch(profileName);
-
-            //return; //TEMP
-
-            /* TEMP END */
-
             //create mod patch and info
-            var hh = ModWorker.createJarPatch(profileName);
-            String modClientPath = hh.Item1;
-            String modName = hh.Item2;
-            String modVersion = hh.Item3;
+            var modInfo = ModWorker.createJarPatch(profileName);
+            String modClientPath = modInfo.Item1;
+            String modName = modInfo.Item2;
+            String modVersion = modInfo.Item3;
 
             if (dj.useJson && !String.IsNullOrWhiteSpace(dj.jsonPath))
             {

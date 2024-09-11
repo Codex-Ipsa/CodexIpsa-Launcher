@@ -140,8 +140,8 @@ namespace MCLauncher.launchers
                 if (entry.disabled)
                     continue;
 
-                //if cusjar = set path
-                if (game == null && version == null)
+                //set game name
+                if ((game == null && entry.name != "") && (version == null && entry.version != ""))
                 {
                     game = entry.name;
                     version = entry.version;

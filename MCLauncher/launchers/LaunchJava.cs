@@ -9,7 +9,7 @@ namespace MCLauncher.launchers
     {
         //launches java edition
         //TODO
-        public static (string, string, string) launch(String instanceName)
+        public static (string, string, string) launchGame(String instanceName)
         {
             //create directories
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
