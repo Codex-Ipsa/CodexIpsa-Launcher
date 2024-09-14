@@ -69,15 +69,15 @@
             this.vanillaPage = new System.Windows.Forms.TabPage();
             this.chkLatestSnapshot = new System.Windows.Forms.CheckBox();
             this.chkLatest = new System.Windows.Forms.CheckBox();
-            this.vanillaExperimental = new System.Windows.Forms.CheckBox();
-            this.vanillaSnapshot = new System.Windows.Forms.CheckBox();
-            this.vanillaRelease = new System.Windows.Forms.CheckBox();
-            this.vanillaBeta = new System.Windows.Forms.CheckBox();
-            this.vanillaAlpha = new System.Windows.Forms.CheckBox();
-            this.vanillaInfdev = new System.Windows.Forms.CheckBox();
-            this.vanillaIndev = new System.Windows.Forms.CheckBox();
-            this.vanillaClassic = new System.Windows.Forms.CheckBox();
-            this.vanillaPreclassic = new System.Windows.Forms.CheckBox();
+            this.chkExperimental = new System.Windows.Forms.CheckBox();
+            this.chkSnapshot = new System.Windows.Forms.CheckBox();
+            this.chkRelease = new System.Windows.Forms.CheckBox();
+            this.chkBeta = new System.Windows.Forms.CheckBox();
+            this.chkAlpha = new System.Windows.Forms.CheckBox();
+            this.chkInfdev = new System.Windows.Forms.CheckBox();
+            this.chkIndev = new System.Windows.Forms.CheckBox();
+            this.chkClassic = new System.Windows.Forms.CheckBox();
+            this.chkPreclassic = new System.Windows.Forms.CheckBox();
             this.vanillaList = new System.Windows.Forms.ListView();
             this.eduPage = new System.Windows.Forms.TabPage();
             this.eduList = new System.Windows.Forms.ListView();
@@ -86,13 +86,14 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.grbGame = new System.Windows.Forms.GroupBox();
             this.grbForExp = new System.Windows.Forms.GroupBox();
+            this.chkServerIP = new System.Windows.Forms.CheckBox();
+            this.serverIPBox = new System.Windows.Forms.TextBox();
             this.javaBox = new System.Windows.Forms.TextBox();
             this.javaBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.serverIPBox = new System.Windows.Forms.TextBox();
-            this.chkServerIP = new System.Windows.Forms.CheckBox();
+            this.chkOther = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -477,17 +478,18 @@
             // 
             // vanillaPage
             // 
+            this.vanillaPage.Controls.Add(this.chkOther);
             this.vanillaPage.Controls.Add(this.chkLatestSnapshot);
             this.vanillaPage.Controls.Add(this.chkLatest);
-            this.vanillaPage.Controls.Add(this.vanillaExperimental);
-            this.vanillaPage.Controls.Add(this.vanillaSnapshot);
-            this.vanillaPage.Controls.Add(this.vanillaRelease);
-            this.vanillaPage.Controls.Add(this.vanillaBeta);
-            this.vanillaPage.Controls.Add(this.vanillaAlpha);
-            this.vanillaPage.Controls.Add(this.vanillaInfdev);
-            this.vanillaPage.Controls.Add(this.vanillaIndev);
-            this.vanillaPage.Controls.Add(this.vanillaClassic);
-            this.vanillaPage.Controls.Add(this.vanillaPreclassic);
+            this.vanillaPage.Controls.Add(this.chkExperimental);
+            this.vanillaPage.Controls.Add(this.chkSnapshot);
+            this.vanillaPage.Controls.Add(this.chkRelease);
+            this.vanillaPage.Controls.Add(this.chkBeta);
+            this.vanillaPage.Controls.Add(this.chkAlpha);
+            this.vanillaPage.Controls.Add(this.chkInfdev);
+            this.vanillaPage.Controls.Add(this.chkIndev);
+            this.vanillaPage.Controls.Add(this.chkClassic);
+            this.vanillaPage.Controls.Add(this.chkPreclassic);
             this.vanillaPage.Controls.Add(this.vanillaList);
             this.vanillaPage.ImageIndex = 0;
             this.vanillaPage.Location = new System.Drawing.Point(4, 22);
@@ -519,122 +521,122 @@
             this.chkLatest.UseVisualStyleBackColor = true;
             this.chkLatest.CheckedChanged += new System.EventHandler(this.chkLatest_CheckedChanged);
             // 
-            // vanillaExperimental
+            // chkExperimental
             // 
-            this.vanillaExperimental.AutoSize = true;
-            this.vanillaExperimental.Checked = true;
-            this.vanillaExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaExperimental.Location = new System.Drawing.Point(207, 335);
-            this.vanillaExperimental.Name = "vanillaExperimental";
-            this.vanillaExperimental.Size = new System.Drawing.Size(86, 17);
-            this.vanillaExperimental.TabIndex = 9;
-            this.vanillaExperimental.Text = "Experimental";
-            this.vanillaExperimental.UseVisualStyleBackColor = true;
-            this.vanillaExperimental.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkExperimental.AutoSize = true;
+            this.chkExperimental.Checked = true;
+            this.chkExperimental.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkExperimental.Location = new System.Drawing.Point(207, 335);
+            this.chkExperimental.Name = "chkExperimental";
+            this.chkExperimental.Size = new System.Drawing.Size(86, 17);
+            this.chkExperimental.TabIndex = 9;
+            this.chkExperimental.Text = "Experimental";
+            this.chkExperimental.UseVisualStyleBackColor = true;
+            this.chkExperimental.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaSnapshot
+            // chkSnapshot
             // 
-            this.vanillaSnapshot.AutoSize = true;
-            this.vanillaSnapshot.Checked = true;
-            this.vanillaSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaSnapshot.Location = new System.Drawing.Point(130, 335);
-            this.vanillaSnapshot.Name = "vanillaSnapshot";
-            this.vanillaSnapshot.Size = new System.Drawing.Size(71, 17);
-            this.vanillaSnapshot.TabIndex = 8;
-            this.vanillaSnapshot.Text = "Snapshot";
-            this.vanillaSnapshot.UseVisualStyleBackColor = true;
-            this.vanillaSnapshot.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkSnapshot.AutoSize = true;
+            this.chkSnapshot.Checked = true;
+            this.chkSnapshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSnapshot.Location = new System.Drawing.Point(130, 335);
+            this.chkSnapshot.Name = "chkSnapshot";
+            this.chkSnapshot.Size = new System.Drawing.Size(71, 17);
+            this.chkSnapshot.TabIndex = 8;
+            this.chkSnapshot.Text = "Snapshot";
+            this.chkSnapshot.UseVisualStyleBackColor = true;
+            this.chkSnapshot.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaRelease
+            // chkRelease
             // 
-            this.vanillaRelease.AutoSize = true;
-            this.vanillaRelease.Checked = true;
-            this.vanillaRelease.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaRelease.Location = new System.Drawing.Point(59, 335);
-            this.vanillaRelease.Name = "vanillaRelease";
-            this.vanillaRelease.Size = new System.Drawing.Size(65, 17);
-            this.vanillaRelease.TabIndex = 7;
-            this.vanillaRelease.Text = "Release";
-            this.vanillaRelease.UseVisualStyleBackColor = true;
-            this.vanillaRelease.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkRelease.AutoSize = true;
+            this.chkRelease.Checked = true;
+            this.chkRelease.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRelease.Location = new System.Drawing.Point(59, 335);
+            this.chkRelease.Name = "chkRelease";
+            this.chkRelease.Size = new System.Drawing.Size(65, 17);
+            this.chkRelease.TabIndex = 7;
+            this.chkRelease.Text = "Release";
+            this.chkRelease.UseVisualStyleBackColor = true;
+            this.chkRelease.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaBeta
+            // chkBeta
             // 
-            this.vanillaBeta.AutoSize = true;
-            this.vanillaBeta.Checked = true;
-            this.vanillaBeta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaBeta.Location = new System.Drawing.Point(5, 335);
-            this.vanillaBeta.Name = "vanillaBeta";
-            this.vanillaBeta.Size = new System.Drawing.Size(48, 17);
-            this.vanillaBeta.TabIndex = 6;
-            this.vanillaBeta.Text = "Beta";
-            this.vanillaBeta.UseVisualStyleBackColor = true;
-            this.vanillaBeta.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkBeta.AutoSize = true;
+            this.chkBeta.Checked = true;
+            this.chkBeta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBeta.Location = new System.Drawing.Point(5, 335);
+            this.chkBeta.Name = "chkBeta";
+            this.chkBeta.Size = new System.Drawing.Size(48, 17);
+            this.chkBeta.TabIndex = 6;
+            this.chkBeta.Text = "Beta";
+            this.chkBeta.UseVisualStyleBackColor = true;
+            this.chkBeta.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaAlpha
+            // chkAlpha
             // 
-            this.vanillaAlpha.AutoSize = true;
-            this.vanillaAlpha.Checked = true;
-            this.vanillaAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaAlpha.Location = new System.Drawing.Point(274, 315);
-            this.vanillaAlpha.Name = "vanillaAlpha";
-            this.vanillaAlpha.Size = new System.Drawing.Size(53, 17);
-            this.vanillaAlpha.TabIndex = 5;
-            this.vanillaAlpha.Text = "Alpha";
-            this.vanillaAlpha.UseVisualStyleBackColor = true;
-            this.vanillaAlpha.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkAlpha.AutoSize = true;
+            this.chkAlpha.Checked = true;
+            this.chkAlpha.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAlpha.Location = new System.Drawing.Point(274, 315);
+            this.chkAlpha.Name = "chkAlpha";
+            this.chkAlpha.Size = new System.Drawing.Size(53, 17);
+            this.chkAlpha.TabIndex = 5;
+            this.chkAlpha.Text = "Alpha";
+            this.chkAlpha.UseVisualStyleBackColor = true;
+            this.chkAlpha.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaInfdev
+            // chkInfdev
             // 
-            this.vanillaInfdev.AutoSize = true;
-            this.vanillaInfdev.Checked = true;
-            this.vanillaInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaInfdev.Location = new System.Drawing.Point(212, 315);
-            this.vanillaInfdev.Name = "vanillaInfdev";
-            this.vanillaInfdev.Size = new System.Drawing.Size(56, 17);
-            this.vanillaInfdev.TabIndex = 4;
-            this.vanillaInfdev.Text = "Infdev";
-            this.vanillaInfdev.UseVisualStyleBackColor = true;
-            this.vanillaInfdev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkInfdev.AutoSize = true;
+            this.chkInfdev.Checked = true;
+            this.chkInfdev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkInfdev.Location = new System.Drawing.Point(212, 315);
+            this.chkInfdev.Name = "chkInfdev";
+            this.chkInfdev.Size = new System.Drawing.Size(56, 17);
+            this.chkInfdev.TabIndex = 4;
+            this.chkInfdev.Text = "Infdev";
+            this.chkInfdev.UseVisualStyleBackColor = true;
+            this.chkInfdev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaIndev
+            // chkIndev
             // 
-            this.vanillaIndev.AutoSize = true;
-            this.vanillaIndev.Checked = true;
-            this.vanillaIndev.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaIndev.Location = new System.Drawing.Point(153, 315);
-            this.vanillaIndev.Name = "vanillaIndev";
-            this.vanillaIndev.Size = new System.Drawing.Size(53, 17);
-            this.vanillaIndev.TabIndex = 3;
-            this.vanillaIndev.Text = "Indev";
-            this.vanillaIndev.UseVisualStyleBackColor = true;
-            this.vanillaIndev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkIndev.AutoSize = true;
+            this.chkIndev.Checked = true;
+            this.chkIndev.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIndev.Location = new System.Drawing.Point(153, 315);
+            this.chkIndev.Name = "chkIndev";
+            this.chkIndev.Size = new System.Drawing.Size(53, 17);
+            this.chkIndev.TabIndex = 3;
+            this.chkIndev.Text = "Indev";
+            this.chkIndev.UseVisualStyleBackColor = true;
+            this.chkIndev.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaClassic
+            // chkClassic
             // 
-            this.vanillaClassic.AutoSize = true;
-            this.vanillaClassic.Checked = true;
-            this.vanillaClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaClassic.Location = new System.Drawing.Point(88, 315);
-            this.vanillaClassic.Name = "vanillaClassic";
-            this.vanillaClassic.Size = new System.Drawing.Size(59, 17);
-            this.vanillaClassic.TabIndex = 2;
-            this.vanillaClassic.Text = "Classic";
-            this.vanillaClassic.UseVisualStyleBackColor = true;
-            this.vanillaClassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkClassic.AutoSize = true;
+            this.chkClassic.Checked = true;
+            this.chkClassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkClassic.Location = new System.Drawing.Point(88, 315);
+            this.chkClassic.Name = "chkClassic";
+            this.chkClassic.Size = new System.Drawing.Size(59, 17);
+            this.chkClassic.TabIndex = 2;
+            this.chkClassic.Text = "Classic";
+            this.chkClassic.UseVisualStyleBackColor = true;
+            this.chkClassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
-            // vanillaPreclassic
+            // chkPreclassic
             // 
-            this.vanillaPreclassic.AutoSize = true;
-            this.vanillaPreclassic.Checked = true;
-            this.vanillaPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.vanillaPreclassic.Location = new System.Drawing.Point(5, 315);
-            this.vanillaPreclassic.Name = "vanillaPreclassic";
-            this.vanillaPreclassic.Size = new System.Drawing.Size(77, 17);
-            this.vanillaPreclassic.TabIndex = 1;
-            this.vanillaPreclassic.Text = "Pre-classic";
-            this.vanillaPreclassic.UseVisualStyleBackColor = true;
-            this.vanillaPreclassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
+            this.chkPreclassic.AutoSize = true;
+            this.chkPreclassic.Checked = true;
+            this.chkPreclassic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPreclassic.Location = new System.Drawing.Point(5, 315);
+            this.chkPreclassic.Name = "chkPreclassic";
+            this.chkPreclassic.Size = new System.Drawing.Size(77, 17);
+            this.chkPreclassic.TabIndex = 1;
+            this.chkPreclassic.Text = "Pre-classic";
+            this.chkPreclassic.UseVisualStyleBackColor = true;
+            this.chkPreclassic.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // vanillaList
             // 
@@ -657,7 +659,7 @@
             this.eduPage.ImageIndex = 0;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
-            this.eduPage.Size = new System.Drawing.Size(358, 382);
+            this.eduPage.Size = new System.Drawing.Size(358, 376);
             this.eduPage.TabIndex = 5;
             this.eduPage.Text = "MinecraftEdu";
             this.eduPage.UseVisualStyleBackColor = true;
@@ -683,7 +685,7 @@
             this.xboxPage.ImageIndex = 6;
             this.xboxPage.Location = new System.Drawing.Point(4, 22);
             this.xboxPage.Name = "xboxPage";
-            this.xboxPage.Size = new System.Drawing.Size(358, 382);
+            this.xboxPage.Size = new System.Drawing.Size(358, 376);
             this.xboxPage.TabIndex = 4;
             this.xboxPage.Text = "Xbox 360";
             this.xboxPage.UseVisualStyleBackColor = true;
@@ -769,6 +771,24 @@
             this.grbForExp.TabStop = false;
             this.grbForExp.Text = "grb.ForExp";
             // 
+            // chkServerIP
+            // 
+            this.chkServerIP.AutoSize = true;
+            this.chkServerIP.Location = new System.Drawing.Point(6, 126);
+            this.chkServerIP.Name = "chkServerIP";
+            this.chkServerIP.Size = new System.Drawing.Size(88, 17);
+            this.chkServerIP.TabIndex = 37;
+            this.chkServerIP.Text = "chk.ServerIP";
+            this.chkServerIP.UseVisualStyleBackColor = true;
+            this.chkServerIP.CheckedChanged += new System.EventHandler(this.chkServerIP_CheckedChanged);
+            // 
+            // serverIPBox
+            // 
+            this.serverIPBox.Location = new System.Drawing.Point(99, 124);
+            this.serverIPBox.Name = "serverIPBox";
+            this.serverIPBox.Size = new System.Drawing.Size(318, 20);
+            this.serverIPBox.TabIndex = 36;
+            // 
             // javaBox
             // 
             this.javaBox.Location = new System.Drawing.Point(99, 72);
@@ -816,23 +836,17 @@
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
-            // serverIPBox
+            // chkOther
             // 
-            this.serverIPBox.Location = new System.Drawing.Point(99, 124);
-            this.serverIPBox.Name = "serverIPBox";
-            this.serverIPBox.Size = new System.Drawing.Size(318, 20);
-            this.serverIPBox.TabIndex = 36;
-            // 
-            // chkServerIP
-            // 
-            this.chkServerIP.AutoSize = true;
-            this.chkServerIP.Location = new System.Drawing.Point(6, 126);
-            this.chkServerIP.Name = "chkServerIP";
-            this.chkServerIP.Size = new System.Drawing.Size(88, 17);
-            this.chkServerIP.TabIndex = 37;
-            this.chkServerIP.Text = "chk.ServerIP";
-            this.chkServerIP.UseVisualStyleBackColor = true;
-            this.chkServerIP.CheckedChanged += new System.EventHandler(this.chkServerIP_CheckedChanged);
+            this.chkOther.AutoSize = true;
+            this.chkOther.Checked = true;
+            this.chkOther.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOther.Location = new System.Drawing.Point(299, 335);
+            this.chkOther.Name = "chkOther";
+            this.chkOther.Size = new System.Drawing.Size(52, 17);
+            this.chkOther.TabIndex = 12;
+            this.chkOther.Text = "Other";
+            this.chkOther.UseVisualStyleBackColor = true;
             // 
             // InstanceGui
             // 
@@ -905,15 +919,15 @@
         public System.Windows.Forms.TabPage vanillaPage;
         public System.Windows.Forms.CheckBox chkLatestSnapshot;
         public System.Windows.Forms.CheckBox chkLatest;
-        public System.Windows.Forms.CheckBox vanillaExperimental;
-        public System.Windows.Forms.CheckBox vanillaSnapshot;
-        public System.Windows.Forms.CheckBox vanillaRelease;
-        public System.Windows.Forms.CheckBox vanillaBeta;
-        public System.Windows.Forms.CheckBox vanillaAlpha;
-        public System.Windows.Forms.CheckBox vanillaInfdev;
-        public System.Windows.Forms.CheckBox vanillaIndev;
-        public System.Windows.Forms.CheckBox vanillaClassic;
-        public System.Windows.Forms.CheckBox vanillaPreclassic;
+        public System.Windows.Forms.CheckBox chkExperimental;
+        public System.Windows.Forms.CheckBox chkSnapshot;
+        public System.Windows.Forms.CheckBox chkRelease;
+        public System.Windows.Forms.CheckBox chkBeta;
+        public System.Windows.Forms.CheckBox chkAlpha;
+        public System.Windows.Forms.CheckBox chkInfdev;
+        public System.Windows.Forms.CheckBox chkIndev;
+        public System.Windows.Forms.CheckBox chkClassic;
+        public System.Windows.Forms.CheckBox chkPreclassic;
         public System.Windows.Forms.ListView vanillaList;
         public System.Windows.Forms.TabPage eduPage;
         public System.Windows.Forms.ListView eduList;
@@ -929,5 +943,6 @@
         public System.Windows.Forms.Button deleteBtn;
         public System.Windows.Forms.CheckBox chkServerIP;
         public System.Windows.Forms.TextBox serverIPBox;
+        public System.Windows.Forms.CheckBox chkOther;
     }
 }

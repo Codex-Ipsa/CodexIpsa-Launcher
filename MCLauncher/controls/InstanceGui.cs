@@ -88,31 +88,31 @@ namespace MCLauncher.controls
             {
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") }; //dd.MM.yyyy HH:mm:ss
 
-                if (vanillaPreclassic.Checked && row[0] == "pre-classic")
+                if (chkPreclassic.Checked && row[0] == "pre-classic")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaClassic.Checked && row[0] == "classic")
+                if (chkClassic.Checked && row[0] == "classic")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaIndev.Checked && row[0] == "indev")
+                if (chkIndev.Checked && row[0] == "indev")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaInfdev.Checked && row[0] == "infdev")
+                if (chkInfdev.Checked && row[0] == "infdev")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaAlpha.Checked && row[0] == "alpha")
+                if (chkAlpha.Checked && row[0] == "alpha")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaBeta.Checked && row[0] == "beta")
+                if (chkBeta.Checked && row[0] == "beta")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaRelease.Checked && row[0] == "release")
+                if (chkRelease.Checked && row[0] == "release")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaSnapshot.Checked && row[0] == "snapshot")
+                if (chkSnapshot.Checked && row[0] == "snapshot")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
-                if (vanillaExperimental.Checked && row[0] == "experimental")
+                if (chkExperimental.Checked && row[0] == "experimental")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
 
@@ -469,7 +469,7 @@ namespace MCLauncher.controls
         {
             if (chkLatest.Checked)
             {
-                vanillaRelease.Checked = true;
+                chkRelease.Checked = true;
 
                 for (int i = 0; i < vanillaList.Items.Count; i++)
                 {
@@ -499,7 +499,7 @@ namespace MCLauncher.controls
         {
             if (chkLatestSnapshot.Checked)
             {
-                vanillaSnapshot.Checked = true;
+                chkSnapshot.Checked = true;
 
                 for (int i = 0; i < vanillaList.Items.Count; i++)
                 {
