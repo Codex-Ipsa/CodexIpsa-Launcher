@@ -58,7 +58,7 @@ namespace MCLauncher.forms
             else if (loader == "fabric")
             {
                 List<String> loaders = FabricWorker.getLoaderVersions(version);
-                for(int i = 0; i < loaders.Count(); i++)
+                for (int i = 0; i < loaders.Count(); i++)
                 {
                     int icon = -1;
                     if (i == 0)
@@ -70,8 +70,6 @@ namespace MCLauncher.forms
                 }
 
                 recommendedVer = 0; //always recommend latest
-                //TODO
-                //TODO
             }
 
             //select recommended version
@@ -103,6 +101,19 @@ namespace MCLauncher.forms
                     //DownloadProgress dp = new DownloadProgress();
                     //dp.ShowDialog();
                 }
+            }
+            //download fabric
+            else if (loader == "fabric")
+            {
+                String loaderVer = listView1.SelectedItems[0].Text;
+                //get mod json
+                String moddedJson = FabricWorker.createModJson(version, loaderVer);
+                
+                //save json
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\fabric-{version}-{loaderVer}.json", moddedJson);
+
+                //add to modlist
+                theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", "");
             }
             this.Close();
         }

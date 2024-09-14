@@ -1,8 +1,10 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.json.api;
 using MCLauncher.json.fabric;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MCLauncher.launchers.fabric
 {
@@ -67,7 +69,58 @@ namespace MCLauncher.launchers.fabric
             }
 
             return version;
+        }
 
+        //creates the mod json to use
+        public static String createModJson(String gameVersion, String loaderVersion)
+        {
+            //check for reupload name first
+            String fabricVersion = getFabricName(gameVersion);
+
+            //get fabric ver json
+            string versionInfo = Globals.client.DownloadString($"https://meta.fabricmc.net/v2/versions/loader/{fabricVersion}/{loaderVersion}/profile/json");
+            FabricVersionJson fabricJson = JsonConvert.DeserializeObject<FabricVersionJson>(versionInfo);
+
+            //get ipsa ver json
+            string ipsaManifest = Globals.client.DownloadString($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/java/{gameVersion}.json");
+            VersionJson ipsaJson = JsonConvert.DeserializeObject<VersionJson>(ipsaManifest);
+
+            //replace ipsa info with fabric stuff
+            ipsaJson.classpath = fabricJson.mainClass;
+            ipsaJson.game = "Fabric";
+            ipsaJson.version = $"{gameVersion}-{loaderVersion}";
+
+            List<VersionJsonLibraries> list = ipsaJson.libraries.ToList();
+            foreach (FabricLibsJson lib in fabricJson.libraries)
+            {
+                string[] names = lib.name.Split(':');
+                string[] paths = names[0].Split('.');
+
+                string fullUrl = lib.url;
+                foreach (string path in paths)
+                {
+                    fullUrl += path + "/";
+                }
+
+                fullUrl += $"{names[1]}/{names[2]}/{names[1]}-{names[2]}.jar";
+
+                string libname = $"{names[1]}-{names[2]}";
+
+                //Console.WriteLine(fullUrl);
+
+                VersionJsonLibraries newOne = new VersionJsonLibraries();
+                newOne.name = libname;
+                newOne.url = fullUrl;
+                newOne.size = 0;
+                newOne.extract = false;
+
+                list.Add(newOne);
+            }
+
+            ipsaJson.libraries = list.ToArray();
+            string json = JsonConvert.SerializeObject(ipsaJson);
+
+            return json;
         }
     }
 }

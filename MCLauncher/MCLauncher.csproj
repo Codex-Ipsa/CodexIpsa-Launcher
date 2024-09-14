@@ -101,6 +101,7 @@
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="json\fabric\FabricGameJson.cs" />
     <Compile Include="json\fabric\FabricLoaderJson.cs" />
+    <Compile Include="json\fabric\FabricVersionJson.cs" />
     <Compile Include="json\launcher\AuthJson.cs" />
     <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />
