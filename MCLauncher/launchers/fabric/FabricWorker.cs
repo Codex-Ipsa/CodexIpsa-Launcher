@@ -87,8 +87,6 @@ namespace MCLauncher.launchers.fabric
 
             //replace ipsa info with fabric stuff
             ipsaJson.classpath = fabricJson.mainClass;
-            ipsaJson.game = "Fabric";
-            ipsaJson.version = $"{gameVersion}-{loaderVersion}";
 
             List<VersionJsonLibraries> list = ipsaJson.libraries.ToList();
             foreach (FabricLibsJson lib in fabricJson.libraries)
