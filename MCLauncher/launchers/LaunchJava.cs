@@ -9,6 +9,8 @@ namespace MCLauncher.launchers
     internal class LaunchJava
     {
         public static string runID = "";
+        
+        //WIP
 
         //launches java edition
         public static void launchGame(String instanceName)

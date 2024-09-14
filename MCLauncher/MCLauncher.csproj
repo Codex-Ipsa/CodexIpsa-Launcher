@@ -86,13 +86,6 @@
     <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
-    <Compile Include="classes\FabricParser.cs" />
-    <Compile Include="forms\OutputConsole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\OutputConsole.Designer.cs">
-      <DependentUpon>OutputConsole.cs</DependentUpon>
-    </Compile>
     <Compile Include="json\api\LanguagesJson.cs" />
     <Compile Include="json\api\UpdateJson.cs" />
     <Compile Include="json\api\VersionJson.cs" />
@@ -185,7 +178,6 @@
     <Compile Include="forms\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
-    <Compile Include="classes\JavaModHelper.cs" />
     <Compile Include="classes\Settings.cs" />
     <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
@@ -255,9 +247,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\NewInstance.resx">
       <DependentUpon>NewInstance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\OutputConsole.resx">
-      <DependentUpon>OutputConsole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\PallasRepo.resx">
       <DependentUpon>PallasRepo.cs</DependentUpon>
