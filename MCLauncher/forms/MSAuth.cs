@@ -423,7 +423,10 @@ namespace MCLauncher
                 mojpassRequest.Accept = "application/json";
                 mojpassRequest.Method = "POST";
 
-                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{ip}:{port}"));
+                String myIP = Globals.client.DownloadString("http://checkip.amazonaws.com/");
+                myIP = myIP.Replace("\n", String.Empty);
+
+                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(myIP));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
