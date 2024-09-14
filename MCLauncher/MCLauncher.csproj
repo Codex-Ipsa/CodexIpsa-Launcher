@@ -172,12 +172,6 @@
     <Compile Include="forms\PallasRepo.Designer.cs">
       <DependentUpon>PallasRepo.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Profile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\Profile.Designer.cs">
-      <DependentUpon>Profile.cs</DependentUpon>
-    </Compile>
     <Compile Include="classes\Settings.cs" />
     <Compile Include="classes\Strings.cs" />
     <Compile Include="controls\HomeScreen.cs">
@@ -250,9 +244,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\PallasRepo.resx">
       <DependentUpon>PallasRepo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\Profile.resx">
-      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

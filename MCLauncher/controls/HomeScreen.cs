@@ -145,7 +145,6 @@ namespace MCLauncher
             }
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
-            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void reloadInstance(string instName)
@@ -178,8 +177,6 @@ namespace MCLauncher
 
             //Ready to play text
             Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
-            Profile.profileName = Instance.cmbInstaces.Text;
-
             Instance.loadPlayTime(instName, ij);
         }
 
