@@ -6,7 +6,6 @@ namespace MCLauncher.json.api
     {
         public Risugami[] risugami { get; set; }
         public Forge[] forge { get; set; }
-        public Fabric[] fabric { get; set; }
         public Neoforge[] neoforge { get; set; }
         public Quilt[] quilt { get; set; }
         public Liteloader[] liteloader { get; set; }
@@ -29,11 +28,6 @@ namespace MCLauncher.json.api
         public ForgeSupplement supplement { get; set; }
     }
     public class ForgeSupplement
-    {
-        //TODO
-    }
-
-    public class Fabric
     {
         //TODO
     }
