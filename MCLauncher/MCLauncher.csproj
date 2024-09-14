@@ -283,7 +283,7 @@
     <Content Include="image\grass.png" />
     <Content Include="image\icon.ico" />
     <Content Include="image\icon.png" />
-    <Content Include="image\star.png" />
+    <Content Include="image\recommended.png" />
     <Content Include="image\stone-large-dark.png" />
   </ItemGroup>
   <ItemGroup>

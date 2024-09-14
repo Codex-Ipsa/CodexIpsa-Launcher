@@ -25,6 +25,20 @@ namespace MCLauncher.forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            //set window title
+            if (loader == "forge")
+                this.Text = "Install Forge";
+            else if (loader == "fabric")
+                this.Text = "Install Fabric";
+            else if (loader == "risugami")
+                this.Text = "Install Risugami's Modloader";
+            else if (loader == "neoforge")
+                this.Text = "Install Neoforge";
+            else if (loader == "quilt")
+                this.Text = "Install Quilt";
+            else if (loader == "liteloader")
+                this.Text = "Install LiteLoader";
+
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
