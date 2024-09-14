@@ -13,7 +13,9 @@ namespace MCLauncher.json.api
 
     public class Risugami
     {
-        //TODO
+        public String id { get; set; }
+        public String url { get; set; }
+        public String urlmp { get; set; }
     }
 
     public class Forge

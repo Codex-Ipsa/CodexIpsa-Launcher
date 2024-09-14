@@ -71,6 +71,23 @@ namespace MCLauncher.forms
 
                 recommendedVer = 0; //always recommend latest
             }
+            else if (loader == "risugami")
+            {
+                for (int i = 0; i < manifest.risugami.Count(); i++)
+                {
+                    Risugami r = manifest.risugami[i];
+
+                    int icon = -1;
+                    if (i == 0)
+                        icon = 0;
+                    else
+                        icon = -1;
+
+                    listView1.Items.Add(r.id, icon);
+                }
+
+                recommendedVer = 0; //always recommend latest
+            }
 
             //select recommended version
             listView1.Select();
@@ -108,12 +125,36 @@ namespace MCLauncher.forms
                 String loaderVer = listView1.SelectedItems[0].Text;
                 //get mod json
                 String moddedJson = FabricWorker.createModJson(version, loaderVer);
-                
+
                 //save json
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\fabric-{version}-{loaderVer}.json", moddedJson);
 
                 //add to modlist
                 theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", "");
+            }
+            //download risugami's modloader
+            else if (loader == "risugami")
+            {
+                Risugami risugami = manifest.risugami[listView1.SelectedItems[0].Index];
+
+                //download risugami
+                DownloadProgress.url = risugami.url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\modloader-{risugami.id}.zip";
+                DownloadProgress download = new DownloadProgress();
+                download.ShowDialog();
+
+                //download modloadermp if available
+                if(risugami.urlmp != null)
+                {
+                    DownloadProgress.url = risugami.urlmp;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\modloadermp-{risugami.id}.zip";
+                    DownloadProgress download2 = new DownloadProgress();
+                    download2.ShowDialog();
+                }
+
+                //add to modlist
+                theModsGui.addModList($"Risugami's Modloader", risugami.id, $"modloader-{risugami.id}.zip", "jarmod", version);
+                theModsGui.addModList($"", "", $"modloadermp-{risugami.id}.zip", "jarmod", version);
             }
             this.Close();
         }
