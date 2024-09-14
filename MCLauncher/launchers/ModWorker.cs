@@ -1,4 +1,5 @@
-﻿using MCLauncher.json.launcher;
+﻿using MCLauncher.json.api;
+using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics.Eventing.Reader;
@@ -38,14 +39,32 @@ namespace MCLauncher.launchers
             bool hasJarMods = false;
             String clientPath = $"{Globals.dataPath}\\versions\\java\\{ij.version}.jar"; //TODO IF BASEGAME IS REPLACED WITH A CUSJAR
 
-            //get cusJar path (if exists)
+            //gets client path
             for (int i = 0; i < mj.items.Length; i++)
             {
                 ModJsonEntry entry = mj.items[i];
 
+                if (entry.disabled)
+                    continue;
+
                 if (entry.type == "cusjar")
                 {
                     clientPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
+                    break;
+                }
+                else
+                {
+                    String modFile = getModManifest(instanceName);
+                    if (modFile == null)
+                        break;
+
+                    String modVerManifest = File.ReadAllText(modFile);
+                    VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(modVerManifest);
+
+                    if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vj.version}.jar"))
+                        Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{vj.version}.jar");
+
+                    clientPath = $"{Globals.dataPath}\\versions\\java\\{vj.version}.jar";
                     break;
                 }
             }
@@ -200,10 +219,21 @@ namespace MCLauncher.launchers
                 if (entry.disabled)
                     continue;
 
-                if (manifestPath == null && entry.type == "json")
+                if (manifestPath == null)
                 {
-                    manifestPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
-                    break;
+                    if (entry.type == "json")
+                    {
+                        manifestPath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{entry.file}";
+                        break;
+                    }
+                    else if (entry.json != null && entry.json != String.Empty)
+                    {
+                        if (!File.Exists($"{Globals.dataPath}\\data\\json\\{entry.json}.json"))
+                            Globals.client.DownloadFile($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/java/{entry.json}.json", $"{Globals.dataPath}\\data\\json\\{entry.json}.json");
+
+                        manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
+                        break;
+                    }
                 }
             }
 
