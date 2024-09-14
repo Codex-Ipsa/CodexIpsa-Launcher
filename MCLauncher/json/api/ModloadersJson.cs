@@ -27,11 +27,7 @@ namespace MCLauncher.json.api
         public double size { get; set; }
         public String released { get; set; }
         public bool recommended { get; set; }
-        public ForgeSupplement supplement { get; set; }
-    }
-    public class ForgeSupplement
-    {
-        //TODO
+        public Forge[] supplement { get; set; }
     }
 
     public class Neoforge

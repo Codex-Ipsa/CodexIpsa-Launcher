@@ -102,21 +102,41 @@ namespace MCLauncher.forms
                 Forge forge = manifest.forge[listView1.SelectedItems[0].Index];
 
                 //json based
-                if (manifest.forge[listView1.SelectedItems[0].Index].type == "json")
+                if (forge.type == "json")
                 {
                     String forgeManifest = Globals.client.DownloadString(forge.json);
                     forgeManifest = forgeManifest.Replace("{forgeVer}", forge.id).Replace("{forgeUrl}", forge.url).Replace("{forgeSize}", forge.size.ToString());
                     File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.json", forgeManifest);
 
                     //add to modlist
-                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.json", "json", "");
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.json", "json", version);
                 }
-                else //type == jarmod
+                else if (forge.type == "jarmod")
                 {
-                    //DownloadProgress.url = manifest.forge[listView1.SelectedItems[0].Index].url;
-                    //DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{id}-{version}.zip";
-                    //DownloadProgress dp = new DownloadProgress();
-                    //dp.ShowDialog();
+                    //download jarmod zip
+                    DownloadProgress.url = forge.url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
+
+                    //add to modlist
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", version);
+
+                    //download supplement(s) if they exist
+                    if (forge.supplement != null)
+                    {
+                        foreach (Forge sup in forge.supplement)
+                        {
+                            //download
+                            DownloadProgress.url = sup.url;
+                            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{sup.id}.zip";
+                            dp = new DownloadProgress();
+                            dp.ShowDialog();
+
+                            //add to modlist
+                            theModsGui.addModList("", "", $"{sup.id}.zip", sup.type, sup.json);
+                        }
+                    }
                 }
             }
             //download fabric
@@ -130,7 +150,7 @@ namespace MCLauncher.forms
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\fabric-{version}-{loaderVer}.json", moddedJson);
 
                 //add to modlist
-                theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", "");
+                theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", version);
             }
             //download risugami's modloader
             else if (loader == "risugami")
@@ -144,7 +164,7 @@ namespace MCLauncher.forms
                 download.ShowDialog();
 
                 //download modloadermp if available
-                if(risugami.urlmp != null)
+                if (risugami.urlmp != null)
                 {
                     DownloadProgress.url = risugami.urlmp;
                     DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\modloadermp-{risugami.id}.zip";
