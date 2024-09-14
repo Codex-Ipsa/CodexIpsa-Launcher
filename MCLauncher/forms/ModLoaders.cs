@@ -52,6 +52,11 @@ namespace MCLauncher.forms
                     listView1.Items.Add(f.id, icon).SubItems.AddRange(item);
                 }
             }
+            else if (loader == "fabric")
+            {
+                //TODO
+                //TODO
+            }
 
             //select recommended version
             listView1.Select();

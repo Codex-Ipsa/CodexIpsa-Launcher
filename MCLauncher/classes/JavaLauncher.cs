@@ -127,11 +127,6 @@ namespace MCLauncher.classes
             String modName = modInfo.Item2;
             String modVersion = modInfo.Item3;
 
-
-
-
-
-
             if (ij.useAssets == true && ij.assetsPath != null)
             {
                 vj.assets.url = ij.assetsPath;

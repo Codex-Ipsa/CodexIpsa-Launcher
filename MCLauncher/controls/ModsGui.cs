@@ -1,6 +1,7 @@
 ﻿using MCLauncher.forms;
 using MCLauncher.json.api;
 using MCLauncher.json.launcher;
+using MCLauncher.launchers.fabric;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,11 @@ namespace MCLauncher.controls
         {
             this.version = version;
 
+            if (FabricWorker.isAvailable(version))
+                btnFabric.Enabled = true;
+            else
+                btnFabric.Enabled = false;
+
             try
             {
                 //download manifest
@@ -101,11 +107,6 @@ namespace MCLauncher.controls
                 else
                     btnForge.Enabled = false;
 
-                if (mm.fabric != null)
-                    btnFabric.Enabled = true;
-                else
-                    btnFabric.Enabled = false;
-
                 if (mm.neoforge != null)
                     btnNeoforge.Enabled = true;
                 else
@@ -128,7 +129,6 @@ namespace MCLauncher.controls
 
                 btnMLoader.Enabled = false;
                 btnForge.Enabled = false;
-                btnFabric.Enabled = false;
                 btnNeoforge.Enabled = false;
                 btnQuilt.Enabled = false;
                 btnLiteloader.Enabled = false;
