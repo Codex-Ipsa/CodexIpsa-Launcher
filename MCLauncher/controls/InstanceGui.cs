@@ -551,8 +551,6 @@ namespace MCLauncher.controls
 
                 if (selectedVersion.Contains(" ("))
                     selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
-
-                Logger.Info("{TEST!!}", FabricWorker.getFabricName(selectedVersion));
             }
         }
 

@@ -1,6 +1,9 @@
 ﻿using MCLauncher.controls;
 using MCLauncher.json.api;
+using MCLauncher.launchers.fabric;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -54,6 +57,19 @@ namespace MCLauncher.forms
             }
             else if (loader == "fabric")
             {
+                List<String> loaders = FabricWorker.getLoaderVersions(version);
+                for(int i = 0; i < loaders.Count(); i++)
+                {
+                    int icon = -1;
+                    if (i == 0)
+                        icon = 0;
+                    else
+                        icon = -1;
+
+                    listView1.Items.Add(loaders[i], icon);
+                }
+
+                recommendedVer = 0; //always recommend latest
                 //TODO
                 //TODO
             }

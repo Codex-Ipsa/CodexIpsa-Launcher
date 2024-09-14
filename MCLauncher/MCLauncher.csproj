@@ -100,6 +100,7 @@
     <Compile Include="json\api\ModloadersJson.cs" />
     <Compile Include="classes\JavaLauncher.cs" />
     <Compile Include="json\fabric\FabricGameJson.cs" />
+    <Compile Include="json\fabric\FabricLoaderJson.cs" />
     <Compile Include="json\launcher\AuthJson.cs" />
     <Compile Include="json\launcher\InstanceJson.cs" />
     <Compile Include="json\api\VersionListJson.cs" />
@@ -212,7 +213,7 @@
     <Compile Include="forms\Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
-    <Compile Include="launchers\fabric\FabricReuploadsJson.cs" />
+    <Compile Include="json\fabric\FabricReuploadsJson.cs" />
     <Compile Include="launchers\fabric\FabricWorker.cs" />
     <Compile Include="launchers\LaunchJava.cs" />
     <Compile Include="launchers\ModWorker.cs" />
