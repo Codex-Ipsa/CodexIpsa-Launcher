@@ -33,9 +33,8 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnInstall = new System.Windows.Forms.Button();
-            this.btnReload = new System.Windows.Forms.Button();
             this.iconsList = new System.Windows.Forms.ImageList(this.components);
+            this.btnInstall = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
@@ -65,37 +64,28 @@
             this.columnHeader2.Text = "Released";
             this.columnHeader2.Width = 150;
             // 
-            // btnInstall
-            // 
-            this.btnInstall.Location = new System.Drawing.Point(175, 265);
-            this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(122, 23);
-            this.btnInstall.TabIndex = 1;
-            this.btnInstall.Text = "Install selected";
-            this.btnInstall.UseVisualStyleBackColor = true;
-            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
-            // 
-            // btnReload
-            // 
-            this.btnReload.Location = new System.Drawing.Point(12, 265);
-            this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(122, 23);
-            this.btnReload.TabIndex = 2;
-            this.btnReload.Text = "Reload or somthing";
-            this.btnReload.UseVisualStyleBackColor = true;
-            // 
             // iconsList
             // 
             this.iconsList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconsList.ImageStream")));
             this.iconsList.TransparentColor = System.Drawing.Color.Transparent;
             this.iconsList.Images.SetKeyName(0, "recommended.png");
             // 
+            // btnInstall
+            // 
+            this.btnInstall.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnInstall.Location = new System.Drawing.Point(0, 260);
+            this.btnInstall.Name = "btnInstall";
+            this.btnInstall.Size = new System.Drawing.Size(309, 23);
+            this.btnInstall.TabIndex = 1;
+            this.btnInstall.Text = "Install selected";
+            this.btnInstall.UseVisualStyleBackColor = true;
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
+            // 
             // ModLoaders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 293);
-            this.Controls.Add(this.btnReload);
+            this.ClientSize = new System.Drawing.Size(309, 283);
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.listView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -111,7 +101,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnInstall;
-        private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.ImageList iconsList;
     }
 }
