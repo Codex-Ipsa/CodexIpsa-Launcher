@@ -592,5 +592,23 @@ namespace MCLauncher.controls
         {
             Process.Start($"{Globals.dataPath}\\instance\\{nameBox.Text}\\");
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(tabControl1.SelectedIndex);
+
+            if (tabControl1.SelectedIndex == 2)
+            {
+                grbGame.Visible = false;
+                grbForExp.Visible = false;
+                grbXbox.Visible = true;
+            }
+            else
+            {
+                grbGame.Visible = true;
+                grbForExp.Visible = true;
+                grbXbox.Visible = false;
+            }
+        }
     }
 }

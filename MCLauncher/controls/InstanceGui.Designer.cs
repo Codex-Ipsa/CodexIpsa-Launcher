@@ -67,6 +67,7 @@
             this.jsonBox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.vanillaPage = new System.Windows.Forms.TabPage();
+            this.chkOther = new System.Windows.Forms.CheckBox();
             this.chkLatestSnapshot = new System.Windows.Forms.CheckBox();
             this.chkLatest = new System.Windows.Forms.CheckBox();
             this.chkExperimental = new System.Windows.Forms.CheckBox();
@@ -93,7 +94,6 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.chkOther = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -475,6 +475,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(366, 402);
             this.tabControl1.TabIndex = 37;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // vanillaPage
             // 
@@ -498,6 +499,18 @@
             this.vanillaPage.TabIndex = 0;
             this.vanillaPage.Text = "Vanilla";
             this.vanillaPage.UseVisualStyleBackColor = true;
+            // 
+            // chkOther
+            // 
+            this.chkOther.AutoSize = true;
+            this.chkOther.Checked = true;
+            this.chkOther.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOther.Location = new System.Drawing.Point(299, 335);
+            this.chkOther.Name = "chkOther";
+            this.chkOther.Size = new System.Drawing.Size(52, 17);
+            this.chkOther.TabIndex = 12;
+            this.chkOther.Text = "Other";
+            this.chkOther.UseVisualStyleBackColor = true;
             // 
             // chkLatestSnapshot
             // 
@@ -672,7 +685,7 @@
             this.eduList.Location = new System.Drawing.Point(3, 3);
             this.eduList.MultiSelect = false;
             this.eduList.Name = "eduList";
-            this.eduList.Size = new System.Drawing.Size(348, 333);
+            this.eduList.Size = new System.Drawing.Size(348, 370);
             this.eduList.TabIndex = 1;
             this.eduList.UseCompatibleStateImageBehavior = false;
             this.eduList.View = System.Windows.Forms.View.Details;
@@ -698,7 +711,7 @@
             this.xboxList.Location = new System.Drawing.Point(3, 3);
             this.xboxList.MultiSelect = false;
             this.xboxList.Name = "xboxList";
-            this.xboxList.Size = new System.Drawing.Size(348, 333);
+            this.xboxList.Size = new System.Drawing.Size(348, 370);
             this.xboxList.TabIndex = 2;
             this.xboxList.UseCompatibleStateImageBehavior = false;
             this.xboxList.View = System.Windows.Forms.View.Details;
@@ -835,18 +848,6 @@
             this.deleteBtn.Text = "btn.delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
-            // 
-            // chkOther
-            // 
-            this.chkOther.AutoSize = true;
-            this.chkOther.Checked = true;
-            this.chkOther.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOther.Location = new System.Drawing.Point(299, 335);
-            this.chkOther.Name = "chkOther";
-            this.chkOther.Size = new System.Drawing.Size(52, 17);
-            this.chkOther.TabIndex = 12;
-            this.chkOther.Text = "Other";
-            this.chkOther.UseVisualStyleBackColor = true;
             // 
             // InstanceGui
             // 

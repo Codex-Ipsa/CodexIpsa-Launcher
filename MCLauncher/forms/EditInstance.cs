@@ -37,7 +37,12 @@ namespace MCLauncher.forms
 
             //fill in stuff
             if (ij.edition == "x360")
+            {
                 instanceGui.tabControl1.SelectedIndex = 2;
+                instanceGui.grbGame.Visible = false;
+                instanceGui.grbForExp.Visible = false;
+                instanceGui.grbXbox.Visible = true;
+            }
             else if (ij.edition == "javaedu")
                 instanceGui.tabControl1.SelectedIndex = 1;
             else
