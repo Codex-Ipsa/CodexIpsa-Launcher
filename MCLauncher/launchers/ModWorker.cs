@@ -94,7 +94,7 @@ namespace MCLauncher.launchers
                         if (!hasJarMods)
                         {
                             //ONLY extract the base game when jarmods exist
-                            ZipFile.ExtractToDirectory(clientPath, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\");
+                            extractZip(clientPath, $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\temp\\");
                             Logger.Info("[ModWorker/createJarPatch]", $"Base game jar: {ij.version}.jar");
 
                             hasJarMods = true;
@@ -242,7 +242,7 @@ namespace MCLauncher.launchers
         }
 
         //String to MD5
-        public static String MD5String(string input)
+        public static String MD5String(String input)
         {
             using (MD5 md5 = MD5.Create())
             {
@@ -250,6 +250,28 @@ namespace MCLauncher.launchers
                 byte[] hashBytes = md5.ComputeHash(inputBytes);
 
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToUpperInvariant();
+            }
+        }
+
+        public static void extractZip(String zipPath, String destination)
+        {
+            using (ZipArchive archive = ZipFile.OpenRead(zipPath))
+            {
+                foreach (ZipArchiveEntry entry in archive.Entries)
+                {
+                    try
+                    {
+                        String path = Path.Combine(destination, entry.FullName);
+                        String dir = Path.GetDirectoryName(path);
+
+                        Directory.CreateDirectory(dir);
+                        entry.ExtractToFile(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error("[ModWorker/extractZip]", $"Failed to extract {entry.FullName} ({ex.Message})");
+                    }
+                }
             }
         }
     }
