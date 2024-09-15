@@ -602,12 +602,42 @@ namespace MCLauncher.controls
                 grbGame.Visible = false;
                 grbForExp.Visible = false;
                 grbXbox.Visible = true;
+
+                if (xboxList.SelectedItems.Count > 0)
+                {
+                    selectedVersion = xboxList.SelectedItems[0].Text;
+
+                    if (selectedVersion.Contains(" ("))
+                        selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
+                }
             }
             else
             {
                 grbGame.Visible = true;
                 grbForExp.Visible = true;
                 grbXbox.Visible = false;
+
+                if (tabControl1.SelectedIndex == 1)
+                {
+                    if (eduList.SelectedItems.Count > 0)
+                    {
+                        selectedVersion = eduList.SelectedItems[0].Text;
+
+                        if (selectedVersion.Contains(" ("))
+                            selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
+                    }
+
+                }
+                else
+                {
+                    if (vanillaList.SelectedItems.Count > 0)
+                    {
+                        selectedVersion = vanillaList.SelectedItems[0].Text;
+
+                        if (selectedVersion.Contains(" ("))
+                            selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
+                    }
+                }
             }
         }
     }

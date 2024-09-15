@@ -93,7 +93,12 @@ namespace MCLauncher.forms
 
             instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 
-            instanceGui.selectInList(instanceGui.vanillaList, ij.version);
+            if (ij.edition == "java")
+                instanceGui.selectInList(instanceGui.vanillaList, ij.version);
+            else if (ij.edition == "javaedu")
+                instanceGui.selectInList(instanceGui.eduList, ij.version);
+            else if (ij.edition == "x360")
+                instanceGui.selectInList(instanceGui.xboxList, ij.version);
 
             //latest and latestsnapshot stuff
             if (ij.version.Contains("latest"))
