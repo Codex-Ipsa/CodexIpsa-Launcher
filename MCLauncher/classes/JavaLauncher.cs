@@ -284,6 +284,12 @@ namespace MCLauncher.classes
                         Directory.CreateDirectory(supPath);
                         Globals.client.DownloadFile(sup.url, supPath + sup.name);
                     }
+
+                    if (sup.extract == true)
+                    {
+                        ModWorker.extractZip(supPath + sup.name, supPath);
+                        //ZipFile.ExtractToDirectory(supPath + sup.name, supPath);
+                    }
                 }
             }
 

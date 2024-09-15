@@ -43,5 +43,6 @@ namespace MCLauncher.json.api
         public String path { get; set; }
         public String name { get; set; }
         public bool renew { get; set; }
+        public bool extract { get; set; }
     }
 }
