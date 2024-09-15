@@ -134,7 +134,15 @@ namespace MCLauncher.forms
                     dp.ShowDialog();
 
                     //add to modlist
-                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", version);
+                    String jsonToAdd = version;
+                    if(forge.json != null)
+                    {
+                        String fileName = forge.json.Substring(forge.json.LastIndexOf('/') + 1);
+                        Globals.client.DownloadFile(forge.json, $"{Globals.dataPath}\\data\\json\\{fileName}");
+                        jsonToAdd = fileName.Replace(".json", "");
+                    }
+
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", jsonToAdd);
 
                     //download supplement(s) if they exist
                     if (forge.supplement != null)
