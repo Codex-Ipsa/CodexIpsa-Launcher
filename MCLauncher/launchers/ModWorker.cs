@@ -253,6 +253,7 @@ namespace MCLauncher.launchers
             }
         }
 
+        //extracts zip with catching errors
         public static void extractZip(String zipPath, String destination)
         {
             using (ZipArchive archive = ZipFile.OpenRead(zipPath))
@@ -265,6 +266,9 @@ namespace MCLauncher.launchers
                         String dir = Path.GetDirectoryName(path);
 
                         Directory.CreateDirectory(dir);
+                        if(File.Exists(path))
+                            File.Delete(path);
+
                         entry.ExtractToFile(path);
                     }
                     catch (Exception ex)
