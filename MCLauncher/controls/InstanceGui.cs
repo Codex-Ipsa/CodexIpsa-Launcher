@@ -145,15 +145,15 @@ namespace MCLauncher.controls
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
-                String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
+                String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") };
 
                 eduList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
 
             //set width after adding items
-            eduList.Columns[0].Width = -1;
-            eduList.Columns[1].Width = -1;
-            eduList.Columns[2].Width = -2;
+            eduList.Columns[0].Width = vanillaList.Columns[0].Width;
+            eduList.Columns[1].Width = vanillaList.Columns[1].Width;
+            eduList.Columns[2].Width = vanillaList.Columns[2].Width;
 
             //select first item
             eduList.Items[0].Selected = true;
@@ -176,15 +176,15 @@ namespace MCLauncher.controls
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
-                String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy HH:mm:ss") };
+                String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") };
 
                 xboxList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
 
             //set width after adding items
-            xboxList.Columns[0].Width = -1;
-            xboxList.Columns[1].Width = -1;
-            xboxList.Columns[2].Width = -2;
+            xboxList.Columns[0].Width = vanillaList.Columns[0].Width;
+            xboxList.Columns[1].Width = vanillaList.Columns[1].Width;
+            xboxList.Columns[2].Width = vanillaList.Columns[2].Width;
 
             //select first item
             xboxList.Items[0].Selected = true;
