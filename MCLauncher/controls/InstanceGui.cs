@@ -595,8 +595,6 @@ namespace MCLauncher.controls
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(tabControl1.SelectedIndex);
-
             if (tabControl1.SelectedIndex == 2)
             {
                 grbGame.Visible = false;
