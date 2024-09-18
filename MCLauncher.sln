@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCLauncher", "MCLauncher\MCLauncher.csproj", "{CBDC88B7-6249-404F-931F-99924D4D4674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodexIpsa.Tools", "CodexIpsa.Tools\CodexIpsa.Tools.csproj", "{33B4E004-960B-435D-B286-C154B3D27B3E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{CBDC88B7-6249-404F-931F-99924D4D4674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBDC88B7-6249-404F-931F-99924D4D4674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBDC88B7-6249-404F-931F-99924D4D4674}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33B4E004-960B-435D-B286-C154B3D27B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33B4E004-960B-435D-B286-C154B3D27B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33B4E004-960B-435D-B286-C154B3D27B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33B4E004-960B-435D-B286-C154B3D27B3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
