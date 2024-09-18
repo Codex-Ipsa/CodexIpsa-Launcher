@@ -511,6 +511,7 @@
             this.chkOther.TabIndex = 12;
             this.chkOther.Text = "Other";
             this.chkOther.UseVisualStyleBackColor = true;
+            this.chkOther.Visible = false;
             // 
             // chkLatestSnapshot
             // 
