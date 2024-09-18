@@ -832,9 +832,9 @@
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(547, 376);
+            this.openBtn.Location = new System.Drawing.Point(538, 376);
             this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(78, 23);
+            this.openBtn.Size = new System.Drawing.Size(87, 23);
             this.openBtn.TabIndex = 43;
             this.openBtn.Text = "btn.openDir";
             this.openBtn.UseVisualStyleBackColor = true;
