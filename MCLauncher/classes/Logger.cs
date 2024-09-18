@@ -1,10 +1,5 @@
 ﻿using MCLauncher.classes;
-using MCLauncher.forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MCLauncher
 {
@@ -36,7 +31,7 @@ namespace MCLauncher
         {
             //Output.AddHeader("#E74856", header, text);
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
+            Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
             if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
                 text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
@@ -46,7 +41,7 @@ namespace MCLauncher
         public static void GameInfo(string text)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            if(text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
+            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
                 text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
 
             if (text.Contains("<log4j:Event"))
@@ -85,7 +80,7 @@ namespace MCLauncher
             //return input;
             //shitty void for splitting strings
             int start = input.IndexOf(before) + before.Length;
-            if(!input.Contains(after))
+            if (!input.Contains(after))
             {
                 return input.Replace(before, "");
             }

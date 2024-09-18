@@ -40,6 +40,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.lblPlayedFor = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.btnLogIn);
             this.panel1.Controls.Add(this.btnPlay);
+            this.panel1.Controls.Add(this.lblPlayedFor);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 325);
             this.panel1.Name = "panel1";
@@ -79,7 +81,7 @@
             this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
             this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
-            this.lblLogInWarn.Location = new System.Drawing.Point(214, 42);
+            this.lblLogInWarn.Location = new System.Drawing.Point(216, 45);
             this.lblLogInWarn.Name = "lblLogInWarn";
             this.lblLogInWarn.Size = new System.Drawing.Size(353, 13);
             this.lblLogInWarn.TabIndex = 20;
@@ -174,6 +176,18 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
+            // lblPlayedFor
+            // 
+            this.lblPlayedFor.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblPlayedFor.BackColor = System.Drawing.Color.Transparent;
+            this.lblPlayedFor.ForeColor = System.Drawing.Color.White;
+            this.lblPlayedFor.Location = new System.Drawing.Point(216, 45);
+            this.lblPlayedFor.Name = "lblPlayedFor";
+            this.lblPlayedFor.Size = new System.Drawing.Size(353, 13);
+            this.lblPlayedFor.TabIndex = 22;
+            this.lblPlayedFor.Text = "lbl.playedFor";
+            this.lblPlayedFor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // webBrowser1
             // 
             this.webBrowser1.AllowWebBrowserDrop = false;
@@ -214,5 +228,6 @@
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        public System.Windows.Forms.Label lblPlayedFor;
     }
 }

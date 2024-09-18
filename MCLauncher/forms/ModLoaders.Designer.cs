@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModLoaders));
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
+            this.iconsList = new System.Windows.Forms.ImageList(this.components);
+            this.btnInstall = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView1
             // 
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
@@ -46,6 +49,7 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(309, 259);
+            this.listView1.SmallImageList = this.iconsList;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -60,26 +64,33 @@
             this.columnHeader2.Text = "Released";
             this.columnHeader2.Width = 150;
             // 
-            // button1
+            // iconsList
             // 
-            this.button1.Location = new System.Drawing.Point(0, 265);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(309, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Install selected";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.iconsList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconsList.ImageStream")));
+            this.iconsList.TransparentColor = System.Drawing.Color.Transparent;
+            this.iconsList.Images.SetKeyName(0, "recommended.png");
+            // 
+            // btnInstall
+            // 
+            this.btnInstall.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnInstall.Location = new System.Drawing.Point(0, 260);
+            this.btnInstall.Name = "btnInstall";
+            this.btnInstall.Size = new System.Drawing.Size(309, 23);
+            this.btnInstall.TabIndex = 1;
+            this.btnInstall.Text = "Install selected";
+            this.btnInstall.UseVisualStyleBackColor = true;
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
             // ModLoaders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 290);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(309, 283);
+            this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.listView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ModLoaders";
-            this.Text = "Mod loaders";
+            this.Text = "Modloaders";
             this.ResumeLayout(false);
 
         }
@@ -89,6 +100,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnInstall;
+        private System.Windows.Forms.ImageList iconsList;
     }
 }

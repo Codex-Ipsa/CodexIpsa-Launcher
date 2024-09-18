@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Net;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace MCLauncher
 {
@@ -29,10 +23,10 @@ namespace MCLauncher
             this.ControlBox = false;
 
             //Lang
-            this.Text = Strings.lblDlFiles;
-            label1.Text = Strings.lblDlFiles;
-            cancelBtn.Text = Strings.btnCancel;
-            ProgressLabel.Text = Strings.lblLoading;
+            this.Text = Strings.sj.lblDlFiles;
+            label1.Text = Strings.sj.lblDlFiles;
+            cancelBtn.Text = Strings.sj.btnCancel;
+            ProgressLabel.Text = Strings.sj.lblLoading;
 
 
             wc = new WebClient();
@@ -59,7 +53,7 @@ namespace MCLauncher
 
         private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            ProgressLabel.Text = $"{e.ProgressPercentage}% | {e.BytesReceived} {Strings.bytes} / {e.TotalBytesToReceive} {Strings.bytes}";
+            ProgressLabel.Text = $"{e.ProgressPercentage}% | {e.BytesReceived} {Strings.sj.bytes} / {e.TotalBytesToReceive} {Strings.sj.bytes}";
 
             progressBarDownload.Value = e.ProgressPercentage;
         }

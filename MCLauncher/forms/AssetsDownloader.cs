@@ -1,18 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
+using System.Windows.Forms;
 
 namespace MCLauncher.forms
 {
@@ -36,9 +29,9 @@ namespace MCLauncher.forms
             this.MinimizeBox = false;
 
             //Load lang
-            lblDlFiles.Text = Strings.lblDlAssets;
-            lblLoading.Text = Strings.lblLoading;
-            cancelBtn.Text = Strings.btnCancel;
+            lblDlFiles.Text = Strings.sj.lblDlAssets;
+            lblLoading.Text = Strings.sj.lblLoading;
+            cancelBtn.Text = Strings.sj.btnCancel;
 
             Logger.Info("[AssetsDownloader]", $"Starting for {assetsName};{assetsUrl}");
 
@@ -76,7 +69,7 @@ namespace MCLauncher.forms
             int i = 0;
             foreach (KeyValuePair<string, AssetIndexObject> entry in dict)
             {
-                if(!doWork)
+                if (!doWork)
                 {
                     break;
                 }

@@ -1,5 +1,9 @@
 /MCLauncher/bin
 /MCLauncher/obj
 /.vs
+/MCLauncher/.vs
 /MCLauncher/classes/APIKeysLocal.cs
 TODO.txt
+/CodexIpsa.Tools/bin
+/CodexIpsa.Tools/obj
+/CodexIpsa.Tools/.vs

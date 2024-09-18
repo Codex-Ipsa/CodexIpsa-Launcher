@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using MCLauncher.controls;
+using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MCLauncher.controls;
 
 namespace MCLauncher
 {
@@ -25,13 +17,13 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Lang
-            this.Text = Strings.updateAvail;
-            label1.Text = Strings.lblUpdateAvail;
-            cancelBtn.Text = Strings.btnNo;
-            updateBtn.Text = Strings.btnYes;
-            label2.Text = Strings.lblDoDown;
+            this.Text = Strings.sj.updateAvail;
+            label1.Text = Strings.sj.lblUpdateAvail;
+            cancelBtn.Text = Strings.sj.btnNo;
+            updateBtn.Text = Strings.sj.btnYes;
+            label2.Text = Strings.sj.lblDoDown;
 
-            infoLabel.Text = $"{ver}\n\n{Strings.lblWhatsNew}\n{info}";
+            infoLabel.Text = $"{ver}\n\n{Strings.sj.lblWhatsNew}\n{info}";
             UrlString = url;
         }
 

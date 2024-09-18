@@ -1,17 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using MCLauncher.json.api;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MCLauncher.controls
@@ -39,12 +36,6 @@ namespace MCLauncher.controls
         {
             InstanceSetting = this;
             InitializeComponent();
-
-            //Lang
-            lblJre8.Text = "Java 8";
-            lblJre17.Text = "Java 17";
-            btnGetJava8.Text = Strings.installJava.Replace("{ver}", "8");
-            btnGetJava17.Text = Strings.installJava.Replace("{ver}", "17");
 
             //Seasonal background
             if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
@@ -74,6 +65,7 @@ namespace MCLauncher.controls
             //JREs
             cmbJre8.Text = Settings.sj.jre8;
             cmbJre17.Text = Settings.sj.jre17;
+            cmbJre21.Text = Settings.sj.jre21;
         }
 
         public static void loadData()
@@ -88,11 +80,11 @@ namespace MCLauncher.controls
             langNameList.Clear();
 
             //Get update info
-            if(!Globals.offlineMode)
+            if (!Globals.offlineMode)
             {
                 WebClient client = new WebClient();
                 string jsonData = client.DownloadString(Globals.updateInfo);
-                List<settingsJson> data = JsonConvert.DeserializeObject<List<settingsJson>>(jsonData);
+                List<UpdateJson> data = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonData);
                 foreach (var vers in data)
                 {
                     nameList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
@@ -102,10 +94,10 @@ namespace MCLauncher.controls
                     noteList.Add(vers.brNote);
                 }
 
-                string json = client.DownloadString(Globals.languageManfest);
+                string json = client.DownloadString(Globals.languageList);
                 byte[] jsonArr = Encoding.Default.GetBytes(json);
                 string langData = Encoding.UTF8.GetString(jsonArr);
-                List<settingsJson> lang = JsonConvert.DeserializeObject<List<settingsJson>>(langData);
+                List<LanguagesJson> lang = JsonConvert.DeserializeObject<List<LanguagesJson>>(langData);
                 foreach (var vers in lang)
                 {
                     languageList.Add(vers.title);
@@ -136,8 +128,8 @@ namespace MCLauncher.controls
             }
             else
             {
-                if(!isFirstLangCheck)
-                    MessageBox.Show(Strings.noUpdate, "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!isFirstLangCheck)
+                    MessageBox.Show(Strings.sj.noUpdate, "Update manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Logger.Info("[Settings]", $"No new update is available.");
             }
@@ -163,12 +155,12 @@ namespace MCLauncher.controls
 
         private void cmbLangSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(isFirstLangCheck)
+            if (isFirstLangCheck)
             {
                 Logger.Info("[Settings]", $"PrefLang: {Settings.sj.language}");
                 isFirstLangCheck = false;
 
-                if(Settings.sj.language == "english" || Settings.sj.language == String.Empty || Settings.sj.language == null)
+                if (Settings.sj.language == "english" || Settings.sj.language == String.Empty || Settings.sj.language == null)
                 {
                     Strings.reloadLangs("english");
                 }
@@ -190,7 +182,7 @@ namespace MCLauncher.controls
 
         private void chkDiscordRpc_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkDiscordRpc.Checked)
+            if (chkDiscordRpc.Checked)
             {
                 Settings.sj.discordRPC = true;
                 Settings.Save();
@@ -226,6 +218,18 @@ namespace MCLauncher.controls
             }
         }
 
+        private void btnJre21_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre21.Text = ofd.FileName;
+                Settings.sj.jre21 = ofd.FileName;
+                Settings.Save();
+            }
+        }
+
         private void btnGetJava8_Click(object sender, EventArgs e)
         {
             DownloadJava(8);
@@ -236,81 +240,9 @@ namespace MCLauncher.controls
             DownloadJava(17);
         }
 
-        public void DownloadJava(int targetMajor)
+        private void btnGetJava21_Click(object sender, EventArgs e)
         {
-            string jsonData = Globals.client.DownloadString(Globals.JavaInstalls);
-            List<javaInstallsManifest> data = JsonConvert.DeserializeObject<List<javaInstallsManifest>>(jsonData);
-            foreach (var vers in data)
-            {
-                if(vers.major == targetMajor)
-                {
-                    bool shouldDownload = false;
-
-                    //Download if not present
-                    if (!Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
-                    {
-                        shouldDownload = true;
-                    }
-                    //Download if update available
-                    else if (!File.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") || File.ReadAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") != vers.id)
-                    {
-                        DialogResult dialogResult = MessageBox.Show(Strings.javaUpdate.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            shouldDownload = true;
-                        }
-                    }
-                    //Redownload if latest exists
-                    else
-                    {
-                        DialogResult dialogResult = MessageBox.Show(Strings.javaRedownload.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            shouldDownload = true;
-                        }
-                    }
-
-                    if(shouldDownload)
-                    {
-                        if(Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
-                            Directory.Delete($"{Globals.dataPath}\\jre\\jre{vers.major}", true);
-                        
-                        Directory.CreateDirectory($"{Globals.dataPath}\\jre\\jre{vers.major}");
-                        DownloadProgress.url = vers.url;
-                        DownloadProgress.savePath = $"{Globals.dataPath}\\jre\\temp.zip";
-                        DownloadProgress dp = new DownloadProgress();
-                        dp.ShowDialog();
-
-                        try
-                        {
-                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\jre\\temp.zip", $"{Globals.dataPath}\\jre\\jre{vers.major}");
-                            File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
-                            File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
-
-                            DialogResult dialogResult = MessageBox.Show(Strings.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                            if (dialogResult == DialogResult.Yes)
-                            {
-                                if(vers.major == 8)
-                                {
-                                    cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Settings.sj.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Settings.Save();
-                                }
-                                else if(vers.major == 17)
-                                {
-                                    cmbJre17.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Settings.sj.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
-                                    Settings.Save();
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Error("[SettingsScreen]", $"Failed to download/install Java {vers.id}; {vers.url}; {ex.Message}");
-                        }
-                    }
-                }
-            }
+            DownloadJava(21);
         }
 
         private void cmbJre8_TextUpdate(object sender, EventArgs e)
@@ -324,18 +256,95 @@ namespace MCLauncher.controls
             Settings.sj.jre17 = cmbJre17.Text;
             Settings.Save();
         }
-    }
 
-    public class settingsJson
-    {
-        public string brName { get; set; }
-        public string brVer { get; set; }
-        public string brId { get; set; }
-        public string brUrl { get; set; }
-        public string brNote { get; set; }
+        private void cmbJre21_TextUpdate(object sender, EventArgs e)
+        {
+            Settings.sj.jre21 = cmbJre21.Text;
+            Settings.Save();
+        }
 
-        public string title { get; set; }
-        public string name { get; set; }
+        public void DownloadJava(int targetMajor)
+        {
+            string jsonData = Globals.client.DownloadString(Globals.JavaInstalls);
+            List<javaInstallsManifest> data = JsonConvert.DeserializeObject<List<javaInstallsManifest>>(jsonData);
+            foreach (var vers in data)
+            {
+                if (vers.major == targetMajor)
+                {
+                    bool shouldDownload = false;
+
+                    //Download if not present
+                    if (!Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
+                    {
+                        shouldDownload = true;
+                    }
+                    //Download if update available
+                    else if (!File.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") || File.ReadAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt") != vers.id)
+                    {
+                        DialogResult dialogResult = MessageBox.Show(Strings.sj.javaUpdate.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            shouldDownload = true;
+                        }
+                    }
+                    //Redownload if latest exists
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show(Strings.sj.javaRedownload.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            shouldDownload = true;
+                        }
+                    }
+
+                    if (shouldDownload)
+                    {
+                        if (Directory.Exists($"{Globals.dataPath}\\jre\\jre{vers.major}"))
+                            Directory.Delete($"{Globals.dataPath}\\jre\\jre{vers.major}", true);
+
+                        Directory.CreateDirectory($"{Globals.dataPath}\\jre\\jre{vers.major}");
+                        DownloadProgress.url = vers.url;
+                        DownloadProgress.savePath = $"{Globals.dataPath}\\jre\\temp.zip";
+                        DownloadProgress dp = new DownloadProgress();
+                        dp.ShowDialog();
+
+                        try
+                        {
+                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\jre\\temp.zip", $"{Globals.dataPath}\\jre\\jre{vers.major}");
+                            File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
+                            File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
+
+                            DialogResult dialogResult = MessageBox.Show(Strings.sj.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                if (vers.major == 8)
+                                {
+                                    cmbJre8.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.sj.jre8 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
+                                }
+                                else if (vers.major == 17)
+                                {
+                                    cmbJre17.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.sj.jre17 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
+                                }
+                                else if (vers.major == 21)
+                                {
+                                    cmbJre21.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.sj.jre21 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error("[SettingsScreen]", $"Failed to download/install Java {vers.id}; {vers.url}; {ex.Message}");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class javaInstallsManifest

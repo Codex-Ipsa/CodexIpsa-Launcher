@@ -1,14 +1,9 @@
-﻿using MCLauncher.forms;
+﻿using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MCLauncher.classes
 {
@@ -43,7 +38,7 @@ namespace MCLauncher.classes
 
             //downloading game
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-            var dj = JsonConvert.DeserializeObject<ProfileInfo>(data);
+            var dj = JsonConvert.DeserializeObject<InstanceJson>(data);
 
             string url = Globals.client.DownloadString(Globals.x360Url) + dj.version + ".zip";
 
@@ -60,7 +55,7 @@ namespace MCLauncher.classes
             }
 
             //loading settings
-            if(!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml"))
+            if (!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml"))
             {
                 Logger.Error("[XboxLauncher]", "Xenia config not found! Make sure to relaunch the game at least once for settings to take place!");
             }
@@ -82,7 +77,7 @@ namespace MCLauncher.classes
             //launching bases
             if (dj.version.Contains("pre") || dj.version == "tu0")
             {
-                if(Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\"))
+                if (Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\"))
                     Directory.Delete($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\", true);
 
                 Process proc = new Process();
@@ -126,7 +121,7 @@ namespace MCLauncher.classes
 
                     DirectoryInfo itunes = new DirectoryInfo($"{Globals.dataPath}\\versions\\x360\\{dj.version}");
                     FileInfo[] itunesFiles = itunes.GetFiles("*.*", SearchOption.AllDirectories);
-                    foreach(FileInfo file in itunesFiles)
+                    foreach (FileInfo file in itunesFiles)
                     {
                         string fileName = file.FullName.Replace($"{Globals.dataPath}\\versions\\x360\\{dj.version}", "");
                         string path = fileName.Substring(0, fileName.LastIndexOf("\\") + 1);

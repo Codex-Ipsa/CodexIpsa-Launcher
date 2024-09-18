@@ -1,17 +1,12 @@
 ﻿using MCLauncher.classes;
 using MCLauncher.controls;
-using MCLauncher.forms;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -104,7 +99,7 @@ namespace MCLauncher
             //Check for internet
             try
             {
-                string offlineJson = Globals.client.DownloadString(Globals.offlineManfest);
+                string offlineJson = Globals.client.DownloadString(Globals.offlineManifest);
                 OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
                 if (test.offline)
                 {
@@ -125,7 +120,7 @@ namespace MCLauncher
             if (!Globals.offlineMode)
             {
                 string jsonUpd = Globals.client.DownloadString(Globals.updateInfo);
-                List<jsonObject> dataUpd = JsonConvert.DeserializeObject<List<jsonObject>>(jsonUpd);
+                List<UpdateJson> dataUpd = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonUpd);
 
                 foreach (var vers in dataUpd)
                 {
@@ -223,7 +218,7 @@ namespace MCLauncher
 
         private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 

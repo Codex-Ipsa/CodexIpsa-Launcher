@@ -1,160 +1,204 @@
-﻿using MCLauncher.classes.ipsajson;
-using Newtonsoft.Json;
+﻿using MCLauncher.controls;
+using MCLauncher.json.api;
+using MCLauncher.launchers.fabric;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
     public partial class ModLoaders : Form
     {
-        public List<ModLoaderManifest> mj;
-        public string loaderType = "";
-        public string gameVersion = "";
+        public ModsGui theModsGui;
+        public ModloadersJson manifest;
+        public String version;
+        public String loader;
+        public String instanceName;
 
-        public ModLoaders(string version, string loader)
+        public ModLoaders(String version, String loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
+            //set window title
+            if (loader == "forge")
+                this.Text = "Install Forge";
+            else if (loader == "fabric")
+                this.Text = "Install Fabric";
+            else if (loader == "risugami")
+                this.Text = "Install Risugami's Modloader";
+            else if (loader == "neoforge")
+                this.Text = "Install Neoforge";
+            else if (loader == "quilt")
+                this.Text = "Install Quilt";
+            else if (loader == "liteloader")
+                this.Text = "Install LiteLoader";
+
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
-            loaderType = loader;
-            gameVersion = version;
+            this.theModsGui = modsGui;
+            this.version = version;
+            this.loader = loader;
+            this.instanceName = instanceName;
+            this.manifest = mm;
 
-            if (loader == "fabric")
+            //load forge versions
+            int recommendedVer = 0;
+            if (loader == "forge")
             {
-                List<string> versions = FabricParser.GetList();
-                foreach (string ver in versions)
-                    listView1.Items.Add(ver);
-                //foreach (ModLoaderItem item in m.items)
-                //{
-                //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                //}
-            }
-            else
-            {
-                string jsonFile = Globals.client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
-                mj = JsonConvert.DeserializeObject<List<ModLoaderManifest>>(jsonFile);
-                foreach (ModLoaderManifest m in mj)
+                for (int i = 0; i < manifest.forge.Count(); i++)
                 {
-                    if (m.name == "forge" && loader == "forge")
+                    Forge f = manifest.forge[i];
+
+                    //get recommended version
+                    int icon = -1;
+                    if (f.recommended)
                     {
-                        foreach (ModLoaderItem item in m.items)
+                        icon = 0;
+                        recommendedVer = i;
+                    }
+
+                    //add to list
+                    String[] item = new String[] { f.released };
+                    listView1.Items.Add(f.id, icon).SubItems.AddRange(item);
+                }
+            }
+            else if (loader == "fabric")
+            {
+                List<String> loaders = FabricWorker.getLoaderVersions(version);
+                for (int i = 0; i < loaders.Count(); i++)
+                {
+                    int icon = -1;
+                    if (i == 0)
+                        icon = 0;
+                    else
+                        icon = -1;
+
+                    listView1.Items.Add(loaders[i], icon);
+                }
+
+                recommendedVer = 0; //always recommend latest
+            }
+            else if (loader == "risugami")
+            {
+                for (int i = 0; i < manifest.risugami.Count(); i++)
+                {
+                    Risugami r = manifest.risugami[i];
+
+                    int icon = -1;
+                    if (i == 0)
+                        icon = 0;
+                    else
+                        icon = -1;
+
+                    listView1.Items.Add(r.id, icon);
+                }
+
+                recommendedVer = 0; //always recommend latest
+            }
+
+            //select recommended version
+            listView1.Select();
+            listView1.Items[recommendedVer].Selected = true;
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            //download forge
+            if (loader == "forge")
+            {
+                Forge forge = manifest.forge[listView1.SelectedItems[0].Index];
+
+                //json based
+                if (forge.type == "json")
+                {
+                    String forgeManifest = Globals.client.DownloadString(forge.json);
+                    forgeManifest = forgeManifest.Replace("{forgeVer}", forge.id).Replace("{forgeUrl}", forge.url).Replace("{forgeSize}", forge.size.ToString());
+                    File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.json", forgeManifest);
+
+                    //add to modlist
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.json", "json", version);
+                }
+                else if (forge.type == "jarmod")
+                {
+                    //download jarmod zip
+                    DownloadProgress.url = forge.url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.zip";
+                    DownloadProgress dp = new DownloadProgress();
+                    dp.ShowDialog();
+
+                    //add to modlist
+                    String jsonToAdd = version;
+                    if(forge.json != null)
+                    {
+                        String fileName = forge.json.Substring(forge.json.LastIndexOf('/') + 1);
+                        Globals.client.DownloadFile(forge.json, $"{Globals.dataPath}\\data\\json\\{fileName}");
+                        jsonToAdd = fileName.Replace(".json", "");
+                    }
+
+                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", jsonToAdd);
+
+                    //download supplement(s) if they exist
+                    if (forge.supplement != null)
+                    {
+                        foreach (Forge sup in forge.supplement)
                         {
-                            listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
+                            //download
+                            DownloadProgress.url = sup.url;
+                            DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{sup.id}.zip";
+                            dp = new DownloadProgress();
+                            dp.ShowDialog();
+
+                            //add to modlist
+                            theModsGui.addModList("", "", $"{sup.id}.zip", sup.type, sup.json);
                         }
                     }
-                    else if (m.name == "modloader" && loader == "modloader")
-                    {
-                        //foreach (ModLoaderItem item in m.items)
-                        //{
-                        //    listView1.Items.Add(new ListViewItem(new[] { item.id.Replace("minecraftforge-", ""), item.released.Replace("T", " ") }));
-                        //}
-                    }
                 }
             }
-
-            listView1.Select();
-            listView1.Items[0].Selected = true;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if(loaderType == "fabric")
+            //download fabric
+            else if (loader == "fabric")
             {
-                string newJson = FabricParser.versionJson(gameVersion, listView1.SelectedItems[0].Text);
+                String loaderVer = listView1.SelectedItems[0].Text;
+                //get mod json
+                String moddedJson = FabricWorker.createModJson(version, loaderVer);
 
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", newJson);
+                //save json
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\fabric-{version}-{loaderVer}.json", moddedJson);
 
-                Profile.modListWorker("add", "Fabric", $"{gameVersion}-{listView1.SelectedItems[0].Text}", $"fabric-loader-{gameVersion}-{listView1.SelectedItems[0].Text}.json", "json", "");
-                Profile.reloadModsList();
+                //add to modlist
+                theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", version);
             }
-            else if(loaderType == "forge")
+            //download risugami's modloader
+            else if (loader == "risugami")
             {
-                ModLoaderItem item = mj[0].items[listView1.SelectedItems[0].Index];
-                Console.WriteLine(item.id);
+                Risugami risugami = manifest.risugami[listView1.SelectedItems[0].Index];
 
-                if (item.supplement != null)
+                //download risugami
+                DownloadProgress.url = risugami.url;
+                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\modloader-{risugami.id}.zip";
+                DownloadProgress download = new DownloadProgress();
+                download.ShowDialog();
+
+                //download modloadermp if available
+                if (risugami.urlmp != null)
                 {
-                    foreach (string sup in item.supplement)
-                    {
-                        string file = sup.Substring(sup.LastIndexOf('/') + 1);
-                        DownloadProgress.url = sup;
-                        DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{file}";
-                        DownloadProgress dpsup = new DownloadProgress();
-                        dpsup.ShowDialog();
-
-                        Profile.modListWorker("add", "", "", $"{file}", "jarmod", "");
-                    }
+                    DownloadProgress.url = risugami.urlmp;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\modloadermp-{risugami.id}.zip";
+                    DownloadProgress download2 = new DownloadProgress();
+                    download2.ShowDialog();
                 }
 
-                string ext = ".zip";
-                if (item.type == "json")
-                    ext = ".json";
-
-                string[] split = item.id.Replace("minecraftforge-", "").Split(new[] { '-' }, 2);
-                string forgeVersion = split[1];
-                string gameVersion = split[0];
-                Logger.Error("[ModLoaders]", $"item.id; {item.id} forgeVer; {forgeVersion} gameVer; {gameVersion}");
-
-                Logger.Error("[ModLoaders]", $"item url; {item.url} gmver; {gameVersion}");
-
-                if (item.type == "json")
-                {
-                    Logger.Error("[ModLoaders]", $"CALLED!!!");
-                    DownloadProgress.url = $"https://codex-ipsa.dejvoss.cz/launcher/modloader/forge/minecraftforge-{gameVersion}.json";
-                }
-                else
-                    DownloadProgress.url = item.url;
-
-                Logger.Error("[ModLoaders]", $"dp url; {DownloadProgress.url}");
-
-                DownloadProgress.savePath = $"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}";
-                DownloadProgress dp = new DownloadProgress();
-                dp.ShowDialog();
-
-                if(item.type == "json")
-                {
-                    string original = File.ReadAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}");
-                    string updated = original.Replace("{forgeVer}", forgeVersion).Replace("{forgeUrl}", item.url);
-                    File.WriteAllText($"{Globals.dataPath}\\instance\\{Profile.profileName}\\jarmods\\{item.id}{ext}", updated);
-                }
-
-                Profile.modListWorker("add", "Forge", forgeVersion, $"{item.id}{ext}", item.type, item.json);
-                Profile.reloadModsList();
+                //add to modlist
+                theModsGui.addModList($"Risugami's Modloader", risugami.id, $"modloader-{risugami.id}.zip", "jarmod", version);
+                theModsGui.addModList($"", "", $"modloadermp-{risugami.id}.zip", "jarmod", version);
             }
-
             this.Close();
         }
-    }
-
-    public class ModLoaderManifest
-    {
-        public string name { get; set; }
-        public ModLoaderItem[] items { get; set; }
-    }
-
-    public class ModLoaderItem
-    {
-        public string id { get; set; }
-        public string json { get; set; }
-        public string type { get; set; }
-        public string url { get; set; }
-        public string released { get; set; }
-        public bool recommended { get; set; }
-        public string[] supplement { get; set; }
     }
 }

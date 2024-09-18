@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MCLauncher.classes;
+using MCLauncher.json.launcher;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,8 +13,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
-using MCLauncher.classes;
-using Newtonsoft.Json;
 
 namespace MCLauncher
 {
@@ -48,10 +49,10 @@ namespace MCLauncher
             this.MinimizeBox = false;
 
             //Load lang
-            this.Text = Strings.titleLogin;
-            label2.Text = Strings.labelPleaseLog;
-            label1.Text = Strings.labelCode;
-            cancelBtn.Text = Strings.btnCancel;
+            this.Text = Strings.sj.titleLogin;
+            label2.Text = Strings.sj.labelPleaseLog;
+            label1.Text = Strings.sj.labelCode;
+            cancelBtn.Text = Strings.sj.btnCancel;
 
             //This NO LONGER uses the test azure app, DONT change that!!!
             deviceCurrent = 0;
@@ -65,13 +66,13 @@ namespace MCLauncher
 
             string deviceJson = $"[{deviceResponseString}]";
 
-            List<jsonObject> deviceData = JsonConvert.DeserializeObject<List<jsonObject>>(deviceJson);
+            List<AuthJson> deviceData = JsonConvert.DeserializeObject<List<AuthJson>>(deviceJson);
             foreach (var vers in deviceData)
             {
                 userCode = vers.user_code;
                 deviceCode = vers.device_code;
                 deviceUrl = vers.verification_uri;
-                if(Globals.isDebug)
+                if (Globals.isDebug)
                 {
                     Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
                     Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
@@ -115,12 +116,12 @@ namespace MCLauncher
                 else
                     Logger.Info("[MSAuth]", "Got Token response!");
                 string tokenJson = $"[{tokenResponseString}]";
-                List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
+                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
                 foreach (var vers in authTokenData)
                 {
                     accessToken = vers.access_token;
                     refreshToken = vers.refresh_token;
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                     {
                         Logger.Info("[MSAuth]", $"AccessToken: {accessToken}");
                         Logger.Info("[MSAuth]", $"RefreshToken: {refreshToken}");
@@ -161,7 +162,7 @@ namespace MCLauncher
                     string json = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={accessToken}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
 
                     streamWriter.Write(json);
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                         Logger.Info("[MSAuth]", $"XBL Request: {json}");
                 }
 
@@ -170,14 +171,14 @@ namespace MCLauncher
                 using (var streamReader = new StreamReader(xblResponse.GetResponseStream()))
                 {
                     xblResponseString = streamReader.ReadToEnd();
-                    if(Globals.isDebug)
+                    if (Globals.isDebug)
                         Logger.Info("[MSAuth]", $"XBL Response: {xblResponseString}");
                     else
                         Logger.Info("[MSAuth]", $"Got XBL response");
                 }
 
                 string xblJson = $"[{xblResponseString}]";
-                List<jsonObject> xblTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(xblJson);
+                List<AuthJson> xblTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(xblJson);
                 foreach (var vers in xblTokenData)
                 {
                     xblToken = vers.Token;
@@ -191,7 +192,7 @@ namespace MCLauncher
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"Array of xui: {s3}");
 
-                List<jsonObject> uhsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(s3);
+                List<AuthJson> uhsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(s3);
                 foreach (var vers in uhsTokenData)
                 {
                     userHash = vers.uhs;
@@ -221,7 +222,7 @@ namespace MCLauncher
                 string json = $"{{\"Properties\": {{\"SandboxId\": \"RETAIL\",\"UserTokens\": [\"{xblToken}\"]}},\"RelyingParty\": \"rp://api.minecraftservices.com/\",\"TokenType\": \"JWT\"}}";
 
                 streamWriter.Write(json);
-                if(Globals.isDebug)
+                if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"XSTS Request: {json}");
             }
 
@@ -238,7 +239,7 @@ namespace MCLauncher
                         Logger.Info($"[MSAuth]", $"Got XSTS response");
                 }
 
-                List<jsonObject> xstsTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{xstsResponseString}]");
+                List<AuthJson> xstsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{xstsResponseString}]");
                 foreach (var vers in xstsTokenData)
                 {
                     xstsToken = vers.Token;
@@ -285,7 +286,7 @@ namespace MCLauncher
                         Logger.Info($"[MSAuth]", $"Got MC response");
                 }
 
-                List<jsonObject> mcTokenData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{mcResponseString}]");
+                List<AuthJson> mcTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{mcResponseString}]");
                 foreach (var vers in mcTokenData)
                 {
                     mcAccessToken = vers.access_token;
@@ -356,7 +357,7 @@ namespace MCLauncher
                     Logger.Info($"[MSAuth]", $"Got RefreshToken response");
 
                 string tokenJson = $"[{tokenResponseString}]";
-                List<jsonObject> authTokenData = JsonConvert.DeserializeObject<List<jsonObject>>(tokenJson);
+                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
                 foreach (var vers in authTokenData)
                 {
                     accessToken = vers.access_token;
@@ -394,7 +395,7 @@ namespace MCLauncher
                         Logger.Info("[MSAuth]", "Got profile response");
                 }
 
-                List<jsonObject> mcProfileData = JsonConvert.DeserializeObject<List<jsonObject>>($"[{profileResponseString}]");
+                List<AuthJson> mcProfileData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{profileResponseString}]");
                 foreach (var vers in mcProfileData)
                 {
                     playerName = vers.name;
@@ -412,7 +413,7 @@ namespace MCLauncher
             }
         }
 
-        public static void getMpPass()
+        public static void getMpPass(String ip, String port)
         {
             try
             {
@@ -422,7 +423,10 @@ namespace MCLauncher
                 mojpassRequest.Accept = "application/json";
                 mojpassRequest.Method = "POST";
 
-                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes($"{JavaLauncher.srvIP}:{JavaLauncher.srvPort}"));
+                String myIP = Globals.client.DownloadString("http://checkip.amazonaws.com/");
+                myIP = myIP.Replace("\n", String.Empty);
+
+                var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(myIP));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
@@ -453,7 +457,7 @@ namespace MCLauncher
                     Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
 
                     //Get the actual Mppass
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={JavaLauncher.srvIP}:{JavaLauncher.srvPort}");
+                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={ip}:{port}");
 
                     mppassRequest.Method = "POST";
                     mppassRequest.ContentType = "application/x-www-form-urlencoded";
@@ -528,16 +532,16 @@ namespace MCLauncher
             }
         }
 
-        public static void onGameStart(bool getMppass)
+        public static void onGameStart(bool getMppass, String ip, String port)
         {
             voidRefreshToken(Settings.sj.refreshToken);
             xblAuth();
             xstsAuth();
             minecraftAuth();
             verifyOwnership();
-            if(getMppass == true)
+            if (getMppass == true)
             {
-                getMpPass();
+                getMpPass(ip, port);
             }
             //todo: only do if player owns the game
             getProfileInfo();

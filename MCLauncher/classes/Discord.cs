@@ -1,13 +1,7 @@
-﻿using DiscordRPC.Logging;
-using DiscordRPC;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Threading;
-using MCLauncher.Properties;
+using System.Diagnostics;
 
 namespace MCLauncher.classes
 {
@@ -17,6 +11,13 @@ namespace MCLauncher.classes
 
         public static async void Init()
         {
+            Process[] pname = Process.GetProcessesByName("discord");
+            if (pname.Length == 0)
+            {
+                Logger.Discord("[Discord]", "Could not locate Discord! Skipping...");
+                return;
+            }
+
             try
             {
                 if (Settings.sj.discordRPC)

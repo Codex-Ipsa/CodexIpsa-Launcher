@@ -1,26 +1,15 @@
-﻿using DiscordRPC;
-using DiscordRPC.Logging;
-using MCLauncher.classes;
-using MCLauncher.classes.jsons;
+﻿using MCLauncher.classes;
 using MCLauncher.forms;
+using MCLauncher.json.api;
+using MCLauncher.json.launcher;
+using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Xml;
-using System.Xml.Linq;
-using Color = System.Drawing.Color;
 
 namespace MCLauncher
 {
@@ -38,6 +27,7 @@ namespace MCLauncher
         {
             Instance = this;
             InitializeComponent();
+
             Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
             lastInstance = Settings.sj.instance;
 
@@ -49,12 +39,27 @@ namespace MCLauncher
             //Check if user is logged in
             checkAuth();
 
-            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json") && !File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.cfg"))
+            if (!File.Exists($"{Globals.dataPath}\\instance\\Default\\instance.json"))
             {
-                Profile prof = new Profile("Default", "def");
+                InstanceJson ij = new InstanceJson();
+                ij.data = 3;
+                ij.edition = "java";
+                ij.version = "b1.7.3";
+                ij.resolution = "854 480";
+                ij.memory = "512 512";
+                String serialized = JsonConvert.SerializeObject(ij);
+
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\Default\\jarmods");
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\instance.json", serialized);
+
+                ModJson mj = new ModJson();
+                mj.items = new ModJsonEntry[0];
+
+                String modJson = JsonConvert.SerializeObject(mj);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\jarmods\\mods.json", modJson);
             }
 
-            Logger.Info("[TEST0]", selectedInstance);
+            //Logger.Info("[TEST0]", selectedInstance);
             loadInstanceList();
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
@@ -74,7 +79,7 @@ namespace MCLauncher
                 Logger.Error($"[HomeScreen]", "User is not logged in");
                 Instance.btnLogOut.Visible = false;
                 Instance.btnLogIn.Visible = true;
-                Instance.lblWelcome.Text = $"{Strings.lblWelcome} Guest";
+                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", "Guest");
 
                 JavaLauncher.msPlayerName = "Guest";
                 JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
@@ -87,7 +92,7 @@ namespace MCLauncher
                     Instance.cmbInstaces.Enabled = false;
                     Instance.btnEditInst.Enabled = false;
                     Instance.btnNewInst.Enabled = false;
-                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn;
+                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
                 }
                 else
                 {
@@ -95,7 +100,7 @@ namespace MCLauncher
                     Instance.cmbInstaces.Enabled = true;
                     Instance.btnEditInst.Enabled = true;
                     Instance.btnNewInst.Enabled = true;
-                    Instance.lblLogInWarn.Text = Strings.lblLogInWarn_Debug;
+                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn_Debug;
                 }
             }
             else
@@ -114,9 +119,9 @@ namespace MCLauncher
                 {
                     Instance.btnLogOut.Visible = true;
                     Instance.btnLogIn.Visible = false;
-                    Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
+                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
                     Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Text = "";
+                    Instance.lblLogInWarn.Visible = false;
                     Instance.cmbInstaces.Enabled = true;
                     Instance.btnEditInst.Enabled = true;
                     Instance.btnNewInst.Enabled = true;
@@ -135,153 +140,89 @@ namespace MCLauncher
                 var dirName = dirN.Name;
                 if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
-                    string text = File.ReadAllText($"{Globals.dataPath}\\instance\\{dirName}\\instance.json");
-                    if (text.Contains("instVer") && text.Contains("instType"))
-                    {
-                        updateFromFirstInst($"{Globals.dataPath}\\instance\\{dirName}");
-                    }
-                    if (text.Contains("\"proxy\": true"))
-                    {
-                        text = text.Replace("\"proxy\": true", "\"disProxy\": false");
-                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
-                    }
-                    else if (text.Contains("\"proxy\": false"))
-                    {
-                        text = text.Replace("\"proxy\": false", "\"disProxy\": false");
-                        File.WriteAllText(($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"), text);
-                    }
-
-                    instanceList.Add(dirName);
-                }
-                else if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.cfg"))
-                {
-                    updateFromSecondInst($"{Globals.dataPath}\\instance\\{dirName}\\");
                     instanceList.Add(dirName);
                 }
             }
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
-            Profile.profileName = Instance.cmbInstaces.Text;
         }
 
         public static void reloadInstance(string instName)
         {
+            //TODO this needs some rewrite so i don't need to do "Minecraft " + versionName lmaoo
+
             Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
-            var pj = JsonConvert.DeserializeObject<profileJson>(json);
+            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
-            selectedVersion = "Minecraft " + pj.version;
-            selectedEdition = pj.edition;
+            selectedVersion = "Minecraft " + ij.version;
+            selectedEdition = ij.edition;
 
+            Logger.Info("[HomeScreen/reloadInstance]", $"ver: {selectedVersion}, ed: {selectedEdition}");
+
+            if (selectedVersion.Contains("latest"))
+            {
+                selectedVersion = "Minecraft " + getLatestVersion(ij.version);
+            }
+
+            //get mod name
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
-
-            string tempName = null;
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
-            foreach (ModJsonEntry ent in mj.items)
+
+            var modInfo = ModWorker.getPatchName(mj);
+            if(modInfo.Item2 != null)
             {
-                if (ent.disabled == false)
-                {
-                    if (tempName == null && !String.IsNullOrWhiteSpace(ent.name) && !String.IsNullOrWhiteSpace(ent.version))
-                    {
-                        tempName = ent.name + " " + ent.version;
-                    }
-                }
-            }
-            if (!String.IsNullOrWhiteSpace(tempName))
-            {
-                selectedVersion = tempName;
+                selectedVersion = $"{modInfo.Item1} {modInfo.Item2}";
             }
 
-            Instance.lblReady.Text = $"{Strings.lblReady} {selectedVersion}";
-            Profile.profileName = Instance.cmbInstaces.Text;
+            //Ready to play text
+            Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
+            Instance.loadPlayTime(instName, ij);
         }
 
-        public static void updateFromSecondInst(string path)
+        public void loadPlayTime(String instanceName, InstanceJson ij)
         {
-            string content = File.ReadAllText($"{path}\\instance.cfg");
-            var orig = JsonConvert.DeserializeObject<List<instanceV2>>(content);
+            if (instanceName != cmbInstaces.Text)
+                return;
 
-            foreach (var oj in orig)
-            {
-                string saveData = "";
-                saveData += $"{{\n";
-                saveData += $"  \"data\": 2,\n";
-                if (oj.edition == "Java Edition")
-                    saveData += $"  \"edition\": \"java\",\n";
-                else if (oj.edition == "Xbox 360 Edition")
-                    saveData += $"  \"edition\": \"x360\",\n";
-                saveData += $"  \"version\": \"{oj.version}\",\n";
-                saveData += $"  \"directory\": \"{oj.directory}\",\n";
-                saveData += $"  \"resolution\": \"{oj.resolutionX} {oj.resolutionY}\",\n";
-                saveData += $"  \"memory\": \"{oj.ramMax} {oj.ramMin}\",\n";
-                saveData += $"  \"befCmd\": \"\",\n";
-                saveData += $"  \"aftCmd\": \"{oj.jvmArgs}\",\n";
-                saveData += $"  \"useJava\": {bool.Parse(oj.useCustomJava.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"javaPath\": \"{oj.customJava}\",\n";
-                saveData += $"  \"useJson\": false,\n";
-                saveData += $"  \"jsonPath\": \"\",\n";
-                saveData += $"  \"useClass\": false,\n";
-                saveData += $"  \"classpath\": \"\",\n";
-                saveData += $"  \"demo\": false,\n";
-                saveData += $"  \"modded\": false,\n";
-                saveData += $"  \"offline\": {bool.Parse(oj.offlineMode.ToString().ToLower()).ToString().ToLower()},\n";
-                saveData += $"  \"disProxy\": false,\n";
-                saveData += $"  \"multiplayer\": false,\n";
-                saveData += $"  \"xboxDemo\": false,\n";
-                saveData += $"  \"useAssets\": false,\n";
-                saveData += $"  \"assetsPath\": \"\"\n";
-                saveData += $"}}";
-                Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance");
-                Console.WriteLine(saveData);
-                File.WriteAllText($"{path}\\instance.json", saveData);
-                File.Delete($"{path}\\instance.cfg");
-            }
-        }
+            //Played for text
+            TimeSpan t = TimeSpan.FromMilliseconds(ij.playTime);
+            String playedForText = "Played for ";
+            if (t.Days == 1)
+                playedForText += $"{t.Days} {Strings.sj.lblPlayedForDay} ";
+            else if (t.Days > 1)
+                playedForText += $"{t.Days} {Strings.sj.lblPlayedForDays} ";
 
-        public static void updateFromFirstInst(string path)
-        {
-            int index = path.LastIndexOf("\\") + 1;
-            string name = path.Substring(index, path.Length - index);
+            if (t.Hours == 1)
+                playedForText += $"{t.Hours} {Strings.sj.lblPlayedForHour} ";
+            else if (t.Hours > 1)
+                playedForText += $"{t.Hours} {Strings.sj.lblPlayedForHours} ";
 
-            string text = File.ReadAllText($"{path}\\instance.json");
-            if (text.Contains("classroom"))
-            {
-                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"MinecraftEdu\",");
-            }
-            else
-            {
-                text = text.Replace($"[\n{{", $"[\n{{\n\"name\":\"{name}\",\n\"edition\":\"Java Edition\",");
-            }
-            text = text.Replace("instVer", "version");
-            text = text.Replace("instType", "type");
-            text = text.Replace("instUrl", "url");
-            text = text.Replace("instDir", "directory");
-            text = text.Replace("instResWidth", "resolutionX");
-            text = text.Replace("instResHeight", "resolutionY");
-            text = text.Replace("instRamMin", "ramMin");
-            text = text.Replace("instRamMax", "ramMax");
-            text = text.Replace("useCustJava", "useCustomJava");
-            text = text.Replace("instCustJava", "customJava");
-            text = text.Replace("useCustJvm", "useJvmArgs");
-            text = text.Replace("instCustJvm", "jvmArgs");
-            text = text.Replace("useCustMethod", "useLaunchMethod");
-            text = text.Replace("instCustMethod", "launchMethod");
-            text = text.Replace("\"useCustJar\":\"False\",", String.Empty);
-            text = text.Replace("\"instCustJar\":\"\",", String.Empty);
-            text = text.Replace("useOfflineMode", "offlineMode");
-            Logger.Info("[HomeScreen/updateFromLegacyInst]", $"Updated instance: {name}");
-            Console.WriteLine(text);
-            File.WriteAllText($"{path}\\instance.cfg", text);
+            if (t.Minutes == 1)
+                playedForText += $"{t.Minutes} {Strings.sj.lblPlayedForMinute} ";
+            else if (t.Minutes > 1)
+                playedForText += $"{t.Minutes} {Strings.sj.lblPlayedForMinutes} ";
+
+            if (t.Seconds == 1)
+                playedForText += $"{t.Seconds} {Strings.sj.lblPlayedForSecond}";
+            else if (t.Seconds > 1)
+                playedForText += $"{t.Seconds} {Strings.sj.lblPlayedForSeconds}";
+
+            if (t.TotalMilliseconds == 0)
+                playedForText = Strings.sj.lblHaventPlayed;
+
+            lblPlayedFor.Text = playedForText;
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (selectedEdition == "x360")
+            {
                 XboxLauncher.Launch(selectedInstance);
+            }
             else
             {
-                JavaLauncher jl = new JavaLauncher();
-                jl.Launch(selectedInstance);
+                JavaLauncher.Launch(selectedInstance);
             }
             /*if (selectedEdition == "java")
                 LaunchJava.LaunchGame();
@@ -295,20 +236,14 @@ namespace MCLauncher
 
         private void btnNewInst_Click(object sender, EventArgs e)
         {
-            //Profile pr = new Profile("New profile", "new");
-            //pr.ShowDialog();
             NewInstance ni = new NewInstance();
             ni.ShowDialog();
-            /*InstanceManager man = new InstanceManager("New profile", "new");
-            man.ShowDialog();*/
         }
 
         private void btnEditInst_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile(cmbInstaces.Text, "edit");
-            pr.ShowDialog();
-            /*InstanceManager man = new InstanceManager(cmbInstaces.Text, "edit");
-            man.ShowDialog();*/
+            EditInstance ei = new EditInstance(selectedInstance);
+            ei.ShowDialog();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
@@ -327,7 +262,7 @@ namespace MCLauncher
             {
                 Instance.btnLogOut.Visible = true;
                 Instance.btnLogIn.Visible = false;
-                Instance.lblWelcome.Text = $"{Strings.lblWelcome} {msPlayerName}";
+                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
                 this.Refresh();
             }
         }
@@ -348,7 +283,7 @@ namespace MCLauncher
 
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Logger.Info("[TEST2]", cmbInstaces.Text);
+            //Logger.Info("[TEST2]", cmbInstaces.Text);
             reloadInstance(cmbInstaces.Text);
             Settings.sj.instance = cmbInstaces.Text;
             Settings.Save();
@@ -359,17 +294,31 @@ namespace MCLauncher
             //loadInstanceList();
         }
 
-        /*public static void playBtnDis(string label)
+        //gets latest snapshot or release version
+        public static String getLatestVersion(String whichOne)
         {
-            Instance.btnPlay.Enabled = false;
-            Instance.lblLogInWarn.Text = label;
-        }
+            String latestJson = "";
+            using (WebClient cl = new WebClient())
+            {
+                latestJson = cl.DownloadString(Globals.javaLatest);
+            }
 
-        public static void playBtnEn(string label)
-        {
-            Instance.btnPlay.Enabled = true;
-            Instance.lblLogInWarn.Text = label;
-        }*/
+            LatestVersionJson lj = JsonConvert.DeserializeObject<LatestVersionJson>(latestJson);
+
+            if (whichOne == "latest")
+            {
+                Logger.Info("[HomeScreen/reloadInstance]", $"Translate 'latest' to {lj.release}");
+                return lj.release;
+            }
+            else if (whichOne == "latestsnapshot")
+            {
+                Logger.Info("[HomeScreen/reloadInstance]", $"Translate 'latestsnapshot' to {lj.snapshot}");
+                return lj.snapshot;
+            }
+
+            //this shouldn't happen but it wont compile
+            return null;
+        }
     }
 
     public class changelogJson
@@ -379,29 +328,5 @@ namespace MCLauncher
         public string date { get; set; }
         public string content { get; set; }
         public string brNote { get; set; }
-    }
-
-    public class profileJson
-    {
-        public int data { get; set; }
-        public string version { get; set; }
-        public string edition { get; set; }
-    }
-
-    public class instanceV2
-    {
-        public string name { get; set; }
-        public string edition { get; set; }
-        public string version { get; set; }
-        public string directory { get; set; }
-        public string resolutionX { get; set; }
-        public string resolutionY { get; set; }
-        public string ramMin { get; set; }
-        public string ramMax { get; set; }
-        public string useCustomJava { get; set; }
-        public string customJava { get; set; }
-        public string offlineMode { get; set; }
-        public string useProxy { get; set; }
-        public string jvmArgs { get; set; }
     }
 }

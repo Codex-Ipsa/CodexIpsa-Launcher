@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MCLauncher.forms
@@ -48,7 +41,7 @@ namespace MCLauncher.forms
                 .Replace(">", "")
                 .Replace("|", "");
 
-            if(string.IsNullOrWhiteSpace(textBox1.Text))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 label2.Visible = true;
                 label2.Text = "Can't be empty.";
