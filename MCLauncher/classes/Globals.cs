@@ -5,7 +5,7 @@ using System.Net;
 
 namespace MCLauncher
 {
-    class Globals
+    public static class Globals
     {
         //System
         public static WebClient client = new WebClient();
