@@ -16,9 +16,9 @@ namespace CodexIpsa_Tools
             //Console.Write("> ");
 
             //String selection = Console.ReadLine();
-            EduModule.start("1.8.9_build-3_classroom-20160404.jar", "1.8.9");
+            EduModule.start("1.8.9_build-3_classroom-20160404.jar", "1.8.9", "1.8.9-b3");
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

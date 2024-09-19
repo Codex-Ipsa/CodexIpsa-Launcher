@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MCLauncher.json.fabric
 {
-    internal class FabricVersionJson
+    public class FabricVersionJson
     {
         public string id { get; set; }
         public string inheritsFrom { get; set; }
