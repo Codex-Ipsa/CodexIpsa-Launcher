@@ -42,7 +42,6 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.lblPlayedFor = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,22 +198,12 @@
             this.webBrowser1.Size = new System.Drawing.Size(784, 325);
             this.webBrowser1.TabIndex = 0;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Location = new System.Drawing.Point(0, 315);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(768, 33);
-            this.panel2.TabIndex = 4;
-            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(784, 387);
@@ -240,6 +229,5 @@
         public System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.WebBrowser webBrowser1;
         public System.Windows.Forms.Label lblPlayedFor;
-        private System.Windows.Forms.Panel panel2;
     }
 }
