@@ -95,31 +95,8 @@ namespace MCLauncher.forms
 
             instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 
-            if (ij.edition == "java")
-                instanceGui.selectInList(instanceGui.vanillaList, ij.version);
-            else if (ij.edition == "javaedu")
-                instanceGui.selectInList(instanceGui.eduList, ij.version);
-            else if (ij.edition == "x360")
-                instanceGui.selectInList(instanceGui.xboxList, ij.version);
-
-            //latest and latestsnapshot stuff
-            if (ij.version.Contains("latest"))
-            {
-                if (ij.version == "latest")
-                {
-                    instanceGui.chkLatest.Checked = true;
-                }
-                else if (ij.version == "latestsnapshot")
-                {
-                    instanceGui.chkLatestSnapshot.Checked = true;
-                }
-
-                instanceGui.selectedVersion = HomeScreen.getLatestVersion(ij.version);
-                instanceGui.vanillaList.Enabled = false;
-            }
-
             //filter
-            if(ij.filter != null)
+            if (ij.filter != null)
             {
                 if (!ij.filter.Contains("release"))
                     instanceGui.chkRelease.Checked = false;
@@ -141,6 +118,38 @@ namespace MCLauncher.forms
                     instanceGui.chkClassic.Checked = false;
                 if (!ij.filter.Contains("preclassic"))
                     instanceGui.chkPreclassic.Checked = false;
+            }
+
+            //set init to true so version list can be loaded
+            instanceGui.initialized = true;
+
+            //load lists
+            instanceGui.loadJavaList();
+            instanceGui.loadEduList();
+            instanceGui.loadXboxList();
+
+            //select version
+            if (ij.edition == "java")
+                instanceGui.selectInList(instanceGui.vanillaList, ij.version);
+            else if (ij.edition == "javaedu")
+                instanceGui.selectInList(instanceGui.eduList, ij.version);
+            else if (ij.edition == "x360")
+                instanceGui.selectInList(instanceGui.xboxList, ij.version);
+
+            //latest and latestsnapshot stuff
+            if (ij.version.Contains("latest"))
+            {
+                if (ij.version == "latest")
+                {
+                    instanceGui.chkLatest.Checked = true;
+                }
+                else if (ij.version == "latestsnapshot")
+                {
+                    instanceGui.chkLatestSnapshot.Checked = true;
+                }
+
+                instanceGui.selectedVersion = HomeScreen.getLatestVersion(ij.version);
+                instanceGui.vanillaList.Enabled = false;
             }
         }
 

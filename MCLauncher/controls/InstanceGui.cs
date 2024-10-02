@@ -17,6 +17,8 @@ namespace MCLauncher.controls
         public bool isEdit1 = false;
         public String originalName;
 
+        public bool initialized = false;
+
         public long playTime;
 
         public InstanceGui(Form form, bool isEdit)
@@ -64,10 +66,6 @@ namespace MCLauncher.controls
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
             }
-
-            loadJavaList();
-            loadEduList();
-            loadXboxList();
         }
 
         public void loadJavaList()
@@ -487,7 +485,8 @@ namespace MCLauncher.controls
 
         private void vanillaCheck_CheckedChanged(object sender, EventArgs e)
         {
-            loadJavaList();
+            if (initialized)
+                loadJavaList();
         }
 
         private void chkLatest_CheckedChanged(object sender, EventArgs e)

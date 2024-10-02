@@ -33,6 +33,16 @@ namespace MCLauncher.forms
             instanceGui.assetIndexBox.Enabled = false;
             instanceGui.assetIndexBtn.Enabled = false;
             instanceGui.serverIPBox.Enabled = false;
+
+            //set init to true so version list can be loaded
+            instanceGui.initialized = true;
+
+            //load lists
+            instanceGui.loadJavaList();
+            instanceGui.loadEduList();
+            instanceGui.loadXboxList();
+
+            //select in list
             instanceGui.selectInList(instanceGui.vanillaList, "b1.7.3");
         }
     }
