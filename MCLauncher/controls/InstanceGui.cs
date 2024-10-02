@@ -257,6 +257,31 @@ namespace MCLauncher.controls
 
             ij.playTime = this.playTime;
 
+            //build filter array
+            List<String> filter = new List<String>();
+            if (chkLatest.Checked || chkRelease.Checked) //make sure to enable release when the always release is checked just in case
+                filter.Add("release");
+            if (chkLatestSnapshot.Checked || chkSnapshot.Checked) //same with snapshot
+                filter.Add("snapshot");
+            if (chkExperimental.Checked)
+                filter.Add("experimental"); //and so on
+            if (chkOther.Checked)
+                filter.Add("other");
+            if (chkBeta.Checked)
+                filter.Add("beta");
+            if (chkAlpha.Checked)
+                filter.Add("alpha");
+            if (chkInfdev.Checked)
+                filter.Add("infdev");
+            if (chkIndev.Checked)
+                filter.Add("indev");
+            if (chkClassic.Checked)
+                filter.Add("classic");
+            if (chkPreclassic.Checked)
+                filter.Add("preclassic");
+
+            ij.filter = filter.ToArray();
+
             string json = JsonConvert.SerializeObject(ij);
 
             //get profile name

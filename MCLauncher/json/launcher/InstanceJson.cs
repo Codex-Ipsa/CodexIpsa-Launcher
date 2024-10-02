@@ -34,5 +34,7 @@ namespace MCLauncher.json.launcher
         public bool xboxDemo { get; set; }
 
         public long playTime { get; set; }
+
+        public String[] filter { get; set; }
     }
 }
