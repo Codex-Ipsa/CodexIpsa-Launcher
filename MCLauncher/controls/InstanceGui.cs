@@ -117,9 +117,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            vanillaList.Columns[0].Width = -1;
-            vanillaList.Columns[1].Width = -1;
-            vanillaList.Columns[2].Width = -2;
+            vanillaList.Columns[0].Width = 186;
+            vanillaList.Columns[1].Width = 71;
+            vanillaList.Columns[2].Width = 70;
 
             //select first item
             if (vanillaList.Items.Count > 0)
@@ -151,9 +151,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            eduList.Columns[0].Width = vanillaList.Columns[0].Width;
-            eduList.Columns[1].Width = vanillaList.Columns[1].Width;
-            eduList.Columns[2].Width = vanillaList.Columns[2].Width;
+            eduList.Columns[0].Width = 186;
+            eduList.Columns[1].Width = 71;
+            eduList.Columns[2].Width = 70;
 
             //select first item
             eduList.Items[0].Selected = true;
@@ -182,9 +182,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            xboxList.Columns[0].Width = vanillaList.Columns[0].Width;
-            xboxList.Columns[1].Width = vanillaList.Columns[1].Width;
-            xboxList.Columns[2].Width = vanillaList.Columns[2].Width;
+            xboxList.Columns[0].Width = 186;
+            xboxList.Columns[1].Width = 71;
+            xboxList.Columns[2].Width = 70;
 
             //select first item
             xboxList.Items[0].Selected = true;
