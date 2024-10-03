@@ -8,6 +8,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -57,10 +58,18 @@ namespace MCLauncher.controls
             branchIndex = cmbUpdateSelect.SelectedIndex;
             cmbLangSelect.DataSource = langNameList;
 
-            if (Settings.sj.discordRPC)
-                chkDiscordRpc.Checked = true;
-            else
-                chkDiscordRpc.Checked = false;
+            //rpc
+            chkDiscordRpc.Checked = Settings.sj.discordRPC;
+
+            //themes
+            chkUseTheme.Checked = Settings.sj.useTheme;
+            cmbTheme.Text = Settings.sj.themePath;
+            chkThemesOptout.Checked = Settings.sj.seasonalOptout;
+            if (!Settings.sj.useTheme)
+            {
+                cmbTheme.Enabled = false;
+                btnTheme.Enabled = false;
+            }
 
             //JREs
             cmbJre8.Text = Settings.sj.jre8;
@@ -344,6 +353,39 @@ namespace MCLauncher.controls
                     }
                 }
             }
+        }
+
+        private void chkUseTheme_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbTheme.Enabled = chkUseTheme.Checked;
+            btnTheme.Enabled = chkUseTheme.Checked;
+
+            Settings.sj.useTheme = chkUseTheme.Checked;
+            Settings.Save();
+        }
+
+        private void cmbTheme_TextChanged(object sender, EventArgs e)
+        {
+            Settings.sj.themePath = cmbTheme.Text;
+            Settings.Save();
+        }
+
+        private void btnTheme_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Zip files|*.zip";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbTheme.Text = ofd.FileName;
+                Settings.sj.themePath = ofd.FileName;
+                Settings.Save();
+            }
+        }
+
+        private void chkThemesOptout_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.sj.seasonalOptout = chkThemesOptout.Checked;
+            Settings.Save();
         }
     }
 

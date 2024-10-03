@@ -33,6 +33,11 @@ namespace MCLauncher
         public string language { get; set; }
         public string instance { get; set; }
         public bool discordRPC { get; set; }
+
+        public bool useTheme { get; set; }
+        public string themePath { get; set; }
+        public bool seasonalOptout { get; set; }
+
         public string jre8 { get; set; }
         public string jre17 { get; set; }
         public string jre21 { get; set; }
@@ -44,6 +49,11 @@ namespace MCLauncher
             language = "english";
             instance = "Default";
             discordRPC = true;
+
+            useTheme = false;
+            themePath = "";
+            seasonalOptout = false;
+
             jre8 = "java.exe";
             jre17 = "java.exe";
             jre21 = "java.exe";

@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsScreen));
             this.pnlCenter = new System.Windows.Forms.Panel();
+            this.grbThemes = new System.Windows.Forms.GroupBox();
+            this.chkUseTheme = new System.Windows.Forms.CheckBox();
+            this.chkThemesOptout = new System.Windows.Forms.CheckBox();
+            this.btnTheme = new System.Windows.Forms.Button();
+            this.cmbTheme = new System.Windows.Forms.ComboBox();
             this.grbJavaInstalls = new System.Windows.Forms.GroupBox();
             this.btnJre21 = new System.Windows.Forms.Button();
             this.btnGetJava21 = new System.Windows.Forms.Button();
@@ -51,16 +56,11 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
-            this.grbThemes = new System.Windows.Forms.GroupBox();
-            this.btnTheme = new System.Windows.Forms.Button();
-            this.cmbTheme = new System.Windows.Forms.ComboBox();
-            this.chkThemesOptout = new System.Windows.Forms.CheckBox();
-            this.chkUseTheme = new System.Windows.Forms.CheckBox();
             this.pnlCenter.SuspendLayout();
+            this.grbThemes.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
             this.grbLauncher.SuspendLayout();
             this.grbUpdates.SuspendLayout();
-            this.grbThemes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlCenter
@@ -74,6 +74,64 @@
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(446, 374);
             this.pnlCenter.TabIndex = 24;
+            // 
+            // grbThemes
+            // 
+            this.grbThemes.BackColor = System.Drawing.Color.Transparent;
+            this.grbThemes.Controls.Add(this.chkUseTheme);
+            this.grbThemes.Controls.Add(this.chkThemesOptout);
+            this.grbThemes.Controls.Add(this.btnTheme);
+            this.grbThemes.Controls.Add(this.cmbTheme);
+            this.grbThemes.ForeColor = System.Drawing.Color.White;
+            this.grbThemes.Location = new System.Drawing.Point(0, 166);
+            this.grbThemes.Name = "grbThemes";
+            this.grbThemes.Size = new System.Drawing.Size(446, 72);
+            this.grbThemes.TabIndex = 22;
+            this.grbThemes.TabStop = false;
+            this.grbThemes.Text = "grb.themes";
+            // 
+            // chkUseTheme
+            // 
+            this.chkUseTheme.AutoSize = true;
+            this.chkUseTheme.Location = new System.Drawing.Point(6, 21);
+            this.chkUseTheme.Name = "chkUseTheme";
+            this.chkUseTheme.Size = new System.Drawing.Size(97, 17);
+            this.chkUseTheme.TabIndex = 36;
+            this.chkUseTheme.Text = "chk.useTheme";
+            this.chkUseTheme.UseVisualStyleBackColor = true;
+            this.chkUseTheme.CheckedChanged += new System.EventHandler(this.chkUseTheme_CheckedChanged);
+            // 
+            // chkThemesOptout
+            // 
+            this.chkThemesOptout.AutoSize = true;
+            this.chkThemesOptout.Location = new System.Drawing.Point(6, 48);
+            this.chkThemesOptout.Name = "chkThemesOptout";
+            this.chkThemesOptout.Size = new System.Drawing.Size(113, 17);
+            this.chkThemesOptout.TabIndex = 3;
+            this.chkThemesOptout.Text = "chk.themesOptout";
+            this.chkThemesOptout.UseVisualStyleBackColor = true;
+            this.chkThemesOptout.CheckedChanged += new System.EventHandler(this.chkThemesOptout_CheckedChanged);
+            // 
+            // btnTheme
+            // 
+            this.btnTheme.ForeColor = System.Drawing.Color.Black;
+            this.btnTheme.Location = new System.Drawing.Point(403, 19);
+            this.btnTheme.Name = "btnTheme";
+            this.btnTheme.Size = new System.Drawing.Size(36, 21);
+            this.btnTheme.TabIndex = 35;
+            this.btnTheme.Text = "...";
+            this.btnTheme.UseVisualStyleBackColor = true;
+            this.btnTheme.Click += new System.EventHandler(this.btnTheme_Click);
+            // 
+            // cmbTheme
+            // 
+            this.cmbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbTheme.FormattingEnabled = true;
+            this.cmbTheme.Location = new System.Drawing.Point(110, 19);
+            this.cmbTheme.Name = "cmbTheme";
+            this.cmbTheme.Size = new System.Drawing.Size(287, 21);
+            this.cmbTheme.TabIndex = 34;
+            this.cmbTheme.TextChanged += new System.EventHandler(this.cmbTheme_TextChanged);
             // 
             // grbJavaInstalls
             // 
@@ -312,60 +370,6 @@
             this.cmbUpdateSelect.TabIndex = 0;
             this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
             // 
-            // grbThemes
-            // 
-            this.grbThemes.BackColor = System.Drawing.Color.Transparent;
-            this.grbThemes.Controls.Add(this.chkUseTheme);
-            this.grbThemes.Controls.Add(this.chkThemesOptout);
-            this.grbThemes.Controls.Add(this.btnTheme);
-            this.grbThemes.Controls.Add(this.cmbTheme);
-            this.grbThemes.ForeColor = System.Drawing.Color.White;
-            this.grbThemes.Location = new System.Drawing.Point(0, 166);
-            this.grbThemes.Name = "grbThemes";
-            this.grbThemes.Size = new System.Drawing.Size(446, 72);
-            this.grbThemes.TabIndex = 22;
-            this.grbThemes.TabStop = false;
-            this.grbThemes.Text = "grb.themes";
-            // 
-            // btnTheme
-            // 
-            this.btnTheme.ForeColor = System.Drawing.Color.Black;
-            this.btnTheme.Location = new System.Drawing.Point(403, 19);
-            this.btnTheme.Name = "btnTheme";
-            this.btnTheme.Size = new System.Drawing.Size(36, 21);
-            this.btnTheme.TabIndex = 35;
-            this.btnTheme.Text = "...";
-            this.btnTheme.UseVisualStyleBackColor = true;
-            // 
-            // cmbTheme
-            // 
-            this.cmbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.cmbTheme.FormattingEnabled = true;
-            this.cmbTheme.Location = new System.Drawing.Point(110, 19);
-            this.cmbTheme.Name = "cmbTheme";
-            this.cmbTheme.Size = new System.Drawing.Size(287, 21);
-            this.cmbTheme.TabIndex = 34;
-            // 
-            // chkThemesOptout
-            // 
-            this.chkThemesOptout.AutoSize = true;
-            this.chkThemesOptout.Location = new System.Drawing.Point(6, 48);
-            this.chkThemesOptout.Name = "chkThemesOptout";
-            this.chkThemesOptout.Size = new System.Drawing.Size(113, 17);
-            this.chkThemesOptout.TabIndex = 3;
-            this.chkThemesOptout.Text = "chk.themesOptout";
-            this.chkThemesOptout.UseVisualStyleBackColor = true;
-            // 
-            // chkUseTheme
-            // 
-            this.chkUseTheme.AutoSize = true;
-            this.chkUseTheme.Location = new System.Drawing.Point(6, 21);
-            this.chkUseTheme.Name = "chkUseTheme";
-            this.chkUseTheme.Size = new System.Drawing.Size(97, 17);
-            this.chkUseTheme.TabIndex = 36;
-            this.chkUseTheme.Text = "chk.useTheme";
-            this.chkUseTheme.UseVisualStyleBackColor = true;
-            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,14 +381,14 @@
             this.Name = "SettingsScreen";
             this.Size = new System.Drawing.Size(784, 387);
             this.pnlCenter.ResumeLayout(false);
+            this.grbThemes.ResumeLayout(false);
+            this.grbThemes.PerformLayout();
             this.grbJavaInstalls.ResumeLayout(false);
             this.grbJavaInstalls.PerformLayout();
             this.grbLauncher.ResumeLayout(false);
             this.grbLauncher.PerformLayout();
             this.grbUpdates.ResumeLayout(false);
             this.grbUpdates.PerformLayout();
-            this.grbThemes.ResumeLayout(false);
-            this.grbThemes.PerformLayout();
             this.ResumeLayout(false);
 
         }
