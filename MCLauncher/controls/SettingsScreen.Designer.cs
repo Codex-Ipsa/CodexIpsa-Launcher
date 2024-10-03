@@ -51,7 +51,7 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbThemes = new System.Windows.Forms.GroupBox();
             this.btnTheme = new System.Windows.Forms.Button();
             this.cmbTheme = new System.Windows.Forms.ComboBox();
             this.chkThemesOptout = new System.Windows.Forms.CheckBox();
@@ -60,13 +60,13 @@
             this.grbJavaInstalls.SuspendLayout();
             this.grbLauncher.SuspendLayout();
             this.grbUpdates.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grbThemes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlCenter
             // 
             this.pnlCenter.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCenter.Controls.Add(this.groupBox1);
+            this.pnlCenter.Controls.Add(this.grbThemes);
             this.pnlCenter.Controls.Add(this.grbJavaInstalls);
             this.pnlCenter.Controls.Add(this.grbLauncher);
             this.pnlCenter.Controls.Add(this.grbUpdates);
@@ -312,20 +312,20 @@
             this.cmbUpdateSelect.TabIndex = 0;
             this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
             // 
-            // groupBox1
+            // grbThemes
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.chkUseTheme);
-            this.groupBox1.Controls.Add(this.chkThemesOptout);
-            this.groupBox1.Controls.Add(this.btnTheme);
-            this.groupBox1.Controls.Add(this.cmbTheme);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(0, 166);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(446, 72);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "grb.themes";
+            this.grbThemes.BackColor = System.Drawing.Color.Transparent;
+            this.grbThemes.Controls.Add(this.chkUseTheme);
+            this.grbThemes.Controls.Add(this.chkThemesOptout);
+            this.grbThemes.Controls.Add(this.btnTheme);
+            this.grbThemes.Controls.Add(this.cmbTheme);
+            this.grbThemes.ForeColor = System.Drawing.Color.White;
+            this.grbThemes.Location = new System.Drawing.Point(0, 166);
+            this.grbThemes.Name = "grbThemes";
+            this.grbThemes.Size = new System.Drawing.Size(446, 72);
+            this.grbThemes.TabIndex = 22;
+            this.grbThemes.TabStop = false;
+            this.grbThemes.Text = "grb.themes";
             // 
             // btnTheme
             // 
@@ -383,8 +383,8 @@
             this.grbLauncher.PerformLayout();
             this.grbUpdates.ResumeLayout(false);
             this.grbUpdates.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbThemes.ResumeLayout(false);
+            this.grbThemes.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -413,10 +413,10 @@
         private System.Windows.Forms.ComboBox cmbJre21;
         public System.Windows.Forms.Button btnGetJava21;
         private System.Windows.Forms.Button btnJre21;
-        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.GroupBox grbThemes;
         public System.Windows.Forms.CheckBox chkThemesOptout;
-        private System.Windows.Forms.Button btnTheme;
-        private System.Windows.Forms.ComboBox cmbTheme;
         public System.Windows.Forms.CheckBox chkUseTheme;
+        public System.Windows.Forms.Button btnTheme;
+        public System.Windows.Forms.ComboBox cmbTheme;
     }
 }

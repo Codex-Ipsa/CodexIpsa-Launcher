@@ -69,6 +69,10 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.btnGetJava17.Text = sj.installJava.Replace("{ver}", "17");
             SettingsScreen.InstanceSetting.btnGetJava21.Text = sj.installJava.Replace("{ver}", "21");
 
+            SettingsScreen.InstanceSetting.grbThemes.Text = sj.grbThemes;
+            SettingsScreen.InstanceSetting.chkUseTheme.Text = sj.chkUseTheme;
+            SettingsScreen.InstanceSetting.chkThemesOptout.Text = sj.chkThemesOptout;
+
             CreditsScreen.Instance.lblLauncherBy.Text = sj.lblLauncherBy.Replace("{version}", Globals.verDisplay);
             CreditsScreen.Instance.lblDejvossIpsa.Text = sj.lblDejvossIpsa;
             CreditsScreen.Instance.lblTeam.Text = sj.lblTeam;
@@ -117,7 +121,7 @@ namespace MCLauncher
             public String grbJavaInstalls = "Java installations";
             public string installJava = "Install Java {ver} ↓";
             public String grbThemes = "Themes";
-            public String lblTheme = "Custom theme";
+            public String chkUseTheme = "Custom theme";
             public String chkThemesOptout = "Opt-out of seasonal themes";
 
             //CreditsScreen
