@@ -52,10 +52,10 @@
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnTheme = new System.Windows.Forms.Button();
+            this.cmbTheme = new System.Windows.Forms.ComboBox();
+            this.chkThemesOptout = new System.Windows.Forms.CheckBox();
+            this.chkUseTheme = new System.Windows.Forms.CheckBox();
             this.pnlCenter.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
             this.grbLauncher.SuspendLayout();
@@ -315,10 +315,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.chkUseTheme);
+            this.groupBox1.Controls.Add(this.chkThemesOptout);
+            this.groupBox1.Controls.Add(this.btnTheme);
+            this.groupBox1.Controls.Add(this.cmbTheme);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(0, 166);
             this.groupBox1.Name = "groupBox1";
@@ -327,43 +327,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "grb.themes";
             // 
-            // label1
+            // btnTheme
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "lbl.theme";
+            this.btnTheme.ForeColor = System.Drawing.Color.Black;
+            this.btnTheme.Location = new System.Drawing.Point(403, 19);
+            this.btnTheme.Name = "btnTheme";
+            this.btnTheme.Size = new System.Drawing.Size(36, 21);
+            this.btnTheme.TabIndex = 35;
+            this.btnTheme.Text = "...";
+            this.btnTheme.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // cmbTheme
             // 
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(403, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 21);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbTheme.FormattingEnabled = true;
+            this.cmbTheme.Location = new System.Drawing.Point(110, 19);
+            this.cmbTheme.Name = "cmbTheme";
+            this.cmbTheme.Size = new System.Drawing.Size(287, 21);
+            this.cmbTheme.TabIndex = 34;
             // 
-            // comboBox1
+            // chkThemesOptout
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(110, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(287, 21);
-            this.comboBox1.TabIndex = 34;
+            this.chkThemesOptout.AutoSize = true;
+            this.chkThemesOptout.Location = new System.Drawing.Point(6, 48);
+            this.chkThemesOptout.Name = "chkThemesOptout";
+            this.chkThemesOptout.Size = new System.Drawing.Size(113, 17);
+            this.chkThemesOptout.TabIndex = 3;
+            this.chkThemesOptout.Text = "chk.themesOptout";
+            this.chkThemesOptout.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chkUseTheme
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 48);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "chk.themesOptout";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkUseTheme.AutoSize = true;
+            this.chkUseTheme.Location = new System.Drawing.Point(6, 21);
+            this.chkUseTheme.Name = "chkUseTheme";
+            this.chkUseTheme.Size = new System.Drawing.Size(97, 17);
+            this.chkUseTheme.TabIndex = 36;
+            this.chkUseTheme.Text = "chk.useTheme";
+            this.chkUseTheme.UseVisualStyleBackColor = true;
             // 
             // SettingsScreen
             // 
@@ -413,9 +414,9 @@
         public System.Windows.Forms.Button btnGetJava21;
         private System.Windows.Forms.Button btnJre21;
         public System.Windows.Forms.GroupBox groupBox1;
-        public System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.CheckBox chkThemesOptout;
+        private System.Windows.Forms.Button btnTheme;
+        private System.Windows.Forms.ComboBox cmbTheme;
+        public System.Windows.Forms.CheckBox chkUseTheme;
     }
 }

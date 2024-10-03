@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 
 namespace MCLauncher
@@ -113,8 +114,11 @@ namespace MCLauncher
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
             public string grbDefaults = "Defaults"; //DEPRECATED
-            public string grbJavaInstalls = "Java installations";
+            public String grbJavaInstalls = "Java installations";
             public string installJava = "Install Java {ver} ↓";
+            public String grbThemes = "Themes";
+            public String lblTheme = "Custom theme";
+            public String chkThemesOptout = "Opt-out of seasonal themes";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";
