@@ -202,6 +202,7 @@
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
     <Compile Include="json\fabric\FabricReuploadsJson.cs" />
+    <Compile Include="json\launcher\ThemesJson.cs" />
     <Compile Include="launchers\fabric\FabricWorker.cs" />
     <Compile Include="launchers\LaunchJava.cs" />
     <Compile Include="launchers\ModWorker.cs" />
