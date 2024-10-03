@@ -142,32 +142,32 @@ namespace MCLauncher
             }
 
             //Seasonal background
-            try
-            {
-                Globals.client.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
-                menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            }
-            catch (WebException e)
-            {
-                if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
-                {
-                    File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
-                }
-            }
+            //try
+            //{
+            //    Globals.client.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //}
+            //catch (WebException e)
+            //{
+            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
+            //    {
+            //        File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //    }
+            //}
 
-            try
-            {
-                Globals.client.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
-                pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            }
-            catch (WebException e)
-            {
-                if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-                {
-                    File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
-                }
-            }
+            //try
+            //{
+            //    Globals.client.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //}
+            //catch (WebException e)
+            //{
+            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
+            //    {
+            //        File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    }
+            //}
 
             if (SettingsScreen.isUpdating == false)
             {

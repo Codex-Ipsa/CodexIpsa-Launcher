@@ -39,10 +39,10 @@ namespace MCLauncher.controls
             InitializeComponent();
 
             //Seasonal background
-            if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-            {
-                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            }
+            //if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
+            //{
+            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //}
 
             //center panel
             pnlCenter.Location = new Point(

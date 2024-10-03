@@ -53,7 +53,7 @@ namespace MCLauncher
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -107,8 +107,7 @@ namespace MCLauncher
             this.pnlBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlBackground.BackColor = System.Drawing.Color.Transparent;
-            this.pnlBackground.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlBackground.BackgroundImage")));
+            this.pnlBackground.BackColor = System.Drawing.Color.DimGray;
             this.pnlBackground.Location = new System.Drawing.Point(-1, 24);
             this.pnlBackground.Name = "pnlBackground";
             this.pnlBackground.Size = new System.Drawing.Size(785, 383);
