@@ -280,12 +280,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\dirt-large-dark.png" />
-    <Content Include="res\grass.png" />
+    <Content Include="res\dirt.png" />
     <Content Include="res\icon.ico" />
     <Content Include="res\icon.png" />
     <Content Include="res\recommended.png" />
-    <Content Include="res\stone-large-dark.png" />
+    <Content Include="res\stone.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

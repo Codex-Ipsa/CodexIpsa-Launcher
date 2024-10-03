@@ -33,7 +33,7 @@ namespace MCLauncher
             Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
             lastInstance = Settings.sj.instance;
 
-            panel1.BackgroundImage = Themes.grass;
+            panel1.BackgroundImage = Themes.dirt;
 
             //Check if user is logged in
             checkAuth();

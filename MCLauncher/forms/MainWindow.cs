@@ -145,7 +145,7 @@ namespace MCLauncher
             Themes.loadTheme();
 
             //set theme
-            menuStrip1.BackgroundImage = Themes.grass;
+            menuStrip1.BackgroundImage = Themes.dirt;
             this.BackgroundImage = Themes.stone;
 
             //Seasonal background
