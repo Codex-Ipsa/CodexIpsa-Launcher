@@ -60,7 +60,7 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
 
-            SettingsScreen.InstanceSetting.grbDefaults.Text = sj.grbDefaults;
+            SettingsScreen.InstanceSetting.grbJavaInstalls.Text = sj.grbJavaInstalls;
             SettingsScreen.InstanceSetting.lblJre8.Text = "Java 8";
             SettingsScreen.InstanceSetting.lblJre17.Text = "Java 17";
             SettingsScreen.InstanceSetting.lblJre21.Text = "Java 21";
@@ -112,7 +112,8 @@ namespace MCLauncher
             public string grbUpdates = "Updates";
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
-            public string grbDefaults = "Defaults";
+            public string grbDefaults = "Defaults"; //DEPRECATED
+            public string grbJavaInstalls = "Java installations";
             public string installJava = "Install Java {ver} ↓";
 
             //CreditsScreen
