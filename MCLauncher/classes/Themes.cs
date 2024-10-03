@@ -19,7 +19,6 @@ namespace MCLauncher.classes
         public static String dirtPath = null;
         public static Image dirt;
 
-        //TODO: DOWNLOAD AND APPLY SEASONAL THEMES
         //TODO: HOT RELOAD THEMES WHEN USER DOES STUFF WITH CHECKBOX ETC
 
         public static void loadTheme()
