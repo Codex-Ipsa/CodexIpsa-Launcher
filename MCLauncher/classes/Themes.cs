@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -17,6 +18,9 @@ namespace MCLauncher.classes
         public static Image stone;
         public static String dirtPath = null;
         public static Image dirt;
+
+        //TODO: DOWNLOAD AND APPLY SEASONAL THEMES
+        //TODO: HOT RELOAD THEMES WHEN USER DOES STUFF WITH CHECKBOX ETC
 
         public static void loadTheme()
         {
@@ -49,6 +53,14 @@ namespace MCLauncher.classes
             //if user theme
             else if (Settings.sj.useTheme && Settings.sj.themePath != String.Empty)
             {
+                if (Directory.Exists($"{Globals.dataPath}\\themes\\custom\\"))
+                    Directory.Delete($"{Globals.dataPath}\\themes\\custom\\", true);
+
+                Directory.CreateDirectory($"{Globals.dataPath}\\themes\\custom\\");
+                ZipFile.ExtractToDirectory(Settings.sj.themePath, $"{Globals.dataPath}\\themes\\custom\\");
+
+                dirtPath = $"{Globals.dataPath}\\themes\\custom\\dirt.png";
+                stonePath = $"{Globals.dataPath}\\themes\\custom\\stone.png";
 
                 Logger.Info("[Theme]", "Custom theme loaded!");
             }
