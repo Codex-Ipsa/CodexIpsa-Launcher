@@ -67,7 +67,13 @@ namespace MCLauncher
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";
-            Instance.cmbInstaces.SelectedIndex = Instance.cmbInstaces.FindString(selectedInstance);
+
+            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
+            Instance.cmbInstaces.SelectedIndex = instanceIndex;
+            if(instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
+            {
+                reloadInstance(cmbInstaces.Text);
+            }
 
             webBrowser1.Url = new Uri(Globals.changelogUrl);
 
