@@ -23,6 +23,8 @@ namespace MCLauncher
 
         public static string lastInstance;
 
+        public bool initialized = false;
+
         public HomeScreen()
         {
             Instance = this;
@@ -59,8 +61,9 @@ namespace MCLauncher
                 File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\jarmods\\mods.json", modJson);
             }
 
-            //Logger.Info("[TEST0]", selectedInstance);
             loadInstanceList();
+            initialized = true;
+
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";
@@ -284,9 +287,12 @@ namespace MCLauncher
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Logger.Info("[TEST2]", cmbInstaces.Text);
-            reloadInstance(cmbInstaces.Text);
-            Settings.sj.instance = cmbInstaces.Text;
-            Settings.Save();
+            if(initialized == true)
+            {
+                reloadInstance(cmbInstaces.Text);
+                Settings.sj.instance = cmbInstaces.Text;
+                Settings.Save();
+            }
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)
