@@ -33,7 +33,7 @@ namespace MCLauncher.classes
                 String seasonalManifest = Globals.client.DownloadString(Globals.seasonalManifest);
                 List<ThemesJson> tjl = JsonConvert.DeserializeObject<List<ThemesJson>>(seasonalManifest);
 
-                DateTime dt = DateTime.Now;
+                DateTime dt = DateTime.UtcNow;
 
                 foreach (ThemesJson tj in tjl)
                 {
@@ -41,14 +41,21 @@ namespace MCLauncher.classes
                     {
                         if (dt.ToString("dd-MM-yyyy").StartsWith(date))
                         {
-                            Console.WriteLine("GOT DATE! WOOO! DO FUNNY STUFF HERE!");
+                            if (Directory.Exists($"{Globals.dataPath}\\themes\\{tj.id}\\"))
+                                Directory.Delete($"{Globals.dataPath}\\themes\\{tj.id}\\", true);
+
+                            Globals.client.DownloadFile(tj.url, $"{Globals.dataPath}\\themes\\{tj.id}.zip");
+                            ZipFile.ExtractToDirectory($"{Globals.dataPath}\\themes\\{tj.id}.zip", $"{Globals.dataPath}\\themes\\{tj.id}\\");
+                            File.Delete($"{Globals.dataPath}\\themes\\{tj.id}.zip");
+
+                            dirtPath = $"{Globals.dataPath}\\themes\\{tj.id}\\dirt.png";
+                            stonePath = $"{Globals.dataPath}\\themes\\{tj.id}\\stone.png";
+
+                            Logger.Info("[Theme]", "Seasonal theme loaded!");
                             break;
                         }
                     }
                 }
-
-                //Globals.client.DownloadFile("", "");
-                Logger.Info("[Theme]", "Seasonal theme loaded!");
             }
             //if user theme
             else if (Settings.sj.useTheme && Settings.sj.themePath != String.Empty)
