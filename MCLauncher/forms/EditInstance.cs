@@ -78,7 +78,7 @@ namespace MCLauncher.forms
             instanceGui.chkCustJson.Checked = ij.useJson;
             instanceGui.jsonBox.Enabled = ij.useJson;
             instanceGui.jsonBox.Text = ij.jsonPath;
-            instanceGui.jsonBtn.Enabled = ij.useJava;
+            instanceGui.jsonBtn.Enabled = ij.useJson;
 
             instanceGui.chkClasspath.Checked = ij.useClass;
             instanceGui.classBox.Enabled = ij.useClass;
