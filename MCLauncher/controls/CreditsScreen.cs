@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using MCLauncher.classes;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -13,11 +14,8 @@ namespace MCLauncher.controls
             InitializeComponent();
             Instance = this;
 
-            //Seasonal background
-            //if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-            //{
-            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            //}
+            //theme
+            this.BackgroundImage = Themes.stone;
 
             //Center the panel
             pnlCenter.Location = new Point(

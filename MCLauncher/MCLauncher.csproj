@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>image\icon.ico</ApplicationIcon>
+    <ApplicationIcon>res\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -280,12 +280,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="image\dirt-large-dark.png" />
-    <Content Include="image\grass.png" />
-    <Content Include="image\icon.ico" />
-    <Content Include="image\icon.png" />
-    <Content Include="image\recommended.png" />
-    <Content Include="image\stone-large-dark.png" />
+    <Content Include="res\dirt-large-dark.png" />
+    <Content Include="res\grass.png" />
+    <Content Include="res\icon.ico" />
+    <Content Include="res\icon.png" />
+    <Content Include="res\recommended.png" />
+    <Content Include="res\stone-large-dark.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

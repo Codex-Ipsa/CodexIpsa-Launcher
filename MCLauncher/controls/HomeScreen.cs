@@ -33,10 +33,7 @@ namespace MCLauncher
             Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
             lastInstance = Settings.sj.instance;
 
-            //if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
-            //{
-            //    panel1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            //}
+            panel1.BackgroundImage = Themes.grass;
 
             //Check if user is logged in
             checkAuth();
@@ -75,7 +72,7 @@ namespace MCLauncher
                 reloadInstance(cmbInstaces.Text);
             }
 
-            String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", "");
+            String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
             webBrowser1.DocumentText = changelog;
 
             Discord.Init();

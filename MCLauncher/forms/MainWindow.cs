@@ -141,6 +141,13 @@ namespace MCLauncher
                 }
             }
 
+            //load theme
+            Themes.loadTheme();
+
+            //set theme
+            menuStrip1.BackgroundImage = Themes.grass;
+            this.BackgroundImage = Themes.stone;
+
             //Seasonal background
             //try
             //{

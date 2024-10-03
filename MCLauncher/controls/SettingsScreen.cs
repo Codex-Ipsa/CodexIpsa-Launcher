@@ -1,4 +1,5 @@
-﻿using MCLauncher.json.api;
+﻿using MCLauncher.classes;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,9 @@ namespace MCLauncher.controls
             InstanceSetting = this;
             InitializeComponent();
 
-            //Seasonal background
-            //if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-            //{
-            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            //}
+            //theme
+            this.BackgroundImage = Themes.stone;
+
 
             //center panel
             pnlCenter.Location = new Point(

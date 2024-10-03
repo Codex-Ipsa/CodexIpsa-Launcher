@@ -10,10 +10,12 @@ namespace MCLauncher.classes
 {
     internal class Themes
     {
-        public Image stone;
-        public Image grass;
+        public static String stonePath = "";
+        public static Image stone = Image.FromFile(stonePath);
+        public static String grassPath = "";
+        public static Image grass = Image.FromFile(grassPath);
 
-        public void loadTheme()
+        public static void loadTheme()
         {
             Directory.CreateDirectory($"{Globals.dataPath}\\themes\\");
 
