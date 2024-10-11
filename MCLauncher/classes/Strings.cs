@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 
 namespace MCLauncher
@@ -60,13 +61,17 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
 
-            SettingsScreen.InstanceSetting.grbDefaults.Text = sj.grbDefaults;
+            SettingsScreen.InstanceSetting.grbJavaInstalls.Text = sj.grbJavaInstalls;
             SettingsScreen.InstanceSetting.lblJre8.Text = "Java 8";
             SettingsScreen.InstanceSetting.lblJre17.Text = "Java 17";
             SettingsScreen.InstanceSetting.lblJre21.Text = "Java 21";
             SettingsScreen.InstanceSetting.btnGetJava8.Text = sj.installJava.Replace("{ver}", "8");
             SettingsScreen.InstanceSetting.btnGetJava17.Text = sj.installJava.Replace("{ver}", "17");
             SettingsScreen.InstanceSetting.btnGetJava21.Text = sj.installJava.Replace("{ver}", "21");
+
+            SettingsScreen.InstanceSetting.grbThemes.Text = sj.grbThemes;
+            SettingsScreen.InstanceSetting.chkUseTheme.Text = sj.chkUseTheme;
+            SettingsScreen.InstanceSetting.chkThemesOptout.Text = sj.chkThemesOptout;
 
             CreditsScreen.Instance.lblLauncherBy.Text = sj.lblLauncherBy.Replace("{version}", Globals.verDisplay);
             CreditsScreen.Instance.lblDejvossIpsa.Text = sj.lblDejvossIpsa;
@@ -112,8 +117,12 @@ namespace MCLauncher
             public string grbUpdates = "Updates";
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
-            public string grbDefaults = "Defaults";
+            public string grbDefaults = "Defaults"; //DEPRECATED
+            public String grbJavaInstalls = "Java installations";
             public string installJava = "Install Java {ver} ↓";
+            public String grbThemes = "Themes";
+            public String chkUseTheme = "Custom theme";
+            public String chkThemesOptout = "Opt-out of seasonal themes";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";

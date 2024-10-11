@@ -321,7 +321,7 @@ namespace MCLauncher.classes
 
             string[] ram = ij.memory.Split(' ');
 
-            proc.StartInfo.Arguments = $"-Xmx{ram[0]}M -Xms{ram[1]}M ";
+            proc.StartInfo.Arguments = $"-Xms{ram[1]}M -Xmx{ram[0]}M ";
 
             if (vj.cmdBef != "" && ij.disProxy == false)
                 proc.StartInfo.Arguments += $"{vj.cmdBef.Replace("{gameDir}", $"{workDir}\\.minecraft").Replace("{libsDir}", $"{Globals.dataPath}\\libs")} ";

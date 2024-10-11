@@ -141,33 +141,40 @@ namespace MCLauncher
                 }
             }
 
-            //Seasonal background
-            try
-            {
-                Globals.client.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
-                menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            }
-            catch (WebException e)
-            {
-                if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
-                {
-                    File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
-                }
-            }
+            //load theme
+            Themes.loadTheme();
 
-            try
-            {
-                Globals.client.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
-                pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-                this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            }
-            catch (WebException e)
-            {
-                if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-                {
-                    File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
-                }
-            }
+            //set theme
+            menuStrip1.BackgroundImage = Themes.dirt;
+            this.BackgroundImage = Themes.stone;
+
+            //Seasonal background
+            //try
+            //{
+            //    Globals.client.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //}
+            //catch (WebException e)
+            //{
+            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
+            //    {
+            //        File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
+            //    }
+            //}
+
+            //try
+            //{
+            //    Globals.client.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //}
+            //catch (WebException e)
+            //{
+            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
+            //    {
+            //        File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
+            //    }
+            //}
 
             if (SettingsScreen.isUpdating == false)
             {

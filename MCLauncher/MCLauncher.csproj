@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>image\icon.ico</ApplicationIcon>
+    <ApplicationIcon>res\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -86,6 +86,7 @@
     <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
+    <Compile Include="classes\Themes.cs" />
     <Compile Include="json\api\LanguagesJson.cs" />
     <Compile Include="json\api\UpdateJson.cs" />
     <Compile Include="json\api\VersionJson.cs" />
@@ -201,6 +202,7 @@
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
     <Compile Include="json\fabric\FabricReuploadsJson.cs" />
+    <Compile Include="json\launcher\ThemesJson.cs" />
     <Compile Include="launchers\fabric\FabricWorker.cs" />
     <Compile Include="launchers\LaunchJava.cs" />
     <Compile Include="launchers\ModWorker.cs" />
@@ -279,12 +281,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="image\dirt-large-dark.png" />
-    <Content Include="image\grass.png" />
-    <Content Include="image\icon.ico" />
-    <Content Include="image\icon.png" />
-    <Content Include="image\recommended.png" />
-    <Content Include="image\stone-large-dark.png" />
+    <Content Include="res\dirt.png" />
+    <Content Include="res\icon.ico" />
+    <Content Include="res\icon.png" />
+    <Content Include="res\recommended.png" />
+    <Content Include="res\stone.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

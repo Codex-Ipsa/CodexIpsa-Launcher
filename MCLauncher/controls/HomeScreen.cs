@@ -23,6 +23,8 @@ namespace MCLauncher
 
         public static string lastInstance;
 
+        public bool initialized = false;
+
         public HomeScreen()
         {
             Instance = this;
@@ -31,10 +33,7 @@ namespace MCLauncher
             Logger.Info("[HomeScreen]", $"Last instance: {Settings.sj.instance}");
             lastInstance = Settings.sj.instance;
 
-            if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
-            {
-                panel1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            }
+            panel1.BackgroundImage = Themes.dirt;
 
             //Check if user is logged in
             checkAuth();
@@ -59,14 +58,22 @@ namespace MCLauncher
                 File.WriteAllText($"{Globals.dataPath}\\instance\\Default\\jarmods\\mods.json", modJson);
             }
 
-            //Logger.Info("[TEST0]", selectedInstance);
             loadInstanceList();
+            initialized = true;
+
             selectedInstance = lastInstance;
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";
-            Instance.cmbInstaces.SelectedIndex = Instance.cmbInstaces.FindString(selectedInstance);
 
-            webBrowser1.Url = new Uri(Globals.changelogUrl);
+            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
+            Instance.cmbInstaces.SelectedIndex = instanceIndex;
+            if(instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
+            {
+                reloadInstance(cmbInstaces.Text);
+            }
+
+            String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
+            webBrowser1.DocumentText = changelog;
 
             Discord.Init();
             Discord.ChangeMessage("Idling");
@@ -284,9 +291,12 @@ namespace MCLauncher
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Logger.Info("[TEST2]", cmbInstaces.Text);
-            reloadInstance(cmbInstaces.Text);
-            Settings.sj.instance = cmbInstaces.Text;
-            Settings.Save();
+            if(initialized == true)
+            {
+                reloadInstance(cmbInstaces.Text);
+                Settings.sj.instance = cmbInstaces.Text;
+                Settings.Save();
+            }
         }
 
         private void cmbInstaces_Click(object sender, EventArgs e)

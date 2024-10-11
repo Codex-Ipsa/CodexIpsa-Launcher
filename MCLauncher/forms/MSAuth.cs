@@ -36,6 +36,7 @@ namespace MCLauncher
         public static string deviceUrl;
 
         public static bool hasErrored = false;
+        public static String errorMsg = "An error happened during the login process!\nCheck the console for further information and try again.";
 
         public static int deviceLimit = 900;
         public static int deviceCurrent = 0;
@@ -409,6 +410,7 @@ namespace MCLauncher
             catch (WebException e)
             {
                 Logger.Error("[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
+                errorMsg = "Seems like you don't own Minecraft on this account.\nTry another or buy the game at minecraft.net!";
                 hasErrored = true;
             }
         }
@@ -496,6 +498,7 @@ namespace MCLauncher
             if (hasErrored == true)
             {
                 Logger.Error($"[MSAuth]", $"Could not authenticate you.");
+                MessageBox.Show(errorMsg, "MS auth error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

@@ -14,8 +14,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.3.3"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
-        public static string verCurrent = "0.3.3"; //Change this on release
-        public static string verDisplay = "0.3.3"; //Change this on release
+        public static string verCurrent = "0.3.4"; //Change this on release
+        public static string verDisplay = "0.3.4"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -50,9 +50,7 @@ namespace MCLauncher
         public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
         public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/launcher/version/list.json";
         public static string changelogUrl = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/changelog.php";
-        public static string seasonalDirt = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/dirt.png";
-        public static string seasonalStone = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png";
-        public static string seasonalManifest = $"http://codex-ipsa.dejvoss.cz/launcher/seasonal/index.json";
+        public static string seasonalManifest = $"http://files.codex-ipsa.cz/seasonal/seasons.json";
         public static string offlineManifest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
 
         public static string languageList = $"http://codex-ipsa.dejvoss.cz/launcher/language/index.json";

@@ -2,7 +2,9 @@
 using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MCLauncher.forms
@@ -76,7 +78,7 @@ namespace MCLauncher.forms
             instanceGui.chkCustJson.Checked = ij.useJson;
             instanceGui.jsonBox.Enabled = ij.useJson;
             instanceGui.jsonBox.Text = ij.jsonPath;
-            instanceGui.jsonBtn.Enabled = ij.useJava;
+            instanceGui.jsonBtn.Enabled = ij.useJson;
 
             instanceGui.chkClasspath.Checked = ij.useClass;
             instanceGui.classBox.Enabled = ij.useClass;
@@ -93,6 +95,40 @@ namespace MCLauncher.forms
 
             instanceGui.chkXboxDemo.Checked = ij.xboxDemo;
 
+            //filter
+            if (ij.filter != null)
+            {
+                if (!ij.filter.Contains("release"))
+                    instanceGui.chkRelease.Checked = false;
+                if (!ij.filter.Contains("snapshot"))
+                    instanceGui.chkSnapshot.Checked = false;
+                if (!ij.filter.Contains("experimental"))
+                    instanceGui.chkExperimental.Checked = false;
+                if (!ij.filter.Contains("other"))
+                    instanceGui.chkOther.Checked = false;
+                if (!ij.filter.Contains("beta"))
+                    instanceGui.chkBeta.Checked = false;
+                if (!ij.filter.Contains("alpha"))
+                    instanceGui.chkAlpha.Checked = false;
+                if (!ij.filter.Contains("infdev"))
+                    instanceGui.chkInfdev.Checked = false;
+                if (!ij.filter.Contains("indev"))
+                    instanceGui.chkIndev.Checked = false;
+                if (!ij.filter.Contains("classic"))
+                    instanceGui.chkClassic.Checked = false;
+                if (!ij.filter.Contains("preclassic"))
+                    instanceGui.chkPreclassic.Checked = false;
+            }
+
+            //set init to true so version list can be loaded
+            instanceGui.initialized = true;
+
+            //load lists
+            instanceGui.loadJavaList();
+            instanceGui.loadEduList();
+            instanceGui.loadXboxList();
+
+            //select version
             if (ij.edition == "java")
                 instanceGui.selectInList(instanceGui.vanillaList, ij.version);
             else if (ij.edition == "javaedu")

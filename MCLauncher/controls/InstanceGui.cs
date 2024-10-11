@@ -17,6 +17,8 @@ namespace MCLauncher.controls
         public bool isEdit1 = false;
         public String originalName;
 
+        public bool initialized = false;
+
         public long playTime;
 
         public InstanceGui(Form form, bool isEdit)
@@ -64,10 +66,6 @@ namespace MCLauncher.controls
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
             }
-
-            loadJavaList();
-            loadEduList();
-            loadXboxList();
         }
 
         public void loadJavaList()
@@ -117,9 +115,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            vanillaList.Columns[0].Width = -1;
-            vanillaList.Columns[1].Width = -1;
-            vanillaList.Columns[2].Width = -2;
+            vanillaList.Columns[0].Width = 186;
+            vanillaList.Columns[1].Width = 71;
+            vanillaList.Columns[2].Width = 70;
 
             //select first item
             if (vanillaList.Items.Count > 0)
@@ -151,9 +149,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            eduList.Columns[0].Width = vanillaList.Columns[0].Width;
-            eduList.Columns[1].Width = vanillaList.Columns[1].Width;
-            eduList.Columns[2].Width = vanillaList.Columns[2].Width;
+            eduList.Columns[0].Width = 186;
+            eduList.Columns[1].Width = 71;
+            eduList.Columns[2].Width = 70;
 
             //select first item
             eduList.Items[0].Selected = true;
@@ -182,9 +180,9 @@ namespace MCLauncher.controls
             }
 
             //set width after adding items
-            xboxList.Columns[0].Width = vanillaList.Columns[0].Width;
-            xboxList.Columns[1].Width = vanillaList.Columns[1].Width;
-            xboxList.Columns[2].Width = vanillaList.Columns[2].Width;
+            xboxList.Columns[0].Width = 186;
+            xboxList.Columns[1].Width = 71;
+            xboxList.Columns[2].Width = 70;
 
             //select first item
             xboxList.Items[0].Selected = true;
@@ -256,6 +254,31 @@ namespace MCLauncher.controls
             ij.xboxDemo = chkXboxDemo.Checked;
 
             ij.playTime = this.playTime;
+
+            //build filter array
+            List<String> filter = new List<String>();
+            if (chkLatest.Checked || chkRelease.Checked) //make sure to enable release when the always release is checked just in case
+                filter.Add("release");
+            if (chkLatestSnapshot.Checked || chkSnapshot.Checked) //same with snapshot
+                filter.Add("snapshot");
+            if (chkExperimental.Checked)
+                filter.Add("experimental"); //and so on
+            if (chkOther.Checked)
+                filter.Add("other");
+            if (chkBeta.Checked)
+                filter.Add("beta");
+            if (chkAlpha.Checked)
+                filter.Add("alpha");
+            if (chkInfdev.Checked)
+                filter.Add("infdev");
+            if (chkIndev.Checked)
+                filter.Add("indev");
+            if (chkClassic.Checked)
+                filter.Add("classic");
+            if (chkPreclassic.Checked)
+                filter.Add("preclassic");
+
+            ij.filter = filter.ToArray();
 
             string json = JsonConvert.SerializeObject(ij);
 
@@ -462,7 +485,8 @@ namespace MCLauncher.controls
 
         private void vanillaCheck_CheckedChanged(object sender, EventArgs e)
         {
-            loadJavaList();
+            if (initialized)
+                loadJavaList();
         }
 
         private void chkLatest_CheckedChanged(object sender, EventArgs e)
