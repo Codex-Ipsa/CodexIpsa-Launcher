@@ -36,7 +36,7 @@ namespace MCLauncher
         public static string deviceUrl;
 
         public static bool hasErrored = false;
-        public static String errorMsg = "An error happened during the login process!\nPlease, try again.";
+        public static String errorMsg = "An error happened during the login process!\nCheck the console for further information and try again.";
 
         public static int deviceLimit = 900;
         public static int deviceCurrent = 0;
