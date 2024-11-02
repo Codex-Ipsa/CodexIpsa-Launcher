@@ -49,7 +49,7 @@
             // 
             // btnRepos
             // 
-            this.btnRepos.Location = new System.Drawing.Point(672, 267);
+            this.btnRepos.Location = new System.Drawing.Point(672, 236);
             this.btnRepos.Name = "btnRepos";
             this.btnRepos.Size = new System.Drawing.Size(117, 23);
             this.btnRepos.TabIndex = 32;
@@ -70,7 +70,7 @@
             // btnMLoader
             // 
             this.btnMLoader.Enabled = false;
-            this.btnMLoader.Location = new System.Drawing.Point(672, 189);
+            this.btnMLoader.Location = new System.Drawing.Point(672, 187);
             this.btnMLoader.Name = "btnMLoader";
             this.btnMLoader.Size = new System.Drawing.Size(117, 23);
             this.btnMLoader.TabIndex = 30;
@@ -81,7 +81,7 @@
             // btnFabric
             // 
             this.btnFabric.Enabled = false;
-            this.btnFabric.Location = new System.Drawing.Point(672, 160);
+            this.btnFabric.Location = new System.Drawing.Point(672, 153);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
             this.btnFabric.TabIndex = 29;
@@ -91,7 +91,7 @@
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.Location = new System.Drawing.Point(672, 31);
+            this.btnMoveDown.Location = new System.Drawing.Point(672, 36);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(117, 23);
             this.btnMoveDown.TabIndex = 28;
@@ -101,7 +101,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(672, 60);
+            this.btnRemove.Location = new System.Drawing.Point(672, 70);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(117, 23);
             this.btnRemove.TabIndex = 27;
@@ -122,7 +122,7 @@
             // btnForge
             // 
             this.btnForge.Enabled = false;
-            this.btnForge.Location = new System.Drawing.Point(672, 131);
+            this.btnForge.Location = new System.Drawing.Point(672, 119);
             this.btnForge.Name = "btnForge";
             this.btnForge.Size = new System.Drawing.Size(117, 23);
             this.btnForge.TabIndex = 25;
@@ -132,7 +132,7 @@
             // 
             // btnReplaceJar
             // 
-            this.btnReplaceJar.Location = new System.Drawing.Point(672, 325);
+            this.btnReplaceJar.Location = new System.Drawing.Point(672, 304);
             this.btnReplaceJar.Name = "btnReplaceJar";
             this.btnReplaceJar.Size = new System.Drawing.Size(117, 23);
             this.btnReplaceJar.TabIndex = 24;
@@ -142,7 +142,7 @@
             // 
             // btnAddToJar
             // 
-            this.btnAddToJar.Location = new System.Drawing.Point(672, 296);
+            this.btnAddToJar.Location = new System.Drawing.Point(672, 270);
             this.btnAddToJar.Name = "btnAddToJar";
             this.btnAddToJar.Size = new System.Drawing.Size(117, 23);
             this.btnAddToJar.TabIndex = 23;
@@ -185,7 +185,7 @@
             // separator1
             // 
             this.separator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.separator1.Location = new System.Drawing.Point(672, 351);
+            this.separator1.Location = new System.Drawing.Point(672, 341);
             this.separator1.Name = "separator1";
             this.separator1.Size = new System.Drawing.Size(117, 2);
             this.separator1.TabIndex = 34;
@@ -193,7 +193,7 @@
             // separator2
             // 
             this.separator2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.separator2.Location = new System.Drawing.Point(672, 262);
+            this.separator2.Location = new System.Drawing.Point(672, 222);
             this.separator2.Name = "separator2";
             this.separator2.Size = new System.Drawing.Size(117, 2);
             this.separator2.TabIndex = 35;
@@ -201,7 +201,7 @@
             // separator3
             // 
             this.separator3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.separator3.Location = new System.Drawing.Point(672, 86);
+            this.separator3.Location = new System.Drawing.Point(672, 105);
             this.separator3.Name = "separator3";
             this.separator3.Size = new System.Drawing.Size(117, 2);
             this.separator3.TabIndex = 38;
