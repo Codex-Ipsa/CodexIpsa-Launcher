@@ -74,14 +74,16 @@ namespace MCLauncher.classes
             //if both fail, load default
             if (stonePath == null || dirtPath == null)
             {
-                dirtPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../res/dirt.png");
-                stonePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../res/stone.png");
+                stone = Properties.Resources.stone;
+                dirt = Properties.Resources.dirt;
                 Logger.Info("[Theme]", "Default theme loaded!");
             }
-
-            //finally load textures to Image()
-            stone = Image.FromFile(stonePath);
-            dirt = Image.FromFile(dirtPath);
+            //and if everything goes well, load theme textures to Image()
+            else
+            {
+                stone = Image.FromFile(stonePath);
+                dirt = Image.FromFile(dirtPath);
+            }
         }
     }
 }
