@@ -76,6 +76,8 @@ namespace MCLauncher.classes
             {
                 stone = Properties.Resources.stone;
                 dirt = Properties.Resources.dirt;
+
+                stonePath = "http://files.codex-ipsa.cz/seasonal/defaultStone.png";
                 Logger.Info("[Theme]", "Default theme loaded!");
             }
             //and if everything goes well, load theme textures to Image()
