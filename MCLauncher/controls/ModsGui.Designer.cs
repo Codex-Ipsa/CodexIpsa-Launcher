@@ -42,11 +42,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnNeoforge = new System.Windows.Forms.Button();
             this.separator1 = new System.Windows.Forms.Label();
             this.separator2 = new System.Windows.Forms.Label();
-            this.btnQuilt = new System.Windows.Forms.Button();
-            this.btnLiteloader = new System.Windows.Forms.Button();
             this.separator3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -73,7 +70,7 @@
             // btnMLoader
             // 
             this.btnMLoader.Enabled = false;
-            this.btnMLoader.Location = new System.Drawing.Point(672, 149);
+            this.btnMLoader.Location = new System.Drawing.Point(672, 189);
             this.btnMLoader.Name = "btnMLoader";
             this.btnMLoader.Size = new System.Drawing.Size(117, 23);
             this.btnMLoader.TabIndex = 30;
@@ -84,7 +81,7 @@
             // btnFabric
             // 
             this.btnFabric.Enabled = false;
-            this.btnFabric.Location = new System.Drawing.Point(672, 120);
+            this.btnFabric.Location = new System.Drawing.Point(672, 160);
             this.btnFabric.Name = "btnFabric";
             this.btnFabric.Size = new System.Drawing.Size(117, 23);
             this.btnFabric.TabIndex = 29;
@@ -125,7 +122,7 @@
             // btnForge
             // 
             this.btnForge.Enabled = false;
-            this.btnForge.Location = new System.Drawing.Point(672, 91);
+            this.btnForge.Location = new System.Drawing.Point(672, 131);
             this.btnForge.Name = "btnForge";
             this.btnForge.Size = new System.Drawing.Size(117, 23);
             this.btnForge.TabIndex = 25;
@@ -185,17 +182,6 @@
             // 
             this.columnHeader2.Text = "Config";
             // 
-            // btnNeoforge
-            // 
-            this.btnNeoforge.Enabled = false;
-            this.btnNeoforge.Location = new System.Drawing.Point(672, 178);
-            this.btnNeoforge.Name = "btnNeoforge";
-            this.btnNeoforge.Size = new System.Drawing.Size(117, 23);
-            this.btnNeoforge.TabIndex = 33;
-            this.btnNeoforge.Text = "btn.Neoforge";
-            this.btnNeoforge.UseVisualStyleBackColor = true;
-            this.btnNeoforge.Click += new System.EventHandler(this.btnNeoforge_Click);
-            // 
             // separator1
             // 
             this.separator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -212,28 +198,6 @@
             this.separator2.Size = new System.Drawing.Size(117, 2);
             this.separator2.TabIndex = 35;
             // 
-            // btnQuilt
-            // 
-            this.btnQuilt.Enabled = false;
-            this.btnQuilt.Location = new System.Drawing.Point(672, 207);
-            this.btnQuilt.Name = "btnQuilt";
-            this.btnQuilt.Size = new System.Drawing.Size(117, 23);
-            this.btnQuilt.TabIndex = 36;
-            this.btnQuilt.Text = "btn.Quilt";
-            this.btnQuilt.UseVisualStyleBackColor = true;
-            this.btnQuilt.Click += new System.EventHandler(this.btnQuilt_Click);
-            // 
-            // btnLiteloader
-            // 
-            this.btnLiteloader.Enabled = false;
-            this.btnLiteloader.Location = new System.Drawing.Point(672, 236);
-            this.btnLiteloader.Name = "btnLiteloader";
-            this.btnLiteloader.Size = new System.Drawing.Size(117, 23);
-            this.btnLiteloader.TabIndex = 37;
-            this.btnLiteloader.Text = "btn.Liteloader";
-            this.btnLiteloader.UseVisualStyleBackColor = true;
-            this.btnLiteloader.Click += new System.EventHandler(this.btnLiteloader_Click);
-            // 
             // separator3
             // 
             this.separator3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -247,11 +211,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.separator3);
-            this.Controls.Add(this.btnLiteloader);
-            this.Controls.Add(this.btnQuilt);
             this.Controls.Add(this.separator2);
             this.Controls.Add(this.separator1);
-            this.Controls.Add(this.btnNeoforge);
             this.Controls.Add(this.btnRepos);
             this.Controls.Add(this.btnOpenDotMc);
             this.Controls.Add(this.btnMLoader);
@@ -288,8 +249,5 @@
         public System.Windows.Forms.Button btnMLoader;
         public System.Windows.Forms.Button btnFabric;
         public System.Windows.Forms.Button btnForge;
-        public System.Windows.Forms.Button btnNeoforge;
-        public System.Windows.Forms.Button btnQuilt;
-        public System.Windows.Forms.Button btnLiteloader;
     }
 }

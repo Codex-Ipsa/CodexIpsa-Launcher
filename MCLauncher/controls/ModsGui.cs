@@ -107,20 +107,20 @@ namespace MCLauncher.controls
                 else
                     btnForge.Enabled = false;
 
-                if (mm.neoforge != null)
-                    btnNeoforge.Enabled = true;
-                else
-                    btnNeoforge.Enabled = false;
+                //if (mm.neoforge != null)
+                //    btnNeoforge.Enabled = true;
+                //else
+                //    btnNeoforge.Enabled = false;
 
-                if (mm.quilt != null)
-                    btnQuilt.Enabled = true;
-                else
-                    btnQuilt.Enabled = false;
+                //if (mm.quilt != null)
+                //    btnQuilt.Enabled = true;
+                //else
+                //    btnQuilt.Enabled = false;
 
-                if (mm.liteloader != null)
-                    btnLiteloader.Enabled = true;
-                else
-                    btnLiteloader.Enabled = false;
+                //if (mm.liteloader != null)
+                //    btnLiteloader.Enabled = true;
+                //else
+                //    btnLiteloader.Enabled = false;
             }
             catch (WebException ex)
             {
@@ -129,9 +129,9 @@ namespace MCLauncher.controls
 
                 btnMLoader.Enabled = false;
                 btnForge.Enabled = false;
-                btnNeoforge.Enabled = false;
-                btnQuilt.Enabled = false;
-                btnLiteloader.Enabled = false;
+                //btnNeoforge.Enabled = false;
+                //btnQuilt.Enabled = false;
+                //btnLiteloader.Enabled = false;
             }
         }
 
