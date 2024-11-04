@@ -1,6 +1,7 @@
 ﻿using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MCLauncher.classes
 {
@@ -56,9 +58,15 @@ namespace MCLauncher.classes
                     }
                 }
             }
+
             //if user theme
-            else if (Settings.sj.useTheme && Settings.sj.themePath != String.Empty)
+            if (Settings.sj.useTheme && Settings.sj.themePath != String.Empty)
             {
+                if (dirtPath != null || stonePath != null)
+                {
+                    goto final;
+                }
+
                 if (Directory.Exists($"{Globals.dataPath}\\themes\\custom\\"))
                     Directory.Delete($"{Globals.dataPath}\\themes\\custom\\", true);
 
@@ -71,17 +79,23 @@ namespace MCLauncher.classes
                 Logger.Info("[Theme]", "Custom theme loaded!");
             }
 
+            final:
+
             //if both fail, load default
             if (stonePath == null || dirtPath == null)
             {
-                dirtPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../res/dirt.png");
-                stonePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../res/stone.png");
+                stone = Properties.Resources.stone;
+                dirt = Properties.Resources.dirt;
+
+                stonePath = "http://files.codex-ipsa.cz/seasonal/defaultStone.png";
                 Logger.Info("[Theme]", "Default theme loaded!");
             }
-
-            //finally load textures to Image()
-            stone = Image.FromFile(stonePath);
-            dirt = Image.FromFile(dirtPath);
+            //and if everything goes well, load theme textures to Image()
+            else
+            {
+                stone = Image.FromFile(stonePath);
+                dirt = Image.FromFile(dirtPath);
+            }
         }
     }
 }
