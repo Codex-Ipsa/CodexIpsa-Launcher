@@ -76,10 +76,7 @@ namespace MCLauncher
         public void loadMainWindow()
         {
             //Set the window name
-            Logger.Info($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
-            this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
-            Console.Title = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
-            Logger.Info($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
+            this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]";
 
             //Create directories
             Directory.CreateDirectory($"{Globals.dataPath}");
