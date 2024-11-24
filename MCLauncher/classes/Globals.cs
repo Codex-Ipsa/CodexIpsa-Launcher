@@ -31,9 +31,11 @@ namespace MCLauncher
 
         //Java manifests
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-manifest.json";
+        public static string javaManifestFile = $"{dataPath}\\versions\\java-manifest.json";
         public static string javaLatest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-latest.json";
         public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
+        public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";
 
         public static string PallasManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/pallas.json";
         public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
@@ -42,6 +44,7 @@ namespace MCLauncher
 
         //Xbox manifests
         public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_manifest.json";
+        public static string x360ManifestFile = $"{dataPath}\\versions\\x360-manifest.json";
         public static string x360Url = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_url.txt";
         public static string x360Base = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_base.txt";
         public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/emulator/xenia_manifest.json";

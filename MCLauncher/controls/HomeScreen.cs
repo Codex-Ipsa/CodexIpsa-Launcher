@@ -67,13 +67,19 @@ namespace MCLauncher
 
             int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
             Instance.cmbInstaces.SelectedIndex = instanceIndex;
-            if(instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
+            if (instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
             {
                 reloadInstance(cmbInstaces.Text);
             }
 
-            String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
-            webBrowser1.DocumentText = changelog;
+            if (!Globals.offlineMode)
+            {
+                String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
+                webBrowser1.DocumentText = changelog;
+            } else
+            {
+                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b></center>";
+            }
 
             Discord.Init();
             Discord.ChangeMessage("Idling");
@@ -81,6 +87,12 @@ namespace MCLauncher
 
         public static void checkAuth()
         {
+            if (Globals.offlineMode)
+            {
+                //TODO
+                return;
+            }
+
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 Logger.Error($"[HomeScreen]", "User is not logged in");
@@ -177,7 +189,7 @@ namespace MCLauncher
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
 
             var modInfo = ModWorker.getPatchName(mj);
-            if(modInfo.Item2 != null)
+            if (modInfo.Item2 != null)
             {
                 selectedVersion = $"{modInfo.Item1} {modInfo.Item2}";
             }
@@ -291,7 +303,7 @@ namespace MCLauncher
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Logger.Info("[TEST2]", cmbInstaces.Text);
-            if(initialized == true)
+            if (initialized == true)
             {
                 reloadInstance(cmbInstaces.Text);
                 Settings.sj.instance = cmbInstaces.Text;
