@@ -32,9 +32,8 @@ namespace MCLauncher
 
             //set strings
             MainWindow.Instance.menuStrip1.Items[0].Text = sj.cntHome;
-            MainWindow.Instance.menuStrip1.Items[1].Text = sj.cntProfiles;
-            MainWindow.Instance.menuStrip1.Items[2].Text = sj.cntSettings;
-            MainWindow.Instance.menuStrip1.Items[3].Text = sj.cntAbout;
+            MainWindow.Instance.menuStrip1.Items[1].Text = sj.cntSettings;
+            MainWindow.Instance.menuStrip1.Items[2].Text = sj.cntAbout;
 
             HomeScreen.Instance.btnPlay.Text = sj.btnPlay;
             HomeScreen.Instance.btnLogIn.Text = sj.btnLogIn;

@@ -33,7 +33,6 @@ namespace MCLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3.SuspendLayout();
@@ -57,7 +56,6 @@ namespace MCLauncher
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
-            this.profilesToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -74,16 +72,6 @@ namespace MCLauncher
             this.homeToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.homeToolStripMenuItem.Text = "cnt.home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
-            // 
-            // profilesToolStripMenuItem
-            // 
-            this.profilesToolStripMenuItem.Enabled = false;
-            this.profilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
-            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.profilesToolStripMenuItem.Text = "cnt.profiles";
-            this.profilesToolStripMenuItem.Visible = false;
-            this.profilesToolStripMenuItem.Click += new System.EventHandler(this.profilesToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -128,7 +116,6 @@ namespace MCLauncher
         public System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
         public System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profilesToolStripMenuItem;
     }
 }
 
