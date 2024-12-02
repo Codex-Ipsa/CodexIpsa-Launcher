@@ -670,7 +670,7 @@
             // eduPage
             // 
             this.eduPage.Controls.Add(this.eduList);
-            this.eduPage.ImageIndex = 0;
+            this.eduPage.ImageIndex = 7;
             this.eduPage.Location = new System.Drawing.Point(4, 22);
             this.eduPage.Name = "eduPage";
             this.eduPage.Size = new System.Drawing.Size(358, 376);
@@ -730,6 +730,7 @@
             this.imageList1.Images.SetKeyName(4, "quilt.png");
             this.imageList1.Images.SetKeyName(5, "neoforge.png");
             this.imageList1.Images.SetKeyName(6, "xbox360.png");
+            this.imageList1.Images.SetKeyName(7, "thumb_edu.png");
             // 
             // grbGame
             // 
