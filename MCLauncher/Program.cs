@@ -6,9 +6,6 @@ namespace MCLauncher
 {
     static class Program
     {
-        /// <summary>
-        /// Hlavní vstupní bod aplikace.
-        /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
@@ -55,7 +52,6 @@ namespace MCLauncher
                 }
             }
             Application.Run(new MainWindow());
-            //Application.Run(new NewUI());
         }
     }
 }
