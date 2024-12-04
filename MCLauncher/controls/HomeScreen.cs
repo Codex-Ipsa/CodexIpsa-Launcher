@@ -78,7 +78,7 @@ namespace MCLauncher
                 webBrowser1.DocumentText = changelog;
             } else
             {
-                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b></center>";
+                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
             }
 
             Discord.Init();
