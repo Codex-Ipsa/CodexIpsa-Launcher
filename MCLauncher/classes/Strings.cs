@@ -49,6 +49,7 @@ namespace MCLauncher
             {
                 HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", HomeScreen.msPlayerName);
                 HomeScreen.Instance.lblLogInWarn.Text = "";
+                HomeScreen.Instance.lblLogInWarn.Visible = false;
             }
             HomeScreen.Instance.lblReady.Text = sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
             HomeScreen.Instance.lblSelInst.Text = sj.lblSelInst;
