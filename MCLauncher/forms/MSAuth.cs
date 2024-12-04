@@ -509,6 +509,8 @@ namespace MCLauncher
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth]", $"Saved refresh token: {Settings.sj.refreshToken}");
                 HomeScreen.msPlayerName = playerName;
+                Settings.sj.username = playerName;
+                Settings.Save();
                 HomeScreen.checkAuth();
             }
         }
@@ -532,6 +534,8 @@ namespace MCLauncher
             {
                 //Logger.log(ConsoleColor.Blue, ConsoleColor.Gray, $"[MSAuth]", $"Got username: {playerName}");
                 HomeScreen.msPlayerName = playerName;
+                Settings.sj.username = playerName;
+                Settings.Save();
             }
         }
 
@@ -560,6 +564,9 @@ namespace MCLauncher
                 JavaLauncher.msPlayerUUID = playerUUID;
                 JavaLauncher.msPlayerAccessToken = mcAccessToken;
                 JavaLauncher.msPlayerMPPass = mpPass;
+
+                Settings.sj.username = playerName;
+                Settings.Save();
 
                 /*LaunchJava.launchPlayerName = playerName;
                 LaunchJava.launchPlayerUUID = playerUUID;

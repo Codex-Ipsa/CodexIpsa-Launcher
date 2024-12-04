@@ -30,6 +30,7 @@ namespace MCLauncher
     {
         public string warning { get; set; }
         public string refreshToken { get; set; }
+        public string username { get; set; }
         public string language { get; set; }
         public string instance { get; set; }
         public bool discordRPC { get; set; }
