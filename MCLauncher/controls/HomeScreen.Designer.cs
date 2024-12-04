@@ -79,7 +79,7 @@
             this.lblLogInWarn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblLogInWarn.BackColor = System.Drawing.Color.Transparent;
             this.lblLogInWarn.ForeColor = System.Drawing.Color.White;
-            this.lblLogInWarn.Location = new System.Drawing.Point(216, 45);
+            this.lblLogInWarn.Location = new System.Drawing.Point(216, 5);
             this.lblLogInWarn.Name = "lblLogInWarn";
             this.lblLogInWarn.Size = new System.Drawing.Size(353, 13);
             this.lblLogInWarn.TabIndex = 20;

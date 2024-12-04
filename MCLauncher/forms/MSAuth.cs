@@ -415,7 +415,7 @@ namespace MCLauncher
             }
         }
 
-        public static void getMpPass(String ip, String port)
+        public static String getMpPass(String ip, String port)
         {
             try
             {
@@ -470,18 +470,19 @@ namespace MCLauncher
                         Logger.Info("[MSAuth]", $"MPpass Response: {mppassResponseString}");
                     else
                         Logger.Info("[MSAuth]", "Got Mppass response");
-                    mpPass = mppassResponseString;
+                    return mppassResponseString;
                 }
                 else
                 {
                     Logger.Error("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
-                    mpPass = "-";
+                    return "-";
                 }
             }
             catch (WebException e)
             {
                 Logger.Error("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
+                return "-";
             }
         }
 
@@ -534,6 +535,12 @@ namespace MCLauncher
             {
                 //Logger.log(ConsoleColor.Blue, ConsoleColor.Gray, $"[MSAuth]", $"Got username: {playerName}");
                 HomeScreen.msPlayerName = playerName;
+
+                JavaLauncher.msPlayerName = playerName;
+                JavaLauncher.msPlayerUUID = playerUUID;
+                JavaLauncher.msPlayerAccessToken = accessToken;
+                JavaLauncher.msPlayerMPPass = mpPass;
+
                 Settings.sj.username = playerName;
                 Settings.Save();
             }
@@ -560,6 +567,8 @@ namespace MCLauncher
             }
             else
             {
+                HomeScreen.msPlayerName = playerName;
+
                 JavaLauncher.msPlayerName = playerName;
                 JavaLauncher.msPlayerUUID = playerUUID;
                 JavaLauncher.msPlayerAccessToken = mcAccessToken;

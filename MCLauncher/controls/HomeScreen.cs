@@ -76,7 +76,8 @@ namespace MCLauncher
             {
                 String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
-            } else
+            }
+            else
             {
                 webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
             }
@@ -85,11 +86,26 @@ namespace MCLauncher
             Discord.ChangeMessage("Idling");
         }
 
+        //checks for authentication
         public static void checkAuth()
         {
+            Logger.Info("[HomeScreen/checkAuth]", "Checking authentication...");
+
             if (Globals.offlineMode)
             {
-                //TODO
+                if ((Settings.sj.refreshToken != String.Empty || Settings.sj.username != null) && (Settings.sj.refreshToken != String.Empty || Settings.sj.refreshToken != null))
+                {
+                    Console.WriteLine("CALLED!! YAAY");
+                    JavaLauncher.msPlayerName = Settings.sj.username;
+                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                    JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
+
+                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", Settings.sj.username);
+                    Instance.btnPlay.Enabled = true;
+                    Instance.lblLogInWarn.Visible = true;
+                    Instance.lblLogInWarn.Text = "Playing in offline mode, some features may not be available!";
+                }
                 return;
             }
 
@@ -125,7 +141,8 @@ namespace MCLauncher
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-                MSAuth.usernameFromRefreshToken();
+                //MSAuth.usernameFromRefreshToken();
+                MSAuth.onGameStart(false, "", "");
                 if (MSAuth.hasErrored == true)
                 {
                     Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
@@ -136,16 +153,34 @@ namespace MCLauncher
                 }
                 else
                 {
-                    Instance.btnLogOut.Visible = true;
-                    Instance.btnLogIn.Visible = false;
-                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
-                    Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Visible = false;
-                    Instance.cmbInstaces.Enabled = true;
-                    Instance.btnEditInst.Enabled = true;
-                    Instance.btnNewInst.Enabled = true;
+                    loadUserInfo(msPlayerName, "");
+                    enableButtons(true);
                 }
             }
+
+            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {JavaLauncher.msPlayerAccessToken}");
+        }
+
+        //loads user info and auth message
+        public static void loadUserInfo(String username, String authMsg)
+        {
+            Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", username);
+            Instance.lblLogInWarn.Text = authMsg;
+        }
+
+        //enables/disables buttons depending on auth status
+        public static void enableButtons(bool enable)
+        {
+            Instance.btnLogOut.Visible = enable;
+            Instance.btnLogIn.Visible = !enable;
+
+            Instance.btnPlay.Enabled = enable;
+
+            Instance.cmbInstaces.Enabled = enable;
+            Instance.btnEditInst.Enabled = enable;
+            Instance.btnNewInst.Enabled = enable;
+
+            Instance.lblLogInWarn.Visible = !enable;
         }
 
         public static void loadInstanceList()

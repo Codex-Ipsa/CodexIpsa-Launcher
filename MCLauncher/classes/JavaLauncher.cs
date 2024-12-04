@@ -117,18 +117,18 @@ namespace MCLauncher.classes
                 //TODO - attempt to at least verify the user WAS authenticated at some point and use that username
                 if (ipPort == null)
                 {
-                    MSAuth.onGameStart(false, null, null);
+                    //MSAuth.onGameStart(false, null, null);
                 }
                 else
                 {
-                    MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
+                    //MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
                 }
             } else
             {
-                msPlayerName = "Guest";
-                msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                msPlayerUUID = "fakePlayerIDThisIsNotReal";
-                msPlayerMPPass = "fakeMPPassThisIsNotReal";
+                //msPlayerName = "Guest";
+                //msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+                //msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                //msPlayerMPPass = "fakeMPPassThisIsNotReal";
             }
 
             //download game jar
@@ -365,7 +365,7 @@ namespace MCLauncher.classes
                 if (ij.offline)
                     msPlayerMPPass = "-";
 
-                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{msPlayerMPPass}\" ";
+                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{MSAuth.getMpPass(ipPort[0], ipPort[1])}\" ";
                 Logger.Info("[JavaLauncher]", $"Server active!");
             }
 
