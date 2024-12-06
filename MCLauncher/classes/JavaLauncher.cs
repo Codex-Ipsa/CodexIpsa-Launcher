@@ -19,7 +19,6 @@ namespace MCLauncher.classes
         public static string msPlayerName;
         public static string msPlayerUUID;
         public static string msPlayerAccessToken;
-        public static string msPlayerMPPass;
 
         public static string manifestPath = "";
 
@@ -350,12 +349,12 @@ namespace MCLauncher.classes
             Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
             if (ipPort != null)
             {
-                if (ij.offline)
-                    msPlayerMPPass = "-";
-
-                MSAuth.onServerJoin(ipPort[0], ipPort[1]);
-                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
-                Logger.Info("[JavaLauncher]", $"Server active!");
+                if (!ij.offline)
+                {
+                    MSAuth.onServerJoin(ipPort[0], ipPort[1]);
+                    proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
+                    Logger.Info("[JavaLauncher]", $"Server active!");
+                }
             }
 
             string classpath = vj.classpath;

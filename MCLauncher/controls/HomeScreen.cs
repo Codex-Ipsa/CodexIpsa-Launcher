@@ -91,24 +91,6 @@ namespace MCLauncher
         {
             Logger.Info("[HomeScreen/checkAuth]", "Checking authentication...");
 
-            if (Globals.offlineMode)
-            {
-                if ((Settings.sj.refreshToken != String.Empty || Settings.sj.username != null) && (Settings.sj.refreshToken != String.Empty || Settings.sj.refreshToken != null))
-                {
-                    Console.WriteLine("CALLED!! YAAY");
-                    JavaLauncher.msPlayerName = Settings.sj.username;
-                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-                    JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
-
-                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", Settings.sj.username);
-                    Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Visible = true;
-                    Instance.lblLogInWarn.Text = "Playing in offline mode, some features may not be available!";
-                }
-                return;
-            }
-
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 Logger.Error($"[HomeScreen]", "User is not logged in");
@@ -119,29 +101,33 @@ namespace MCLauncher
                 JavaLauncher.msPlayerName = "Guest";
                 JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
                 JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-                JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
-                if (Globals.requireAuth == true)
-                {
-                    Instance.btnPlay.Enabled = false;
-                    Instance.cmbInstaces.Enabled = false;
-                    Instance.btnEditInst.Enabled = false;
-                    Instance.btnNewInst.Enabled = false;
-                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
-                }
-                else
-                {
-                    Instance.btnPlay.Enabled = true;
-                    Instance.cmbInstaces.Enabled = true;
-                    Instance.btnEditInst.Enabled = true;
-                    Instance.btnNewInst.Enabled = true;
-                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn_Debug;
-                }
+                Instance.btnPlay.Enabled = false;
+                Instance.cmbInstaces.Enabled = false;
+                Instance.btnEditInst.Enabled = false;
+                Instance.btnNewInst.Enabled = false;
+                Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
             }
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-                //MSAuth.usernameFromRefreshToken();
+
+                if (Globals.offlineMode)
+                {
+                    Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
+                    JavaLauncher.msPlayerName = Settings.sj.username;
+                    msPlayerName = Settings.sj.username;
+                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+
+                    Console.WriteLine(Settings.sj.username);
+                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", Settings.sj.username);
+                    Instance.lblWelcome.Update();
+                    Instance.lblLogInWarn.Visible = true;
+                    Instance.lblLogInWarn.Text = "Playing in offline mode, some features may not be available!";
+                    return;
+                }
+
                 MSAuth.refreshAuth();
                 if (MSAuth.hasErrored == true)
                 {
@@ -328,7 +314,6 @@ namespace MCLauncher
             JavaLauncher.msPlayerName = "Guest";
             JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
             JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-            JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
             Settings.sj.refreshToken = String.Empty;
             Settings.Save();
