@@ -142,7 +142,7 @@ namespace MCLauncher
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
                 //MSAuth.usernameFromRefreshToken();
-                MSAuth.onGameStart(false, "", "");
+                MSAuth.refreshAuth();
                 if (MSAuth.hasErrored == true)
                 {
                     Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");

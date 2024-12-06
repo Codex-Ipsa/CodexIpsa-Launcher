@@ -107,7 +107,7 @@ namespace MCLauncher.classes
 
                 if (EnterIp.inputText != null && EnterIp.inputText != String.Empty)
                 {
-                    ipPort = LaunchJava.splitIpPort(ij.serverIP);
+                    ipPort = LaunchJava.splitIpPort(EnterIp.inputText);
                 }
             }
 
@@ -360,6 +360,7 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
+            Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
             if (ipPort != null)
             {
                 if (ij.offline)
