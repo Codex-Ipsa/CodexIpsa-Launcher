@@ -92,6 +92,14 @@ namespace MCLauncher
         {
             if (Globals.isDebug)
                 Logger.Info("[MSAuth]", $"Test! 1s! {deviceCurrent}");
+
+            String url = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
+            String data =  "grant_type=urn:ietf:params:oauth:grant-type:device_code";
+            data += "&client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09";
+            data += $"&device_code={deviceCode}";
+
+            Http.postUrl(url, data); //TODO
+
             var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.microsoftonline.com/consumers/oauth2/v2.0/token");
             var tokenPostData = "grant_type=urn:ietf:params:oauth:grant-type:device_code";
             tokenPostData += "&client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09";

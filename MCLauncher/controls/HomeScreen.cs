@@ -264,14 +264,6 @@ namespace MCLauncher
             {
                 JavaLauncher.Launch(selectedInstance);
             }
-            /*if (selectedEdition == "java")
-                LaunchJava.LaunchGame();
-
-            else if (selectedEdition == "x360")
-                LaunchXbox360.LaunchGame();
-
-            else if (selectedEdition == "edu")
-                LaunchJava.LaunchGame();*/
         }
 
         private void btnNewInst_Click(object sender, EventArgs e)

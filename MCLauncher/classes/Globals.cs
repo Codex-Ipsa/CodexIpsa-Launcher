@@ -27,7 +27,6 @@ namespace MCLauncher
 
         //Switches
         public static bool isDebug = false;
-        public static bool requireAuth = true; //Change this on release
 
         //Java manifests
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-manifest.json";
