@@ -336,43 +336,31 @@ namespace MCLauncher
             }
         }
 
-        public static void voidRefreshToken(string mcRefreshToken)
+        //gets access token from refresh token
+        public static void withRefreshToken(string mcRefreshToken)
         {
             try
             {
-                //THIS USES THE TEST APP, CHANGE!!!
-                var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.live.com/oauth20_token.srf");
-                var tokenPostData = "client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
-                tokenPostData += "&refresh_token=" + Uri.EscapeDataString($"{mcRefreshToken}");
-                tokenPostData += "&grant_type=" + Uri.EscapeDataString("refresh_token");
-                tokenPostData += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.dejvoss.cz/auth");
-                var tokenData = Encoding.ASCII.GetBytes(tokenPostData);
-                tokenRequest.Method = "POST";
-                tokenRequest.ContentType = "application/x-www-form-urlencoded";
-                tokenRequest.ContentLength = tokenData.Length;
-                using (var stream = tokenRequest.GetRequestStream())
-                {
-                    stream.Write(tokenData, 0, tokenData.Length);
-                }
-                var tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-                var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
-                if (Globals.isDebug)
-                    Logger.Info($"[MSAuth]", $"RefreshToken Response: {tokenResponseString}");
-                else
-                    Logger.Info($"[MSAuth]", $"Got RefreshToken response");
+                String url = "https://login.live.com/oauth20_token.srf";
+                String data = "client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
+                data += "&refresh_token=" + Uri.EscapeDataString($"{mcRefreshToken}");
+                data += "&grant_type=" + Uri.EscapeDataString("refresh_token");
+                data += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.dejvoss.cz/auth");
+                String response = Http.postUrl(url, data);
 
-                string tokenJson = $"[{tokenResponseString}]";
-                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
-                foreach (var vers in authTokenData)
-                {
-                    accessToken = vers.access_token;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"accessToken: {accessToken}");
-                }
+                if (Globals.isDebug)
+                    Logger.Info($"[MSAuth/withRefreshToken]", $"response: {response}");
+                else
+                    Logger.Info($"[MSAuth/withRefreshToken]", $"got response!");
+
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                accessToken = json.access_token;
+                if (Globals.isDebug)
+                    Logger.Info($"[MSAuth/withRefreshToken]", $"access token: {accessToken}");
             }
             catch (WebException e)
             {
-                Logger.Error("[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
+                Logger.Error("[MSAuth/withRefreshToken]", $"returned an error: {e.Message}");
                 hasErrored = true;
             }
         }
@@ -484,7 +472,7 @@ namespace MCLauncher
         //logs in the user on the start of launcher if already logged i, before
         public static void refreshAuth()
         {
-            voidRefreshToken(Settings.sj.refreshToken);
+            withRefreshToken(Settings.sj.refreshToken);
             xblAuth();
             xstsAuth();
             minecraftAuth();
