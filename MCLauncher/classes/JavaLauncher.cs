@@ -111,26 +111,6 @@ namespace MCLauncher.classes
                 }
             }
 
-            //authenticate on game launch
-            if (!Globals.offlineMode)
-            {
-                //TODO - attempt to at least verify the user WAS authenticated at some point and use that username
-                if (ipPort == null)
-                {
-                    //MSAuth.onGameStart(false, null, null);
-                }
-                else
-                {
-                    //MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
-                }
-            } else
-            {
-                //msPlayerName = "Guest";
-                //msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                //msPlayerUUID = "fakePlayerIDThisIsNotReal";
-                //msPlayerMPPass = "fakeMPPassThisIsNotReal";
-            }
-
             //download game jar
             if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
                 Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
@@ -203,7 +183,14 @@ namespace MCLauncher.classes
                     string timestamp = dir.Substring(dir.IndexOf("-") + 1);
                     if (!Globals.running.ContainsKey(timestamp))
                     {
-                        Directory.Delete($"{Globals.dataPath}\\libs\\natives-{timestamp}", true);
+                        try
+                        {
+                            Directory.Delete($"{Globals.dataPath}\\libs\\natives-{timestamp}", true);
+                        }
+                        catch (UnauthorizedAccessException e)
+                        {
+                            Logger.Error("[JavaLauncher]", $"Could not delete natives dir natives-{timestamp}");
+                        }
                     }
                 }
             }
@@ -366,7 +353,8 @@ namespace MCLauncher.classes
                 if (ij.offline)
                     msPlayerMPPass = "-";
 
-                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{MSAuth.getMpPass(ipPort[0], ipPort[1])}\" ";
+                MSAuth.onServerJoin(ipPort[0], ipPort[1]);
+                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
                 Logger.Info("[JavaLauncher]", $"Server active!");
             }
 

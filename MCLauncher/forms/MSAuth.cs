@@ -365,7 +365,7 @@ namespace MCLauncher
             }
         }
 
-        public static String getMpPass(String ip, String port)
+        public static void onServerJoin(String ip, String port)
         {
             Logger.Info("[MSAuth/getMpPass]", $"ip: {ip}, port: {port}");
             try
@@ -407,34 +407,17 @@ namespace MCLauncher
 
                 if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
                 {
-                    Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
-
-                    //Get the actual Mppass
-                    Logger.Info("SAD", $"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={ip}:{port}");
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={ip}:{port}");
-
-                    mppassRequest.Method = "POST";
-                    mppassRequest.ContentType = "application/x-www-form-urlencoded";
-
-                    var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
-                    var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"MPpass Response: {mppassResponseString}");
-                    else
-                        Logger.Info("[MSAuth]", "Got Mppass response");
-                    return mppassResponseString;
+                    Console.WriteLine($"[MSAuth] Success!");
                 }
                 else
                 {
                     Logger.Error("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
-                    return "-";
                 }
             }
             catch (WebException e)
             {
                 Logger.Error("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
                 hasErrored = true;
-                return "-";
             }
         }
 
