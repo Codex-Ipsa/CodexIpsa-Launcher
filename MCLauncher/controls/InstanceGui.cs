@@ -80,10 +80,18 @@ namespace MCLauncher.controls
             vanillaList.Columns.Add(Strings.sj.rowReleased);
 
             //add items
-            String manifest = Globals.client.DownloadString(Globals.javaManifest);
+
+            String manifest = File.ReadAllText(Globals.javaManifestFile);
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
+                if (Globals.offlineMode)
+                {
+                    if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{ver.id}.jar") && !File.Exists($"{Globals.dataPath}\\data\\json\\{ver.id}.json"))
+                    {
+                        continue;
+                    }
+                }
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") }; //dd.MM.yyyy HH:mm:ss
 
                 if (chkPreclassic.Checked && row[0] == "pre-classic")
@@ -139,14 +147,24 @@ namespace MCLauncher.controls
             eduList.Columns.Add(Strings.sj.rowReleased);
 
             //add items
-            String manifest = Globals.client.DownloadString(Globals.javaEduManifest);
+
+            String manifest = File.ReadAllText(Globals.javaEduManifestFile);
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
+                if (Globals.offlineMode)
+                {
+                    if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{ver.id}.jar") && !File.Exists($"{Globals.dataPath}\\data\\json\\{ver.id}.json"))
+                    {
+                        continue;
+                    }
+                }
+
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") };
 
                 eduList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
+
 
             //set width after adding items
             eduList.Columns[0].Width = 186;
@@ -154,8 +172,11 @@ namespace MCLauncher.controls
             eduList.Columns[2].Width = 70;
 
             //select first item
-            eduList.Items[0].Selected = true;
-            eduList.TopItem = eduList.Items[0];
+            if (eduList.Items.Count > 0)
+            {
+                eduList.Items[0].Selected = true;
+                eduList.TopItem = eduList.Items[0];
+            }
         }
 
         public void loadXboxList()
@@ -170,14 +191,23 @@ namespace MCLauncher.controls
             xboxList.Columns.Add(Strings.sj.rowReleased);
 
             //add items
-            String manifest = Globals.client.DownloadString(Globals.x360Manifest);
+            String manifest = File.ReadAllText(Globals.x360ManifestFile);
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
+                if (Globals.offlineMode)
+                {
+                    if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{ver.id}"))
+                    {
+                        continue;
+                    }
+                }
+
                 String[] row = { ver.type, ver.released.ToUniversalTime().ToString("dd.MM.yyyy") };
 
                 xboxList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
+
 
             //set width after adding items
             xboxList.Columns[0].Width = 186;
@@ -185,8 +215,11 @@ namespace MCLauncher.controls
             xboxList.Columns[2].Width = 70;
 
             //select first item
-            xboxList.Items[0].Selected = true;
-            xboxList.TopItem = xboxList.Items[0];
+            if (xboxList.Items.Count > 0)
+            {
+                xboxList.Items[0].Selected = true;
+                xboxList.TopItem = xboxList.Items[0];
+            }
         }
 
         //Finds and selects a version in the ver list

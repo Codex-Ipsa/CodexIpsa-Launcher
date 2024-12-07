@@ -86,6 +86,7 @@
     <Compile Include="classes\APIKeysLocal.cs" />
     <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
+    <Compile Include="classes\Http.cs" />
     <Compile Include="classes\Themes.cs" />
     <Compile Include="json\api\LanguagesJson.cs" />
     <Compile Include="json\api\UpdateJson.cs" />

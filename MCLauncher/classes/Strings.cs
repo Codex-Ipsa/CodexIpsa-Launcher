@@ -32,9 +32,8 @@ namespace MCLauncher
 
             //set strings
             MainWindow.Instance.menuStrip1.Items[0].Text = sj.cntHome;
-            MainWindow.Instance.menuStrip1.Items[1].Text = sj.cntProfiles;
-            MainWindow.Instance.menuStrip1.Items[2].Text = sj.cntSettings;
-            MainWindow.Instance.menuStrip1.Items[3].Text = sj.cntAbout;
+            MainWindow.Instance.menuStrip1.Items[1].Text = sj.cntSettings;
+            MainWindow.Instance.menuStrip1.Items[2].Text = sj.cntAbout;
 
             HomeScreen.Instance.btnPlay.Text = sj.btnPlay;
             HomeScreen.Instance.btnLogIn.Text = sj.btnLogIn;
@@ -50,6 +49,8 @@ namespace MCLauncher
             {
                 HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", HomeScreen.msPlayerName);
                 HomeScreen.Instance.lblLogInWarn.Text = "";
+                if (Globals.offlineMode)
+                    HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
             }
             HomeScreen.Instance.lblReady.Text = sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
             HomeScreen.Instance.lblSelInst.Text = sj.lblSelInst;
@@ -98,6 +99,7 @@ namespace MCLauncher
             public string lblWelcome = "Welcome, {playerName}";
             public string lblReady = "Ready to play {verInfo}";
             public string lblLogInWarn = "You need to log in to use the launcher!";
+            public String lblLogInWarnOffline = "Playing in offline mode, some features may not be available!";
             public string lblLogInWarn_Debug = "MAKE SURE TO DISABLE THIS IN GLOBALS!";
             public string lblPlayedFor = "Played for";
             public string lblPlayedForDay = "day";

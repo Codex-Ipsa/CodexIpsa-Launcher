@@ -13,27 +13,30 @@ namespace MCLauncher.classes
         {
             //download/update xenia
             Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\");
-            var xm = JsonConvert.DeserializeObject<XeniaManifest>(Globals.client.DownloadString(Globals.xeniaManifest));
-            if (File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version.cfg"))
+            if(!Globals.offlineMode)
             {
-                File.Move($"{Globals.dataPath}\\emulator\\xenia\\version.cfg", $"{Globals.dataPath}\\emulator\\xenia\\version");
-            }
+                var xm = JsonConvert.DeserializeObject<XeniaManifest>(Globals.client.DownloadString(Globals.xeniaManifest));
+                if (File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version.cfg"))
+                {
+                    File.Move($"{Globals.dataPath}\\emulator\\xenia\\version.cfg", $"{Globals.dataPath}\\emulator\\xenia\\version");
+                }
 
-            if (!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version") || !File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\version").Contains(xm.ver))
-            {
-                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe");
-                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\LICENSE");
+                if (!File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version") || !File.ReadAllText($"{Globals.dataPath}\\emulator\\xenia\\version").Contains(xm.ver))
+                {
+                    File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe");
+                    File.Delete($"{Globals.dataPath}\\emulator\\xenia\\LICENSE");
 
-                DownloadProgress.url = xm.url;
-                DownloadProgress.savePath = $"{Globals.dataPath}\\emulator\\xenia\\xenia.zip";
-                DownloadProgress download = new DownloadProgress();
-                download.ShowDialog();
+                    DownloadProgress.url = xm.url;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\emulator\\xenia\\xenia.zip";
+                    DownloadProgress download = new DownloadProgress();
+                    download.ShowDialog();
 
-                ZipFile.ExtractToDirectory($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip", $"{Globals.dataPath}\\emulator\\xenia\\");
-                File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\version", xm.ver);
-                File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip");
+                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip", $"{Globals.dataPath}\\emulator\\xenia\\");
+                    File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\version", xm.ver);
+                    File.Delete($"{Globals.dataPath}\\emulator\\xenia\\xenia.zip");
 
-                Logger.Info("[XboxLauncher]", "Updated Xenia");
+                    Logger.Info("[XboxLauncher]", "Updated Xenia");
+                }
             }
 
             //downloading game

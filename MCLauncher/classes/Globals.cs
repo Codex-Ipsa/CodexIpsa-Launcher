@@ -14,8 +14,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.3.3"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
-        public static string verCurrent = "0.3.5"; //Change this on release
-        public static string verDisplay = "0.3.5"; //Change this on release
+        public static string verCurrent = "0.3.6"; //Change this on release
+        public static string verDisplay = "0.3.6"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -27,13 +27,14 @@ namespace MCLauncher
 
         //Switches
         public static bool isDebug = false;
-        public static bool requireAuth = true; //Change this on release
 
         //Java manifests
         public static string javaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-manifest.json";
+        public static string javaManifestFile = $"{dataPath}\\versions\\java-manifest.json";
         public static string javaLatest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/java-latest.json";
         public static string javaInfo = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/javaedu_manifest.json";
+        public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";
 
         public static string PallasManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/pallas.json";
         public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
@@ -42,6 +43,7 @@ namespace MCLauncher
 
         //Xbox manifests
         public static string x360Manifest = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_manifest.json";
+        public static string x360ManifestFile = $"{dataPath}\\versions\\x360-manifest.json";
         public static string x360Url = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_url.txt";
         public static string x360Base = $"http://codex-ipsa.dejvoss.cz/launcher/codebase/{codebase}/x360_base.txt";
         public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/emulator/xenia_manifest.json";

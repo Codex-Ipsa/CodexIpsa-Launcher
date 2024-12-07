@@ -18,26 +18,17 @@ namespace MCLauncher
 {
     public partial class MSAuth : Form
     {
-        public static string browserAddress;
-        public static string authCode;
-        public static string accessToken;
-        public static string xblToken;
-        public static string userHash;
-        public static string XError;
-        public static string xstsToken;
-        public static string mcAccessToken;
-        public static string playerUUID;
-        public static string playerName;
-        public static string refreshToken;
-        public static string mpPass;
+        //auth info
+        public static String deviceCode;
 
-        public static string userCode;
-        public static string deviceCode;
-        public static string deviceUrl;
+        //user info
+        public static String msAccessToken;
+        public static String msRefreshToken;
 
-        public static bool hasErrored = false;
+        //error to display
         public static String errorMsg = "An error happened during the login process!\nCheck the console for further information and try again.";
 
+        //for checking initial time to wait for auth
         public static int deviceLimit = 900;
         public static int deviceCurrent = 0;
 
@@ -55,32 +46,22 @@ namespace MCLauncher
             label1.Text = Strings.sj.labelCode;
             cancelBtn.Text = Strings.sj.btnCancel;
 
-            //This NO LONGER uses the test azure app, DONT change that!!!
             deviceCurrent = 0;
-            var deviceRequest = (HttpWebRequest)WebRequest.Create($"https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"); //THIS NEEDS TO HAVE OFFLINE ACCESS TO RETURN REFRESH CODE!!!!!
-            deviceRequest.Method = "GET";
-            deviceRequest.ContentType = "application/x-www-form-urlencoded";
-            var deviceResponse = (HttpWebResponse)deviceRequest.GetResponse();
-            var deviceResponseString = new StreamReader(deviceResponse.GetResponseStream()).ReadToEnd();
+
+            String url = "https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"; //this needs to have offline access at the end
+            String response = Http.getUrl(url);
             if (Globals.isDebug)
-                Logger.Info("[MSAuth]", $"Deviceflow response: {deviceResponseString}");
+                Logger.Info("[MSAuth]", $"deviceflow response: {response}");
 
-            string deviceJson = $"[{deviceResponseString}]";
+            AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+            deviceCode = json.device_code;
+            deviceLimit = json.expires_in;
 
-            List<AuthJson> deviceData = JsonConvert.DeserializeObject<List<AuthJson>>(deviceJson);
-            foreach (var vers in deviceData)
-            {
-                userCode = vers.user_code;
-                deviceCode = vers.device_code;
-                deviceUrl = vers.verification_uri;
-                if (Globals.isDebug)
-                {
-                    Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {deviceUrl} and enter the code {userCode} to authenticate.");
-                    Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
-                }
-                textBox1.Text = $"{userCode}";
-                textBox1.ReadOnly = true;
-            }
+            textBox1.Text = json.user_code;
+            textBox1.ReadOnly = true;
+
+            Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {json.verification_uri} and enter the code {json.user_code} to authenticate.");
+            Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
             this.Refresh();
             backgroundWorker1.RunWorkerAsync();
             //this.Close();
@@ -89,483 +70,311 @@ namespace MCLauncher
         public static void deviceFlowPing(object source, ElapsedEventArgs e)
         {
             if (Globals.isDebug)
-                Logger.Info("[MSAuth]", $"Test! 1s! {deviceCurrent}");
-            var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.microsoftonline.com/consumers/oauth2/v2.0/token");
-            var tokenPostData = "grant_type=urn:ietf:params:oauth:grant-type:device_code";
-            tokenPostData += "&client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09";
-            tokenPostData += $"&device_code={deviceCode}";
-            var tokenData = Encoding.ASCII.GetBytes(tokenPostData);
-            tokenRequest.Method = "POST";
-            tokenRequest.ContentType = "application/x-www-form-urlencoded";
-            tokenRequest.ContentLength = tokenData.Length;
-            tokenRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
-            if (Globals.isDebug)
-                Logger.Info("[MSAuth]", $"Post data: {tokenPostData}");
+                Logger.Info("[MSAuth/deviceFlowPing]", $"called! {deviceCurrent}");
+
+            String url = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
+            String data = "grant_type=urn:ietf:params:oauth:grant-type:device_code";
+            data += "&client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09";
+            data += $"&device_code={deviceCode}";
 
             //This has to be done because of MS's shitty service - thanks!
             try
             {
-                using (var stream = tokenRequest.GetRequestStream())
-                {
-                    stream.Write(tokenData, 0, tokenData.Length);
-                }
-                var tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-                var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
-                deviceCurrent = 181;
-                if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Response string: {tokenResponseString}");
-                else
-                    Logger.Info("[MSAuth]", "Got Token response!");
-                string tokenJson = $"[{tokenResponseString}]";
-                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
-                foreach (var vers in authTokenData)
-                {
-                    accessToken = vers.access_token;
-                    refreshToken = vers.refresh_token;
-                    if (Globals.isDebug)
-                    {
-                        Logger.Info("[MSAuth]", $"AccessToken: {accessToken}");
-                        Logger.Info("[MSAuth]", $"RefreshToken: {refreshToken}");
-                    }
-                }
-            }
-            catch (WebException ex)
-            {
-                using (WebResponse response = ex.Response)
-                {
-                    Logger.Info("[MSAuth]", $"Waiting for user to log in...");
-                    HttpWebResponse httpResponse = (HttpWebResponse)response;
-                    using (Stream data = response.GetResponseStream())
-                    using (var reader = new StreamReader(data))
-                    {
-                        string text = reader.ReadToEnd();
+                String response = Http.postUrl(url, data);
 
-                        if (Globals.isDebug)
-                            Logger.Info("[MSAuth]", $"Response: \n{text}");
-                    }
-                }
+                deviceCurrent = deviceLimit + 1;
+                if (Globals.isDebug)
+                    Logger.Info("[MSAuth/deviceFlowPing]", $"Response string: {response}");
+                else
+                    Logger.Info("[MSAuth/deviceFlowPing]", "Got Token response!");
+
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                msAccessToken = json.access_token;
+                msRefreshToken = json.refresh_token;
+            }
+            catch (WebException)
+            {
                 deviceCurrent++;
             }
         }
 
-        public static void xblAuth()
+        //authenticate with xbox live
+        public static String[] xblAuth(String msAccess)
         {
-            //Auth with XBL
             try
             {
-                var xblRequest = (HttpWebRequest)WebRequest.Create("https://user.auth.xboxlive.com/user/authenticate");
-                xblRequest.ContentType = "application/json";
-                xblRequest.Accept = "application/json";
-                xblRequest.Method = "POST";
+                String url = "https://user.auth.xboxlive.com/user/authenticate";
+                String data = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={msAccess}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
+                String response = Http.postJson(url, data);
 
-                using (var streamWriter = new StreamWriter(xblRequest.GetRequestStream()))
-                {
-                    string json = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={accessToken}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
-
-                    streamWriter.Write(json);
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"XBL Request: {json}");
-                }
-
-                var xblResponse = (HttpWebResponse)xblRequest.GetResponse();
-                var xblResponseString = "";
-                using (var streamReader = new StreamReader(xblResponse.GetResponseStream()))
-                {
-                    xblResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"XBL Response: {xblResponseString}");
-                    else
-                        Logger.Info("[MSAuth]", $"Got XBL response");
-                }
-
-                string xblJson = $"[{xblResponseString}]";
-                List<AuthJson> xblTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(xblJson);
-                foreach (var vers in xblTokenData)
-                {
-                    xblToken = vers.Token;
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"xblToken: {xblToken}");
-                }
-
-                string s = xblJson.Substring(xblJson.LastIndexOf("[{"));
-                string s2 = s.Replace("}}", "");
-                string s3 = s2.Replace("]]", "]");
                 if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Array of xui: {s3}");
+                    Logger.Info($"[MSAuth/xblAuth]", $"response: {response}");
 
-                List<AuthJson> uhsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(s3);
-                foreach (var vers in uhsTokenData)
-                {
-                    userHash = vers.uhs;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"userHash: {userHash}");
-                    else
-                        Logger.Info($"[MSAuth]", $"Got userHash!");
-                }
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                return new string[] { json.Token, json.DisplayClaims.xui[0].uhs };
             }
             catch (WebException e)
             {
-                Logger.Error("[MSAuth]", $"XBL request returned an error: {e.Message}");
-                hasErrored = true;
+                Logger.Error("[MSAuth/xblAuth]", $"returned an error: {e.Message}");
+                return null;
             }
         }
 
-        public static void xstsAuth()
+        //get xsts token
+        public static String getXstsToken(String xblToken)
         {
-            //Authenticate with XSTS
-            var xstsRequest = (HttpWebRequest)WebRequest.Create("https://xsts.auth.xboxlive.com/xsts/authorize");
-            xstsRequest.ContentType = "application/json";
-            xstsRequest.Accept = "application/json";
-            xstsRequest.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(xstsRequest.GetRequestStream()))
+            try
             {
-                string json = $"{{\"Properties\": {{\"SandboxId\": \"RETAIL\",\"UserTokens\": [\"{xblToken}\"]}},\"RelyingParty\": \"rp://api.minecraftservices.com/\",\"TokenType\": \"JWT\"}}";
+                String url = "https://xsts.auth.xboxlive.com/xsts/authorize";
+                String data = $"{{\"Properties\": {{\"SandboxId\": \"RETAIL\",\"UserTokens\": [\"{xblToken}\"]}},\"RelyingParty\": \"rp://api.minecraftservices.com/\",\"TokenType\": \"JWT\"}}";
+                String response = Http.postJson(url, data);
 
-                streamWriter.Write(json);
                 if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"XSTS Request: {json}");
-            }
+                    Logger.Info($"[MSAuth/xstsAuth]", $"response: {response}");
 
-            try
-            {
-                var xstsResponse = (HttpWebResponse)xstsRequest.GetResponse();
-                var xstsResponseString = "";
-                using (var streamReader = new StreamReader(xstsResponse.GetResponseStream()))
-                {
-                    xstsResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"XSTS Response: {xstsResponseString}");
-                    else
-                        Logger.Info($"[MSAuth]", $"Got XSTS response");
-                }
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                Logger.Info($"[MSAuth/xstsAuth]", $"xError: {json.XErr}");
 
-                List<AuthJson> xstsTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{xstsResponseString}]");
-                foreach (var vers in xstsTokenData)
-                {
-                    xstsToken = vers.Token;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"xstsToken: {xstsToken}");
-                    XError = vers.XErr;
-                    Logger.Info($"[MSAuth]", $"xError: {XError}");
-                }
-
+                return json.Token;
             }
             catch (WebException e)
             {
-                Logger.Error("[MSAuth]", $"XSTS request returned an error: {e.Message}");
-                hasErrored = true;
+                Logger.Error("[MSAuth/xstsAuth]", $"returned an error: {e.Message}");
+                return null;
             }
         }
 
-        public static void minecraftAuth()
+        //authenticate with minecraft
+        public static String getMinecraftToken(String userHash, String xstsToken)
         {
-            //Minecraft authentication
             try
             {
-                var mcRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/authentication/login_with_xbox");
-                mcRequest.ContentType = "application/json";
-                mcRequest.Accept = "application/json";
-                mcRequest.Method = "POST";
+                String url = "https://api.minecraftservices.com/authentication/login_with_xbox";
+                String data = $"{{\"identityToken\": \"XBL3.0 x={userHash};{xstsToken}\"}}";
+                String response = Http.postJson(url, data);
 
-                using (var streamWriter = new StreamWriter(mcRequest.GetRequestStream()))
-                {
-                    string json = $"{{\"identityToken\": \"XBL3.0 x={userHash};{xstsToken}\"}}";
+                if (Globals.isDebug)
+                    Logger.Info($"[MSAuth/minecraftAuth]", $"response: {response}");
 
-                    streamWriter.Write(json);
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"MC Request: {json}");
-                }
-                var mcResponse = (HttpWebResponse)mcRequest.GetResponse();
-                var mcResponseString = "";
-                using (var streamReader = new StreamReader(mcResponse.GetResponseStream()))
-                {
-                    mcResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"MC Response: {mcResponseString}");
-                    else
-                        Logger.Info($"[MSAuth]", $"Got MC response");
-                }
-
-                List<AuthJson> mcTokenData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{mcResponseString}]");
-                foreach (var vers in mcTokenData)
-                {
-                    mcAccessToken = vers.access_token;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"mcAccessToken: {mcAccessToken}");
-                }
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                return json.access_token;
             }
             catch (WebException e)
             {
-                hasErrored = true;
-                Logger.Error("[MSAuth]", $"MinecraftAuth returned a webException: {e.Message}");
+                Logger.Error("[MSAuth/minecraftAuth]", $"returned an error: {e.Message}");
+                return null;
             }
-
         }
 
-        public static void verifyOwnership()
+        //check game ownership
+        public static void verifyOwnership(String accessToken)
         {
-            //Verify game ownership
             try
             {
-                var ownRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/entitlements/mcstore");
-                ownRequest.ContentType = "application/json";
-                ownRequest.Accept = "application/json";
-                ownRequest.Method = "GET";
-                ownRequest.PreAuthenticate = true;
-                ownRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
+                String url = "https://api.minecraftservices.com/entitlements/mcstore";
+                Dictionary<String, String> headers = new Dictionary<String, String>();
+                headers.Add("Authorization", $"Bearer {accessToken}");
 
-                var ownResponse = (HttpWebResponse)ownRequest.GetResponse();
-                var ownResponseString = "";
-                using (var streamReader = new StreamReader(ownResponse.GetResponseStream()))
-                {
-                    ownResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"Own Response: {ownResponseString}");
-                }
+                String response = Http.getJson(url, headers);
+
+                if (Globals.isDebug)
+                    Logger.Info($"[MSAuth/verifyOwnership]", $"response: {response}");
             }
             catch (WebException e)
             {
-                hasErrored = true;
-                Logger.Error("[MSAuth]", $"VerifyOwnership returned a webException: {e.Message}");
+                Logger.Error("[MSAuth/verifyOwnership]", $"returned an error: {e.Message}");
             }
             //TODO: VERIFY THE USER ACTALLY OWNS THE GAME, ALONG OTHER GAMES LIKE BEDROCK AND DUNGEONS [maybe it works without it?]
         }
 
-        public static void voidRefreshToken(string mcRefreshToken)
+        //get profile info
+        public static String[] getProfileInfo(String accessToken)
         {
             try
             {
-                //THIS USES THE TEST APP, CHANGE!!!
-                var tokenRequest = (HttpWebRequest)WebRequest.Create("https://login.live.com/oauth20_token.srf");
-                var tokenPostData = "client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
-                tokenPostData += "&refresh_token=" + Uri.EscapeDataString($"{mcRefreshToken}");
-                tokenPostData += "&grant_type=" + Uri.EscapeDataString("refresh_token");
-                tokenPostData += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.dejvoss.cz/auth");
-                var tokenData = Encoding.ASCII.GetBytes(tokenPostData);
-                tokenRequest.Method = "POST";
-                tokenRequest.ContentType = "application/x-www-form-urlencoded";
-                tokenRequest.ContentLength = tokenData.Length;
-                using (var stream = tokenRequest.GetRequestStream())
-                {
-                    stream.Write(tokenData, 0, tokenData.Length);
-                }
-                var tokenResponse = (HttpWebResponse)tokenRequest.GetResponse();
-                var tokenResponseString = new StreamReader(tokenResponse.GetResponseStream()).ReadToEnd();
+                String url = "https://api.minecraftservices.com/minecraft/profile";
+                Dictionary<String, String> headers = new Dictionary<String, String>();
+                headers.Add("Authorization", $"Bearer {accessToken}");
+
+                String response = Http.getJson(url, headers);
+
                 if (Globals.isDebug)
-                    Logger.Info($"[MSAuth]", $"RefreshToken Response: {tokenResponseString}");
-                else
-                    Logger.Info($"[MSAuth]", $"Got RefreshToken response");
+                    Logger.Info($"[MSAuth/getProfileInfo]", $"response: {response}");
 
-                string tokenJson = $"[{tokenResponseString}]";
-                List<AuthJson> authTokenData = JsonConvert.DeserializeObject<List<AuthJson>>(tokenJson);
-                foreach (var vers in authTokenData)
-                {
-                    accessToken = vers.access_token;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"accessToken: {accessToken}");
-                }
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                return new String[] { json.name, json.id };
             }
             catch (WebException e)
             {
-                Logger.Error("[MSAuth]", $"RefreshToken request returned an error: {e.Message}");
-                hasErrored = true;
-            }
-        }
-
-        public static void getProfileInfo()
-        {
-            //Get profile info
-            try
-            {
-                var profileRequest = (HttpWebRequest)WebRequest.Create("https://api.minecraftservices.com/minecraft/profile");
-                profileRequest.ContentType = "application/json";
-                profileRequest.Accept = "application/json";
-                profileRequest.Method = "GET";
-                profileRequest.PreAuthenticate = true;
-                profileRequest.Headers.Add("Authorization", $"Bearer {mcAccessToken}");
-
-                var profileResponse = (HttpWebResponse)profileRequest.GetResponse();
-                var profileResponseString = "";
-                using (var streamReader = new StreamReader(profileResponse.GetResponseStream()))
-                {
-                    profileResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"Profile Response: {profileResponseString}");
-                    else
-                        Logger.Info("[MSAuth]", "Got profile response");
-                }
-
-                List<AuthJson> mcProfileData = JsonConvert.DeserializeObject<List<AuthJson>>($"[{profileResponseString}]");
-                foreach (var vers in mcProfileData)
-                {
-                    playerName = vers.name;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"Player name: {playerName}");
-                    playerUUID = vers.id;
-                    if (Globals.isDebug)
-                        Logger.Info($"[MSAuth]", $"Player UUID: {playerUUID}");
-                }
-            }
-            catch (WebException e)
-            {
-                Logger.Error("[MSAuth]", $"ProfileInfo request returned an error: {e.Message}");
+                Logger.Error("[MSAuth/getProfileInfo]", $"returned an error: {e.Message}");
                 errorMsg = "Seems like you don't own Minecraft on this account.\nTry another or buy the game at minecraft.net!";
-                hasErrored = true;
+                return null;
             }
         }
 
-        public static void getMpPass(String ip, String port)
+        //gets access token from refresh token
+        public static String fromRefreshToken(String refreshToken)
         {
             try
             {
-                //Notify the mojang session servers
-                var mojpassRequest = (HttpWebRequest)WebRequest.Create("https://sessionserver.mojang.com/session/minecraft/join");
-                mojpassRequest.ContentType = "application/json";
-                mojpassRequest.Accept = "application/json";
-                mojpassRequest.Method = "POST";
+                String url = "https://login.live.com/oauth20_token.srf";
+                String data = "client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
+                data += "&refresh_token=" + Uri.EscapeDataString($"{refreshToken}");
+                data += "&grant_type=" + Uri.EscapeDataString("refresh_token");
+                data += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.dejvoss.cz/auth");
+                String response = Http.postUrl(url, data);
 
+                if (Globals.isDebug)
+                    Logger.Info($"[MSAuth/fromRefreshToken]", $"response: {response}");
+
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
+                return json.access_token;
+            }
+            catch (WebException e)
+            {
+                Logger.Error("[MSAuth/fromRefreshToken]", $"returned an error: {e.Message}");
+                return null;
+            }
+        }
+
+        //notify session servers on joining a server
+        public static void onServerJoin(String ip, String port, String accessToken, String playerUUID)
+        {
+            Logger.Info("[MSAuth/onServerJoin]", $"ip: {ip}, port: {port}");
+
+            try
+            {
                 String myIP = Globals.client.DownloadString("http://checkip.amazonaws.com/");
                 myIP = myIP.Replace("\n", String.Empty);
 
                 var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(myIP));
                 string sha1 = string.Concat(hash.Select(b => b.ToString("x2")));
                 if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"sha1 (serverId): {sha1}");
+                    Logger.Info("[MSAuth]", $"sha1 serverId: {sha1}");
 
-                using (var streamWriter = new StreamWriter(mojpassRequest.GetRequestStream()))
-                {
-                    string json = $"{{\"serverId\": \"{sha1}\",\"accessToken\": \"{mcAccessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
+                String url = "https://sessionserver.mojang.com/session/minecraft/join";
+                String data = $"{{\"serverId\": \"{sha1}\",\"accessToken\": \"{accessToken}\",\"selectedProfile\": \"{playerUUID}\"}}";
+                HttpStatusCode status = Http.postJsonStatus(url, data);
 
-                    streamWriter.Write(json);
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"Mojpass Request: {json}");
-                }
-                var mojpassResponse = (HttpWebResponse)mojpassRequest.GetResponse();
-                var mojpassResponseString = "";
-                using (var streamReader = new StreamReader(mojpassResponse.GetResponseStream()))
-                {
-                    mojpassResponseString = streamReader.ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"Mojpass Response: {mojpassResponseString}");
-                    else
-                        Logger.Info("[MSAuth]", "Got Mojpass response");
-                }
-                if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Mojpass code: {mojpassResponse.StatusCode}");
-
-                if (mojpassResponse.StatusCode == HttpStatusCode.NoContent)
-                {
-                    Console.WriteLine($"[MSAuth] Success! Getting Mppass..");
-
-                    //Get the actual Mppass
-                    var mppassRequest = (HttpWebRequest)WebRequest.Create($"http://api.betacraft.uk/getmppass.jsp?user={playerName}&server={ip}:{port}");
-
-                    mppassRequest.Method = "POST";
-                    mppassRequest.ContentType = "application/x-www-form-urlencoded";
-
-                    var mppassResponse = (HttpWebResponse)mppassRequest.GetResponse();
-                    var mppassResponseString = new StreamReader(mppassResponse.GetResponseStream()).ReadToEnd();
-                    if (Globals.isDebug)
-                        Logger.Info("[MSAuth]", $"MPpass Response: {mppassResponseString}");
-                    else
-                        Logger.Info("[MSAuth]", "Got Mppass response");
-                    mpPass = mppassResponseString;
-                }
+                if (status == HttpStatusCode.NoContent)
+                    Logger.Info($"[MSAuth/onServerJoin]", "Success!");
                 else
-                {
-                    Logger.Error("[MSAuth]", $"Mojpass request returned an error: {mojpassResponse.StatusCode}");
-                    mpPass = "-";
-                }
+                    Logger.Error("[MSAuth/onServerJoin]", $"got a wrong statusCode: {status}");
             }
             catch (WebException e)
             {
-                Logger.Error("[MSAuth]", $"GetMpPass request returned an error: {e.Message}");
-                hasErrored = true;
+                Logger.Error("[MSAuth/onServerJoin]", $"returned an error: {e.Message}");
             }
         }
 
+        //login for the first time
         public static void deviceFlow()
         {
-            Logger.Info($"[MSAuth]", $"deviceFlow was called!");
-            xblAuth();
-            xstsAuth();
-            minecraftAuth();
-            verifyOwnership();
-            //todo: only do if player owns the game
-            getProfileInfo();
+            String[] xblInfo = xblAuth(msAccessToken);
+            if (xblInfo != null)
+            {
+                String xblToken = xblInfo[0];
+                String xblUser = xblInfo[1];
 
-            if (hasErrored == true)
-            {
-                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
-                MessageBox.Show(errorMsg, "MS auth error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                String xstsToken = getXstsToken(xblToken);
+                if (xblToken != null)
+                {
+                    String accessToken = getMinecraftToken(xblUser, xstsToken);
+                    if (accessToken != null)
+                    {
+                        verifyOwnership(accessToken);
+
+                        //todo: only do if player owns the game
+                        String[] profileInfo = getProfileInfo(accessToken); //name, id
+                        if (profileInfo != null)
+                        {
+                            String playerName = profileInfo[0];
+                            String playerUUID = profileInfo[1];
+
+                            Settings.sj.refreshToken = msRefreshToken;
+                            Settings.Save();
+
+                            HomeScreen.msPlayerName = playerName;
+                            JavaLauncher.msPlayerName = playerName;
+                            JavaLauncher.msPlayerUUID = playerUUID;
+                            JavaLauncher.msPlayerAccessToken = accessToken;
+                            Settings.sj.username = playerName;
+                            Settings.Save();
+
+                            Logger.Info($"[MSAuth]", $"Logged in successfully!");
+                            HomeScreen.loadUserInfo(playerName, "");
+                            HomeScreen.enableButtons(true);
+                            return;
+                        }
+                    }
+                }
             }
-            else
-            {
-                if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Refresh token to save: {refreshToken}");
-                Settings.sj.refreshToken = refreshToken;
-                Settings.Save();
-                if (Globals.isDebug)
-                    Logger.Info("[MSAuth]", $"Saved refresh token: {Settings.sj.refreshToken}");
-                HomeScreen.msPlayerName = playerName;
-                HomeScreen.checkAuth();
-            }
+
+            Logger.Error($"[MSAuth]", $"Could not authenticate you.");
+            if (errorMsg != null)
+                MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Settings.sj.refreshToken = null;
+            Settings.Save();
+
+            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+            HomeScreen.enableButtons(false);
         }
 
-        public static void usernameFromRefreshToken()
+        //logs in the user on the start of launcher if already logged in before
+        public static void refreshAuth()
         {
-            voidRefreshToken(Settings.sj.refreshToken);
-            xblAuth();
-            xstsAuth();
-            minecraftAuth();
-            verifyOwnership();
-            //todo: only do if player owns the game
-            getProfileInfo();
+            String msAccess = fromRefreshToken(Settings.sj.refreshToken);
+            if (msAccess != null)
+            {
+                String[] xblInfo = xblAuth(msAccess);
+                if (xblInfo != null)
+                {
+                    String xblToken = xblInfo[0];
+                    String xblUser = xblInfo[1];
 
-            if (hasErrored == true)
-            {
-                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
-                hasErrored = false;
-            }
-            else
-            {
-                //Logger.log(ConsoleColor.Blue, ConsoleColor.Gray, $"[MSAuth]", $"Got username: {playerName}");
-                HomeScreen.msPlayerName = playerName;
-            }
-        }
+                    String xstsToken = getXstsToken(xblToken);
+                    if (xblToken != null)
+                    {
+                        String accessToken = getMinecraftToken(xblUser, xstsToken);
+                        if (accessToken != null)
+                        {
+                            verifyOwnership(accessToken);
 
-        public static void onGameStart(bool getMppass, String ip, String port)
-        {
-            voidRefreshToken(Settings.sj.refreshToken);
-            xblAuth();
-            xstsAuth();
-            minecraftAuth();
-            verifyOwnership();
-            if (getMppass == true)
-            {
-                getMpPass(ip, port);
-            }
-            //todo: only do if player owns the game
-            getProfileInfo();
+                            //todo: only do if player owns the game
+                            String[] profileInfo = getProfileInfo(accessToken); //name, id
+                            if (profileInfo != null)
+                            {
+                                String playerName = profileInfo[0];
+                                String playerUUID = profileInfo[1];
 
-            if (hasErrored == true)
-            {
-                Logger.Error($"[MSAuth]", $"Could not authenticate you.");
-                hasErrored = false;
-            }
-            else
-            {
-                JavaLauncher.msPlayerName = playerName;
-                JavaLauncher.msPlayerUUID = playerUUID;
-                JavaLauncher.msPlayerAccessToken = mcAccessToken;
-                JavaLauncher.msPlayerMPPass = mpPass;
+                                HomeScreen.msPlayerName = playerName;
+                                JavaLauncher.msPlayerName = playerName;
+                                JavaLauncher.msPlayerUUID = playerUUID;
+                                JavaLauncher.msPlayerAccessToken = accessToken;
 
-                /*LaunchJava.launchPlayerName = playerName;
-                LaunchJava.launchPlayerUUID = playerUUID;
-                LaunchJava.launchPlayerAccessToken = mcAccessToken;
-                LaunchJava.launchMpPass = mpPass;*/
+                                Settings.sj.username = playerName;
+                                Settings.Save();
+
+                                Logger.Info($"[MSAuth]", $"Logged in successfully!");
+                                HomeScreen.loadUserInfo(playerName, "");
+                                HomeScreen.enableButtons(true);
+                                return;
+                            }
+                        }
+                    }
+                }
             }
+
+            Logger.Error($"[MSAuth]", $"Could not authenticate you.");
+            if (errorMsg != null)
+                MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Settings.sj.refreshToken = null;
+            Settings.Save();
+
+            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+            HomeScreen.enableButtons(false);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -577,11 +386,12 @@ namespace MCLauncher
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
+            Logger.Info("[MSAuth]", $"Waiting for user to log in...");
             System.Timers.Timer myTimer = new System.Timers.Timer();
             myTimer.Elapsed += new ElapsedEventHandler(deviceFlowPing);
             myTimer.Interval = 5000; // 1000 ms is one second
             myTimer.Start();
-            while (deviceCurrent <= 180)
+            while (deviceCurrent <= deviceLimit / 5)
             {
 
             }
@@ -592,13 +402,13 @@ namespace MCLauncher
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             Logger.Error("[MSAuth]", "User cancelled the operation!");
-            hasErrored = true;
+            errorMsg = null;
             this.Close();
         }
 
         private void MSAuth_FormClosing(object sender, FormClosingEventArgs e)
         {
-            deviceCurrent = 181;
+            deviceCurrent = deviceLimit + 1;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -615,7 +425,7 @@ namespace MCLauncher
 
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
-            System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
+            ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(textBox1, "Click to copy to clipboard");
         }
     }

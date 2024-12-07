@@ -17,6 +17,10 @@ namespace MCLauncher.launchers.fabric
             String fabricVersion = getFabricName(version);
 
             //get game manifest
+            if(Globals.offlineMode)
+            {
+                return false;
+            }
             String manifest = Globals.client.DownloadString("https://meta.fabricmc.net/v2/versions/game");
             List<FabricGameJson> gj = JsonConvert.DeserializeObject<List<FabricGameJson>>(manifest);
 
@@ -56,6 +60,10 @@ namespace MCLauncher.launchers.fabric
         public static String getFabricName(String version)
         {
             //get fabric reuploads manifest
+            if(Globals.offlineMode)
+            {
+                return "null";
+            }
             String manifest = Globals.client.DownloadString(Globals.fabricReuploads);
             List<FabricReuploadsJson> frj = JsonConvert.DeserializeObject<List<FabricReuploadsJson>>(manifest);
 

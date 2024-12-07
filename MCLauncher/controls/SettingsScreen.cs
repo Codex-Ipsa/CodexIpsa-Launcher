@@ -322,7 +322,7 @@ namespace MCLauncher.controls
                             File.Delete($"{Globals.dataPath}\\jre\\temp.zip");
                             File.WriteAllText($"{Globals.dataPath}\\jre\\jre{vers.major}\\version.txt", vers.id);
 
-                            DialogResult dialogResult = MessageBox.Show(Strings.sj.javaSetDefault.Replace("{ver}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            DialogResult dialogResult = MessageBox.Show(Strings.sj.javaSetDefault.Replace("{vers.major}", vers.major.ToString()), "Java manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dialogResult == DialogResult.Yes)
                             {
                                 if (vers.major == 8)

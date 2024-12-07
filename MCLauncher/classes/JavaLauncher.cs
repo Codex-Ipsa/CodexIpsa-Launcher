@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace MCLauncher.classes
 {
@@ -18,7 +19,6 @@ namespace MCLauncher.classes
         public static string msPlayerName;
         public static string msPlayerUUID;
         public static string msPlayerAccessToken;
-        public static string msPlayerMPPass;
 
         public static string manifestPath = "";
 
@@ -54,15 +54,18 @@ namespace MCLauncher.classes
             }
 
             //get VersionJson
-            try
+            if (!Globals.offlineMode)
             {
-                Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
-            }
-            catch (System.Net.WebException)
-            {
-                Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version));
-                if (!File.Exists($"{Globals.dataPath}\\data\\json\\{version}.json"))
-                    return;
+                try
+                {
+                    Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version), $"{Globals.dataPath}\\data\\json\\{version}.json");
+                }
+                catch (System.Net.WebException)
+                {
+                    Logger.Error("[JavaLauncher]", "Could not (re)download version JSON: " + Globals.javaInfo.Replace("{type}", ij.edition).Replace("{ver}", version));
+                    if (!File.Exists($"{Globals.dataPath}\\data\\json\\{version}.json"))
+                        return;
+                }
             }
 
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
@@ -103,18 +106,8 @@ namespace MCLauncher.classes
 
                 if (EnterIp.inputText != null && EnterIp.inputText != String.Empty)
                 {
-                    ipPort = LaunchJava.splitIpPort(ij.serverIP);
+                    ipPort = LaunchJava.splitIpPort(EnterIp.inputText);
                 }
-            }
-
-            //authenticate on game launch
-            if (ipPort == null)
-            {
-                MSAuth.onGameStart(false, null, null);
-            }
-            else
-            {
-                MSAuth.onGameStart(true, ipPort[0], ipPort[1]);
             }
 
             //download game jar
@@ -127,23 +120,26 @@ namespace MCLauncher.classes
             String modName = modInfo.Item2;
             String modVersion = modInfo.Item3;
 
-            if (ij.useAssets == true && ij.assetsPath != null)
+            if (!Globals.offlineMode)
             {
-                vj.assets.url = ij.assetsPath;
-                vj.assets.name = ij.assetsPath.Substring(ij.assetsPath.LastIndexOf('/') + 1).Replace(".json", "");
-
-                if (!vj.assets.url.Contains("http"))
+                if (ij.useAssets == true && ij.assetsPath != null)
                 {
-                    vj.assets.url = "file:///" + vj.assets.url;
-                }
+                    vj.assets.url = ij.assetsPath;
+                    vj.assets.name = ij.assetsPath.Substring(ij.assetsPath.LastIndexOf('/') + 1).Replace(".json", "");
 
-                AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
-                ad.ShowDialog();
-            }
-            else if (vj.assets != null && !String.IsNullOrWhiteSpace(vj.assets.name))
-            {
-                AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
-                ad.ShowDialog();
+                    if (!vj.assets.url.Contains("http"))
+                    {
+                        vj.assets.url = "file:///" + vj.assets.url;
+                    }
+
+                    AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
+                    ad.ShowDialog();
+                }
+                else if (vj.assets != null && !String.IsNullOrWhiteSpace(vj.assets.name))
+                {
+                    AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
+                    ad.ShowDialog();
+                }
             }
 
             //yes I know this is a shitty fix but nothing better I can do till lf releases
@@ -186,7 +182,14 @@ namespace MCLauncher.classes
                     string timestamp = dir.Substring(dir.IndexOf("-") + 1);
                     if (!Globals.running.ContainsKey(timestamp))
                     {
-                        Directory.Delete($"{Globals.dataPath}\\libs\\natives-{timestamp}", true);
+                        try
+                        {
+                            Directory.Delete($"{Globals.dataPath}\\libs\\natives-{timestamp}", true);
+                        }
+                        catch (UnauthorizedAccessException e)
+                        {
+                            Logger.Error("[JavaLauncher]", $"Could not delete natives dir natives-{timestamp}");
+                        }
                     }
                 }
             }
@@ -273,22 +276,25 @@ namespace MCLauncher.classes
                 .Replace("{version}", $"\"{vj.version}\"")
                 .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
-            if (vj.supplement != null)
+            if (!Globals.offlineMode)
             {
-                foreach (var sup in vj.supplement)
+                if (vj.supplement != null)
                 {
-                    string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft");
-                    if (!File.Exists(supPath + sup.name) || sup.renew)
+                    foreach (var sup in vj.supplement)
                     {
-                        Logger.Info("[JavaLauncher]", $"Downloading supplement {sup.name}...");
-                        Directory.CreateDirectory(supPath);
-                        Globals.client.DownloadFile(sup.url, supPath + sup.name);
-                    }
+                        string supPath = sup.path.Replace("{gameDir}", $"{workDir}\\.minecraft");
+                        if (!File.Exists(supPath + sup.name) || sup.renew)
+                        {
+                            Logger.Info("[JavaLauncher]", $"Downloading supplement {sup.name}...");
+                            Directory.CreateDirectory(supPath);
+                            Globals.client.DownloadFile(sup.url, supPath + sup.name);
+                        }
 
-                    if (sup.extract == true)
-                    {
-                        ModWorker.extractZip(supPath + sup.name, supPath);
-                        //ZipFile.ExtractToDirectory(supPath + sup.name, supPath);
+                        if (sup.extract == true)
+                        {
+                            ModWorker.extractZip(supPath + sup.name, supPath);
+                            //ZipFile.ExtractToDirectory(supPath + sup.name, supPath);
+                        }
                     }
                 }
             }
@@ -335,17 +341,20 @@ namespace MCLauncher.classes
                 string fileName = vj.logging.Substring(vj.logging.LastIndexOf('/') + 1);
                 string hash = vj.logging.Substring(0, vj.logging.LastIndexOf('/') - 1);
                 hash = hash.Substring(hash.LastIndexOf('/') + 1);
-                Globals.client.DownloadFile(vj.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
+                if (!Globals.offlineMode)
+                    Globals.client.DownloadFile(vj.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
+            Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
             if (ipPort != null)
             {
-                if (ij.offline)
-                    msPlayerMPPass = "-";
-
-                proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"{msPlayerMPPass}\" ";
-                Logger.Info("[JavaLauncher]", $"Server active!");
+                if (!ij.offline)
+                {
+                    MSAuth.onServerJoin(ipPort[0], ipPort[1], msPlayerAccessToken, msPlayerUUID);
+                    proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
+                    Logger.Info("[JavaLauncher]", $"Server active!");
+                }
             }
 
             string classpath = vj.classpath;

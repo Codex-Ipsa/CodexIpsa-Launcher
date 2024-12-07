@@ -67,73 +67,82 @@ namespace MCLauncher
 
             int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
             Instance.cmbInstaces.SelectedIndex = instanceIndex;
-            if(instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
+            if (instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
             {
                 reloadInstance(cmbInstaces.Text);
             }
 
-            String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
-            webBrowser1.DocumentText = changelog;
+            if (!Globals.offlineMode)
+            {
+                String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
+                webBrowser1.DocumentText = changelog;
+            }
+            else
+            {
+                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
+            }
 
             Discord.Init();
             Discord.ChangeMessage("Idling");
         }
 
+        //checks for authentication
         public static void checkAuth()
         {
+            Logger.Info("[HomeScreen/checkAuth]", "Checking authentication...");
+
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 Logger.Error($"[HomeScreen]", "User is not logged in");
-                Instance.btnLogOut.Visible = false;
-                Instance.btnLogIn.Visible = true;
-                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", "Guest");
+                loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                enableButtons(false);
 
                 JavaLauncher.msPlayerName = "Guest";
                 JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
                 JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-                JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
-
-                if (Globals.requireAuth == true)
-                {
-                    Instance.btnPlay.Enabled = false;
-                    Instance.cmbInstaces.Enabled = false;
-                    Instance.btnEditInst.Enabled = false;
-                    Instance.btnNewInst.Enabled = false;
-                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
-                }
-                else
-                {
-                    Instance.btnPlay.Enabled = true;
-                    Instance.cmbInstaces.Enabled = true;
-                    Instance.btnEditInst.Enabled = true;
-                    Instance.btnNewInst.Enabled = true;
-                    Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn_Debug;
-                }
             }
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-                MSAuth.usernameFromRefreshToken();
-                if (MSAuth.hasErrored == true)
+
+                if (Globals.offlineMode)
                 {
-                    Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
-                    MSAuth.hasErrored = false;
-                    Settings.sj.refreshToken = String.Empty;
-                    Settings.Save();
-                    checkAuth();
+                    Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
+                    JavaLauncher.msPlayerName = Settings.sj.username;
+                    msPlayerName = Settings.sj.username;
+                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
+                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                    return;
                 }
                 else
                 {
-                    Instance.btnLogOut.Visible = true;
-                    Instance.btnLogIn.Visible = false;
-                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
-                    Instance.btnPlay.Enabled = true;
-                    Instance.lblLogInWarn.Visible = false;
-                    Instance.cmbInstaces.Enabled = true;
-                    Instance.btnEditInst.Enabled = true;
-                    Instance.btnNewInst.Enabled = true;
+                    MSAuth.refreshAuth();
                 }
             }
+
+            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {JavaLauncher.msPlayerAccessToken}");
+        }
+
+        //loads user info and auth message
+        public static void loadUserInfo(String username, String authMsg)
+        {
+            Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", username);
+            Instance.lblLogInWarn.Text = authMsg;
+        }
+
+        //enables/disables buttons depending on auth status
+        public static void enableButtons(bool enable)
+        {
+            Instance.btnLogOut.Visible = enable;
+            Instance.btnLogIn.Visible = !enable;
+
+            Instance.btnPlay.Enabled = enable;
+
+            Instance.cmbInstaces.Enabled = enable;
+            Instance.btnEditInst.Enabled = enable;
+            Instance.btnNewInst.Enabled = enable;
+
+            Instance.lblLogInWarn.Visible = !enable;
         }
 
         public static void loadInstanceList()
@@ -177,7 +186,7 @@ namespace MCLauncher
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
 
             var modInfo = ModWorker.getPatchName(mj);
-            if(modInfo.Item2 != null)
+            if (modInfo.Item2 != null)
             {
                 selectedVersion = $"{modInfo.Item1} {modInfo.Item2}";
             }
@@ -231,14 +240,6 @@ namespace MCLauncher
             {
                 JavaLauncher.Launch(selectedInstance);
             }
-            /*if (selectedEdition == "java")
-                LaunchJava.LaunchGame();
-
-            else if (selectedEdition == "x360")
-                LaunchXbox360.LaunchGame();
-
-            else if (selectedEdition == "edu")
-                LaunchJava.LaunchGame();*/
         }
 
         private void btnNewInst_Click(object sender, EventArgs e)
@@ -259,19 +260,6 @@ namespace MCLauncher
             Logger.Info($"[HomeScreen]", "Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
-
-            if (MSAuth.hasErrored == true)
-            {
-                Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please try again.");
-                MSAuth.hasErrored = false;
-            }
-            else
-            {
-                Instance.btnLogOut.Visible = true;
-                Instance.btnLogIn.Visible = false;
-                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
-                this.Refresh();
-            }
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -281,7 +269,6 @@ namespace MCLauncher
             JavaLauncher.msPlayerName = "Guest";
             JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
             JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-            JavaLauncher.msPlayerMPPass = "fakeMPPassThisIsNotReal";
 
             Settings.sj.refreshToken = String.Empty;
             Settings.Save();
@@ -291,7 +278,7 @@ namespace MCLauncher
         private void cmbInstaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Logger.Info("[TEST2]", cmbInstaces.Text);
-            if(initialized == true)
+            if (initialized == true)
             {
                 reloadInstance(cmbInstaces.Text);
                 Settings.sj.instance = cmbInstaces.Text;

@@ -17,7 +17,6 @@ namespace MCLauncher
         HomeScreen homeScr;
         CreditsScreen creditsScr;
         SettingsScreen settingsScr;
-        //ProfileScreen instanceScr;
 
         public MainWindow()
         {
@@ -35,7 +34,6 @@ namespace MCLauncher
             this.Controls.Add(homeScr);
             this.Controls.Remove(creditsScr);
             this.Controls.Remove(settingsScr);
-            //this.Controls.Remove(instanceScr);
         }
 
         public void addCredits()
@@ -47,7 +45,6 @@ namespace MCLauncher
             this.Controls.Add(creditsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(settingsScr);
-            //this.Controls.Remove(instanceScr);
         }
 
         public void addSettings()
@@ -59,27 +56,12 @@ namespace MCLauncher
             this.Controls.Add(settingsScr);
             this.Controls.Remove(homeScr);
             this.Controls.Remove(creditsScr);
-            //this.Controls.Remove(instanceScr);
         }
-        /*public void addInstance()
-        {
-            instanceScr.Location = new Point(0, 24);
-            //instanceScr.Dock = DockStyle.Fill; //TODO
-            instanceScr.Padding = new Padding(0, 24, 0, 0);
-
-            this.Controls.Add(instanceScr);
-            this.Controls.Remove(homeScr);
-            this.Controls.Remove(creditsScr);
-            this.Controls.Remove(settingsScr);
-        }*/
 
         public void loadMainWindow()
         {
             //Set the window name
-            Logger.Info($"[MainWindow]", $"Codex-Ipsa Launcher has started!");
-            this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]"; //window name
-            Console.Title = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}] CONSOLE";
-            Logger.Info($"[MainWindow]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
+            this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]";
 
             //Create directories
             Directory.CreateDirectory($"{Globals.dataPath}");
@@ -141,6 +123,14 @@ namespace MCLauncher
                 }
             }
 
+            //always download version manifests for later offline usage
+            if (!Globals.offlineMode)
+            {
+                Globals.client.DownloadFile(Globals.javaManifest, Globals.javaManifestFile);
+                Globals.client.DownloadFile(Globals.javaEduManifest, Globals.javaEduManifestFile);
+                Globals.client.DownloadFile(Globals.x360Manifest, Globals.x360ManifestFile);
+            }
+
             //load theme
             Themes.loadTheme();
 
@@ -148,41 +138,12 @@ namespace MCLauncher
             menuStrip1.BackgroundImage = Themes.dirt;
             this.BackgroundImage = Themes.stone;
 
-            //Seasonal background
-            //try
-            //{
-            //    Globals.client.DownloadFile(Globals.seasonalDirt, $"{Globals.dataPath}\\data\\seasonalDirt.png");
-            //    menuStrip1.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            //}
-            //catch (WebException e)
-            //{
-            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalDirt.png"))
-            //    {
-            //        File.Delete($"{Globals.dataPath}\\data\\seasonalDirt.png");
-            //    }
-            //}
-
-            //try
-            //{
-            //    Globals.client.DownloadFile(Globals.seasonalStone, $"{Globals.dataPath}\\data\\seasonalStone.png");
-            //    pnlBackground.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            //    this.BackgroundImage = Image.FromFile($"{Globals.dataPath}\\data\\seasonalStone.png");
-            //}
-            //catch (WebException e)
-            //{
-            //    if (File.Exists($"{Globals.dataPath}\\data\\seasonalStone.png"))
-            //    {
-            //        File.Delete($"{Globals.dataPath}\\data\\seasonalStone.png");
-            //    }
-            //}
-
             if (SettingsScreen.isUpdating == false)
             {
                 //this is done here so it initializes first
                 homeScr = new HomeScreen();
                 creditsScr = new CreditsScreen();
                 settingsScr = new SettingsScreen();
-                //instanceScr = new ProfileScreen();
                 addHome();
             }
         }
@@ -202,11 +163,6 @@ namespace MCLauncher
             addSettings();
         }
 
-        private void profilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //addInstance();
-        }
-
         private void MainWindow_ResizeBegin(object sender, EventArgs e)
         {
             SuspendLayout();
@@ -221,11 +177,6 @@ namespace MCLauncher
         {
             if (Discord.client != null)
                 Discord.client.Dispose();
-        }
-
-        private void importProfileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 

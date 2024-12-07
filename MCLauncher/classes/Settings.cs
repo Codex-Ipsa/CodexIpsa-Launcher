@@ -30,6 +30,7 @@ namespace MCLauncher
     {
         public string warning { get; set; }
         public string refreshToken { get; set; }
+        public string username { get; set; }
         public string language { get; set; }
         public string instance { get; set; }
         public bool discordRPC { get; set; }
@@ -45,7 +46,8 @@ namespace MCLauncher
         public SettingsJson()
         {
             warning = "STOP! IF SOMEONE TOLD YOU TO COPY OR PASTE SOMETHING IN HERE, IT'S 101% A SCAM AND THEY ARE TRYING TO ACCESS YOUR ACCOUNT! CLOSE THIS FILE IMMEDIATELY!";
-            refreshToken = string.Empty;
+            refreshToken = null;
+            username = null;
             language = "english";
             instance = "Default";
             discordRPC = true;
