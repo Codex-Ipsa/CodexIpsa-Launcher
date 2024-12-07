@@ -94,19 +94,12 @@ namespace MCLauncher
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 Logger.Error($"[HomeScreen]", "User is not logged in");
-                Instance.btnLogOut.Visible = false;
-                Instance.btnLogIn.Visible = true;
-                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", "Guest");
+                loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                enableButtons(false);
 
                 JavaLauncher.msPlayerName = "Guest";
                 JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
                 JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-
-                Instance.btnPlay.Enabled = false;
-                Instance.cmbInstaces.Enabled = false;
-                Instance.btnEditInst.Enabled = false;
-                Instance.btnNewInst.Enabled = false;
-                Instance.lblLogInWarn.Text = Strings.sj.lblLogInWarn;
             }
             else
             {
@@ -119,28 +112,11 @@ namespace MCLauncher
                     msPlayerName = Settings.sj.username;
                     JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
                     JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
-
-                    Console.WriteLine(Settings.sj.username);
-                    Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", Settings.sj.username);
-                    Instance.lblWelcome.Update();
-                    Instance.lblLogInWarn.Visible = true;
-                    Instance.lblLogInWarn.Text = "Playing in offline mode, some features may not be available!";
                     return;
-                }
-
-                MSAuth.refreshAuth();
-                if (MSAuth.hasErrored == true)
-                {
-                    Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please re-log in.");
-                    MSAuth.hasErrored = false;
-                    Settings.sj.refreshToken = String.Empty;
-                    Settings.Save();
-                    checkAuth();
                 }
                 else
                 {
-                    loadUserInfo(msPlayerName, "");
-                    enableButtons(true);
+                    MSAuth.refreshAuth();
                 }
             }
 
@@ -284,19 +260,6 @@ namespace MCLauncher
             Logger.Info($"[HomeScreen]", "Calling MSAuth");
             MSAuth auth = new MSAuth();
             auth.ShowDialog();
-
-            if (MSAuth.hasErrored == true)
-            {
-                Logger.Info($"[HomeScreen]", $"MSAuth returned hasErrored. Please try again.");
-                MSAuth.hasErrored = false;
-            }
-            else
-            {
-                Instance.btnLogOut.Visible = true;
-                Instance.btnLogIn.Visible = false;
-                Instance.lblWelcome.Text = Strings.sj.lblWelcome.Replace("{playerName}", msPlayerName);
-                this.Refresh();
-            }
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)

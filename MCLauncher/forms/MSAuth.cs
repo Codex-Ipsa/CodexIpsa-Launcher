@@ -311,7 +311,14 @@ namespace MCLauncher
             }
 
             Logger.Error($"[MSAuth]", $"Could not authenticate you.");
-            MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (errorMsg != null)
+                MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Settings.sj.refreshToken = null;
+            Settings.Save();
+
+            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+            HomeScreen.enableButtons(false);
         }
 
         //logs in the user on the start of launcher if already logged in before
@@ -350,6 +357,8 @@ namespace MCLauncher
                                 Settings.Save();
 
                                 Logger.Info($"[MSAuth]", $"Logged in successfully!");
+                                HomeScreen.loadUserInfo(playerName, "");
+                                HomeScreen.enableButtons(true);
                                 return;
                             }
                         }
@@ -358,7 +367,14 @@ namespace MCLauncher
             }
 
             Logger.Error($"[MSAuth]", $"Could not authenticate you.");
-            MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (errorMsg != null)
+                MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Settings.sj.refreshToken = null;
+            Settings.Save();
+
+            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+            HomeScreen.enableButtons(false);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -386,6 +402,7 @@ namespace MCLauncher
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             Logger.Error("[MSAuth]", "User cancelled the operation!");
+            errorMsg = null;
             this.Close();
         }
 
