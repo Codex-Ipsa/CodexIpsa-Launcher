@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,11 +32,28 @@ namespace MCLauncher.classes
             return respString;
         }
 
+        public static HttpStatusCode postJsonStatus(String url, String data)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.ContentType = "application/json";
+            req.Accept = "application/json";
+            req.Method = "POST";
+
+            using (StreamWriter sw = new StreamWriter(req.GetRequestStream()))
+            {
+                sw.Write(data);
+            }
+
+            var resp = (HttpWebResponse)req.GetResponse();
+            return resp.StatusCode;
+        }
+
         public static String postUrl(String url, String data)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.ContentType = "application/x-www-form-urlencoded";
             req.Method = "POST";
+            req.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
             byte[] dataByte = Encoding.ASCII.GetBytes(data);
             req.ContentLength = dataByte.Length;
@@ -69,6 +87,18 @@ namespace MCLauncher.classes
             {
                 respString = s.ReadToEnd();
             }
+            return respString;
+        }
+
+        public static String getUrl(String url)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.Method = "GET";
+            req.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+
+            var resp = (HttpWebResponse)req.GetResponse();
+            var respString = new StreamReader(resp.GetResponseStream()).ReadToEnd();
             return respString;
         }
     }

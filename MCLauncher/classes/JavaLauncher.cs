@@ -351,7 +351,7 @@ namespace MCLauncher.classes
             {
                 if (!ij.offline)
                 {
-                    MSAuth.onServerJoin(ipPort[0], ipPort[1]);
+                    MSAuth.onServerJoin(ipPort[0], ipPort[1], msPlayerAccessToken, msPlayerUUID);
                     proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
                     Logger.Info("[JavaLauncher]", $"Server active!");
                 }
