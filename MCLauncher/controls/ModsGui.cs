@@ -70,9 +70,18 @@ namespace MCLauncher.controls
                 entries.Add(ent);
             }
 
-            modView.Columns[0].Width = -1;
-            modView.Columns[1].Width = -1;
-            modView.Columns[2].Width = -2;
+            if (entries.Count > 0)
+            {
+                modView.Columns[0].Width = -1;
+                modView.Columns[1].Width = -1;
+                modView.Columns[2].Width = -2;
+            }
+            else
+            {
+                modView.Columns[0].Width = 77;
+                modView.Columns[1].Width = 60;
+                modView.Columns[2].Width = 60;
+            }
         }
 
         public void loadModloaderButtons(String version)
