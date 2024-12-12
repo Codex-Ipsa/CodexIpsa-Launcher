@@ -36,7 +36,7 @@ namespace MCLauncher
         public static string javaEduManifest = $"http://files.codex-ipsa.cz/version/{codebase}/javaedu-manifest.json";
         public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";
 
-        public static string PallasManifest = $"http://codex-ipsa.dejvoss.cz/launcher/modrepo/pallas.json";
+        public static string PallasManifest = $"http://files.codex-ipsa.cz/modrepo/manifest.json";
         public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
         public static string Modloaders = "http://codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
         public static string fabricReuploads = $"http://files.codex-ipsa.cz/modloader/fabric-reups.json";
