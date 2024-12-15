@@ -4,10 +4,11 @@ namespace MCLauncher.json.api
 {
     internal class UpdateJson
     {
-        public String brId { get; set; }
-        public String brName { get; set; }
-        public String brVer { get; set; }
-        public String brUrl { get; set; }
-        public String brNote { get; set; }
+        public String id { get; set; }
+        public String name { get; set; }
+        public String version { get; set; }
+        public String url { get; set; }
+        public String info { get; set; }
+        public bool available { get; set; }
     }
 }

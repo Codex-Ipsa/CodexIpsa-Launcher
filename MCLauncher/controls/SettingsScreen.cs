@@ -95,11 +95,14 @@ namespace MCLauncher.controls
                 List<UpdateJson> data = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonData);
                 foreach (var vers in data)
                 {
-                    nameList.Add($"{vers.brName} - {vers.brVer} [{vers.brId}]");
-                    idList.Add(vers.brId);
-                    urlList.Add(vers.brUrl);
-                    versionList.Add(vers.brVer);
-                    noteList.Add(vers.brNote);
+                    if(vers.available)
+                    {
+                        nameList.Add($"{vers.name} - {vers.version} [{vers.id}]");
+                        idList.Add(vers.id);
+                        urlList.Add(vers.url);
+                        versionList.Add(vers.version);
+                        noteList.Add(vers.info);
+                    }
                 }
 
                 string json = client.DownloadString(Globals.languageList);

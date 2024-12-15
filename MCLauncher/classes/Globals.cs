@@ -37,24 +37,25 @@ namespace MCLauncher
         public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";
 
         public static string PallasManifest = $"http://files.codex-ipsa.cz/modrepo/manifest.json";
-        public static string JavaInstalls = "http://codex-ipsa.dejvoss.cz/launcher/jre/manifest.json";
-        public static string Modloaders = "http://codex-ipsa.dejvoss.cz/launcher/modloader/loaders-{ver}.json";
-        public static string fabricReuploads = $"http://files.codex-ipsa.cz/modloader/fabric-reups.json";
+        public static string JavaInstalls = "http://files.codex-ipsa.cz/jre/manifest.json";
+        public static string Modloaders = "http://files.codex-ipsa.cz/modloader/loaders-{ver}.json";
+        public static string fabricReuploads = $"http://files.codex-ipsa.cz/modloader/reuploads.json";
 
         //Xbox manifests
         public static string x360Manifest = $"http://files.codex-ipsa.cz/version/{codebase}/x360-manifest.json";
         public static string x360ManifestFile = $"{dataPath}\\versions\\x360-manifest.json";
         public static string x360Data = $"http://files.codex-ipsa.cz/version/{codebase}/x360-data.txt";
-        public static string xeniaManifest = $"http://codex-ipsa.dejvoss.cz/launcher/emulator/xenia_manifest.json";
+        public static string xeniaManifest = $"http://files.codex-ipsa.cz/xenia/manifest.json";
 
         //System
-        public static string updaterUrl = $"http://codex-ipsa.dejvoss.cz/launcher/LauncherUpdater2.exe"; //LauncherUpdater.exe
-        public static string updateInfo = $"http://codex-ipsa.dejvoss.cz/launcher/version/list.json";
+        public static string updaterUrl = $"http://files.codex-ipsa.cz/update/LauncherUpdater2.exe"; //LauncherUpdater.exe
+        public static string updateInfo = $"http://files.codex-ipsa.cz/update/manifest.json";
         public static string changelogUrl = $"http://files.codex-ipsa.cz/version/{codebase}/changelog.php";
         public static string seasonalManifest = $"http://files.codex-ipsa.cz/seasonal/seasons.json";
-        public static string offlineManifest = $"http://codex-ipsa.dejvoss.cz/launcher/offline.json";
 
-        public static string languageList = $"http://codex-ipsa.dejvoss.cz/launcher/language/index.json";
-        public static string languageJson = $"http://codex-ipsa.dejvoss.cz/launcher/language/{{selected}}.json";
+        public static string offlineManifest = $"http://files.codex-ipsa.cz/offline.json";
+
+        public static string languageList = $"http://files.codex-ipsa.cz/lang/manifest.json";
+        public static string languageJson = $"http://files.codex-ipsa.cz/lang/{{selected}}.json";
     }
 }

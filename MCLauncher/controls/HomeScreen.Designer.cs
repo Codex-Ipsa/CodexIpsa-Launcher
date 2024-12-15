@@ -226,7 +226,7 @@
         public System.Windows.Forms.Label lblWelcome;
         public System.Windows.Forms.Label lblReady;
         public System.Windows.Forms.Button btnLogIn;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         public System.Windows.Forms.Label lblPlayedFor;
+        public System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
