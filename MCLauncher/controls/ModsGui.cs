@@ -97,7 +97,7 @@ namespace MCLauncher.controls
             {
                 //download manifest
                 WebClient client = new WebClient();
-                String loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
+                String loaderManifest = client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
                 client.Dispose();
 
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");

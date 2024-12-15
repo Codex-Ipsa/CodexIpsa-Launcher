@@ -221,7 +221,7 @@ namespace MCLauncher
                 String data = "client_id=" + Uri.EscapeDataString("bee0ffd1-4143-41ef-bdf6-fe15d5549c09");
                 data += "&refresh_token=" + Uri.EscapeDataString($"{refreshToken}");
                 data += "&grant_type=" + Uri.EscapeDataString("refresh_token");
-                data += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.dejvoss.cz/auth");
+                data += "&redirect_uri=" + Uri.EscapeDataString("https://codex-ipsa.cz/auth");
                 String response = Http.postUrl(url, data);
 
                 if (Globals.isDebug)
