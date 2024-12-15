@@ -43,7 +43,7 @@ namespace MCLauncher.classes
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
             var dj = JsonConvert.DeserializeObject<InstanceJson>(data);
 
-            string url = Globals.client.DownloadString(Globals.x360Url) + dj.version + ".zip";
+            string url = Globals.client.DownloadString(Globals.x360Data) + dj.version + ".zip";
 
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\x360\\");
             if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{dj.version}"))
@@ -98,7 +98,7 @@ namespace MCLauncher.classes
                 //download base
                 if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\tu0"))
                 {
-                    DownloadProgress.url = Globals.client.DownloadString(Globals.x360Base);
+                    DownloadProgress.url = Globals.client.DownloadString(Globals.x360Data + "tu0.zip");
                     DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\tu0.zip";
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();

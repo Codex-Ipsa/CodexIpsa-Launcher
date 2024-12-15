@@ -78,14 +78,16 @@ namespace MCLauncher
             if (File.Exists($"{Globals.currentPath}\\LauncherUpdater.exe"))
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
 
-            //Check for internet
+            //check for internet
+            //TODO get offline manifest and display error message
+            //TODO display no internet available message if manifest 404s
             try
             {
-                string offlineJson = Globals.client.DownloadString(Globals.offlineManifest);
-                OfflineManifest test = JsonConvert.DeserializeObject<OfflineManifest>(offlineJson);
-                if (test.offline)
+                string offjson = Globals.client.DownloadString(Globals.offlineManifest);
+                OfflineJson oj = JsonConvert.DeserializeObject<OfflineJson>(offjson);
+                if (oj.offline)
                 {
-                    Logger.Error($"[MainWindow]", $"Servers are down! Reason: {test.message}");
+                    Logger.Error($"[MainWindow]", $"Servers are down! Reason: {oj.message}");
                     Globals.offlineMode = true;
                 }
             }
@@ -106,7 +108,7 @@ namespace MCLauncher
 
                 foreach (var vers in dataUpd)
                 {
-                    branchIds.Add(vers.brId);
+                    branchIds.Add(vers.id);
                 }
 
                 int index = branchIds.FindIndex(x => x.StartsWith(Globals.branch));
@@ -178,11 +180,5 @@ namespace MCLauncher
             if (Discord.client != null)
                 Discord.client.Dispose();
         }
-    }
-
-    public class OfflineManifest
-    {
-        public bool offline { get; set; }
-        public string message { get; set; }
     }
 }

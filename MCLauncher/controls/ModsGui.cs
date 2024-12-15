@@ -70,9 +70,18 @@ namespace MCLauncher.controls
                 entries.Add(ent);
             }
 
-            modView.Columns[0].Width = -1;
-            modView.Columns[1].Width = -1;
-            modView.Columns[2].Width = -2;
+            if (entries.Count > 0)
+            {
+                modView.Columns[0].Width = -1;
+                modView.Columns[1].Width = -1;
+                modView.Columns[2].Width = -2;
+            }
+            else
+            {
+                modView.Columns[0].Width = 77;
+                modView.Columns[1].Width = 60;
+                modView.Columns[2].Width = 60;
+            }
         }
 
         public void loadModloaderButtons(String version)
@@ -88,7 +97,7 @@ namespace MCLauncher.controls
             {
                 //download manifest
                 WebClient client = new WebClient();
-                String loaderManifest = client.DownloadString($"https://codex-ipsa.dejvoss.cz/launcher/modloaders/{version}.json");
+                String loaderManifest = client.DownloadString(Globals.Modloaders.Replace("{ver}", version));
                 client.Dispose();
 
                 Logger.Info("[ModsGui/loadModloaderButtons]", $"got manifest for {version}");

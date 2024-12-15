@@ -229,7 +229,7 @@ namespace MCLauncher.launchers
                     else if (entry.json != null && entry.json != String.Empty)
                     {
                         if (!File.Exists($"{Globals.dataPath}\\data\\json\\{entry.json}.json"))
-                            Globals.client.DownloadFile($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/java/{entry.json}.json", $"{Globals.dataPath}\\data\\json\\{entry.json}.json");
+                            Globals.client.DownloadFile(Globals.javaInfo.Replace("{type}", "java").Replace("{ver}", entry.json), $"{Globals.dataPath}\\data\\json\\{entry.json}.json");
 
                         manifestPath = $"{Globals.dataPath}\\data\\json\\{entry.json}.json";
                         break;

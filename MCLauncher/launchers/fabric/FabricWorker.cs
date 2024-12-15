@@ -90,7 +90,7 @@ namespace MCLauncher.launchers.fabric
             FabricVersionJson fabricJson = JsonConvert.DeserializeObject<FabricVersionJson>(versionInfo);
 
             //get ipsa ver json
-            string ipsaManifest = Globals.client.DownloadString($"http://codex-ipsa.dejvoss.cz/launcher/codebase/{Globals.codebase}/java/{gameVersion}.json");
+            string ipsaManifest = Globals.client.DownloadString(Globals.javaInfo.Replace("{type}", "java").Replace("{ver}", gameVersion));
             VersionJson ipsaJson = JsonConvert.DeserializeObject<VersionJson>(ipsaManifest);
 
             //replace ipsa info with fabric stuff

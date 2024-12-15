@@ -89,6 +89,7 @@
     <Compile Include="classes\Http.cs" />
     <Compile Include="classes\Themes.cs" />
     <Compile Include="json\api\LanguagesJson.cs" />
+    <Compile Include="json\api\OfflineJson.cs" />
     <Compile Include="json\api\UpdateJson.cs" />
     <Compile Include="json\api\VersionJson.cs" />
     <Compile Include="json\api\LatestVersionJson.cs" />

@@ -74,7 +74,7 @@ namespace MCLauncher
 
             if (!Globals.offlineMode)
             {
-                String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://codex-ipsa.dejvoss.cz/launcher/seasonal/stone.png", Themes.stonePath);
+                String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://files.codex-ipsa.cz/seasonal/defaultStone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
             }
             else
