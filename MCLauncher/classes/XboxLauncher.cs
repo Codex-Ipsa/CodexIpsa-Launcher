@@ -98,7 +98,7 @@ namespace MCLauncher.classes
                 //download base
                 if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\tu0"))
                 {
-                    DownloadProgress.url = Globals.client.DownloadString(Globals.x360Data + "tu0.zip");
+                    DownloadProgress.url = Globals.client.DownloadString(Globals.x360Data) + "tu0.zip";
                     DownloadProgress.savePath = $"{Globals.dataPath}\\versions\\x360\\tu0.zip";
                     DownloadProgress download = new DownloadProgress();
                     download.ShowDialog();
