@@ -130,6 +130,7 @@ namespace MCLauncher.classes
                     if (!vj.assets.url.Contains("http"))
                     {
                         vj.assets.url = "file:///" + vj.assets.url;
+                        vj.assets.name = ij.assetsPath.Substring(ij.assetsPath.LastIndexOf('\\') + 1).Replace(".json", "");
                     }
 
                     AssetsDownloader ad = new AssetsDownloader(vj.assets.url, vj.assets.name);
