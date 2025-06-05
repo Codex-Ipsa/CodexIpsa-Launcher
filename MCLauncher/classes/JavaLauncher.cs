@@ -372,6 +372,7 @@ namespace MCLauncher.classes
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
+            
             try
             {
                 Discord.ChangeMessage($"Playing {vj.game} ({vj.version})");
