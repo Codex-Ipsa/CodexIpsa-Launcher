@@ -1,4 +1,5 @@
-﻿using MCLauncher.json.api;
+﻿using MCLauncher.forms;
+using MCLauncher.json.api;
 using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
@@ -46,6 +47,18 @@ namespace MCLauncher.launchers
 
                 if (entry.disabled)
                     continue;
+
+                //check for mod updates
+                string[] skip = PallasRepo.checkForUpdate(instanceName, entry.name, entry.version);
+                if (skip != null)
+                {
+                    Logger.Info("[JavaModHelper/Test1]", $"0   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
+                    entry.version = skip[0];
+                    entry.json = skip[1];
+                    entry.file = skip[2];
+                    entry.type = skip[3];
+                    Logger.Info("[JavaModHelper/Test1]", $"1   {entry.version}, {entry.json}, {entry.file}, {entry.type}");
+                }
 
                 if (entry.type == "cusjar")
                 {

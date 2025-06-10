@@ -11,7 +11,6 @@ namespace MCLauncher.forms
 {
     public partial class AssetsDownloader : Form
     {
-        public string assetUrl = "";
         public string assetName = "";
         public bool isVirt = false;
         public Dictionary<string, AssetIndexObject> dict = new Dictionary<string, AssetIndexObject>();
@@ -21,8 +20,9 @@ namespace MCLauncher.forms
 
         public AssetsDownloader(string assetsUrl, string assetsName)
         {
-            assetUrl = assetsUrl;
+            Uri assetUrl = new Uri(assetsUrl);
             assetName = assetsName;
+
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -36,7 +36,15 @@ namespace MCLauncher.forms
             Logger.Info("[AssetsDownloader]", $"Starting for {assetsName};{assetsUrl}");
 
             Directory.CreateDirectory($"{Globals.dataPath}\\assets\\indexes\\");
-            assetClient.DownloadFile(assetUrl, $"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
+            //if it's a local file copy it
+            if (assetUrl.Scheme == "file")
+            {
+                File.Copy(assetUrl.LocalPath, $"{Globals.dataPath}\\assets\\indexes\\{assetName}.json", true);
+            }
+            else //else just dl from link
+            {
+                assetClient.DownloadFile(assetUrl, $"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
+            }
             string manifest = File.ReadAllText($"{Globals.dataPath}\\assets\\indexes\\{assetName}.json");
 
             var data = (JObject)JsonConvert.DeserializeObject(manifest);
