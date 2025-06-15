@@ -4,13 +4,30 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Windows.Forms;
 
 namespace MCLauncher.classes
 {
     internal class XboxLauncher
     {
+        public static string runID = "";
+
         public static void Launch(string profileName)
         {
+            //check if profile is already running
+            if (Globals.running.ContainsValue(profileName))
+            {
+                DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+            Globals.running.Add(runID, profileName);
+
+
             //download/update xenia
             Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\");
             if(!Globals.offlineMode)
@@ -104,7 +121,7 @@ namespace MCLauncher.classes
                 proc.EnableRaisingEvents = true;
                 proc.StartInfo.FileName = $"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"";
                 proc.StartInfo.Arguments = $"\"{Globals.dataPath}\\versions\\x360\\{dj.version}\\default.xex\"";
-                proc.Exited += OnProcessExited;
+                proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, proc))); //lmao this is dumb shit (but it works)
                 proc.Start();
                 Logger.Info("[XboxLauncher]", "Launched xenia @ base");
                 Discord.ChangeMessage($"Playing Xbox 360 Edition ({dj.version})");
@@ -157,16 +174,36 @@ namespace MCLauncher.classes
                 proc.EnableRaisingEvents = true;
                 proc.StartInfo.FileName = $"\"{Globals.dataPath}\\emulator\\xenia\\xenia_canary.exe\"";
                 proc.StartInfo.Arguments = $"\"{Globals.dataPath}\\versions\\x360\\tu0\\default.xex\"";
-                proc.Exited += OnProcessExited;
+                proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, proc))); //lmao this is dumb shit (but it works)
                 proc.Start();
                 Logger.Info("[XboxLauncher]", "Launched xenia @ update");
                 Discord.ChangeMessage($"Playing Xbox 360 Edition ({dj.version})");
             }
         }
 
-        private static void OnProcessExited(object sender, EventArgs e)
+        private static void OnProcessExited(object sender, EventArgs e, string instanceName, Process proc)
         {
+            //get runtime
+            TimeSpan runtime = DateTime.Now - proc.StartTime;
+            long saveRuntime = (long)Math.Round(runtime.TotalMilliseconds, 0);
+            Logger.Info("[XboxLauncher]", $"Total runtime for this session: {saveRuntime}");
+
+            //change discord rpc
             Discord.ChangeMessage($"Idling");
+
+            //remove running ID
+            Globals.running.Remove(runID);
+
+            //save the runtime
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
+            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
+            ij.playTime = ij.playTime + (long)saveRuntime;
+            String toSave = JsonConvert.SerializeObject(ij);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json", toSave);
+
+
+            //reload played for text
+            HomeScreen.Instance.loadPlayTime(instanceName, ij);
         }
     }
 
