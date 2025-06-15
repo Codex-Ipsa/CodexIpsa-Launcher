@@ -77,6 +77,23 @@ namespace MCLauncher.classes
                 File.WriteAllText($"{Globals.dataPath}\\emulator\\xenia\\xenia-canary.config.toml", config);
             }
 
+            //download profile if not exists
+            if(!Globals.offlineMode)
+            {
+                if(!Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\E0300000726512D1"))
+                {
+                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content");
+
+                    DownloadProgress.url = Globals.xeniaProfile;
+                    DownloadProgress.savePath = $"{Globals.dataPath}\\emulator\\xenia\\content\\xenia_profile.zip";
+                    DownloadProgress download = new DownloadProgress();
+                    download.ShowDialog();
+
+                    ZipFile.ExtractToDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\xenia_profile.zip", $"{Globals.dataPath}\\emulator\\xenia\\content\\");
+
+                }
+            }
+
             //launching bases
             if (dj.version.Contains("pre") || dj.version == "tu0")
             {

@@ -46,6 +46,8 @@ namespace MCLauncher
         public static string x360ManifestFile = $"{dataPath}\\versions\\x360-manifest.json";
         public static string x360Data = $"http://files.codex-ipsa.cz/version/{codebase}/x360-data.txt";
         public static string xeniaManifest = $"http://files.codex-ipsa.cz/xenia/manifest.json";
+        public static string xeniaProfile = $"http://files.codex-ipsa.cz/xenia/xenia_profile.zip";
+
 
         //System
         public static string updaterUrl = $"http://files.codex-ipsa.cz/update/LauncherUpdater2.exe"; //LauncherUpdater.exe
