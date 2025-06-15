@@ -80,8 +80,8 @@ namespace MCLauncher.classes
             //launching bases
             if (dj.version.Contains("pre") || dj.version == "tu0")
             {
-                if (Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\"))
-                    Directory.Delete($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\", true);
+                if (Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\"))
+                    Directory.Delete($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\", true);
 
                 Process proc = new Process();
                 proc.EnableRaisingEvents = true;
@@ -107,11 +107,11 @@ namespace MCLauncher.classes
                     File.Delete($"{Globals.dataPath}\\versions\\x360\\tu0.zip");
                 }
 
-                if (!Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}"))
+                if (!Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\{dj.version}"))
                 {
                     Logger.Info("[XboxLauncher]", "Copying update files...");
-                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000");
-                    DirectoryInfo di = new DirectoryInfo($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000");
+                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000");
+                    DirectoryInfo di = new DirectoryInfo($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000");
                     foreach (FileInfo file in di.GetFiles())
                     {
                         file.Delete();
@@ -120,7 +120,7 @@ namespace MCLauncher.classes
                     {
                         dir.Delete(true);
                     }
-                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}");
+                    Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\{dj.version}");
 
                     DirectoryInfo itunes = new DirectoryInfo($"{Globals.dataPath}\\versions\\x360\\{dj.version}");
                     FileInfo[] itunesFiles = itunes.GetFiles("*.*", SearchOption.AllDirectories);
@@ -131,8 +131,8 @@ namespace MCLauncher.classes
                         //Console.WriteLine(file.FullName);
                         //Console.WriteLine(path + fileName);
                         //Console.WriteLine("-----------");
-                        Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}\\{path}");
-                        File.Copy($"{file.FullName}", $"{Globals.dataPath}\\emulator\\xenia\\content\\584111F7\\000B0000\\{dj.version}\\{fileName}");
+                        Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\{dj.version}\\{path}");
+                        File.Copy($"{file.FullName}", $"{Globals.dataPath}\\emulator\\xenia\\content\\0000000000000000\\584111F7\\000B0000\\{dj.version}\\{fileName}");
                     }
                 }
 
