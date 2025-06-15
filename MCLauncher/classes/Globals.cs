@@ -14,8 +14,8 @@ namespace MCLauncher
         //Manual
         public static string codebase = "0.3.7"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
-        public static string verCurrent = "0.3.9"; //Change this on release
-        public static string verDisplay = "0.3.9"; //Change this on release
+        public static string verCurrent = "0.3.10"; //Change this on release
+        public static string verDisplay = "0.3.10"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -46,6 +46,8 @@ namespace MCLauncher
         public static string x360ManifestFile = $"{dataPath}\\versions\\x360-manifest.json";
         public static string x360Data = $"http://files.codex-ipsa.cz/version/{codebase}/x360-data.txt";
         public static string xeniaManifest = $"http://files.codex-ipsa.cz/xenia/manifest.json";
+        public static string xeniaProfile = $"http://files.codex-ipsa.cz/xenia/xenia_profile.zip";
+
 
         //System
         public static string updaterUrl = $"http://files.codex-ipsa.cz/update/LauncherUpdater2.exe"; //LauncherUpdater.exe
