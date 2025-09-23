@@ -705,6 +705,7 @@ namespace MCLauncher.controls
             shortcut.Description = "A Codex-Ipsa Launcher instance";
             shortcut.TargetPath = Globals.currentPath + @"\MCLauncher.exe";
             shortcut.WorkingDirectory = Globals.currentPath;
+            shortcut.Arguments = $"-instance=\"{nameBox.Text}\"";
             shortcut.Save();
         }
     }
