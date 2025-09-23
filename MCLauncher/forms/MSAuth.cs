@@ -296,7 +296,7 @@ namespace MCLauncher
                             Settings.sj.refreshToken = msRefreshToken;
                             Settings.Save();
 
-                            HomeScreen.msPlayerName = playerName;
+                            //HomeScreen.msPlayerName = playerName;
                             msUsername = playerName;
                             msUUID = playerUUID;
                             msAccessToken = accessToken;
@@ -360,7 +360,7 @@ namespace MCLauncher
                                 Logger.Info($"[MSAuth]", $"Logged in successfully!");
                                 if(!isNogoi)
                                 {
-                                    HomeScreen.msPlayerName = playerName;
+                                    //HomeScreen.msPlayerName = playerName;
 
                                     HomeScreen.loadUserInfo(playerName, "");
                                     HomeScreen.enableButtons(true);
@@ -380,8 +380,11 @@ namespace MCLauncher
             Settings.sj.refreshToken = null;
             Settings.Save();
 
-            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
-            HomeScreen.enableButtons(false);
+            if (!isNogoi)
+            {
+                HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                HomeScreen.enableButtons(false);
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

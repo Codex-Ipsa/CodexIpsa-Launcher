@@ -16,7 +16,7 @@ namespace MCLauncher
     {
         public static HomeScreen Instance;
         public static string selectedEdition; //for checking which edition to launch
-        public static string msPlayerName; //for "welcome" string
+
         public static string selectedInstance = "Default";
         public static string selectedVersion; //for the "ready to play X" string
 
@@ -108,7 +108,6 @@ namespace MCLauncher
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
                     MSAuth.msUsername = Settings.sj.username;
-                    msPlayerName = Settings.sj.username;
                     MSAuth.msAccessToken = "fakeuuid";
                     MSAuth.msUUID = "fakeaccess";
                     return;

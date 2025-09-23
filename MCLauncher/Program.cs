@@ -38,6 +38,7 @@ namespace MCLauncher
                         //HomeScreen.Instance.Hide();
 
                         //TODO auth fails
+                        Settings.Reload();
                         MSAuth.refreshAuth(true);
                         //TODO count and add playtime
                         //TODO discord RPC

@@ -46,7 +46,7 @@ namespace MCLauncher
             }
             else
             {
-                HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", HomeScreen.msPlayerName);
+                HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", MSAuth.msUsername);
                 HomeScreen.Instance.lblLogInWarn.Text = "";
                 if (Globals.offlineMode)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
