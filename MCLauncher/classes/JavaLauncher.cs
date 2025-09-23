@@ -15,9 +15,6 @@ namespace MCLauncher.classes
     {
         //TODO
         //Possibly rewrite all of this shit
-        public static string msPlayerName;
-        public static string msPlayerUUID;
-        public static string msPlayerAccessToken;
 
         public static string manifestPath = "";
 
@@ -258,9 +255,9 @@ namespace MCLauncher.classes
 
             vj.cmdAft = vj.cmdAft.Replace("{game}", vj.game)
                 .Replace("{version}", vj.version)
-                .Replace("{playerName}", msPlayerName)
-                .Replace("{accessToken}", msPlayerAccessToken)
-                .Replace("{uuid}", msPlayerUUID)
+                .Replace("{playerName}", MSAuth.msUsername)
+                .Replace("{accessToken}", MSAuth.msAccessToken)
+                .Replace("{uuid}", MSAuth.msUUID)
                 .Replace("{width}", defRes[0])
                 .Replace("{height}", defRes[1])
                 .Replace("{workDir}", $"\"{workDir}\"")
@@ -270,7 +267,7 @@ namespace MCLauncher.classes
 
             vj.cmdBef = vj.cmdBef.Replace("{assetDir}", $"\"{assetsDir}/\"").Replace("\\", "/")
                 .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vj.assets.name}.json\"").Replace("\\", "/")
-                .Replace("{uuid}", msPlayerUUID)
+                .Replace("{uuid}", MSAuth.msUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{game}", $"\"{vj.game}\"")
                 .Replace("{version}", $"\"{vj.version}\"")
@@ -300,7 +297,7 @@ namespace MCLauncher.classes
             }
 
             if (ij.offline)
-                vj.cmdAft = vj.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
+                vj.cmdAft = vj.cmdAft.Replace(MSAuth.msAccessToken, "-").Replace(MSAuth.msUUID, "-");
 
             Process proc = new Process();
             proc.EnableRaisingEvents = true;
@@ -351,7 +348,7 @@ namespace MCLauncher.classes
             {
                 if (!ij.offline)
                 {
-                    MSAuth.onServerJoin(ipPort[0], ipPort[1], msPlayerAccessToken, msPlayerUUID);
+                    MSAuth.onServerJoin(ipPort[0], ipPort[1], MSAuth.msAccessToken, MSAuth.msUUID);
                     proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
                     Logger.Info("[JavaLauncher]", $"Server active!");
                 }

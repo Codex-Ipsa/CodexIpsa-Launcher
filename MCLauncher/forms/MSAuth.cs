@@ -20,7 +20,10 @@ namespace MCLauncher
         public static String deviceCode;
 
         //user info
-        public static String msAccessToken;
+        public static String msUsername = "Guest";
+        public static String msUUID = "fakeuuid";
+        public static String msAccessToken = "fakeaccess";
+
         public static String msRefreshToken;
 
         //error to display
@@ -293,9 +296,9 @@ namespace MCLauncher
                             Settings.Save();
 
                             HomeScreen.msPlayerName = playerName;
-                            JavaLauncher.msPlayerName = playerName;
-                            JavaLauncher.msPlayerUUID = playerUUID;
-                            JavaLauncher.msPlayerAccessToken = accessToken;
+                            msUsername = playerName;
+                            msUUID = playerUUID;
+                            msAccessToken = accessToken;
                             Settings.sj.username = playerName;
                             Settings.Save();
 
@@ -347,9 +350,9 @@ namespace MCLauncher
                                 String playerUUID = profileInfo[1];
 
                                 HomeScreen.msPlayerName = playerName;
-                                JavaLauncher.msPlayerName = playerName;
-                                JavaLauncher.msPlayerUUID = playerUUID;
-                                JavaLauncher.msPlayerAccessToken = accessToken;
+                                msUsername = playerName;
+                                msUUID = playerUUID;
+                                msAccessToken = accessToken;
 
                                 Settings.sj.username = playerName;
                                 Settings.Save();

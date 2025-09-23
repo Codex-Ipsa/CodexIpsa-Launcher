@@ -11,8 +11,8 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
         }
 
@@ -22,8 +22,8 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write($"ERROR  [{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
         }
 
@@ -33,16 +33,16 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
         }
 
         public static void GameInfo(string text)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
 
             if (text.Contains("<log4j:Event"))
             {
@@ -69,8 +69,8 @@ namespace MCLauncher
         public static void GameError(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.Gray;
         }

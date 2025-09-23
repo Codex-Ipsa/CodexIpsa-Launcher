@@ -96,9 +96,9 @@ namespace MCLauncher
                 loadUserInfo("Guest", Strings.sj.lblLogInWarn);
                 enableButtons(false);
 
-                JavaLauncher.msPlayerName = "Guest";
-                JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                MSAuth.msUsername = "Guest";
+                MSAuth.msAccessToken = "fakeuuid";
+                MSAuth.msUUID = "fakeaccess";
             }
             else
             {
@@ -107,10 +107,10 @@ namespace MCLauncher
                 if (Globals.offlineMode)
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
-                    JavaLauncher.msPlayerName = Settings.sj.username;
+                    MSAuth.msUsername = Settings.sj.username;
                     msPlayerName = Settings.sj.username;
-                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                    MSAuth.msAccessToken = "fakeuuid";
+                    MSAuth.msUUID = "fakeaccess";
                     return;
                 }
                 else
@@ -119,7 +119,7 @@ namespace MCLauncher
                 }
             }
 
-            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {JavaLauncher.msPlayerAccessToken}");
+            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {MSAuth.msAccessToken}");
         }
 
         //loads user info and auth message
@@ -265,9 +265,9 @@ namespace MCLauncher
         {
             Logger.Info($"[HomeScreen]", "Logging out");
 
-            JavaLauncher.msPlayerName = "Guest";
-            JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-            JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+            MSAuth.msUsername = "Guest";
+            MSAuth.msAccessToken = "fakeuuid";
+            MSAuth.msUUID = "fakeaccess";
 
             Settings.sj.refreshToken = String.Empty;
             Settings.Save();
