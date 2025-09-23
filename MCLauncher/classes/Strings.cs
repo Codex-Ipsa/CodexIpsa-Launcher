@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Net;
-using System.Security.Policy;
 using System.Text;
 
 namespace MCLauncher

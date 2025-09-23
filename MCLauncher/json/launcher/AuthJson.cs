@@ -4,7 +4,7 @@ namespace MCLauncher.json.launcher
 {
     internal class AuthJson
     {
-        public int expires_in {  get; set; }
+        public int expires_in { get; set; }
         public string refresh_token { get; set; }
         public string access_token { get; set; }
         public string Token { get; set; }
@@ -26,6 +26,6 @@ namespace MCLauncher.json.launcher
 
     internal class XUI
     {
-        public String uhs { get; set;}
+        public String uhs { get; set; }
     }
 }

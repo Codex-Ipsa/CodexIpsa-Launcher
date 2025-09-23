@@ -9,7 +9,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -95,7 +94,7 @@ namespace MCLauncher.controls
                 List<UpdateJson> data = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonData);
                 foreach (var vers in data)
                 {
-                    if(vers.available)
+                    if (vers.available)
                     {
                         nameList.Add($"{vers.name} - {vers.version} [{vers.id}]");
                         idList.Add(vers.id);

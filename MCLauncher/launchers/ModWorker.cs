@@ -3,7 +3,6 @@ using MCLauncher.json.api;
 using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
@@ -279,7 +278,7 @@ namespace MCLauncher.launchers
                         String dir = Path.GetDirectoryName(path);
 
                         Directory.CreateDirectory(dir);
-                        if(File.Exists(path))
+                        if (File.Exists(path))
                             File.Delete(path);
 
                         entry.ExtractToFile(path);

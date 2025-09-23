@@ -1,6 +1,5 @@
 ﻿using MCLauncher.classes;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace MCLauncher.controls

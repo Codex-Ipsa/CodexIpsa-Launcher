@@ -1,5 +1,4 @@
-﻿using MCLauncher.classes;
-using MCLauncher.json.api;
+﻿using MCLauncher.json.api;
 using MCLauncher.json.fabric;
 using Newtonsoft.Json;
 using System;
@@ -17,7 +16,7 @@ namespace MCLauncher.launchers.fabric
             String fabricVersion = getFabricName(version);
 
             //get game manifest
-            if(Globals.offlineMode)
+            if (Globals.offlineMode)
             {
                 return false;
             }
@@ -60,7 +59,7 @@ namespace MCLauncher.launchers.fabric
         public static String getFabricName(String version)
         {
             //get fabric reuploads manifest
-            if(Globals.offlineMode)
+            if (Globals.offlineMode)
             {
                 return "null";
             }

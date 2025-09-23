@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Windows.Forms;
-using System.Windows.Media.Media3D;
 
 namespace MCLauncher.classes
 {
@@ -373,7 +372,7 @@ namespace MCLauncher.classes
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
             Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
-            
+
             try
             {
                 Discord.ChangeMessage($"Playing {vj.game} ({vj.version})");

@@ -3,7 +3,6 @@ using MCLauncher.json.api;
 using MCLauncher.launchers.fabric;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -135,7 +134,7 @@ namespace MCLauncher.forms
 
                     //add to modlist
                     String jsonToAdd = version;
-                    if(forge.json != null)
+                    if (forge.json != null)
                     {
                         String fileName = forge.json.Substring(forge.json.LastIndexOf('/') + 1);
                         Globals.client.DownloadFile(forge.json, $"{Globals.dataPath}\\data\\json\\{fileName}");

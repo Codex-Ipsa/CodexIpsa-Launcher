@@ -1,6 +1,5 @@
 ﻿using MCLauncher.json.api;
 using MCLauncher.json.launcher;
-using MCLauncher.launchers.fabric;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
