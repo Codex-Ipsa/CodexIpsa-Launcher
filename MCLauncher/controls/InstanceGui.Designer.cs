@@ -94,6 +94,7 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
+            this.shortcutBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -851,10 +852,21 @@
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
+            // shortcutBtn
+            // 
+            this.shortcutBtn.Location = new System.Drawing.Point(368, 375);
+            this.shortcutBtn.Name = "shortcutBtn";
+            this.shortcutBtn.Size = new System.Drawing.Size(75, 23);
+            this.shortcutBtn.TabIndex = 44;
+            this.shortcutBtn.Text = "btn.shortcut";
+            this.shortcutBtn.UseVisualStyleBackColor = true;
+            this.shortcutBtn.Click += new System.EventHandler(this.shortcutBtn_Click);
+            // 
             // InstanceGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.shortcutBtn);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.tabControl1);
@@ -947,5 +959,6 @@
         public System.Windows.Forms.CheckBox chkServerIP;
         public System.Windows.Forms.TextBox serverIPBox;
         public System.Windows.Forms.CheckBox chkOther;
+        private System.Windows.Forms.Button shortcutBtn;
     }
 }

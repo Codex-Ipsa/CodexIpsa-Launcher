@@ -695,5 +695,17 @@ namespace MCLauncher.controls
                 }
             }
         }
+
+        private void shortcutBtn_Click(object sender, EventArgs e)
+        {
+            object shDesktop = (object)"Desktop";
+            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + $"\\{nameBox.Text} [Codex-Ipsa].lnk";
+            IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            shortcut.Description = "A Codex-Ipsa Launcher instance";
+            shortcut.TargetPath = Globals.currentPath + @"\MCLauncher.exe";
+            shortcut.WorkingDirectory = Globals.currentPath;
+            shortcut.Save();
+        }
     }
 }
