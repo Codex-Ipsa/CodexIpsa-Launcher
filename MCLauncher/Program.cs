@@ -38,7 +38,8 @@ namespace MCLauncher
                         //HomeScreen.Instance.Hide();
 
                         //TODO auth fails
-                        //TODO count and add playtime 
+                        MSAuth.refreshAuth(true);
+                        //TODO count and add playtime
                         //TODO discord RPC
 
                         JavaLauncher.Launch(instanceName);

@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
+using System.Windows.Media.Converters;
 
 namespace MCLauncher
 {
@@ -323,7 +324,7 @@ namespace MCLauncher
         }
 
         //logs in the user on the start of launcher if already logged in before
-        public static void refreshAuth()
+        public static void refreshAuth(bool isNogoi)
         {
             String msAccess = fromRefreshToken(Settings.sj.refreshToken);
             if (msAccess != null)
@@ -349,7 +350,6 @@ namespace MCLauncher
                                 String playerName = profileInfo[0];
                                 String playerUUID = profileInfo[1];
 
-                                HomeScreen.msPlayerName = playerName;
                                 msUsername = playerName;
                                 msUUID = playerUUID;
                                 msAccessToken = accessToken;
@@ -358,8 +358,14 @@ namespace MCLauncher
                                 Settings.Save();
 
                                 Logger.Info($"[MSAuth]", $"Logged in successfully!");
-                                HomeScreen.loadUserInfo(playerName, "");
-                                HomeScreen.enableButtons(true);
+                                if(!isNogoi)
+                                {
+                                    HomeScreen.msPlayerName = playerName;
+
+                                    HomeScreen.loadUserInfo(playerName, "");
+                                    HomeScreen.enableButtons(true);
+                                }
+
                                 return;
                             }
                         }

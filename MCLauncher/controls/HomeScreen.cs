@@ -115,7 +115,7 @@ namespace MCLauncher
                 }
                 else
                 {
-                    MSAuth.refreshAuth();
+                    MSAuth.refreshAuth(false);
                 }
             }
 
