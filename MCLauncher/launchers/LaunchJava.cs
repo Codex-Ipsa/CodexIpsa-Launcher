@@ -53,7 +53,7 @@ namespace MCLauncher.launchers
         //also translates domains into IPs
         public static String[] splitIpPort(String input)
         {
-            String[] ipPort = new String[2];
+            String[] ipPort = new String[3];
 
             //bool hasPort = input.Contains(":");
             String[] split = input.Split(':');
@@ -88,6 +88,7 @@ namespace MCLauncher.launchers
                 ipPort[1] = "25565";
             }
 
+            ipPort[2] = split[0]; //and save the original domain/ip for modern (1.6+) versions
             return ipPort;
         }
     }

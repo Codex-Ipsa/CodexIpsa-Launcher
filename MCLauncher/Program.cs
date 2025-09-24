@@ -34,13 +34,12 @@ namespace MCLauncher
                         String instanceName = arg.Substring(arg.IndexOf('=') + 1);
                         Logger.Info("[Startup]", $"Starting nogui mode with instance {instanceName}");
 
-                        //Application.Run(new MainWindow());
-                        //HomeScreen.Instance.Hide();
-
-                        //TODO auth fails
+                        //auth first
                         Settings.Reload();
                         MSAuth.refreshAuth(true);
+                        
                         //TODO count and add playtime
+                        
                         //TODO discord RPC
 
                         JavaLauncher.Launch(instanceName);

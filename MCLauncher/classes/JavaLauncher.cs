@@ -343,13 +343,23 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
-            Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
+            //server auto connect
             if (ipPort != null)
             {
+                Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
+
                 if (!ij.offline)
                 {
-                    MSAuth.onServerJoin(ipPort[0], ipPort[1], MSAuth.msAccessToken, MSAuth.msUUID);
-                    proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
+                    if (vj.srvCmd.Contains("-Dserver")) //fix for versions with BC wrapper
+                    {
+                        MSAuth.onServerJoin(ipPort[0], ipPort[1], MSAuth.msAccessToken, MSAuth.msUUID);
+                        proc.StartInfo.Arguments += vj.srvCmd.Replace("{ip}", ipPort[0]).Replace("{port}", ipPort[1]) + " ";
+                    }
+                    else //or just add it to the end, and use the domain instead force conert to IP
+                    {
+                        ij.aftCmd += vj.srvCmd.Replace("{ip}", ipPort[2]).Replace("{port}", ipPort[1]);
+                    }
+
                     Logger.Info("[JavaLauncher]", $"Server active!");
                 }
             }
