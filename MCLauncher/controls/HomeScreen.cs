@@ -180,9 +180,14 @@ namespace MCLauncher
             }
 
             //get mod name
+            if(!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json")) //if file doesn't exist for some reason
+            {
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", "{\"items\":[]}");
+            }
+
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
-
+           
             var modInfo = ModWorker.getPatchName(mj);
             if (modInfo.Item2 != null)
             {
