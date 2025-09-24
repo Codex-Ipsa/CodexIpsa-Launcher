@@ -69,8 +69,17 @@ namespace MCLauncher.launchers
             //check if valid host -> translate to IP
             else if (Regex.IsMatch(split[0], validHosts))
             {
-                IPAddress[] IPs = Dns.GetHostAddresses(split[0]);
-                ipPort[0] = IPs[0].ToString();
+                try
+                {
+                    IPAddress[] IPs = Dns.GetHostAddresses(split[0]);
+                    ipPort[0] = IPs[0].ToString();
+                }
+                catch (Exception e) //if invalid ip just return null 
+                {
+                    Logger.Error("splitIpPort", $"invalid IP {input}");
+                    //TODO: error popup here
+                    return null;
+                }
             }
             //if all fails, just skip
             else
