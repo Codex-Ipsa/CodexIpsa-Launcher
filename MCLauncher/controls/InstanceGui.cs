@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace MCLauncher.controls
@@ -697,15 +698,23 @@ namespace MCLauncher.controls
 
         private void shortcutBtn_Click(object sender, EventArgs e)
         {
-            object shDesktop = (object)"Desktop";
-            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + $"\\{nameBox.Text} [Codex-Ipsa].lnk";
-            IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
-            shortcut.Description = "A Codex-Ipsa Launcher instance";
-            shortcut.TargetPath = Globals.currentPath + @"\MCLauncher.exe";
-            shortcut.WorkingDirectory = Globals.currentPath;
-            shortcut.Arguments = $"-instance=\"{nameBox.Text}\"";
-            shortcut.Save();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Shortcut files (.lnk)|*.lnk";
+            sfd.FileName = $"{nameBox.Text} [Codex-Ipsa].lnk";
+            sfd.RestoreDirectory = true;
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+                string shortcutAddress = sfd.FileName;
+                IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
+                shortcut.Description = "A Codex-Ipsa Launcher instance";
+                shortcut.TargetPath = Globals.currentPath + @"\MCLauncher.exe";
+                shortcut.WorkingDirectory = Globals.currentPath;
+                shortcut.Arguments = $"-instance=\"{nameBox.Text}\"";
+                shortcut.Save();
+            }
         }
     }
 }
