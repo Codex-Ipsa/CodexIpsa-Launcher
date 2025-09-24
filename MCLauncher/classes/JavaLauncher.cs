@@ -104,6 +104,7 @@ namespace MCLauncher.classes
                 {
                     ipPort = LaunchJava.splitIpPort(EnterIp.inputText);
                 }
+                EnterIp.inputText = null;
             }
 
             //download game jar
