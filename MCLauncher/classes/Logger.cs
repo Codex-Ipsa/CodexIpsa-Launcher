@@ -75,7 +75,7 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        static string Splitter(string input, string before, string after)
+        public static string Splitter(string input, string before, string after)
         {
             //return input;
             //shitty void for splitting strings
