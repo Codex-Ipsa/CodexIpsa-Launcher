@@ -199,8 +199,14 @@ namespace MCLauncher
             Instance.loadPlayTime(instName, ij);
         }
 
+        public void reloadPlayTime(String instanceName, InstanceJson ij)
+        {
+            Instance.loadPlayTime(instanceName, ij);
+        }
+
         public void loadPlayTime(String instanceName, InstanceJson ij)
         {
+            Logger.Info("[HomeScreen/loadPlayTime]", $"Called!");
             if (instanceName != cmbInstaces.Text)
                 return;
 
@@ -231,6 +237,7 @@ namespace MCLauncher
                 playedForText = Strings.sj.lblHaventPlayed;
 
             lblPlayedFor.Text = playedForText;
+            Logger.Info("[HomeScreen/loadPlayTime]", $"pftext: {playedForText}");
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -241,7 +248,11 @@ namespace MCLauncher
             }
             else
             {
-                JavaLauncher.Launch(selectedInstance);
+                GameOutput go = new GameOutput();
+                go.Show();
+
+                JavaLauncher launcher = new JavaLauncher(selectedInstance, false, go);
+                launcher.Launch();
             }
         }
 

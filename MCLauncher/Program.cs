@@ -1,4 +1,5 @@
 ﻿using MCLauncher.classes;
+using MCLauncher.forms;
 using System;
 using System.Windows.Forms;
 
@@ -37,13 +38,18 @@ namespace MCLauncher
                         //auth first
                         Settings.Reload();
                         MSAuth.refreshAuth(true);
-                        
+
                         //TODO count and add playtime
-                        
+
                         //TODO discord RPC
 
-                        JavaLauncher.Launch(instanceName);
-                        Console.ReadLine(); //TEMP
+                        GameOutput go = new GameOutput();
+
+                        JavaLauncher launcher = new JavaLauncher(instanceName, true, go);
+                        launcher.Launch();
+
+                        Application.Run(go);
+
                         return;
                     }
                     else
