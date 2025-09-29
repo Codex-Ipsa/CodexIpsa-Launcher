@@ -195,6 +195,8 @@ namespace MCLauncher
             public string btnRemove = "Remove";
             public string btnForge = "Install Forge";
             public string btnFabric = "Install Fabric";
+            public string btnBabric = "Install Babric";
+            public string btnLegacyFabric = "Install Legacy Fabric";
             public string btnMLoader = "Install ModLoader";
             public string btnRepos = "Mod repositories";
             public string btnAddToJar = "Add to minecraft.jar";

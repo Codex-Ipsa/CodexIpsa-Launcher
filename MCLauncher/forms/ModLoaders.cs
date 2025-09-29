@@ -13,11 +13,11 @@ namespace MCLauncher.forms
     {
         public ModsGui theModsGui;
         public ModloadersJson manifest;
-        public String version;
-        public String loader;
+        public String gameVersion;
+        public LoaderType loader;
         public String instanceName;
 
-        public ModLoaders(String version, String loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
+        public  ModLoaders(String gameVersion, LoaderType loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -25,31 +25,37 @@ namespace MCLauncher.forms
             this.MinimizeBox = false;
 
             //set window title
-            if (loader == "forge")
+            if (loader == LoaderType.Forge)
                 this.Text = "Install Forge";
-            else if (loader == "fabric")
+            else if (loader == LoaderType.Fabric)
                 this.Text = "Install Fabric";
-            else if (loader == "risugami")
+            else if (loader == LoaderType.Babric)
+                this.Text = "Install Babric";
+            else if (loader == LoaderType.LegacyFabric)
+                this.Text = "Install Legacy Fabric";
+            else if (loader == LoaderType.Risugami)
                 this.Text = "Install Risugami's Modloader";
-            else if (loader == "neoforge")
+
+            //unimplemented
+            else if (loader == LoaderType.NeoForge)
                 this.Text = "Install Neoforge";
-            else if (loader == "quilt")
+            else if (loader == LoaderType.Quilt)
                 this.Text = "Install Quilt";
-            else if (loader == "liteloader")
+            else if (loader == LoaderType.LiteLoader)
                 this.Text = "Install LiteLoader";
 
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
 
             this.theModsGui = modsGui;
-            this.version = version;
+            this.gameVersion = gameVersion;
             this.loader = loader;
             this.instanceName = instanceName;
             this.manifest = mm;
 
             //load forge versions
             int recommendedVer = 0;
-            if (loader == "forge")
+            if (loader == LoaderType.Forge)
             {
                 for (int i = 0; i < manifest.forge.Count(); i++)
                 {
@@ -68,9 +74,9 @@ namespace MCLauncher.forms
                     listView1.Items.Add(f.id, icon).SubItems.AddRange(item);
                 }
             }
-            else if (loader == "fabric")
+            else if (loader == LoaderType.Fabric || loader == LoaderType.Babric || loader == LoaderType.LegacyFabric)
             {
-                List<String> loaders = FabricWorker.getLoaderVersions(version);
+                List<String> loaders = FabricWorker.getLoaderVersions(gameVersion, loader);
                 for (int i = 0; i < loaders.Count(); i++)
                 {
                     int icon = -1;
@@ -84,7 +90,7 @@ namespace MCLauncher.forms
 
                 recommendedVer = 0; //always recommend latest
             }
-            else if (loader == "risugami")
+            else if (loader == LoaderType.Risugami)
             {
                 for (int i = 0; i < manifest.risugami.Count(); i++)
                 {
@@ -110,7 +116,7 @@ namespace MCLauncher.forms
         private void btnInstall_Click(object sender, EventArgs e)
         {
             //download forge
-            if (loader == "forge")
+            if (loader == LoaderType.Forge)
             {
                 Forge forge = manifest.forge[listView1.SelectedItems[0].Index];
 
@@ -122,7 +128,7 @@ namespace MCLauncher.forms
                     File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\minecraftforge-{forge.id}.json", forgeManifest);
 
                     //add to modlist
-                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.json", "json", version);
+                    theModsGui.addModList($"Forge {gameVersion}", forge.id, $"minecraftforge-{forge.id}.json", "json", gameVersion);
                 }
                 else if (forge.type == "jarmod")
                 {
@@ -133,7 +139,7 @@ namespace MCLauncher.forms
                     dp.ShowDialog();
 
                     //add to modlist
-                    String jsonToAdd = version;
+                    String jsonToAdd = gameVersion;
                     if (forge.json != null)
                     {
                         String fileName = forge.json.Substring(forge.json.LastIndexOf('/') + 1);
@@ -141,7 +147,7 @@ namespace MCLauncher.forms
                         jsonToAdd = fileName.Replace(".json", "");
                     }
 
-                    theModsGui.addModList($"Forge {version}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", jsonToAdd);
+                    theModsGui.addModList($"Forge {gameVersion}", forge.id, $"minecraftforge-{forge.id}.zip", "jarmod", jsonToAdd);
 
                     //download supplement(s) if they exist
                     if (forge.supplement != null)
@@ -161,20 +167,27 @@ namespace MCLauncher.forms
                 }
             }
             //download fabric
-            else if (loader == "fabric")
+            else if (loader == LoaderType.Fabric || loader == LoaderType.Babric || loader == LoaderType.LegacyFabric)
             {
                 String loaderVer = listView1.SelectedItems[0].Text;
                 //get mod json
-                String moddedJson = FabricWorker.createModJson(version, loaderVer);
+                String moddedJson = FabricWorker.createModJson(gameVersion, loaderVer, loader);
+
+                //get name and ID for saving
+                String[] loaderInfo = new String[] { "Fabric", "fabric" };
+                if(loader == LoaderType.Babric)
+                    loaderInfo = new String[] { "Babric", "babric" };
+                else if(loader == LoaderType.LegacyFabric)
+                    loaderInfo = new String[] { "Leagcy Fabric", "legacyfabric" };
 
                 //save json
-                File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\fabric-{version}-{loaderVer}.json", moddedJson);
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{loaderInfo[1]}-{gameVersion}-{loaderVer}.json", moddedJson);
 
                 //add to modlist
-                theModsGui.addModList($"Fabric {version}", loaderVer, $"fabric-{version}-{loaderVer}.json", "json", version);
+                theModsGui.addModList($"{loaderInfo[0]} {gameVersion}", loaderVer, $"{loaderInfo[1]}-{gameVersion}-{loaderVer}.json", "json", gameVersion);
             }
             //download risugami's modloader
-            else if (loader == "risugami")
+            else if (loader == LoaderType.Risugami)
             {
                 Risugami risugami = manifest.risugami[listView1.SelectedItems[0].Index];
 
@@ -194,10 +207,25 @@ namespace MCLauncher.forms
                 }
 
                 //add to modlist
-                theModsGui.addModList($"Risugami's Modloader", risugami.id, $"modloader-{risugami.id}.zip", "jarmod", version);
-                theModsGui.addModList($"", "", $"modloadermp-{risugami.id}.zip", "jarmod", version);
+                theModsGui.addModList($"Risugami's Modloader", risugami.id, $"modloader-{risugami.id}.zip", "jarmod", gameVersion);
+                theModsGui.addModList($"", "", $"modloadermp-{risugami.id}.zip", "jarmod", gameVersion);
             }
             this.Close();
+        }
+
+        public enum LoaderType
+        {
+            None,
+            Forge,
+            Risugami,
+            Fabric, //regular
+            Babric, //b1.7.3
+            LegacyFabric, //r1.3 - 1.13
+
+            //unimplemented, don't use yet!!
+            Quilt,
+            NeoForge,
+            LiteLoader
         }
     }
 }

@@ -22,6 +22,8 @@ namespace MCLauncher.controls
         public List<ModJsonEntry> entries;
         public ModloadersJson mm;
 
+        ModLoaders.LoaderType fabricButtonType;
+
         public ModsGui(String instName)
         {
             InitializeComponent();
@@ -88,10 +90,28 @@ namespace MCLauncher.controls
         {
             this.version = version;
 
-            if (FabricWorker.isAvailable(version))
+            fabricButtonType = FabricWorker.isAvailable(version);
+
+            if (fabricButtonType == ModLoaders.LoaderType.Fabric)
+            {
                 btnFabric.Enabled = true;
+                btnFabric.Text = Strings.sj.btnFabric;
+            }
+            else if (fabricButtonType == ModLoaders.LoaderType.Babric)
+            {
+                btnFabric.Enabled = true;
+                btnFabric.Text = Strings.sj.btnBabric;
+            }
+            else if (fabricButtonType == ModLoaders.LoaderType.LegacyFabric)
+            {
+                btnFabric.Enabled = true;
+                btnFabric.Text = Strings.sj.btnLegacyFabric;
+            }
             else
+            {
                 btnFabric.Enabled = false;
+                btnFabric.Text = Strings.sj.btnFabric;
+            }
 
             try
             {
@@ -271,37 +291,37 @@ namespace MCLauncher.controls
 
         private void btnForge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "forge", instanceName, mm, this);
+            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.Forge, instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
-        {
-            ModLoaders ml = new ModLoaders(version, "fabric", instanceName, mm, this);
+        {  
+            ModLoaders ml = new ModLoaders(version, fabricButtonType, instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnMLoader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "risugami", instanceName, mm, this);
+            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.Risugami, instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnNeoforge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "neoforge", instanceName, mm, this);
+            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.NeoForge, instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnQuilt_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "quilt", instanceName, mm, this);
+            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.Quilt, instanceName, mm, this);
             ml.ShowDialog();
         }
 
         private void btnLiteloader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, "liteloader", instanceName, mm, this);
+            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.LiteLoader, instanceName, mm, this);
             ml.ShowDialog();
         }
 
