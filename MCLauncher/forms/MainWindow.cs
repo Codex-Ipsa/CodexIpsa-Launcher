@@ -62,14 +62,6 @@ namespace MCLauncher
             //Set the window name
             this.Text = $"Codex-Ipsa Launcher v{Globals.verDisplay} [branch {Globals.branch}]";
 
-            //Create directories
-            Directory.CreateDirectory($"{Globals.dataPath}");
-            Directory.CreateDirectory($"{Globals.dataPath}\\versions");
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance");
-            Directory.CreateDirectory($"{Globals.dataPath}\\libs");
-            Directory.CreateDirectory($"{Globals.dataPath}\\assets");
-            Directory.CreateDirectory($"{Globals.dataPath}\\data\\json");
-
             //load settings
             Settings.Reload();
 

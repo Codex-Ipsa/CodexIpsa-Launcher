@@ -1,5 +1,6 @@
 ﻿using MCLauncher.classes;
 using System;
+using System.IO;
 
 namespace MCLauncher
 {
@@ -14,6 +15,8 @@ namespace MCLauncher
             if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
                 text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
         public static void Error(string header, string text)
@@ -25,6 +28,8 @@ namespace MCLauncher
             if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
                 text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
         public static void Discord(string header, string text)
@@ -36,6 +41,8 @@ namespace MCLauncher
             if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
                 text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
         public static void GameInfo(string text)

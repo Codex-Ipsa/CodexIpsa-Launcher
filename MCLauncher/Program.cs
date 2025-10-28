@@ -1,6 +1,7 @@
 ﻿using MCLauncher.classes;
 using MCLauncher.forms;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -12,6 +13,17 @@ namespace MCLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //Create directories
+            Directory.CreateDirectory($"{Globals.dataPath}");
+            Directory.CreateDirectory($"{Globals.dataPath}\\versions");
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance");
+            Directory.CreateDirectory($"{Globals.dataPath}\\libs");
+            Directory.CreateDirectory($"{Globals.dataPath}\\assets");
+            Directory.CreateDirectory($"{Globals.dataPath}\\data\\json");
+
+            //clear log file
+            File.WriteAllText($"{Globals.dataPath}\\launcher.log", "");
 
             Logger.Info($"[Startup]", $"Codex-Ipsa Launcher has started!");
             Logger.Info($"[Startup]", $"Version {Globals.verDisplay}, Branch {Globals.branch}");
