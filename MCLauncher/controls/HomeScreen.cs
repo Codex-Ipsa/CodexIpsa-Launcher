@@ -248,10 +248,8 @@ namespace MCLauncher
             }
             else
             {
-                GameOutput go = new GameOutput();
-                go.Show();
-
-                JavaLauncher launcher = new JavaLauncher(selectedInstance, false, go);
+                
+                JavaLauncher launcher = new JavaLauncher(selectedInstance, false);
                 launcher.Launch();
             }
         }

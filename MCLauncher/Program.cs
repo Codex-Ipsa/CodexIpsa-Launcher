@@ -43,12 +43,12 @@ namespace MCLauncher
 
                         //TODO discord RPC
 
-                        GameOutput go = new GameOutput();
+                        //GameOutput go = new GameOutput(instanceName);
 
-                        JavaLauncher launcher = new JavaLauncher(instanceName, true, go);
+                        JavaLauncher launcher = new JavaLauncher(instanceName, true);
                         launcher.Launch();
 
-                        Application.Run(go);
+                        //Application.Run(launcher);
 
                         return;
                     }

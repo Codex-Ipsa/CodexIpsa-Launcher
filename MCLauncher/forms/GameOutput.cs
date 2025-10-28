@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCLauncher.classes;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -7,9 +8,11 @@ namespace MCLauncher.forms
 {
     public partial class GameOutput : Form
     {
-        public GameOutput()
+        public GameOutput(JavaLauncher launcher)
         {
             InitializeComponent();
+
+            this.Text = $"Game output [{launcher.instanceName}]";
         }
 
         public void logMessage(string message)
@@ -73,6 +76,11 @@ namespace MCLauncher.forms
 
                 boxOutput.ScrollToCaret();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

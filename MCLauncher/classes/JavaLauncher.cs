@@ -16,7 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.classes
 {
-    internal class JavaLauncher
+    public class JavaLauncher
     {
         //TODO
         //Possibly rewrite all of this shit
@@ -30,11 +30,20 @@ namespace MCLauncher.classes
         public bool noGui = false;
         public GameOutput gameOutput;
 
-        public JavaLauncher(string instanceName, bool noGui, GameOutput gameOutput)
+        public Process proc;
+
+        public JavaLauncher(string instanceName, bool noGui)
         {
             this.instanceName = instanceName;
             this.noGui = noGui;
-            this.gameOutput = gameOutput;
+
+            GameOutput go = new GameOutput(this);
+            if (noGui)
+                Application.Run(go); //THIS NEEDS FIXING!
+            else
+                go.Show();
+
+            this.gameOutput = go;
         }
 
         public void Launch()
@@ -317,7 +326,7 @@ namespace MCLauncher.classes
             if (ij.offline)
                 vj.cmdAft = vj.cmdAft.Replace(MSAuth.msAccessToken, "-").Replace(MSAuth.msUUID, "-");
 
-            Process proc = new Process();
+            proc = new Process();
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
@@ -470,6 +479,11 @@ namespace MCLauncher.classes
 
             String toSave = JsonConvert.SerializeObject(ij);
             File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json", toSave);
+        }
+
+        public void killGame()
+        {
+            proc.Kill();
         }
 
         private void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
