@@ -25,8 +25,8 @@ namespace MCLauncher.launchers.fabric
 
             //fabric type
             List<FabricGameJson> fabricJson = getFabricJson($"{getMetaUrl(LoaderType.Fabric)}/versions/game");
-            List<FabricGameJson> babricJson = getFabricJson($"{getMetaUrl(LoaderType.Babric)}/versions/game");
-            List<FabricGameJson> legacyfabricJson = getFabricJson($"{getMetaUrl(LoaderType.LegacyFabric)}/versions/game");
+            //List<FabricGameJson> babricJson = getFabricJson($"{getMetaUrl(LoaderType.Babric)}/versions/game");
+            //List<FabricGameJson> legacyfabricJson = getFabricJson($"{getMetaUrl(LoaderType.LegacyFabric)}/versions/game");
 
             //check if version exists
             foreach (FabricGameJson ver in fabricJson)
@@ -37,21 +37,21 @@ namespace MCLauncher.launchers.fabric
                 }
             }
 
-            foreach (FabricGameJson ver in babricJson)
-            {
-                if (ver.version == fabricVersion)
-                {
-                    return ModLoaders.LoaderType.Babric;
-                }
-            }
+            //foreach (FabricGameJson ver in babricJson)
+            //{
+            //    if (ver.version == fabricVersion)
+            //    {
+            //        return ModLoaders.LoaderType.Babric;
+            //    }
+            //}
 
-            foreach (FabricGameJson ver in legacyfabricJson)
-            {
-                if (ver.version == fabricVersion)
-                {
-                    return ModLoaders.LoaderType.LegacyFabric;
-                }
-            }
+            //foreach (FabricGameJson ver in legacyfabricJson)
+            //{
+            //    if (ver.version == fabricVersion)
+            //    {
+            //        return ModLoaders.LoaderType.LegacyFabric;
+            //    }
+            //}
 
             return ModLoaders.LoaderType.None;
         }
@@ -160,11 +160,11 @@ namespace MCLauncher.launchers.fabric
 
         public static String getMetaUrl(ModLoaders.LoaderType loaderType)
         {
-            if (loaderType == ModLoaders.LoaderType.Babric)
-                return "https://meta.babric.glass-launcher.net/v2";
-            else if (loaderType == ModLoaders.LoaderType.LegacyFabric)
-                return "https://meta.legacyfabric.net/v2";
-            else
+            //if (loaderType == ModLoaders.LoaderType.Babric)
+            //    return "https://meta.babric.glass-launcher.net/v2";
+            //else if (loaderType == ModLoaders.LoaderType.LegacyFabric)
+            //    return "https://meta.legacyfabric.net/v2";
+            //else
                 return "https://meta.fabricmc.net/v2";
         }
     }

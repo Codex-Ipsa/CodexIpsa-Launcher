@@ -29,20 +29,20 @@ namespace MCLauncher.forms
                 this.Text = "Install Forge";
             else if (loader == LoaderType.Fabric)
                 this.Text = "Install Fabric";
-            else if (loader == LoaderType.Babric)
-                this.Text = "Install Babric";
-            else if (loader == LoaderType.LegacyFabric)
-                this.Text = "Install Legacy Fabric";
+            //else if (loader == LoaderType.Babric)
+            //    this.Text = "Install Babric";
+            //else if (loader == LoaderType.LegacyFabric)
+            //    this.Text = "Install Legacy Fabric";
             else if (loader == LoaderType.Risugami)
                 this.Text = "Install Risugami's Modloader";
 
             //unimplemented
-            else if (loader == LoaderType.NeoForge)
-                this.Text = "Install Neoforge";
-            else if (loader == LoaderType.Quilt)
-                this.Text = "Install Quilt";
-            else if (loader == LoaderType.LiteLoader)
-                this.Text = "Install LiteLoader";
+            //else if (loader == LoaderType.NeoForge)
+            //    this.Text = "Install Neoforge";
+            //else if (loader == LoaderType.Quilt)
+            //    this.Text = "Install Quilt";
+            //else if (loader == LoaderType.LiteLoader)
+            //    this.Text = "Install LiteLoader";
 
             listView1.Columns[0].Width = -1;
             listView1.Columns[1].Width = -2;
@@ -74,7 +74,7 @@ namespace MCLauncher.forms
                     listView1.Items.Add(f.id, icon).SubItems.AddRange(item);
                 }
             }
-            else if (loader == LoaderType.Fabric || loader == LoaderType.Babric || loader == LoaderType.LegacyFabric)
+            else if (loader == LoaderType.Fabric/* || loader == LoaderType.Babric || loader == LoaderType.LegacyFabric*/)
             {
                 List<String> loaders = FabricWorker.getLoaderVersions(gameVersion, loader);
                 for (int i = 0; i < loaders.Count(); i++)
@@ -167,7 +167,7 @@ namespace MCLauncher.forms
                 }
             }
             //download fabric
-            else if (loader == LoaderType.Fabric || loader == LoaderType.Babric || loader == LoaderType.LegacyFabric)
+            else if (loader == LoaderType.Fabric /*|| loader == LoaderType.Babric || loader == LoaderType.LegacyFabric*/)
             {
                 String loaderVer = listView1.SelectedItems[0].Text;
                 //get mod json
@@ -175,10 +175,10 @@ namespace MCLauncher.forms
 
                 //get name and ID for saving
                 String[] loaderInfo = new String[] { "Fabric", "fabric" };
-                if(loader == LoaderType.Babric)
-                    loaderInfo = new String[] { "Babric", "babric" };
-                else if(loader == LoaderType.LegacyFabric)
-                    loaderInfo = new String[] { "Leagcy Fabric", "legacyfabric" };
+                //if(loader == LoaderType.Babric)
+                //    loaderInfo = new String[] { "Babric", "babric" };
+                //else if(loader == LoaderType.LegacyFabric)
+                //    loaderInfo = new String[] { "Leagcy Fabric", "legacyfabric" };
 
                 //save json
                 File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\jarmods\\{loaderInfo[1]}-{gameVersion}-{loaderVer}.json", moddedJson);
@@ -219,13 +219,13 @@ namespace MCLauncher.forms
             Forge,
             Risugami,
             Fabric, //regular
-            Babric, //b1.7.3
-            LegacyFabric, //r1.3 - 1.13
+            //Babric, //b1.7.3
+            //LegacyFabric, //r1.3 - 1.13
 
             //unimplemented, don't use yet!!
-            Quilt,
-            NeoForge,
-            LiteLoader
+            //Quilt,
+            //NeoForge,
+            //LiteLoader
         }
     }
 }

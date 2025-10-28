@@ -97,16 +97,16 @@ namespace MCLauncher.controls
                 btnFabric.Enabled = true;
                 btnFabric.Text = Strings.sj.btnFabric;
             }
-            else if (fabricButtonType == ModLoaders.LoaderType.Babric)
-            {
-                btnFabric.Enabled = true;
-                btnFabric.Text = Strings.sj.btnBabric;
-            }
-            else if (fabricButtonType == ModLoaders.LoaderType.LegacyFabric)
-            {
-                btnFabric.Enabled = true;
-                btnFabric.Text = Strings.sj.btnLegacyFabric;
-            }
+            //else if (fabricButtonType == ModLoaders.LoaderType.Babric)
+            //{
+            //    btnFabric.Enabled = true;
+            //    btnFabric.Text = Strings.sj.btnBabric;
+            //}
+            //else if (fabricButtonType == ModLoaders.LoaderType.LegacyFabric)
+            //{
+            //    btnFabric.Enabled = true;
+            //    btnFabric.Text = Strings.sj.btnLegacyFabric;
+            //}
             else
             {
                 btnFabric.Enabled = false;
@@ -309,20 +309,20 @@ namespace MCLauncher.controls
 
         private void btnNeoforge_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.NeoForge, instanceName, mm, this);
-            ml.ShowDialog();
+            //ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.NeoForge, instanceName, mm, this);
+            //ml.ShowDialog();
         }
 
         private void btnQuilt_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.Quilt, instanceName, mm, this);
-            ml.ShowDialog();
+            //ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.Quilt, instanceName, mm, this);
+            //ml.ShowDialog();
         }
 
         private void btnLiteloader_Click(object sender, EventArgs e)
         {
-            ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.LiteLoader, instanceName, mm, this);
-            ml.ShowDialog();
+            //ModLoaders ml = new ModLoaders(version, ModLoaders.LoaderType.LiteLoader, instanceName, mm, this);
+            //ml.ShowDialog();
         }
 
         private void btnRepos_Click(object sender, EventArgs e)
