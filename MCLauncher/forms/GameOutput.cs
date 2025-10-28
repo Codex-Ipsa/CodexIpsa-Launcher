@@ -8,11 +8,16 @@ namespace MCLauncher.forms
 {
     public partial class GameOutput : Form
     {
+        public JavaLauncher theLauncher;
         public GameOutput(JavaLauncher launcher)
         {
             InitializeComponent();
 
+            theLauncher = launcher;
             this.Text = $"Game output [{launcher.instanceName}]";
+
+            //lang
+            button1.Text = Strings.sj.btnKill;
         }
 
         public void logMessage(string message)
@@ -78,9 +83,15 @@ namespace MCLauncher.forms
             }
         }
 
+        //kill.
         private void button1_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(Strings.sj.killInstance, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+            if (result == DialogResult.Yes)
+            {
+                theLauncher.killGame();
+            }            
         }
     }
 }

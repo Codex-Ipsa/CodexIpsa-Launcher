@@ -224,6 +224,10 @@ namespace MCLauncher
 
             public string chooseLatestRelease = "Choose latest 'release' version";
             public string chooseLatestSnapshot = "Choose latest 'snapshot' version";
+
+            //GameOutput
+            public String btnKill = "Kill game";
+            public String killInstance = "Are you sure you want to kill the game?\nThis may lead to unwanted behaviour like the game corrupting!";
         }
     }
 }
