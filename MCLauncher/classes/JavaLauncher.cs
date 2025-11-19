@@ -10,6 +10,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -39,7 +40,10 @@ namespace MCLauncher.classes
 
             GameOutput go = new GameOutput(this);
             if (noGui)
-                Application.Run(go); //THIS NEEDS FIXING!
+                new Thread(new ThreadStart(delegate
+                {
+                    Application.Run(go);
+                })).Start();
             else
                 go.Show();
 
@@ -467,6 +471,9 @@ namespace MCLauncher.classes
             //reload played for text
             if (!noGui)
                 HomeScreen.Instance.loadPlayTime(instanceName, ij);
+
+            if (gameOutput.boxOutput.InvokeRequired)
+                gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.thisInstance.button1.Enabled = false; }));
         }
 
         //updates the played for.. time

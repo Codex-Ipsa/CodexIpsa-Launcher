@@ -9,11 +9,14 @@ namespace MCLauncher.forms
     public partial class GameOutput : Form
     {
         public JavaLauncher theLauncher;
+        public GameOutput thisInstance;
+
         public GameOutput(JavaLauncher launcher)
         {
             InitializeComponent();
 
             theLauncher = launcher;
+            thisInstance = this;
             this.Text = $"Game output [{launcher.instanceName}]";
 
             //lang

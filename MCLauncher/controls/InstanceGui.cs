@@ -51,6 +51,7 @@ namespace MCLauncher.controls
             saveBtn.Text = Strings.sj.btnSaveInst;
             deleteBtn.Text = Strings.sj.btnDeleteInst;
             openBtn.Text = Strings.sj.btnOpenDir;
+            shortcutBtn.Text = Strings.sj.createShortcut;
 
             grbXbox.Text = Strings.sj.grbGame;
             chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));

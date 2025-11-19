@@ -188,6 +188,7 @@ namespace MCLauncher
             public string chkClasspath = "Classpath";
             public string chkAssetIndex = "Asset index";
             public string chkServerIP = "Server IP";
+            public String createShortcut = "Create shortcut";
 
             //Profile manager mods
             public string btnMoveUp = "Move up";

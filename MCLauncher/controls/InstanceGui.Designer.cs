@@ -856,7 +856,7 @@
             // 
             this.shortcutBtn.Location = new System.Drawing.Point(368, 375);
             this.shortcutBtn.Name = "shortcutBtn";
-            this.shortcutBtn.Size = new System.Drawing.Size(75, 23);
+            this.shortcutBtn.Size = new System.Drawing.Size(94, 23);
             this.shortcutBtn.TabIndex = 44;
             this.shortcutBtn.Text = "btn.shortcut";
             this.shortcutBtn.UseVisualStyleBackColor = true;

@@ -76,6 +76,6 @@
         #endregion
 
         public System.Windows.Forms.RichTextBox boxOutput;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button1;
     }
 }
