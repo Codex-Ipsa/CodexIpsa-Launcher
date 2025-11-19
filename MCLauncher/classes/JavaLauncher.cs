@@ -5,15 +5,10 @@ using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MCLauncher.classes
 {

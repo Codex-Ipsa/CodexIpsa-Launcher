@@ -17,7 +17,7 @@ namespace MCLauncher.forms
         public LoaderType loader;
         public String instanceName;
 
-        public  ModLoaders(String gameVersion, LoaderType loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
+        public ModLoaders(String gameVersion, LoaderType loader, String instanceName, ModloadersJson mm, ModsGui modsGui)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

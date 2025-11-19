@@ -11,7 +11,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
-using System.Windows.Media.Converters;
 
 namespace MCLauncher
 {
@@ -358,7 +357,7 @@ namespace MCLauncher
                                 Settings.Save();
 
                                 Logger.Info($"[MSAuth]", $"Logged in successfully!");
-                                if(!isNogoi)
+                                if (!isNogoi)
                                 {
                                     //HomeScreen.msPlayerName = playerName;
 

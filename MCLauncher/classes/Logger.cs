@@ -1,6 +1,4 @@
-﻿using MCLauncher.classes;
-using System;
-using System.Globalization;
+﻿using System;
 using System.IO;
 
 namespace MCLauncher

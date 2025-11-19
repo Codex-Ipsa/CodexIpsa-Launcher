@@ -56,7 +56,7 @@ namespace MCLauncher.launchers.fabric
             return ModLoaders.LoaderType.None;
         }
 
-        
+
 
         private static List<FabricGameJson> getFabricJson(String url)
         {
@@ -165,7 +165,7 @@ namespace MCLauncher.launchers.fabric
             //else if (loaderType == ModLoaders.LoaderType.LegacyFabric)
             //    return "https://meta.legacyfabric.net/v2";
             //else
-                return "https://meta.fabricmc.net/v2";
+            return "https://meta.fabricmc.net/v2";
         }
     }
 }

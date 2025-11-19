@@ -2,7 +2,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MCLauncher.forms
 {
@@ -94,7 +93,7 @@ namespace MCLauncher.forms
             if (result == DialogResult.Yes)
             {
                 theLauncher.killGame();
-            }            
+            }
         }
     }
 }

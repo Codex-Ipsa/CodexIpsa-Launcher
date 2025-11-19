@@ -296,7 +296,7 @@ namespace MCLauncher.controls
         }
 
         private void btnFabric_Click(object sender, EventArgs e)
-        {  
+        {
             ModLoaders ml = new ModLoaders(version, fabricButtonType, instanceName, mm, this);
             ml.ShowDialog();
         }
