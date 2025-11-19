@@ -68,6 +68,9 @@ namespace MCLauncher.classes
             runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
             Globals.running.Add(runID, instanceName);
 
+            //clear log file
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.log", "");
+
             //get InstanceJson
             string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
             ij = JsonConvert.DeserializeObject<InstanceJson>(data);
@@ -474,6 +477,8 @@ namespace MCLauncher.classes
 
             if (gameOutput.boxOutput.InvokeRequired)
                 gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.thisInstance.button1.Enabled = false; }));
+            else
+                gameOutput.thisInstance.button1.Enabled = false;
         }
 
         //updates the played for.. time
@@ -497,7 +502,7 @@ namespace MCLauncher.classes
         {
             if (e.Data != null)
             {
-                Logger.GameInfo(e.Data);
+                Logger.GameInfo(e.Data, instanceName);
 
                 if (gameOutput.boxOutput.InvokeRequired)
                 {
@@ -510,7 +515,7 @@ namespace MCLauncher.classes
         {
             if (e.Data != null)
             {
-                Logger.GameError(e.Data);
+                Logger.GameError(e.Data, instanceName);
 
                 if (gameOutput.boxOutput.InvokeRequired)
                 {
