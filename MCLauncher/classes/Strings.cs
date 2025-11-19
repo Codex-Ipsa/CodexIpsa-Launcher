@@ -56,7 +56,6 @@ namespace MCLauncher
 
             SettingsScreen.InstanceSetting.grbLauncher.Text = sj.grbLauncher;
             SettingsScreen.InstanceSetting.lblLang.Text = sj.lblLang;
-            SettingsScreen.InstanceSetting.grbUpdates.Text = sj.grbUpdates;
             SettingsScreen.InstanceSetting.lblBranch.Text = sj.lblBranch;
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
@@ -115,7 +114,6 @@ namespace MCLauncher
             public string grbLauncher = "Launcher";
             public string lblLang = "Language";
             public string chkDiscordRpc = "Discord RPC";
-            public string grbUpdates = "Updates";
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
             public string grbDefaults = "Defaults"; //DEPRECATED

@@ -51,17 +51,17 @@
             this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
             this.lblLang = new System.Windows.Forms.Label();
             this.cmbLangSelect = new System.Windows.Forms.ComboBox();
-            this.grbUpdates = new System.Windows.Forms.GroupBox();
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
             this.chkShowConsole = new System.Windows.Forms.CheckBox();
             this.chkShowLog = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pnlCenter.SuspendLayout();
             this.grbThemes.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
             this.grbLauncher.SuspendLayout();
-            this.grbUpdates.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlCenter
@@ -70,7 +70,6 @@
             this.pnlCenter.Controls.Add(this.grbThemes);
             this.pnlCenter.Controls.Add(this.grbJavaInstalls);
             this.pnlCenter.Controls.Add(this.grbLauncher);
-            this.pnlCenter.Controls.Add(this.grbUpdates);
             this.pnlCenter.Location = new System.Drawing.Point(165, 5);
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(446, 374);
@@ -283,15 +282,20 @@
             // grbLauncher
             // 
             this.grbLauncher.BackColor = System.Drawing.Color.Transparent;
+            this.grbLauncher.Controls.Add(this.groupBox2);
+            this.grbLauncher.Controls.Add(this.btnCheckUpdates);
+            this.grbLauncher.Controls.Add(this.groupBox1);
+            this.grbLauncher.Controls.Add(this.cmbUpdateSelect);
+            this.grbLauncher.Controls.Add(this.lblBranch);
             this.grbLauncher.Controls.Add(this.chkShowLog);
             this.grbLauncher.Controls.Add(this.chkShowConsole);
             this.grbLauncher.Controls.Add(this.chkDiscordRpc);
             this.grbLauncher.Controls.Add(this.lblLang);
             this.grbLauncher.Controls.Add(this.cmbLangSelect);
             this.grbLauncher.ForeColor = System.Drawing.Color.White;
-            this.grbLauncher.Location = new System.Drawing.Point(0, 0);
+            this.grbLauncher.Location = new System.Drawing.Point(0, 3);
             this.grbLauncher.Name = "grbLauncher";
-            this.grbLauncher.Size = new System.Drawing.Size(446, 71);
+            this.grbLauncher.Size = new System.Drawing.Size(446, 157);
             this.grbLauncher.TabIndex = 20;
             this.grbLauncher.TabStop = false;
             this.grbLauncher.Text = "grb.launcher";
@@ -301,7 +305,7 @@
             this.chkDiscordRpc.AutoSize = true;
             this.chkDiscordRpc.Checked = true;
             this.chkDiscordRpc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDiscordRpc.Location = new System.Drawing.Point(311, 48);
+            this.chkDiscordRpc.Location = new System.Drawing.Point(263, 46);
             this.chkDiscordRpc.Name = "chkDiscordRpc";
             this.chkDiscordRpc.Size = new System.Drawing.Size(101, 17);
             this.chkDiscordRpc.TabIndex = 2;
@@ -328,24 +332,10 @@
             this.cmbLangSelect.TabIndex = 0;
             this.cmbLangSelect.SelectedIndexChanged += new System.EventHandler(this.cmbLangSelect_SelectedIndexChanged);
             // 
-            // grbUpdates
-            // 
-            this.grbUpdates.BackColor = System.Drawing.Color.Transparent;
-            this.grbUpdates.Controls.Add(this.btnCheckUpdates);
-            this.grbUpdates.Controls.Add(this.lblBranch);
-            this.grbUpdates.Controls.Add(this.cmbUpdateSelect);
-            this.grbUpdates.ForeColor = System.Drawing.Color.White;
-            this.grbUpdates.Location = new System.Drawing.Point(0, 77);
-            this.grbUpdates.Name = "grbUpdates";
-            this.grbUpdates.Size = new System.Drawing.Size(446, 83);
-            this.grbUpdates.TabIndex = 21;
-            this.grbUpdates.TabStop = false;
-            this.grbUpdates.Text = "grb.updates";
-            // 
             // btnCheckUpdates
             // 
             this.btnCheckUpdates.ForeColor = System.Drawing.Color.Black;
-            this.btnCheckUpdates.Location = new System.Drawing.Point(5, 52);
+            this.btnCheckUpdates.Location = new System.Drawing.Point(6, 121);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
             this.btnCheckUpdates.Size = new System.Drawing.Size(434, 23);
             this.btnCheckUpdates.TabIndex = 3;
@@ -356,7 +346,7 @@
             // lblBranch
             // 
             this.lblBranch.AutoSize = true;
-            this.lblBranch.Location = new System.Drawing.Point(6, 22);
+            this.lblBranch.Location = new System.Drawing.Point(6, 97);
             this.lblBranch.Name = "lblBranch";
             this.lblBranch.Size = new System.Drawing.Size(53, 13);
             this.lblBranch.TabIndex = 1;
@@ -367,7 +357,7 @@
             this.cmbUpdateSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUpdateSelect.ForeColor = System.Drawing.Color.Black;
             this.cmbUpdateSelect.FormattingEnabled = true;
-            this.cmbUpdateSelect.Location = new System.Drawing.Point(110, 19);
+            this.cmbUpdateSelect.Location = new System.Drawing.Point(111, 94);
             this.cmbUpdateSelect.Name = "cmbUpdateSelect";
             this.cmbUpdateSelect.Size = new System.Drawing.Size(329, 21);
             this.cmbUpdateSelect.TabIndex = 0;
@@ -376,7 +366,8 @@
             // chkShowConsole
             // 
             this.chkShowConsole.AutoSize = true;
-            this.chkShowConsole.Location = new System.Drawing.Point(6, 48);
+            this.chkShowConsole.Enabled = false;
+            this.chkShowConsole.Location = new System.Drawing.Point(6, 46);
             this.chkShowConsole.Name = "chkShowConsole";
             this.chkShowConsole.Size = new System.Drawing.Size(110, 17);
             this.chkShowConsole.TabIndex = 3;
@@ -386,12 +377,29 @@
             // chkShowLog
             // 
             this.chkShowLog.AutoSize = true;
-            this.chkShowLog.Location = new System.Drawing.Point(164, 48);
+            this.chkShowLog.Enabled = false;
+            this.chkShowLog.Location = new System.Drawing.Point(6, 69);
             this.chkShowLog.Name = "chkShowLog";
             this.chkShowLog.Size = new System.Drawing.Size(90, 17);
             this.chkShowLog.TabIndex = 4;
             this.chkShowLog.Text = "chk.showLog";
             this.chkShowLog.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(218, 41);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1, 40);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(7, 87);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(433, 1);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
             // 
             // SettingsScreen
             // 
@@ -410,8 +418,6 @@
             this.grbJavaInstalls.PerformLayout();
             this.grbLauncher.ResumeLayout(false);
             this.grbLauncher.PerformLayout();
-            this.grbUpdates.ResumeLayout(false);
-            this.grbUpdates.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -430,7 +436,6 @@
         public System.Windows.Forms.CheckBox chkDiscordRpc;
         public System.Windows.Forms.Label lblLang;
         private System.Windows.Forms.ComboBox cmbLangSelect;
-        public System.Windows.Forms.GroupBox grbUpdates;
         public System.Windows.Forms.Button btnCheckUpdates;
         public System.Windows.Forms.Label lblBranch;
         private System.Windows.Forms.ComboBox cmbUpdateSelect;
@@ -447,5 +452,7 @@
         public System.Windows.Forms.ComboBox cmbTheme;
         private System.Windows.Forms.CheckBox chkShowConsole;
         private System.Windows.Forms.CheckBox chkShowLog;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
