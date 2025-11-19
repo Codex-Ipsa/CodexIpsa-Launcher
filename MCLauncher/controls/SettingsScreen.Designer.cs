@@ -55,6 +55,8 @@
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.lblBranch = new System.Windows.Forms.Label();
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
+            this.chkShowConsole = new System.Windows.Forms.CheckBox();
+            this.chkShowLog = new System.Windows.Forms.CheckBox();
             this.pnlCenter.SuspendLayout();
             this.grbThemes.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
@@ -281,6 +283,8 @@
             // grbLauncher
             // 
             this.grbLauncher.BackColor = System.Drawing.Color.Transparent;
+            this.grbLauncher.Controls.Add(this.chkShowLog);
+            this.grbLauncher.Controls.Add(this.chkShowConsole);
             this.grbLauncher.Controls.Add(this.chkDiscordRpc);
             this.grbLauncher.Controls.Add(this.lblLang);
             this.grbLauncher.Controls.Add(this.cmbLangSelect);
@@ -297,7 +301,7 @@
             this.chkDiscordRpc.AutoSize = true;
             this.chkDiscordRpc.Checked = true;
             this.chkDiscordRpc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDiscordRpc.Location = new System.Drawing.Point(6, 48);
+            this.chkDiscordRpc.Location = new System.Drawing.Point(311, 48);
             this.chkDiscordRpc.Name = "chkDiscordRpc";
             this.chkDiscordRpc.Size = new System.Drawing.Size(101, 17);
             this.chkDiscordRpc.TabIndex = 2;
@@ -369,6 +373,26 @@
             this.cmbUpdateSelect.TabIndex = 0;
             this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
             // 
+            // chkShowConsole
+            // 
+            this.chkShowConsole.AutoSize = true;
+            this.chkShowConsole.Location = new System.Drawing.Point(6, 48);
+            this.chkShowConsole.Name = "chkShowConsole";
+            this.chkShowConsole.Size = new System.Drawing.Size(110, 17);
+            this.chkShowConsole.TabIndex = 3;
+            this.chkShowConsole.Text = "chk.showConsole";
+            this.chkShowConsole.UseVisualStyleBackColor = true;
+            // 
+            // chkShowLog
+            // 
+            this.chkShowLog.AutoSize = true;
+            this.chkShowLog.Location = new System.Drawing.Point(164, 48);
+            this.chkShowLog.Name = "chkShowLog";
+            this.chkShowLog.Size = new System.Drawing.Size(90, 17);
+            this.chkShowLog.TabIndex = 4;
+            this.chkShowLog.Text = "chk.showLog";
+            this.chkShowLog.UseVisualStyleBackColor = true;
+            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,5 +445,7 @@
         public System.Windows.Forms.CheckBox chkUseTheme;
         public System.Windows.Forms.Button btnTheme;
         public System.Windows.Forms.ComboBox cmbTheme;
+        private System.Windows.Forms.CheckBox chkShowConsole;
+        private System.Windows.Forms.CheckBox chkShowLog;
     }
 }
