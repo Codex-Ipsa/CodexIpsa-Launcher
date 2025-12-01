@@ -58,6 +58,8 @@ namespace MCLauncher.controls
 
             //rpc
             chkDiscordRpc.Checked = Settings.sj.discordRPC;
+            chkShowLog.Checked = Settings.sj.logGame;
+            chkShowConsole.Checked = true; //temp until i figure out if this is possible to hide
 
             //themes
             chkUseTheme.Checked = Settings.sj.useTheme;

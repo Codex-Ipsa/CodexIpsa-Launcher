@@ -448,7 +448,7 @@ namespace MCLauncher.classes
             proc.BeginOutputReadLine();
 
             //this makes sure the launcher stays open when nogui mode and game log window is enabled
-            if(!Settings.sj.logGame && noGui)
+            if (!Settings.sj.logGame && noGui)
                 proc.WaitForExit();
 
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
@@ -479,10 +479,13 @@ namespace MCLauncher.classes
             if (!noGui)
                 HomeScreen.Instance.loadPlayTime(instanceName, ij);
 
-            if (gameOutput.boxOutput.InvokeRequired)
-                gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.thisInstance.button1.Enabled = false; }));
-            else
-                gameOutput.thisInstance.button1.Enabled = false;
+            if (Settings.sj.logGame)
+            {
+                if (gameOutput.boxOutput.InvokeRequired)
+                    gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.thisInstance.button1.Enabled = false; }));
+                else
+                    gameOutput.thisInstance.button1.Enabled = false;
+            }
         }
 
         //updates the played for.. time
@@ -508,10 +511,9 @@ namespace MCLauncher.classes
             {
                 Logger.GameInfo(e.Data, instanceName);
 
-                if (gameOutput.boxOutput.InvokeRequired)
-                {
-                    gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logMessage(e.Data); }));
-                }
+                if (Settings.sj.logGame)
+                    if (gameOutput.boxOutput.InvokeRequired)
+                        gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logMessage(e.Data); }));
             }
         }
 
@@ -521,10 +523,9 @@ namespace MCLauncher.classes
             {
                 Logger.GameError(e.Data, instanceName);
 
-                if (gameOutput.boxOutput.InvokeRequired)
-                {
-                    gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logError(e.Data); }));
-                }
+                if (Settings.sj.logGame)
+                    if (gameOutput.boxOutput.InvokeRequired)
+                        gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logError(e.Data); }));
             }
         }
     }

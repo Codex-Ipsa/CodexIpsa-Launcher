@@ -40,7 +40,7 @@ namespace MCLauncher
         public bool seasonalOptout { get; set; }
 
         public bool logGame { get; set; }
-        public bool cnslWindows {  get; set; }
+        public bool cnslWindow {  get; set; }
 
         public string jre8 { get; set; }
         public string jre17 { get; set; }
@@ -60,7 +60,7 @@ namespace MCLauncher
             seasonalOptout = false;
 
             logGame = true;
-            cnslWindows = false;
+            cnslWindow = false;
 
             jre8 = "java.exe";
             jre17 = "java.exe";
