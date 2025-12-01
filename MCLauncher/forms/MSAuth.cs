@@ -50,6 +50,7 @@ namespace MCLauncher
             deviceCurrent = 0;
 
             String url = "https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"; //this needs to have offline access at the end
+
             String response = Http.getUrl(url);
             if (Globals.isDebug)
                 Logger.Info("[MSAuth]", $"deviceflow response: {response}");
@@ -62,7 +63,10 @@ namespace MCLauncher
             textBox1.ReadOnly = true;
 
             Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {json.verification_uri} and enter the code {json.user_code} to authenticate.");
-            Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
+
+            if (Globals.isDebug)
+                Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
+
             this.Refresh();
             backgroundWorker1.RunWorkerAsync();
             //this.Close();
