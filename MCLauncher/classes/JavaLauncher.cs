@@ -5,7 +5,6 @@ using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;

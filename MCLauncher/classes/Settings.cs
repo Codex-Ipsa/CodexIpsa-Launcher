@@ -40,7 +40,7 @@ namespace MCLauncher
         public bool seasonalOptout { get; set; }
 
         public bool logGame { get; set; }
-        public bool cnslWindow {  get; set; }
+        public bool cnslWindow { get; set; }
 
         public string jre8 { get; set; }
         public string jre17 { get; set; }
