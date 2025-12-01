@@ -512,7 +512,7 @@
             this.chkOther.TabIndex = 12;
             this.chkOther.Text = "Other";
             this.chkOther.UseVisualStyleBackColor = true;
-            this.chkOther.Visible = false;
+            this.chkOther.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // chkLatestSnapshot
             // 

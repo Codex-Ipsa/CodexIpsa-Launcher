@@ -120,6 +120,9 @@ namespace MCLauncher.controls
 
                 if (chkExperimental.Checked && row[0] == "experimental")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                if (chkOther.Checked && row[0] == "other")
+                    vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
 
             //set width after adding items
