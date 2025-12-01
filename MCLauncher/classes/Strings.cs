@@ -59,6 +59,8 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.lblBranch.Text = sj.lblBranch;
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
+            SettingsScreen.InstanceSetting.chkShowLog.Text = sj.chkShowLog;
+            SettingsScreen.InstanceSetting.chkShowConsole.Text = sj.chkShowConsole;
 
             SettingsScreen.InstanceSetting.grbJavaInstalls.Text = sj.grbJavaInstalls;
             SettingsScreen.InstanceSetting.lblJre8.Text = "Java 8";
@@ -122,6 +124,8 @@ namespace MCLauncher
             public String grbThemes = "Themes";
             public String chkUseTheme = "Custom theme";
             public String chkThemesOptout = "Opt-out of seasonal themes";
+            public String chkShowLog = "Show game log window";
+            public String chkShowConsole = "Show launcher console";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";

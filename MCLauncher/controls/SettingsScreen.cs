@@ -388,6 +388,12 @@ namespace MCLauncher.controls
             Settings.sj.seasonalOptout = chkThemesOptout.Checked;
             Settings.Save();
         }
+
+        private void chkShowLog_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.sj.logGame = chkShowLog.Checked;
+            Settings.Save();
+        }
     }
 
     public class javaInstallsManifest

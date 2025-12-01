@@ -39,6 +39,9 @@ namespace MCLauncher
         public string themePath { get; set; }
         public bool seasonalOptout { get; set; }
 
+        public bool logGame { get; set; }
+        public bool cnslWindows {  get; set; }
+
         public string jre8 { get; set; }
         public string jre17 { get; set; }
         public string jre21 { get; set; }
@@ -55,6 +58,9 @@ namespace MCLauncher
             useTheme = false;
             themePath = "";
             seasonalOptout = false;
+
+            logGame = true;
+            cnslWindows = false;
 
             jre8 = "java.exe";
             jre17 = "java.exe";

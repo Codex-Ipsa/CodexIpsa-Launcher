@@ -5,6 +5,7 @@ using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
@@ -33,16 +34,20 @@ namespace MCLauncher.classes
             this.instanceName = instanceName;
             this.noGui = noGui;
 
+            //game log window fuckery
             GameOutput go = new GameOutput(this);
-            if (noGui)
-                new Thread(new ThreadStart(delegate
-                {
-                    Application.Run(go);
-                })).Start();
-            else
-                go.Show();
+            if (Settings.sj.logGame)
+            {
+                if (noGui)
+                    new Thread(new ThreadStart(delegate
+                    {
+                        Application.Run(go);
+                    })).Start();
+                else
+                    go.Show();
 
-            this.gameOutput = go;
+                this.gameOutput = go;
+            }
         }
 
         public void Launch()
@@ -441,6 +446,10 @@ namespace MCLauncher.classes
 
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
+
+            //this makes sure the launcher stays open when nogui mode and game log window is enabled
+            if(!Settings.sj.logGame && noGui)
+                proc.WaitForExit();
 
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }

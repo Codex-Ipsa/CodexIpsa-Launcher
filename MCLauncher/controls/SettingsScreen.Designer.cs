@@ -48,16 +48,16 @@
             this.lblJre8 = new System.Windows.Forms.Label();
             this.cmbJre8 = new System.Windows.Forms.ComboBox();
             this.grbLauncher = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCheckUpdates = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
+            this.lblBranch = new System.Windows.Forms.Label();
+            this.chkShowLog = new System.Windows.Forms.CheckBox();
+            this.chkShowConsole = new System.Windows.Forms.CheckBox();
             this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
             this.lblLang = new System.Windows.Forms.Label();
             this.cmbLangSelect = new System.Windows.Forms.ComboBox();
-            this.btnCheckUpdates = new System.Windows.Forms.Button();
-            this.lblBranch = new System.Windows.Forms.Label();
-            this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
-            this.chkShowConsole = new System.Windows.Forms.CheckBox();
-            this.chkShowLog = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pnlCenter.SuspendLayout();
             this.grbThemes.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
@@ -300,6 +300,75 @@
             this.grbLauncher.TabStop = false;
             this.grbLauncher.Text = "grb.launcher";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(7, 87);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(433, 1);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            // 
+            // btnCheckUpdates
+            // 
+            this.btnCheckUpdates.ForeColor = System.Drawing.Color.Black;
+            this.btnCheckUpdates.Location = new System.Drawing.Point(6, 121);
+            this.btnCheckUpdates.Name = "btnCheckUpdates";
+            this.btnCheckUpdates.Size = new System.Drawing.Size(434, 23);
+            this.btnCheckUpdates.TabIndex = 3;
+            this.btnCheckUpdates.Text = "btn.checkUpdates";
+            this.btnCheckUpdates.UseVisualStyleBackColor = true;
+            this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(218, 41);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1, 40);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            // 
+            // cmbUpdateSelect
+            // 
+            this.cmbUpdateSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUpdateSelect.ForeColor = System.Drawing.Color.Black;
+            this.cmbUpdateSelect.FormattingEnabled = true;
+            this.cmbUpdateSelect.Location = new System.Drawing.Point(111, 94);
+            this.cmbUpdateSelect.Name = "cmbUpdateSelect";
+            this.cmbUpdateSelect.Size = new System.Drawing.Size(329, 21);
+            this.cmbUpdateSelect.TabIndex = 0;
+            this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
+            // 
+            // lblBranch
+            // 
+            this.lblBranch.AutoSize = true;
+            this.lblBranch.Location = new System.Drawing.Point(6, 97);
+            this.lblBranch.Name = "lblBranch";
+            this.lblBranch.Size = new System.Drawing.Size(53, 13);
+            this.lblBranch.TabIndex = 1;
+            this.lblBranch.Text = "lbl.branch";
+            // 
+            // chkShowLog
+            // 
+            this.chkShowLog.AutoSize = true;
+            this.chkShowLog.Location = new System.Drawing.Point(9, 46);
+            this.chkShowLog.Name = "chkShowLog";
+            this.chkShowLog.Size = new System.Drawing.Size(90, 17);
+            this.chkShowLog.TabIndex = 4;
+            this.chkShowLog.Text = "chk.showLog";
+            this.chkShowLog.UseVisualStyleBackColor = true;
+            this.chkShowLog.CheckedChanged += new System.EventHandler(this.chkShowLog_CheckedChanged);
+            // 
+            // chkShowConsole
+            // 
+            this.chkShowConsole.AutoSize = true;
+            this.chkShowConsole.Enabled = false;
+            this.chkShowConsole.Location = new System.Drawing.Point(9, 69);
+            this.chkShowConsole.Name = "chkShowConsole";
+            this.chkShowConsole.Size = new System.Drawing.Size(110, 17);
+            this.chkShowConsole.TabIndex = 3;
+            this.chkShowConsole.Text = "chk.showConsole";
+            this.chkShowConsole.UseVisualStyleBackColor = true;
+            // 
             // chkDiscordRpc
             // 
             this.chkDiscordRpc.AutoSize = true;
@@ -331,75 +400,6 @@
             this.cmbLangSelect.Size = new System.Drawing.Size(330, 21);
             this.cmbLangSelect.TabIndex = 0;
             this.cmbLangSelect.SelectedIndexChanged += new System.EventHandler(this.cmbLangSelect_SelectedIndexChanged);
-            // 
-            // btnCheckUpdates
-            // 
-            this.btnCheckUpdates.ForeColor = System.Drawing.Color.Black;
-            this.btnCheckUpdates.Location = new System.Drawing.Point(6, 121);
-            this.btnCheckUpdates.Name = "btnCheckUpdates";
-            this.btnCheckUpdates.Size = new System.Drawing.Size(434, 23);
-            this.btnCheckUpdates.TabIndex = 3;
-            this.btnCheckUpdates.Text = "btn.checkUpdates";
-            this.btnCheckUpdates.UseVisualStyleBackColor = true;
-            this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);
-            // 
-            // lblBranch
-            // 
-            this.lblBranch.AutoSize = true;
-            this.lblBranch.Location = new System.Drawing.Point(6, 97);
-            this.lblBranch.Name = "lblBranch";
-            this.lblBranch.Size = new System.Drawing.Size(53, 13);
-            this.lblBranch.TabIndex = 1;
-            this.lblBranch.Text = "lbl.branch";
-            // 
-            // cmbUpdateSelect
-            // 
-            this.cmbUpdateSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUpdateSelect.ForeColor = System.Drawing.Color.Black;
-            this.cmbUpdateSelect.FormattingEnabled = true;
-            this.cmbUpdateSelect.Location = new System.Drawing.Point(111, 94);
-            this.cmbUpdateSelect.Name = "cmbUpdateSelect";
-            this.cmbUpdateSelect.Size = new System.Drawing.Size(329, 21);
-            this.cmbUpdateSelect.TabIndex = 0;
-            this.cmbUpdateSelect.SelectedIndexChanged += new System.EventHandler(this.cmbUpdateSelect_SelectedIndexChanged);
-            // 
-            // chkShowConsole
-            // 
-            this.chkShowConsole.AutoSize = true;
-            this.chkShowConsole.Enabled = false;
-            this.chkShowConsole.Location = new System.Drawing.Point(6, 46);
-            this.chkShowConsole.Name = "chkShowConsole";
-            this.chkShowConsole.Size = new System.Drawing.Size(110, 17);
-            this.chkShowConsole.TabIndex = 3;
-            this.chkShowConsole.Text = "chk.showConsole";
-            this.chkShowConsole.UseVisualStyleBackColor = true;
-            // 
-            // chkShowLog
-            // 
-            this.chkShowLog.AutoSize = true;
-            this.chkShowLog.Enabled = false;
-            this.chkShowLog.Location = new System.Drawing.Point(6, 69);
-            this.chkShowLog.Name = "chkShowLog";
-            this.chkShowLog.Size = new System.Drawing.Size(90, 17);
-            this.chkShowLog.TabIndex = 4;
-            this.chkShowLog.Text = "chk.showLog";
-            this.chkShowLog.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(218, 41);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1, 40);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(7, 87);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(433, 1);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
             // 
             // SettingsScreen
             // 
@@ -450,9 +450,9 @@
         public System.Windows.Forms.CheckBox chkUseTheme;
         public System.Windows.Forms.Button btnTheme;
         public System.Windows.Forms.ComboBox cmbTheme;
-        private System.Windows.Forms.CheckBox chkShowConsole;
-        private System.Windows.Forms.CheckBox chkShowLog;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.CheckBox chkShowLog;
+        public System.Windows.Forms.CheckBox chkShowConsole;
     }
 }
