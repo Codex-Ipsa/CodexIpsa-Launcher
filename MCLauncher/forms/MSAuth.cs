@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -88,7 +89,6 @@ namespace MCLauncher
             {
                 String response = Http.postUrl(url, data);
 
-                deviceCurrent = deviceLimit + 1;
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth/deviceFlowPing]", $"Response string: {response}");
                 else
@@ -97,6 +97,8 @@ namespace MCLauncher
                 AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
                 msAccessToken = json.access_token;
                 msRefreshToken = json.refresh_token;
+
+                deviceCurrent = deviceLimit + 1; //this STOPS THE FUCKING CLOCK!! WHY WAS IT NOT AT THE END!!!!
             }
             catch (WebException)
             {
@@ -111,11 +113,14 @@ namespace MCLauncher
             {
                 String url = "https://user.auth.xboxlive.com/user/authenticate";
                 String data = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={msAccess}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
-                String response = Http.postJson(url, data);
 
-                //try getting req body for debug??
-                //wtf happening here, it keeps returning 400 BAD REQUEST for some people
-                //BAD REQUEST MORE LIKE WHYYYYYYY
+                if(Globals.isDebug)
+                {
+                    Console.WriteLine("URL: " + url);
+                    Console.WriteLine("DATA: " + data);
+                }
+
+                String response = Http.postJson(url, data);
 
                 if (Globals.isDebug)
                     Logger.Info($"[MSAuth/xblAuth]", $"response: {response}");
@@ -449,6 +454,7 @@ namespace MCLauncher
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            Thread.Sleep(500); //keep this here just in case, it doesn't fix xblauth 400 but it helps the coloring in debug
             Logger.Info("[MSAuth]", "Worker completed!");
             deviceFlow();
             this.Close();
