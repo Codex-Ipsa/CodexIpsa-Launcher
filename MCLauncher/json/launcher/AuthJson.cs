@@ -9,7 +9,7 @@ namespace MCLauncher.json.launcher
         public string access_token { get; set; }
         public string Token { get; set; }
         public string uhs { get; set; }
-        public string XErr { get; set; }
+        public double XErr { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public string user_code { get; set; }

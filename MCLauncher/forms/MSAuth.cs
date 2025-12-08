@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -112,6 +113,10 @@ namespace MCLauncher
                 String data = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={msAccess}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
                 String response = Http.postJson(url, data);
 
+                //try getting req body for debug??
+                //wtf happening here, it keeps returning 400 BAD REQUEST for some people
+                //BAD REQUEST MORE LIKE WHYYYYYYY
+
                 if (Globals.isDebug)
                     Logger.Info($"[MSAuth/xblAuth]", $"response: {response}");
 
@@ -138,13 +143,31 @@ namespace MCLauncher
                     Logger.Info($"[MSAuth/xstsAuth]", $"response: {response}");
 
                 AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
-                Logger.Info($"[MSAuth/xstsAuth]", $"xError: {json.XErr}");
 
                 return json.Token;
             }
             catch (WebException e)
             {
+                String resp = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(resp);
                 Logger.Error("[MSAuth/xstsAuth]", $"returned an error: {e.Message}");
+                Logger.Info($"[MSAuth/xstsAuth]", $"xError: {json.XErr}");
+
+                //decode different xerrs and set error msg
+                if (json.XErr == 2148916227)
+                    errorMsg = $"Seems like your Xbox account has been banned.\nTry another one.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916233)
+                    errorMsg = $"Seems like you don't own an Xbox account.\nCreate one, or try a different Microsoft account.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916235)
+                    errorMsg = $"Your account is from a country where Xbox Live is not available.\nTry another one.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916236 || json.XErr == 2148916237)
+                    errorMsg = $"Seems like your Xbox account needs adult verification.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916238)
+                    errorMsg = $"Your account seems to be underage and needs to be added to a family by an adult.\n(XErr: {json.XErr})";
+                else
+                    errorMsg = $"Something has gone wrong in the login process.\nPlease, try again or try a different account.\n(XErr: {json.XErr})";
+
                 return null;
             }
         }
