@@ -305,7 +305,7 @@ namespace MCLauncher
                 String xblUser = xblInfo[1];
 
                 String xstsToken = getXstsToken(xblToken);
-                if (xblToken != null)
+                if (xstsToken != null)
                 {
                     String accessToken = getMinecraftToken(xblUser, xstsToken);
                     if (accessToken != null)
@@ -362,7 +362,7 @@ namespace MCLauncher
                     String xblUser = xblInfo[1];
 
                     String xstsToken = getXstsToken(xblToken);
-                    if (xblToken != null)
+                    if (xstsToken != null)
                     {
                         String accessToken = getMinecraftToken(xblUser, xstsToken);
                         if (accessToken != null)
