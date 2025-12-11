@@ -64,7 +64,7 @@ namespace MCLauncher
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";
 
-            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
+            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance);
             Instance.cmbInstaces.SelectedIndex = instanceIndex;
             if (instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
             {
@@ -148,15 +148,28 @@ namespace MCLauncher
             List<string> instanceList = new List<string>();
             string[] dirs = Directory.GetDirectories($"{Globals.dataPath}\\instance\\", "*");
 
+            Console.Write("instances: ");
             foreach (string dir in dirs)
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
+                Console.Write(dirName + " ");
+
+                //debug - print all instances
                 if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
                     instanceList.Add(dirName);
-                }
+                    Console.Write("1 ");
+                } else
+                    Console.Write("0 ");
+
+                if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\jarmods\\mods.json"))
+                    Console.Write("1 ");
+                else
+                    Console.Write("0 ");
             }
+            Console.WriteLine();
+
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
         }
@@ -167,6 +180,10 @@ namespace MCLauncher
 
             Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
+
+            //debug print json
+            Logger.Info("[HomeScreen/reloadInstance]", $"{json}");
+            
             InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
             selectedVersion = "Minecraft " + ij.version;
