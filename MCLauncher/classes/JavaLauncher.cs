@@ -227,25 +227,30 @@ namespace MCLauncher.classes
 
             foreach (var lib in vj.libraries)
             {
-                if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
+                //this ensures compatibility with old (pre-0.4.0) jsons
+                String libName = lib.name;
+                if (lib.version != null)
+                    libName = $"{lib.name}-{lib.version}";
+
+                if (!File.Exists($"{Globals.dataPath}\\libs\\{libName}.jar"))
                 {
-                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{libName}.jar");
                 }
                 else
                 {
                     //TODO check against actual filesizes, this will do for now:tm:
-                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{libName}.jar");
                     if (fi.Length == 0)
                     {
                         //delete and redownload
-                        File.Delete($"{Globals.dataPath}\\libs\\{lib.name}.jar");
-                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                        File.Delete($"{Globals.dataPath}\\libs\\{libName}.jar");
+                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{libName}.jar");
                     }
                 }
 
                 if (lib.extract == true)
                 {
-                    var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{libName}.jar");
                     foreach (var zipArchiveEntry in archive.Entries)
                     {
                         if (!zipArchiveEntry.ToString().Contains("META-INF"))
@@ -258,7 +263,7 @@ namespace MCLauncher.classes
                     }
                 }
                 else
-                    jars += $"\"{Globals.dataPath}\\libs\\{lib.name}.jar\";";
+                    jars += $"\"{Globals.dataPath}\\libs\\{libName}.jar\";";
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 

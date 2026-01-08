@@ -33,6 +33,7 @@ namespace MCLauncher.json.api
     public class VersionJsonLibraries
     {
         public String name { get; set; }
+        public String version { get; set; }
         public String url { get; set; }
         public int size { get; set; }
         public bool extract { get; set; }
