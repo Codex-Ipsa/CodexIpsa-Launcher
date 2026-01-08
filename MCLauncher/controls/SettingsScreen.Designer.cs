@@ -35,6 +35,9 @@
             this.btnTheme = new System.Windows.Forms.Button();
             this.cmbTheme = new System.Windows.Forms.ComboBox();
             this.grbJavaInstalls = new System.Windows.Forms.GroupBox();
+            this.lblJre25 = new System.Windows.Forms.Label();
+            this.btnJre25 = new System.Windows.Forms.Button();
+            this.cmbJre25 = new System.Windows.Forms.ComboBox();
             this.btnJre21 = new System.Windows.Forms.Button();
             this.btnGetJava21 = new System.Windows.Forms.Button();
             this.lblJre21 = new System.Windows.Forms.Label();
@@ -54,10 +57,10 @@
             this.cmbUpdateSelect = new System.Windows.Forms.ComboBox();
             this.lblBranch = new System.Windows.Forms.Label();
             this.chkShowLog = new System.Windows.Forms.CheckBox();
-            this.chkShowConsole = new System.Windows.Forms.CheckBox();
             this.chkDiscordRpc = new System.Windows.Forms.CheckBox();
             this.lblLang = new System.Windows.Forms.Label();
             this.cmbLangSelect = new System.Windows.Forms.ComboBox();
+            this.btnGetJava25 = new System.Windows.Forms.Button();
             this.pnlCenter.SuspendLayout();
             this.grbThemes.SuspendLayout();
             this.grbJavaInstalls.SuspendLayout();
@@ -83,7 +86,7 @@
             this.grbThemes.Controls.Add(this.btnTheme);
             this.grbThemes.Controls.Add(this.cmbTheme);
             this.grbThemes.ForeColor = System.Drawing.Color.White;
-            this.grbThemes.Location = new System.Drawing.Point(0, 166);
+            this.grbThemes.Location = new System.Drawing.Point(0, 144);
             this.grbThemes.Name = "grbThemes";
             this.grbThemes.Size = new System.Drawing.Size(446, 72);
             this.grbThemes.TabIndex = 22;
@@ -136,6 +139,9 @@
             // grbJavaInstalls
             // 
             this.grbJavaInstalls.BackColor = System.Drawing.Color.Transparent;
+            this.grbJavaInstalls.Controls.Add(this.lblJre25);
+            this.grbJavaInstalls.Controls.Add(this.btnJre25);
+            this.grbJavaInstalls.Controls.Add(this.cmbJre25);
             this.grbJavaInstalls.Controls.Add(this.btnJre21);
             this.grbJavaInstalls.Controls.Add(this.btnGetJava21);
             this.grbJavaInstalls.Controls.Add(this.lblJre21);
@@ -149,12 +155,42 @@
             this.grbJavaInstalls.Controls.Add(this.lblJre8);
             this.grbJavaInstalls.Controls.Add(this.cmbJre8);
             this.grbJavaInstalls.ForeColor = System.Drawing.Color.White;
-            this.grbJavaInstalls.Location = new System.Drawing.Point(0, 244);
+            this.grbJavaInstalls.Location = new System.Drawing.Point(0, 222);
             this.grbJavaInstalls.Name = "grbJavaInstalls";
-            this.grbJavaInstalls.Size = new System.Drawing.Size(446, 130);
+            this.grbJavaInstalls.Size = new System.Drawing.Size(446, 152);
             this.grbJavaInstalls.TabIndex = 21;
             this.grbJavaInstalls.TabStop = false;
             this.grbJavaInstalls.Text = "grb.javaInstalls";
+            // 
+            // lblJre25
+            // 
+            this.lblJre25.AutoSize = true;
+            this.lblJre25.Location = new System.Drawing.Point(6, 103);
+            this.lblJre25.Name = "lblJre25";
+            this.lblJre25.Size = new System.Drawing.Size(43, 13);
+            this.lblJre25.TabIndex = 36;
+            this.lblJre25.Text = "lbl.jre25";
+            // 
+            // btnJre25
+            // 
+            this.btnJre25.ForeColor = System.Drawing.Color.Black;
+            this.btnJre25.Location = new System.Drawing.Point(403, 99);
+            this.btnJre25.Name = "btnJre25";
+            this.btnJre25.Size = new System.Drawing.Size(36, 21);
+            this.btnJre25.TabIndex = 35;
+            this.btnJre25.Text = "...";
+            this.btnJre25.UseVisualStyleBackColor = true;
+            this.btnJre25.Click += new System.EventHandler(this.btnJre25_Click);
+            // 
+            // cmbJre25
+            // 
+            this.cmbJre25.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbJre25.FormattingEnabled = true;
+            this.cmbJre25.Location = new System.Drawing.Point(67, 100);
+            this.cmbJre25.Name = "cmbJre25";
+            this.cmbJre25.Size = new System.Drawing.Size(330, 21);
+            this.cmbJre25.TabIndex = 34;
+            this.cmbJre25.TextUpdate += new System.EventHandler(this.cmbJre25_TextUpdate);
             // 
             // btnJre21
             // 
@@ -170,7 +206,7 @@
             // btnGetJava21
             // 
             this.btnGetJava21.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava21.Location = new System.Drawing.Point(291, 100);
+            this.btnGetJava21.Location = new System.Drawing.Point(291, 126);
             this.btnGetJava21.Name = "btnGetJava21";
             this.btnGetJava21.Size = new System.Drawing.Size(106, 23);
             this.btnGetJava21.TabIndex = 32;
@@ -200,7 +236,7 @@
             // btnGetJava17
             // 
             this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava17.Location = new System.Drawing.Point(179, 100);
+            this.btnGetJava17.Location = new System.Drawing.Point(179, 126);
             this.btnGetJava17.Name = "btnGetJava17";
             this.btnGetJava17.Size = new System.Drawing.Size(106, 23);
             this.btnGetJava17.TabIndex = 29;
@@ -211,7 +247,7 @@
             // btnGetJava8
             // 
             this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava8.Location = new System.Drawing.Point(67, 100);
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 126);
             this.btnGetJava8.Name = "btnGetJava8";
             this.btnGetJava8.Size = new System.Drawing.Size(106, 23);
             this.btnGetJava8.TabIndex = 28;
@@ -288,21 +324,20 @@
             this.grbLauncher.Controls.Add(this.cmbUpdateSelect);
             this.grbLauncher.Controls.Add(this.lblBranch);
             this.grbLauncher.Controls.Add(this.chkShowLog);
-            this.grbLauncher.Controls.Add(this.chkShowConsole);
             this.grbLauncher.Controls.Add(this.chkDiscordRpc);
             this.grbLauncher.Controls.Add(this.lblLang);
             this.grbLauncher.Controls.Add(this.cmbLangSelect);
             this.grbLauncher.ForeColor = System.Drawing.Color.White;
-            this.grbLauncher.Location = new System.Drawing.Point(0, 3);
+            this.grbLauncher.Location = new System.Drawing.Point(0, 0);
             this.grbLauncher.Name = "grbLauncher";
-            this.grbLauncher.Size = new System.Drawing.Size(446, 157);
+            this.grbLauncher.Size = new System.Drawing.Size(446, 138);
             this.grbLauncher.TabIndex = 20;
             this.grbLauncher.TabStop = false;
             this.grbLauncher.Text = "grb.launcher";
             // 
             // groupBox2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(7, 87);
+            this.groupBox2.Location = new System.Drawing.Point(7, 69);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(433, 1);
             this.groupBox2.TabIndex = 6;
@@ -311,7 +346,7 @@
             // btnCheckUpdates
             // 
             this.btnCheckUpdates.ForeColor = System.Drawing.Color.Black;
-            this.btnCheckUpdates.Location = new System.Drawing.Point(6, 121);
+            this.btnCheckUpdates.Location = new System.Drawing.Point(6, 103);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
             this.btnCheckUpdates.Size = new System.Drawing.Size(434, 23);
             this.btnCheckUpdates.TabIndex = 3;
@@ -323,7 +358,7 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(218, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1, 40);
+            this.groupBox1.Size = new System.Drawing.Size(1, 15);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -332,7 +367,7 @@
             this.cmbUpdateSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUpdateSelect.ForeColor = System.Drawing.Color.Black;
             this.cmbUpdateSelect.FormattingEnabled = true;
-            this.cmbUpdateSelect.Location = new System.Drawing.Point(111, 94);
+            this.cmbUpdateSelect.Location = new System.Drawing.Point(111, 76);
             this.cmbUpdateSelect.Name = "cmbUpdateSelect";
             this.cmbUpdateSelect.Size = new System.Drawing.Size(329, 21);
             this.cmbUpdateSelect.TabIndex = 0;
@@ -341,7 +376,7 @@
             // lblBranch
             // 
             this.lblBranch.AutoSize = true;
-            this.lblBranch.Location = new System.Drawing.Point(6, 97);
+            this.lblBranch.Location = new System.Drawing.Point(6, 79);
             this.lblBranch.Name = "lblBranch";
             this.lblBranch.Size = new System.Drawing.Size(53, 13);
             this.lblBranch.TabIndex = 1;
@@ -357,17 +392,6 @@
             this.chkShowLog.Text = "chk.showLog";
             this.chkShowLog.UseVisualStyleBackColor = true;
             this.chkShowLog.CheckedChanged += new System.EventHandler(this.chkShowLog_CheckedChanged);
-            // 
-            // chkShowConsole
-            // 
-            this.chkShowConsole.AutoSize = true;
-            this.chkShowConsole.Enabled = false;
-            this.chkShowConsole.Location = new System.Drawing.Point(9, 69);
-            this.chkShowConsole.Name = "chkShowConsole";
-            this.chkShowConsole.Size = new System.Drawing.Size(110, 17);
-            this.chkShowConsole.TabIndex = 3;
-            this.chkShowConsole.Text = "chk.showConsole";
-            this.chkShowConsole.UseVisualStyleBackColor = true;
             // 
             // chkDiscordRpc
             // 
@@ -401,11 +425,23 @@
             this.cmbLangSelect.TabIndex = 0;
             this.cmbLangSelect.SelectedIndexChanged += new System.EventHandler(this.cmbLangSelect_SelectedIndexChanged);
             // 
+            // btnGetJava25
+            // 
+            this.btnGetJava25.ForeColor = System.Drawing.Color.Black;
+            this.btnGetJava25.Location = new System.Drawing.Point(568, 353);
+            this.btnGetJava25.Name = "btnGetJava25";
+            this.btnGetJava25.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava25.TabIndex = 37;
+            this.btnGetJava25.Text = "btn.getJava25";
+            this.btnGetJava25.UseVisualStyleBackColor = true;
+            this.btnGetJava25.Click += new System.EventHandler(this.btnGetJava25_Click);
+            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
+            this.Controls.Add(this.btnGetJava25);
             this.Controls.Add(this.pnlCenter);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(784, 387);
@@ -453,6 +489,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.CheckBox chkShowLog;
-        public System.Windows.Forms.CheckBox chkShowConsole;
+        public System.Windows.Forms.Label lblJre25;
+        private System.Windows.Forms.Button btnJre25;
+        private System.Windows.Forms.ComboBox cmbJre25;
+        public System.Windows.Forms.Button btnGetJava25;
     }
 }

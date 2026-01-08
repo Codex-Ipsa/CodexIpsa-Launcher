@@ -60,15 +60,16 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
             SettingsScreen.InstanceSetting.chkShowLog.Text = sj.chkShowLog;
-            SettingsScreen.InstanceSetting.chkShowConsole.Text = sj.chkShowConsole;
 
             SettingsScreen.InstanceSetting.grbJavaInstalls.Text = sj.grbJavaInstalls;
             SettingsScreen.InstanceSetting.lblJre8.Text = "Java 8";
             SettingsScreen.InstanceSetting.lblJre17.Text = "Java 17";
             SettingsScreen.InstanceSetting.lblJre21.Text = "Java 21";
+            SettingsScreen.InstanceSetting.lblJre25.Text = "Java 25";
             SettingsScreen.InstanceSetting.btnGetJava8.Text = sj.installJava.Replace("{ver}", "8");
             SettingsScreen.InstanceSetting.btnGetJava17.Text = sj.installJava.Replace("{ver}", "17");
             SettingsScreen.InstanceSetting.btnGetJava21.Text = sj.installJava.Replace("{ver}", "21");
+            SettingsScreen.InstanceSetting.btnGetJava25.Text = sj.installJava.Replace("{ver}", "25");
 
             SettingsScreen.InstanceSetting.grbThemes.Text = sj.grbThemes;
             SettingsScreen.InstanceSetting.chkUseTheme.Text = sj.chkUseTheme;
@@ -125,7 +126,6 @@ namespace MCLauncher
             public String chkUseTheme = "Custom theme";
             public String chkThemesOptout = "Opt-out of seasonal themes";
             public String chkShowLog = "Show game log window";
-            public String chkShowConsole = "Show launcher console";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";

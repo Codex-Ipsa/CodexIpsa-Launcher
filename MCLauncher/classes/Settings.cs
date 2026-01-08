@@ -43,8 +43,10 @@ namespace MCLauncher
         public bool cnslWindow { get; set; }
 
         public string jre8 { get; set; }
+        public string jre16 { get; set; } //unused for now..
         public string jre17 { get; set; }
         public string jre21 { get; set; }
+        public string jre25 { get; set; }
 
         public SettingsJson()
         {
@@ -65,6 +67,7 @@ namespace MCLauncher
             jre8 = "java.exe";
             jre17 = "java.exe";
             jre21 = "java.exe";
+            jre25 = "java.exe";
         }
     }
 }

@@ -362,6 +362,8 @@ namespace MCLauncher.classes
                 proc.StartInfo.FileName = Settings.sj.jre17;
             else if (vj.java <= 21)
                 proc.StartInfo.FileName = Settings.sj.jre21;
+            else if (vj.java <= 25)
+                proc.StartInfo.FileName = Settings.sj.jre25;
             else
                 proc.StartInfo.FileName = "java.exe";
 

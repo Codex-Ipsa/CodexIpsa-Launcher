@@ -59,7 +59,6 @@ namespace MCLauncher.controls
             //rpc
             chkDiscordRpc.Checked = Settings.sj.discordRPC;
             chkShowLog.Checked = Settings.sj.logGame;
-            chkShowConsole.Checked = true; //temp until i figure out if this is possible to hide
 
             //themes
             chkUseTheme.Checked = Settings.sj.useTheme;
@@ -75,6 +74,7 @@ namespace MCLauncher.controls
             cmbJre8.Text = Settings.sj.jre8;
             cmbJre17.Text = Settings.sj.jre17;
             cmbJre21.Text = Settings.sj.jre21;
+            cmbJre25.Text = Settings.sj.jre25;
         }
 
         public static void loadData()
@@ -242,6 +242,18 @@ namespace MCLauncher.controls
             }
         }
 
+        private void btnJre25_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Executables|*.exe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                cmbJre25.Text = ofd.FileName;
+                Settings.sj.jre25 = ofd.FileName;
+                Settings.Save();
+            }
+        }
+
         private void btnGetJava8_Click(object sender, EventArgs e)
         {
             DownloadJava(8);
@@ -255,6 +267,11 @@ namespace MCLauncher.controls
         private void btnGetJava21_Click(object sender, EventArgs e)
         {
             DownloadJava(21);
+        }
+
+        private void btnGetJava25_Click(object sender, EventArgs e)
+        {
+            DownloadJava(25);
         }
 
         private void cmbJre8_TextUpdate(object sender, EventArgs e)
@@ -272,6 +289,12 @@ namespace MCLauncher.controls
         private void cmbJre21_TextUpdate(object sender, EventArgs e)
         {
             Settings.sj.jre21 = cmbJre21.Text;
+            Settings.Save();
+        }
+
+        private void cmbJre25_TextUpdate(object sender, EventArgs e)
+        {
+            Settings.sj.jre25 = cmbJre25.Text;
             Settings.Save();
         }
 
@@ -345,6 +368,12 @@ namespace MCLauncher.controls
                                 {
                                     cmbJre21.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.sj.jre21 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.Save();
+                                }
+                                else if (vers.major == 25)
+                                {
+                                    cmbJre25.Text = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
+                                    Settings.sj.jre25 = $"{Globals.dataPath}\\jre\\jre{vers.major}\\{vers.executable}";
                                     Settings.Save();
                                 }
                             }
