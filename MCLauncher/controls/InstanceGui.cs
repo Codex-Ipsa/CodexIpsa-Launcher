@@ -31,7 +31,7 @@ namespace MCLauncher.controls
             grbGame.Text = Strings.sj.grbGame;
             lblProfName.Text = Strings.sj.lblProfName;
             lblGameDir.Text = Strings.sj.lblGameDir;
-            lblReso.Text = Strings.sj.lblReso;
+            chkReso.Text = Strings.sj.lblReso;
             lblMem.Text = Strings.sj.lblMem;
             lblMemMax.Text = Strings.sj.lblMemMax;
             lblMemMin.Text = Strings.sj.lblMemMin;
@@ -266,6 +266,7 @@ namespace MCLauncher.controls
                 ij.version = "latestsnapshot";
 
             ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
+            ij.useResolution = chkReso.Checked;
             ij.resolution = $"{resXBox.Text} {resYBox.Text}";
             ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
             ij.befCmd = jvmArgsBox.Text;
@@ -391,6 +392,20 @@ namespace MCLauncher.controls
         private void xboxNameBox_TextChanged(object sender, EventArgs e)
         {
             nameBox.Text = xboxNameBox.Text;
+        }
+
+        private void chkReso_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkReso.Checked)
+            {
+                resXBox.Enabled = true;
+                resYBox.Enabled = true;
+            }
+            else
+            {
+                resXBox.Enabled = false;
+                resYBox.Enabled = false;
+            }
         }
 
         private void ramMaxBox_ValueChanged(object sender, EventArgs e)

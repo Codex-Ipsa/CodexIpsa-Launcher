@@ -271,7 +271,11 @@ namespace MCLauncher.classes
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 
-            string[] defRes = ij.resolution.Split(' ');
+            string[] defRes = new string[2];
+            if (ij.useResolution)
+                defRes = ij.resolution.Split(' ');
+            else
+                defRes = vj.defRes.Split(' ');
 
             if (vj.assets == null)
             {

@@ -56,7 +56,6 @@
             this.lblProfName = new System.Windows.Forms.Label();
             this.lblGameDir = new System.Windows.Forms.Label();
             this.dirBtn = new System.Windows.Forms.Button();
-            this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
             this.grbXbox = new System.Windows.Forms.GroupBox();
@@ -95,6 +94,7 @@
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.shortcutBtn = new System.Windows.Forms.Button();
+            this.chkReso = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -361,15 +361,6 @@
             this.dirBtn.Text = "...";
             this.dirBtn.UseVisualStyleBackColor = true;
             this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
-            // 
-            // lblReso
-            // 
-            this.lblReso.AutoSize = true;
-            this.lblReso.Location = new System.Drawing.Point(6, 74);
-            this.lblReso.Name = "lblReso";
-            this.lblReso.Size = new System.Drawing.Size(45, 13);
-            this.lblReso.TabIndex = 12;
-            this.lblReso.Text = "lbl.Reso";
             // 
             // nameBox
             // 
@@ -736,6 +727,7 @@
             // grbGame
             // 
             this.grbGame.BackColor = System.Drawing.SystemColors.Control;
+            this.grbGame.Controls.Add(this.chkReso);
             this.grbGame.Controls.Add(this.lblGameArgs);
             this.grbGame.Controls.Add(this.gameArgsBox);
             this.grbGame.Controls.Add(this.lblJvmArgs);
@@ -755,7 +747,6 @@
             this.grbGame.Controls.Add(this.lblProfName);
             this.grbGame.Controls.Add(this.lblGameDir);
             this.grbGame.Controls.Add(this.dirBtn);
-            this.grbGame.Controls.Add(this.lblReso);
             this.grbGame.Controls.Add(this.nameBox);
             this.grbGame.Controls.Add(this.dirBox);
             this.grbGame.Location = new System.Drawing.Point(368, 2);
@@ -862,6 +853,17 @@
             this.shortcutBtn.UseVisualStyleBackColor = true;
             this.shortcutBtn.Click += new System.EventHandler(this.shortcutBtn_Click);
             // 
+            // chkReso
+            // 
+            this.chkReso.AutoSize = true;
+            this.chkReso.Location = new System.Drawing.Point(6, 73);
+            this.chkReso.Name = "chkReso";
+            this.chkReso.Size = new System.Drawing.Size(72, 17);
+            this.chkReso.TabIndex = 29;
+            this.chkReso.Text = "chk.Reso";
+            this.chkReso.UseVisualStyleBackColor = true;
+            this.chkReso.CheckedChanged += new System.EventHandler(this.chkReso_CheckedChanged);
+            // 
             // InstanceGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -921,7 +923,6 @@
         public System.Windows.Forms.Label lblProfName;
         public System.Windows.Forms.Label lblGameDir;
         public System.Windows.Forms.Button dirBtn;
-        public System.Windows.Forms.Label lblReso;
         public System.Windows.Forms.TextBox nameBox;
         public System.Windows.Forms.TextBox dirBox;
         public System.Windows.Forms.GroupBox grbXbox;
@@ -960,5 +961,6 @@
         public System.Windows.Forms.TextBox serverIPBox;
         public System.Windows.Forms.CheckBox chkOther;
         private System.Windows.Forms.Button shortcutBtn;
+        public System.Windows.Forms.CheckBox chkReso;
     }
 }
