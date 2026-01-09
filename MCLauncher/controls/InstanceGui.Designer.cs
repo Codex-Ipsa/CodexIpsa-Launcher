@@ -85,6 +85,7 @@
             this.xboxList = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.grbGame = new System.Windows.Forms.GroupBox();
+            this.chkReso = new System.Windows.Forms.CheckBox();
             this.grbForExp = new System.Windows.Forms.GroupBox();
             this.chkServerIP = new System.Windows.Forms.CheckBox();
             this.serverIPBox = new System.Windows.Forms.TextBox();
@@ -94,7 +95,6 @@
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.shortcutBtn = new System.Windows.Forms.Button();
-            this.chkReso = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -265,7 +265,7 @@
             0});
             this.ramMaxBox.Location = new System.Drawing.Point(99, 97);
             this.ramMaxBox.Maximum = new decimal(new int[] {
-            16384,
+            32768,
             0,
             0,
             0});
@@ -427,7 +427,7 @@
             0});
             this.ramMinBox.Location = new System.Drawing.Point(277, 97);
             this.ramMinBox.Maximum = new decimal(new int[] {
-            16384,
+            32768,
             0,
             0,
             0});
@@ -756,6 +756,17 @@
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
             // 
+            // chkReso
+            // 
+            this.chkReso.AutoSize = true;
+            this.chkReso.Location = new System.Drawing.Point(6, 73);
+            this.chkReso.Name = "chkReso";
+            this.chkReso.Size = new System.Drawing.Size(72, 17);
+            this.chkReso.TabIndex = 29;
+            this.chkReso.Text = "chk.Reso";
+            this.chkReso.UseVisualStyleBackColor = true;
+            this.chkReso.CheckedChanged += new System.EventHandler(this.chkReso_CheckedChanged);
+            // 
             // grbForExp
             // 
             this.grbForExp.Controls.Add(this.chkServerIP);
@@ -852,17 +863,6 @@
             this.shortcutBtn.Text = "btn.shortcut";
             this.shortcutBtn.UseVisualStyleBackColor = true;
             this.shortcutBtn.Click += new System.EventHandler(this.shortcutBtn_Click);
-            // 
-            // chkReso
-            // 
-            this.chkReso.AutoSize = true;
-            this.chkReso.Location = new System.Drawing.Point(6, 73);
-            this.chkReso.Name = "chkReso";
-            this.chkReso.Size = new System.Drawing.Size(72, 17);
-            this.chkReso.TabIndex = 29;
-            this.chkReso.Text = "chk.Reso";
-            this.chkReso.UseVisualStyleBackColor = true;
-            this.chkReso.CheckedChanged += new System.EventHandler(this.chkReso_CheckedChanged);
             // 
             // InstanceGui
             // 
