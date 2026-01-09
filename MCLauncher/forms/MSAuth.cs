@@ -114,7 +114,7 @@ namespace MCLauncher
                 String url = "https://user.auth.xboxlive.com/user/authenticate";
                 String data = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={msAccess}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
 
-                if(Globals.isDebug)
+                if (Globals.isDebug)
                 {
                     Console.WriteLine("URL: " + url);
                     Console.WriteLine("DATA: " + data);

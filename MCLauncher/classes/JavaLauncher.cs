@@ -120,7 +120,7 @@ namespace MCLauncher.classes
             Logger.Info("[JavaLauncher]", $"manifestPath: {manifestPath}");
 
             string manifestJson = File.ReadAllText(manifestPath);
-            if(Globals.isDebug)
+            if (Globals.isDebug)
                 Logger.Info("[JavaLauncher]", $"manifestJson: {manifestJson}");
 
             VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(manifestJson);

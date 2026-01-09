@@ -160,10 +160,11 @@ namespace MCLauncher
                 {
                     instanceList.Add(dirName);
                     Console.Write("1 ");
-                } else
+                }
+                else
                     Console.Write("0 ");
 
-                if(File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\jarmods\\mods.json"))
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\jarmods\\mods.json"))
                     Console.Write("1 ");
                 else
                     Console.Write("0 ");
@@ -183,7 +184,7 @@ namespace MCLauncher
 
             //debug print json
             Logger.Info("[HomeScreen/reloadInstance]", $"{json}");
-            
+
             InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
             selectedVersion = "Minecraft " + ij.version;
