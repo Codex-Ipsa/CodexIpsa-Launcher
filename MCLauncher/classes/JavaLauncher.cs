@@ -118,7 +118,11 @@ namespace MCLauncher.classes
 
             //deserialize VersionJson
             Logger.Info("[JavaLauncher]", $"manifestPath: {manifestPath}");
+
             string manifestJson = File.ReadAllText(manifestPath);
+            if(Globals.isDebug)
+                Logger.Info("[JavaLauncher]", $"manifestJson: {manifestJson}");
+
             VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 
             //get ip and port for mppass (if wanted)
@@ -140,8 +144,8 @@ namespace MCLauncher.classes
             }
 
             //download game jar
-            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
-                Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vj.version}.jar"))
+                Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{vj.version}.jar");
 
             //create mod patch and info
             var modInfo = ModWorker.createJarPatch(instanceName);
@@ -201,7 +205,7 @@ namespace MCLauncher.classes
             if (modClientPath != null)
                 jars += $"\"{modClientPath}\";";
             else
-                jars += $"\"{Globals.dataPath}\\versions\\java\\{version}.jar\";";
+                jars += $"\"{Globals.dataPath}\\versions\\java\\{vj.version}.jar\";";
 
             string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.TopDirectoryOnly);
             foreach (string oldNative in oldNatives)
