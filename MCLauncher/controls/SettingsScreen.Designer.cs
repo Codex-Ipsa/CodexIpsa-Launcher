@@ -139,6 +139,7 @@
             // grbJavaInstalls
             // 
             this.grbJavaInstalls.BackColor = System.Drawing.Color.Transparent;
+            this.grbJavaInstalls.Controls.Add(this.btnGetJava25);
             this.grbJavaInstalls.Controls.Add(this.lblJre25);
             this.grbJavaInstalls.Controls.Add(this.btnJre25);
             this.grbJavaInstalls.Controls.Add(this.cmbJre25);
@@ -206,9 +207,9 @@
             // btnGetJava21
             // 
             this.btnGetJava21.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava21.Location = new System.Drawing.Point(291, 126);
+            this.btnGetJava21.Location = new System.Drawing.Point(255, 123);
             this.btnGetJava21.Name = "btnGetJava21";
-            this.btnGetJava21.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava21.Size = new System.Drawing.Size(88, 23);
             this.btnGetJava21.TabIndex = 32;
             this.btnGetJava21.Text = "btn.getJava21";
             this.btnGetJava21.UseVisualStyleBackColor = true;
@@ -236,9 +237,9 @@
             // btnGetJava17
             // 
             this.btnGetJava17.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava17.Location = new System.Drawing.Point(179, 126);
+            this.btnGetJava17.Location = new System.Drawing.Point(161, 123);
             this.btnGetJava17.Name = "btnGetJava17";
-            this.btnGetJava17.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava17.Size = new System.Drawing.Size(88, 23);
             this.btnGetJava17.TabIndex = 29;
             this.btnGetJava17.Text = "btn.getJava17";
             this.btnGetJava17.UseVisualStyleBackColor = true;
@@ -247,9 +248,9 @@
             // btnGetJava8
             // 
             this.btnGetJava8.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava8.Location = new System.Drawing.Point(67, 126);
+            this.btnGetJava8.Location = new System.Drawing.Point(67, 123);
             this.btnGetJava8.Name = "btnGetJava8";
-            this.btnGetJava8.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava8.Size = new System.Drawing.Size(88, 23);
             this.btnGetJava8.TabIndex = 28;
             this.btnGetJava8.Text = "btn.getJava8";
             this.btnGetJava8.UseVisualStyleBackColor = true;
@@ -428,9 +429,9 @@
             // btnGetJava25
             // 
             this.btnGetJava25.ForeColor = System.Drawing.Color.Black;
-            this.btnGetJava25.Location = new System.Drawing.Point(568, 353);
+            this.btnGetJava25.Location = new System.Drawing.Point(349, 123);
             this.btnGetJava25.Name = "btnGetJava25";
-            this.btnGetJava25.Size = new System.Drawing.Size(106, 23);
+            this.btnGetJava25.Size = new System.Drawing.Size(88, 23);
             this.btnGetJava25.TabIndex = 37;
             this.btnGetJava25.Text = "btn.getJava25";
             this.btnGetJava25.UseVisualStyleBackColor = true;
@@ -441,7 +442,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
-            this.Controls.Add(this.btnGetJava25);
             this.Controls.Add(this.pnlCenter);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(784, 387);
