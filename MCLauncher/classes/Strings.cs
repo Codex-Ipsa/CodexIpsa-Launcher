@@ -66,10 +66,10 @@ namespace MCLauncher
             SettingsScreen.InstanceSetting.lblJre17.Text = "Java 17";
             SettingsScreen.InstanceSetting.lblJre21.Text = "Java 21";
             SettingsScreen.InstanceSetting.lblJre25.Text = "Java 25";
-            SettingsScreen.InstanceSetting.btnGetJava8.Text = sj.installJava.Replace("{ver}", "8");
-            SettingsScreen.InstanceSetting.btnGetJava17.Text = sj.installJava.Replace("{ver}", "17");
-            SettingsScreen.InstanceSetting.btnGetJava21.Text = sj.installJava.Replace("{ver}", "21");
-            SettingsScreen.InstanceSetting.btnGetJava25.Text = sj.installJava.Replace("{ver}", "25");
+            SettingsScreen.InstanceSetting.btnGetJava8.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava17.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava21.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava25.Text = "↓";
 
             SettingsScreen.InstanceSetting.grbThemes.Text = sj.grbThemes;
             SettingsScreen.InstanceSetting.chkUseTheme.Text = sj.chkUseTheme;
@@ -121,7 +121,7 @@ namespace MCLauncher
             public string btnCheckUpdates = "Check for updates";
             public string grbDefaults = "Defaults"; //DEPRECATED
             public String grbJavaInstalls = "Java installations";
-            public string installJava = "Install Java {ver} ↓";
+            public string installJava = "Install Java {ver} ↓"; //DEPRECATED
             public String grbThemes = "Themes";
             public String chkUseTheme = "Custom theme";
             public String chkThemesOptout = "Opt-out of seasonal themes";
