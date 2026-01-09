@@ -134,7 +134,7 @@
             // chkAssetIndex
             // 
             this.chkAssetIndex.AutoSize = true;
-            this.chkAssetIndex.Location = new System.Drawing.Point(6, 100);
+            this.chkAssetIndex.Location = new System.Drawing.Point(9, 101);
             this.chkAssetIndex.Name = "chkAssetIndex";
             this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
             this.chkAssetIndex.TabIndex = 33;
@@ -162,7 +162,7 @@
             // chkCustJava
             // 
             this.chkCustJava.AutoSize = true;
-            this.chkCustJava.Location = new System.Drawing.Point(6, 74);
+            this.chkCustJava.Location = new System.Drawing.Point(9, 75);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
             this.chkCustJava.TabIndex = 30;
@@ -173,7 +173,7 @@
             // chkCustJson
             // 
             this.chkCustJson.AutoSize = true;
-            this.chkCustJson.Location = new System.Drawing.Point(6, 48);
+            this.chkCustJson.Location = new System.Drawing.Point(9, 48);
             this.chkCustJson.Name = "chkCustJson";
             this.chkCustJson.Size = new System.Drawing.Size(90, 17);
             this.chkCustJson.TabIndex = 27;
@@ -191,7 +191,7 @@
             // chkClasspath
             // 
             this.chkClasspath.AutoSize = true;
-            this.chkClasspath.Location = new System.Drawing.Point(6, 22);
+            this.chkClasspath.Location = new System.Drawing.Point(9, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
             this.chkClasspath.TabIndex = 25;
@@ -219,7 +219,7 @@
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(6, 195);
+            this.chkOffline.Location = new System.Drawing.Point(9, 195);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(77, 17);
             this.chkOffline.TabIndex = 23;
@@ -239,7 +239,7 @@
             // chkProxy
             // 
             this.chkProxy.AutoSize = true;
-            this.chkProxy.Location = new System.Drawing.Point(6, 172);
+            this.chkProxy.Location = new System.Drawing.Point(9, 172);
             this.chkProxy.Name = "chkProxy";
             this.chkProxy.Size = new System.Drawing.Size(73, 17);
             this.chkProxy.TabIndex = 21;
@@ -759,7 +759,7 @@
             // chkReso
             // 
             this.chkReso.AutoSize = true;
-            this.chkReso.Location = new System.Drawing.Point(6, 73);
+            this.chkReso.Location = new System.Drawing.Point(9, 73);
             this.chkReso.Name = "chkReso";
             this.chkReso.Size = new System.Drawing.Size(72, 17);
             this.chkReso.TabIndex = 29;
@@ -792,7 +792,7 @@
             // chkServerIP
             // 
             this.chkServerIP.AutoSize = true;
-            this.chkServerIP.Location = new System.Drawing.Point(6, 126);
+            this.chkServerIP.Location = new System.Drawing.Point(9, 126);
             this.chkServerIP.Name = "chkServerIP";
             this.chkServerIP.Size = new System.Drawing.Size(88, 17);
             this.chkServerIP.TabIndex = 37;
