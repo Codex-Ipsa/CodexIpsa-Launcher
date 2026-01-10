@@ -201,9 +201,10 @@
             // 
             // lblAnnouncer
             // 
+            this.lblAnnouncer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAnnouncer.BackColor = System.Drawing.Color.White;
             this.lblAnnouncer.ForeColor = System.Drawing.Color.Black;
-            this.lblAnnouncer.Location = new System.Drawing.Point(600, 210);
+            this.lblAnnouncer.Location = new System.Drawing.Point(600, 187);
             this.lblAnnouncer.Name = "lblAnnouncer";
             this.lblAnnouncer.Size = new System.Drawing.Size(116, 40);
             this.lblAnnouncer.TabIndex = 23;
