@@ -1,6 +1,7 @@
 ﻿using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -82,8 +83,19 @@ namespace MCLauncher
             CreditsScreen.Instance.lblSpecialThanks.Text = sj.lblSpecialThanks;
         }
 
+        //exports ENGLISH language json for translators
+        public static void exportLangJson()
+        {
+            stringJson export = new stringJson();
+            String toSave = JsonConvert.SerializeObject(export);
+            File.WriteAllText($"export-english.json", toSave);
+        }
+
         public class stringJson
         {
+            //VERSION LAST UPDATED
+            public String launcherVerLast = Globals.verCurrent;
+
             //MainWindow
             public string cntHome = "Home";
             public string cntProfiles = "Profiles";
