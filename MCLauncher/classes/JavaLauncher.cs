@@ -7,32 +7,57 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Media.Media3D;
 
 namespace MCLauncher.classes
 {
-    internal class JavaLauncher
+    public class JavaLauncher
     {
         //TODO
         //Possibly rewrite all of this shit
-        public static string msPlayerName;
-        public static string msPlayerUUID;
-        public static string msPlayerAccessToken;
 
         public static string manifestPath = "";
 
         public static string runID = "";
 
-        public static void Launch(string profileName)
+        public InstanceJson ij = new InstanceJson();
+        public String instanceName;
+        public bool noGui = false;
+        public GameOutput gameOutput;
+
+        public Process proc;
+
+        public JavaLauncher(string instanceName, bool noGui)
+        {
+            this.instanceName = instanceName;
+            this.noGui = noGui;
+
+            //game log window fuckery
+            GameOutput go = new GameOutput(this);
+            if (Settings.sj.logGame)
+            {
+                if (noGui)
+                    new Thread(new ThreadStart(delegate
+                    {
+                        Application.Run(go);
+                    })).Start();
+                else
+                    go.Show();
+
+                this.gameOutput = go;
+            }
+        }
+
+        public void Launch()
         {
             //create dir
             Directory.CreateDirectory($"{Globals.dataPath}\\versions\\java\\");
 
             //check if profile is already running
-            if (Globals.running.ContainsValue(profileName))
+            if (Globals.running.ContainsValue(instanceName))
             {
-                DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", profileName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show(Strings.sj.wrnRunning.Replace("{profileName}", instanceName), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result != DialogResult.Yes)
                 {
@@ -40,11 +65,14 @@ namespace MCLauncher.classes
                 }
             }
             runID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-            Globals.running.Add(runID, profileName);
+            Globals.running.Add(runID, instanceName);
+
+            //clear log file
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.log", "");
 
             //get InstanceJson
-            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{profileName}\\instance.json");
-            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
+            ij = JsonConvert.DeserializeObject<InstanceJson>(data);
 
             //get latest versions if asked for
             String version = ij.version;
@@ -71,7 +99,7 @@ namespace MCLauncher.classes
             manifestPath = $"{Globals.dataPath}\\data\\json\\{version}.json";
 
             //set manifestPath to modmanifest if mods use it
-            String modManifest = ModWorker.getModManifest(profileName);
+            String modManifest = ModWorker.getModManifest(instanceName);
             if (modManifest != null)
                 manifestPath = modManifest;
 
@@ -90,7 +118,11 @@ namespace MCLauncher.classes
 
             //deserialize VersionJson
             Logger.Info("[JavaLauncher]", $"manifestPath: {manifestPath}");
+
             string manifestJson = File.ReadAllText(manifestPath);
+            if (Globals.isDebug)
+                Logger.Info("[JavaLauncher]", $"manifestJson: {manifestJson}");
+
             VersionJson vj = JsonConvert.DeserializeObject<VersionJson>(manifestJson);
 
             //get ip and port for mppass (if wanted)
@@ -108,14 +140,15 @@ namespace MCLauncher.classes
                 {
                     ipPort = LaunchJava.splitIpPort(EnterIp.inputText);
                 }
+                EnterIp.inputText = null;
             }
 
             //download game jar
-            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{version}.jar"))
-                Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{version}.jar");
+            if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{vj.version}.jar"))
+                Globals.client.DownloadFile(vj.url, $"{Globals.dataPath}\\versions\\java\\{vj.version}.jar");
 
             //create mod patch and info
-            var modInfo = ModWorker.createJarPatch(profileName);
+            var modInfo = ModWorker.createJarPatch(instanceName);
             String modClientPath = modInfo.Item1;
             String modName = modInfo.Item2;
             String modVersion = modInfo.Item3;
@@ -148,21 +181,21 @@ namespace MCLauncher.classes
             {
                 Logger.Error("[JavaLauncher]", "Copying assets... (fix for 1.6 snapshots)");
 
-                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\");
+                Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\");
 
                 foreach (string dirPath in Directory.GetDirectories($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", "*", SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"));
+                    Directory.CreateDirectory(dirPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\"));
                 }
 
                 foreach (string newPath in Directory.GetFiles($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", "*.*", SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\"), true);
+                    File.Copy(newPath, newPath.Replace($"{Globals.dataPath}\\assets\\virtual\\{vj.assets.name}\\", $"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\"), true);
                 }
 
-                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\pack.mcmeta");
-                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\READ_ME_I_AM_VERY_IMPORTANT.txt");
-                File.Delete($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\assets\\sounds.json");
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\pack.mcmeta");
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\READ_ME_I_AM_VERY_IMPORTANT.txt");
+                File.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\sounds.json");
             }
 
             string jars = "";
@@ -172,7 +205,7 @@ namespace MCLauncher.classes
             if (modClientPath != null)
                 jars += $"\"{modClientPath}\";";
             else
-                jars += $"\"{Globals.dataPath}\\versions\\java\\{version}.jar\";";
+                jars += $"\"{Globals.dataPath}\\versions\\java\\{vj.version}.jar\";";
 
             string[] oldNatives = Directory.GetDirectories($"{Globals.dataPath}\\libs\\", "*", SearchOption.TopDirectoryOnly);
             foreach (string oldNative in oldNatives)
@@ -198,25 +231,30 @@ namespace MCLauncher.classes
 
             foreach (var lib in vj.libraries)
             {
-                if (!File.Exists($"{Globals.dataPath}\\libs\\{lib.name}.jar"))
+                //this ensures compatibility with old (pre-0.4.0) jsons
+                String libName = lib.name;
+                if (lib.version != null)
+                    libName = $"{lib.name}-{lib.version}";
+
+                if (!File.Exists($"{Globals.dataPath}\\libs\\{libName}.jar"))
                 {
-                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{libName}.jar");
                 }
                 else
                 {
                     //TODO check against actual filesizes, this will do for now:tm:
-                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    FileInfo fi = new FileInfo($"{Globals.dataPath}\\libs\\{libName}.jar");
                     if (fi.Length == 0)
                     {
                         //delete and redownload
-                        File.Delete($"{Globals.dataPath}\\libs\\{lib.name}.jar");
-                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                        File.Delete($"{Globals.dataPath}\\libs\\{libName}.jar");
+                        Globals.client.DownloadFile(lib.url, $"{Globals.dataPath}\\libs\\{libName}.jar");
                     }
                 }
 
                 if (lib.extract == true)
                 {
-                    var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{lib.name}.jar");
+                    var archive = ZipFile.OpenRead($"{Globals.dataPath}\\libs\\{libName}.jar");
                     foreach (var zipArchiveEntry in archive.Entries)
                     {
                         if (!zipArchiveEntry.ToString().Contains("META-INF"))
@@ -229,11 +267,15 @@ namespace MCLauncher.classes
                     }
                 }
                 else
-                    jars += $"\"{Globals.dataPath}\\libs\\{lib.name}.jar\";";
+                    jars += $"\"{Globals.dataPath}\\libs\\{libName}.jar\";";
             }
             jars = jars.Remove(jars.LastIndexOf(';'));
 
-            string[] defRes = ij.resolution.Split(' ');
+            string[] defRes = new string[2];
+            if (ij.useResolution)
+                defRes = ij.resolution.Split(' ');
+            else
+                defRes = vj.defRes.Split(' ');
 
             if (vj.assets == null)
             {
@@ -247,7 +289,7 @@ namespace MCLauncher.classes
             else
                 assetsDir = $"{Globals.dataPath}\\assets";
 
-            string workDir = $"{Globals.dataPath}\\instance\\{profileName}";
+            string workDir = $"{Globals.dataPath}\\instance\\{instanceName}";
             if (!string.IsNullOrWhiteSpace(ij.directory) && !string.IsNullOrEmpty(ij.directory))
                 workDir = ij.directory;
 
@@ -259,9 +301,9 @@ namespace MCLauncher.classes
 
             vj.cmdAft = vj.cmdAft.Replace("{game}", vj.game)
                 .Replace("{version}", vj.version)
-                .Replace("{playerName}", msPlayerName)
-                .Replace("{accessToken}", msPlayerAccessToken)
-                .Replace("{uuid}", msPlayerUUID)
+                .Replace("{playerName}", MSAuth.msUsername)
+                .Replace("{accessToken}", MSAuth.msAccessToken)
+                .Replace("{uuid}", MSAuth.msUUID)
                 .Replace("{width}", defRes[0])
                 .Replace("{height}", defRes[1])
                 .Replace("{workDir}", $"\"{workDir}\"")
@@ -271,7 +313,7 @@ namespace MCLauncher.classes
 
             vj.cmdBef = vj.cmdBef.Replace("{assetDir}", $"\"{assetsDir}/\"").Replace("\\", "/")
                 .Replace("{assetName}", $"\"{Globals.dataPath}\\assets\\indexes\\{vj.assets.name}.json\"").Replace("\\", "/")
-                .Replace("{uuid}", msPlayerUUID)
+                .Replace("{uuid}", MSAuth.msUUID)
                 .Replace("{workDir}", $"\"{workDir}\"")
                 .Replace("{game}", $"\"{vj.game}\"")
                 .Replace("{version}", $"\"{vj.version}\"")
@@ -301,20 +343,25 @@ namespace MCLauncher.classes
             }
 
             if (ij.offline)
-                vj.cmdAft = vj.cmdAft.Replace(msPlayerAccessToken, "-").Replace(msPlayerUUID, "-");
+                vj.cmdAft = vj.cmdAft.Replace(MSAuth.msAccessToken, "-").Replace(MSAuth.msUUID, "-");
 
-            Process proc = new Process();
+            proc = new Process();
             proc.EnableRaisingEvents = true;
             proc.OutputDataReceived += OnOutputDataReceived;
             proc.ErrorDataReceived += OnErrorDataReceived;
-            proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, profileName, vj.assetsVirt, proc))); //lmao this is dumb shit (but it works)
+            //this is now EVEN uglier AHAHAHAHHAH
+            if (noGui)
+                proc.Exited += (sender, e) => OnProcessExited(sender, e, vj.assetsVirt, proc);
+            else
+                proc.Exited += (sender, e) => HomeScreen.Instance.lblPlayedFor.Invoke(new System.Action(() => OnProcessExited(sender, e, vj.assetsVirt, proc))); //lmao this is dumb shit (but it works)
+
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.CreateNoWindow = true;
 
-            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\");
-            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{profileName}\\.minecraft\\";
+            Directory.CreateDirectory($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\");
+            proc.StartInfo.WorkingDirectory = $"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\";
             if (ij.useJava)
                 proc.StartInfo.FileName = ij.javaPath;
             else if (vj.java <= 8)
@@ -323,6 +370,8 @@ namespace MCLauncher.classes
                 proc.StartInfo.FileName = Settings.sj.jre17;
             else if (vj.java <= 21)
                 proc.StartInfo.FileName = Settings.sj.jre21;
+            else if (vj.java <= 25)
+                proc.StartInfo.FileName = Settings.sj.jre25;
             else
                 proc.StartInfo.FileName = "java.exe";
 
@@ -347,13 +396,23 @@ namespace MCLauncher.classes
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }
 
-            Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
+            //server auto connect
             if (ipPort != null)
             {
+                Logger.Info("[JavaLauncher]", $"ipPort: {ipPort}");
+
                 if (!ij.offline)
                 {
-                    MSAuth.onServerJoin(ipPort[0], ipPort[1], msPlayerAccessToken, msPlayerUUID);
-                    proc.StartInfo.Arguments += $"-Dserver=\"{ipPort[0]}\" -Dport=\"{ipPort[1]}\" -Dmppass=\"0\" ";
+                    if (vj.srvCmd.Contains("-Dserver")) //fix for versions with BC wrapper
+                    {
+                        MSAuth.onServerJoin(ipPort[0], ipPort[1], MSAuth.msAccessToken, MSAuth.msUUID);
+                        proc.StartInfo.Arguments += vj.srvCmd.Replace("{ip}", ipPort[0]).Replace("{port}", ipPort[1]) + " ";
+                    }
+                    else //or just add it to the end, and use the domain instead force conert to IP
+                    {
+                        ij.aftCmd += vj.srvCmd.Replace("{ip}", ipPort[2]).Replace("{port}", ipPort[1]);
+                    }
+
                     Logger.Info("[JavaLauncher]", $"Server active!");
                 }
             }
@@ -372,8 +431,8 @@ namespace MCLauncher.classes
             Logger.Info("[JavaLauncher]", $"{proc.StartInfo.FileName} {proc.StartInfo.Arguments}");
 
             string tempAppdata = Environment.GetEnvironmentVariable("Appdata");
-            Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{profileName}\\");
-            
+            Environment.SetEnvironmentVariable("Appdata", $"{Globals.dataPath}\\instance\\{instanceName}\\");
+
             try
             {
                 Discord.ChangeMessage($"Playing {vj.game} ({vj.version})");
@@ -387,6 +446,7 @@ namespace MCLauncher.classes
                 Discord.ChangeMessage($"Idling");
                 Globals.running.Remove(runID);
                 return;
+
                 //TODO = ASK TO DOWNLOAD JAVA
 
                 /*if (!File.Exists($"{Globals.dataPath}\\data\\jre\\bin\\java.exe"))
@@ -401,10 +461,14 @@ namespace MCLauncher.classes
             proc.BeginErrorReadLine();
             proc.BeginOutputReadLine();
 
+            //this makes sure the launcher stays open when nogui mode and game log window is enabled
+            if (!Settings.sj.logGame && noGui)
+                proc.WaitForExit();
+
             Environment.SetEnvironmentVariable("Appdata", tempAppdata);
         }
 
-        private static void OnProcessExited(object sender, EventArgs e, string instanceName, bool shouldDelete, Process proc)
+        private void OnProcessExited(object sender, EventArgs e, bool shouldDelete, Process proc)
         {
             //get runtime
             TimeSpan runtime = DateTime.Now - proc.StartTime;
@@ -423,30 +487,59 @@ namespace MCLauncher.classes
                     Directory.Delete($"{Globals.dataPath}\\instance\\{instanceName}\\.minecraft\\assets\\", true);
 
             //save the runtime
-            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
-            InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(data);
-            ij.playTime = ij.playTime + (long)saveRuntime;
-            String toSave = JsonConvert.SerializeObject(ij);
-            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json", toSave);
-
+            updatePlayTime(saveRuntime);
 
             //reload played for text
-            HomeScreen.Instance.loadPlayTime(instanceName, ij);
-        }
+            if (!noGui)
+                HomeScreen.Instance.loadPlayTime(instanceName, ij);
 
-        static void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            if (e.Data != null)
+            if (Settings.sj.logGame)
             {
-                Logger.GameInfo(e.Data);
+                if (gameOutput.boxOutput.InvokeRequired)
+                    gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.thisInstance.button1.Enabled = false; }));
+                else
+                    gameOutput.thisInstance.button1.Enabled = false;
             }
         }
 
-        static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+        //updates the played for.. time
+        public void updatePlayTime(long saveRuntime)
+        {
+            string data = File.ReadAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json");
+            ij = JsonConvert.DeserializeObject<InstanceJson>(data);
+
+            ij.playTime = ij.playTime + (long)saveRuntime;
+
+            String toSave = JsonConvert.SerializeObject(ij);
+            File.WriteAllText($"{Globals.dataPath}\\instance\\{instanceName}\\instance.json", toSave);
+        }
+
+        public void killGame()
+        {
+            proc.Kill();
+        }
+
+        private void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             if (e.Data != null)
             {
-                Logger.GameError(e.Data);
+                Logger.GameInfo(e.Data, instanceName);
+
+                if (Settings.sj.logGame)
+                    if (gameOutput.boxOutput.InvokeRequired)
+                        gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logMessage(e.Data); }));
+            }
+        }
+
+        private void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                Logger.GameError(e.Data, instanceName);
+
+                if (Settings.sj.logGame)
+                    if (gameOutput.boxOutput.InvokeRequired)
+                        gameOutput.boxOutput.Invoke(new MethodInvoker(delegate { gameOutput.logError(e.Data); }));
             }
         }
     }

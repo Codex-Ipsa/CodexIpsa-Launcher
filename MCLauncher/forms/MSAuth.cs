@@ -8,9 +8,9 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Cache;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -22,7 +22,10 @@ namespace MCLauncher
         public static String deviceCode;
 
         //user info
-        public static String msAccessToken;
+        public static String msUsername = "Guest";
+        public static String msUUID = "fakeuuid";
+        public static String msAccessToken = "fakeaccess";
+
         public static String msRefreshToken;
 
         //error to display
@@ -49,6 +52,7 @@ namespace MCLauncher
             deviceCurrent = 0;
 
             String url = "https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode?client_id=bee0ffd1-4143-41ef-bdf6-fe15d5549c09&scope=XboxLive.signin+offline_access"; //this needs to have offline access at the end
+
             String response = Http.getUrl(url);
             if (Globals.isDebug)
                 Logger.Info("[MSAuth]", $"deviceflow response: {response}");
@@ -61,7 +65,10 @@ namespace MCLauncher
             textBox1.ReadOnly = true;
 
             Logger.Info("[MSAuth]", $"To sign in, use a web browser to open the page {json.verification_uri} and enter the code {json.user_code} to authenticate.");
-            Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
+
+            if (Globals.isDebug)
+                Logger.Info("[MSAuth]", $"Device code: {deviceCode}");
+
             this.Refresh();
             backgroundWorker1.RunWorkerAsync();
             //this.Close();
@@ -82,7 +89,6 @@ namespace MCLauncher
             {
                 String response = Http.postUrl(url, data);
 
-                deviceCurrent = deviceLimit + 1;
                 if (Globals.isDebug)
                     Logger.Info("[MSAuth/deviceFlowPing]", $"Response string: {response}");
                 else
@@ -91,6 +97,8 @@ namespace MCLauncher
                 AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
                 msAccessToken = json.access_token;
                 msRefreshToken = json.refresh_token;
+
+                deviceCurrent = deviceLimit + 1; //this STOPS THE FUCKING CLOCK!! WHY WAS IT NOT AT THE END!!!!
             }
             catch (WebException)
             {
@@ -105,6 +113,13 @@ namespace MCLauncher
             {
                 String url = "https://user.auth.xboxlive.com/user/authenticate";
                 String data = $"{{\"Properties\": {{\"AuthMethod\": \"RPS\",\"SiteName\": \"user.auth.xboxlive.com\",\"RpsTicket\": \"d={msAccess}\"}},\"RelyingParty\": \"http://auth.xboxlive.com\",\"TokenType\": \"JWT\"}}";
+
+                if (Globals.isDebug)
+                {
+                    Console.WriteLine("URL: " + url);
+                    Console.WriteLine("DATA: " + data);
+                }
+
                 String response = Http.postJson(url, data);
 
                 if (Globals.isDebug)
@@ -133,13 +148,31 @@ namespace MCLauncher
                     Logger.Info($"[MSAuth/xstsAuth]", $"response: {response}");
 
                 AuthJson json = JsonConvert.DeserializeObject<AuthJson>(response);
-                Logger.Info($"[MSAuth/xstsAuth]", $"xError: {json.XErr}");
 
                 return json.Token;
             }
             catch (WebException e)
             {
+                String resp = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+
+                AuthJson json = JsonConvert.DeserializeObject<AuthJson>(resp);
                 Logger.Error("[MSAuth/xstsAuth]", $"returned an error: {e.Message}");
+                Logger.Info($"[MSAuth/xstsAuth]", $"xError: {json.XErr}");
+
+                //decode different xerrs and set error msg
+                if (json.XErr == 2148916227)
+                    errorMsg = $"Seems like your Xbox account has been banned.\nTry another one.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916233)
+                    errorMsg = $"Seems like you don't own an Xbox account.\nCreate one, or try a different Microsoft account.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916235)
+                    errorMsg = $"Your account is from a country where Xbox Live is not available.\nTry another one.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916236 || json.XErr == 2148916237)
+                    errorMsg = $"Seems like your Xbox account needs adult verification.\n(XErr: {json.XErr})";
+                else if (json.XErr == 2148916238)
+                    errorMsg = $"Your account seems to be underage and needs to be added to a family by an adult.\n(XErr: {json.XErr})";
+                else
+                    errorMsg = $"Something has gone wrong in the login process.\nPlease, try again or try a different account.\n(XErr: {json.XErr})";
+
                 return null;
             }
         }
@@ -277,7 +310,7 @@ namespace MCLauncher
                 String xblUser = xblInfo[1];
 
                 String xstsToken = getXstsToken(xblToken);
-                if (xblToken != null)
+                if (xstsToken != null)
                 {
                     String accessToken = getMinecraftToken(xblUser, xstsToken);
                     if (accessToken != null)
@@ -294,10 +327,10 @@ namespace MCLauncher
                             Settings.sj.refreshToken = msRefreshToken;
                             Settings.Save();
 
-                            HomeScreen.msPlayerName = playerName;
-                            JavaLauncher.msPlayerName = playerName;
-                            JavaLauncher.msPlayerUUID = playerUUID;
-                            JavaLauncher.msPlayerAccessToken = accessToken;
+                            //HomeScreen.msPlayerName = playerName;
+                            msUsername = playerName;
+                            msUUID = playerUUID;
+                            msAccessToken = accessToken;
                             Settings.sj.username = playerName;
                             Settings.Save();
 
@@ -322,7 +355,7 @@ namespace MCLauncher
         }
 
         //logs in the user on the start of launcher if already logged in before
-        public static void refreshAuth()
+        public static void refreshAuth(bool isNogoi)
         {
             String msAccess = fromRefreshToken(Settings.sj.refreshToken);
             if (msAccess != null)
@@ -334,7 +367,7 @@ namespace MCLauncher
                     String xblUser = xblInfo[1];
 
                     String xstsToken = getXstsToken(xblToken);
-                    if (xblToken != null)
+                    if (xstsToken != null)
                     {
                         String accessToken = getMinecraftToken(xblUser, xstsToken);
                         if (accessToken != null)
@@ -348,17 +381,22 @@ namespace MCLauncher
                                 String playerName = profileInfo[0];
                                 String playerUUID = profileInfo[1];
 
-                                HomeScreen.msPlayerName = playerName;
-                                JavaLauncher.msPlayerName = playerName;
-                                JavaLauncher.msPlayerUUID = playerUUID;
-                                JavaLauncher.msPlayerAccessToken = accessToken;
+                                msUsername = playerName;
+                                msUUID = playerUUID;
+                                msAccessToken = accessToken;
 
                                 Settings.sj.username = playerName;
                                 Settings.Save();
 
                                 Logger.Info($"[MSAuth]", $"Logged in successfully!");
-                                HomeScreen.loadUserInfo(playerName, "");
-                                HomeScreen.enableButtons(true);
+                                if (!isNogoi)
+                                {
+                                    //HomeScreen.msPlayerName = playerName;
+
+                                    HomeScreen.loadUserInfo(playerName, "");
+                                    HomeScreen.enableButtons(true);
+                                }
+
                                 return;
                             }
                         }
@@ -373,8 +411,11 @@ namespace MCLauncher
             Settings.sj.refreshToken = null;
             Settings.Save();
 
-            HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
-            HomeScreen.enableButtons(false);
+            if (!isNogoi)
+            {
+                HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                HomeScreen.enableButtons(false);
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -413,6 +454,7 @@ namespace MCLauncher
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            Thread.Sleep(500); //keep this here just in case, it doesn't fix xblauth 400 but it helps the coloring in debug
             Logger.Info("[MSAuth]", "Worker completed!");
             deviceFlow();
             this.Close();

@@ -56,7 +56,6 @@
             this.lblProfName = new System.Windows.Forms.Label();
             this.lblGameDir = new System.Windows.Forms.Label();
             this.dirBtn = new System.Windows.Forms.Button();
-            this.lblReso = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.dirBox = new System.Windows.Forms.TextBox();
             this.grbXbox = new System.Windows.Forms.GroupBox();
@@ -86,6 +85,7 @@
             this.xboxList = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.grbGame = new System.Windows.Forms.GroupBox();
+            this.chkReso = new System.Windows.Forms.CheckBox();
             this.grbForExp = new System.Windows.Forms.GroupBox();
             this.chkServerIP = new System.Windows.Forms.CheckBox();
             this.serverIPBox = new System.Windows.Forms.TextBox();
@@ -94,6 +94,7 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.openBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
+            this.shortcutBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ramMaxBox)).BeginInit();
             this.grbXbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramMinBox)).BeginInit();
@@ -133,7 +134,7 @@
             // chkAssetIndex
             // 
             this.chkAssetIndex.AutoSize = true;
-            this.chkAssetIndex.Location = new System.Drawing.Point(6, 100);
+            this.chkAssetIndex.Location = new System.Drawing.Point(9, 101);
             this.chkAssetIndex.Name = "chkAssetIndex";
             this.chkAssetIndex.Size = new System.Drawing.Size(99, 17);
             this.chkAssetIndex.TabIndex = 33;
@@ -161,7 +162,7 @@
             // chkCustJava
             // 
             this.chkCustJava.AutoSize = true;
-            this.chkCustJava.Location = new System.Drawing.Point(6, 74);
+            this.chkCustJava.Location = new System.Drawing.Point(9, 75);
             this.chkCustJava.Name = "chkCustJava";
             this.chkCustJava.Size = new System.Drawing.Size(91, 17);
             this.chkCustJava.TabIndex = 30;
@@ -172,7 +173,7 @@
             // chkCustJson
             // 
             this.chkCustJson.AutoSize = true;
-            this.chkCustJson.Location = new System.Drawing.Point(6, 48);
+            this.chkCustJson.Location = new System.Drawing.Point(9, 48);
             this.chkCustJson.Name = "chkCustJson";
             this.chkCustJson.Size = new System.Drawing.Size(90, 17);
             this.chkCustJson.TabIndex = 27;
@@ -190,7 +191,7 @@
             // chkClasspath
             // 
             this.chkClasspath.AutoSize = true;
-            this.chkClasspath.Location = new System.Drawing.Point(6, 22);
+            this.chkClasspath.Location = new System.Drawing.Point(9, 22);
             this.chkClasspath.Name = "chkClasspath";
             this.chkClasspath.Size = new System.Drawing.Size(93, 17);
             this.chkClasspath.TabIndex = 25;
@@ -218,7 +219,7 @@
             // chkOffline
             // 
             this.chkOffline.AutoSize = true;
-            this.chkOffline.Location = new System.Drawing.Point(6, 195);
+            this.chkOffline.Location = new System.Drawing.Point(9, 195);
             this.chkOffline.Name = "chkOffline";
             this.chkOffline.Size = new System.Drawing.Size(77, 17);
             this.chkOffline.TabIndex = 23;
@@ -238,7 +239,7 @@
             // chkProxy
             // 
             this.chkProxy.AutoSize = true;
-            this.chkProxy.Location = new System.Drawing.Point(6, 172);
+            this.chkProxy.Location = new System.Drawing.Point(9, 172);
             this.chkProxy.Name = "chkProxy";
             this.chkProxy.Size = new System.Drawing.Size(73, 17);
             this.chkProxy.TabIndex = 21;
@@ -264,7 +265,7 @@
             0});
             this.ramMaxBox.Location = new System.Drawing.Point(99, 97);
             this.ramMaxBox.Maximum = new decimal(new int[] {
-            16384,
+            32768,
             0,
             0,
             0});
@@ -361,15 +362,6 @@
             this.dirBtn.UseVisualStyleBackColor = true;
             this.dirBtn.Click += new System.EventHandler(this.dirBtn_Click);
             // 
-            // lblReso
-            // 
-            this.lblReso.AutoSize = true;
-            this.lblReso.Location = new System.Drawing.Point(6, 74);
-            this.lblReso.Name = "lblReso";
-            this.lblReso.Size = new System.Drawing.Size(45, 13);
-            this.lblReso.TabIndex = 12;
-            this.lblReso.Text = "lbl.Reso";
-            // 
             // nameBox
             // 
             this.nameBox.Location = new System.Drawing.Point(99, 19);
@@ -435,7 +427,7 @@
             0});
             this.ramMinBox.Location = new System.Drawing.Point(277, 97);
             this.ramMinBox.Maximum = new decimal(new int[] {
-            16384,
+            32768,
             0,
             0,
             0});
@@ -511,7 +503,7 @@
             this.chkOther.TabIndex = 12;
             this.chkOther.Text = "Other";
             this.chkOther.UseVisualStyleBackColor = true;
-            this.chkOther.Visible = false;
+            this.chkOther.CheckedChanged += new System.EventHandler(this.vanillaCheck_CheckedChanged);
             // 
             // chkLatestSnapshot
             // 
@@ -735,6 +727,7 @@
             // grbGame
             // 
             this.grbGame.BackColor = System.Drawing.SystemColors.Control;
+            this.grbGame.Controls.Add(this.chkReso);
             this.grbGame.Controls.Add(this.lblGameArgs);
             this.grbGame.Controls.Add(this.gameArgsBox);
             this.grbGame.Controls.Add(this.lblJvmArgs);
@@ -754,7 +747,6 @@
             this.grbGame.Controls.Add(this.lblProfName);
             this.grbGame.Controls.Add(this.lblGameDir);
             this.grbGame.Controls.Add(this.dirBtn);
-            this.grbGame.Controls.Add(this.lblReso);
             this.grbGame.Controls.Add(this.nameBox);
             this.grbGame.Controls.Add(this.dirBox);
             this.grbGame.Location = new System.Drawing.Point(368, 2);
@@ -763,6 +755,17 @@
             this.grbGame.TabIndex = 38;
             this.grbGame.TabStop = false;
             this.grbGame.Text = "grb.Game";
+            // 
+            // chkReso
+            // 
+            this.chkReso.AutoSize = true;
+            this.chkReso.Location = new System.Drawing.Point(9, 73);
+            this.chkReso.Name = "chkReso";
+            this.chkReso.Size = new System.Drawing.Size(72, 17);
+            this.chkReso.TabIndex = 29;
+            this.chkReso.Text = "chk.Reso";
+            this.chkReso.UseVisualStyleBackColor = true;
+            this.chkReso.CheckedChanged += new System.EventHandler(this.chkReso_CheckedChanged);
             // 
             // grbForExp
             // 
@@ -789,7 +792,7 @@
             // chkServerIP
             // 
             this.chkServerIP.AutoSize = true;
-            this.chkServerIP.Location = new System.Drawing.Point(6, 126);
+            this.chkServerIP.Location = new System.Drawing.Point(9, 126);
             this.chkServerIP.Name = "chkServerIP";
             this.chkServerIP.Size = new System.Drawing.Size(88, 17);
             this.chkServerIP.TabIndex = 37;
@@ -851,10 +854,21 @@
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
+            // shortcutBtn
+            // 
+            this.shortcutBtn.Location = new System.Drawing.Point(368, 375);
+            this.shortcutBtn.Name = "shortcutBtn";
+            this.shortcutBtn.Size = new System.Drawing.Size(94, 23);
+            this.shortcutBtn.TabIndex = 44;
+            this.shortcutBtn.Text = "btn.shortcut";
+            this.shortcutBtn.UseVisualStyleBackColor = true;
+            this.shortcutBtn.Click += new System.EventHandler(this.shortcutBtn_Click);
+            // 
             // InstanceGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.shortcutBtn);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.tabControl1);
@@ -909,7 +923,6 @@
         public System.Windows.Forms.Label lblProfName;
         public System.Windows.Forms.Label lblGameDir;
         public System.Windows.Forms.Button dirBtn;
-        public System.Windows.Forms.Label lblReso;
         public System.Windows.Forms.TextBox nameBox;
         public System.Windows.Forms.TextBox dirBox;
         public System.Windows.Forms.GroupBox grbXbox;
@@ -947,5 +960,7 @@
         public System.Windows.Forms.CheckBox chkServerIP;
         public System.Windows.Forms.TextBox serverIPBox;
         public System.Windows.Forms.CheckBox chkOther;
+        private System.Windows.Forms.Button shortcutBtn;
+        public System.Windows.Forms.CheckBox chkReso;
     }
 }

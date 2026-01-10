@@ -9,7 +9,7 @@ namespace MCLauncher.launchers
     internal class LaunchJava
     {
         public static string runID = "";
-        
+
         //WIP
 
         //launches java edition
@@ -53,7 +53,7 @@ namespace MCLauncher.launchers
         //also translates domains into IPs
         public static String[] splitIpPort(String input)
         {
-            String[] ipPort = new String[2];
+            String[] ipPort = new String[3];
 
             //bool hasPort = input.Contains(":");
             String[] split = input.Split(':');
@@ -69,8 +69,17 @@ namespace MCLauncher.launchers
             //check if valid host -> translate to IP
             else if (Regex.IsMatch(split[0], validHosts))
             {
-                IPAddress[] IPs = Dns.GetHostAddresses(split[0]);
-                ipPort[0] = IPs[0].ToString();
+                try
+                {
+                    IPAddress[] IPs = Dns.GetHostAddresses(split[0]);
+                    ipPort[0] = IPs[0].ToString();
+                }
+                catch (Exception e) //if invalid ip just return null 
+                {
+                    Logger.Error("splitIpPort", $"invalid IP {input}");
+                    //TODO: error popup here
+                    return null;
+                }
             }
             //if all fails, just skip
             else
@@ -88,6 +97,7 @@ namespace MCLauncher.launchers
                 ipPort[1] = "25565";
             }
 
+            ipPort[2] = split[0]; //and save the original domain/ip for modern (1.6+) versions
             return ipPort;
         }
     }

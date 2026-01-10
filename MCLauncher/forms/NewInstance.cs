@@ -24,7 +24,9 @@ namespace MCLauncher.forms
             instanceGui.ramMinBox.Value = 512;
             instanceGui.ramMaxBox.Value = 512;
             instanceGui.resXBox.Text = "854";
+            instanceGui.resXBox.Enabled = false;
             instanceGui.resYBox.Text = "480";
+            instanceGui.resYBox.Enabled = false;
             instanceGui.javaBox.Enabled = false;
             instanceGui.javaBtn.Enabled = false;
             instanceGui.jsonBox.Enabled = false;

@@ -2,7 +2,6 @@
 using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -56,9 +55,13 @@ namespace MCLauncher.forms
             instanceGui.nameBox.Text = instanceName;
             instanceGui.originalName = instanceName;
             instanceGui.dirBox.Text = ij.directory; //TODO CHECK FOR INVALID
+
+            instanceGui.chkReso.Checked = ij.useResolution;
             String[] res = ij.resolution.Split(new char[] { ' ' });
             instanceGui.resXBox.Text = res[0];
+            instanceGui.resXBox.Enabled = ij.useResolution;
             instanceGui.resYBox.Text = res[1];
+            instanceGui.resYBox.Enabled = ij.useResolution;
             String[] mem = ij.memory.Split(new char[] { ' ' });
             instanceGui.ramMaxBox.Value = int.Parse(mem[0]);
             instanceGui.ramMinBox.Value = int.Parse(mem[1]);

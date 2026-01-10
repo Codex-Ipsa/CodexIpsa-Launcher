@@ -1,8 +1,8 @@
 ﻿using MCLauncher.controls;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net;
-using System.Security.Policy;
 using System.Text;
 
 namespace MCLauncher
@@ -47,7 +47,7 @@ namespace MCLauncher
             }
             else
             {
-                HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", HomeScreen.msPlayerName);
+                HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", MSAuth.msUsername);
                 HomeScreen.Instance.lblLogInWarn.Text = "";
                 if (Globals.offlineMode)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
@@ -57,18 +57,20 @@ namespace MCLauncher
 
             SettingsScreen.InstanceSetting.grbLauncher.Text = sj.grbLauncher;
             SettingsScreen.InstanceSetting.lblLang.Text = sj.lblLang;
-            SettingsScreen.InstanceSetting.grbUpdates.Text = sj.grbUpdates;
             SettingsScreen.InstanceSetting.lblBranch.Text = sj.lblBranch;
             SettingsScreen.InstanceSetting.btnCheckUpdates.Text = sj.btnCheckUpdates;
             SettingsScreen.InstanceSetting.chkDiscordRpc.Text = sj.chkDiscordRpc;
+            SettingsScreen.InstanceSetting.chkShowLog.Text = sj.chkShowLog;
 
             SettingsScreen.InstanceSetting.grbJavaInstalls.Text = sj.grbJavaInstalls;
             SettingsScreen.InstanceSetting.lblJre8.Text = "Java 8";
             SettingsScreen.InstanceSetting.lblJre17.Text = "Java 17";
             SettingsScreen.InstanceSetting.lblJre21.Text = "Java 21";
-            SettingsScreen.InstanceSetting.btnGetJava8.Text = sj.installJava.Replace("{ver}", "8");
-            SettingsScreen.InstanceSetting.btnGetJava17.Text = sj.installJava.Replace("{ver}", "17");
-            SettingsScreen.InstanceSetting.btnGetJava21.Text = sj.installJava.Replace("{ver}", "21");
+            SettingsScreen.InstanceSetting.lblJre25.Text = "Java 25";
+            SettingsScreen.InstanceSetting.btnGetJava8.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava17.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava21.Text = "↓";
+            SettingsScreen.InstanceSetting.btnGetJava25.Text = "↓";
 
             SettingsScreen.InstanceSetting.grbThemes.Text = sj.grbThemes;
             SettingsScreen.InstanceSetting.chkUseTheme.Text = sj.chkUseTheme;
@@ -81,8 +83,19 @@ namespace MCLauncher
             CreditsScreen.Instance.lblSpecialThanks.Text = sj.lblSpecialThanks;
         }
 
+        //exports ENGLISH language json for translators
+        public static void exportLangJson()
+        {
+            stringJson export = new stringJson();
+            String toSave = JsonConvert.SerializeObject(export);
+            File.WriteAllText($"export-english.json", toSave);
+        }
+
         public class stringJson
         {
+            //VERSION LAST UPDATED
+            public String launcherVerLast = Globals.verCurrent;
+
             //MainWindow
             public string cntHome = "Home";
             public string cntProfiles = "Profiles";
@@ -116,20 +129,20 @@ namespace MCLauncher
             public string grbLauncher = "Launcher";
             public string lblLang = "Language";
             public string chkDiscordRpc = "Discord RPC";
-            public string grbUpdates = "Updates";
             public string lblBranch = "Branch";
             public string btnCheckUpdates = "Check for updates";
             public string grbDefaults = "Defaults"; //DEPRECATED
             public String grbJavaInstalls = "Java installations";
-            public string installJava = "Install Java {ver} ↓";
+            public string installJava = "Install Java {ver} ↓"; //DEPRECATED
             public String grbThemes = "Themes";
             public String chkUseTheme = "Custom theme";
             public String chkThemesOptout = "Opt-out of seasonal themes";
+            public String chkShowLog = "Show game log window";
 
             //CreditsScreen
             public string lblLauncherBy = "Codex-Ipsa Launcher v{version} by";
             public string lblDejvossIpsa = $"DEJVOSS Productions";
-            public string lblCopyright = "(c) 2022-2024";
+            public string lblCopyright = "(c) 2022-2026";
             public string lblTeam = "The team:\nDEJVOSS; programming.";
             public string lblSpecialThanks = "Special thanks:\nBetaCraft; BCWrapper.\nOmniarchive; version files.\nMisterSheeple; file hosting.\nAnd you; for using the launcher.";
 
@@ -189,6 +202,7 @@ namespace MCLauncher
             public string chkClasspath = "Classpath";
             public string chkAssetIndex = "Asset index";
             public string chkServerIP = "Server IP";
+            public String createShortcut = "Create shortcut";
 
             //Profile manager mods
             public string btnMoveUp = "Move up";
@@ -196,6 +210,8 @@ namespace MCLauncher
             public string btnRemove = "Remove";
             public string btnForge = "Install Forge";
             public string btnFabric = "Install Fabric";
+            public string btnBabric = "Install Babric";
+            public string btnLegacyFabric = "Install Legacy Fabric";
             public string btnMLoader = "Install ModLoader";
             public string btnRepos = "Mod repositories";
             public string btnAddToJar = "Add to minecraft.jar";
@@ -223,6 +239,10 @@ namespace MCLauncher
 
             public string chooseLatestRelease = "Choose latest 'release' version";
             public string chooseLatestSnapshot = "Choose latest 'snapshot' version";
+
+            //GameOutput
+            public String btnKill = "Kill game";
+            public String killInstance = "Are you sure you want to kill the game?\nThis may lead to unwanted behaviour like the game corrupting!";
         }
     }
 }

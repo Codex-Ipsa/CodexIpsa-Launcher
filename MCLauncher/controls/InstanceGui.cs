@@ -1,6 +1,5 @@
 ﻿using MCLauncher.json.api;
 using MCLauncher.json.launcher;
-using MCLauncher.launchers.fabric;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ namespace MCLauncher.controls
             grbGame.Text = Strings.sj.grbGame;
             lblProfName.Text = Strings.sj.lblProfName;
             lblGameDir.Text = Strings.sj.lblGameDir;
-            lblReso.Text = Strings.sj.lblReso;
+            chkReso.Text = Strings.sj.lblReso;
             lblMem.Text = Strings.sj.lblMem;
             lblMemMax.Text = Strings.sj.lblMemMax;
             lblMemMin.Text = Strings.sj.lblMemMin;
@@ -51,6 +50,7 @@ namespace MCLauncher.controls
             saveBtn.Text = Strings.sj.btnSaveInst;
             deleteBtn.Text = Strings.sj.btnDeleteInst;
             openBtn.Text = Strings.sj.btnOpenDir;
+            shortcutBtn.Text = Strings.sj.createShortcut;
 
             grbXbox.Text = Strings.sj.grbGame;
             chkXboxDemo.Text = Strings.sj.chkUseDemo.Substring(0, Strings.sj.chkUseDemo.IndexOf(" ("));
@@ -119,6 +119,9 @@ namespace MCLauncher.controls
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
 
                 if (chkExperimental.Checked && row[0] == "experimental")
+                    vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
+
+                if (chkOther.Checked && row[0] == "other")
                     vanillaList.Items.Add(ver.id + ver.alt).SubItems.AddRange(row);
             }
 
@@ -263,6 +266,7 @@ namespace MCLauncher.controls
                 ij.version = "latestsnapshot";
 
             ij.directory = dirBox.Text; //TODO CHECK FOR INVALID
+            ij.useResolution = chkReso.Checked;
             ij.resolution = $"{resXBox.Text} {resYBox.Text}";
             ij.memory = $"{ramMaxBox.Value} {ramMinBox.Value}";
             ij.befCmd = jvmArgsBox.Text;
@@ -388,6 +392,20 @@ namespace MCLauncher.controls
         private void xboxNameBox_TextChanged(object sender, EventArgs e)
         {
             nameBox.Text = xboxNameBox.Text;
+        }
+
+        private void chkReso_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkReso.Checked)
+            {
+                resXBox.Enabled = true;
+                resYBox.Enabled = true;
+            }
+            else
+            {
+                resXBox.Enabled = false;
+                resYBox.Enabled = false;
+            }
         }
 
         private void ramMaxBox_ValueChanged(object sender, EventArgs e)
@@ -693,6 +711,27 @@ namespace MCLauncher.controls
                             selectedVersion = selectedVersion.Substring(0, selectedVersion.IndexOf(" ("));
                     }
                 }
+            }
+        }
+
+        private void shortcutBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Shortcut files (.lnk)|*.lnk";
+            sfd.FileName = $"{nameBox.Text} [Codex-Ipsa].lnk";
+            sfd.RestoreDirectory = true;
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+                string shortcutAddress = sfd.FileName;
+                IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
+                shortcut.Description = "A Codex-Ipsa Launcher instance";
+                shortcut.TargetPath = Globals.currentPath + @"\MCLauncher.exe";
+                shortcut.WorkingDirectory = Globals.currentPath;
+                shortcut.Arguments = $"-instance=\"{nameBox.Text}\"";
+                shortcut.Save();
             }
         }
     }

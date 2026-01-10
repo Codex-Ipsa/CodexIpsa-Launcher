@@ -6,7 +6,6 @@ using MCLauncher.launchers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -17,7 +16,7 @@ namespace MCLauncher
     {
         public static HomeScreen Instance;
         public static string selectedEdition; //for checking which edition to launch
-        public static string msPlayerName; //for "welcome" string
+
         public static string selectedInstance = "Default";
         public static string selectedVersion; //for the "ready to play X" string
 
@@ -65,21 +64,35 @@ namespace MCLauncher
             if (!File.Exists($"{Globals.dataPath}\\instance\\{selectedInstance}\\instance.json"))
                 selectedInstance = "Default";
 
-            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance); ;
+            int instanceIndex = Instance.cmbInstaces.FindString(selectedInstance);
             Instance.cmbInstaces.SelectedIndex = instanceIndex;
             if (instanceIndex == 0) //this fixes loading instance if last selected is the first one in combobox
             {
                 reloadInstance(cmbInstaces.Text);
             }
 
+            lblAnnouncer.Text = "";
+
             if (!Globals.offlineMode)
             {
                 String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://files.codex-ipsa.cz/seasonal/defaultStone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
+
+                //load announcer
+                String announcer = Globals.client.DownloadString(Globals.announcerUrl);
+                Logger.Info("[HomeScreen]", $"announcer text: \"{announcer}\"");
+                if (!String.IsNullOrWhiteSpace(announcer))
+                {
+                    lblAnnouncer.Text = announcer;
+                    lblAnnouncer.Visible = true;
+                }
+                else
+                    lblAnnouncer.Visible = false;
             }
             else
             {
                 webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
+                lblAnnouncer.Visible = false;
             }
 
             Discord.Init();
@@ -97,9 +110,9 @@ namespace MCLauncher
                 loadUserInfo("Guest", Strings.sj.lblLogInWarn);
                 enableButtons(false);
 
-                JavaLauncher.msPlayerName = "Guest";
-                JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                MSAuth.msUsername = "Guest";
+                MSAuth.msAccessToken = "fakeuuid";
+                MSAuth.msUUID = "fakeaccess";
             }
             else
             {
@@ -108,19 +121,18 @@ namespace MCLauncher
                 if (Globals.offlineMode)
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
-                    JavaLauncher.msPlayerName = Settings.sj.username;
-                    msPlayerName = Settings.sj.username;
-                    JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-                    JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+                    MSAuth.msUsername = Settings.sj.username;
+                    MSAuth.msAccessToken = "fakeuuid";
+                    MSAuth.msUUID = "fakeaccess";
                     return;
                 }
                 else
                 {
-                    MSAuth.refreshAuth();
+                    MSAuth.refreshAuth(false);
                 }
             }
 
-            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {JavaLauncher.msPlayerAccessToken}");
+            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {MSAuth.msAccessToken}");
         }
 
         //loads user info and auth message
@@ -150,15 +162,29 @@ namespace MCLauncher
             List<string> instanceList = new List<string>();
             string[] dirs = Directory.GetDirectories($"{Globals.dataPath}\\instance\\", "*");
 
+            Console.Write("instances: ");
             foreach (string dir in dirs)
             {
                 var dirN = new DirectoryInfo(dir);
                 var dirName = dirN.Name;
+                Console.Write(dirName + " ");
+
+                //debug - print all instances
                 if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\instance.json"))
                 {
                     instanceList.Add(dirName);
+                    Console.Write("1 ");
                 }
+                else
+                    Console.Write("0 ");
+
+                if (File.Exists($"{Globals.dataPath}\\instance\\{dirName}\\jarmods\\mods.json"))
+                    Console.Write("1 ");
+                else
+                    Console.Write("0 ");
             }
+            Console.WriteLine();
+
             Instance.cmbInstaces.DataSource = instanceList;
             Instance.cmbInstaces.Refresh();
         }
@@ -169,6 +195,10 @@ namespace MCLauncher
 
             Logger.Info("[HomeScreen/reloadInstance]", $"Reload for {instName}");
             string json = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.json");
+
+            //debug print json
+            Logger.Info("[HomeScreen/reloadInstance]", $"{json}");
+
             InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
             selectedVersion = "Minecraft " + ij.version;
@@ -182,6 +212,11 @@ namespace MCLauncher
             }
 
             //get mod name
+            if (!File.Exists($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json")) //if file doesn't exist for some reason
+            {
+                File.WriteAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json", "{\"items\":[]}");
+            }
+
             string modJson = File.ReadAllText($"{Globals.dataPath}\\instance\\{instName}\\jarmods\\mods.json");
             ModJson mj = JsonConvert.DeserializeObject<ModJson>(modJson);
 
@@ -196,8 +231,14 @@ namespace MCLauncher
             Instance.loadPlayTime(instName, ij);
         }
 
+        public void reloadPlayTime(String instanceName, InstanceJson ij)
+        {
+            Instance.loadPlayTime(instanceName, ij);
+        }
+
         public void loadPlayTime(String instanceName, InstanceJson ij)
         {
+            Logger.Info("[HomeScreen/loadPlayTime]", $"Called!");
             if (instanceName != cmbInstaces.Text)
                 return;
 
@@ -228,6 +269,7 @@ namespace MCLauncher
                 playedForText = Strings.sj.lblHaventPlayed;
 
             lblPlayedFor.Text = playedForText;
+            Logger.Info("[HomeScreen/loadPlayTime]", $"pftext: {playedForText}");
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -238,7 +280,9 @@ namespace MCLauncher
             }
             else
             {
-                JavaLauncher.Launch(selectedInstance);
+
+                JavaLauncher launcher = new JavaLauncher(selectedInstance, false);
+                launcher.Launch();
             }
         }
 
@@ -266,9 +310,9 @@ namespace MCLauncher
         {
             Logger.Info($"[HomeScreen]", "Logging out");
 
-            JavaLauncher.msPlayerName = "Guest";
-            JavaLauncher.msPlayerAccessToken = "fakeAccessTokenThisIsNotReal";
-            JavaLauncher.msPlayerUUID = "fakePlayerIDThisIsNotReal";
+            MSAuth.msUsername = "Guest";
+            MSAuth.msAccessToken = "fakeuuid";
+            MSAuth.msUUID = "fakeaccess";
 
             Settings.sj.refreshToken = String.Empty;
             Settings.Save();

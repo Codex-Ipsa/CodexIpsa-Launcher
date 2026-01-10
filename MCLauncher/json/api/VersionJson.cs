@@ -13,6 +13,7 @@ namespace MCLauncher.json.api
         public String cmdAft { get; set; }
         public String defRes { get; set; }
         public bool srvJoin { get; set; }
+        public String srvCmd { get; set; }
         public bool assetsVirt { get; set; }
         public VersionJsonAssets assets { get; set; }
         public String logging { get; set; }
@@ -32,6 +33,7 @@ namespace MCLauncher.json.api
     public class VersionJsonLibraries
     {
         public String name { get; set; }
+        public String version { get; set; }
         public String url { get; set; }
         public int size { get; set; }
         public bool extract { get; set; }

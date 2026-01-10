@@ -1,16 +1,10 @@
 ﻿using MCLauncher.json.launcher;
 using Newtonsoft.Json;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace MCLauncher.classes
 {
@@ -79,7 +73,7 @@ namespace MCLauncher.classes
                 Logger.Info("[Theme]", "Custom theme loaded!");
             }
 
-            final:
+        final:
 
             //if both fail, load default
             if (stonePath == null || dirtPath == null)

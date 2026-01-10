@@ -1,5 +1,5 @@
-﻿using MCLauncher.classes;
-using System;
+﻿using System;
+using System.IO;
 
 namespace MCLauncher
 {
@@ -11,9 +11,11 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
         public static void Error(string header, string text)
@@ -22,9 +24,11 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write($"ERROR  [{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} ");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
         public static void Discord(string header, string text)
@@ -33,49 +37,58 @@ namespace MCLauncher
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write($"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header}");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(" " + text);
+
+            File.AppendAllText($"{Globals.dataPath}\\launcher.log", $"[{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}] {header} {text}\n");
         }
 
-        public static void GameInfo(string text)
+        public static void GameInfo(string text, String instName)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
 
             if (text.Contains("<log4j:Event"))
             {
                 DateTime dt = UnixTimeStampToDateTime(Double.Parse(Splitter(text, "timestamp=\"", "\" level=")));
-                Console.Write($"[{dt.ToString("HH:mm:ss")}] [{Splitter(text, "thread=\"", "\">")}/{Splitter(text, "level=\"", "\" thread=")}]: ");
+                String msg = $"[{dt.ToString("HH:mm:ss")}] [{Splitter(text, "thread=\"", "\">")}/{Splitter(text, "level=\"", "\" thread=")}]: ";
+                Console.Write(msg);
+                File.AppendAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.log", msg + "\n");
             }
             else if (text.Contains("<log4j:Message"))
             {
-                Console.Write(Splitter(text, "<log4j:Message><![CDATA[", "]]></log4j:Message>"));
+                String msg = Splitter(text, "<log4j:Message><![CDATA[", "]]></log4j:Message>");
+                Console.Write(msg);
+                File.AppendAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.log", msg + "\n");
             }
             else if (text.Contains("</log4j:Event"))
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine();
+                File.AppendAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.log", "\n");
             }
             else
             {
                 Console.WriteLine(text);
+                File.AppendAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.log", text + "\n");
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public static void GameError(string text)
+        public static void GameError(string text, String instName)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            if (text != null && JavaLauncher.msPlayerAccessToken != null && JavaLauncher.msPlayerUUID != null)
-                text = text.Replace(JavaLauncher.msPlayerAccessToken, "[ACCESS_TOKEN]").Replace(JavaLauncher.msPlayerUUID, "[UUID]");
+            if (text != null && MSAuth.msAccessToken != null && MSAuth.msUUID != null)
+                text = text.Replace(MSAuth.msAccessToken, "[ACCESS_TOKEN]").Replace(MSAuth.msUUID, "[UUID]");
             Console.WriteLine(text);
+            File.AppendAllText($"{Globals.dataPath}\\instance\\{instName}\\instance.log", text + "\n");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        static string Splitter(string input, string before, string after)
+        public static string Splitter(string input, string before, string after)
         {
             //return input;
             //shitty void for splitting strings

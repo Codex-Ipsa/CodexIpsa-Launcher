@@ -92,9 +92,12 @@ namespace MCLauncher.forms
                     filePath = $"{Globals.dataPath}/assets/objects/{firstTwo}/{entry.Value.hash}";
                 }
 
+                Logger.Info("AssetIndex", $"Downloading assets... This may take a while...");
                 if (!File.Exists(filePath))
                 {
-                    Logger.Info("[AssetIndex]", $"Downloaded {entry.Key}");
+                    if (Globals.isDebug)
+                        Logger.Info("[AssetIndex]", $"Downloaded {entry.Key}");
+                    
                     string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                     Directory.CreateDirectory(path);
                     if (entry.Value.custom_url != null)
@@ -137,4 +140,18 @@ namespace MCLauncher.forms
             this.Close();
         }
     }
+
+    public class AssetIndexManifest
+    {
+        public AssetIndexObject objects { get; set; }
+        public bool isVirtual { get; set; }
+    }
+
+    public class AssetIndexObject
+    {
+        public int size { get; set; }
+        public string hash { get; set; }
+        public string custom_url { get; set; }
+    }
+
 }

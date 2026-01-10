@@ -84,10 +84,15 @@
   <ItemGroup>
     <Compile Include="classes\APIKeys.cs" />
     <Compile Include="classes\APIKeysLocal.cs" />
-    <Compile Include="classes\AssetIndex.cs" />
     <Compile Include="classes\Discord.cs" />
     <Compile Include="classes\Http.cs" />
     <Compile Include="classes\Themes.cs" />
+    <Compile Include="forms\GameOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\GameOutput.Designer.cs">
+      <DependentUpon>GameOutput.cs</DependentUpon>
+    </Compile>
     <Compile Include="json\api\LanguagesJson.cs" />
     <Compile Include="json\api\OfflineJson.cs" />
     <Compile Include="json\api\UpdateJson.cs" />
@@ -234,6 +239,9 @@
     <EmbeddedResource Include="forms\AssetsDownloader.resx">
       <DependentUpon>AssetsDownloader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\GameOutput.resx">
+      <DependentUpon>GameOutput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ImportProfile.resx">
       <DependentUpon>ImportProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +309,16 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

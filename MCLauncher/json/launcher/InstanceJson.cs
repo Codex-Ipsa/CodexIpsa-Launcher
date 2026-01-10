@@ -10,6 +10,7 @@ namespace MCLauncher.json.launcher
         public string version { get; set; }
 
         public string directory { get; set; }
+        public bool useResolution { get; set; }
         public string resolution { get; set; }
         public string memory { get; set; }
         public string befCmd { get; set; }

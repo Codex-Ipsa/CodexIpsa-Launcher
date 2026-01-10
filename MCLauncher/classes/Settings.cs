@@ -39,9 +39,14 @@ namespace MCLauncher
         public string themePath { get; set; }
         public bool seasonalOptout { get; set; }
 
+        public bool logGame { get; set; }
+        public bool cnslWindow { get; set; }
+
         public string jre8 { get; set; }
+        public string jre16 { get; set; } //unused for now..
         public string jre17 { get; set; }
         public string jre21 { get; set; }
+        public string jre25 { get; set; }
 
         public SettingsJson()
         {
@@ -56,9 +61,13 @@ namespace MCLauncher
             themePath = "";
             seasonalOptout = false;
 
+            logGame = true;
+            cnslWindow = false;
+
             jre8 = "java.exe";
             jre17 = "java.exe";
             jre21 = "java.exe";
+            jre25 = "java.exe";
         }
     }
 }

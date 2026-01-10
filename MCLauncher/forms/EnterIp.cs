@@ -26,5 +26,14 @@ namespace MCLauncher
             inputText = comboBox1.Text;
             this.Close();
         }
+
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inputText = comboBox1.Text;
+                this.Close();
+            }
+        }
     }
 }
