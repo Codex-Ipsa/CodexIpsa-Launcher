@@ -13,6 +13,10 @@ namespace MCLauncher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //DEV: export language json
+            //Strings.exportLangJson();
+            //throw new NotImplementedException();
+
             //Create directories
             Directory.CreateDirectory($"{Globals.dataPath}");
             Directory.CreateDirectory($"{Globals.dataPath}\\versions");

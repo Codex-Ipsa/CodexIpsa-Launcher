@@ -41,6 +41,7 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.lblPlayedFor = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.lblAnnouncer = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,11 +199,22 @@
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.WebBrowserShortcutsEnabled = false;
             // 
+            // lblAnnouncer
+            // 
+            this.lblAnnouncer.BackColor = System.Drawing.Color.White;
+            this.lblAnnouncer.ForeColor = System.Drawing.Color.Black;
+            this.lblAnnouncer.Location = new System.Drawing.Point(600, 210);
+            this.lblAnnouncer.Name = "lblAnnouncer";
+            this.lblAnnouncer.Size = new System.Drawing.Size(116, 40);
+            this.lblAnnouncer.TabIndex = 23;
+            this.lblAnnouncer.Text = "Multiple Xbox 360 versions have been added!";
+            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
+            this.Controls.Add(this.lblAnnouncer);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(784, 387);
@@ -228,5 +240,6 @@
         public System.Windows.Forms.Button btnLogIn;
         public System.Windows.Forms.Label lblPlayedFor;
         public System.Windows.Forms.WebBrowser webBrowser1;
+        public System.Windows.Forms.Label lblAnnouncer;
     }
 }

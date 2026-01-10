@@ -71,14 +71,28 @@ namespace MCLauncher
                 reloadInstance(cmbInstaces.Text);
             }
 
+            lblAnnouncer.Text = "";
+
             if (!Globals.offlineMode)
             {
                 String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://files.codex-ipsa.cz/seasonal/defaultStone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
+
+                //load announcer
+                String announcer = Globals.client.DownloadString(Globals.announcerUrl);
+                Logger.Info("[HomeScreen]", $"announcer text: \"{announcer}\"");
+                if (!String.IsNullOrWhiteSpace(announcer))
+                {
+                    lblAnnouncer.Text = announcer;
+                    lblAnnouncer.Visible = true;
+                }
+                else
+                    lblAnnouncer.Visible = false;
             }
             else
             {
                 webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
+                lblAnnouncer.Visible = false;
             }
 
             Discord.Init();
