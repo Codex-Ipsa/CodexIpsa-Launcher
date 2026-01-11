@@ -131,8 +131,6 @@ namespace MCLauncher
                     MSAuth.refreshAuth(false);
                 }
             }
-
-            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {MSAuth.msAccessToken}");
         }
 
         //loads user info and auth message
@@ -338,11 +336,7 @@ namespace MCLauncher
         //gets latest snapshot or release version
         public static String getLatestVersion(String whichOne)
         {
-            String latestJson = "";
-            using (WebClient cl = new WebClient())
-            {
-                latestJson = cl.DownloadString(Globals.javaLatest);
-            }
+            String latestJson = File.ReadAllText(Globals.javaLatestFile);
 
             LatestVersionJson lj = JsonConvert.DeserializeObject<LatestVersionJson>(latestJson);
 

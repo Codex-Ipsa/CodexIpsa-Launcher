@@ -32,6 +32,7 @@ namespace MCLauncher
         public static string javaManifest = $"http://files.codex-ipsa.cz/version/{codebase}/java-manifest.json";
         public static string javaManifestFile = $"{dataPath}\\versions\\java-manifest.json";
         public static string javaLatest = $"http://files.codex-ipsa.cz/version/{codebase}/java-latest.json";
+        public static string javaLatestFile = $"{dataPath}\\versions\\java-latest.json";
         public static string javaInfo = $"http://files.codex-ipsa.cz/version/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://files.codex-ipsa.cz/version/{codebase}/javaedu-manifest.json";
         public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";

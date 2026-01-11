@@ -120,6 +120,7 @@ namespace MCLauncher
             if (!Globals.offlineMode)
             {
                 Globals.client.DownloadFile(Globals.javaManifest, Globals.javaManifestFile);
+                Globals.client.DownloadFile(Globals.javaLatest, Globals.javaLatestFile);
                 Globals.client.DownloadFile(Globals.javaEduManifest, Globals.javaEduManifestFile);
                 Globals.client.DownloadFile(Globals.x360Manifest, Globals.x360ManifestFile);
             }
