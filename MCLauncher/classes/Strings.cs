@@ -51,6 +51,8 @@ namespace MCLauncher
                 HomeScreen.Instance.lblLogInWarn.Text = "";
                 if (Globals.noInternet)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
+                else if(Globals.msAuthDown)
+                    HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnAuthOffline;
             }
             HomeScreen.Instance.lblReady.Text = sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
             HomeScreen.Instance.lblSelInst.Text = sj.lblSelInst;
@@ -113,6 +115,7 @@ namespace MCLauncher
             public string lblReady = "Ready to play {verInfo}";
             public string lblLogInWarn = "You need to log in to use the launcher!";
             public String lblLogInWarnOffline = "Playing in offline mode, some features may not be available!";
+            public String lblLogInWarnAuthOffline = "Auth servers seem to be down, some features may not be available!";
             public string lblLogInWarn_Debug = "MAKE SURE TO DISABLE THIS IN GLOBALS!";
             public string lblPlayedFor = "Played for";
             public string lblPlayedForDay = "day";

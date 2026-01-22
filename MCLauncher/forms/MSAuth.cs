@@ -356,7 +356,7 @@ namespace MCLauncher
 
         //logs in the user on the start of launcher if already logged in before
         //returns true if launcher should allow offline launch
-        public static bool refreshAuth(bool isNogoi)
+        public static void refreshAuth(bool isNogoi)
         {
             String msAccess = fromRefreshToken(Settings.sj.refreshToken);
             if (msAccess != null)
@@ -398,7 +398,7 @@ namespace MCLauncher
                                     HomeScreen.enableButtons(true);
                                 }
 
-                                return false;
+                                return;
                             }
                         }
                     }
@@ -420,7 +420,6 @@ namespace MCLauncher
                 {
                     HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
                     HomeScreen.enableButtons(false);
-                    return false;
                 }
                 else
                 {
@@ -429,12 +428,12 @@ namespace MCLauncher
                     MSAuth.msAccessToken = "fakeuuid";
                     MSAuth.msUUID = "fakeaccess";
 
-                    return true;
+                    Globals.msAuthDown = true;
                     //HomeScreen.enableButtons(true);
                 }
             }
 
-            return false;
+            return;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

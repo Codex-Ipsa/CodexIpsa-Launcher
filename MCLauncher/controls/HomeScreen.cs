@@ -130,12 +130,7 @@ namespace MCLauncher
                 }
                 else
                 {
-                    bool offlineAccess = MSAuth.refreshAuth(false);
-                    if (offlineAccess)
-                    {
-                        HomeScreen.loadUserInfo(Settings.sj.username, Strings.sj.lblLogInWarnOffline);
-                        Console.WriteLine("ASHUDOIKASS " + Instance.lblLogInWarn.Visible);
-                    }
+                    MSAuth.refreshAuth(false);
                 }
             }
         }
