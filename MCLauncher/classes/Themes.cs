@@ -23,7 +23,7 @@ namespace MCLauncher.classes
             Directory.CreateDirectory($"{Globals.dataPath}\\themes\\");
 
             //if seasonal theme
-            if (!Settings.sj.seasonalOptout && !Globals.offlineMode)
+            if (!Settings.sj.seasonalOptout && !Globals.noInternet)
             {
                 String seasonalManifest = Globals.client.DownloadString(Globals.seasonalManifest);
                 List<ThemesJson> tjl = JsonConvert.DeserializeObject<List<ThemesJson>>(seasonalManifest);

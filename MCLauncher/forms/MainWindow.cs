@@ -79,20 +79,20 @@ namespace MCLauncher
                 if (oj.offline)
                 {
                     Logger.Error($"[MainWindow]", $"Servers are down! Reason: {oj.message}");
-                    Globals.offlineMode = true;
+                    Globals.noInternet = true;
                 }
             }
             catch
             {
                 Logger.Error($"[MainWindow]", "Internet connection not available!");
-                Globals.offlineMode = true;
+                Globals.noInternet = true;
             }
 
             //Check for updates
             Logger.Info($"[MainWindow]", "Checking for updates..");
             List<string> branchIds = new List<string>();
 
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 string jsonUpd = Globals.client.DownloadString(Globals.updateInfo);
                 List<UpdateJson> dataUpd = JsonConvert.DeserializeObject<List<UpdateJson>>(jsonUpd);
@@ -117,9 +117,10 @@ namespace MCLauncher
             }
 
             //always download version manifests for later offline usage
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 Globals.client.DownloadFile(Globals.javaManifest, Globals.javaManifestFile);
+                Globals.client.DownloadFile(Globals.javaLatest, Globals.javaLatestFile);
                 Globals.client.DownloadFile(Globals.javaEduManifest, Globals.javaEduManifestFile);
                 Globals.client.DownloadFile(Globals.x360Manifest, Globals.x360ManifestFile);
             }

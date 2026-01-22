@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -73,7 +74,7 @@ namespace MCLauncher
 
             lblAnnouncer.Text = "";
 
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://files.codex-ipsa.cz/seasonal/defaultStone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
@@ -91,7 +92,7 @@ namespace MCLauncher
             }
             else
             {
-                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
+                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b></center>";
                 lblAnnouncer.Visible = false;
             }
 
@@ -117,8 +118,7 @@ namespace MCLauncher
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-
-                if (Globals.offlineMode)
+                if (Globals.noInternet)
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
                     MSAuth.msUsername = Settings.sj.username;
@@ -131,8 +131,6 @@ namespace MCLauncher
                     MSAuth.refreshAuth(false);
                 }
             }
-
-            Logger.Info("[HomeScreen/checkAuth]", $"TOKEN: {MSAuth.msAccessToken}");
         }
 
         //loads user info and auth message
@@ -338,11 +336,7 @@ namespace MCLauncher
         //gets latest snapshot or release version
         public static String getLatestVersion(String whichOne)
         {
-            String latestJson = "";
-            using (WebClient cl = new WebClient())
-            {
-                latestJson = cl.DownloadString(Globals.javaLatest);
-            }
+            String latestJson = File.ReadAllText(Globals.javaLatestFile);
 
             LatestVersionJson lj = JsonConvert.DeserializeObject<LatestVersionJson>(latestJson);
 

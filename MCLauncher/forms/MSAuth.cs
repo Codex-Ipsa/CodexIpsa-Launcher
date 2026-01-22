@@ -355,6 +355,7 @@ namespace MCLauncher
         }
 
         //logs in the user on the start of launcher if already logged in before
+        //returns true if launcher should allow offline launch
         public static void refreshAuth(bool isNogoi)
         {
             String msAccess = fromRefreshToken(Settings.sj.refreshToken);
@@ -408,14 +409,31 @@ namespace MCLauncher
             if (errorMsg != null)
                 MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            Settings.sj.refreshToken = null;
-            Settings.Save();
+            //do not do this, the auth servers may just be down
+            //Settings.sj.refreshToken = null;
+            //Settings.Save();
 
             if (!isNogoi)
             {
-                HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
-                HomeScreen.enableButtons(false);
+                //TODO: check if username/accesstoken isn't null = auth servers down? = allow offline launch
+                if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
+                {
+                    HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                    HomeScreen.enableButtons(false);
+                }
+                else
+                {
+                    Logger.Info($"[HomeScreen]", "Seems like MS auth is down? Activating offline only mode...");
+                    MSAuth.msUsername = Settings.sj.username;
+                    MSAuth.msAccessToken = "fakeuuid";
+                    MSAuth.msUUID = "fakeaccess";
+
+                    Globals.msAuthDown = true;
+                    //HomeScreen.enableButtons(true);
+                }
             }
+
+            return;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

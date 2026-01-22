@@ -82,7 +82,7 @@ namespace MCLauncher.classes
             }
 
             //get VersionJson
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 try
                 {
@@ -153,7 +153,7 @@ namespace MCLauncher.classes
             String modName = modInfo.Item2;
             String modVersion = modInfo.Item3;
 
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 if (ij.useAssets == true && ij.assetsPath != null)
                 {
@@ -319,7 +319,7 @@ namespace MCLauncher.classes
                 .Replace("{version}", $"\"{vj.version}\"")
                 .Replace("{libDir}", $"\"{Globals.dataPath}\\libs\"");
 
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 if (vj.supplement != null)
                 {
@@ -391,7 +391,7 @@ namespace MCLauncher.classes
                 string fileName = vj.logging.Substring(vj.logging.LastIndexOf('/') + 1);
                 string hash = vj.logging.Substring(0, vj.logging.LastIndexOf('/') - 1);
                 hash = hash.Substring(hash.LastIndexOf('/') + 1);
-                if (!Globals.offlineMode)
+                if (!Globals.noInternet)
                     Globals.client.DownloadFile(vj.logging, $"{Globals.dataPath}\\libs\\logging\\{fileName}");
                 proc.StartInfo.Arguments += $"-Dlog4j.configurationFile=\"{Globals.dataPath}\\libs\\logging\\{fileName}\" ";
             }

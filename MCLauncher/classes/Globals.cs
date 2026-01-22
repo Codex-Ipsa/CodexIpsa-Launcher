@@ -9,13 +9,14 @@ namespace MCLauncher
     {
         //System
         public static WebClient client = new WebClient();
-        public static bool offlineMode = false;
+        public static bool noInternet = false;
+        public static bool msAuthDown = false;
 
         //Manual
         public static string codebase = "0.4.0"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
-        public static string verCurrent = "0.4.0"; //Change this on release
-        public static string verDisplay = "0.4.0"; //Change this on release
+        public static string verCurrent = "0.4.1"; //Change this on release
+        public static string verDisplay = "0.4.1"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -32,6 +33,7 @@ namespace MCLauncher
         public static string javaManifest = $"http://files.codex-ipsa.cz/version/{codebase}/java-manifest.json";
         public static string javaManifestFile = $"{dataPath}\\versions\\java-manifest.json";
         public static string javaLatest = $"http://files.codex-ipsa.cz/version/{codebase}/java-latest.json";
+        public static string javaLatestFile = $"{dataPath}\\versions\\java-latest.json";
         public static string javaInfo = $"http://files.codex-ipsa.cz/version/{codebase}/{{type}}/{{ver}}.json";
         public static string javaEduManifest = $"http://files.codex-ipsa.cz/version/{codebase}/javaedu-manifest.json";
         public static string javaEduManifestFile = $"{dataPath}\\versions\\javaedu-manifest.json";
