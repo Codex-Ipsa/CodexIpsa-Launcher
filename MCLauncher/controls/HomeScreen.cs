@@ -92,7 +92,7 @@ namespace MCLauncher
             }
             else
             {
-                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b><br>This feature is in an early phase, expect things to be broken!</center>";
+                webBrowser1.DocumentText = "<center><b>Internet connection not available.</b></center>";
                 lblAnnouncer.Visible = false;
             }
 
@@ -118,8 +118,6 @@ namespace MCLauncher
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-                Console.WriteLine("QUICK DISABLE INTERNET!!");
-                Thread.Sleep(1000);
                 if (Globals.noInternet)
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
