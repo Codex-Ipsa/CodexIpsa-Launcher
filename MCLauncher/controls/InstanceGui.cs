@@ -85,7 +85,7 @@ namespace MCLauncher.controls
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
-                if (Globals.offlineMode)
+                if (Globals.noInternet)
                 {
                     if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{ver.id}.jar") && !File.Exists($"{Globals.dataPath}\\data\\json\\{ver.id}.json"))
                     {
@@ -155,7 +155,7 @@ namespace MCLauncher.controls
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
-                if (Globals.offlineMode)
+                if (Globals.noInternet)
                 {
                     if (!File.Exists($"{Globals.dataPath}\\versions\\java\\{ver.id}.jar") && !File.Exists($"{Globals.dataPath}\\data\\json\\{ver.id}.json"))
                     {
@@ -198,7 +198,7 @@ namespace MCLauncher.controls
             List<VersionListJson> jm = JsonConvert.DeserializeObject<List<VersionListJson>>(manifest);
             foreach (VersionListJson ver in jm)
             {
-                if (Globals.offlineMode)
+                if (Globals.noInternet)
                 {
                     if (!Directory.Exists($"{Globals.dataPath}\\versions\\x360\\{ver.id}"))
                     {

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MCLauncher
@@ -73,7 +74,7 @@ namespace MCLauncher
 
             lblAnnouncer.Text = "";
 
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 String changelog = Globals.client.DownloadString(Globals.changelogUrl).Replace("http://files.codex-ipsa.cz/seasonal/defaultStone.png", Themes.stonePath);
                 webBrowser1.DocumentText = changelog;
@@ -117,8 +118,9 @@ namespace MCLauncher
             else
             {
                 Logger.Info($"[HomeScreen]", "User is logged in, re-checking everything");
-
-                if (Globals.offlineMode)
+                Console.WriteLine("QUICK DISABLE INTERNET!!");
+                Thread.Sleep(1000);
+                if (Globals.noInternet)
                 {
                     Logger.Info($"[HomeScreen]", "Offline mode active, loading cached info");
                     MSAuth.msUsername = Settings.sj.username;
@@ -128,7 +130,12 @@ namespace MCLauncher
                 }
                 else
                 {
-                    MSAuth.refreshAuth(false);
+                    bool offlineAccess = MSAuth.refreshAuth(false);
+                    if (offlineAccess)
+                    {
+                        HomeScreen.loadUserInfo(Settings.sj.username, Strings.sj.lblLogInWarnOffline);
+                        Console.WriteLine("ASHUDOIKASS " + Instance.lblLogInWarn.Visible);
+                    }
                 }
             }
         }

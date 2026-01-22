@@ -30,7 +30,7 @@ namespace MCLauncher.classes
 
             //download/update xenia
             Directory.CreateDirectory($"{Globals.dataPath}\\emulator\\xenia\\");
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 var xm = JsonConvert.DeserializeObject<XeniaManifest>(Globals.client.DownloadString(Globals.xeniaManifest));
                 if (File.Exists($"{Globals.dataPath}\\emulator\\xenia\\version.cfg"))
@@ -95,7 +95,7 @@ namespace MCLauncher.classes
             }
 
             //download profile if not exists
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 if (!Directory.Exists($"{Globals.dataPath}\\emulator\\xenia\\content\\E0300000726512D1"))
                 {

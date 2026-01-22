@@ -49,7 +49,7 @@ namespace MCLauncher
             {
                 HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", MSAuth.msUsername);
                 HomeScreen.Instance.lblLogInWarn.Text = "";
-                if (Globals.offlineMode)
+                if (Globals.noInternet)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
             }
             HomeScreen.Instance.lblReady.Text = sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);

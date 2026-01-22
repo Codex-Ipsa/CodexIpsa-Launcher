@@ -89,7 +89,7 @@ namespace MCLauncher.controls
             langNameList.Clear();
 
             //Get update info
-            if (!Globals.offlineMode)
+            if (!Globals.noInternet)
             {
                 WebClient client = new WebClient();
                 string jsonData = client.DownloadString(Globals.updateInfo);

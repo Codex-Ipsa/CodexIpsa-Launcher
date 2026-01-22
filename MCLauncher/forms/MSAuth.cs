@@ -355,7 +355,8 @@ namespace MCLauncher
         }
 
         //logs in the user on the start of launcher if already logged in before
-        public static void refreshAuth(bool isNogoi)
+        //returns true if launcher should allow offline launch
+        public static bool refreshAuth(bool isNogoi)
         {
             String msAccess = fromRefreshToken(Settings.sj.refreshToken);
             if (msAccess != null)
@@ -397,7 +398,7 @@ namespace MCLauncher
                                     HomeScreen.enableButtons(true);
                                 }
 
-                                return;
+                                return false;
                             }
                         }
                     }
@@ -408,14 +409,32 @@ namespace MCLauncher
             if (errorMsg != null)
                 MessageBox.Show(errorMsg, "Authentication error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            Settings.sj.refreshToken = null;
-            Settings.Save();
+            //do not do this, the auth servers may just be down
+            //Settings.sj.refreshToken = null;
+            //Settings.Save();
 
             if (!isNogoi)
             {
-                HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
-                HomeScreen.enableButtons(false);
+                //TODO: check if username/accesstoken isn't null = auth servers down? = allow offline launch
+                if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
+                {
+                    HomeScreen.loadUserInfo("Guest", Strings.sj.lblLogInWarn);
+                    HomeScreen.enableButtons(false);
+                    return false;
+                }
+                else
+                {
+                    Logger.Info($"[HomeScreen]", "Seems like MS auth is down? Activating offline only mode...");
+                    MSAuth.msUsername = Settings.sj.username;
+                    MSAuth.msAccessToken = "fakeuuid";
+                    MSAuth.msUUID = "fakeaccess";
+
+                    return true;
+                    //HomeScreen.enableButtons(true);
+                }
             }
+
+            return false;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

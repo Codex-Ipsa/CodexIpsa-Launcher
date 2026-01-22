@@ -18,7 +18,7 @@ namespace MCLauncher.launchers.fabric
             String fabricVersion = getFabricName(version);
 
             //get game manifest
-            if (Globals.offlineMode)
+            if (Globals.noInternet)
             {
                 return ModLoaders.LoaderType.None;
             }
@@ -89,7 +89,7 @@ namespace MCLauncher.launchers.fabric
         public static String getFabricName(String version)
         {
             //get fabric reuploads manifest
-            if (Globals.offlineMode)
+            if (Globals.noInternet)
             {
                 return "null";
             }

@@ -9,7 +9,7 @@ namespace MCLauncher
     {
         //System
         public static WebClient client = new WebClient();
-        public static bool offlineMode = false;
+        public static bool noInternet = false;
 
         //Manual
         public static string codebase = "0.4.0"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
