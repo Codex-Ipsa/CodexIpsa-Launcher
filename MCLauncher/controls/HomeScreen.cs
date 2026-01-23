@@ -242,7 +242,7 @@ namespace MCLauncher
 
             //Played for text
             TimeSpan t = TimeSpan.FromMilliseconds(ij.playTime);
-            String playedForText = "Played for ";
+            String playedForText = Strings.sj.lblPlayedFor + " ";
             if (t.Days == 1)
                 playedForText += $"{t.Days} {Strings.sj.lblPlayedForDay} ";
             else if (t.Days > 1)
