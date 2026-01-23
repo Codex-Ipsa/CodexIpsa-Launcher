@@ -60,7 +60,7 @@ namespace MCLauncher
         public static string offlineManifest = $"http://files.codex-ipsa.cz/offline.json";
 
         public static string languageList = $"http://files.codex-ipsa.cz/lang/manifest.json";
-        public static string languageJson = $"http://files.codex-ipsa.cz/lang/{{selected}}.json";
+        public static string languageJson = $"http://lang.codex-ipsa.cz/{{selected}}.json";
 
         //announcer feature
         public static string announcerUrl = $"http://files.codex-ipsa.cz/version/{codebase}/announcer.txt";
