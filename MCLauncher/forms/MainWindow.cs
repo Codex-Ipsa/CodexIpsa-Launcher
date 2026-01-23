@@ -70,8 +70,6 @@ namespace MCLauncher
                 File.Delete($"{Globals.currentPath}\\LauncherUpdater.exe");
 
             //check for internet
-            //TODO get offline manifest and display error message
-            //TODO display no internet available message if manifest 404s
             try
             {
                 string offjson = Globals.client.DownloadString(Globals.offlineManifest);
