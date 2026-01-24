@@ -13,10 +13,10 @@ namespace MCLauncher
         public static bool msAuthDown = false;
 
         //Manual
-        public static string codebase = "0.4.0"; //0.3.3 //0.4.0-dev //0.3.0-prod //0.3.0-dev //0.2.1 //0.2.1-old //0.2.0 //omega13 //0.0.7-dev //mojang-data //legacyfix //legacyfix-testing
+        public static string codebase = "0.4.0"; //0.4.0-lftest //0.3.7
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
-        public static string verCurrent = "0.4.1"; //Change this on release
-        public static string verDisplay = "0.4.1"; //Change this on release
+        public static string verCurrent = "0.4.2"; //Change this on release
+        public static string verDisplay = "0.4.2"; //Change this on release
 
         //Paths
         public static string currentPath = Directory.GetCurrentDirectory();
@@ -60,7 +60,7 @@ namespace MCLauncher
         public static string offlineManifest = $"http://files.codex-ipsa.cz/offline.json";
 
         public static string languageList = $"http://files.codex-ipsa.cz/lang/manifest.json";
-        public static string languageJson = $"http://files.codex-ipsa.cz/lang/{{selected}}.json";
+        public static string languageJson = $"http://lang.codex-ipsa.cz/{{selected}}.json";
 
         //announcer feature
         public static string announcerUrl = $"http://files.codex-ipsa.cz/version/{codebase}/announcer.txt";

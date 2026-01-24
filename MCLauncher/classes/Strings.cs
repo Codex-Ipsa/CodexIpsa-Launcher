@@ -1,6 +1,8 @@
 ﻿using MCLauncher.controls;
+using MCLauncher.json.api;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -40,6 +42,7 @@ namespace MCLauncher
             HomeScreen.Instance.btnLogOut.Text = sj.btnLogOut;
             HomeScreen.Instance.btnEditInst.Text = sj.btnEditInst;
             HomeScreen.Instance.btnNewInst.Text = sj.btnNewInst;
+            HomeScreen.Instance.loadPlayTime(HomeScreen.selectedInstance, HomeScreen.selectedInstanceJson);
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", "Guest");
@@ -51,7 +54,7 @@ namespace MCLauncher
                 HomeScreen.Instance.lblLogInWarn.Text = "";
                 if (Globals.noInternet)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnOffline;
-                else if(Globals.msAuthDown)
+                else if (Globals.msAuthDown)
                     HomeScreen.Instance.lblLogInWarn.Text = sj.lblLogInWarnAuthOffline;
             }
             HomeScreen.Instance.lblReady.Text = sj.lblReady.Replace("{verInfo}", HomeScreen.selectedVersion);
@@ -85,12 +88,30 @@ namespace MCLauncher
             CreditsScreen.Instance.lblSpecialThanks.Text = sj.lblSpecialThanks;
         }
 
-        //exports ENGLISH language json for translators
+        //exports language jsons for translators
         public static void exportLangJson()
         {
-            stringJson export = new stringJson();
-            String toSave = JsonConvert.SerializeObject(export);
-            File.WriteAllText($"export-english.json", toSave);
+            String langList = Globals.client.DownloadString(Globals.languageList);
+            byte[] jsonArr = Encoding.Default.GetBytes(langList);
+            string langData = Encoding.UTF8.GetString(jsonArr);
+            List<LanguagesJson> lang = JsonConvert.DeserializeObject<List<LanguagesJson>>(langData);
+
+            foreach (LanguagesJson langObj in lang)
+            {
+                string url = Globals.languageJson.Replace("{selected}", langObj.title.ToLower());
+                
+                string json = Globals.client.DownloadString(url);
+                byte[] jsonArr2 = Encoding.Default.GetBytes(json);
+                string newJson = Encoding.UTF8.GetString(jsonArr2);
+
+                stringJson export = JsonConvert.DeserializeObject<stringJson>(newJson);
+                String toSave = JsonConvert.SerializeObject(export);
+                toSave = toSave.Replace("\",", "\",\n  ");
+
+                File.WriteAllText($"{langObj.title.ToLower()}.json", toSave);
+                Console.WriteLine(langObj.title.ToLower());
+            }
+            throw new NotImplementedException();
         }
 
         public class stringJson

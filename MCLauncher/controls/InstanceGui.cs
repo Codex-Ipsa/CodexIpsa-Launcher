@@ -63,6 +63,7 @@ namespace MCLauncher.controls
             {
                 saveBtn.Text = Strings.sj.createProfile;
 
+                shortcutBtn.Visible = false;
                 deleteBtn.Visible = false;
                 openBtn.Visible = false;
             }

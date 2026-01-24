@@ -15,7 +15,7 @@ namespace MCLauncher
 
             //DEV: export language json
             //Strings.exportLangJson();
-            //throw new NotImplementedException();
+            
 
             //Create directories
             Directory.CreateDirectory($"{Globals.dataPath}");
