@@ -13,7 +13,7 @@ namespace MCLauncher
         public static bool msAuthDown = false;
 
         //Manual
-        public static string codebase = "0.4.0-lftest"; //0.4.0-lftest //0.3.7
+        public static string codebase = "0.4.0"; //0.4.0-lftest //0.3.7
         public static string branch = "stable"; //stable //dev //experimental //omega13 //dev-instances //pallas-testing
         public static string verCurrent = "0.4.2"; //Change this on release
         public static string verDisplay = "0.4.2"; //Change this on release
