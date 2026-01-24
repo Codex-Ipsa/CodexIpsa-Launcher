@@ -42,6 +42,7 @@ namespace MCLauncher
             HomeScreen.Instance.btnLogOut.Text = sj.btnLogOut;
             HomeScreen.Instance.btnEditInst.Text = sj.btnEditInst;
             HomeScreen.Instance.btnNewInst.Text = sj.btnNewInst;
+            HomeScreen.Instance.loadPlayTime(HomeScreen.selectedInstance, HomeScreen.selectedInstanceJson);
             if (Settings.sj.refreshToken == String.Empty || Settings.sj.refreshToken == null)
             {
                 HomeScreen.Instance.lblWelcome.Text = sj.lblWelcome.Replace("{playerName}", "Guest");

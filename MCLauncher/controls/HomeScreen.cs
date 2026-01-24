@@ -19,6 +19,7 @@ namespace MCLauncher
         public static string selectedEdition; //for checking which edition to launch
 
         public static string selectedInstance = "Default";
+        public static InstanceJson selectedInstanceJson = null;
         public static string selectedVersion; //for the "ready to play X" string
 
         public static string lastInstance;
@@ -46,6 +47,7 @@ namespace MCLauncher
                 ij.version = "b1.7.3";
                 ij.resolution = "854 480";
                 ij.memory = "512 512";
+                selectedInstanceJson = ij;
                 String serialized = JsonConvert.SerializeObject(ij);
 
                 Directory.CreateDirectory($"{Globals.dataPath}\\instance\\Default\\jarmods");
@@ -199,6 +201,7 @@ namespace MCLauncher
 
             InstanceJson ij = JsonConvert.DeserializeObject<InstanceJson>(json);
             selectedInstance = Instance.cmbInstaces.Text;
+            selectedInstanceJson = ij;
             selectedVersion = "Minecraft " + ij.version;
             selectedEdition = ij.edition;
 
@@ -227,11 +230,6 @@ namespace MCLauncher
             //Ready to play text
             Instance.lblReady.Text = Strings.sj.lblReady.Replace("{verInfo}", selectedVersion);
             Instance.loadPlayTime(instName, ij);
-        }
-
-        public void reloadPlayTime(String instanceName, InstanceJson ij)
-        {
-            Instance.loadPlayTime(instanceName, ij);
         }
 
         public void loadPlayTime(String instanceName, InstanceJson ij)
