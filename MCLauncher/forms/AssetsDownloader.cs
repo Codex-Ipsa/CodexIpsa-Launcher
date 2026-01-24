@@ -75,6 +75,7 @@ namespace MCLauncher.forms
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             int i = 0;
+            Logger.Info("AssetIndex", $"Downloading assets... This may take a while...");
             foreach (KeyValuePair<string, AssetIndexObject> entry in dict)
             {
                 if (!doWork)
@@ -92,16 +93,18 @@ namespace MCLauncher.forms
                     filePath = $"{Globals.dataPath}/assets/objects/{firstTwo}/{entry.Value.hash}";
                 }
 
-                Logger.Info("AssetIndex", $"Downloading assets... This may take a while...");
+
                 if (!File.Exists(filePath))
                 {
                     if (Globals.isDebug)
                         Logger.Info("[AssetIndex]", $"Downloaded {entry.Key}");
-                    
+
                     string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                     Directory.CreateDirectory(path);
-                    if (entry.Value.custom_url != null)
+                    if (entry.Value.custom_url != null)  //custom_url was  in some old BC/Ipsa jsons, keeping it to not break them ig 
                         assetClient.DownloadFile($"{entry.Value.custom_url}", filePath);
+                    else if (entry.Value.url != null)
+                        assetClient.DownloadFile($"{entry.Value.url}", filePath);
                     else
                         assetClient.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                     i++;
@@ -117,7 +120,9 @@ namespace MCLauncher.forms
                         string path = filePath.Substring(0, filePath.LastIndexOf("/"));
                         Directory.CreateDirectory(path);
                         if (entry.Value.custom_url != null)
-                            assetClient.DownloadFile($"{entry.Value.custom_url}", filePath);
+                            assetClient.DownloadFile($"{entry.Value.custom_url}", filePath); //custom_url was  in some old BC/Ipsa jsons, keeping it to not break them ig
+                        else if (entry.Value.url != null)
+                            assetClient.DownloadFile($"{entry.Value.url}", filePath);
                         else
                             assetClient.DownloadFile($"https://resources.download.minecraft.net/{firstTwo}/{entry.Value.hash}", filePath);
                         Logger.Info("[AssetIndex]", $"Redownloaded {entry.Key}");
@@ -152,6 +157,7 @@ namespace MCLauncher.forms
         public int size { get; set; }
         public string hash { get; set; }
         public string custom_url { get; set; }
+        public String url { get; set; }
     }
 
 }
